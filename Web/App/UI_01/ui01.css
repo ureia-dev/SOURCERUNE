@@ -1,4 +1,1 @@
-body.ui-01 .workspace{grid-template-columns:250px minmax(660px,1fr) 126px}
-body.ui-01 .module-card{min-height:98px}
-body.ui-01 .scene-panel{min-height:410px}
-body.ui-01 .module-rail:before{content:"MODULES";font-size:8px;letter-spacing:.14em;color:#64767e;padding:2px 3px 0}
+body.ui-01 .workspace{grid-template-columns:250px minmax(680px,1fr) 128px;grid-template-areas:"modules center meter"}body.ui-01 .module-card{min-height:106px}body.ui-01 .scene-panel{min-height:470px}body.ui-01 .module-rail:before{content:"SCENE MODULES";font-size:8px;letter-spacing:.14em;color:#64767e;padding:2px 3px 0}body.ui-01 .adv-grid{grid-template-columns:repeat(6,minmax(125px,1fr))}
