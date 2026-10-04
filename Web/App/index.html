@@ -1,144 +1,51 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SOURCERUNE — WEB TEST</title>
-<link rel="stylesheet" href="./styles.css">
-<link rel="stylesheet" href="./UI_01/ui01.css">
-<link rel="stylesheet" href="./UI_02/ui02.css">
+<link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./components.css">
+<link rel="stylesheet" href="./UI_01/ui01.css"><link rel="stylesheet" href="./UI_02/ui02.css">
 </head>
 <body class="ui-01">
 <div class="app">
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark" aria-hidden="true"></div>
-      <div><strong>SOURCERUNE</strong><span>ACOUSTIC SCENE ENGINE</span></div>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark"></div><div><strong>SOURCERUNE</strong><span>ACOUSTIC SCENE ENGINE</span></div></div>
+  <div class="build-status"><span class="dot"></span><span id="buildLabel">WEB TEST · COMPLETE UI COMPONENT FOUNDATION · DSP PASS-THROUGH</span></div>
+  <div class="top-actions"><label class="file-btn">LOAD AUDIO<input id="audioFile" type="file" accept="audio/*"></label><button id="playBtn">PLAY</button><button id="stopBtn">STOP</button><label class="loop-toggle"><input id="loopToggle" type="checkbox"> LOOP</label><div class="segmented"><button data-ui="UI_01" class="active">UI_01</button><button data-ui="UI_02">UI_02</button></div></div>
+</header>
+<div id="diagnosticBar" class="diagnostic hidden">TEST HARNESS · Shared state · Local transport · Real pass-through IN/OUT Peak/RMS · C++/Wasm DSP bridge pending</div>
+<section class="presetbar">
+  <div class="preset-label">SCENE PRESET</div><select id="presetSelect"></select>
+  <button id="savePresetBtn">SAVE PRESET</button><button id="importStateBtn">IMPORT</button><button id="exportStateBtn">EXPORT</button><button id="undoBtn">UNDO</button><button id="redoBtn">REDO</button>
+  <div class="snapshots"><button data-snapshot="A" class="active">A</button><button data-snapshot="B">B</button><button data-snapshot="C">C</button><button data-snapshot="D">D</button></div>
+  <button id="globalBypass" class="bypass">GLOBAL BYPASS</button><div class="transport-time" id="transportTime">00:00.000</div>
+</section>
+<section class="runtime-strip">
+  <div><span>ENGINE</span><strong>WEB PASS-THROUGH</strong></div><div><span>SR</span><strong id="sampleRateReadout">—</strong></div><div><span>BLOCK</span><strong id="blockReadout">—</strong></div><div><span>SEED</span><strong id="seedReadout">48151623</strong></div><div><span>SYNC</span><strong id="syncReadout">WEB TIMELINE</strong></div><div class="seek-wrap"><span>SEEK</span><input id="seekSlider" type="range" min="0" max="1000" value="0"></div><div><span>STATE</span><strong id="stateStatus">READY</strong></div>
+</section>
+<main class="workspace">
+  <aside class="module-rail" id="moduleRail"></aside>
+  <section class="center">
+    <div class="scene-panel panel">
+      <div class="panel-head"><div><span class="eyebrow">LIVE ACOUSTIC VIEW</span><h1 id="sceneTitle">Scene View</h1></div><div class="scene-head-controls"><div class="segmented small motion-mode-group"><button data-motion-mode="STATIC">STATIC</button><button data-motion-mode="APPROACH">APPROACH</button><button data-motion-mode="PASS_BY" class="active">PASS BY</button><button data-motion-mode="LEAVE">LEAVE</button><button data-motion-mode="MANUAL">MANUAL</button></div><div class="segmented small"><button data-view="3D" class="active">3D VIEW</button><button data-view="TOP">TOP VIEW</button></div></div></div>
+      <div class="scene-commandbar"><label class="toggle-chip"><input id="syncToggle" type="checkbox" checked> DAW / WEB SYNC</label><button data-set-marker="start">SET START</button><button data-set-marker="closest">SET CLOSEST</button><button data-set-marker="end">SET END</button><span class="marker-status" id="markerStatus">START — · CLOSEST — · END —</span></div>
+      <svg id="sceneSvg" viewBox="0 0 1000 420">
+        <defs><linearGradient id="floorFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19232a"/><stop offset="1" stop-color="#0b1014"/></linearGradient><pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#263139" stroke-width="1"/></pattern></defs>
+        <rect width="1000" height="420" fill="url(#floorFade)"/><rect y="80" width="1000" height="340" fill="url(#grid)" opacity=".55"/>
+        <g id="sceneBuildings"><rect x="55" y="82" width="145" height="208" rx="3" fill="#121a20" stroke="#35444d"/><rect x="222" y="128" width="115" height="162" rx="3" fill="#141d23" stroke="#35444d"/><rect x="706" y="104" width="116" height="186" rx="3" fill="#121a20" stroke="#35444d"/><rect x="842" y="62" width="110" height="228" rx="3" fill="#141d23" stroke="#35444d"/></g>
+        <path id="motionPath" d="M110 325 C340 250 650 250 900 325" fill="none" stroke="#526772" stroke-width="3" stroke-dasharray="9 10"/><circle cx="110" cy="325" r="5" fill="#8a9aa2"/><circle cx="500" cy="270" r="5" fill="#c58b55"/><circle cx="900" cy="325" r="5" fill="#8a9aa2"/>
+        <g id="listenerNode" transform="translate(500 270)"><circle r="24" fill="#11181d" stroke="#85c7d8" stroke-width="2"/><circle r="5" fill="#85c7d8"/></g><g id="sourceNode" transform="translate(260 300)"><circle r="28" fill="#12191e" stroke="#d6a56a" stroke-width="2"/><path d="M-10 -8H3L13-17V17L3 8H-10Z" fill="#d6a56a"/></g>
+        <line id="distanceLine" x1="260" y1="300" x2="500" y2="270" stroke="#8aa0aa" stroke-width="1.5"/><text id="distanceText" x="380" y="270" fill="#cbd7dc" font-size="16" text-anchor="middle">25.0 m</text><text x="500" y="308" fill="#8ba0aa" font-size="13" text-anchor="middle">LISTENER</text><text id="sourceLabel" x="260" y="346" fill="#b9c6cc" font-size="13" text-anchor="middle">SOURCE</text>
+      </svg>
+      <div class="motion-readouts"><div><span>MODE</span><strong id="motionMode">PASS BY</strong></div><div><span>START</span><strong id="startDistance">80.0 m</strong></div><div><span>CLOSEST</span><strong id="closestDistance">3.0 m</strong></div><div><span>END</span><strong id="endDistance">120.0 m</strong></div><div><span>CURRENT</span><strong id="currentDistance">25.0 m</strong></div><div><span>SPEED</span><strong id="speedReadout">60 km/h</strong></div><div><span>DOPPLER</span><strong id="dopplerReadout">70%</strong></div><div><span>WIDTH</span><strong id="widthReadout">40%</strong></div><div><span>PERSPECTIVE</span><strong id="perspectiveReadout">50%</strong></div></div>
     </div>
-    <div class="build-status"><span class="dot"></span><span id="buildLabel">WEB TEST · UI FOUNDATION · DSP PASS-THROUGH</span></div>
-    <div class="top-actions">
-      <label class="file-btn">LOAD AUDIO<input id="audioFile" type="file" accept="audio/*"></label>
-      <button id="playBtn">PLAY</button>
-      <button id="stopBtn">STOP</button>
-      <label class="loop-toggle"><input id="loopToggle" type="checkbox"> LOOP</label>
-      <div class="segmented" aria-label="UI layout">
-        <button data-ui="UI_01" class="active">UI_01</button>
-        <button data-ui="UI_02">UI_02</button>
-      </div>
-    </div>
-  </header>
-
-  <div id="diagnosticBar" class="diagnostic hidden">
-    TEST HARNESS MODE · Shared UI state · Local audio transport · Real pass-through Peak/RMS · DSP bridge pending
-  </div>
-
-  <section class="presetbar">
-    <div class="preset-label">SCENE PRESET</div>
-    <select id="presetSelect"></select>
-    <div class="snapshots" aria-label="Snapshots">
-      <button data-snapshot="A" class="active">A</button><button data-snapshot="B">B</button>
-      <button data-snapshot="C">C</button><button data-snapshot="D">D</button>
-    </div>
-    <button id="globalBypass" class="bypass active">BYPASS</button>
-    <div class="transport-time" id="transportTime">00:00.000</div>
+    <div class="analysis-panel panel"><div class="tabs"><button data-tab="spectrum" class="active">SPECTRUM</button><button data-tab="space">SPACE RESPONSE</button><button data-tab="flow">SIGNAL FLOW</button></div><div class="tab-content active" data-content="spectrum"><canvas id="spectrumCanvas" width="1200" height="250"></canvas></div><div class="tab-content" data-content="space"><div class="space-legend"><span>DIRECT</span><span>EARLY</span><span>TAIL</span></div><svg viewBox="0 0 1000 220" class="response-svg"><path id="directCurve" d="M20 174 C130 152 205 105 315 116 S500 70 635 120 S815 85 980 142" fill="none" stroke="#88cbdc" stroke-width="3"/><path id="earlyCurve" d="M20 190 C170 185 240 145 365 152 S610 110 980 168" fill="none" stroke="#b48a62" stroke-width="2"/><path id="tailCurve" d="M20 200 C200 196 360 176 520 180 S760 155 980 188" fill="none" stroke="#76838b" stroke-width="2"/></svg></div><div class="tab-content" data-content="flow"><div id="signalFlow" class="signal-flow"></div></div></div>
   </section>
-
-  <main class="workspace">
-    <aside class="module-rail" id="moduleRail"></aside>
-
-    <section class="center">
-      <div class="scene-panel panel">
-        <div class="panel-head">
-          <div><span class="eyebrow">LIVE ACOUSTIC VIEW</span><h1 id="sceneTitle">Scene View</h1></div>
-          <div class="scene-tools">
-            <div class="segmented small"><button data-view="3D" class="active">3D VIEW</button><button data-view="TOP">TOP VIEW</button></div>
-          </div>
-        </div>
-        <svg id="sceneSvg" viewBox="0 0 1000 420" role="img" aria-label="Live source and listener scene view">
-          <defs>
-            <linearGradient id="floorFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19232a"/><stop offset="1" stop-color="#0b1014"/></linearGradient>
-            <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#263139" stroke-width="1"/></pattern>
-          </defs>
-          <rect width="1000" height="420" fill="url(#floorFade)"/>
-          <rect y="80" width="1000" height="340" fill="url(#grid)" opacity=".55"/>
-          <g id="sceneBuildings" opacity=".9">
-            <rect x="55" y="82" width="145" height="208" rx="3" fill="#121a20" stroke="#35444d"/>
-            <rect x="222" y="128" width="115" height="162" rx="3" fill="#141d23" stroke="#35444d"/>
-            <rect x="706" y="104" width="116" height="186" rx="3" fill="#121a20" stroke="#35444d"/>
-            <rect x="842" y="62" width="110" height="228" rx="3" fill="#141d23" stroke="#35444d"/>
-          </g>
-          <path id="motionPath" d="M110 325 C340 250 650 250 900 325" fill="none" stroke="#526772" stroke-width="3" stroke-dasharray="9 10"/>
-          <circle id="startMarker" cx="110" cy="325" r="5" fill="#8a9aa2"/>
-          <circle id="closestMarker" cx="500" cy="270" r="5" fill="#c58b55"/>
-          <circle id="endMarker" cx="900" cy="325" r="5" fill="#8a9aa2"/>
-          <g id="listenerNode" transform="translate(500 270)">
-            <circle r="24" fill="#11181d" stroke="#85c7d8" stroke-width="2"/>
-            <circle r="5" fill="#85c7d8"/>
-          </g>
-          <g id="sourceNode" transform="translate(260 300)">
-            <circle r="28" fill="#12191e" stroke="#d6a56a" stroke-width="2"/>
-            <path d="M-10 -8H3L13-17V17L3 8H-10Z" fill="#d6a56a"/>
-          </g>
-          <line id="distanceLine" x1="260" y1="300" x2="500" y2="270" stroke="#8aa0aa" stroke-width="1.5"/>
-          <text id="distanceText" x="380" y="270" fill="#cbd7dc" font-size="16" text-anchor="middle">25.0 m</text>
-          <text x="500" y="308" fill="#8ba0aa" font-size="13" text-anchor="middle">LISTENER</text>
-          <text id="sourceLabel" x="260" y="346" fill="#b9c6cc" font-size="13" text-anchor="middle">SOURCE</text>
-        </svg>
-
-        <div class="motion-readouts">
-          <div><span>MODE</span><strong id="motionMode">PASS BY</strong></div>
-          <div><span>START</span><strong id="startDistance">80 m</strong></div>
-          <div><span>CLOSEST</span><strong id="closestDistance">3 m</strong></div>
-          <div><span>END</span><strong id="endDistance">120 m</strong></div>
-          <div><span>CURRENT</span><strong id="currentDistance">25.0 m</strong></div>
-          <div><span>SPEED</span><strong id="speedReadout">60 km/h</strong></div>
-        </div>
-      </div>
-
-      <div class="analysis-panel panel">
-        <div class="tabs">
-          <button data-tab="spectrum" class="active">SPECTRUM</button>
-          <button data-tab="space">SPACE RESPONSE</button>
-          <button data-tab="flow">SIGNAL FLOW</button>
-        </div>
-        <div class="tab-content active" data-content="spectrum"><canvas id="spectrumCanvas" width="1200" height="250"></canvas></div>
-        <div class="tab-content" data-content="space">
-          <svg viewBox="0 0 1000 220" class="response-svg">
-            <path d="M20 174 C130 152 205 105 315 116 S500 70 635 120 S815 85 980 142" fill="none" stroke="#88cbdc" stroke-width="3"/>
-            <path d="M20 190 C170 185 240 145 365 152 S610 110 980 168" fill="none" stroke="#b48a62" stroke-width="2" opacity=".85"/>
-            <text x="40" y="38">DIRECT</text><text x="155" y="38">EARLY</text><text x="260" y="38">TAIL</text>
-          </svg>
-        </div>
-        <div class="tab-content" data-content="flow"><div id="signalFlow" class="signal-flow"></div></div>
-      </div>
-    </section>
-
-    <aside class="meter-rail panel">
-      <div class="meter-title">LEVEL</div>
-      <div class="meters">
-        <div class="meter-block"><div class="meter-label">IN</div><div class="meter-slot"><div id="inMeter" class="meter-fill"></div></div></div>
-        <div class="meter-block"><div class="meter-label">OUT</div><div class="meter-slot"><div id="outMeter" class="meter-fill"></div></div></div>
-      </div>
-      <div class="meter-values">
-        <div><span>PEAK</span><strong id="peakValue">−∞</strong><em>dBFS</em></div>
-        <div><span>RMS</span><strong id="rmsValue">−∞</strong><em>dBFS</em></div>
-        <div><span>LUFS</span><strong>—</strong><em>pending</em></div>
-      </div>
-    </aside>
-  </main>
-
-  <section class="macro-strip" id="macroStrip"></section>
+  <aside class="meter-rail panel"><div class="meter-head"><span>LEVEL</span><button id="resetPeakBtn">RESET PEAK</button></div><div class="meters"><div class="meter-block"><div class="meter-label">IN</div><div class="meter-slot"><div id="inMeter" class="meter-fill"></div></div></div><div class="meter-block"><div class="meter-label">OUT</div><div class="meter-slot"><div id="outMeter" class="meter-fill"></div></div></div></div><div class="meter-values"><div><span>PEAK IN</span><strong id="peakInValue">−∞</strong><em>dBFS</em></div><div><span>PEAK OUT</span><strong id="peakOutValue">−∞</strong><em>dBFS</em></div><div><span>RMS IN</span><strong id="rmsInValue">−∞</strong><em>dBFS</em></div><div><span>RMS OUT</span><strong id="rmsOutValue">−∞</strong><em>dBFS</em></div><div><span>LUFS</span><strong id="lufsValue">—</strong><em>pending</em></div></div></aside>
+</main>
+<section class="macro-strip" id="macroStrip"></section>
+<section class="advanced-drawer panel"><div class="advanced-head"><div><span class="eyebrow">DETAILED CONTROL</span><h2 id="advancedTitle">MOTION / DISTANCE</h2></div><div class="advanced-nav" id="advancedNav"></div></div><div id="advancedBody" class="advanced-body"></div></section>
 </div>
-
-<div id="assetBrowser" class="asset-browser hidden" role="dialog" aria-modal="true">
-  <div class="browser-card">
-    <div class="browser-head"><div><span class="eyebrow">ASSET LIBRARY</span><h2 id="browserTitle">SOURCE</h2></div><button id="browserClose">CLOSE</button></div>
-    <div class="browser-tools"><input id="assetSearch" placeholder="Search"><select id="categorySelect"></select></div>
-    <div class="browser-body"><div id="assetList" class="asset-list"></div><div id="assetPreview" class="asset-preview"></div></div>
-  </div>
-</div>
-
-<audio id="audioElement" preload="metadata"></audio>
-<script type="module" src="./app.js"></script>
-</body>
-</html>
+<div id="assetBrowser" class="asset-browser hidden"><div class="browser-card"><div class="browser-head"><div><span class="eyebrow">ASSET LIBRARY</span><h2 id="browserTitle">SOURCE</h2></div><button id="browserClose">CLOSE</button></div><div class="browser-tools"><input id="assetSearch" placeholder="Search"><select id="categorySelect"></select></div><div class="browser-body"><div id="assetList" class="asset-list"></div><div id="assetPreview" class="asset-preview"></div></div></div></div>
+<input id="stateImportFile" type="file" accept="application/json,.json" hidden><audio id="audioElement" preload="metadata"></audio><script type="module" src="./app.js"></script>
+</body></html>

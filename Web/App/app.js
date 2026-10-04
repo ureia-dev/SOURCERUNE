@@ -1,147 +1,46 @@
-const $=(q,r=document)=>r.querySelector(q);
-const $$=(q,r=document)=>[...r.querySelectorAll(q)];
-const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"];
-const TYPE_LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT"};
-const defaults={
-  SOURCE:"SRC_003_Smartphone_Speakerphone",
-  TRANSMISSION:"TRN_005_GSM_Stable",
-  WALL_COVER:"CVR_001_None_Open",
-  SPACE_ENVIRONMENT:"SPC_022_Busy_City_Street"
-};
-const state={
-  ui:"UI_01",view:"3D",tab:"spectrum",selection:{...defaults},
-  controls:{motion:50,badSignal:20,condition:20,intelligibility:70,ambience:35,mix:100,speed:60},
-  preset:null,bypass:true,snapshots:{A:null,B:null,C:null,D:null}
-};
-let catalog=[],byId=new Map(),activeBrowserType="SOURCE";
-let audioCtx,sourceNode,analyser,gainNode,audioReady=false;
+const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
+const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"],LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT"};
+const DEFSEL={SOURCE:"SRC_003_Smartphone_Speakerphone",TRANSMISSION:"TRN_005_GSM_Stable",WALL_COVER:"CVR_001_None_Open",SPACE_ENVIRONMENT:"SPC_022_Busy_City_Street"};
+let schema,catalog,byId,state,userPresets={},undo=[],redo=[],browserType="SOURCE";
+let audioCtx,media,inAn,outAn,inGain,outGain,peakIn=-Infinity,peakOut=-Infinity;
 const audio=$("#audioElement");
-
-function assetUrl(item){
-  const rel=state.ui==="UI_01"?item.ui01:item.ui02;
-  return "../../Assets/UI/"+rel;
-}
-function db(v){return v<=1e-7?-Infinity:20*Math.log10(v)}
-function fmtDb(v){return !isFinite(v)?"−∞":v.toFixed(1)}
-
-async function init(){
-  const data=await fetch("./data/catalog.json").then(r=>r.json());
-  catalog=data.items; byId=new Map(catalog.map(x=>[x.id,x]));
-  const presets=catalog.filter(x=>x.type==="SCENE_PRESET_HERO");
-  $("#presetSelect").innerHTML='<option value="">— Select scene preset —</option>'+presets.map(x=>`<option value="${x.id}">${x.name}</option>`).join("");
-  if(new URLSearchParams(location.search).has("test")) $("#diagnosticBar").classList.remove("hidden");
-  renderModules(); renderMacros(); renderSignalFlow(); bind(); drawSpaceFallback(); animate();
-}
-function renderModules(){
-  $("#moduleRail").innerHTML=TYPES.map(t=>{
-    const item=byId.get(state.selection[t]); if(!item) return "";
-    return `<article class="module-card" data-type="${t}">
-      <div class="module-art"><img src="${assetUrl(item)}" alt="" onerror="this.closest('.module-card').classList.add('missing');this.remove()"></div>
-      <div class="module-meta"><span>${TYPE_LABEL[t]}</span><strong>${item.name}</strong><em>SELECT</em></div>
-    </article>`;
-  }).join("");
-  $$(".module-card").forEach(el=>el.onclick=()=>openBrowser(el.dataset.type));
-  const s=byId.get(state.selection.SOURCE); if(s) $("#sourceLabel").textContent=s.name.toUpperCase();
-}
-function renderMacros(){
-  const defs=[
-    ["MOTION","motion","%"],["BAD SIGNAL","badSignal","%"],["CONDITION","condition","%"],
-    ["INTELLIGIBILITY","intelligibility","%"],["AMBIENCE","ambience","%"],["MIX","mix","%"],["SPEED","speed","km/h"]
-  ];
-  $("#macroStrip").innerHTML=defs.map(([label,key,unit])=>`<div class="macro"><h3>${label}</h3>
-    <div class="macro-read"><strong id="v_${key}">${state.controls[key]}</strong><span>${unit}</span></div>
-    <input type="range" min="0" max="${key==="speed"?180:100}" step="1" value="${state.controls[key]}" data-control="${key}">
-  </div>`).join("");
-  $$("#macroStrip input").forEach(sl=>sl.addEventListener("input",e=>{
-    const k=e.target.dataset.control; state.controls[k]=+e.target.value; $("#v_"+k).textContent=e.target.value;
-    updateScene();
-  }));
-}
-function renderSignalFlow(){
-  const nodes=["INPUT","TRANSMISSION","SOURCE","CONDITION","COVER","DISTANCE / MOTION","SPACE","AMBIENCE","INTELLIGIBILITY","TONE","MIX / OUTPUT"];
-  $("#signalFlow").innerHTML=nodes.map((n,i)=>`<span class="flow-node">${n}</span>${i<nodes.length-1?'<span class="flow-arrow">→</span>':""}`).join("");
-}
-function bind(){
-  $$("[data-ui]").forEach(b=>b.onclick=()=>setUI(b.dataset.ui));
-  $$("[data-view]").forEach(b=>b.onclick=()=>{$$("[data-view]").forEach(x=>x.classList.toggle("active",x===b));state.view=b.dataset.view;updateScene()});
-  $$("[data-tab]").forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;$$("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));$$(".tab-content").forEach(x=>x.classList.toggle("active",x.dataset.content===state.tab))});
-  $("#browserClose").onclick=closeBrowser; $("#assetBrowser").onclick=e=>{if(e.target.id==="assetBrowser")closeBrowser()};
-  $("#assetSearch").oninput=renderBrowserList; $("#categorySelect").onchange=renderBrowserList;
-  $("#presetSelect").onchange=e=>{state.preset=e.target.value||null; const p=byId.get(state.preset); $("#sceneTitle").textContent=p?p.name:"Scene View"};
-  $("#globalBypass").onclick=()=>{state.bypass=!state.bypass;$("#globalBypass").classList.toggle("active",state.bypass);$("#globalBypass").textContent=state.bypass?"BYPASS":"PROCESS"};
-  $("#audioFile").onchange=loadAudio; $("#playBtn").onclick=playAudio; $("#stopBtn").onclick=stopAudio; $("#loopToggle").onchange=e=>audio.loop=e.target.checked;
-  $$("[data-snapshot]").forEach(b=>b.onclick=()=>snapshot(b.dataset.snapshot,b));
-}
-function setUI(ui){
-  state.ui=ui; document.body.classList.toggle("ui-01",ui==="UI_01");document.body.classList.toggle("ui-02",ui==="UI_02");
-  $$("[data-ui]").forEach(b=>b.classList.toggle("active",b.dataset.ui===ui)); renderModules();
-}
-function openBrowser(type){
-  activeBrowserType=type; $("#browserTitle").textContent=TYPE_LABEL[type];
-  const cats=[...new Set(catalog.filter(x=>x.type===type).map(x=>x.category))];
-  $("#categorySelect").innerHTML='<option value="">All categories</option>'+cats.map(c=>`<option>${c}</option>`).join("");
-  $("#assetSearch").value=""; $("#assetBrowser").classList.remove("hidden"); renderBrowserList(); previewAsset(byId.get(state.selection[type]));
-}
-function closeBrowser(){ $("#assetBrowser").classList.add("hidden") }
-function renderBrowserList(){
-  const q=$("#assetSearch").value.trim().toLowerCase(),cat=$("#categorySelect").value;
-  const items=catalog.filter(x=>x.type===activeBrowserType&&(!cat||x.category===cat)&&(!q||x.name.toLowerCase().includes(q)||x.id.toLowerCase().includes(q)));
-  $("#assetList").innerHTML=items.map(x=>`<button class="asset-item ${state.selection[activeBrowserType]===x.id?"active":""}" data-id="${x.id}"><span>${x.category}</span><strong>${x.name}</strong></button>`).join("");
-  $(".asset-item").forEach(b=>{
-    b.onmouseenter=()=>previewAsset(byId.get(b.dataset.id));
-    b.onclick=()=>{
-      state.selection[activeBrowserType]=b.dataset.id;
-      renderModules();
-      renderBrowserList();
-      previewAsset(byId.get(b.dataset.id));
-    };
-  });
-}
-function previewAsset(item){
-  if(!item)return;
-  $("#assetPreview").innerHTML=`<div class="preview-art"><img src="${assetUrl(item)}" alt="" onerror="this.remove()"></div><div class="preview-title">${item.name}</div><div class="preview-id">${item.id}</div>`;
-}
-function updateScene(){
-  const p=state.controls.motion/100;
-  const x=110+(790*p), y=325-55*Math.sin(Math.PI*p);
-  $("#sourceNode").setAttribute("transform",`translate(${x.toFixed(1)} ${y.toFixed(1)})`);
-  $("#distanceLine").setAttribute("x1",x);$("#distanceLine").setAttribute("y1",y);
-  const dx=x-500,dy=y-270,dist=Math.max(3,Math.sqrt(dx*dx+dy*dy)/4.9);
-  $("#distanceText").setAttribute("x",(x+500)/2);$("#distanceText").setAttribute("y",(y+270)/2-10);
-  $("#distanceText").textContent=dist.toFixed(1)+" m";$("#currentDistance").textContent=dist.toFixed(1)+" m";
-  $("#speedReadout").textContent=state.controls.speed+" km/h";
-  $("#sceneBuildings").setAttribute("opacity",state.view==="TOP"?".28":".9");
-}
-function snapshot(slot,button){
-  if(!state.snapshots[slot]) state.snapshots[slot]=JSON.parse(JSON.stringify({selection:state.selection,controls:state.controls,preset:state.preset}));
-  else {const s=state.snapshots[slot];state.selection={...s.selection};state.controls={...s.controls};state.preset=s.preset;renderModules();renderMacros();$("#presetSelect").value=state.preset||"";updateScene()}
-  $$("[data-snapshot]").forEach(x=>x.classList.toggle("active",x===button));
-}
-async function setupAudio(){
-  if(audioReady)return;
-  audioCtx=new (window.AudioContext||window.webkitAudioContext)(); sourceNode=audioCtx.createMediaElementSource(audio); analyser=audioCtx.createAnalyser(); gainNode=audioCtx.createGain();
-  analyser.fftSize=2048; analyser.smoothingTimeConstant=.72; sourceNode.connect(analyser); analyser.connect(gainNode);gainNode.connect(audioCtx.destination);audioReady=true;
-}
-async function loadAudio(e){
-  const f=e.target.files?.[0]; if(!f)return; await setupAudio(); audio.src=URL.createObjectURL(f); $("#buildLabel").textContent="WEB TEST · "+f.name+" · DSP PASS-THROUGH";
-}
-async function playAudio(){await setupAudio();await audioCtx.resume(); if(audio.src) audio.play()}
-function stopAudio(){audio.pause();audio.currentTime=0}
-function animate(){
-  requestAnimationFrame(animate); updateTime(); drawSpectrum(); updateMeters(); updateScene();
-}
-function updateTime(){
-  const t=audio.currentTime||0,m=Math.floor(t/60),s=Math.floor(t%60),ms=Math.floor((t%1)*1000);$("#transportTime").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${String(ms).padStart(3,"0")}`;
-}
-function drawSpectrum(){
-  const c=$("#spectrumCanvas"),ctx=c.getContext("2d"),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);ctx.fillStyle="#0b1013";ctx.fillRect(0,0,w,h);
-  ctx.strokeStyle="#233038";ctx.lineWidth=1;for(let i=1;i<8;i++){ctx.beginPath();ctx.moveTo(i*w/8,0);ctx.lineTo(i*w/8,h);ctx.stroke()}for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,i*h/5);ctx.lineTo(w,i*h/5);ctx.stroke()}
-  if(!analyser)return;const data=new Uint8Array(analyser.frequencyBinCount);analyser.getByteFrequencyData(data);ctx.strokeStyle="#89c8d8";ctx.lineWidth=2;ctx.beginPath();for(let x=0;x<w;x++){const i=Math.floor((x/w)*(data.length-1));const y=h-(data[i]/255)*h*.92;(x?ctx.lineTo(x,y):ctx.moveTo(x,y))}ctx.stroke();
-}
-function drawSpaceFallback(){}
-function updateMeters(){
-  if(!analyser){$("#inMeter").style.height="0%";$("#outMeter").style.height="0%";return}
-  const d=new Uint8Array(analyser.fftSize);analyser.getByteTimeDomainData(d);let peak=0,sum=0;for(const x of d){const v=(x-128)/128;peak=Math.max(peak,Math.abs(v));sum+=v*v}const rms=Math.sqrt(sum/d.length),pdb=db(peak),rdb=db(rms),pct=Math.max(0,Math.min(100,(pdb+60)/60*100));
-  $("#inMeter").style.height=pct+"%";$("#outMeter").style.height=pct+"%";$("#peakValue").textContent=fmtDb(pdb);$("#rmsValue").textContent=fmtDb(rdb);
-}
-init().catch(err=>{console.error(err);$("#buildLabel").textContent="WEB TEST · INIT ERROR"});
+const copy=v=>JSON.parse(JSON.stringify(v)),db=v=>v<=1e-7?-Infinity:20*Math.log10(v),fmt=v=>isFinite(v)?v.toFixed(1):"−∞",gain=v=>Math.pow(10,v/20),pretty=v=>String(v).replaceAll("_"," ");
+function newState(){const p={};for(const g of Object.values(schema.groups))for(const c of g.controls)p[c.id]=c.default;return{ui:"UI_01",view:"3D",tab:"spectrum",advanced:"MOTION",params:p,selection:{...DEFSEL},bypass:Object.fromEntries(Object.entries(schema.groups).filter(([,g])=>g.bypass).map(([k])=>[k,false])),sync:true,seed:48151623,markers:{start:null,closest:null,end:null},globalBypass:false,preset:null,snapshots:{A:null,B:null,C:null,D:null},generatorOn:false}}
+function core(){const s=copy(state);delete s.snapshots;return s}function mark(t){$("#stateStatus").textContent=t}function push(){undo.push(core());if(undo.length>80)undo.shift();redo=[];hist()}function mut(fn){push();fn();mark("MODIFIED");refresh()}function hist(){$("#undoBtn").disabled=!undo.length;$("#redoBtn").disabled=!redo.length}
+function restore(s){const snaps=state.snapshots;state=Object.assign(newState(),copy(s));state.snapshots=snaps;refresh()}
+function assetUrl(x){return "../../Assets/UI/"+(state.ui==="UI_01"?x.ui01:x.ui02)}
+function selected(t){return byId.get(state.selection[t])}
+async function init(){[schema,{items:catalog}]=await Promise.all([fetch("./data/ui_controls.json").then(r=>r.json()),fetch("./data/catalog.json").then(r=>r.json())]);byId=new Map(catalog.map(x=>[x.id,x]));state=newState();try{userPresets=JSON.parse(localStorage.getItem("sourcerune.userPresets.v1")||"{}")}catch{}renderPreset();renderNav();bind();refresh();hist();animate();if(new URLSearchParams(location.search).has("test"))$("#diagnosticBar").classList.remove("hidden")}
+function refresh(){document.body.classList.toggle("ui-01",state.ui==="UI_01");document.body.classList.toggle("ui-02",state.ui==="UI_02");$$("[data-ui]").forEach(b=>b.classList.toggle("active",b.dataset.ui===state.ui));$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===state.view));$$("[data-motion-mode]").forEach(b=>b.classList.toggle("active",b.dataset.motionMode===state.params.motionMode));$("#syncToggle").checked=state.sync;$("#globalBypass").classList.toggle("active",state.globalBypass);$("#seedReadout").textContent=state.seed;$("#syncReadout").textContent=state.sync?"WEB TIMELINE":"MANUAL";renderModules();renderMacros();renderFlow();renderAdvanced();renderMarkers();updateScene();updateGains();updateCurves()}
+function renderPreset(){const fac=catalog?.filter(x=>x.type==="SCENE_PRESET_HERO")||[],usr=Object.entries(userPresets);$("#presetSelect").innerHTML='<option value="">— Select scene preset —</option><optgroup label="Factory scene visuals">'+fac.map(x=>`<option value="factory:${x.id}">${x.name}</option>`).join("")+'</optgroup>'+(usr.length?'<optgroup label="User presets">'+usr.map(([k,v])=>`<option value="user:${k}">${v.name}</option>`).join("")+'</optgroup>':"");if(state?.preset)$("#presetSelect").value=state.preset}
+function renderModules(){$("#moduleRail").innerHTML=TYPES.map(t=>{const x=selected(t),bp=state.bypass[t];return`<article class="module-card ${bp?"bypassed":""}" data-type="${t}"><div class="module-art"><img src="${assetUrl(x)}" alt="" onerror="this.closest('.module-card').classList.add('missing');this.remove()"></div><div class="module-actions"><button data-byp="${t}" class="${bp?"active":""}">BYP</button><button data-edit="${t}">EDIT</button></div><div class="module-meta"><span>${LABEL[t]}</span><strong>${x.name}</strong></div></article>`}).join("");$$(".module-card").forEach(e=>e.onclick=x=>{if(!x.target.closest("button"))openBrowser(e.dataset.type)});$$("[data-byp]").forEach(b=>b.onclick=()=>mut(()=>state.bypass[b.dataset.byp]=!state.bypass[b.dataset.byp]));$$("[data-edit]").forEach(b=>b.onclick=()=>{state.advanced=b.dataset.edit;renderAdvanced();renderMacros()});$("#sourceLabel").textContent=selected("SOURCE").name.toUpperCase()}
+const MAC=[["MOTION","motion","%","MOTION"],["BAD SIGNAL","badSignal","%","TRANSMISSION"],["CONDITION","condition","%","CONDITION"],["INTELLIGIBILITY","intelligibility","%","INTELLIGIBILITY"],["AMBIENCE","ambience","%","AMBIENCE"],["MIX","mix","%","MIX"],["ADVANCED EQ / TONE","finalTone","","EQ_TONE"]];
+function renderMacros(){$("#macroStrip").innerHTML=MAC.map(([n,k,u,g])=>{const c=findControl(k);return`<div class="macro ${state.advanced===g?"selected":""}" data-open="${g}"><h3>${n}</h3><div class="macro-read"><strong>${state.params[k]}</strong><span>${u}</span></div><input data-macro="${k}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${state.params[k]}"></div>`}).join("");$$("[data-open]").forEach(e=>e.onclick=x=>{if(!x.target.matches("input")){state.advanced=e.dataset.open;renderMacros();renderAdvanced()}});$$("[data-macro]").forEach(r=>{r.onpointerdown=()=>r.dataset.before=JSON.stringify(core());r.oninput=e=>{state.params[e.target.dataset.macro]=+e.target.value;updateScene();updateGains()};r.onchange=e=>{if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}})}
+function findControl(id){for(const g of Object.values(schema.groups)){const c=g.controls.find(x=>x.id===id);if(c)return c}}
+function renderFlow(){const n=[["INPUT"],["TRANSMISSION","TRANSMISSION"],["SOURCE","SOURCE"],["CONDITION","CONDITION"],["COVER","WALL_COVER"],["DISTANCE / MOTION","MOTION"],["SPACE","SPACE_ENVIRONMENT"],["AMBIENCE","AMBIENCE"],["INTELLIGIBILITY","INTELLIGIBILITY"],["TONE","EQ_TONE"],["MIX / OUTPUT"]];$("#signalFlow").innerHTML=n.map(([x,k],i)=>`<span class="flow-node ${k&&state.bypass[k]?"bypassed":""}">${x}</span>${i<n.length-1?'<span class="flow-arrow">→</span>':""}`).join("")}
+function renderNav(){$("#advancedNav").innerHTML=Object.entries(schema.groups).map(([k,g])=>`<button data-adv="${k}">${g.label}</button>`).join("");$$("[data-adv]").forEach(b=>b.onclick=()=>{state.advanced=b.dataset.adv;renderAdvanced();renderMacros()})}
+function control(c){if(c.type==="select")return`<div class="adv-control"><label>${c.label}</label><select data-param="${c.id}">${c.options.map(o=>`<option value="${o}" ${state.params[c.id]===o?"selected":""}>${pretty(o)}</option>`).join("")}</select></div>`;if(c.type==="number")return`<div class="adv-control"><label>${c.label}</label><div class="value">${c.unit||""}</div><input data-param="${c.id}" type="number" min="${c.min}" max="${c.max}" step="${c.step}" value="${state.params[c.id]}"></div>`;return`<div class="adv-control"><label>${c.label}</label><div class="value">${state.params[c.id]} ${c.unit||""}</div><input data-param="${c.id}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${state.params[c.id]}"></div>`}
+function renderAdvanced(){const k=state.advanced,g=schema.groups[k];$$("[data-adv]").forEach(b=>b.classList.toggle("active",b.dataset.adv===k));$("#advancedTitle").textContent=g.label;let extra="";if(g.assetType)extra=`<div class="adv-control wide"><label>MODEL / TYPE</label><div class="value">${selected(g.assetType).name}</div><button data-library="${g.assetType}">SELECT FROM LIBRARY</button></div>`;if(g.special==="motion")extra+=`<div class="adv-control wide"><label>TIMELINE</label><div class="adv-buttons"><button data-set-marker="start">SET START</button><button data-set-marker="closest">SET CLOSEST</button><button data-set-marker="end">SET END</button><button id="advSync">${state.sync?"SYNC ON":"SYNC OFF"}</button></div></div>`;if(g.special==="seed")extra+=`<div class="adv-control wide"><label>DETERMINISTIC SEED</label><div class="adv-buttons"><input id="seedInput" type="number" value="${state.seed}"><button id="applySeed">APPLY</button><button id="newSeed">NEW SEED</button></div></div>`;if(g.special==="generator")extra+=`<div class="adv-control"><label>GENERATOR STATE</label><button id="generatorToggle" class="${state.generatorOn?"active":""}">${state.generatorOn?"ON":"OFF"}</button></div>`;const bp=g.bypass?`<button id="advBypass" class="${state.bypass[k]?"active":""}">${state.bypass[k]?"BYPASSED":"ACTIVE"}</button>`:"";$("#advancedBody").innerHTML=`<div class="adv-top"><div class="adv-summary">${g.assetType?selected(g.assetType).name:g.label}</div><div>${bp}</div></div><div class="adv-grid">${g.controls.map(control).join("")}${extra}</div><div class="state-note">All controls are state/automation surfaces. Browser audio stays pass-through until shared C++ Wasm DSP is connected.</div>`;bindAdvanced()}
+function bindAdvanced(){$$("[data-library]").forEach(b=>b.onclick=()=>openBrowser(b.dataset.library));$$("[data-param]").forEach(c=>{c.onpointerdown=()=>c.dataset.before=JSON.stringify(core());const apply=e=>{const id=e.target.dataset.param,def=findControl(id);state.params[id]=def.type==="select"?e.target.value:+e.target.value;updateScene();updateGains();updateCurves();const v=e.target.closest(".adv-control")?.querySelector(".value");if(v&&def.type==="range")v.textContent=state.params[id]+" "+(def.unit||"")};c.oninput=apply;c.onchange=e=>{apply(e);if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}});const bp=$("#advBypass");if(bp)bp.onclick=()=>mut(()=>state.bypass[state.advanced]=!state.bypass[state.advanced]);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));const sy=$("#advSync");if(sy)sy.onclick=()=>mut(()=>state.sync=!state.sync);const ap=$("#applySeed");if(ap)ap.onclick=()=>mut(()=>state.seed=Math.max(0,Math.floor(+$("#seedInput").value||0)));const ns=$("#newSeed");if(ns)ns.onclick=()=>mut(()=>state.seed=(Math.imul(state.seed||1,1664525)+1013904223)>>>0);const gt=$("#generatorToggle");if(gt)gt.onclick=()=>mut(()=>state.generatorOn=!state.generatorOn)}
+function bind(){$$("[data-ui]").forEach(b=>b.onclick=()=>mut(()=>state.ui=b.dataset.ui));$$("[data-view]").forEach(b=>b.onclick=()=>mut(()=>state.view=b.dataset.view));$$("[data-motion-mode]").forEach(b=>b.onclick=()=>mut(()=>state.params.motionMode=b.dataset.motionMode));$$("[data-tab]").forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;$$("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));$$(".tab-content").forEach(x=>x.classList.toggle("active",x.dataset.content===state.tab))});$("#syncToggle").onchange=e=>mut(()=>state.sync=e.target.checked);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));$("#browserClose").onclick=closeBrowser;$("#assetBrowser").onclick=e=>{if(e.target.id==="assetBrowser")closeBrowser()};$("#assetSearch").oninput=renderBrowserList;$("#categorySelect").onchange=renderBrowserList;$("#presetSelect").onchange=loadPreset;$("#savePresetBtn").onclick=savePreset;$("#importStateBtn").onclick=()=>$("#stateImportFile").click();$("#exportStateBtn").onclick=exportState;$("#stateImportFile").onchange=importState;$("#undoBtn").onclick=doUndo;$("#redoBtn").onclick=doRedo;$("#globalBypass").onclick=()=>mut(()=>state.globalBypass=!state.globalBypass);$("#audioFile").onchange=loadAudio;$("#playBtn").onclick=play;$("#stopBtn").onclick=stop;$("#loopToggle").onchange=e=>audio.loop=e.target.checked;$("#seekSlider").oninput=e=>{if(audio.duration)audio.currentTime=+e.target.value/1000*audio.duration};$("#resetPeakBtn").onclick=()=>{peakIn=peakOut=-Infinity;mark("PEAK RESET")};$$("[data-snapshot]").forEach(b=>b.onclick=()=>snapshot(b.dataset.snapshot,b))}
+function doUndo(){if(!undo.length)return;redo.push(core());restore(undo.pop());hist();mark("UNDO")}function doRedo(){if(!redo.length)return;undo.push(core());restore(redo.pop());hist();mark("REDO")}
+function loadPreset(e){const v=e.target.value;if(!v)return;push();if(v.startsWith("factory:")){state.preset=v;const x=byId.get(v.slice(8));$("#sceneTitle").textContent=x?.name||"Scene View"}else{const p=userPresets[v.slice(5)];if(p){const snaps=state.snapshots;state=Object.assign(newState(),copy(p.state));state.snapshots=snaps;state.preset=v}}mark("PRESET LOADED");refresh()}
+function savePreset(){const name=prompt("Preset name");if(!name)return;const k=Date.now().toString(36);userPresets[k]={name,state:core()};localStorage.setItem("sourcerune.userPresets.v1",JSON.stringify(userPresets));state.preset="user:"+k;renderPreset();mark("PRESET SAVED")}
+function exportState(){const b=new Blob([JSON.stringify({product:"SOURCERUNE",schema:1,state:core()},null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="SOURCERUNE_State.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);mark("STATE EXPORTED")}
+function importState(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const p=JSON.parse(r.result);if(p.product!=="SOURCERUNE"||!p.state)throw Error("Invalid state");push();restore(p.state);mark("STATE IMPORTED")}catch(x){alert("State import failed: "+x.message)}e.target.value=""};r.readAsText(f)}
+function snapshot(s,b){if(!state.snapshots[s])state.snapshots[s]=core();else{push();const keep=state.snapshots;state=Object.assign(newState(),copy(keep[s]));state.snapshots=keep;refresh()}$$("[data-snapshot]").forEach(x=>x.classList.toggle("active",x===b));mark("SNAPSHOT "+s)}
+function openBrowser(t){browserType=t;$("#browserTitle").textContent=LABEL[t];const cats=[...new Set(catalog.filter(x=>x.type===t).map(x=>x.category))];$("#categorySelect").innerHTML='<option value="">All categories</option>'+cats.map(x=>`<option>${x}</option>`).join("");$("#assetSearch").value="";$("#assetBrowser").classList.remove("hidden");renderBrowserList();preview(selected(t))}
+function closeBrowser(){$("#assetBrowser").classList.add("hidden")}function renderBrowserList(){const q=$("#assetSearch").value.toLowerCase(),c=$("#categorySelect").value,x=catalog.filter(i=>i.type===browserType&&(!c||i.category===c)&&(!q||i.name.toLowerCase().includes(q)||i.id.toLowerCase().includes(q)));$("#assetList").innerHTML=x.map(i=>`<button class="asset-item ${state.selection[browserType]===i.id?"active":""}" data-id="${i.id}"><span>${i.category}</span><strong>${i.name}</strong></button>`).join("");$$(".asset-item").forEach(b=>{b.onmouseenter=()=>preview(byId.get(b.dataset.id));b.onclick=()=>{mut(()=>state.selection[browserType]=b.dataset.id);renderBrowserList();preview(byId.get(b.dataset.id))}})}function preview(x){$("#assetPreview").innerHTML=`<div class="preview-art"><img src="${assetUrl(x)}" alt="" onerror="this.remove()"></div><div class="preview-title">${x.name}</div><div class="preview-id">${x.id}</div>`}
+function setMarker(k){mut(()=>state.markers[k]=audio.currentTime||0)}function renderMarkers(){const f=v=>v==null?"—":v.toFixed(2)+"s";$("#markerStatus").textContent="START "+f(state.markers.start)+" · CLOSEST "+f(state.markers.closest)+" · END "+f(state.markers.end)}
+function distance(){const p=state.params.motion/100,a=state.params.startDistance,c=state.params.closestDistance,e=state.params.endDistance,m=state.params.motionMode;if(m==="STATIC")return a;if(m==="APPROACH")return a+(c-a)*p;if(m==="LEAVE")return c+(e-c)*p;if(m==="PASS_BY")return p<=.5?a+(c-a)*p*2:c+(e-c)*(p-.5)*2;return a+(e-a)*p}
+function updateScene(){const p=state.params.motion/100,x=110+790*p,y=325-55*Math.sin(Math.PI*p),d=distance();$("#sourceNode").setAttribute("transform",`translate(${x} ${y})`);$("#distanceLine").setAttribute("x1",x);$("#distanceLine").setAttribute("y1",y);$("#distanceText").setAttribute("x",(x+500)/2);$("#distanceText").setAttribute("y",(y+270)/2-10);$("#distanceText").textContent=d.toFixed(1)+" m";$("#motionMode").textContent=pretty(state.params.motionMode);$("#startDistance").textContent=state.params.startDistance.toFixed(1)+" m";$("#closestDistance").textContent=state.params.closestDistance.toFixed(1)+" m";$("#endDistance").textContent=state.params.endDistance.toFixed(1)+" m";$("#currentDistance").textContent=d.toFixed(1)+" m";$("#speedReadout").textContent=state.params.speed+" km/h";$("#dopplerReadout").textContent=state.params.doppler+"%";$("#widthReadout").textContent=state.params.width+"%";$("#perspectiveReadout").textContent=state.params.perspective+"%";$("#sceneBuildings").setAttribute("opacity",state.view==="TOP"?".28":".9")}
+function updateCurves(){for(const [id,k] of [["directCurve","direct"],["earlyCurve","early"],["tailCurve","tail"]])$("#"+id).style.opacity=.2+.8*state.params[k]/100}
+async function setupAudio(){if(audioCtx)return;audioCtx=new(window.AudioContext||window.webkitAudioContext)();media=audioCtx.createMediaElementSource(audio);inGain=audioCtx.createGain();inAn=audioCtx.createAnalyser();outGain=audioCtx.createGain();outAn=audioCtx.createAnalyser();inAn.fftSize=outAn.fftSize=2048;media.connect(inGain);inGain.connect(inAn);inAn.connect(outGain);outGain.connect(outAn);outAn.connect(audioCtx.destination);$("#sampleRateReadout").textContent=audioCtx.sampleRate+" Hz";$("#blockReadout").textContent="browser";updateGains()}
+function updateGains(){if(!audioCtx)return;inGain.gain.value=gain(state.params.inputGain);outGain.gain.value=gain(state.params.outputGain)}
+async function loadAudio(e){const f=e.target.files?.[0];if(!f)return;await setupAudio();audio.src=URL.createObjectURL(f);$("#buildLabel").textContent="WEB TEST · "+f.name+" · DSP PASS-THROUGH";mark("AUDIO LOADED")}async function play(){await setupAudio();await audioCtx.resume();if(audio.src)audio.play()}function stop(){audio.pause();audio.currentTime=0}
+function stats(a){if(!a)return{peak:-Infinity,rms:-Infinity,pct:0};const d=new Uint8Array(a.fftSize);a.getByteTimeDomainData(d);let p=0,s=0;for(const x of d){const v=(x-128)/128;p=Math.max(p,Math.abs(v));s+=v*v}p=db(p);const r=db(Math.sqrt(s/d.length));return{peak:p,rms:r,pct:Math.max(0,Math.min(100,(p+60)/60*100))}}
+function meters(){const i=stats(inAn),o=stats(outAn);peakIn=Math.max(peakIn,i.peak);peakOut=Math.max(peakOut,o.peak);$("#inMeter").style.height=i.pct+"%";$("#outMeter").style.height=o.pct+"%";$("#peakInValue").textContent=fmt(peakIn);$("#peakOutValue").textContent=fmt(peakOut);$("#rmsInValue").textContent=fmt(i.rms);$("#rmsOutValue").textContent=fmt(o.rms)}
+function spectrum(){const c=$("#spectrumCanvas"),x=c.getContext("2d"),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.fillStyle="#0b1013";x.fillRect(0,0,w,h);x.strokeStyle="#233038";for(let i=1;i<8;i++){x.beginPath();x.moveTo(i*w/8,0);x.lineTo(i*w/8,h);x.stroke()}if(!outAn)return;const d=new Uint8Array(outAn.frequencyBinCount);outAn.getByteFrequencyData(d);x.strokeStyle="#89c8d8";x.lineWidth=2;x.beginPath();for(let a=0;a<w;a++){const n=Math.floor(a/w*(d.length-1)),y=h-d[n]/255*h*.92;a?x.lineTo(a,y):x.moveTo(a,y)}x.stroke()}
+function time(){const t=audio.currentTime||0,m=Math.floor(t/60),s=Math.floor(t%60),ms=Math.floor(t%1*1000);$("#transportTime").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${String(ms).padStart(3,"0")}`;if(audio.duration)$("#seekSlider").value=Math.round(t/audio.duration*1000)}
+function animate(){requestAnimationFrame(animate);time();spectrum();meters();updateScene()}
+init().catch(e=>{console.error(e);$("#buildLabel").textContent="WEB TEST · INIT ERROR";mark("INIT ERROR")});
