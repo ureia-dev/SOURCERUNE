@@ -1,0 +1,8 @@
+body.ui-02 .workspace{grid-template-columns:222px minmax(760px,1fr) 126px}
+body.ui-02 .center{grid-template-rows:minmax(520px,1fr) 176px}
+body.ui-02 .scene-panel{min-height:520px}
+body.ui-02 .module-card{min-height:82px}
+body.ui-02 #sceneSvg{min-height:410px}
+body.ui-02 .analysis-panel .tab-content{height:140px}
+body.ui-02 .module-rail:before{content:"SCENE COMPONENTS";font-size:8px;letter-spacing:.14em;color:#64767e;padding:2px 3px 0}
+body.ui-02 .motion-readouts{background:#0c1215}
