@@ -1,0 +1,6 @@
+id,asset_group,origin,third_party_content,status,notes
+ART_SOURCE_V2,SOURCE,internally generated for SOURCERUNE,no,review-required,binary PNGs not yet committed
+ART_TRANSMISSION_V2,TRANSMISSION,internally generated for SOURCERUNE,no,review-required,binary PNGs not yet committed
+ART_COVER_V2,WALL_COVER,internally generated for SOURCERUNE,no,review-required,binary PNGs not yet committed
+ART_SPACE_V2,SPACE_ENVIRONMENT,internally generated for SOURCERUNE,no,review-required,binary PNGs not yet committed
+ART_SCENE_V2,SCENE_PRESET_HERO,internally generated for SOURCERUNE,no,review-required,binary PNGs not yet committed
