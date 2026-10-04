@@ -11,6 +11,11 @@ SOURCERUNE now has two equal mainline runtime targets:
 
 AAX is not part of the current mainline. It may be added later as a secondary target without changing the core DSP architecture.
 
+## Current repository policy
+
+Development currently stays in this **single public repository** so VST3/WEB/UI iteration and WEB TEST deployment remain fast. No separate private core repository is part of the current plan.
+
+
 ## Architecture rules
 
 - C++20 shared DSP/scene/state core.

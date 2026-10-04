@@ -10,6 +10,15 @@ The WEB version exists for two purposes:
 
 It must not become a separate sound implementation.
 
+## Current deployment policy
+
+SOURCERUNE currently uses **one public repository** for both native and browser development.
+
+The WEB TEST target is built and deployed from this same repository. Do not introduce a second private core repository or cross-repository deployment dependency in the current phase, because that would slow normal iteration and complicate parity/debugging.
+
+This does not permit a separate browser sound path: WEB still compiles the shared C++ core to WebAssembly.
+
+
 ## Runtime split
 
 ```text

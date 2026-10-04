@@ -25,6 +25,17 @@ AAX is deferred as a possible secondary target and must not distort the VST3/WEB
 8. Expensive UI analysis work stays outside realtime processing.
 9. Scene/model changes are prepared outside realtime processing and applied clicklessly.
 
+## Repository visibility / deployment policy
+
+For the current development phase, SOURCERUNE remains a **single public repository**.
+
+- Do not split DSP/Core and WEB into separate repositories at this stage.
+- Keep VST3, WEB, DSP, UI, tests, presets and documentation in this repository so build/deploy iteration remains fast.
+- WEB TEST remains directly deployable from this repository.
+- This is a workflow decision, not a signal-processing decision: VST3 and WEB still share the same C++ DSP/Scene/State implementation.
+- If commercial source-protection requirements later outweigh iteration cost, repository separation can be revisited deliberately; it is not part of the current architecture.
+
+
 ## Planned repository layout
 
 ```text
