@@ -62,8 +62,60 @@
           "step": 1,
           "unit": "%",
           "default": 5
+        },
+        {
+          "id": "bandwidthLoss",
+          "label": "BANDWIDTH LOSS",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "id": "noiseStatic",
+          "label": "NOISE / STATIC",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "id": "bitrateArtifacts",
+          "label": "BITRATE ARTIFACTS",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "id": "signalCompression",
+          "label": "SIGNAL COMPRESSION",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
         }
-      ]
+      ],
+      "behavior": {
+        "macro": "badSignal",
+        "mediumAware": true,
+        "drives": [
+          "bandwidthLoss",
+          "noiseStatic",
+          "dropout",
+          "bitrateArtifacts",
+          "interference",
+          "signalCompression"
+        ]
+      }
     },
     "CONDITION": {
       "label": "CONDITION",
@@ -130,6 +182,36 @@
           "step": 1,
           "unit": "%",
           "default": 5
+        },
+        {
+          "id": "imbalance",
+          "label": "IMBALANCE",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "id": "wowFlutter",
+          "label": "WOW / FLUTTER",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "id": "intermittentContact",
+          "label": "INTERMITTENT CONTACT",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
         }
       ]
     },
