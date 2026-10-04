@@ -87,7 +87,15 @@ function renderBrowserList(){
   const q=$("#assetSearch").value.trim().toLowerCase(),cat=$("#categorySelect").value;
   const items=catalog.filter(x=>x.type===activeBrowserType&&(!cat||x.category===cat)&&(!q||x.name.toLowerCase().includes(q)||x.id.toLowerCase().includes(q)));
   $("#assetList").innerHTML=items.map(x=>`<button class="asset-item ${state.selection[activeBrowserType]===x.id?"active":""}" data-id="${x.id}"><span>${x.category}</span><strong>${x.name}</strong></button>`).join("");
-  $$(".asset-item").forEach(b=>{b.onmouseenter=()=>previewAsset(byId.get(b.dataset.id));b.onclick=()=>{state.selection[activeBrowserType]=b.dataset.id;renderModules();renderBrowserList();previewAsset(byId.get(b.dataset.id)}})
+  $(".asset-item").forEach(b=>{
+    b.onmouseenter=()=>previewAsset(byId.get(b.dataset.id));
+    b.onclick=()=>{
+      state.selection[activeBrowserType]=b.dataset.id;
+      renderModules();
+      renderBrowserList();
+      previewAsset(byId.get(b.dataset.id));
+    };
+  });
 }
 function previewAsset(item){
   if(!item)return;
