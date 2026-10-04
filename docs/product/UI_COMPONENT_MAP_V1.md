@@ -10,8 +10,8 @@ Global Bypass; Input Gain; Output Gain; Original ↔ Full Scene Mix; factory sce
 ## Complete processing/control groups
 
 - **SOURCE** — selector, Character, bypass, current model.
-- **TRANSMISSION** — selector, Bad Signal, Dropout/Packet Loss, Interference, Codec Damage, bypass.
-- **CONDITION** — NEW/USED/OLD/DAMAGED, amount, Rattle, Buzz, Device Compression, Instability, bypass.
+- **TRANSMISSION** — selector, Bad Signal, Bandwidth Loss, Noise/Static, Dropout/Packet Loss, Bitrate Artifacts, Interference, Signal Compression, Codec Damage, bypass. Bad Signal remains medium-aware.
+- **CONDITION** — NEW/USED/OLD/DAMAGED, amount, Rattle, Buzz, Device Compression, Imbalance, Wow/Flutter, Intermittent Contact, Instability, bypass.
 - **WALL / COVER** — selector, Amount, Leak, Panel/Cavity Resonance, bypass.
 - **MOTION / DISTANCE** — STATIC/APPROACH/PASS BY/LEAVE/MANUAL, Start/Closest/End/Current Distance, Speed km/h, Doppler, Width, Perspective, Motion Position, Sync, Set Start/Closest/End, bypass.
 - **SPACE / ENVIRONMENT** — selector, Amount, Decay, Character, Direct, Early, Tail, bypass.
