@@ -25,7 +25,8 @@
       "purpose": "全插件最底層霧黑/金屬感底板；不可烘焙內容",
       "masterTarget": "96x96 @2x master",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_PANEL_FRAME",
@@ -35,7 +36,8 @@
       "purpose": "所有大 panel 共用外框、內陰影、1px 金屬邊",
       "masterTarget": "96x96 @2x master",
       "states": "default/focus",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_CARD_FRAME",
@@ -45,7 +47,8 @@
       "purpose": "SOURCE/TRANSMISSION/WALL/SPACE 小卡共用框",
       "masterTarget": "80x80 @2x master",
       "states": "default/hover/selected/bypassed",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_CARD_IMAGE_MASK",
@@ -95,7 +98,8 @@
       "purpose": "頂部工具列底板",
       "masterTarget": "96x64 @2x",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_PRESETBAR_BG",
@@ -135,7 +139,8 @@
       "purpose": "一般按鈕共用",
       "masterTarget": "96x56 @2x",
       "states": "idle/hover/pressed/disabled",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_SEGMENT_CAP",
@@ -145,7 +150,8 @@
       "purpose": "A/B、3D/Top、Approach/PassBy/Leave 等 segmented",
       "masterTarget": "88x52 @2x",
       "states": "idle/hover/active/disabled",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_DROPDOWN_CAP",
@@ -155,7 +161,8 @@
       "purpose": "Preset/Selector/Mode 下拉框",
       "masterTarget": "112x56 @2x",
       "states": "idle/hover/open/disabled",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_DROPDOWN_CARET",
@@ -175,7 +182,8 @@
       "purpose": "齒輪/資料夾/箭頭/全螢幕等 icon-only button",
       "masterTarget": "64x56 @2x",
       "states": "idle/hover/pressed/active",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_CHECKBOX",
@@ -205,7 +213,8 @@
       "purpose": "水平 slider track",
       "masterTarget": "128x16 @2x",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_SLIDER_FILL",
@@ -225,7 +234,8 @@
       "purpose": "slider thumb",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover/drag",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_KNOB_S_BASE",
@@ -235,7 +245,8 @@
       "purpose": "小 knob 底座，Bad Signal/Condition/Speed/Doppler/Width",
       "masterTarget": "112x112 @2x",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_KNOB_M_BASE",
@@ -245,7 +256,8 @@
       "purpose": "中 knob，Ambience/Mix/Intelligibility",
       "masterTarget": "144x144 @2x",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_KNOB_L_BASE",
@@ -255,7 +267,8 @@
       "purpose": "UI_02 大 Distance dial 底座",
       "masterTarget": "640x640 @2x",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_KNOB_ARC",
@@ -285,7 +298,8 @@
       "purpose": "IN/OUT meter 槽外框",
       "masterTarget": "64x256 @2x",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_METER_SEGMENT",
@@ -315,7 +329,8 @@
       "purpose": "Spectrum/EQ/Response 共用暗色格線底",
       "masterTarget": "128x128 @2x",
       "states": "default",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_SPECTRUM_CURVE",
@@ -395,7 +410,8 @@
       "purpose": "Source marker cap/icon；位置/標籤/值由 code",
       "masterTarget": "64x64 @2x",
       "states": "idle/selected/drag",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_SCENE_LISTENER_MARKER",
@@ -405,7 +421,8 @@
       "purpose": "Listener marker cap；位置/標籤由 code",
       "masterTarget": "64x64 @2x",
       "states": "idle/selected",
-      "status": "NEW_P0"
+      "status": "ASSET_READY_P0_V1",
+      "webBinding": "Web/App/runtime_skin_p0.css"
     },
     {
       "id": "RT_SCENE_PATH",
@@ -717,5 +734,14 @@
       "states": "default/active/bypassed",
       "status": "NEW_P2"
     }
-  ]
+  ],
+  "p0": {
+    "version": 1,
+    "status": "ASSET_READY_AND_WEB_SKIN_BOUND",
+    "logicalComponents": 17,
+    "pngFiles": 33,
+    "manifest": "Assets/UI/Runtime/p0_skin_manifest_v1.json",
+    "webSkin": "Web/App/runtime_skin_p0.css",
+    "nativeReuse": "Assets/UI/Runtime/Common/*"
+  }
 }
