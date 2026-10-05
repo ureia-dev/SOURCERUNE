@@ -14,6 +14,12 @@
       "semanticScenes": 26,
       "exportsPerScene": 3,
       "totalPng": 78
+    },
+    "runtimeChrome": {
+      "p0": "complete",
+      "p1": "complete",
+      "p2": "complete",
+      "p2Png": 26
     }
   },
   "components": [
@@ -388,7 +394,8 @@
       "purpose": "Signal Flow node 背景",
       "masterTarget": "80x44 @2x",
       "states": "default/bypassed/selected",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_SCENE_GRID",
@@ -462,7 +469,8 @@
       "purpose": "25.0m / 0.8s 類浮窗底",
       "masterTarget": "96x64 @2x",
       "states": "default",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_MOTION_CAR_GLYPH",
@@ -483,7 +491,8 @@
       "purpose": "UI_01 motion waveform/trim strip 底",
       "masterTarget": "96x40 @2x",
       "states": "default",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_WAVEFORM",
@@ -665,7 +674,8 @@
       "purpose": "Undo",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover/disabled",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_TOOL_ICON_REDO",
@@ -675,7 +685,8 @@
       "purpose": "Redo",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover/disabled",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_TOOL_ICON_FULLSCREEN",
@@ -685,7 +696,8 @@
       "purpose": "Scene fullscreen",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover/active",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_TOOL_ICON_COPY",
@@ -695,7 +707,8 @@
       "purpose": "Copy state",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_TOOL_ICON_PASTE",
@@ -705,7 +718,8 @@
       "purpose": "Paste state",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover/disabled",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_AMBIENCE_WAVE_GLYPH",
@@ -725,7 +739,8 @@
       "purpose": "Asset browser modal frame",
       "masterTarget": "128x128 @2x",
       "states": "default",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_ASSET_PREVIEW_FRAME",
@@ -735,7 +750,8 @@
       "purpose": "Browser preview artwork frame",
       "masterTarget": "96x96 @2x",
       "states": "default/selected",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_ADV_DRAWER_FRAME",
@@ -745,7 +761,8 @@
       "purpose": "Advanced drawer panel",
       "masterTarget": "96x96 @2x",
       "states": "open",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     },
     {
       "id": "RT_ADV_CONTROL_CARD",
@@ -755,7 +772,8 @@
       "purpose": "Detailed-control cell",
       "masterTarget": "80x80 @2x",
       "states": "default/active/bypassed",
-      "status": "NEW_P2"
+      "status": "ASSET_READY_P2_V1",
+      "webBinding": "Web/App/runtime_skin_p2.css"
     }
   ],
   "p0": {
@@ -788,4 +806,4 @@
     ],
     "note": "Asset-ready-only pieces are intentionally not forced into UI controls that do not yet expose a matching runtime surface."
   }
-}
+}\n

@@ -62,3 +62,4 @@ Do not confuse:
 3. live code-drawn controls/graphs.
 
 A complete UI must assemble all three rather than using a full-interface screenshot.
+\n\n## Runtime chrome progress — 2026-10-05\n\n- P0: complete and Web-bound.\n- P1: complete and Web-bound.\n- P2: complete and Web-bound (**26 independent PNG assets**).\n- Runtime screenshots remain forbidden as implementation assets.\n- Live waveform, meters, spectrum, curves, text and positions remain code-driven.\n
