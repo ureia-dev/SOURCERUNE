@@ -150,7 +150,7 @@ body.ui-01 #sceneSvg{height:calc(100% - 190px)}
 .adv-control:focus-within,.adv-control:hover{
   background-image:url("../../Assets/UI/Runtime/Common/Advanced/RT_ADV_CONTROL_CARD_ACTIVE.png");
 }
-.adv-control.bypassed{
+.advanced-drawer.bypassed .adv-control,.adv-control.bypassed{
   background-image:url("../../Assets/UI/Runtime/Common/Advanced/RT_ADV_CONTROL_CARD_BYPASSED.png");
   opacity:.62;
 }
