@@ -402,3 +402,147 @@ body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-knob-range{
 body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-wave{display:none}
 body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] h3{order:1}
 body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-select{order:2}
+
+
+/* UI_01 approved reference uses stable section-color outlines. */
+body.ui-01 .macro-motion{border-color:#00bff3!important;box-shadow:inset 0 0 0 1px rgba(0,191,243,.14)}
+body.ui-01 .macro-badsignal{border-color:#ff3f3f!important;box-shadow:inset 0 0 0 1px rgba(255,63,63,.10)}
+body.ui-01 .macro-condition{border-color:#d7a72b!important;box-shadow:inset 0 0 0 1px rgba(215,167,43,.10)}
+body.ui-01 .macro-intelligibility{border-color:#42e5ae!important;box-shadow:inset 0 0 0 1px rgba(66,229,174,.10)}
+body.ui-01 .macro-ambience{border-color:#ba64d6!important;box-shadow:inset 0 0 0 1px rgba(186,100,214,.10)}
+body.ui-01 .macro-mix{border-color:#d9e2e5!important}
+body.ui-01 .macro-eq{border-color:#8ea3ad!important}
+
+/* UI_02 lower distance/motion deck: real runtime controls and graph. */
+body.ui-02 .motion-readouts:before,
+body.ui-02 .motion-readouts:after{content:none!important}
+body.ui-02 .motion-deck-ui{
+  position:absolute!important;
+  left:42%!important;
+  right:22px!important;
+  top:20px!important;
+  height:160px!important;
+  padding:0!important;
+  background:none!important;
+  border:0!important;
+  z-index:4;
+}
+body.ui-02 .motion-deck-head{
+  height:40px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+body.ui-02 .motion-deck-head>span{
+  color:#e0eaee;
+  font-size:15px;
+  font-weight:500;
+  letter-spacing:.035em;
+}
+body.ui-02 #motionDeckMode{
+  margin-left:auto;
+  width:250px;
+  height:38px;
+  padding-left:14px!important;
+  font-size:11px!important;
+}
+body.ui-02 .motion-deck-graph{
+  display:block;
+  width:100%;
+  height:108px;
+  overflow:visible;
+}
+body.ui-02 .motion-deck-graph path{
+  stroke:#a6ecff;
+  stroke-width:2.1;
+  fill:none;
+  vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 0 2px rgba(74,196,255,.42));
+}
+body.ui-02 .motion-deck-graph line{
+  stroke:#29404b;
+  stroke-width:1;
+  vector-effect:non-scaling-stroke;
+}
+body.ui-02 .motion-deck-graph circle{
+  fill:#dbeaf0;
+  stroke:#20323b;
+  stroke-width:1.2;
+  vector-effect:non-scaling-stroke;
+}
+body.ui-02 .motion-deck-graph #motionDeckCurrent{
+  fill:#5ad4ff;
+  stroke:#e5f8ff;
+  stroke-width:1.5;
+}
+
+/* Current-distance dial is the left large instrument. */
+body.ui-02 .motion-readouts>div:nth-child(5){
+  left:58px!important;
+  top:92px!important;
+  width:240px!important;
+}
+body.ui-02 .motion-readouts>div:nth-child(5) span{
+  font-size:0!important;
+}
+body.ui-02 .motion-readouts>div:nth-child(5) span:after{
+  content:"DISTANCE";
+  display:block;
+  font-size:11px;
+  color:#9aabb4;
+  letter-spacing:.05em;
+}
+body.ui-02 .motion-readouts>div:nth-child(5) strong{
+  font-size:39px!important;
+  line-height:1.05;
+}
+
+/* Start / closest / end sit below the dynamic path. */
+body.ui-02 .motion-readouts>div:nth-child(2){
+  left:44%!important;top:158px!important;text-align:center
+}
+body.ui-02 .motion-readouts>div:nth-child(3){
+  left:63%!important;top:158px!important;text-align:center
+}
+body.ui-02 .motion-readouts>div:nth-child(4){
+  left:82%!important;top:158px!important;text-align:center
+}
+body.ui-02 .motion-readouts>div:nth-child(2) span,
+body.ui-02 .motion-readouts>div:nth-child(3) span,
+body.ui-02 .motion-readouts>div:nth-child(4) span{font-size:8px}
+body.ui-02 .motion-readouts>div:nth-child(2) strong,
+body.ui-02 .motion-readouts>div:nth-child(3) strong,
+body.ui-02 .motion-readouts>div:nth-child(4) strong{font-size:12px}
+
+/* Speed / Doppler / Width become real-looking knob readouts while values remain live. */
+body.ui-02 .motion-readouts>div:nth-child(6),
+body.ui-02 .motion-readouts>div:nth-child(7),
+body.ui-02 .motion-readouts>div:nth-child(8){
+  top:200px!important;
+  width:86px!important;
+  height:76px!important;
+  padding-top:52px!important;
+  text-align:center!important;
+  background:url("../../Assets/UI/Runtime/Common/Controls/RT_KNOB_S_BASE.png") top center/54px 54px no-repeat!important;
+}
+body.ui-02 .motion-readouts>div:nth-child(6){left:48%!important}
+body.ui-02 .motion-readouts>div:nth-child(7){left:65%!important}
+body.ui-02 .motion-readouts>div:nth-child(8){left:82%!important}
+body.ui-02 .motion-readouts>div:nth-child(6) span,
+body.ui-02 .motion-readouts>div:nth-child(7) span,
+body.ui-02 .motion-readouts>div:nth-child(8) span{
+  position:absolute;top:34px;left:0;right:0;
+  font-size:8px!important;color:#a0b1b9
+}
+body.ui-02 .motion-readouts>div:nth-child(6) strong,
+body.ui-02 .motion-readouts>div:nth-child(7) strong,
+body.ui-02 .motion-readouts>div:nth-child(8) strong{
+  font-size:11px!important;margin:0!important
+}
+
+/* UI_02 central scene markers should read cleanly over photography. */
+body.ui-02 #sourceNode image,
+body.ui-02 #listenerNode image{
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.7));
+}
+body.ui-02 #listenerNode{transform-box:fill-box}
