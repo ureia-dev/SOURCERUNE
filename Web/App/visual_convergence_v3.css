@@ -183,7 +183,7 @@ body.ui-01 .motion-knob-row{
   gap:1px;
 }
 body.ui-01 .macro-motion .macro-knob{--knob-size:55px}
-body.ui-01 .macro-motion .macro-knob.compact{--knob-size:51px}
+body.ui-01 .macro-motion .macro-knob.compact{--knob-size:55px}
 body.ui-01 .macro-badsignal .macro-knob,
 body.ui-01 .macro-condition .macro-knob,
 body.ui-01 .macro-intelligibility .macro-knob,
