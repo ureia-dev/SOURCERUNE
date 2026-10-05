@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "count": 224,
+  "count": 250,
   "items": [
     {
       "id": "SRC_001_Smartphone_Earpiece",
@@ -1765,7 +1765,7 @@
     {
       "id": "SCN_001_Mobile_Call_Busy_Sidewalk",
       "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
+      "category": "01 Source / Emitter",
       "name": "Mobile Call - Busy Sidewalk",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_001_Mobile_Call_Busy_Sidewalk.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_001_Mobile_Call_Busy_Sidewalk.png",
@@ -1773,19 +1773,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_002_Mobile_Call_Weak_Signal",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
-      "name": "Mobile Call - Weak Signal",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_002_Mobile_Call_Weak_Signal.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_002_Mobile_Call_Weak_Signal.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_002_Mobile_Call_Weak_Signal.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_003_Office_Desk_Phone_Small_Office",
       "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
+      "category": "01 Source / Emitter",
       "name": "Office Desk Phone - Small Office",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_003_Office_Desk_Phone_Small_Office.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_003_Office_Desk_Phone_Small_Office.png",
@@ -1793,29 +1783,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_004_Hotel_Phone_Corridor_Spill",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
-      "name": "Hotel Phone - Corridor Spill",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_004_Hotel_Phone_Corridor_Spill.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_004_Hotel_Phone_Corridor_Spill.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_004_Hotel_Phone_Corridor_Spill.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_005_Prison_Visiting_Phone",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
-      "name": "Prison Visiting Phone",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_005_Prison_Visiting_Phone.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_005_Prison_Visiting_Phone.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_005_Prison_Visiting_Phone.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_006_Payphone_Street_Corner",
       "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
+      "category": "01 Source / Emitter",
       "name": "Payphone - Street Corner",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_006_Payphone_Street_Corner.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_006_Payphone_Street_Corner.png",
@@ -1825,7 +1795,7 @@
     {
       "id": "SCN_007_Conference_Call_Glass_Office",
       "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
+      "category": "01 Source / Emitter",
       "name": "Conference Call - Glass Office",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_007_Conference_Call_Glass_Office.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_007_Conference_Call_Glass_Office.png",
@@ -1833,39 +1803,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_008_Cordless_Phone_Living_Room",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
-      "name": "Cordless Phone - Living Room",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_008_Cordless_Phone_Living_Room.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_008_Cordless_Phone_Living_Room.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_008_Cordless_Phone_Living_Room.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_009_Phone_In_Pocket_Busy_Street",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
-      "name": "Phone In Pocket - Busy Street",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_009_Phone_In_Pocket_Busy_Street.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_009_Phone_In_Pocket_Busy_Street.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_009_Phone_In_Pocket_Busy_Street.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_010_Phone_In_Backpack_Station_Concourse",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Phone / Telephony",
-      "name": "Phone In Backpack - Station Concourse",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_010_Phone_In_Backpack_Station_Concourse.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_010_Phone_In_Backpack_Station_Concourse.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_010_Phone_In_Backpack_Station_Concourse.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_011_Walkie_Talkie_Construction_Site",
       "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
+      "category": "01 Source / Emitter",
       "name": "Walkie Talkie - Construction Site",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_011_Walkie_Talkie_Construction_Site.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_011_Walkie_Talkie_Construction_Site.png",
@@ -1875,7 +1815,7 @@
     {
       "id": "SCN_012_Police_Radio_Street_Exterior",
       "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
+      "category": "01 Source / Emitter",
       "name": "Police Radio - Street Exterior",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_012_Police_Radio_Street_Exterior.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_012_Police_Radio_Street_Exterior.png",
@@ -1883,39 +1823,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_013_Dispatch_Radio_Vehicle_Interior",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
-      "name": "Dispatch Radio - Vehicle Interior",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_013_Dispatch_Radio_Vehicle_Interior.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_013_Dispatch_Radio_Vehicle_Interior.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_013_Dispatch_Radio_Vehicle_Interior.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_014_Helicopter_Intercom_Clear",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
-      "name": "Helicopter Intercom - Clear",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_014_Helicopter_Intercom_Clear.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_014_Helicopter_Intercom_Clear.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_014_Helicopter_Intercom_Clear.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_015_Helicopter_Intercom_Half_Understandable",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
-      "name": "Helicopter Intercom - Half Understandable",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_015_Helicopter_Intercom_Half_Understandable.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_015_Helicopter_Intercom_Half_Understandable.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_015_Helicopter_Intercom_Half_Understandable.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_016_Aviation_Headset_Cockpit_Style",
       "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
+      "category": "01 Source / Emitter",
       "name": "Aviation Headset - Cockpit Style",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_016_Aviation_Headset_Cockpit_Style.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_016_Aviation_Headset_Cockpit_Style.png",
@@ -1925,7 +1835,7 @@
     {
       "id": "SCN_017_Security_Intercom_Building_Entrance",
       "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
+      "category": "01 Source / Emitter",
       "name": "Security Intercom - Building Entrance",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_017_Security_Intercom_Building_Entrance.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_017_Security_Intercom_Building_Entrance.png",
@@ -1935,7 +1845,7 @@
     {
       "id": "SCN_018_Drive_Thru_Speaker_Fast_Food_Lane",
       "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
+      "category": "01 Source / Emitter",
       "name": "Drive-Thru Speaker - Fast Food Lane",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_018_Drive_Thru_Speaker_Fast_Food_Lane.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_018_Drive_Thru_Speaker_Fast_Food_Lane.png",
@@ -1943,29 +1853,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_019_Radio_In_Back_Office",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
-      "name": "Radio In Back Office",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_019_Radio_In_Back_Office.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_019_Radio_In_Back_Office.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_019_Radio_In_Back_Office.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_020_Car_Radio_Out_of_Range",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Radio / Comms",
-      "name": "Car Radio - Out of Range",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_020_Car_Radio_Out_of_Range.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_020_Car_Radio_Out_of_Range.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_020_Car_Radio_Out_of_Range.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_021_Bullhorn_Street_Protest",
       "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
+      "category": "01 Source / Emitter",
       "name": "Bullhorn - Street Protest",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_021_Bullhorn_Street_Protest.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_021_Bullhorn_Street_Protest.png",
@@ -1975,7 +1865,7 @@
     {
       "id": "SCN_022_Stadium_PA",
       "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
+      "category": "01 Source / Emitter",
       "name": "Stadium PA",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_022_Stadium_PA.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_022_Stadium_PA.png",
@@ -1985,7 +1875,7 @@
     {
       "id": "SCN_023_Train_Station_Announcement",
       "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
+      "category": "01 Source / Emitter",
       "name": "Train Station Announcement",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_023_Train_Station_Announcement.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_023_Train_Station_Announcement.png",
@@ -1993,39 +1883,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_024_Airport_Gate_Announcement",
-      "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
-      "name": "Airport Gate Announcement",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_024_Airport_Gate_Announcement.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_024_Airport_Gate_Announcement.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_024_Airport_Gate_Announcement.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_025_Ceiling_PA_Shopping_Mall",
-      "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
-      "name": "Ceiling PA - Shopping Mall",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_025_Ceiling_PA_Shopping_Mall.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_025_Ceiling_PA_Shopping_Mall.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_025_Ceiling_PA_Shopping_Mall.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_026_Bus_Interior_Announcement",
-      "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
-      "name": "Bus Interior Announcement",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_026_Bus_Interior_Announcement.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_026_Bus_Interior_Announcement.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_026_Bus_Interior_Announcement.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_027_Airplane_Cabin_PA",
       "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
+      "category": "01 Source / Emitter",
       "name": "Airplane Cabin PA",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_027_Airplane_Cabin_PA.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_027_Airplane_Cabin_PA.png",
@@ -2033,139 +1893,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_028_Captain_Announcement",
-      "type": "SCENE_PRESET_HERO",
-      "category": "PA / Public Address",
-      "name": "Captain Announcement",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_028_Captain_Announcement.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_028_Captain_Announcement.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_028_Captain_Announcement.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_029_Upstairs_TV_Through_Wall",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "Upstairs TV Through Wall",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_029_Upstairs_TV_Through_Wall.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_029_Upstairs_TV_Through_Wall.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_029_Upstairs_TV_Through_Wall.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_030_Party_At_The_Neighbors",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "Party At The Neighbors",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_030_Party_At_The_Neighbors.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_030_Party_At_The_Neighbors.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_030_Party_At_The_Neighbors.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_031_Restaurant_Kitchen_Through_Door",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "Restaurant Kitchen Through Door",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_031_Restaurant_Kitchen_Through_Door.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_031_Restaurant_Kitchen_Through_Door.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_031_Restaurant_Kitchen_Through_Door.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_032_TV_In_Living_Room_From_Hallway",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "TV In Living Room From Hallway",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_032_TV_In_Living_Room_From_Hallway.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_032_TV_In_Living_Room_From_Hallway.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_032_TV_In_Living_Room_From_Hallway.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_033_Voice_Behind_Closed_Wooden_Door",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "Voice Behind Closed Wooden Door",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_033_Voice_Behind_Closed_Wooden_Door.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_033_Voice_Behind_Closed_Wooden_Door.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_033_Voice_Behind_Closed_Wooden_Door.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_034_Voice_Behind_Glass_Window",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "Voice Behind Glass Window",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_034_Voice_Behind_Glass_Window.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_034_Voice_Behind_Glass_Window.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_034_Voice_Behind_Glass_Window.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_035_Phone_Inside_Suitcase",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "Phone Inside Suitcase",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_035_Phone_Inside_Suitcase.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_035_Phone_Inside_Suitcase.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_035_Phone_Inside_Suitcase.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_036_Radio_In_Car_Trunk",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Through / Behind / Cover",
-      "name": "Radio In Car Trunk",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_036_Radio_In_Car_Trunk.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_036_Radio_In_Car_Trunk.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_036_Radio_In_Car_Trunk.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_037_Car_Pass_By_City_Street",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Vehicle / Motion",
-      "name": "Car Pass By - City Street",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_037_Car_Pass_By_City_Street.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_037_Car_Pass_By_City_Street.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_037_Car_Pass_By_City_Street.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_038_Car_Pass_By_Parking_Lot",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Vehicle / Motion",
-      "name": "Car Pass By - Parking Lot",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_038_Car_Pass_By_Parking_Lot.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_038_Car_Pass_By_Parking_Lot.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_038_Car_Pass_By_Parking_Lot.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_039_Car_Door_Speaker_Slow_Drive_By",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Vehicle / Motion",
-      "name": "Car Door Speaker - Slow Drive By",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_039_Car_Door_Speaker_Slow_Drive_By.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_039_Car_Door_Speaker_Slow_Drive_By.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_039_Car_Door_Speaker_Slow_Drive_By.png",
-      "status": "art-approved-v2"
-    },
-    {
-      "id": "SCN_040_Truck_Cab_Radio_Highway_Pull_Away",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Vehicle / Motion",
-      "name": "Truck Cab Radio - Highway Pull Away",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_040_Truck_Cab_Radio_Highway_Pull_Away.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_040_Truck_Cab_Radio_Highway_Pull_Away.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_040_Truck_Cab_Radio_Highway_Pull_Away.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_041_Subway_Car_Announcement",
       "type": "SCENE_PRESET_HERO",
-      "category": "Vehicle / Motion",
+      "category": "01 Source / Emitter",
       "name": "Subway Car Announcement",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_041_Subway_Car_Announcement.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_041_Subway_Car_Announcement.png",
@@ -2173,19 +1903,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_042_Bus_PA_Curb_Arrival",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Vehicle / Motion",
-      "name": "Bus PA - Curb Arrival",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_042_Bus_PA_Curb_Arrival.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_042_Bus_PA_Curb_Arrival.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_042_Bus_PA_Curb_Arrival.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_043_Cheap_Wireless_Speaker_In_Room",
       "type": "SCENE_PRESET_HERO",
-      "category": "Special / Lo-Fi / Consumer",
+      "category": "01 Source / Emitter",
       "name": "Cheap Wireless Speaker In Room",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_043_Cheap_Wireless_Speaker_In_Room.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_043_Cheap_Wireless_Speaker_In_Room.png",
@@ -2193,19 +1913,9 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_044_Toy_Recorder_Bedroom",
-      "type": "SCENE_PRESET_HERO",
-      "category": "Special / Lo-Fi / Consumer",
-      "name": "Toy Recorder - Bedroom",
-      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_044_Toy_Recorder_Bedroom.png",
-      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_044_Toy_Recorder_Bedroom.png",
-      "master": "Shared/SCENE_PRESET_HERO/SCN_044_Toy_Recorder_Bedroom.png",
-      "status": "art-approved-v2"
-    },
-    {
       "id": "SCN_045_CCTV_Security_Monitor_Audio",
       "type": "SCENE_PRESET_HERO",
-      "category": "Special / Lo-Fi / Consumer",
+      "category": "01 Source / Emitter",
       "name": "CCTV / Security Monitor Audio",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_045_CCTV_Security_Monitor_Audio.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_045_CCTV_Security_Monitor_Audio.png",
@@ -2215,7 +1925,7 @@
     {
       "id": "SCN_046_Cassette_Recorder_Kitchen_Table",
       "type": "SCENE_PRESET_HERO",
-      "category": "Special / Lo-Fi / Consumer",
+      "category": "01 Source / Emitter",
       "name": "Cassette Recorder - Kitchen Table",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_046_Cassette_Recorder_Kitchen_Table.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_046_Cassette_Recorder_Kitchen_Table.png",
@@ -2225,7 +1935,7 @@
     {
       "id": "SCN_047_Vintage_Radio_Living_Room",
       "type": "SCENE_PRESET_HERO",
-      "category": "Special / Lo-Fi / Consumer",
+      "category": "01 Source / Emitter",
       "name": "Vintage Radio - Living Room",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_047_Vintage_Radio_Living_Room.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_047_Vintage_Radio_Living_Room.png",
@@ -2233,14 +1943,564 @@
       "status": "art-approved-v2"
     },
     {
-      "id": "SCN_048_Small_Guitar_Combo_Garage_Room",
+      "id": "SCN_049_Flat_TV_Living_Room",
       "type": "SCENE_PRESET_HERO",
-      "category": "Special / Lo-Fi / Consumer",
+      "category": "01 Source / Emitter",
+      "name": "Flat TV - Living Room",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_049_Flat_TV_Living_Room.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_049_Flat_TV_Living_Room.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_049_Flat_TV_Living_Room.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_050_Baby_Monitor_Bedroom",
+      "type": "SCENE_PRESET_HERO",
+      "category": "01 Source / Emitter",
+      "name": "Baby Monitor - Bedroom",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_050_Baby_Monitor_Bedroom.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_050_Baby_Monitor_Bedroom.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_050_Baby_Monitor_Bedroom.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_037_Car_Pass_By_City_Street",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Car Pass By - City Street",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_037_Car_Pass_By_City_Street.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_037_Car_Pass_By_City_Street.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_037_Car_Pass_By_City_Street.png",
+      "status": "art-approved-v2"
+    },
+    {
+      "id": "SCN_040_Truck_Cab_Radio_Highway_Pull_Away",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Truck Cab Radio - Highway Pull Away",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_040_Truck_Cab_Radio_Highway_Pull_Away.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_040_Truck_Cab_Radio_Highway_Pull_Away.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_040_Truck_Cab_Radio_Highway_Pull_Away.png",
+      "status": "art-approved-v2"
+    },
+    {
+      "id": "SCN_042_Bus_PA_Curb_Arrival",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Bus PA - Curb Arrival",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_042_Bus_PA_Curb_Arrival.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_042_Bus_PA_Curb_Arrival.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_042_Bus_PA_Curb_Arrival.png",
+      "status": "art-approved-v2"
+    },
+    {
+      "id": "SCN_051_Voice_Approaches_Hallway",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Voice Approaches - Hallway",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_051_Voice_Approaches_Hallway.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_051_Voice_Approaches_Hallway.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_051_Voice_Approaches_Hallway.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_052_Voice_Walks_Past_Quiet_Street",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Voice Walks Past - Quiet Street",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_052_Voice_Walks_Past_Quiet_Street.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_052_Voice_Walks_Past_Quiet_Street.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_052_Voice_Walks_Past_Quiet_Street.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_053_Voice_Leaves_Down_Corridor",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Voice Leaves - Down Corridor",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_053_Voice_Leaves_Down_Corridor.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_053_Voice_Leaves_Down_Corridor.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_053_Voice_Leaves_Down_Corridor.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_054_Train_Approaches_Platform",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Train PA Approaches - Platform",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_054_Train_Approaches_Platform.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_054_Train_Approaches_Platform.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_054_Train_Approaches_Platform.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_055_Train_Passes_Platform",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Train PA Pass By - Platform",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_055_Train_Passes_Platform.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_055_Train_Passes_Platform.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_055_Train_Passes_Platform.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_056_Subway_Announcement_Pulls_Away",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Subway Announcement - Pull Away",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_056_Subway_Announcement_Pulls_Away.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_056_Subway_Announcement_Pulls_Away.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_056_Subway_Announcement_Pulls_Away.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_057_Bullhorn_Marcher_Approaches",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Bullhorn Marcher Approaches",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_057_Bullhorn_Marcher_Approaches.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_057_Bullhorn_Marcher_Approaches.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_057_Bullhorn_Marcher_Approaches.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_058_Portable_PA_Pass_By_Courtyard",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Portable PA Pass By - Courtyard",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_058_Portable_PA_Pass_By_Courtyard.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_058_Portable_PA_Pass_By_Courtyard.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_058_Portable_PA_Pass_By_Courtyard.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_059_Car_Radio_Closed_Window_Pass_By",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Car Radio Through Window - Pass By",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_059_Car_Radio_Closed_Window_Pass_By.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_059_Car_Radio_Closed_Window_Pass_By.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_059_Car_Radio_Closed_Window_Pass_By.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_060_Phone_In_Backpack_Walk_By_Concourse",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Phone In Backpack - Walk By Concourse",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_060_Phone_In_Backpack_Walk_By_Concourse.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_060_Phone_In_Backpack_Walk_By_Concourse.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_060_Phone_In_Backpack_Walk_By_Concourse.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_061_Bus_PA_Pulls_Away_From_Stop",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Bus PA Pull Away - Bus Stop",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_061_Bus_PA_Pulls_Away_From_Stop.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_061_Bus_PA_Pulls_Away_From_Stop.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_061_Bus_PA_Pulls_Away_From_Stop.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_062_Car_Door_Speaker_Approaches_Parking_Lot",
+      "type": "SCENE_PRESET_HERO",
+      "category": "02 Motion / Distance",
+      "name": "Car Door Speaker Approaches - Parking Lot",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_062_Car_Door_Speaker_Approaches_Parking_Lot.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_062_Car_Door_Speaker_Approaches_Parking_Lot.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_062_Car_Door_Speaker_Approaches_Parking_Lot.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_029_Upstairs_TV_Through_Wall",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Upstairs TV Through Wall",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_029_Upstairs_TV_Through_Wall.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_029_Upstairs_TV_Through_Wall.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_029_Upstairs_TV_Through_Wall.png",
+      "status": "art-approved-v2"
+    },
+    {
+      "id": "SCN_033_Voice_Behind_Closed_Wooden_Door",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Voice Behind Closed Wooden Door",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_033_Voice_Behind_Closed_Wooden_Door.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_033_Voice_Behind_Closed_Wooden_Door.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_033_Voice_Behind_Closed_Wooden_Door.png",
+      "status": "art-approved-v2"
+    },
+    {
+      "id": "SCN_036_Radio_In_Car_Trunk",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Radio In Car Trunk",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_036_Radio_In_Car_Trunk.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_036_Radio_In_Car_Trunk.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_036_Radio_In_Car_Trunk.png",
+      "status": "art-approved-v2"
+    },
+    {
+      "id": "SCN_063_ADR_Small_Office",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "ADR Match - Small Office",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_063_ADR_Small_Office.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_063_ADR_Small_Office.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_063_ADR_Small_Office.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_064_Direct_Voice_Bathroom",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Bathroom",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_064_Direct_Voice_Bathroom.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_064_Direct_Voice_Bathroom.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_064_Direct_Voice_Bathroom.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_065_Direct_Voice_Stairwell",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Stairwell",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_065_Direct_Voice_Stairwell.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_065_Direct_Voice_Stairwell.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_065_Direct_Voice_Stairwell.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_066_Direct_Voice_Warehouse",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Warehouse",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_066_Direct_Voice_Warehouse.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_066_Direct_Voice_Warehouse.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_066_Direct_Voice_Warehouse.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_067_Direct_Voice_Tunnel_Underpass",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Tunnel / Underpass",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_067_Direct_Voice_Tunnel_Underpass.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_067_Direct_Voice_Tunnel_Underpass.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_067_Direct_Voice_Tunnel_Underpass.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_068_Direct_Voice_Open_Field",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Open Field",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_068_Direct_Voice_Open_Field.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_068_Direct_Voice_Open_Field.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_068_Direct_Voice_Open_Field.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_069_Direct_Voice_Forest",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Forest",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_069_Direct_Voice_Forest.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_069_Direct_Voice_Forest.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_069_Direct_Voice_Forest.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_070_Direct_Voice_Canyon",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Canyon",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_070_Direct_Voice_Canyon.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_070_Direct_Voice_Canyon.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_070_Direct_Voice_Canyon.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_071_Direct_Voice_Beach",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Beach",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_071_Direct_Voice_Beach.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_071_Direct_Voice_Beach.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_071_Direct_Voice_Beach.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_072_Direct_Voice_Sedan_Interior",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Sedan Interior",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_072_Direct_Voice_Sedan_Interior.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_072_Direct_Voice_Sedan_Interior.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_072_Direct_Voice_Sedan_Interior.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_073_Direct_Voice_Airplane_Cabin",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Direct Voice - Airplane Cabin",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_073_Direct_Voice_Airplane_Cabin.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_073_Direct_Voice_Airplane_Cabin.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_073_Direct_Voice_Airplane_Cabin.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_074_Voice_Behind_Concrete_Wall",
+      "type": "SCENE_PRESET_HERO",
+      "category": "03 Space / Environment",
+      "name": "Voice Behind Concrete Wall",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_074_Voice_Behind_Concrete_Wall.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_074_Voice_Behind_Concrete_Wall.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_074_Voice_Behind_Concrete_Wall.png",
+      "status": "art-required-research-v3"
+    },
+    {
+      "id": "SCN_002_Mobile_Call_Weak_Signal",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Phone / Telephony",
+      "name": "Mobile Call - Weak Signal",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_002_Mobile_Call_Weak_Signal.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_002_Mobile_Call_Weak_Signal.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_002_Mobile_Call_Weak_Signal.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_004_Hotel_Phone_Corridor_Spill",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Phone / Telephony",
+      "name": "Hotel Phone - Corridor Spill",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_004_Hotel_Phone_Corridor_Spill.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_004_Hotel_Phone_Corridor_Spill.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_004_Hotel_Phone_Corridor_Spill.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_005_Prison_Visiting_Phone",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Phone / Telephony",
+      "name": "Prison Visiting Phone",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_005_Prison_Visiting_Phone.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_005_Prison_Visiting_Phone.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_005_Prison_Visiting_Phone.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_008_Cordless_Phone_Living_Room",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Phone / Telephony",
+      "name": "Cordless Phone - Living Room",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_008_Cordless_Phone_Living_Room.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_008_Cordless_Phone_Living_Room.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_008_Cordless_Phone_Living_Room.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_009_Phone_In_Pocket_Busy_Street",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Phone / Telephony",
+      "name": "Phone In Pocket - Busy Street",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_009_Phone_In_Pocket_Busy_Street.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_009_Phone_In_Pocket_Busy_Street.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_009_Phone_In_Pocket_Busy_Street.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_010_Phone_In_Backpack_Station_Concourse",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Phone / Telephony",
+      "name": "Phone In Backpack - Station Concourse",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_010_Phone_In_Backpack_Station_Concourse.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_010_Phone_In_Backpack_Station_Concourse.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_010_Phone_In_Backpack_Station_Concourse.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_013_Dispatch_Radio_Vehicle_Interior",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Radio / Comms",
+      "name": "Dispatch Radio - Vehicle Interior",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_013_Dispatch_Radio_Vehicle_Interior.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_013_Dispatch_Radio_Vehicle_Interior.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_013_Dispatch_Radio_Vehicle_Interior.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_014_Helicopter_Intercom_Clear",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Radio / Comms",
+      "name": "Helicopter Intercom - Clear",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_014_Helicopter_Intercom_Clear.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_014_Helicopter_Intercom_Clear.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_014_Helicopter_Intercom_Clear.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_015_Helicopter_Intercom_Half_Understandable",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Radio / Comms",
+      "name": "Helicopter Intercom - Half Understandable",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_015_Helicopter_Intercom_Half_Understandable.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_015_Helicopter_Intercom_Half_Understandable.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_015_Helicopter_Intercom_Half_Understandable.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_019_Radio_In_Back_Office",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Radio / Comms",
+      "name": "Radio In Back Office",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_019_Radio_In_Back_Office.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_019_Radio_In_Back_Office.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_019_Radio_In_Back_Office.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_020_Car_Radio_Out_of_Range",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Radio / Comms",
+      "name": "Car Radio - Out of Range",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_020_Car_Radio_Out_of_Range.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_020_Car_Radio_Out_of_Range.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_020_Car_Radio_Out_of_Range.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_024_Airport_Gate_Announcement",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / PA / Public Address",
+      "name": "Airport Gate Announcement",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_024_Airport_Gate_Announcement.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_024_Airport_Gate_Announcement.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_024_Airport_Gate_Announcement.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_025_Ceiling_PA_Shopping_Mall",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / PA / Public Address",
+      "name": "Ceiling PA - Shopping Mall",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_025_Ceiling_PA_Shopping_Mall.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_025_Ceiling_PA_Shopping_Mall.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_025_Ceiling_PA_Shopping_Mall.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_026_Bus_Interior_Announcement",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / PA / Public Address",
+      "name": "Bus Interior Announcement",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_026_Bus_Interior_Announcement.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_026_Bus_Interior_Announcement.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_026_Bus_Interior_Announcement.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_028_Captain_Announcement",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / PA / Public Address",
+      "name": "Captain Announcement",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_028_Captain_Announcement.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_028_Captain_Announcement.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_028_Captain_Announcement.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_030_Party_At_The_Neighbors",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Through / Behind / Cover",
+      "name": "Party At The Neighbors",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_030_Party_At_The_Neighbors.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_030_Party_At_The_Neighbors.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_030_Party_At_The_Neighbors.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_031_Restaurant_Kitchen_Through_Door",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Through / Behind / Cover",
+      "name": "Restaurant Kitchen Through Door",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_031_Restaurant_Kitchen_Through_Door.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_031_Restaurant_Kitchen_Through_Door.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_031_Restaurant_Kitchen_Through_Door.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_032_TV_In_Living_Room_From_Hallway",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Through / Behind / Cover",
+      "name": "TV In Living Room From Hallway",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_032_TV_In_Living_Room_From_Hallway.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_032_TV_In_Living_Room_From_Hallway.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_032_TV_In_Living_Room_From_Hallway.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_034_Voice_Behind_Glass_Window",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Through / Behind / Cover",
+      "name": "Voice Behind Glass Window",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_034_Voice_Behind_Glass_Window.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_034_Voice_Behind_Glass_Window.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_034_Voice_Behind_Glass_Window.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_035_Phone_Inside_Suitcase",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Through / Behind / Cover",
+      "name": "Phone Inside Suitcase",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_035_Phone_Inside_Suitcase.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_035_Phone_Inside_Suitcase.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_035_Phone_Inside_Suitcase.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_038_Car_Pass_By_Parking_Lot",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Vehicle / Motion",
+      "name": "Car Pass By - Parking Lot",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_038_Car_Pass_By_Parking_Lot.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_038_Car_Pass_By_Parking_Lot.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_038_Car_Pass_By_Parking_Lot.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_039_Car_Door_Speaker_Slow_Drive_By",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Vehicle / Motion",
+      "name": "Car Door Speaker - Slow Drive By",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_039_Car_Door_Speaker_Slow_Drive_By.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_039_Car_Door_Speaker_Slow_Drive_By.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_039_Car_Door_Speaker_Slow_Drive_By.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_044_Toy_Recorder_Bedroom",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Special / Lo-Fi / Consumer",
+      "name": "Toy Recorder - Bedroom",
+      "ui01": "UI_01/SCENE_PRESET_HERO/SCN_044_Toy_Recorder_Bedroom.png",
+      "ui02": "UI_02/SCENE_PRESET_HERO/SCN_044_Toy_Recorder_Bedroom.png",
+      "master": "Shared/SCENE_PRESET_HERO/SCN_044_Toy_Recorder_Bedroom.png",
+      "status": "reserve-research-v3"
+    },
+    {
+      "id": "SCN_048_Small_Guitar_Combo_Garage_Room",
+      "type": "SCENE_PRESET_RESERVE",
+      "category": "Reserve / Special / Lo-Fi / Consumer",
       "name": "Small Guitar Combo - Garage Room",
       "ui01": "UI_01/SCENE_PRESET_HERO/SCN_048_Small_Guitar_Combo_Garage_Room.png",
       "ui02": "UI_02/SCENE_PRESET_HERO/SCN_048_Small_Guitar_Combo_Garage_Room.png",
       "master": "Shared/SCENE_PRESET_HERO/SCN_048_Small_Guitar_Combo_Garage_Room.png",
-      "status": "art-approved-v2"
+      "status": "reserve-research-v3"
     }
   ]
 }
