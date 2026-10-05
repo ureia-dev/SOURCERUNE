@@ -4,6 +4,16 @@
 
 namespace sourcerune::ui::ui01
 {
+inline constexpr int kReferenceWidth = 1499;
+inline constexpr int kReferenceHeight = 807;
+inline constexpr int kTopBarHeight = 58;
+inline constexpr int kLeftRailWidth = 313;
+inline constexpr int kCenterWidth = 967;
+inline constexpr int kMeterRailWidth = 179;
+inline constexpr int kSceneHeight = 262;
+inline constexpr int kAnalysisHeight = 247;
+inline constexpr int kBottomMacroHeight = 216;
+
 enum class Area
 {
     TopGlobal,
