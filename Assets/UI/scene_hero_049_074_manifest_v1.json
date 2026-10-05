@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "name": "SOURCERUNE SCENE PRESET HERO 049-074 Production V1",
+  "generated": "2026-10-05",
+  "rule": "Each scene is authored as an independent single image asset. Atlas output is reference-only and must never replace individual files.",
+  "styleMaster": {
+    "reference": "Assets/UI/ReferenceSheets/SCENE_PRESET_HERO_48_ATLAS.png",
+    "direction": [
+      "grounded cinematic photorealism",
+      "real post-production use-case storytelling",
+      "medium/wide environmental composition",
+      "practical lighting; restrained warm/cool filmic grade",
+      "no glossy product-ad look",
+      "no sci-fi/fantasy styling",
+      "no excessive shallow-depth portrait look",
+      "environment context is at least as important as the emitter/person"
+    ]
+  },
+  "exports": {
+    "Shared": {
+      "width": 226,
+      "height": 115,
+      "path": "Assets/UI/Shared/SCENE_PRESET_HERO/{id}.png"
+    },
+    "UI_01": {
+      "width": 384,
+      "height": 144,
+      "path": "Assets/UI/UI_01/SCENE_PRESET_HERO/{id}.png"
+    },
+    "UI_02": {
+      "width": 512,
+      "height": 256,
+      "path": "Assets/UI/UI_02/SCENE_PRESET_HERO/{id}.png"
+    }
+  },
+  "template": {
+    "titleBar": true,
+    "sceneNumber": true,
+    "uppercaseCondensedTitle": true,
+    "frame": true,
+    "textMustBeCompositedDeterministically": true,
+    "aiGeneratedTextForbidden": true,
+    "cropPolicy": "Generate one clean photographic master composition with safe margins, then create each target crop independently; do not resize/crop an atlas tile.",
+    "individualFileRequired": true
+  },
+  "scenes": [
+    {
+      "number": 49,
+      "id": "SCN_049_Flat_TV_Living_Room",
+      "name": "Flat TV - Living Room",
+      "brief": "Modern flat-screen television as the audible source in a believable living room; medium-wide room composition, TV glow, sofa/table cues, practical warm lamp light, broadcast/talk-program feel rather than product glamour.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 50,
+      "id": "SCN_050_Baby_Monitor_Bedroom",
+      "name": "Baby Monitor - Bedroom",
+      "brief": "Baby monitor clearly identifiable in a real bedroom/nursery; crib and domestic room context, intimate low-light practical lighting, device is part of scene rather than isolated product shot.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 51,
+      "id": "SCN_051_Voice_Approaches_Hallway",
+      "name": "Voice Approaches - Hallway",
+      "brief": "Person at the far-to-mid end of a realistic hallway walking toward listener/camera; corridor perspective is dominant, person medium-small, direct voice situation.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 52,
+      "id": "SCN_052_Voice_Walks_Past_Quiet_Street",
+      "name": "Voice Walks Past - Quiet Street",
+      "brief": "Person walking laterally past listener on a quiet street; medium-wide sidewalk/street composition, restrained motion cue, night/dusk practical street light, not fashion photography.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 53,
+      "id": "SCN_053_Voice_Leaves_Down_Corridor",
+      "name": "Voice Leaves - Down Corridor",
+      "brief": "Person walking away down a corridor; back turned, strong recession/vanishing lines, environment larger than subject.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 54,
+      "id": "SCN_054_Train_Approaches_Platform",
+      "name": "Train PA Approaches - Platform",
+      "brief": "Train approaching platform with public-address context visible or implied; platform geometry and train approach direction must read immediately.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 55,
+      "id": "SCN_055_Train_Passes_Platform",
+      "name": "Train PA Pass By - Platform",
+      "brief": "Train passing a platform laterally; believable transport scene, modest natural motion blur, PA/public-transport context, not action-poster styling.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 56,
+      "id": "SCN_056_Subway_Announcement_Pulls_Away",
+      "name": "Subway Announcement - Pull Away",
+      "brief": "Subway train pulling away from platform; rear/side departure direction clearly readable, realistic station environment.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 57,
+      "id": "SCN_057_Bullhorn_Marcher_Approaches",
+      "name": "Bullhorn Marcher Approaches",
+      "brief": "Marcher/speaker approaching with handheld bullhorn; observational documentary framing, modest crowd context, megaphone readable but not heroic poster composition.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 58,
+      "id": "SCN_058_Portable_PA_Pass_By_Courtyard",
+      "name": "Portable PA Pass By - Courtyard",
+      "brief": "Portable PA speaker moving through an architectural courtyard, carried or wheeled by a person; environment and moving emitter both readable.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 59,
+      "id": "SCN_059_Car_Radio_Closed_Window_Pass_By",
+      "name": "Car Radio Through Window - Pass By",
+      "brief": "Car passing listener with audible radio behind a closed side window; car motion and closed-window barrier both visually readable.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 60,
+      "id": "SCN_060_Phone_In_Backpack_Walk_By_Concourse",
+      "name": "Phone In Backpack - Walk By Concourse",
+      "brief": "Person walking through station concourse with phone inside backpack; backpack is readable, concourse movement and crowd/architecture context visible.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 61,
+      "id": "SCN_061_Bus_PA_Pulls_Away_From_Stop",
+      "name": "Bus PA Pull Away - Bus Stop",
+      "brief": "Bus pulling away from a stop with onboard PA context; departure direction readable, bus-stop environment visible.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 62,
+      "id": "SCN_062_Car_Door_Speaker_Approaches_Parking_Lot",
+      "name": "Car Door Speaker Approaches - Parking Lot",
+      "brief": "Car approaching in parking lot with door-speaker source context; front/three-quarter approach, parking-lot geometry, realistic night/evening lighting.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 63,
+      "id": "SCN_063_ADR_Small_Office",
+      "name": "ADR Match - Small Office",
+      "brief": "ADR voice placed into a small office; one person/dialogue perspective in modest office, desk/glass/office cues, neutral production-realism.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 64,
+      "id": "SCN_064_Direct_Voice_Bathroom",
+      "name": "Direct Voice - Bathroom",
+      "brief": "Direct speaking voice in hard reflective bathroom; person plus tile/mirror/sink cues, small-room reflections visually implied.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 65,
+      "id": "SCN_065_Direct_Voice_Stairwell",
+      "name": "Direct Voice - Stairwell",
+      "brief": "Direct voice in stairwell; person in concrete/painted stairwell, vertical geometry and hard reflections dominant.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 66,
+      "id": "SCN_066_Direct_Voice_Warehouse",
+      "name": "Direct Voice - Warehouse",
+      "brief": "Direct voice in warehouse; person small-to-medium within large industrial interior, depth, steel/concrete, long-space perspective.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 67,
+      "id": "SCN_067_Direct_Voice_Tunnel_Underpass",
+      "name": "Direct Voice - Tunnel / Underpass",
+      "brief": "Direct voice in tunnel or underpass; person within long hard reflective passage, strong depth and practical lamps.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 68,
+      "id": "SCN_068_Direct_Voice_Open_Field",
+      "name": "Direct Voice - Open Field",
+      "brief": "Direct voice in open field; person in broad minimally reflective landscape, horizon/sky/grass, simple natural daylight/dusk.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 69,
+      "id": "SCN_069_Direct_Voice_Forest",
+      "name": "Direct Voice - Forest",
+      "brief": "Direct voice in forest; person among trees, irregular natural absorption/scattering feel, grounded documentary realism.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 70,
+      "id": "SCN_070_Direct_Voice_Canyon",
+      "name": "Direct Voice - Canyon",
+      "brief": "Direct voice in canyon; person small against canyon walls/rock, long outdoor reflection potential, natural scale emphasized.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 71,
+      "id": "SCN_071_Direct_Voice_Beach",
+      "name": "Direct Voice - Beach",
+      "brief": "Direct voice at beach; person near open shoreline, water/horizon/wind context, broad minimally enclosed environment.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 72,
+      "id": "SCN_072_Direct_Voice_Sedan_Interior",
+      "name": "Direct Voice - Sedan Interior",
+      "brief": "Direct voice inside sedan; person seated in realistic car cabin, dashboard/window/interior cues, compact enclosed acoustic context.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 73,
+      "id": "SCN_073_Direct_Voice_Airplane_Cabin",
+      "name": "Direct Voice - Airplane Cabin",
+      "brief": "Direct voice inside airplane cabin; seated passenger/crew context, rows/windows/overhead panels, realistic commercial aircraft interior.",
+      "status": "ART_REQUIRED"
+    },
+    {
+      "number": 74,
+      "id": "SCN_074_Voice_Behind_Concrete_Wall",
+      "name": "Voice Behind Concrete Wall",
+      "brief": "Voice behind concrete wall; two-space barrier story or visible heavy concrete partition, person/source clearly separated from listener side by high-mass wall.",
+      "status": "ART_REQUIRED"
+    }
+  ]
+}
