@@ -287,3 +287,18 @@ V1 is considered visually complete only when:
 4. Semantic image missing count is zero for the legacy 672 slots.
 5. SCN_049…SCN_074 artwork is separately completed and does not alter runtime chrome.
 6. Dynamic graphs/meters/scene paths remain live code.
+
+## 13. P0 implementation status — 2026-10-05
+
+P0 V1 is now implemented as reusable raster/runtime pieces rather than a full-interface screenshot.
+
+- **17 P0 logical components** have asset-ready status.
+- **33 individual PNG files** are present under `Assets/UI/Runtime/Common/`.
+- Raster masters are authored at **2×**.
+- 9-slice inset metadata is stored in `Assets/UI/Runtime/p0_skin_manifest_v1.json`.
+- WEB skin binding is implemented in `Web/App/runtime_skin_p0.css` and loaded after the UI_01/UI_02 layout CSS.
+- Static path QA confirms **33 / 33 referenced runtime PNG paths resolve** on the implementation branch.
+- Native VST3 may reuse the exact same `Assets/UI/Runtime/Common/*` pieces; no DSP or parameter semantics are encoded in the images.
+- Spectrum/EQ/response curves, meter fills and numeric values, motion/path geometry, text and automation state remain live code.
+
+P0 visual assets are an implementation baseline and can receive later art-polish revisions without changing stable control/state IDs.
