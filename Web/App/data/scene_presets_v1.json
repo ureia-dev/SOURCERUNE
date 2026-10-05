@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "count": 50,
-  "reserveCount": 24,
-  "status": "research-weighted-v3-audition-required",
+  "count": 74,
+  "reserveCount": 0,
+  "status": "research-weighted-v3-expanded-active-audition-required",
   "portfolio": {
     "targetWeights": {
       "SOURCE_EMITTER": 40,
@@ -19,7 +19,15 @@
       "MOTION_DISTANCE": 30,
       "SPACE_ENVIRONMENT": 30
     },
-    "basis": "8-stage SOURCERUNE forum/pro-community research; semantic deduplication; source/emitter diversity; motion/perspective demand; environment/occlusion demand."
+    "basis": "8-stage SOURCERUNE forum/pro-community research; semantic deduplication; source/emitter diversity; motion/perspective demand; environment/occlusion demand.",
+    "policy": "40/30/30 remains the CORE PRIORITY weighting for development and audition. The 24 previously reserved legacy scenes are restored as ADDITIONAL_SCENE so useful phone/radio/PA/cover variants remain directly accessible.",
+    "coreCounts": {
+      "SOURCE_EMITTER": 20,
+      "MOTION_DISTANCE": 15,
+      "SPACE_ENVIRONMENT": 15
+    },
+    "restoredAdditionalScenes": 24,
+    "totalActive": 74
   },
   "presets": {
     "SCN_001_Mobile_Call_Busy_Sidewalk": {
@@ -1253,9 +1261,7 @@
       ],
       "status": "research-weighted-v3-audition-required",
       "portfolioRole": "SPACE_ENVIRONMENT"
-    }
-  },
-  "reservePresets": {
+    },
     "SCN_002_Mobile_Call_Weak_Signal": {
       "heroId": "SCN_002_Mobile_Call_Weak_Signal",
       "name": "Mobile Call - Weak Signal",
@@ -1271,12 +1277,13 @@
         "noiseStatic": 42,
         "dropout": 36,
         "bitrateArtifacts": 48,
-        "interference": 45
+        "interference": 45,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Variant overlap: weak-signal behavior remains available through TRANSMISSION/Bad Signal; active list prioritizes emitter diversity."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_004_Hotel_Phone_Corridor_Spill": {
       "heroId": "SCN_004_Hotel_Phone_Corridor_Spill",
@@ -1288,12 +1295,13 @@
         "SPACE_ENVIRONMENT": "SPC_009_Hallway"
       },
       "params": {
-        "spaceAmount": 58
+        "spaceAmount": 58,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Emitter/space overlap with desk-phone and dedicated environment presets."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_005_Prison_Visiting_Phone": {
       "heroId": "SCN_005_Prison_Visiting_Phone",
@@ -1305,12 +1313,13 @@
         "SPACE_ENVIRONMENT": "SPC_055_Prison_Visiting_Room"
       },
       "params": {
-        "badSignal": 22
+        "badSignal": 22,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Useful but niche; security-intercom family already represented in active set."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_008_Cordless_Phone_Living_Room": {
       "heroId": "SCN_008_Cordless_Phone_Living_Room",
@@ -1322,12 +1331,13 @@
         "SPACE_ENVIRONMENT": "SPC_005_Living_Room"
       },
       "params": {
-        "condition": 28
+        "condition": 28,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Low incremental emitter value versus desk/payphone/conference/mobile coverage."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_009_Phone_In_Pocket_Busy_Street": {
       "heroId": "SCN_009_Phone_In_Pocket_Busy_Street",
@@ -1340,12 +1350,13 @@
       },
       "params": {
         "coverAmount": 88,
-        "badSignal": 20
+        "badSignal": 20,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Static covered-phone case superseded by broader motion/cover combinations."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_010_Phone_In_Backpack_Station_Concourse": {
       "heroId": "SCN_010_Phone_In_Backpack_Station_Concourse",
@@ -1358,12 +1369,13 @@
       },
       "params": {
         "coverAmount": 82,
-        "spaceAmount": 70
+        "spaceAmount": 70,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Superseded by active moving backpack-phone concourse preset."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_013_Dispatch_Radio_Vehicle_Interior": {
       "heroId": "SCN_013_Dispatch_Radio_Vehicle_Interior",
@@ -1375,12 +1387,13 @@
         "SPACE_ENVIRONMENT": "SPC_036_Sedan_Interior"
       },
       "params": {
-        "badSignal": 22
+        "badSignal": 22,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Radio-family overlap with police/walkie plus stronger motion/vehicle scenes."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_014_Helicopter_Intercom_Clear": {
       "heroId": "SCN_014_Helicopter_Intercom_Clear",
@@ -1392,12 +1405,13 @@
         "SPACE_ENVIRONMENT": "SPC_043_Helicopter_Cabin"
       },
       "params": {
-        "badSignal": 12
+        "badSignal": 12,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Intercom family retained through aviation/security; helicopter variant kept as reserve."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_015_Helicopter_Intercom_Half_Understandable": {
       "heroId": "SCN_015_Helicopter_Intercom_Half_Understandable",
@@ -1412,12 +1426,13 @@
         "badSignal": 56,
         "noiseStatic": 34,
         "interference": 38,
-        "intelligibility": 44
+        "intelligibility": 44,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Variant overlap; intelligibility and bad-signal controls remain available."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_019_Radio_In_Back_Office": {
       "heroId": "SCN_019_Radio_In_Back_Office",
@@ -1429,12 +1444,13 @@
         "SPACE_ENVIRONMENT": "SPC_006_Small_Office"
       },
       "params": {
-        "condition": 38
+        "condition": 38,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Static radio/office combination has low incremental value."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_020_Car_Radio_Out_of_Range": {
       "heroId": "SCN_020_Car_Radio_Out_of_Range",
@@ -1449,12 +1465,13 @@
         "badSignal": 78,
         "noiseStatic": 55,
         "interference": 48,
-        "dropout": 26
+        "dropout": 26,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Bad-signal use case retained in module controls; active portfolio prioritizes motion and source diversity."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_024_Airport_Gate_Announcement": {
       "heroId": "SCN_024_Airport_Gate_Announcement",
@@ -1466,14 +1483,15 @@
         "SPACE_ENVIRONMENT": "SPC_013_Lobby"
       },
       "params": {
-        "spaceAmount": 64
+        "spaceAmount": 64,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [
         "Airport Gate uses Lobby as v2 proxy."
       ],
-      "status": "reserve-research-v3",
-      "reserveReason": "PA overlap with active ceiling/station/stadium/airplane presets."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_025_Ceiling_PA_Shopping_Mall": {
       "heroId": "SCN_025_Ceiling_PA_Shopping_Mall",
@@ -1485,12 +1503,13 @@
         "SPACE_ENVIRONMENT": "SPC_018_Shopping_Mall"
       },
       "params": {
-        "spaceAmount": 72
+        "spaceAmount": 72,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "PA overlap; ceiling PA remains active in station context."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_026_Bus_Interior_Announcement": {
       "heroId": "SCN_026_Bus_Interior_Announcement",
@@ -1502,12 +1521,13 @@
         "SPACE_ENVIRONMENT": "SPC_039_Bus_Interior"
       },
       "params": {
-        "spaceAmount": 52
+        "spaceAmount": 52,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Static vehicle-PA overlap; active bus motion presets cover the stronger workflow need."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_028_Captain_Announcement": {
       "heroId": "SCN_028_Captain_Announcement",
@@ -1520,12 +1540,13 @@
       },
       "params": {
         "bandwidthLoss": 32,
-        "intelligibility": 72
+        "intelligibility": 72,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Near-duplicate of active Airplane Cabin PA."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_030_Party_At_The_Neighbors": {
       "heroId": "SCN_030_Party_At_The_Neighbors",
@@ -1539,12 +1560,13 @@
       "params": {
         "coverAmount": 76,
         "ambienceType": "CROWD",
-        "ambience": 34
+        "ambience": 34,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Barrier case overlap; active set keeps more diagnostic wall/door/floor cases."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_031_Restaurant_Kitchen_Through_Door": {
       "heroId": "SCN_031_Restaurant_Kitchen_Through_Door",
@@ -1556,7 +1578,8 @@
         "SPACE_ENVIRONMENT": "SPC_015_Restaurant"
       },
       "params": {
-        "coverAmount": 72
+        "coverAmount": 72,
+        "motionMode": "STATIC"
       },
       "bypass": {
         "SOURCE": true
@@ -1564,8 +1587,8 @@
       "notes": [
         "Direct voice; SOURCE bypassed."
       ],
-      "status": "reserve-research-v3",
-      "reserveReason": "Door-occlusion overlap with active direct-voice wooden-door case."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_032_TV_In_Living_Room_From_Hallway": {
       "heroId": "SCN_032_TV_In_Living_Room_From_Hallway",
@@ -1577,12 +1600,13 @@
         "SPACE_ENVIRONMENT": "SPC_009_Hallway"
       },
       "params": {
-        "coverAmount": 52
+        "coverAmount": 52,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "TV/door overlap; active set keeps flat-TV source plus stronger barrier exemplars."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_034_Voice_Behind_Glass_Window": {
       "heroId": "SCN_034_Voice_Behind_Glass_Window",
@@ -1594,7 +1618,8 @@
         "SPACE_ENVIRONMENT": "SPC_006_Small_Office"
       },
       "params": {
-        "coverAmount": 65
+        "coverAmount": 65,
+        "motionMode": "STATIC"
       },
       "bypass": {
         "SOURCE": true
@@ -1602,8 +1627,8 @@
       "notes": [
         "Direct voice; SOURCE bypassed."
       ],
-      "status": "reserve-research-v3",
-      "reserveReason": "Lower-priority barrier versus wood/concrete/floor-ceiling; retained as reserve."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_035_Phone_Inside_Suitcase": {
       "heroId": "SCN_035_Phone_Inside_Suitcase",
@@ -1615,12 +1640,13 @@
         "SPACE_ENVIRONMENT": "SPC_002_Bedroom"
       },
       "params": {
-        "coverAmount": 92
+        "coverAmount": 92,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Niche cover case; module asset remains manually selectable."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_038_Car_Pass_By_Parking_Lot": {
       "heroId": "SCN_038_Car_Pass_By_Parking_Lot",
@@ -1642,8 +1668,8 @@
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Redundant car pass-by; replaced by broader motion variety."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_039_Car_Door_Speaker_Slow_Drive_By": {
       "heroId": "SCN_039_Car_Door_Speaker_Slow_Drive_By",
@@ -1665,8 +1691,8 @@
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Redundant car pass-by; human-scale and vehicle approach/leave cases now cover motion range."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_044_Toy_Recorder_Bedroom": {
       "heroId": "SCN_044_Toy_Recorder_Bedroom",
@@ -1681,12 +1707,13 @@
         "conditionMode": "OLD",
         "condition": 72,
         "wowFlutter": 28,
-        "instability": 22
+        "instability": 22,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [],
-      "status": "reserve-research-v3",
-      "reserveReason": "Niche lo-fi emitter; retained as reserve."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     },
     "SCN_048_Small_Guitar_Combo_Garage_Room": {
       "heroId": "SCN_048_Small_Guitar_Combo_Garage_Room",
@@ -1701,14 +1728,16 @@
         "sourceCharacter": 68,
         "conditionMode": "USED",
         "condition": 32,
-        "spaceAmount": 62
+        "spaceAmount": 62,
+        "motionMode": "STATIC"
       },
       "bypass": {},
       "notes": [
         "Garage Room uses Workshop as v2 proxy."
       ],
-      "status": "reserve-research-v3",
-      "reserveReason": "Lower relevance to primary post/worldizing focus than active broadcast/comms/playback emitters."
+      "status": "restored-active-v3-audition-required",
+      "portfolioRole": "ADDITIONAL_SCENE"
     }
-  }
+  },
+  "reservePresets": {}
 }
