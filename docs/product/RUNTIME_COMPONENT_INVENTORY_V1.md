@@ -18,27 +18,27 @@ This document converts the approved UI_01 / UI_02 visual direction into reusable
 
 The code layout remains authoritative for responsive behavior; the supplied images are authoritative for art direction and relative emphasis.
 
-## 2. Current semantic-image audit
+## 2. Current asset audit
 
-Expected legacy V2 delivery:
-- Shared: 224 PNG
-- UI_01: 224 PNG
-- UI_02: 224 PNG
-- ReferenceSheets: 6 PNG
-- **Total expected: 678 PNG**
+Current GitHub `main` PNG reality after P0/P1/P2 Runtime work:
 
-Current GitHub `main` audit:
-- Total PNG under `Assets/UI`: **650**
-- ReferenceSheets: **6**
-- Runtime/master semantic PNG present: **644 / 672**
-- Missing: **28 PNG**
+- Total PNG under `Assets/UI`: **761**
+- Legacy semantic/reference present: **650 / 678**
+- Runtime chrome PNG: **111**
+- Legacy runtime/master semantic present: **644 / 672**
+- ReferenceSheets: **6 / 6**
+- Legacy semantic PNG missing: **28**
 
-Missing exact files:
+Missing exact legacy files:
 - UI_01 TRANSMISSION `TRN_005` through `TRN_024`: **20**
 - Shared SPACE_ENVIRONMENT `SPC_053` through `SPC_056`: **4**
 - UI_01 SPACE_ENVIRONMENT `SPC_053` through `SPC_056`: **4**
 
-Separately, the preset portfolio now contains SCN_001…SCN_074. The old V2 art set contains only SCN_001…SCN_048. Therefore **SCN_049…SCN_074 still require 26 semantic scenes × 3 exports = 78 PNG** after style approval.
+The missing 28 are present in the user-supplied V2 ZIP but are not yet committed to GitHub.
+
+Separately, the preset portfolio contains SCN_001…SCN_074 while existing scene imagery stops at SCN_048. Therefore **SCN_049…SCN_074 require 26 scenes × 3 independent PNG exports = 78 new PNG**.
+
+Projected total after the 28 legacy restorations and 78 new Scene Hero exports: **867 PNG**, assuming no additional Runtime chrome is added.
 
 ## 3. What is already usable vs what is not
 
@@ -53,20 +53,10 @@ Separately, the preset portfolio now contains SCN_001…SCN_074. The old V2 art 
 
 These are **content images inside cards / selectors / preview regions**. They are not panel chrome.
 
-### Missing runtime component library
-There is currently no committed dedicated runtime chrome library for:
-- panel skins,
-- reusable button skins,
-- reusable dropdown skins,
-- knob bases,
-- slider thumbs/tracks,
-- meter frames/segments,
-- scene markers,
-- EQ nodes,
-- common module icons,
-- 9-slice modal/drawer frames.
+### Runtime component library — implemented through P2
+The decomposed runtime chrome library is now committed and Web-bound through P0, P1 and P2. It includes panel skins, button/dropdown skins, knob bases, slider parts, meter parts, scene markers, EQ nodes, module/tool icons, browser/drawer frames and other reusable pieces.
 
-Those are the pieces defined below.
+The inventory table below remains the component contract; current implemented status is reflected by each component's ASSET_READY status and the P0/P1/P2 manifests.
 
 ## 4. UI_01 structural baseline
 
