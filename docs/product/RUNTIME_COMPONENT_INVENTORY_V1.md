@@ -318,3 +318,4 @@ P1 completed on 2026-10-05.
 - Dynamic scene/path/parameter/meter behavior remains code-driven.
 - No DSP changes.
 \n\n## 13. Runtime P2 completion — 2026-10-05\n\nP2 is implemented as modular runtime assets, not a UI screenshot.\n\n- 26 independent PNG assets added.\n- Signal Flow nodes now have default / bypassed / selected states.\n- UI_01 has a reusable distance callout and a live waveform strip background.\n- Undo / Redo / Copy / Paste / Fullscreen icon families are available and Web-bound.\n- Asset Browser and Advanced Drawer use reusable panel/card chrome.\n- Copy/Paste state and scene fullscreen are functional Web controls.\n- Waveform pixels are drawn live from the analyser; only the strip chrome is raster.\n- No DSP behavior was changed.\n
+P2 merge guard: skip CI requested for this UI-asset-only change; no workflow dispatch is required.
