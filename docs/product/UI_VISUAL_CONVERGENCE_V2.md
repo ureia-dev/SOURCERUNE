@@ -124,3 +124,14 @@ Branch checks before merge:
 - real SCN_049…SCN_074 scene artwork,
 - the previously identified 28 missing legacy semantic PNG slots,
 - final Web ↔ native pixel parity once native rendering is available.
+
+
+## Final V2 optical corrections
+
+- UI_02 SOURCE preview uses the active approved Factory Scene Hero as contextual source imagery when available; UI_01 continues to use the literal semantic SOURCE asset.
+- UI_02 main scene also prefers the active approved Factory Scene Hero, with SPACE_ENVIRONMENT fallback for presets whose new hero art is still pending.
+- Intelligibility public parameter values stay unchanged, while UI labels follow the approved presentation:
+  - NATURAL → Natural
+  - DIALOGUE → More Clear
+  - AGGRESSIVE → Muffled
+- SOURCE / TRANSMISSION / WALL / SPACE card arrows are real state-changing controls, not decoration.
