@@ -546,3 +546,36 @@ body.ui-02 #listenerNode image{
   filter:drop-shadow(0 2px 5px rgba(0,0,0,.7));
 }
 body.ui-02 #listenerNode{transform-box:fill-box}
+
+
+/* UI_02 title action is a chevron, not an EDIT text button. */
+body.ui-02 .module-actions [data-edit]{
+  width:32px;height:32px;min-width:32px;
+  padding:0!important;
+  font-size:0!important;
+  border:0!important;
+  background-color:transparent!important;
+  background-image:url("../../Assets/UI/Runtime/Common/AssetCard/RT_IMAGE_ARROW_R_IDLE.png")!important;
+  background-position:center!important;
+  background-size:16px 24px!important;
+  background-repeat:no-repeat!important;
+}
+body.ui-02 .module-actions [data-edit]:hover{
+  background-image:url("../../Assets/UI/Runtime/Common/AssetCard/RT_IMAGE_ARROW_R_HOVER.png")!important;
+}
+
+/* UI_02 ambience horizontal value label. */
+body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-knob{
+  position:relative;
+  padding-right:58px;
+}
+body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-knob:after{
+  content:attr(data-value);
+  position:absolute;
+  right:0;
+  top:1px;
+  width:50px;
+  color:#e2edf1;
+  font:500 16px/20px ui-monospace,Consolas,monospace;
+  text-align:right;
+}
