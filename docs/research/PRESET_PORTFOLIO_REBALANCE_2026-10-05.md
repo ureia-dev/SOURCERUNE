@@ -111,3 +111,17 @@ This rebalance uses the eight-stage forum/pro-community research already perform
 - No DSP implementation was changed.
 - No GitHub Actions workflow was added or executed.
 - Numerical values are starting points for audition, not claimed as final acoustic truth.
+
+
+## 2026-10-05 correction — restored reserve scenes to active
+
+User direction: do **not** remove the overlapping phone / radio / PA / cover variants from the usable Factory list.
+
+Action:
+- restored all **24** previous `reservePresets` entries to active `presets`;
+- Factory active total is now **74**;
+- `reservePresets` is currently empty;
+- restored catalog entries return to `SCENE_PRESET_HERO`, so they appear in the normal Factory scene browser again;
+- the original **40% Source / 30% Motion / 30% Environment** split remains the **core prioritization rule**, not a hard cap on how many usable presets may exist;
+- the restored scenes are tagged `ADDITIONAL_SCENE`, so none of the newly added research-weighted presets are removed;
+- no DSP or GitHub Actions changes.
