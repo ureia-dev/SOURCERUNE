@@ -1,0 +1,131 @@
+name: SOURCERUNE CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      validation_level:
+        description: "CI level: fast / deep / release"
+        required: true
+        default: "fast"
+        type: choice
+        options:
+          - fast
+          - deep
+          - release
+
+concurrency:
+  group: sourcerune-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fast:
+    name: Fast
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: JavaScript syntax
+        run: node --check Web/App/app.js
+
+      - name: JSON and preset mirror smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          for p in sorted(Path(".").rglob("*.json")):
+              json.loads(p.read_text(encoding="utf-8"))
+              print("JSON OK:", p)
+          canonical = Path("Assets/FactoryPresets/scene_presets_v1.json").read_bytes()
+          web = Path("Web/App/data/scene_presets_v1.json").read_bytes()
+          assert canonical == web, "Factory preset Web mirror is stale"
+          data = json.loads(canonical)
+          assert data["count"] == len(data["presets"])
+          assert len(set(data["presets"])) == len(data["presets"])
+          for key, preset in data["presets"].items():
+              assert preset["heroId"] == key, key
+          print("FAST preset/data smoke: PASS")
+          PY
+
+      - name: Required structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s Source/State/ParameterIds.h
+          test -s Web/App/index.html
+          test -s Web/TestHarness/index.html
+          test -s docs/architecture/DSP_BEHAVIOR_CONTRACT_V1.md
+          test -s PROJECT_RULES.md
+
+      - name: CI policy guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q "Fast / Deep / Release" PROJECT_RULES.md
+          ! grep -Eq -- '--rounds[ =]+[0-9]+|--iterations[ =]+[0-9]+|for i in \{1\.\.[0-9]+' .github/workflows/ci.yml
+
+  deep:
+    name: Deep
+    needs: fast
+    if: github.event_name == 'workflow_dispatch' && (inputs.validation_level == 'deep' || inputs.validation_level == 'release')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Default deep consistency
+        run: |
+          python3 - <<'PY'
+          import json, re
+          from pathlib import Path
+          preset = json.loads(Path("Assets/FactoryPresets/scene_presets_v1.json").read_text(encoding="utf-8"))
+          controls = json.loads(Path("Web/App/data/ui_controls.json").read_text(encoding="utf-8"))
+          ids = re.findall(r'Entry\{"([^"]+)",\s*"([^"]+)"\}', Path("Source/State/ParameterIds.h").read_text(encoding="utf-8"))
+          assert len(ids) == len({x[0] for x in ids}), "duplicate public parameter ID"
+          assert preset["reserveCount"] >= 0
+          assert sum(preset["portfolio"]["actualCounts"].values()) == sum(preset["portfolio"]["coreCounts"].values())
+          assert controls["schema"] == 1
+          print("DEEP consistency: PASS")
+          PY
+
+  release:
+    name: Release
+    needs: deep
+    if: github.event_name == 'workflow_dispatch' && inputs.validation_level == 'release'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Release-readiness manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "SOURCERUNE release-readiness manifest"
+            echo "commit=${GITHUB_SHA}"
+            echo
+            echo "NOTE: native VST3/WASM build targets are not yet present; this is repository readiness only."
+            sha256sum               Assets/FactoryPresets/scene_presets_v1.json               Web/App/data/scene_presets_v1.json               Web/App/data/catalog.json               Web/App/data/ui_controls.json               Source/State/ParameterIds.h
+          } > release-readiness.txt
+
+      - name: Upload release-readiness manifest
+        uses: actions/upload-artifact@v6
+        with:
+          name: sourcerune-release-readiness
+          path: release-readiness.txt
+          if-no-files-found: error
