@@ -1,0 +1,40 @@
+{
+  "schema": 3,
+  "auditDate": "2026-10-05",
+  "current": {
+    "totalPng": 761,
+    "legacySemanticAndReference": 650,
+    "runtimeChrome": 111
+  },
+  "legacy": {
+    "expectedSemanticRuntime": 672,
+    "presentSemanticRuntime": 644,
+    "referenceSheetsExpected": 6,
+    "referenceSheetsPresent": 6,
+    "missing": 28,
+    "missingGroups": [
+      {
+        "path": "Assets/UI/UI_01/TRANSMISSION",
+        "range": "TRN_005-TRN_024",
+        "count": 20
+      },
+      {
+        "path": "Assets/UI/Shared/SPACE_ENVIRONMENT",
+        "range": "SPC_053-SPC_056",
+        "count": 4
+      },
+      {
+        "path": "Assets/UI/UI_01/SPACE_ENVIRONMENT",
+        "range": "SPC_053-SPC_056",
+        "count": 4
+      }
+    ]
+  },
+  "newSceneHero": {
+    "range": "SCN_049-SCN_074",
+    "scenes": 26,
+    "exportsPerScene": 3,
+    "missingPng": 78
+  },
+  "projectedCompleteTotalPng": 867
+}
