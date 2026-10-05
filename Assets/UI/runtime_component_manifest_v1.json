@@ -1,0 +1,721 @@
+{
+  "schema": 1,
+  "title": "SOURCERUNE Runtime Component Inventory V1",
+  "date": "2026-10-05",
+  "rule": "Assemble UI from semantic art + reusable runtime chrome + live code. Never use a full-interface screenshot as implementation.",
+  "currentAudit": {
+    "expectedLegacyPng": 678,
+    "currentRepoPng": 650,
+    "currentRuntimeSemantic": 644,
+    "expectedRuntimeSemantic": 672,
+    "missingLegacyRuntimeSemantic": 28,
+    "newSceneSemanticMissing": {
+      "sceneIds": "SCN_049-SCN_074",
+      "semanticScenes": 26,
+      "exportsPerScene": 3,
+      "totalPng": 78
+    }
+  },
+  "components": [
+    {
+      "id": "RT_SHELL_BG",
+      "ui": "COMMON",
+      "group": "Shell",
+      "implementation": "PNG_9SLICE",
+      "purpose": "全插件最底層霧黑/金屬感底板；不可烘焙內容",
+      "masterTarget": "96x96 @2x master",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_PANEL_FRAME",
+      "ui": "COMMON",
+      "group": "Shell",
+      "implementation": "PNG_9SLICE",
+      "purpose": "所有大 panel 共用外框、內陰影、1px 金屬邊",
+      "masterTarget": "96x96 @2x master",
+      "states": "default/focus",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_CARD_FRAME",
+      "ui": "COMMON",
+      "group": "Shell",
+      "implementation": "PNG_9SLICE",
+      "purpose": "SOURCE/TRANSMISSION/WALL/SPACE 小卡共用框",
+      "masterTarget": "80x80 @2x master",
+      "states": "default/hover/selected/bypassed",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_CARD_IMAGE_MASK",
+      "ui": "COMMON",
+      "group": "Shell",
+      "implementation": "CODE",
+      "purpose": "圖片圓角/裁切遮罩；不做整張 PNG",
+      "masterTarget": "runtime",
+      "states": "default",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_SECTION_DIVIDER_H",
+      "ui": "COMMON",
+      "group": "Shell",
+      "implementation": "PNG_TILE",
+      "purpose": "水平分隔線/亮邊",
+      "masterTarget": "128x8 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_SECTION_DIVIDER_V",
+      "ui": "COMMON",
+      "group": "Shell",
+      "implementation": "PNG_TILE",
+      "purpose": "垂直分隔線/亮邊",
+      "masterTarget": "8x128 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_ACCENT_LINE",
+      "ui": "COMMON",
+      "group": "Shell",
+      "implementation": "CODE",
+      "purpose": "cyan/amber/green/purple 狀態線由程式換色",
+      "masterTarget": "runtime",
+      "states": "state color",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_TOPBAR_BG",
+      "ui": "COMMON",
+      "group": "Global",
+      "implementation": "PNG_9SLICE",
+      "purpose": "頂部工具列底板",
+      "masterTarget": "96x64 @2x",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_PRESETBAR_BG",
+      "ui": "UI_01",
+      "group": "Global",
+      "implementation": "PNG_9SLICE",
+      "purpose": "UI_01 preset/state bar",
+      "masterTarget": "96x56 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_RUNTIME_STRIP_BG",
+      "ui": "UI_01",
+      "group": "Global",
+      "implementation": "PNG_9SLICE",
+      "purpose": "ENGINE/SR/BLOCK/SEED/SYNC/SEEK/STATE 條",
+      "masterTarget": "96x48 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_LOGO_MARK",
+      "ui": "COMMON",
+      "group": "Brand",
+      "implementation": "PNG_FIXED",
+      "purpose": "SOURCERUNE 圖形標誌；透明底",
+      "masterTarget": "96x96 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_BUTTON_CAP",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_9SLICE",
+      "purpose": "一般按鈕共用",
+      "masterTarget": "96x56 @2x",
+      "states": "idle/hover/pressed/disabled",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_SEGMENT_CAP",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_9SLICE",
+      "purpose": "A/B、3D/Top、Approach/PassBy/Leave 等 segmented",
+      "masterTarget": "88x52 @2x",
+      "states": "idle/hover/active/disabled",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_DROPDOWN_CAP",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_9SLICE",
+      "purpose": "Preset/Selector/Mode 下拉框",
+      "masterTarget": "112x56 @2x",
+      "states": "idle/hover/open/disabled",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_DROPDOWN_CARET",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "下拉箭頭",
+      "masterTarget": "24x24 @2x",
+      "states": "idle/hover",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_ICON_BUTTON_CAP",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_9SLICE",
+      "purpose": "齒輪/資料夾/箭頭/全螢幕等 icon-only button",
+      "masterTarget": "64x56 @2x",
+      "states": "idle/hover/pressed/active",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_CHECKBOX",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_FIXED",
+      "purpose": "Static/Dropout/Interference/Duck 等 checkbox",
+      "masterTarget": "32x32 @2x",
+      "states": "off/on/disabled",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_BYPASS_TOGGLE",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_FIXED",
+      "purpose": "模組 bypass/On",
+      "masterTarget": "64x32 @2x",
+      "states": "off/on/disabled",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_SLIDER_TRACK",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_9SLICE",
+      "purpose": "水平 slider track",
+      "masterTarget": "128x16 @2x",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_SLIDER_FILL",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "CODE",
+      "purpose": "fill 長度與色彩動態",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_SLIDER_THUMB",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_FIXED",
+      "purpose": "slider thumb",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover/drag",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_KNOB_S_BASE",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_FIXED",
+      "purpose": "小 knob 底座，Bad Signal/Condition/Speed/Doppler/Width",
+      "masterTarget": "112x112 @2x",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_KNOB_M_BASE",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "PNG_FIXED",
+      "purpose": "中 knob，Ambience/Mix/Intelligibility",
+      "masterTarget": "144x144 @2x",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_KNOB_L_BASE",
+      "ui": "UI_02",
+      "group": "Control",
+      "implementation": "PNG_FIXED",
+      "purpose": "UI_02 大 Distance dial 底座",
+      "masterTarget": "640x640 @2x",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_KNOB_ARC",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "CODE",
+      "purpose": "數值弧線、顏色、進度，不做死圖",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_KNOB_POINTER",
+      "ui": "COMMON",
+      "group": "Control",
+      "implementation": "CODE",
+      "purpose": "指示線/點由參數角度旋轉",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_METER_FRAME",
+      "ui": "COMMON",
+      "group": "Meter",
+      "implementation": "PNG_9SLICE",
+      "purpose": "IN/OUT meter 槽外框",
+      "masterTarget": "64x256 @2x",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_METER_SEGMENT",
+      "ui": "COMMON",
+      "group": "Meter",
+      "implementation": "PNG_FIXED",
+      "purpose": "meter LED 單段形狀；顏色由程式控制",
+      "masterTarget": "20x10 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_METER_FILL",
+      "ui": "COMMON",
+      "group": "Meter",
+      "implementation": "CODE",
+      "purpose": "即時電平、Peak Hold、RMS/LUFS 值",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_GRAPH_GRID",
+      "ui": "COMMON",
+      "group": "Analysis",
+      "implementation": "PNG_TILE",
+      "purpose": "Spectrum/EQ/Response 共用暗色格線底",
+      "masterTarget": "128x128 @2x",
+      "states": "default",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_SPECTRUM_CURVE",
+      "ui": "COMMON",
+      "group": "Analysis",
+      "implementation": "CODE",
+      "purpose": "頻譜曲線與填色即時計算",
+      "masterTarget": "runtime",
+      "states": "pre/post",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_EQ_CURVE",
+      "ui": "COMMON",
+      "group": "Analysis",
+      "implementation": "CODE",
+      "purpose": "HPF/LPF/4-band node + curve",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_EQ_NODE",
+      "ui": "COMMON",
+      "group": "Analysis",
+      "implementation": "PNG_FIXED",
+      "purpose": "EQ node 圓點/光暈",
+      "masterTarget": "28x28 @2x",
+      "states": "idle/hover/selected",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_RESPONSE_CURVE",
+      "ui": "COMMON",
+      "group": "Analysis",
+      "implementation": "CODE",
+      "purpose": "Direct/Early/Tail response",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_FLOW_NODE_CAP",
+      "ui": "COMMON",
+      "group": "Analysis",
+      "implementation": "PNG_9SLICE",
+      "purpose": "Signal Flow node 背景",
+      "masterTarget": "80x44 @2x",
+      "states": "default/bypassed/selected",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_SCENE_GRID",
+      "ui": "UI_01",
+      "group": "Scene",
+      "implementation": "PNG_TILE",
+      "purpose": "UI_01 Scene View 技術格線底",
+      "masterTarget": "128x128 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_SCENE_ENV_IMAGE",
+      "ui": "UI_02",
+      "group": "Scene",
+      "implementation": "SEMANTIC_EXISTING",
+      "purpose": "UI_02 大型場景底圖，優先由 SPACE_ENVIRONMENT runtime crop 提供",
+      "masterTarget": "512x256 source, cover-scaled",
+      "states": "selection dependent",
+      "status": "EXISTING"
+    },
+    {
+      "id": "RT_SCENE_SOURCE_MARKER",
+      "ui": "COMMON",
+      "group": "Scene",
+      "implementation": "HYBRID",
+      "purpose": "Source marker cap/icon；位置/標籤/值由 code",
+      "masterTarget": "64x64 @2x",
+      "states": "idle/selected/drag",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_SCENE_LISTENER_MARKER",
+      "ui": "COMMON",
+      "group": "Scene",
+      "implementation": "HYBRID",
+      "purpose": "Listener marker cap；位置/標籤由 code",
+      "masterTarget": "64x64 @2x",
+      "states": "idle/selected",
+      "status": "NEW_P0"
+    },
+    {
+      "id": "RT_SCENE_PATH",
+      "ui": "COMMON",
+      "group": "Scene",
+      "implementation": "CODE",
+      "purpose": "source-listener 線/運動曲線/波形軌跡",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_SCENE_POINT",
+      "ui": "COMMON",
+      "group": "Scene",
+      "implementation": "PNG_FIXED",
+      "purpose": "Start/Closest/End handle",
+      "masterTarget": "28x28 @2x",
+      "states": "idle/hover/selected",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_DISTANCE_CALLOUT",
+      "ui": "UI_01",
+      "group": "Scene",
+      "implementation": "PNG_9SLICE",
+      "purpose": "25.0m / 0.8s 類浮窗底",
+      "masterTarget": "96x64 @2x",
+      "states": "default",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_MOTION_CAR_GLYPH",
+      "ui": "COMMON",
+      "group": "Scene",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Motion path 車輛 glyph",
+      "masterTarget": "56x40 @2x",
+      "states": "default",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_WAVEFORM_STRIP_BG",
+      "ui": "UI_01",
+      "group": "Scene",
+      "implementation": "PNG_9SLICE",
+      "purpose": "UI_01 motion waveform/trim strip 底",
+      "masterTarget": "96x40 @2x",
+      "states": "default",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_WAVEFORM",
+      "ui": "COMMON",
+      "group": "Scene",
+      "implementation": "CODE",
+      "purpose": "音訊 waveform/seek/trim 動態",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_IMAGE_ARROW_L",
+      "ui": "COMMON",
+      "group": "AssetCard",
+      "implementation": "PNG_FIXED",
+      "purpose": "卡片圖片左箭頭",
+      "masterTarget": "32x48 @2x",
+      "states": "idle/hover",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_IMAGE_ARROW_R",
+      "ui": "COMMON",
+      "group": "AssetCard",
+      "implementation": "PNG_FIXED",
+      "purpose": "卡片圖片右箭頭",
+      "masterTarget": "32x48 @2x",
+      "states": "idle/hover",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_SOURCE",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "SOURCE icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_TRANSMISSION",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "TRANSMISSION icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_WALL",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "WALL/COVER icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_SPACE",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "SPACE/ENVIRONMENT icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_MOTION",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "MOTION icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_BADSIGNAL",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "BAD SIGNAL icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_CONDITION",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "CONDITION icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_INTELLIGIBILITY",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "INTELLIGIBILITY icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_AMBIENCE",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "AMBIENCE icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_MIX",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "MIX icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_MODULE_ICON_EQ",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "EQ/TONE icon",
+      "masterTarget": "40x40 @2x",
+      "states": "default/active",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_TOOL_ICON_GEAR",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Settings",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_TOOL_ICON_FOLDER",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Load/Save/Folder",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover",
+      "status": "NEW_P1"
+    },
+    {
+      "id": "RT_TOOL_ICON_UNDO",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Undo",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover/disabled",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_TOOL_ICON_REDO",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Redo",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover/disabled",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_TOOL_ICON_FULLSCREEN",
+      "ui": "UI_02",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Scene fullscreen",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover/active",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_TOOL_ICON_COPY",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Copy state",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_TOOL_ICON_PASTE",
+      "ui": "COMMON",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "Paste state",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover/disabled",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_AMBIENCE_WAVE_GLYPH",
+      "ui": "COMMON",
+      "group": "Ambience",
+      "implementation": "CODE",
+      "purpose": "Ambience 小 waveform/動態線條，避免為每種 ambience 新造大圖",
+      "masterTarget": "runtime",
+      "states": "dynamic",
+      "status": "CODE"
+    },
+    {
+      "id": "RT_ASSET_BROWSER_FRAME",
+      "ui": "COMMON",
+      "group": "Browser",
+      "implementation": "PNG_9SLICE",
+      "purpose": "Asset browser modal frame",
+      "masterTarget": "128x128 @2x",
+      "states": "default",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_ASSET_PREVIEW_FRAME",
+      "ui": "COMMON",
+      "group": "Browser",
+      "implementation": "PNG_9SLICE",
+      "purpose": "Browser preview artwork frame",
+      "masterTarget": "96x96 @2x",
+      "states": "default/selected",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_ADV_DRAWER_FRAME",
+      "ui": "COMMON",
+      "group": "Advanced",
+      "implementation": "PNG_9SLICE",
+      "purpose": "Advanced drawer panel",
+      "masterTarget": "96x96 @2x",
+      "states": "open",
+      "status": "NEW_P2"
+    },
+    {
+      "id": "RT_ADV_CONTROL_CARD",
+      "ui": "COMMON",
+      "group": "Advanced",
+      "implementation": "PNG_9SLICE",
+      "purpose": "Detailed-control cell",
+      "masterTarget": "80x80 @2x",
+      "states": "default/active/bypassed",
+      "status": "NEW_P2"
+    }
+  ]
+}
