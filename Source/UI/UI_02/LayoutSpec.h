@@ -13,6 +13,14 @@ inline constexpr int kRightRailWidth = 322;
 inline constexpr int kSceneVisualHeight = 358;
 inline constexpr int kMotionDeckHeight = 283;
 inline constexpr int kBottomMacroHeight = 172;
+inline constexpr int kSourceCardHeight = 196;
+inline constexpr int kTransmissionCardHeight = 183;
+inline constexpr int kWallCardHeight = 244;
+inline constexpr int kSpaceCardHeight = 279;
+inline constexpr int kAmbienceCardHeight = 356;
+inline constexpr int kDistanceDialDiameter = 300;
+inline constexpr int kMotionSmallKnobDiameter = 54;
+inline constexpr int kBottomMacroKnobDiameter = 76;
 
 enum class Area
 {

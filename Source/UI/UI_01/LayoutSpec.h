@@ -13,6 +13,14 @@ inline constexpr int kMeterRailWidth = 179;
 inline constexpr int kSceneHeight = 262;
 inline constexpr int kAnalysisHeight = 247;
 inline constexpr int kBottomMacroHeight = 216;
+inline constexpr int kModuleCardHeight = 124;
+inline constexpr int kModuleGap = 8;
+inline constexpr int kSceneHeaderHeight = 34;
+inline constexpr int kSceneGraphHeight = 186;
+inline constexpr int kAnalysisTabHeight = 37;
+inline constexpr int kMacroKnobMotion = 55;
+inline constexpr int kMacroKnobStandard = 68;
+inline constexpr int kMacroKnobMix = 82;
 
 enum class Area
 {
