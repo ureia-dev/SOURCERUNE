@@ -68,7 +68,8 @@
       "purpose": "水平分隔線/亮邊",
       "masterTarget": "128x8 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_SECTION_DIVIDER_V",
@@ -78,7 +79,8 @@
       "purpose": "垂直分隔線/亮邊",
       "masterTarget": "8x128 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_ACCENT_LINE",
@@ -109,7 +111,8 @@
       "purpose": "UI_01 preset/state bar",
       "masterTarget": "96x56 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_RUNTIME_STRIP_BG",
@@ -119,7 +122,8 @@
       "purpose": "ENGINE/SR/BLOCK/SEED/SYNC/SEEK/STATE 條",
       "masterTarget": "96x48 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_LOGO_MARK",
@@ -129,7 +133,8 @@
       "purpose": "SOURCERUNE 圖形標誌；透明底",
       "masterTarget": "96x96 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_BUTTON_CAP",
@@ -172,7 +177,8 @@
       "purpose": "下拉箭頭",
       "masterTarget": "24x24 @2x",
       "states": "idle/hover",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_ICON_BUTTON_CAP",
@@ -193,7 +199,8 @@
       "purpose": "Static/Dropout/Interference/Duck 等 checkbox",
       "masterTarget": "32x32 @2x",
       "states": "off/on/disabled",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_BYPASS_TOGGLE",
@@ -203,7 +210,7 @@
       "purpose": "模組 bypass/On",
       "masterTarget": "64x32 @2x",
       "states": "off/on/disabled",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1"
     },
     {
       "id": "RT_SLIDER_TRACK",
@@ -309,7 +316,8 @@
       "purpose": "meter LED 單段形狀；顏色由程式控制",
       "masterTarget": "20x10 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_METER_FILL",
@@ -360,7 +368,7 @@
       "purpose": "EQ node 圓點/光暈",
       "masterTarget": "28x28 @2x",
       "states": "idle/hover/selected",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1"
     },
     {
       "id": "RT_RESPONSE_CURVE",
@@ -390,7 +398,8 @@
       "purpose": "UI_01 Scene View 技術格線底",
       "masterTarget": "128x128 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/index.html + Web/App/app.js"
     },
     {
       "id": "RT_SCENE_ENV_IMAGE",
@@ -442,7 +451,8 @@
       "purpose": "Start/Closest/End handle",
       "masterTarget": "28x28 @2x",
       "states": "idle/hover/selected",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/index.html + Web/App/app.js"
     },
     {
       "id": "RT_DISTANCE_CALLOUT",
@@ -462,7 +472,8 @@
       "purpose": "Motion path 車輛 glyph",
       "masterTarget": "56x40 @2x",
       "states": "default",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/index.html + Web/App/app.js"
     },
     {
       "id": "RT_WAVEFORM_STRIP_BG",
@@ -492,7 +503,7 @@
       "purpose": "卡片圖片左箭頭",
       "masterTarget": "32x48 @2x",
       "states": "idle/hover",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1"
     },
     {
       "id": "RT_IMAGE_ARROW_R",
@@ -502,7 +513,7 @@
       "purpose": "卡片圖片右箭頭",
       "masterTarget": "32x48 @2x",
       "states": "idle/hover",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1"
     },
     {
       "id": "RT_MODULE_ICON_SOURCE",
@@ -512,7 +523,8 @@
       "purpose": "SOURCE icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_TRANSMISSION",
@@ -522,7 +534,8 @@
       "purpose": "TRANSMISSION icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_WALL",
@@ -532,7 +545,8 @@
       "purpose": "WALL/COVER icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_SPACE",
@@ -542,7 +556,8 @@
       "purpose": "SPACE/ENVIRONMENT icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_MOTION",
@@ -552,7 +567,8 @@
       "purpose": "MOTION icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_BADSIGNAL",
@@ -562,7 +578,8 @@
       "purpose": "BAD SIGNAL icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_CONDITION",
@@ -572,7 +589,8 @@
       "purpose": "CONDITION icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_INTELLIGIBILITY",
@@ -582,7 +600,8 @@
       "purpose": "INTELLIGIBILITY icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_AMBIENCE",
@@ -592,7 +611,8 @@
       "purpose": "AMBIENCE icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_MIX",
@@ -602,7 +622,8 @@
       "purpose": "MIX icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_MODULE_ICON_EQ",
@@ -612,7 +633,8 @@
       "purpose": "EQ/TONE icon",
       "masterTarget": "40x40 @2x",
       "states": "default/active",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_TOOL_ICON_GEAR",
@@ -622,7 +644,7 @@
       "purpose": "Settings",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1"
     },
     {
       "id": "RT_TOOL_ICON_FOLDER",
@@ -632,7 +654,8 @@
       "purpose": "Load/Save/Folder",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover",
-      "status": "NEW_P1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
       "id": "RT_TOOL_ICON_UNDO",
@@ -743,5 +766,26 @@
     "manifest": "Assets/UI/Runtime/p0_skin_manifest_v1.json",
     "webSkin": "Web/App/runtime_skin_p0.css",
     "nativeReuse": "Assets/UI/Runtime/Common/*"
+  },
+  "p1": {
+    "version": 1,
+    "status": "ASSET_READY_AND_WEB_PARTIALLY_BOUND",
+    "logicalComponents": 28,
+    "pngFiles": 52,
+    "manifest": "Assets/UI/Runtime/p1_skin_manifest_v1.json",
+    "webSkin": "Web/App/runtime_skin_p1.css",
+    "liveSceneBinding": [
+      "RT_SCENE_GRID",
+      "RT_SCENE_POINT",
+      "RT_MOTION_CAR_GLYPH"
+    ],
+    "assetReadyOnly": [
+      "RT_BYPASS_TOGGLE",
+      "RT_EQ_NODE",
+      "RT_IMAGE_ARROW_L",
+      "RT_IMAGE_ARROW_R",
+      "RT_TOOL_ICON_GEAR"
+    ],
+    "note": "Asset-ready-only pieces are intentionally not forced into UI controls that do not yet expose a matching runtime surface."
   }
 }
