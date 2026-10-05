@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "name": "SOURCERUNE Runtime P0 Skin V1",
+  "status": "asset-ready-p0-v1",
+  "generated": "2026-10-05",
+  "designBasis": [
+    "UI_01 approved reference",
+    "UI_02 approved reference",
+    "VISUAL_STYLE_V2.md",
+    "RUNTIME_COMPONENT_INVENTORY_V1.md"
+  ],
+  "rules": {
+    "rasterScale": "2x master",
+    "fullInterfaceScreenshotForbidden": true,
+    "bakedRuntimeTextForbidden": true,
+    "liveCode": [
+      "text",
+      "parameter values",
+      "knob arc",
+      "knob pointer",
+      "meter fill",
+      "peak/RMS/LUFS values",
+      "spectrum",
+      "EQ curve",
+      "space response",
+      "motion path",
+      "distance line",
+      "waveform",
+      "source/listener coordinates",
+      "hover/selection/bypass/accent-color logic"
+    ]
+  },
+  "palette": {
+    "bg0": "#050A0D",
+    "bg1": "#090F13",
+    "panel0": "#0D1419",
+    "panel1": "#121B21",
+    "panel2": "#162128",
+    "line": "#34444E",
+    "lineSoft": "#26343D",
+    "cyan": "#4AC4FF",
+    "cyanSoft": "#5CC9EE",
+    "cyanDim": "#2A708E",
+    "text": "#E1EBF0",
+    "muted": "#768892"
+  },
+  "nineSliceInsetsPx2x": {
+    "RT_SHELL_BG.png": [
+      24,
+      24,
+      24,
+      24
+    ],
+    "RT_PANEL_FRAME.png": [
+      22,
+      22,
+      22,
+      22
+    ],
+    "RT_CARD_FRAME.png": [
+      20,
+      20,
+      20,
+      20
+    ],
+    "RT_TOPBAR_BG.png": [
+      20,
+      20,
+      20,
+      20
+    ],
+    "RT_BUTTON_CAP_*.png": [
+      18,
+      18,
+      18,
+      18
+    ],
+    "RT_SEGMENT_CAP_*.png": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "RT_DROPDOWN_CAP_*.png": [
+      18,
+      18,
+      18,
+      18
+    ],
+    "RT_ICON_BUTTON_CAP_*.png": [
+      18,
+      18,
+      18,
+      18
+    ],
+    "RT_SLIDER_TRACK.png": [
+      14,
+      8,
+      14,
+      8
+    ],
+    "RT_METER_FRAME.png": [
+      16,
+      20,
+      16,
+      20
+    ]
+  },
+  "pngCount": 33,
+  "families": {
+    "shell": 4,
+    "buttons": 4,
+    "segmented": 4,
+    "dropdown": 4,
+    "iconButtons": 4,
+    "slider": 4,
+    "knobs": 3,
+    "meter": 1,
+    "analysis": 1,
+    "sceneMarkers": 4
+  }
+}
