@@ -145,16 +145,16 @@ Code baseline:
 | `RT_EQ_CURVE` | COMMON | Analysis | **CODE** | HPF/LPF/4-band node + curve | runtime | dynamic | CODE |
 | `RT_EQ_NODE` | COMMON | Analysis | **PNG_FIXED** | EQ node 圓點/光暈 | 28x28 @2x | idle/hover/selected | ASSET_READY_P1_V1 |
 | `RT_RESPONSE_CURVE` | COMMON | Analysis | **CODE** | Direct/Early/Tail response | runtime | dynamic | CODE |
-| `RT_FLOW_NODE_CAP` | COMMON | Analysis | **PNG_9SLICE** | Signal Flow node 背景 | 80x44 @2x | default/bypassed/selected | NEW_P2 |
+| `RT_FLOW_NODE_CAP` | COMMON | Analysis | **PNG_9SLICE** | Signal Flow node 背景 | 80x44 @2x | default/bypassed/selected | ASSET_READY_P2_V1 |
 | `RT_SCENE_GRID` | UI_01 | Scene | **PNG_TILE** | UI_01 Scene View 技術格線底 | 128x128 @2x | default | ASSET_READY_P1_V1 |
 | `RT_SCENE_ENV_IMAGE` | UI_02 | Scene | **SEMANTIC_EXISTING** | UI_02 大型場景底圖，優先由 SPACE_ENVIRONMENT runtime crop 提供 | 512x256 source, cover-scaled | selection dependent | EXISTING |
 | `RT_SCENE_SOURCE_MARKER` | COMMON | Scene | **HYBRID** | Source marker cap/icon；位置/標籤/值由 code | 64x64 @2x | idle/selected/drag | NEW_P0 |
 | `RT_SCENE_LISTENER_MARKER` | COMMON | Scene | **HYBRID** | Listener marker cap；位置/標籤由 code | 64x64 @2x | idle/selected | NEW_P0 |
 | `RT_SCENE_PATH` | COMMON | Scene | **CODE** | source-listener 線/運動曲線/波形軌跡 | runtime | dynamic | CODE |
 | `RT_SCENE_POINT` | COMMON | Scene | **PNG_FIXED** | Start/Closest/End handle | 28x28 @2x | idle/hover/selected | ASSET_READY_P1_V1 |
-| `RT_DISTANCE_CALLOUT` | UI_01 | Scene | **PNG_9SLICE** | 25.0m / 0.8s 類浮窗底 | 96x64 @2x | default | NEW_P2 |
+| `RT_DISTANCE_CALLOUT` | UI_01 | Scene | **PNG_9SLICE** | 25.0m / 0.8s 類浮窗底 | 96x64 @2x | default | ASSET_READY_P2_V1 |
 | `RT_MOTION_CAR_GLYPH` | COMMON | Scene | **VECTOR_OR_PNG** | Motion path 車輛 glyph | 56x40 @2x | default | ASSET_READY_P1_V1 |
-| `RT_WAVEFORM_STRIP_BG` | UI_01 | Scene | **PNG_9SLICE** | UI_01 motion waveform/trim strip 底 | 96x40 @2x | default | NEW_P2 |
+| `RT_WAVEFORM_STRIP_BG` | UI_01 | Scene | **PNG_9SLICE** | UI_01 motion waveform/trim strip 底 | 96x40 @2x | default | ASSET_READY_P2_V1 |
 | `RT_WAVEFORM` | COMMON | Scene | **CODE** | 音訊 waveform/seek/trim 動態 | runtime | dynamic | CODE |
 | `RT_IMAGE_ARROW_L` | COMMON | AssetCard | **PNG_FIXED** | 卡片圖片左箭頭 | 32x48 @2x | idle/hover | ASSET_READY_P1_V1 |
 | `RT_IMAGE_ARROW_R` | COMMON | AssetCard | **PNG_FIXED** | 卡片圖片右箭頭 | 32x48 @2x | idle/hover | ASSET_READY_P1_V1 |
@@ -171,16 +171,16 @@ Code baseline:
 | `RT_MODULE_ICON_EQ` | COMMON | Icon | **VECTOR_OR_PNG** | EQ/TONE icon | 40x40 @2x | default/active | ASSET_READY_P1_V1 |
 | `RT_TOOL_ICON_GEAR` | COMMON | Icon | **VECTOR_OR_PNG** | Settings | 32x32 @2x | idle/hover | ASSET_READY_P1_V1 |
 | `RT_TOOL_ICON_FOLDER` | COMMON | Icon | **VECTOR_OR_PNG** | Load/Save/Folder | 32x32 @2x | idle/hover | ASSET_READY_P1_V1 |
-| `RT_TOOL_ICON_UNDO` | COMMON | Icon | **VECTOR_OR_PNG** | Undo | 32x32 @2x | idle/hover/disabled | NEW_P2 |
-| `RT_TOOL_ICON_REDO` | COMMON | Icon | **VECTOR_OR_PNG** | Redo | 32x32 @2x | idle/hover/disabled | NEW_P2 |
-| `RT_TOOL_ICON_FULLSCREEN` | UI_02 | Icon | **VECTOR_OR_PNG** | Scene fullscreen | 32x32 @2x | idle/hover/active | NEW_P2 |
-| `RT_TOOL_ICON_COPY` | COMMON | Icon | **VECTOR_OR_PNG** | Copy state | 32x32 @2x | idle/hover | NEW_P2 |
-| `RT_TOOL_ICON_PASTE` | COMMON | Icon | **VECTOR_OR_PNG** | Paste state | 32x32 @2x | idle/hover/disabled | NEW_P2 |
+| `RT_TOOL_ICON_UNDO` | COMMON | Icon | **VECTOR_OR_PNG** | Undo | 32x32 @2x | idle/hover/disabled | ASSET_READY_P2_V1 |
+| `RT_TOOL_ICON_REDO` | COMMON | Icon | **VECTOR_OR_PNG** | Redo | 32x32 @2x | idle/hover/disabled | ASSET_READY_P2_V1 |
+| `RT_TOOL_ICON_FULLSCREEN` | UI_02 | Icon | **VECTOR_OR_PNG** | Scene fullscreen | 32x32 @2x | idle/hover/active | ASSET_READY_P2_V1 |
+| `RT_TOOL_ICON_COPY` | COMMON | Icon | **VECTOR_OR_PNG** | Copy state | 32x32 @2x | idle/hover | ASSET_READY_P2_V1 |
+| `RT_TOOL_ICON_PASTE` | COMMON | Icon | **VECTOR_OR_PNG** | Paste state | 32x32 @2x | idle/hover/disabled | ASSET_READY_P2_V1 |
 | `RT_AMBIENCE_WAVE_GLYPH` | COMMON | Ambience | **CODE** | Ambience 小 waveform/動態線條，避免為每種 ambience 新造大圖 | runtime | dynamic | CODE |
-| `RT_ASSET_BROWSER_FRAME` | COMMON | Browser | **PNG_9SLICE** | Asset browser modal frame | 128x128 @2x | default | NEW_P2 |
-| `RT_ASSET_PREVIEW_FRAME` | COMMON | Browser | **PNG_9SLICE** | Browser preview artwork frame | 96x96 @2x | default/selected | NEW_P2 |
-| `RT_ADV_DRAWER_FRAME` | COMMON | Advanced | **PNG_9SLICE** | Advanced drawer panel | 96x96 @2x | open | NEW_P2 |
-| `RT_ADV_CONTROL_CARD` | COMMON | Advanced | **PNG_9SLICE** | Detailed-control cell | 80x80 @2x | default/active/bypassed | NEW_P2 |
+| `RT_ASSET_BROWSER_FRAME` | COMMON | Browser | **PNG_9SLICE** | Asset browser modal frame | 128x128 @2x | default | ASSET_READY_P2_V1 |
+| `RT_ASSET_PREVIEW_FRAME` | COMMON | Browser | **PNG_9SLICE** | Browser preview artwork frame | 96x96 @2x | default/selected | ASSET_READY_P2_V1 |
+| `RT_ADV_DRAWER_FRAME` | COMMON | Advanced | **PNG_9SLICE** | Advanced drawer panel | 96x96 @2x | open | ASSET_READY_P2_V1 |
+| `RT_ADV_CONTROL_CARD` | COMMON | Advanced | **PNG_9SLICE** | Detailed-control cell | 80x80 @2x | default/active/bypassed | ASSET_READY_P2_V1 |
 
 ## 7. Rendering rule by type
 
@@ -317,3 +317,4 @@ P1 completed on 2026-10-05.
 - Asset-ready but intentionally not force-bound yet: Bypass Toggle, EQ Node, Image Arrows, Gear Icon. These await a matching runtime control rather than adding decorative/non-functional controls.
 - Dynamic scene/path/parameter/meter behavior remains code-driven.
 - No DSP changes.
+\n\n## 13. Runtime P2 completion — 2026-10-05\n\nP2 is implemented as modular runtime assets, not a UI screenshot.\n\n- 26 independent PNG assets added.\n- Signal Flow nodes now have default / bypassed / selected states.\n- UI_01 has a reusable distance callout and a live waveform strip background.\n- Undo / Redo / Copy / Paste / Fullscreen icon families are available and Web-bound.\n- Asset Browser and Advanced Drawer use reusable panel/card chrome.\n- Copy/Paste state and scene fullscreen are functional Web controls.\n- Waveform pixels are drawn live from the analyser; only the strip chrome is raster.\n- No DSP behavior was changed.\n
