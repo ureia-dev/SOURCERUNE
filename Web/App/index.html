@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./components.css">
 <link rel="stylesheet" href="./UI_01/ui01.css"><link rel="stylesheet" href="./UI_02/ui02.css">
 <link rel="stylesheet" href="./runtime_skin_p0.css">
-<link rel="stylesheet" href="./runtime_skin_p1.css">
+<link rel="stylesheet" href="./runtime_skin_p1.css">\n<link rel="stylesheet" href="./runtime_skin_p2.css">
 </head>
 <body class="ui-01">
 <div class="app">
@@ -18,7 +18,7 @@
 <div id="diagnosticBar" class="diagnostic hidden">TEST HARNESS · Shared state · Local transport · Real pass-through IN/OUT Peak/RMS · C++/Wasm DSP bridge pending</div>
 <section class="presetbar">
   <div class="preset-label">SCENE PRESET</div><select id="presetSelect"></select>
-  <button id="savePresetBtn">SAVE PRESET</button><button id="presetVisualsBtn">PRESET VISUALS</button><button id="importStateBtn">IMPORT</button><button id="exportStateBtn">EXPORT</button><button id="undoBtn">UNDO</button><button id="redoBtn">REDO</button>
+  <button id="savePresetBtn">SAVE PRESET</button><button id="presetVisualsBtn">PRESET VISUALS</button><button id="importStateBtn">IMPORT</button><button id="exportStateBtn">EXPORT</button><button id="copyStateBtn">COPY</button><button id="pasteStateBtn" disabled>PASTE</button><button id="undoBtn">UNDO</button><button id="redoBtn">REDO</button>
   <div class="snapshots"><button data-snapshot="A" class="active">A</button><button data-snapshot="B">B</button><button data-snapshot="C">C</button><button data-snapshot="D">D</button></div>
   <button id="globalBypass" class="bypass">GLOBAL BYPASS</button><div class="transport-time" id="transportTime">00:00.000</div>
 </section>
@@ -29,7 +29,7 @@
   <aside class="module-rail" id="moduleRail"></aside>
   <section class="center">
     <div class="scene-panel panel">
-      <div class="panel-head"><div><span class="eyebrow">LIVE ACOUSTIC VIEW</span><h1 id="sceneTitle">Scene View</h1></div><div class="scene-head-controls"><div class="segmented small motion-mode-group"><button data-motion-mode="STATIC">STATIC</button><button data-motion-mode="APPROACH">APPROACH</button><button data-motion-mode="PASS_BY" class="active">PASS BY</button><button data-motion-mode="LEAVE">LEAVE</button><button data-motion-mode="MANUAL">MANUAL</button></div><div class="segmented small"><button data-view="3D" class="active">3D VIEW</button><button data-view="TOP">TOP VIEW</button></div></div></div>
+      <div class="panel-head"><div><span class="eyebrow">LIVE ACOUSTIC VIEW</span><h1 id="sceneTitle">Scene View</h1></div><div class="scene-head-controls"><div class="segmented small motion-mode-group"><button data-motion-mode="STATIC">STATIC</button><button data-motion-mode="APPROACH">APPROACH</button><button data-motion-mode="PASS_BY" class="active">PASS BY</button><button data-motion-mode="LEAVE">LEAVE</button><button data-motion-mode="MANUAL">MANUAL</button></div><div class="segmented small"><button data-view="3D" class="active">3D VIEW</button><button data-view="TOP">TOP VIEW</button></div><button id="sceneFullscreenBtn" class="rt-icon-button" title="Fullscreen scene" aria-label="Fullscreen scene">FULLSCREEN</button></div></div>
       <div class="scene-commandbar"><label class="toggle-chip"><input id="syncToggle" type="checkbox" checked> DAW / WEB SYNC</label><button data-set-marker="start">SET START</button><button data-set-marker="closest">SET CLOSEST</button><button data-set-marker="end">SET END</button><span class="marker-status" id="markerStatus">START — · CLOSEST — · END —</span></div>
       <svg id="sceneSvg" viewBox="0 0 1000 420">
         <defs><linearGradient id="floorFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19232a"/><stop offset="1" stop-color="#0b1014"/></linearGradient><pattern id="grid" width="128" height="128" patternUnits="userSpaceOnUse"><image href="../../Assets/UI/Runtime/UI_01/Scene/RT_SCENE_GRID.png" width="128" height="128"/></pattern></defs>
@@ -37,7 +37,7 @@
         <g id="sceneBuildings"><rect x="55" y="82" width="145" height="208" rx="3" fill="#121a20" stroke="#35444d"/><rect x="222" y="128" width="115" height="162" rx="3" fill="#141d23" stroke="#35444d"/><rect x="706" y="104" width="116" height="186" rx="3" fill="#121a20" stroke="#35444d"/><rect x="842" y="62" width="110" height="228" rx="3" fill="#141d23" stroke="#35444d"/></g>
         <path id="motionPath" d="M110 325 C340 250 650 250 900 325" fill="none" stroke="#526772" stroke-width="3" stroke-dasharray="9 10"/><image href="../../Assets/UI/Runtime/Common/Scene/RT_SCENE_POINT_IDLE.png" x="96" y="311" width="28" height="28"/><image href="../../Assets/UI/Runtime/Common/Scene/RT_SCENE_POINT_SELECTED.png" x="486" y="256" width="28" height="28"/><image href="../../Assets/UI/Runtime/Common/Scene/RT_SCENE_POINT_IDLE.png" x="886" y="311" width="28" height="28"/><image id="motionCarGlyph" href="../../Assets/UI/Runtime/Common/Scene/RT_MOTION_CAR_GLYPH.png" x="232" y="238" width="56" height="40"/>
         <g id="listenerNode" transform="translate(500 270)"><circle r="24" fill="#11181d" stroke="#85c7d8" stroke-width="2"/><circle r="5" fill="#85c7d8"/></g><g id="sourceNode" transform="translate(260 300)"><circle r="28" fill="#12191e" stroke="#d6a56a" stroke-width="2"/><path d="M-10 -8H3L13-17V17L3 8H-10Z" fill="#d6a56a"/></g>
-        <line id="distanceLine" x1="260" y1="300" x2="500" y2="270" stroke="#8aa0aa" stroke-width="1.5"/><text id="distanceText" x="380" y="270" fill="#cbd7dc" font-size="16" text-anchor="middle">25.0 m</text><text x="500" y="308" fill="#8ba0aa" font-size="13" text-anchor="middle">LISTENER</text><text id="sourceLabel" x="260" y="346" fill="#b9c6cc" font-size="13" text-anchor="middle">SOURCE</text>
+        <line id="distanceLine" x1="260" y1="300" x2="500" y2="270" stroke="#8aa0aa" stroke-width="1.5"/><image id="distanceCallout" href="../../Assets/UI/Runtime/UI_01/Scene/RT_DISTANCE_CALLOUT.png" x="340" y="224" width="80" height="54"/><text id="distanceText" x="380" y="270" fill="#cbd7dc" font-size="16" text-anchor="middle">25.0 m</text><text x="500" y="308" fill="#8ba0aa" font-size="13" text-anchor="middle">LISTENER</text><text id="sourceLabel" x="260" y="346" fill="#b9c6cc" font-size="13" text-anchor="middle">SOURCE</text>
       </svg>
       <div class="motion-readouts"><div><span>MODE</span><strong id="motionMode">PASS BY</strong></div><div><span>START</span><strong id="startDistance">80.0 m</strong></div><div><span>CLOSEST</span><strong id="closestDistance">3.0 m</strong></div><div><span>END</span><strong id="endDistance">120.0 m</strong></div><div><span>CURRENT</span><strong id="currentDistance">25.0 m</strong></div><div><span>SPEED</span><strong id="speedReadout">60 km/h</strong></div><div><span>DOPPLER</span><strong id="dopplerReadout">70%</strong></div><div><span>WIDTH</span><strong id="widthReadout">40%</strong></div><div><span>PERSPECTIVE</span><strong id="perspectiveReadout">50%</strong></div></div>
     </div>
