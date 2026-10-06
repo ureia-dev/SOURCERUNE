@@ -19,3 +19,27 @@ body.ui-01 .app,body.ui-02 .app{
 }
 body.ui-01 .app{width:1499px;height:807px;min-height:807px}
 body.ui-02 .app{width:1672px;height:941px;min-height:941px}
+
+
+/* Production reference layouts never reflow internally.
+   Smaller hosts scale the whole shell instead of collapsing columns/controls. */
+@media(max-width:1380px){
+  body.ui-01 .workspace{
+    grid-template-columns:313px minmax(0,967px) 179px!important;
+    grid-template-areas:"modules center meter"!important;
+  }
+  body.ui-01 .macro-strip{
+    grid-template-columns:1.80fr 1.18fr 1.31fr 1.31fr 1.03fr .76fr 2.05fr!important;
+  }
+  body.ui-01 .motion-mode-group{display:flex!important}
+
+  body.ui-02 .workspace{
+    grid-template-columns:334px minmax(0,972px) 322px!important;
+    grid-template-rows:196px 74px 100px 244px!important;
+    grid-template-areas:none!important;
+  }
+  body.ui-02 .motion-mode-group{display:none!important}
+  body.ui-02 .macro-strip{
+    grid-template-columns:1.08fr 1.08fr 1fr .98fr 1.35fr!important;
+  }
+}
