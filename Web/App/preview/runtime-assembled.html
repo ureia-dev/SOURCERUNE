@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOURCERUNE — Runtime Assembled Preview</title>
+<style>
+html,body{margin:0;background:#05090c;color:#d9e4e9;font-family:Arial,sans-serif}
+header{height:42px;display:flex;align-items:center;gap:14px;padding:0 14px;background:#0a1014;border-bottom:1px solid #26343c;position:sticky;top:0;z-index:10}
+header strong{font-size:12px;letter-spacing:.14em} header span{font-size:10px;color:#82949d}
+button{background:#152027;color:#c9d7dd;border:1px solid #344650;border-radius:3px;padding:6px 12px;cursor:pointer}
+button.active{border-color:#63b9d8;color:#eafaff}
+iframe{display:block;width:100%;height:calc(100vh - 43px);border:0;background:#05090c}
+</style>
+</head>
+<body>
+<header><strong>SOURCERUNE · REAL RUNTIME ASSEMBLY</strong><span>Uses current Web/App + Assets/UI/Runtime; no screenshot skin, no AI redraw.</span><button id="reload">RELOAD</button></header>
+<iframe id="runtime" src="../index.html"></iframe>
+<script>
+const f=document.getElementById('runtime');
+document.getElementById('reload').onclick=()=>f.src='../index.html?preview='+Date.now();
+</script>
+</body>
+</html>
