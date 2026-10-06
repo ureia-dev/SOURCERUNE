@@ -1,0 +1,385 @@
+/* SOURCERUNE REF Visual Lock V6
+   UI_02 first: correct 9-slice display width, top toolbar, and Distance/Motion deck.
+   Runtime-only; no DSP or factory-preset data changes. */
+
+/* Manifest slice values describe SOURCE PIXEL INSETS, not on-screen border thickness. */
+.app::before{
+  border-width:3px!important;
+  border-image-slice:24!important;
+  border-image-width:3px!important;
+}
+.topbar::before{
+  border-width:2px!important;
+  border-image-slice:20!important;
+  border-image-width:2px!important;
+}
+.panel::after{
+  border-width:2px!important;
+  border-image-slice:22!important;
+  border-image-width:2px!important;
+}
+.module-card::after{
+  border-width:2px!important;
+  border-image-slice:20!important;
+  border-image-width:2px!important;
+}
+
+/* Reference toolbar controls are independent runtime buttons. */
+.ref-tool{
+  display:none;
+  width:44px;
+  height:44px;
+  min-width:44px;
+  padding:0;
+  border:0;
+  border-radius:5px;
+  background-color:transparent;
+  background-repeat:no-repeat,no-repeat;
+  background-position:center,center;
+  background-size:27px 27px,100% 100%;
+  color:transparent;
+  font-size:0;
+  cursor:pointer;
+}
+.ref-tool:hover{filter:brightness(1.08)}
+.ref-prev{--tool:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_PREV_IDLE.png");--tool-hover:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_PREV_HOVER.png")}
+.ref-next{--tool:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_NEXT_IDLE.png");--tool-hover:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_NEXT_HOVER.png")}
+.ref-sync{--tool:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_SYNC_IDLE.png");--tool-hover:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_SYNC_HOVER.png")}
+.ref-folder{--tool:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_FOLDER_IDLE.png");--tool-hover:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_FOLDER_HOVER.png")}
+.ref-gear{--tool:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_GEAR_IDLE.png");--tool-hover:url("../../Assets/UI/Runtime/Common/Icons/RT_TOOL_ICON_GEAR_HOVER.png")}
+.ref-tool{background-image:var(--tool),url("../../Assets/UI/Runtime/Common/Controls/RT_ICON_BUTTON_CAP_IDLE.png")}
+.ref-tool:hover{background-image:var(--tool-hover),url("../../Assets/UI/Runtime/Common/Controls/RT_ICON_BUTTON_CAP_HOVER.png")}
+.ref-tool.active{box-shadow:inset 0 0 0 1px rgba(74,196,255,.55),0 0 9px rgba(74,196,255,.12)}
+
+/* ---------------- UI_02 top bar ---------------- */
+body.ui-02 .top-actions{display:none!important}
+body.ui-02 .presetbar{
+  left:429px!important;
+  right:auto!important;
+  top:17px!important;
+  width:646px!important;
+  height:44px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  overflow:visible;
+}
+body.ui-02 .presetbar .preset-label,
+body.ui-02 #savePresetBtn,
+body.ui-02 #presetVisualsBtn,
+body.ui-02 #importStateBtn,
+body.ui-02 #exportStateBtn,
+body.ui-02 #copyStateBtn,
+body.ui-02 #pasteStateBtn,
+body.ui-02 #undoBtn,
+body.ui-02 #redoBtn,
+body.ui-02 #globalBypass,
+body.ui-02 .transport-time,
+body.ui-02 .snapshots button:nth-child(n+3){display:none!important}
+body.ui-02 #refPrevPresetBtn,
+body.ui-02 #refNextPresetBtn,
+body.ui-02 #refSyncBtn,
+body.ui-02 #refFolderBtn,
+body.ui-02 #refGearBtn{display:block}
+body.ui-02 #refPrevPresetBtn{order:1}
+body.ui-02 #refNextPresetBtn{order:2}
+body.ui-02 #presetSelect{
+  order:3;
+  width:330px!important;
+  height:44px!important;
+  flex:none;
+  padding:0 38px 0 16px!important;
+  border-radius:5px;
+  font-size:14px;
+  letter-spacing:.005em;
+}
+body.ui-02 #refSyncBtn{order:4}
+body.ui-02 .snapshots{
+  order:5;
+  display:flex;
+  gap:0!important;
+  margin:0!important;
+  width:88px;
+  height:44px;
+}
+body.ui-02 .snapshots button{
+  display:block;
+  width:44px!important;
+  min-width:44px!important;
+  height:44px!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:0;
+}
+body.ui-02 .snapshots button:first-child{border-radius:5px 0 0 5px}
+body.ui-02 .snapshots button:nth-child(2){border-radius:0 5px 5px 0}
+body.ui-02 #refFolderBtn{order:6}
+body.ui-02 #refGearBtn{
+  position:absolute;
+  z-index:30;
+  top:17px;
+  right:12px;
+}
+body.ui-02 .brand{
+  min-width:330px!important;
+  padding-left:10px;
+}
+body.ui-02 .brand strong{
+  font-size:19px!important;
+  letter-spacing:.17em!important;
+}
+body.ui-02 .brand span{
+  font-size:9px!important;
+  letter-spacing:.10em;
+}
+
+/* Horizontal meters occupy the exact reference band before Settings. */
+body.ui-02 .meter-rail{
+  top:9px!important;
+  right:67px!important;
+  width:448px!important;
+  height:60px!important;
+}
+body.ui-02 .meters{
+  height:58px!important;
+  gap:18px!important;
+}
+body.ui-02 .meter-block{
+  position:relative;
+  grid-template-columns:58px 154px!important;
+  gap:7px!important;
+}
+body.ui-02 .meter-label{
+  font-size:0!important;
+  text-align:right;
+}
+body.ui-02 .meter-block:nth-child(1) .meter-label::after{content:"INPUT";font-size:11px;color:#e0e8eb}
+body.ui-02 .meter-block:nth-child(2) .meter-label::after{content:"OUTPUT";font-size:11px;color:#e0e8eb}
+body.ui-02 .meter-slot{
+  position:relative;
+  width:154px!important;
+  height:14px!important;
+  min-height:14px!important;
+  overflow:visible;
+}
+body.ui-02 .meter-slot::after{
+  content:"-60   -36   -24   -12    -6     0";
+  position:absolute;
+  left:0;top:16px;width:154px;
+  color:#657780;
+  font:7px ui-monospace,SFMono-Regular,Consolas,monospace;
+  white-space:pre;
+  letter-spacing:.1px;
+}
+
+/* ---------------- UI_02 central scene ---------------- */
+body.ui-02 .scene-panel{
+  border-radius:8px!important;
+}
+body.ui-02 #sceneSvg{
+  height:358px!important;
+  min-height:358px!important;
+  background-position:center center!important;
+}
+body.ui-02 .panel-head{
+  top:13px!important;
+  right:18px!important;
+  height:40px!important;
+}
+body.ui-02 .panel-head .segmented.small button{
+  height:38px!important;
+  min-width:96px;
+  font-size:11px!important;
+}
+
+/* The lower 283px area is an explicit two-zone deck: Distance dial + Motion. */
+body.ui-02 .motion-readouts{
+  height:283px!important;
+  min-height:283px!important;
+  position:relative!important;
+  overflow:hidden!important;
+  border-top:1px solid #293942!important;
+  background:linear-gradient(180deg,#0d151a 0%,#081014 100%)!important;
+}
+
+/* Distance: actual fixed-form base + live text/pointer. */
+body.ui-02 .motion-readouts>div:nth-child(5){
+  display:block!important;
+  left:20px!important;
+  top:-8px!important;
+  width:330px!important;
+  height:292px!important;
+  padding:0!important;
+  border:0!important;
+  text-align:center;
+  background:
+    url("../../Assets/UI/Runtime/Common/Controls/RT_KNOB_L_BASE.png") center 0/300px 300px no-repeat!important;
+  z-index:3;
+}
+body.ui-02 .motion-readouts>div:nth-child(5)>span{
+  position:absolute;
+  top:164px;
+  left:0;
+  width:100%;
+  font-size:0!important;
+  color:#a7b7bf;
+  letter-spacing:.06em;
+}
+body.ui-02 .motion-readouts>div:nth-child(5)>span::after{
+  content:"DISTANCE";
+  font-size:12px;
+}
+body.ui-02 .motion-readouts>div:nth-child(5)>strong{
+  position:absolute;
+  top:105px;
+  left:0;
+  width:100%;
+  margin:0!important;
+  color:#edf5f8;
+  font:38px/1.1 ui-sans-serif,system-ui,sans-serif!important;
+  font-weight:500!important;
+  letter-spacing:.01em;
+  text-shadow:0 2px 5px rgba(0,0,0,.65);
+}
+body.ui-02 .motion-readouts>div:nth-child(5)::before{
+  content:"";
+  position:absolute;
+  left:164px!important;
+  top:36px!important;
+  width:3px!important;
+  height:62px!important;
+  border-radius:2px;
+  background:linear-gradient(180deg,#f3f9fb,#69d8ff)!important;
+  box-shadow:0 0 5px rgba(74,196,255,.5);
+  transform-origin:50% 112px!important;
+  transform:rotate(var(--distance-angle,-67deg))!important;
+}
+body.ui-02 .motion-readouts>div:nth-child(5)::after{
+  content:"0.2        1        5        20       100";
+  position:absolute;
+  left:44px;
+  bottom:20px;
+  width:242px;
+  color:#bac6cb;
+  font:12px ui-sans-serif,system-ui,sans-serif;
+  white-space:pre;
+  letter-spacing:.1px;
+}
+
+/* Motion graph occupies reference right half. */
+body.ui-02 .motion-deck-ui{
+  display:block!important;
+  position:absolute!important;
+  left:410px!important;
+  right:24px!important;
+  top:18px!important;
+  width:auto!important;
+  height:150px!important;
+  padding:0!important;
+  z-index:4;
+}
+body.ui-02 .motion-deck-head{
+  height:42px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:14px;
+}
+body.ui-02 .motion-deck-head>span{
+  font-size:14px!important;
+  letter-spacing:.04em;
+}
+body.ui-02 #motionDeckMode{
+  margin-left:auto;
+  width:254px!important;
+  height:38px!important;
+  font-size:11px!important;
+}
+body.ui-02 .motion-deck-graph{
+  width:100%!important;
+  height:102px!important;
+  overflow:visible;
+}
+
+/* Start / Closest / End live readouts under the graph. */
+body.ui-02 .motion-readouts>div:nth-child(2),
+body.ui-02 .motion-readouts>div:nth-child(3),
+body.ui-02 .motion-readouts>div:nth-child(4){
+  display:block!important;
+  top:157px!important;
+  width:110px!important;
+  height:49px!important;
+  padding:0!important;
+  border:0!important;
+  text-align:center;
+  z-index:5;
+}
+body.ui-02 .motion-readouts>div:nth-child(2){left:412px!important}
+body.ui-02 .motion-readouts>div:nth-child(3){left:611px!important}
+body.ui-02 .motion-readouts>div:nth-child(4){left:806px!important}
+body.ui-02 .motion-readouts>div:nth-child(2) span,
+body.ui-02 .motion-readouts>div:nth-child(3) span,
+body.ui-02 .motion-readouts>div:nth-child(4) span{
+  font-size:9px!important;
+  letter-spacing:.06em;
+}
+body.ui-02 .motion-readouts>div:nth-child(2) strong,
+body.ui-02 .motion-readouts>div:nth-child(3) strong,
+body.ui-02 .motion-readouts>div:nth-child(4) strong{
+  margin-top:3px!important;
+  color:#eef4f6;
+  font-size:13px!important;
+}
+
+/* Speed / Doppler / Width: same small runtime knob base, live pointer/value. */
+body.ui-02 .motion-readouts>div:nth-child(6),
+body.ui-02 .motion-readouts>div:nth-child(7),
+body.ui-02 .motion-readouts>div:nth-child(8){
+  display:block!important;
+  top:207px!important;
+  width:145px!important;
+  height:67px!important;
+  padding:0 0 0 62px!important;
+  border:0!important;
+  background:url("../../Assets/UI/Runtime/Common/Controls/RT_KNOB_S_BASE.png") left 5px/54px 54px no-repeat!important;
+  z-index:5;
+}
+body.ui-02 .motion-readouts>div:nth-child(6){left:420px!important}
+body.ui-02 .motion-readouts>div:nth-child(7){left:612px!important}
+body.ui-02 .motion-readouts>div:nth-child(8){left:804px!important}
+body.ui-02 .motion-readouts>div:nth-child(6)>span,
+body.ui-02 .motion-readouts>div:nth-child(7)>span,
+body.ui-02 .motion-readouts>div:nth-child(8)>span{
+  font-size:10px!important;
+  color:#b9c5ca;
+  margin-top:13px;
+}
+body.ui-02 .motion-readouts>div:nth-child(6)>strong,
+body.ui-02 .motion-readouts>div:nth-child(7)>strong,
+body.ui-02 .motion-readouts>div:nth-child(8)>strong{
+  margin-top:2px!important;
+  color:#f0f5f7;
+  font-size:14px!important;
+}
+body.ui-02 .motion-readouts>div:nth-child(6)::after,
+body.ui-02 .motion-readouts>div:nth-child(7)::after,
+body.ui-02 .motion-readouts>div:nth-child(8)::after{
+  top:14px!important;
+  left:26px!important;
+  height:17px!important;
+  transform-origin:50% 20px!important;
+}
+body.ui-02 .motion-readouts>div:nth-child(1),
+body.ui-02 .motion-readouts>div:nth-child(9){display:none!important}
+
+/* Gear opens the existing advanced drawer as an overlay; normal REF stays unchanged. */
+body.ui-02.settings-open .advanced-drawer{
+  display:block!important;
+  position:absolute;
+  z-index:90;
+  top:84px;
+  right:14px;
+  width:520px;
+  max-height:720px;
+  overflow:auto;
+  box-shadow:0 18px 45px rgba(0,0,0,.65);
+}
