@@ -28,6 +28,9 @@ inline constexpr int kAmbienceCardHeight = 356;
 inline constexpr int kDistanceDialDiameter = 300;
 inline constexpr int kMotionSmallKnobDiameter = 54;
 inline constexpr int kBottomMacroKnobDiameter = 76;
+inline constexpr int kWorkspaceGap = 9;
+inline constexpr int kWorkspacePaddingX = 13;
+inline constexpr int kWorkspacePaddingTop = 8;
 
 enum class Area
 {
