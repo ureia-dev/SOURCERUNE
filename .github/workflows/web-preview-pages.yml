@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
     paths:
       - "Web/App/**"
-      - "Assets/UI/Runtime/**"
+      - "Assets/UI/**"
       - ".github/workflows/web-preview-pages.yml"
   workflow_dispatch:
 
