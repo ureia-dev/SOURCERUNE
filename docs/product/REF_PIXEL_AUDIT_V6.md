@@ -95,3 +95,27 @@ Change only the confirmed UI_02 geometry mismatches:
 3. bottom five-panel exact pixel columns/gap.
 
 Do not change DSP, presets, parameter semantics, UI_01 geometry, live graph logic, or runtime asset composition.
+
+
+## UI_01 central internal scan — follow-up
+
+Direct edge/Hough scan of the approved UI_01 REF confirms the current central stack is already aligned closely enough that no geometry override is justified:
+
+- Scene panel outer: y ~173…436
+- Header lower edge: y ~208
+- Scene SVG / graph region: approximately y 208…394
+- Waveform strip: approximately y 394…432
+- Scene-to-analysis gap: approximately 8 px
+- Analysis panel start: y ~444
+- Tab strip: approximately y 444…481
+- Spectrum plotted frame: approximately y 489…684
+
+These align with the current runtime contract:
+- Scene panel 262 px
+- Scene header 34 px
+- Scene graph 186 px
+- Analysis panel 247 px
+- Analysis tabs 37 px
+- Center gap 8 px
+
+Decision: **no UI_01 center geometry change in this pass**. Preserve the current values until a rendered runtime overlay proves a specific delta.
