@@ -13,7 +13,10 @@
   --ui01-analysis-h:247px;
   --ui01-bottom-h:216px;
   --ui01-card-h:124px;
-  --ui01-gap:8px;
+  --ui01-card-gap:8px;
+  --ui01-workspace-gap:10px;
+  --ui01-workspace-pad-x:10px;
+  --ui01-workspace-pad-bottom:8px;
   --ui01-scene-head-h:34px;
   --ui01-scene-graph-h:186px;
   --ui01-tabs-h:37px;
@@ -26,7 +29,10 @@
   --ui01-meter-slot-h:250px;
 
   --ui02-ref-w:1672px;
-  --ui02-gap:8px;
+  --ui02-card-gap:8px;
+  --ui02-workspace-gap:9px;
+  --ui02-workspace-pad-x:13px;
+  --ui02-workspace-pad-top:8px;
   --ui02-ref-h:941px;
   --ui02-top-h:78px;
   --ui02-left-w:334px;
@@ -53,12 +59,12 @@
 /* UI_01: geometry wins over optical styling. */
 body.ui-01 .topbar{height:var(--ui01-top-h)}
 body.ui-01 .workspace{
-  gap:var(--ui01-gap);
-  padding:var(--ui01-gap);
+  gap:var(--ui01-workspace-gap);
+  padding:0 var(--ui01-workspace-pad-x) var(--ui01-workspace-pad-bottom);
 }
 body.ui-01 .module-rail{
-  gap:var(--ui01-gap);
-  height:calc(var(--ui01-card-h) * 4 + var(--ui01-gap) * 3);
+  gap:var(--ui01-card-gap);
+  height:calc(var(--ui01-card-h) * 4 + var(--ui01-card-gap) * 3);
 }
 body.ui-01 .module-card{height:var(--ui01-card-h);min-height:var(--ui01-card-h)}
 body.ui-01 .module-meta{height:var(--ui01-card-head-h)}
@@ -74,8 +80,8 @@ body.ui-01 .analysis-panel{height:var(--ui01-analysis-h)}
 body.ui-01 .tabs{height:var(--ui01-tabs-h)}
 body.ui-01 .macro-strip{
   height:var(--ui01-bottom-h);
-  gap:var(--ui01-gap);
-  padding:0 var(--ui01-gap) var(--ui01-gap);
+  gap:var(--ui01-card-gap);
+  padding:0 var(--ui01-workspace-pad-x) var(--ui01-workspace-pad-bottom);
 }
 body.ui-01 .macro{height:var(--ui01-bottom-h)}
 body.ui-01 .macro-motion .macro-knob{--knob-size:var(--ui01-knob-motion)}
@@ -90,8 +96,8 @@ body.ui-01 .macro-mix .macro-knob{--knob-size:var(--ui01-knob-mix)}
 body.ui-02 .app{min-height:var(--ui02-ref-h)}
 body.ui-02 .topbar{height:var(--ui02-top-h)}
 body.ui-02 .workspace{
-  gap:var(--ui02-gap);
-  padding:var(--ui02-gap);
+  gap:var(--ui02-workspace-gap);
+  padding:var(--ui02-workspace-pad-top) var(--ui02-workspace-pad-x) 0;
 }
 body.ui-02 .workspace{
   grid-template-columns:var(--ui02-left-w) minmax(0,var(--ui02-center-w)) var(--ui02-right-w);
