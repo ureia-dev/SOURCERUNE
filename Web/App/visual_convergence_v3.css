@@ -78,7 +78,7 @@ body.ui-01 .panel-head h1{
   letter-spacing:.015em;
 }
 body.ui-01 #sceneSvg{
-  height:184px!important;
+  height:186px!important;
 }
 body.ui-01 .scene-waveform-strip{
   height:38px;
@@ -182,13 +182,13 @@ body.ui-01 .macro-motion{
 body.ui-01 .motion-knob-row{
   gap:1px;
 }
-body.ui-01 .macro-motion .macro-knob{--knob-size:58px}
-body.ui-01 .macro-motion .macro-knob.compact{--knob-size:49px}
+body.ui-01 .macro-motion .macro-knob{--knob-size:55px}
+body.ui-01 .macro-motion .macro-knob.compact{--knob-size:55px}
 body.ui-01 .macro-badsignal .macro-knob,
-body.ui-01 .macro-condition .macro-knob{--knob-size:66px}
-body.ui-01 .macro-intelligibility .macro-knob{--knob-size:71px}
-body.ui-01 .macro-ambience .macro-knob{--knob-size:62px}
-body.ui-01 .macro-mix .macro-knob{--knob-size:84px}
+body.ui-01 .macro-condition .macro-knob,
+body.ui-01 .macro-intelligibility .macro-knob,
+body.ui-01 .macro-ambience .macro-knob{--knob-size:68px}
+body.ui-01 .macro-mix .macro-knob{--knob-size:82px}
 body.ui-01 .macro-mode-row{margin-top:5px}
 body.ui-01 .macro-mode-row button{
   border-radius:3px;
@@ -247,7 +247,7 @@ body.ui-02 #distanceLine{
 body.ui-02 .motion-readouts{
   background:
     radial-gradient(circle at 172px 142px,rgba(24,44,54,.30),transparent 165px),
-    url("../../Assets/UI/Runtime/Common/Controls/RT_KNOB_L_BASE.png") 25px 8px/294px 294px no-repeat,
+    url("../../Assets/UI/Runtime/Common/Controls/RT_KNOB_L_BASE.png") 22px 5px/300px 300px no-repeat,
     linear-gradient(180deg,#0d151a,#081014);
 }
 body.ui-02 .motion-readouts>div:nth-child(5){
@@ -330,8 +330,8 @@ body.ui-02 .macro-strip .macro h3{
   font-size:9.5px;
   letter-spacing:.02em;
 }
-body.ui-02 .macro-strip .macro-knob{--knob-size:74px}
-body.ui-02 .macro-strip .macro-mix .macro-knob{--knob-size:90px}
+body.ui-02 .macro-strip .macro-knob{--knob-size:76px}
+body.ui-02 .macro-strip .macro-mix .macro-knob{--knob-size:88px}
 body.ui-02 .macro-strip .macro-eq-svg{
   height:80px;
   border-color:#31444d;
