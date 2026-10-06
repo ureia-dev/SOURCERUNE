@@ -34,9 +34,19 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf _site
-          mkdir -p _site/Web _site/Assets/UI
+          mkdir -p _site/Web _site/Assets
           cp -a Web/App _site/Web/App
-          cp -a Assets/UI/Runtime _site/Assets/UI/Runtime
+          cp -a Assets/UI _site/Assets/UI
+          python3 - <<'PY'
+          from pathlib import Path
+          import os, re
+          p = Path("_site/Web/App/index.html")
+          s = p.read_text(encoding="utf-8")
+          rev = os.environ.get("GITHUB_SHA", "dev")[:12]
+          s = re.sub(r'href="(\./[^"]+\.css)"', lambda m: f'href="{m.group(1)}?v={rev}"', s)
+          s = re.sub(r'src="(\./app\.js)"', lambda m: f'src="{m.group(1)}?v={rev}"', s)
+          p.write_text(s, encoding="utf-8")
+          PY
           cat > _site/index.html <<'EOF'
           <!doctype html><meta charset="utf-8">
           <meta http-equiv="refresh" content="0;url=./Web/App/">
