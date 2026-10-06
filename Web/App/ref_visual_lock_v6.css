@@ -400,3 +400,45 @@ body.ui-02 .module-card[data-type="TRANSMISSION"] .module-art img{
 body.ui-02 .module-card[data-type="WALL_COVER"] .module-art img{
   object-position:center 52%;
 }
+
+
+/* UI_02 measured card rectangles from approved 1672x941 REF. */
+body.ui-02 .module-card[data-type="SOURCE"]{
+  position:absolute!important;left:13px!important;top:86px!important;width:334px!important;height:215px!important;
+}
+body.ui-02 .module-card[data-type="TRANSMISSION"]{
+  position:absolute!important;left:13px!important;top:306px!important;width:334px!important;height:178px!important;
+}
+body.ui-02 .module-card[data-type="WALL_COVER"]{
+  position:absolute!important;left:13px!important;top:493px!important;width:334px!important;height:247px!important;
+}
+body.ui-02 .module-card[data-type="SPACE_ENVIRONMENT"]{
+  position:absolute!important;right:13px!important;left:auto!important;top:86px!important;width:322px!important;height:282px!important;
+}
+body.ui-02 .module-card[data-type="SOURCE"] .module-art{top:82px!important;bottom:11px!important}
+body.ui-02 .module-card[data-type="TRANSMISSION"] .module-art{top:74px!important;bottom:12px!important}
+body.ui-02 .module-card[data-type="WALL_COVER"] .module-art{top:78px!important;bottom:14px!important}
+body.ui-02 .module-card[data-type="SPACE_ENVIRONMENT"] .module-art{top:118px!important;bottom:14px!important}
+body.ui-02 .module-card[data-type="SPACE_ENVIRONMENT"] .module-meta{
+  height:58px!important;padding-top:14px!important;
+}
+body.ui-02 .module-space-select{
+  position:absolute;
+  z-index:6;
+  top:64px;
+  left:14px;
+  right:14px;
+  width:calc(100% - 28px);
+  height:42px;
+  padding:0 36px 0 14px;
+  border:1px solid #334650;
+  border-radius:5px;
+  background:#0b1317;
+  color:#eef5f7;
+  font:13px ui-sans-serif,system-ui,sans-serif;
+}
+body.ui-02 .scene-panel{height:645px!important;min-height:645px!important}
+body.ui-02 .motion-readouts{height:287px!important;min-height:287px!important}
+body.ui-02 .macro-strip .macro[data-open="AMBIENCE"]{
+  top:376px!important;height:355px!important;
+}
