@@ -1,94 +1,75 @@
 # SOURCERUNE Asset Delivery Status
 
-Audit date: **2026-10-05 — V3**
+Audit date: **2026-10-06 — V4**
 
 ## 1. Current repository PNG reality
 
-Current committed PNG files under `Assets/UI`: **761**.
+Legacy V2 semantic/reference delivery is now **complete**:
 
-This total must be split correctly:
-
-- Legacy semantic + reference PNG currently present: **650**
-- Reusable Runtime chrome PNG (P0 + P1 + P2): **111**
-- Total currently committed: **761**
-
-Do not compare the 761 total directly with the old 678-package target; the additional 111 files are the new decomposed Runtime UI library.
-
-## 2. Legacy V2 semantic catalog
-
-Semantic catalog baseline: **224 assets**
-- SOURCE 64
-- TRANSMISSION 24
-- WALL / COVER 32
-- SPACE / ENVIRONMENT 56
-- SCENE PRESET HERO 48
-
-Expected legacy image delivery:
-- Shared: 224 PNG
-- UI_01: 224 PNG
-- UI_02: 224 PNG
-- Runtime/master semantic total: **672 PNG**
-- ReferenceSheets: **6 PNG**
-- Legacy package total: **678 PNG**
-
-Current legacy semantic/reference presence:
-- Shared: **220 / 224**
-- UI_01: **200 / 224**
+- Shared: **224 / 224**
+- UI_01: **224 / 224**
 - UI_02: **224 / 224**
-- Runtime/master semantic: **644 / 672**
+- Runtime/master semantic: **672 / 672**
 - ReferenceSheets: **6 / 6**
-- Legacy semantic/reference total present: **650 / 678**
+- Legacy semantic/reference total: **678 / 678**
 
-Missing legacy PNG: **28**
-- `UI_01/TRANSMISSION/TRN_005…TRN_024`: 20
-- `Shared/SPACE_ENVIRONMENT/SPC_053…SPC_056`: 4
-- `UI_01/SPACE_ENVIRONMENT/SPC_053…SPC_056`: 4
+Reusable Runtime chrome:
+- P0: complete and bound
+- P1: complete and bound
+- P2: complete and bound
+- Runtime PNG total: **111**
 
-These 28 files exist in the user-provided `SOURCERUNE_UI_ASSETS_V2.zip`; they are missing only from the current GitHub tree.
+Current committed/branch PNG total after legacy repair: **789**.
+
+## 2. Legacy V2 completion
+
+The four remaining Shared SPACE/ENVIRONMENT masters were restored from the original user-provided `SOURCERUNE_UI_ASSETS_V2.zip` exact bytes:
+
+- `SPC_053_Drive_Thru_Window.png`
+- `SPC_054_Security_Checkpoint.png`
+- `SPC_055_Prison_Visiting_Room.png`
+- `SPC_056_Phone_Booth.png`
+
+The old 28-file gap is now **0**.
 
 ## 3. Runtime chrome status
 
-Reusable decomposed Runtime UI assets are complete through P2:
+Reusable decomposed Runtime UI assets are complete through P2.
 
-- P0: complete and Web-bound
-- P1: complete and Web-bound
-- P2: complete and Web-bound
-- Current Runtime PNG total: **111**
-
-Runtime chrome is separate from semantic imagery.
-
-Rules:
+Rules remain:
 - full-interface screenshots are forbidden as implementation assets;
 - text, values, spectrum, EQ curves, meters, motion paths, waveform, source/listener coordinates and automation state remain code-driven;
-- reusable shell/control/chrome is stored under `Assets/UI/Runtime/`.
+- reusable shell/control/chrome is stored under `Assets/UI/Runtime/`;
+- UI_01 and UI_02 share the Runtime skin contract with Native LayoutSpec.
 
 ## 4. Expanded SCENE PRESET HERO requirement
 
-Factory preset data now contains **SCN_001…SCN_074**.
+Factory preset data contains **SCN_001…SCN_074**.
 
-Existing legacy art contains only **SCN_001…SCN_048**.
+Existing approved semantic art contains **SCN_001…SCN_048**.
 
-Therefore `SCN_049…SCN_074` still require:
+Still required for `SCN_049…SCN_074`:
 - 26 Shared hero cards
 - 26 UI_01 hero cards
 - 26 UI_02 hero cards
-- **78 new PNG**
+- **78 new independent PNG files**
 
-Every output is a **separate single PNG file**. A 26-tile atlas may be generated only as a reference sheet after the individual files exist.
+Every output is a separate single PNG. Atlas sheets are reference-only and may be generated only after the independent files exist.
 
 ## 5. Projected completed PNG count
 
-If no additional Runtime chrome is added:
+If Runtime chrome remains at 111 PNG:
 
-- Current: 761
-- Restore missing legacy: +28
-- New Scene Hero 49–74: +78
-- Projected complete total: **867 PNG**
+- Current after legacy completion: **789**
+- New Scene Hero 49–74: **+78**
+- Projected total: **867 PNG**
 
 ## 6. Source of truth
 
+- Canonical Web geometry: `Web/App/ref_geometry_lock_v5.css`
 - Runtime component inventory: `docs/product/RUNTIME_COMPONENT_INVENTORY_V1.md`
 - Runtime manifests: `Assets/UI/Runtime/p0_skin_manifest_v1.json`, `p1_skin_manifest_v1.json`, `p2_skin_manifest_v1.json`
+- Native geometry: `Source/UI/UI_01/LayoutSpec.h`, `Source/UI/UI_02/LayoutSpec.h`
 - Semantic V2 manifest: `Assets/UI/asset_manifest_v2.csv`
-- New Scene Hero production contract: `docs/product/SCENE_HERO_049_074_PRODUCTION_V1.md`
-- New Scene Hero machine manifest: `Assets/UI/scene_hero_049_074_manifest_v1.json`
+- Scene Hero production contract: `docs/product/SCENE_HERO_049_074_PRODUCTION_V1.md`
+- Scene Hero machine manifest: `Assets/UI/scene_hero_049_074_manifest_v1.json`
