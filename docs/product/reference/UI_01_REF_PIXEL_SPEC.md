@@ -44,3 +44,43 @@ EXISTS-RUNTIME: shell/topbar/panel/card frames; section dividers; button/segment
 ## Pending fine scan
 
 Text bounding boxes/baselines, exact font identity, all knob center/pointer/tick geometry, meter labels/ticks, individual topbar controls, all internal card image/action rectangles, shadow/glow radii and exact colors remain APPROX until measured. Unknown font identity must stay `unknown`.
+
+
+## Meter rail fine geometry — checkpoint 07
+
+Validated against the current main V9 meter reconstruction. These are runtime geometry anchors derived from the approved REF and are suitable as the next overlay baseline.
+
+| Object | x | y | w | h | Status |
+|---|---:|---:|---:|---:|---|
+| Meter rail | 0 | 0 | 179 | 376 | CONFIRMED |
+| Meter visual bed | 0 | 0 | 179 | 266 | CONFIRMED |
+| IN meter block | 14 | 27 | 40 | 213 | CONFIRMED |
+| OUT meter block | 114 | 27 | 40 | 213 | CONFIRMED |
+| IN slot | 24 | 54 | 20 | 178 | CONFIRMED |
+| OUT slot | 124 | 54 | 20 | 178 | CONFIRMED |
+| Center dB labels | 76 | 49 | 28 | ≈214 | CONFIRMED |
+| Peak/RMS toggle | 10 | 273 | 159 | 30 | CONFIRMED |
+| Meter values bed | 0 | 239 | 179 | 137 | CONFIRMED |
+| LUFS area | 10 | 307 | 159 | 69 | CONFIRMED |
+
+Meter scale live text is `0 / -6 / -12 / -24 / -36 / -60`, centered in the 28 px middle column. Current runtime uses 9 px monospace at ≈35.6 px line advance. IN/OUT labels occupy 40×16 top boxes. Peak/RMS labels are live text in two equal toggle cells separated by 5 px. LUFS label/value remain live runtime text; no fake LUFS value is permitted.
+
+Asset classification: meter frame/segments = EXISTS-RUNTIME; scale labels and values = CODE-DRAWN/live text; dedicated baked meter-label PNG = not required unless a later REF overlay proves typography cannot converge with live text.
+
+## Scene live-object geometry contract — checkpoint 08
+
+The following scene objects are confirmed as live runtime layers and must never be replaced by REF crops:
+
+- Motion path: SVG cubic path, CODE-DRAWN.
+- Start / closest / end points: independent runtime marker PNGs, EXISTS-RUNTIME.
+- Motion car glyph: independent runtime PNG, EXISTS-RUNTIME.
+- Listener marker: 64×64 runtime PNG centered on its live scene coordinate, EXISTS-RUNTIME.
+- Source marker: 64×64 runtime PNG centered on its live scene coordinate, EXISTS-RUNTIME.
+- Distance line: live SVG line, CODE-DRAWN.
+- Distance callout bed: 80×54 UI_01 runtime PNG, EXISTS-RUNTIME.
+- Distance value / SOURCE / LISTENER labels: live text, CODE-DRAWN.
+- Scene waveform: live canvas inside an independent waveform-strip bed, CODE-DRAWN + EXISTS-RUNTIME bed.
+- Spectrum: live canvas, CODE-DRAWN.
+- Space-response Direct / Early / Tail curves: live SVG paths, CODE-DRAWN.
+
+The current SVG uses a 1000×420 internal coordinate system; these SVG coordinates are implementation-space values and are **not** to be confused with REF poster pixels. Final REF-local marker coordinates remain APPROX until image-overlay measurement is completed.
