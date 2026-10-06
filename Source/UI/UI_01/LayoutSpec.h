@@ -44,6 +44,14 @@ inline constexpr int kAnalysisTabHeight = 37;
 inline constexpr int kMacroKnobMotion = 55;
 inline constexpr int kMacroKnobStandard = 68;
 inline constexpr int kMacroKnobMix = 82;
+inline constexpr int kBottomMotionWidth = 269;
+inline constexpr int kBottomBadSignalWidth = 178;
+inline constexpr int kBottomConditionWidth = 201;
+inline constexpr int kBottomIntelligibilityWidth = 201;
+inline constexpr int kBottomAmbienceWidth = 155;
+inline constexpr int kBottomMixWidth = 115;
+inline constexpr int kBottomEqWidth = 312;
+inline constexpr int kBottomGridGap = 8;
 
 enum class Area
 {
