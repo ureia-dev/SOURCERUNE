@@ -1,4 +1,5 @@
 name: SOURCERUNE Web Preview
+# Pages enabled; static preview deployment trigger
 
 on:
   push:
