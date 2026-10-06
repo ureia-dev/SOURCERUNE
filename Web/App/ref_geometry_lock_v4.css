@@ -12,6 +12,8 @@
   --ui01-scene-h:262px;
   --ui01-analysis-h:247px;
   --ui01-bottom-h:216px;
+  --ui01-macro-strip-h:221px;
+  --ui01-shell-bottom-pad:5px;
   --ui01-card-h:124px;
   --ui01-card-gap:8px;
   --ui01-workspace-gap:10px;
@@ -41,6 +43,9 @@
   --ui02-scene-h:358px;
   --ui02-motion-h:283px;
   --ui02-bottom-h:172px;
+  --ui02-macro-strip-h:210px;
+  --ui02-macro-top-gap:20px;
+  --ui02-shell-bottom-pad:18px;
   --ui02-source-h:196px;
   --ui02-transmission-h:183px;
   --ui02-wall-h:244px;
@@ -60,7 +65,7 @@
 body.ui-01 .topbar{height:var(--ui01-top-h)}
 body.ui-01 .workspace{
   gap:var(--ui01-workspace-gap);
-  padding:0 var(--ui01-workspace-pad-x) var(--ui01-workspace-pad-bottom);
+  padding:0 var(--ui01-workspace-pad-x) var(--ui01-shell-bottom-pad);
 }
 body.ui-01 .module-rail{
   gap:var(--ui01-card-gap);
@@ -79,7 +84,7 @@ body.ui-01 #sceneSvg{height:var(--ui01-scene-graph-h)!important}
 body.ui-01 .analysis-panel{height:var(--ui01-analysis-h)}
 body.ui-01 .tabs{height:var(--ui01-tabs-h)}
 body.ui-01 .macro-strip{
-  height:var(--ui01-bottom-h);
+  height:var(--ui01-macro-strip-h);
   gap:var(--ui01-card-gap);
   padding:0 var(--ui01-workspace-pad-x) var(--ui01-workspace-pad-bottom);
 }
@@ -96,6 +101,7 @@ body.ui-01 .macro-mix .macro-knob{--knob-size:var(--ui01-knob-mix)}
 body.ui-02 .app{min-height:var(--ui02-ref-h)}
 body.ui-02 .topbar{height:var(--ui02-top-h)}
 body.ui-02 .workspace{
+  position:static;
   gap:var(--ui02-workspace-gap);
   padding:var(--ui02-workspace-pad-top) var(--ui02-workspace-pad-x) 0;
 }
@@ -135,4 +141,25 @@ body.ui-02 .motion-readouts>div:nth-child(8):after{transform-origin:50% 20px}
   body.ui-01 .workspace{
     grid-template-columns:var(--ui01-left-w) minmax(0,var(--ui01-center-w)) var(--ui01-meter-w);
   }
+}
+
+
+/* UI_02 absolute rails are shell-relative, matching the approved pixel scan. */
+body.ui-02 .macro-strip{
+  position:static;
+  height:var(--ui02-macro-strip-h);
+  padding:var(--ui02-macro-top-gap) var(--ui02-workspace-pad-x) var(--ui02-shell-bottom-pad);
+}
+body.ui-02 .macro-strip .macro{height:var(--ui02-bottom-h)}
+body.ui-02 .macro-strip .macro[data-open="AMBIENCE"]{
+  top:374px;
+  right:var(--ui02-workspace-pad-x);
+  width:var(--ui02-right-w);
+  height:var(--ui02-ambience-h);
+}
+body.ui-02 .meter-rail{
+  top:8px;
+  right:var(--ui02-meter-right);
+  width:var(--ui02-meter-w);
+  height:62px;
 }
