@@ -84,3 +84,50 @@ The following scene objects are confirmed as live runtime layers and must never 
 - Space-response Direct / Early / Tail curves: live SVG paths, CODE-DRAWN.
 
 The current SVG uses a 1000×420 internal coordinate system; these SVG coordinates are implementation-space values and are **not** to be confused with REF poster pixels. Final REF-local marker coordinates remain APPROX until image-overlay measurement is completed.
+
+
+## Bottom knob/control geometry — checkpoint 09
+
+This checkpoint separates **confirmed runtime geometry** from REF geometry that is still awaiting a direct overlay scan. No runtime knob position is promoted to REF-confirmed merely because it exists in CSS.
+
+### Current live knob geometry
+
+| Region/control | Runtime face diameter | REF status | Implementation |
+|---|---:|---|---|
+| MOTION: Distance / Speed / Doppler / Width | 55 px | APPROX | existing S knob base + live pointer/value |
+| BAD SIGNAL: Amount | 68 px | APPROX | existing knob base + live pointer/value |
+| CONDITION: Amount | 68 px | APPROX | existing knob base + live pointer/value |
+| INTELLIGIBILITY: Amount | 68 px | APPROX | existing knob base + live pointer/value |
+| AMBIENCE: Amount | 68 px | APPROX | existing knob base + live pointer/value |
+| MIX: Wet | 82 px | APPROX | existing knob base + live pointer/value |
+
+Current pointer contract is CODE-DRAWN: start angle = -135°, sweep = 270°, pointer width = 2 px, pointer top = 15% of face diameter, pointer length = 27% of face diameter, transform origin = 50% / 130%. The numeric value is live centered text; the control label is live text below the face with a 4 px runtime gap.
+
+Current knob ring is also CODE-DRAWN: conic active/inactive ring, radial mask approximately 73–82% radius. This is **not yet REF-CONFIRMED** and must be replaced by measured REF tick geometry if the approved REF shows discrete tick marks rather than a continuous arc.
+
+### Bottom panel widths and derived center zones
+
+The confirmed UI_01 bottom panel widths remain:
+
+```text
+MOTION 269 | BAD SIGNAL 178 | CONDITION 201 | INTELLIGIBILITY 201 |
+AMBIENCE 155 | MIX 115 | EQ/TONE 312
+inter-panel gap ≈ 8 px
+```
+
+Knob centers inside those panels remain APPROX because panel padding, title baseline, selector/preview occupancy and optical centering must be measured from the REF itself. Do not infer a REF center by simply dividing the CSS panel width.
+
+### Text geometry still required from REF overlay
+
+For every knob, the following are explicitly pending and must remain APPROX until measured directly from the approved REF:
+
+- value bounding box x/y/w/h and baseline;
+- label bounding box x/y/w/h and baseline;
+- discrete tick positions/angles and tick lengths, if present;
+- exact face center x/y;
+- face outer diameter versus cap diameter;
+- pointer visible length and pointer pivot;
+- title-to-knob vertical gap;
+- knob-to-mode-button / selector / preview gap.
+
+Asset decision: existing knob-base PNGs are reusable first. Tick rings, pointers, values and labels stay live CSS/SVG/text. A new knob PNG is only justified if a later direct REF overlay proves the existing cap material itself cannot converge.
