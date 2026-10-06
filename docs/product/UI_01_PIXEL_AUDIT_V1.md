@@ -25,3 +25,50 @@ delta = 0 px
 Status: **PASS — no geometry change required.**
 
 Next checkpoint: UI_01 vertical shell closure only.
+
+
+## Checkpoint 02 — vertical shell closure
+
+Canonical current values:
+
+- shell height: 807 px
+- topbar: 58 px
+- workspace: 528 px
+- bottom macro strip: 221 px
+
+Closure:
+
+```text
+58 + 528 + 221 = 807
+delta = 0 px
+```
+
+Bottom macro internal closure:
+
+```text
+216 macro + 5 shell-bottom = 221
+delta = 0 px
+```
+
+Workspace side-rail closure:
+
+```text
+4 × 124 cards + 3 × 8 gaps = 520 px
+520 content + 8 workspace bottom = 528 px
+delta = 0 px
+```
+
+Center stack:
+
+```text
+262 scene + 8 gap + 247 analysis = 517 px
+available workspace content height = 520 px
+difference = 3 px
+```
+
+The 3 px difference is **intentional and REF-derived**, not a geometry bug.  
+The approved reference scan places the center analysis bottom at approximately y=691, while the left/right rails continue to approximately y=694. Therefore the center stack is expected to finish about 3 px earlier than the side rails.
+
+Status: **PASS — do not stretch Scene or Analysis by 3 px.**
+
+Next checkpoint: UI_01 left semantic-card internal geometry only.
