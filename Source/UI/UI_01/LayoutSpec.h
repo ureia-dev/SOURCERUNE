@@ -1,5 +1,6 @@
 #pragma once
 #include "../Common/UISectionIds.h"
+#include "../Common/RuntimeSkinSpec.h"
 #include <array>
 
 namespace sourcerune::ui::ui01
