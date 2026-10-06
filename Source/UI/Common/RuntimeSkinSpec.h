@@ -1,0 +1,31 @@
+#pragma once
+#include <string_view>
+
+namespace sourcerune::ui::skin
+{
+struct Insets
+{
+    int left;
+    int top;
+    int right;
+    int bottom;
+};
+
+inline constexpr std::string_view kShellBgAsset =
+    "Assets/UI/Runtime/Common/Shell/RT_SHELL_BG.png";
+inline constexpr std::string_view kTopBarBgAsset =
+    "Assets/UI/Runtime/Common/Shell/RT_TOPBAR_BG.png";
+inline constexpr std::string_view kPanelFrameAsset =
+    "Assets/UI/Runtime/Common/Shell/RT_PANEL_FRAME.png";
+inline constexpr std::string_view kCardFrameAsset =
+    "Assets/UI/Runtime/Common/Shell/RT_CARD_FRAME.png";
+
+inline constexpr Insets kShellBgInsetsPx2x { 24, 24, 24, 24 };
+inline constexpr Insets kTopBarBgInsetsPx2x { 20, 20, 20, 20 };
+inline constexpr Insets kPanelFrameInsetsPx2x { 22, 22, 22, 22 };
+inline constexpr Insets kCardFrameInsetsPx2x { 20, 20, 20, 20 };
+
+static_assert (kShellBgInsetsPx2x.left == kShellBgInsetsPx2x.right);
+static_assert (kPanelFrameInsetsPx2x.top == kPanelFrameInsetsPx2x.bottom);
+static_assert (kCardFrameInsetsPx2x.left == 20);
+} // namespace sourcerune::ui::skin
