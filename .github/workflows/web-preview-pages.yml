@@ -49,8 +49,8 @@ jobs:
           PY
           cat > _site/index.html <<'EOF'
           <!doctype html><meta charset="utf-8">
-          <meta http-equiv="refresh" content="0;url=./Web/App/">
           <title>SOURCERUNE Preview</title>
+          <script>location.replace("./Web/App/" + location.search + location.hash)</script>
           <a href="./Web/App/">Open SOURCERUNE Web Preview</a>
           EOF
       - name: Configure Pages
