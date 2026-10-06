@@ -6,6 +6,13 @@ namespace sourcerune::ui::ui02
 {
 inline constexpr int kReferenceWidth = 1672;
 inline constexpr int kReferenceHeight = 941;
+inline constexpr float fitScale (float availableWidth, float availableHeight) noexcept
+{
+    const auto sx = availableWidth / static_cast<float> (kReferenceWidth);
+    const auto sy = availableHeight / static_cast<float> (kReferenceHeight);
+    return sx < sy ? sx : sy;
+}
+
 inline constexpr int kTopBarHeight = 78;
 inline constexpr int kLeftRailWidth = 334;
 inline constexpr int kCenterWidth = 972;
