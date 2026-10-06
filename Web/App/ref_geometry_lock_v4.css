@@ -65,7 +65,7 @@
 body.ui-01 .topbar{height:var(--ui01-top-h)}
 body.ui-01 .workspace{
   gap:var(--ui01-workspace-gap);
-  padding:0 var(--ui01-workspace-pad-x) var(--ui01-shell-bottom-pad);
+  padding:0 var(--ui01-workspace-pad-x) var(--ui01-workspace-pad-bottom);
 }
 body.ui-01 .module-rail{
   gap:var(--ui01-card-gap);
@@ -77,7 +77,7 @@ body.ui-01 .module-art{top:var(--ui01-card-head-h);bottom:8px}
 body.ui-01 .module-actions{top:var(--ui01-card-actions-top)}
 body.ui-01 .meters{min-height:var(--ui01-meter-slot-h)}
 body.ui-01 .meter-slot{width:var(--ui01-meter-slot-w);min-height:var(--ui01-meter-slot-h)}
-body.ui-01 .center{grid-template-rows:var(--ui01-scene-h) var(--ui01-analysis-h);gap:var(--ui01-gap)}
+body.ui-01 .center{grid-template-rows:var(--ui01-scene-h) var(--ui01-analysis-h);gap:var(--ui01-card-gap)}
 body.ui-01 .scene-panel{height:var(--ui01-scene-h);min-height:var(--ui01-scene-h)}
 body.ui-01 .panel-head{height:var(--ui01-scene-head-h);min-height:var(--ui01-scene-head-h)}
 body.ui-01 #sceneSvg{height:var(--ui01-scene-graph-h)!important}
