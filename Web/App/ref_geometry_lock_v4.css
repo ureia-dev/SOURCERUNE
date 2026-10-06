@@ -26,6 +26,7 @@
   --ui01-meter-slot-h:250px;
 
   --ui02-ref-w:1672px;
+  --ui02-gap:8px;
   --ui02-ref-h:941px;
   --ui02-top-h:78px;
   --ui02-left-w:334px;
@@ -89,8 +90,8 @@ body.ui-01 .macro-mix .macro-knob{--knob-size:var(--ui01-knob-mix)}
 body.ui-02 .app{min-height:var(--ui02-ref-h)}
 body.ui-02 .topbar{height:var(--ui02-top-h)}
 body.ui-02 .workspace{
-  gap:var(--ui01-gap);
-  padding:var(--ui01-gap);
+  gap:var(--ui02-gap);
+  padding:var(--ui02-gap);
 }
 body.ui-02 .workspace{
   grid-template-columns:var(--ui02-left-w) minmax(0,var(--ui02-center-w)) var(--ui02-right-w);
