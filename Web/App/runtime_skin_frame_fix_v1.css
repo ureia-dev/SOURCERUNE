@@ -1,0 +1,19 @@
+/* SOURCERUNE shell frame fix V1
+   Use RT_SHELL_BG as a 9-slice border instead of stretching the entire 192x192 image. */
+.app{
+  position:relative;
+  background-color:#050a0d;
+  background-image:none!important;
+}
+.app::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:100;
+  pointer-events:none;
+  border:24px solid transparent;
+  border-image-source:url("../../Assets/UI/Runtime/Common/Shell/RT_SHELL_BG.png");
+  border-image-slice:24;
+  border-image-width:24px;
+  border-image-repeat:stretch;
+}
