@@ -119,3 +119,33 @@ These align with the current runtime contract:
 - Center gap 8 px
 
 Decision: **no UI_01 center geometry change in this pass**. Preserve the current values until a rendered runtime overlay proves a specific delta.
+
+
+## Topbar pixel scan — follow-up
+
+### UI_01
+Detected control groups:
+- left auxiliary two-button group: x ~512…601
+- preset selector: x ~606…940 (about 334 px)
+- post-preset / A-B region: x ~947…1095
+- Copy/Paste group: x ~1110…1214
+- Gear visual center: x ~1488
+
+The first UI_01 auxiliary X-style button has ambiguous product semantics in the historical REF. Do not invent behavior merely to fill the visual slot. Geometry may reserve the slot until its host/runtime function is mapped.
+
+### UI_02
+Detected control groups:
+- Prev/Next/Preset outer group: x ~435…872
+- Prev: x ~435…484
+- Next: x ~484…534
+- Preset: x ~534…872
+- post-preset crossed-arrow tool: x ~881…930
+- A/B: x ~949…1020
+- Folder: x ~1036…1096
+- Input/Output meter area begins around x ~1167 and runs to about x ~1604
+- Gear visual center: x ~1642
+
+Confirmed current mismatches:
+1. UI_02 Folder control currently precedes A/B in DOM/flex order; REF places Folder after A/B.
+2. UI_02 lacks the post-preset crossed-arrow tool.
+3. UI_02 topbar starts within only a few pixels of the REF but individual widths/order still require exact locking.
