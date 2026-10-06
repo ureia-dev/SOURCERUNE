@@ -1,0 +1,52 @@
+name: SOURCERUNE Web Preview
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "Web/App/**"
+      - "Assets/UI/Runtime/**"
+      - ".github/workflows/web-preview-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: sourcerune-web-preview
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Prepare static preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/Web _site/Assets/UI
+          cp -a Web/App _site/Web/App
+          cp -a Assets/UI/Runtime _site/Assets/UI/Runtime
+          cat > _site/index.html <<'EOF'
+          <!doctype html><meta charset="utf-8">
+          <meta http-equiv="refresh" content="0;url=./Web/App/">
+          <title>SOURCERUNE Preview</title>
+          <a href="./Web/App/">Open SOURCERUNE Web Preview</a>
+          EOF
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
