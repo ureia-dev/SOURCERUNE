@@ -86,7 +86,7 @@ body.ui-01 .tabs{height:var(--ui01-tabs-h)}
 body.ui-01 .macro-strip{
   height:var(--ui01-macro-strip-h);
   gap:var(--ui01-card-gap);
-  padding:0 var(--ui01-workspace-pad-x) var(--ui01-workspace-pad-bottom);
+  padding:0 var(--ui01-workspace-pad-x) var(--ui01-shell-bottom-pad);
 }
 body.ui-01 .macro{height:var(--ui01-bottom-h)}
 body.ui-01 .macro-motion .macro-knob{--knob-size:var(--ui01-knob-motion)}
