@@ -1,0 +1,18 @@
+/* SOURCERUNE Reference Geometry Lock V6
+   Confirmed by direct pixel/Hough scan of the approved UI_02 REF.
+   Only confirmed UI_02 geometry deltas from V5 are overridden. */
+
+:root{
+  --r02-row1:213px;
+  --r02-row2:63px;
+  --r02-row3:94px;
+  --r02-row4:247px;
+  --r02-ambience-top:380px;
+  --r02-ambience-h:350px;
+}
+
+body.ui-02 .macro-strip{
+  grid-template-columns:337px 315px 297px 316px 337px;
+  column-gap:11px;
+  row-gap:0;
+}
