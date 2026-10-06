@@ -36,6 +36,10 @@ inline constexpr int kBottomMacroKnobDiameter = 76;
 inline constexpr int kWorkspaceGap = 9;
 inline constexpr int kWorkspacePaddingX = 13;
 inline constexpr int kWorkspacePaddingTop = 8;
+inline constexpr int kWorkspaceHeight = 653;
+inline constexpr int kScenePanelHeight = 641;
+inline constexpr int kMeterRight = 72;
+inline constexpr int kMeterWidth = 440;
 
 enum class Area
 {
