@@ -1,1 +1,6 @@
-body.ui-02 .workspace{grid-template-columns:minmax(820px,1fr) 128px;grid-template-areas:"center meter" "modules meter"}body.ui-02 .center{grid-template-rows:minmax(590px,1fr) 184px}body.ui-02 .scene-panel{min-height:590px}body.ui-02 #sceneSvg{min-height:420px}body.ui-02 .module-rail{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:8px}body.ui-02 .module-rail:before{content:"SCENE COMPONENTS";grid-column:1/-1;font-size:8px;letter-spacing:.14em;color:#64767e;padding:2px 3px 0}body.ui-02 .module-card{min-height:112px}body.ui-02 .analysis-panel .tab-content{height:148px}body.ui-02 .advanced-head{background:#0c1215}body.ui-02 .adv-grid{grid-template-columns:repeat(5,minmax(130px,1fr))}
+/* SOURCERUNE UI_02 base identity
+   Production geometry is owned by layout_convergence_v1.css,
+   ref_geometry_lock_v4.css and viewport_fit_v1.css. */
+body.ui-02 .module-rail:before{display:none}
+body.ui-02 .advanced-head{background:#0c1215}
+body.ui-02 .adv-grid{grid-template-columns:repeat(5,minmax(130px,1fr))}
