@@ -64,6 +64,8 @@
 /* UI_01: geometry wins over optical styling. */
 body.ui-01 .topbar{height:var(--ui01-top-h)}
 body.ui-01 .workspace{
+  grid-template-columns:var(--ui01-left-w) minmax(0,var(--ui01-center-w)) var(--ui01-meter-w);
+  grid-template-areas:"modules center meter";
   gap:var(--ui01-workspace-gap);
   padding:0 var(--ui01-workspace-pad-x) var(--ui01-workspace-pad-bottom);
 }
@@ -136,12 +138,7 @@ body.ui-02 .motion-readouts>div:nth-child(6):after,
 body.ui-02 .motion-readouts>div:nth-child(7):after,
 body.ui-02 .motion-readouts>div:nth-child(8):after{transform-origin:50% 20px}
 
-/* At the native reference width, do not let minmax ratios drift the measured rails. */
-@media(min-width:1499px){
-  body.ui-01 .workspace{
-    grid-template-columns:var(--ui01-left-w) minmax(0,var(--ui01-center-w)) var(--ui01-meter-w);
-  }
-}
+
 
 
 /* UI_02 absolute rails are shell-relative, matching the approved pixel scan. */
