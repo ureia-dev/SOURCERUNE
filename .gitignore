@@ -1,0 +1,43 @@
+# Build / IDE
+Builds/
+build/
+.vs/
+.vscode/
+.idea/
+.DS_Store
+*.user
+*.suo
+
+# Local environment and secrets - never commit real credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Private keys / certificates / signing material
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+
+# Credential files
+credentials.json
+credentials.*.json
+service-account.json
+service-account.*.json
+service_account.json
+service_account.*.json
+secrets.json
+secrets.*.json
+
+# Local auth/config files that may contain tokens
+.netrc
+.npmrc
+.pypirc
