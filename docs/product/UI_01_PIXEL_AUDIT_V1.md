@@ -72,3 +72,63 @@ The approved reference scan places the center analysis bottom at approximately y
 Status: **PASS — do not stretch Scene or Analysis by 3 px.**
 
 Next checkpoint: UI_01 left semantic-card internal geometry only.
+
+
+## Checkpoint 03 — SOURCE semantic card internal geometry
+
+Formal reference locked for this audit: the approved **four-card UI_01** reference (SOURCE / TRANSMISSION / WALL-COVER / SPACE-ENVIRONMENT).  
+The older annotated five-card reference containing CONDITION in the left rail is explicitly **not** used for production geometry.
+
+Pixel scan of the first SOURCE card, in full-reference coordinates:
+
+- card outer top: approximately y = 174 px
+- card outer bottom transition: approximately y = 310 px
+- effective SOURCE card height: approximately **136 px**
+- semantic image visible top: y = 232 px
+- semantic image visible bottom: y = 300 px
+- image height: approximately **68 px**
+- semantic image left: x = 37 px
+- semantic image right: x = 274–275 px
+- image width: approximately **238 px**
+- Edit/action column: x = 287–334 px
+- Edit control top band: approximately y = 184–225 px
+- image-cycle/right-arrow panel: approximately x = 287–334 px, y = 232–300 px
+- header/icon/text band before semantic image: approximately **58 px**
+
+Relative to the left rail/card origin (x approximately 28 px, y approximately 174 px):
+
+```text
+semantic image left inset   ≈ 9 px
+semantic image top inset    ≈ 58 px
+semantic image width        ≈ 238 px
+semantic image height       ≈ 68 px
+right action column width   ≈ 47 px
+bottom residual/padding     ≈ 10 px
+```
+
+### Current runtime mismatch found
+
+Current V5 runtime assumes:
+
+```text
+all cards = 124 px
+module-art top = 48 px
+module-art left = 8 px
+module-art right = 47 px
+module-art bottom = 8 px
+module-cycle-next top = 72 px
+module-cycle-next height = 42 px
+```
+
+The SOURCE reference does **not** support an equal-height 124 px template:
+
+- SOURCE card is roughly 12 px taller than the current 124 px assumption.
+- semantic image begins roughly 10 px lower than current `top:48px`.
+- the visible image ends before the action column; current `right:47px` likely makes the image too wide.
+- the reference right-arrow area spans essentially the full semantic-image height; current 42 px cycle hit area is too short although its center is near the correct vertical center.
+
+Status: **MEASURED — implementation intentionally deferred until all four card heights are scanned.**
+
+Do not change the rail template from this checkpoint alone; doing so would shift the remaining cards without verified heights.
+
+Next checkpoint: TRANSMISSION card internal geometry only.
