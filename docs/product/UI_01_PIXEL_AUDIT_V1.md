@@ -132,3 +132,49 @@ Status: **MEASURED — implementation intentionally deferred until all four card
 Do not change the rail template from this checkpoint alone; doing so would shift the remaining cards without verified heights.
 
 Next checkpoint: TRANSMISSION card internal geometry only.
+
+
+## Checkpoint 04 — TRANSMISSION semantic card geometry
+
+Approved four-card UI_01 REF scan:
+
+- card top: y ≈ 318 px
+- card bottom: y ≈ 443 px
+- effective height: ≈ **125 px**
+- gap from SOURCE: ≈ **6 px**
+- semantic image left inset: ≈ 9 px
+- right action/cycle column: ≈ 47 px
+- status: **APPROX / REF-SCANNED**
+
+## Checkpoint 05 — WALL/COVER semantic card geometry
+
+- card top: y ≈ 451 px
+- card bottom: y ≈ 582 px
+- effective height: ≈ **131 px**
+- gap from TRANSMISSION: ≈ **8 px**
+- semantic image left inset: ≈ 9 px
+- right action/cycle column: ≈ 47 px
+- status: **APPROX / REF-SCANNED**
+
+## Checkpoint 06 — SPACE/ENVIRONMENT semantic card geometry
+
+- card top: y ≈ 588 px
+- card bottom: y ≈ 696 px
+- effective height: ≈ **108 px**
+- gap from WALL/COVER: ≈ **6 px**
+- status: **APPROX / REF-SCANNED**
+
+### Four-card rail closure
+
+```text
+137 SOURCE
++ 6 gap
++ 125 TRANSMISSION
++ 8 gap
++ 131 WALL/COVER
++ 6 gap
++ 108 SPACE/ENVIRONMENT
+= 521 px
+```
+
+This replaces the obsolete equal-height 4×124 assumption. The latest native LayoutSpec on main already contains these unequal REF-derived heights, so future web/runtime convergence must preserve them rather than reverting to V5 equal cards.
