@@ -403,9 +403,7 @@ body.ui-02 .macro-strip .macro[data-open="MIX"]{grid-column:4}
 body.ui-02 .macro-strip .macro[data-open="EQ_TONE"]{grid-column:5}
 body.ui-02 .advanced-drawer{display:none}
 
-/* Keep the convergence stable on smaller desktop widths instead of collapsing early. */
-@media(max-width:1380px){
-  body.ui-01 .macro-strip{grid-template-columns:1.80fr 1.18fr 1.31fr 1.31fr 1.03fr .76fr 2.05fr}
+
   body.ui-01 .workspace{grid-template-columns:minmax(250px,21fr) minmax(620px,66fr) minmax(140px,12fr)}
   body.ui-02 .workspace{grid-template-columns:minmax(280px,20.3fr) minmax(650px,59.1fr) minmax(270px,19.6fr)}
 }
