@@ -37,7 +37,7 @@ inline constexpr int kWorkspaceGap = 10;
 inline constexpr int kWorkspacePaddingX = 10;
 inline constexpr int kWorkspacePaddingBottom = 8;
 inline constexpr int kWorkspaceHeight = 528;
-inline constexpr int kMeterRailHeight = 520;
+inline constexpr int kMeterRailHeight = 520; // workspace allocation\ninline constexpr int kMeterRailContentHeight = 376;\ninline constexpr int kMeterSlotWidth = 20;\ninline constexpr int kMeterSlotHeight = 178;\ninline constexpr int kMeterModeTop = 273;\ninline constexpr int kMeterModeHeight = 30;
 inline constexpr int kSceneHeaderHeight = 34;
 inline constexpr int kSceneGraphHeight = 186;
 inline constexpr int kAnalysisTabHeight = 37;
