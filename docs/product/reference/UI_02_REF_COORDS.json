@@ -1,0 +1,182 @@
+{
+  "schema": "sourcerune.ref-coordinates.v1",
+  "coordinate_space": {
+    "origin": "approved-REF image",
+    "width": 1672,
+    "height": 941,
+    "source_ref": "approved UI_02 REF",
+    "status": "mixed CONFIRMED/APPROX"
+  },
+  "major_guides": [
+    {
+      "id": "top_main_boundary",
+      "axis": "y",
+      "value": 77,
+      "status": "APPROX"
+    },
+    {
+      "id": "left_main_divider",
+      "axis": "x",
+      "value": 348,
+      "status": "APPROX"
+    },
+    {
+      "id": "center_right_divider",
+      "axis": "x",
+      "value": 1328,
+      "status": "APPROX"
+    },
+    {
+      "id": "bottom_macro_top",
+      "axis": "y",
+      "value_range": [
+        751,
+        753
+      ],
+      "status": "APPROX"
+    },
+    {
+      "id": "bottom_lower_border",
+      "axis": "y",
+      "value_range": [
+        922,
+        923
+      ],
+      "status": "APPROX"
+    }
+  ],
+  "upper_grid": {
+    "row_heights": [
+      213,
+      63,
+      94,
+      247
+    ],
+    "gap": 9,
+    "status": "CONFIRMED"
+  },
+  "semantic_cards": [
+    {
+      "id": "SOURCE",
+      "h": 213,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "TRANSMISSION",
+      "h": 166,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "WALL_COVER",
+      "h": 247,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "SPACE_ENVIRONMENT",
+      "h": 285,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "AMBIENCE",
+      "h": 350,
+      "status": "CONFIRMED"
+    }
+  ],
+  "center": {
+    "scene_visual_h": 358,
+    "motion_deck_h": 283,
+    "status": "CONFIRMED"
+  },
+  "bottom_macros": {
+    "widths": {
+      "BAD_SIGNAL": 337,
+      "CONDITION": 315,
+      "INTELLIGIBILITY": 297,
+      "MIX": 316,
+      "EQ_TONE": 337
+    },
+    "gap": 11,
+    "padding_x": 13,
+    "status": "CONFIRMED"
+  },
+  "controls": [
+    {
+      "id": "distance_dial",
+      "diameter": 300,
+      "status": "EXISTS-RUNTIME"
+    },
+    {
+      "id": "motion_small_knob",
+      "diameter": 54,
+      "status": "EXISTS-RUNTIME"
+    },
+    {
+      "id": "bottom_macro_knob",
+      "diameter": 76,
+      "status": "EXISTS-RUNTIME"
+    }
+  ],
+  "topbar": [
+    {
+      "id": "prev",
+      "x1": 435,
+      "x2": 484,
+      "status": "APPROX"
+    },
+    {
+      "id": "next",
+      "x1": 484,
+      "x2": 534,
+      "status": "APPROX"
+    },
+    {
+      "id": "preset",
+      "x1": 534,
+      "x2": 872,
+      "status": "APPROX"
+    },
+    {
+      "id": "shuffle",
+      "x1": 881,
+      "x2": 930,
+      "status": "APPROX"
+    },
+    {
+      "id": "ab",
+      "x1": 949,
+      "x2": 1020,
+      "status": "APPROX"
+    },
+    {
+      "id": "folder",
+      "x1": 1036,
+      "x2": 1096,
+      "status": "APPROX"
+    },
+    {
+      "id": "meter_region",
+      "x1": 1167,
+      "x2": 1604,
+      "status": "APPROX"
+    },
+    {
+      "id": "gear_center",
+      "cx": 1642,
+      "status": "APPROX"
+    }
+  ],
+  "live_contract": [
+    "scene markers",
+    "motion path",
+    "distance values",
+    "meter fill",
+    "numeric values",
+    "knob pointer",
+    "knob values",
+    "knob labels"
+  ],
+  "notes": [
+    "Ranges and ≈ anchors remain APPROX in machine-readable form even where the prose spec calls their major bounds confirmed; exact single-pixel promotion requires direct overlay.",
+    "REF crops are forbidden as runtime assets."
+  ]
+}
