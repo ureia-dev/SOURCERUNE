@@ -179,3 +179,26 @@ The UI_02 scene itself keeps the following live contract:
 Text/font metrics inside Motion deck remain `unknown` / APPROX until direct REF measurement.
 
 Status: **SCENE/MOTION MAJOR GEOMETRY + KNOB DIAMETERS CONFIRMED / INTERNAL PLACEMENT FINE SCAN APPROX**.
+
+
+## Checkpoint 55 — UI_02 compact top meter live geometry
+
+The compact horizontal meter is a live runtime element; the REF meter anchor remains approximate while the current implementation geometry is exact in CSS.
+
+Current runtime geometry:
+
+- meter rail: x=1160, y=8, w=440, h=62;
+- live meters row: h=54;
+- each meter block grid: label 48 px + 8 px gap + slot 150 px = 206 px;
+- inter-block gap: 22 px;
+- two-block total width: 206×2 + 22 = 434 px;
+- remaining 6 px is left-side flex residual under current `justify-content:flex-end`;
+- each live slot: 150×15 px;
+- fill inset: 2 px on each side/top/bottom;
+- meter mode toggle/value block hidden in UI_02.
+
+The REF prose anchor (`x≈1167..1604`) remains **APPROX** and should not be overwritten by the current CSS merely because the runtime is exact. The current runtime rail x=1160..1600 is therefore **CONFIRMED-runtime / REF-overlay-pending**.
+
+Meter labels remain live text; fill width remains analyzer-driven live state. The UI_02 horizontal meter uses CSS/grid/repeating optical divisions and does not require a baked meter screenshot.
+
+Status: **RUNTIME METER GEOMETRY EXACT / REF FINE ANCHOR APPROX / LIVE FILL PRESERVED**.
