@@ -55,6 +55,120 @@ jobs:
           print("FAST preset/data smoke: PASS")
           PY
 
+      - name: UI asset parity smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          ui = Path("Assets/UI")
+
+          with (ui / "asset_manifest_v2.csv").open(encoding="utf-8", newline="") as fh:
+              rows = list(csv.DictReader(fh))
+          assert len(rows) == 224, f"semantic manifest row count: {len(rows)}"
+          assert all(r["status"] == "art-approved-v2" for r in rows), "non-approved semantic manifest row"
+
+          expected_semantic = set()
+          for row in rows:
+              for key in ("ui01_asset", "ui02_asset", "master_asset"):
+                  rel = row[key].replace("\\", "/")
+                  assert (ui / rel).is_file(), f"missing semantic asset: {rel}"
+                  expected_semantic.add(rel)
+
+          actual_semantic = set()
+          for surface in ("Shared", "UI_01", "UI_02"):
+              base = ui / surface
+              actual_semantic.update(
+                  str(p.relative_to(ui)).replace("\\", "/")
+                  for p in base.rglob("*.png")
+              )
+          assert expected_semantic == actual_semantic, (
+              f"semantic manifest mismatch missing={sorted(expected_semantic-actual_semantic)[:5]} "
+              f"extra={sorted(actual_semantic-expected_semantic)[:5]}"
+          )
+
+          catalog = json.loads(Path("Web/App/data/catalog.json").read_text(encoding="utf-8"))
+          assert catalog["count"] == len(catalog["items"]), "catalog count/items mismatch"
+          baseline_ids = {r["id"] for r in rows}
+          expansion = json.loads((ui / "scene_hero_049_074_manifest_v1.json").read_text(encoding="utf-8"))
+          expansion_ids = {s["id"] for s in expansion["scenes"]}
+          assert len(expansion_ids) == 26, f"scene expansion IDs: {len(expansion_ids)}"
+          catalog_ids = {item["id"] for item in catalog["items"]}
+          assert catalog_ids == baseline_ids | expansion_ids, (
+              f"catalog ID mismatch missing={sorted((baseline_ids|expansion_ids)-catalog_ids)[:5]} "
+              f"extra={sorted(catalog_ids-(baseline_ids|expansion_ids))[:5]}"
+          )
+          for item in catalog["items"]:
+              if item["id"] in expansion_ids:
+                  assert "art-required" in item.get("status", ""), f"expansion art status: {item['id']}"
+
+          catalog_by_id = {item["id"]: item for item in catalog["items"]}
+          for row in rows:
+              item = catalog_by_id[row["id"]]
+              for manifest_key, catalog_key in (
+                  ("type", "type"),
+                  ("name", "name"),
+                  ("ui01_asset", "ui01"),
+                  ("ui02_asset", "ui02"),
+                  ("master_asset", "master"),
+                  ("status", "status"),
+              ):
+                  assert item[catalog_key] == row[manifest_key], (
+                      f"catalog/manifest mismatch {row['id']} {catalog_key}: "
+                      f"{item[catalog_key]!r} != {row[manifest_key]!r}"
+                  )
+
+          scene_catalog_ids = {item["id"] for item in catalog["items"] if item["type"] == "SCENE_PRESET_HERO"}
+          preset_data = json.loads(Path("Assets/FactoryPresets/scene_presets_v1.json").read_text(encoding="utf-8"))
+          assert set(preset_data["presets"]) == scene_catalog_ids, "scene preset/catalog ID mismatch"
+          for hero_id, preset in preset_data["presets"].items():
+              for selection_type, asset_id in preset.get("selection", {}).items():
+                  assert asset_id in catalog_by_id, f"{hero_id}: missing selection asset {asset_id}"
+                  assert catalog_by_id[asset_id]["type"] == selection_type, (
+                      f"{hero_id}: {asset_id} type {catalog_by_id[asset_id]['type']} != {selection_type}"
+                  )
+
+          runtime_root = ui / "Runtime"
+          expected_runtime = set()
+          for manifest_name in (
+              "p0_skin_manifest_v1.json",
+              "p1_skin_manifest_v1.json",
+              "p2_skin_manifest_v1.json",
+          ):
+              data = json.loads((runtime_root / manifest_name).read_text(encoding="utf-8"))
+              files = data.get("files", [])
+              assert data["pngCount"] == len(files), f"{manifest_name}: pngCount/files mismatch"
+              for rel in files:
+                  assert (runtime_root / rel).is_file(), f"{manifest_name}: missing {rel}"
+              overlap = expected_runtime.intersection(files)
+              assert not overlap, f"runtime asset listed in multiple manifests: {sorted(overlap)[:5]}"
+              expected_runtime.update(files)
+
+          actual_runtime = {
+              str(p.relative_to(runtime_root)).replace("\\", "/")
+              for p in runtime_root.rglob("*.png")
+          }
+          assert expected_runtime == actual_runtime, (
+              f"runtime manifest mismatch missing={sorted(expected_runtime-actual_runtime)[:5]} "
+              f"extra={sorted(actual_runtime-expected_runtime)[:5]}"
+          )
+
+          refs = list((ui / "ReferenceSheets").glob("*.png"))
+          integrity = json.loads((ui / "asset_integrity_v3.json").read_text(encoding="utf-8"))
+          assert integrity["legacy"]["presentSemanticRuntime"] == len(actual_semantic)
+          assert integrity["legacy"]["missing"] == 0
+          assert integrity["current"]["runtimeChrome"] == len(actual_runtime)
+          assert integrity["current"]["legacySemanticAndReference"] == len(actual_semantic) + len(refs)
+          assert integrity["current"]["totalPng"] == len(actual_semantic) + len(actual_runtime) + len(refs)
+
+          print(
+              "FAST UI asset parity: PASS",
+              f"semantic={len(actual_semantic)} runtime={len(actual_runtime)} refs={len(refs)}",
+          )
+          PY
+
       - name: Required structure
         shell: bash
         run: |

@@ -6,8 +6,8 @@
   --sr01-w:1499px;--sr01-h:807px;--sr01-top:58px;
   --sr01-pad:10px;--sr01-col-gap:10px;--sr01-left:313px;--sr01-center:967px;--sr01-meter:179px;
   --sr01-work-h:528px;--sr01-scene:262px;--sr01-analysis:247px;--sr01-center-gap:8px;
-  --sr01-source-h:137px;--sr01-trans-h:125px;--sr01-wall-h:131px;--sr01-space-h:108px;
-  --sr01-gap-st:6px;--sr01-gap-tw:8px;--sr01-gap-ws:6px;
+  --sr01-source-h:136px;--sr01-trans-h:132px;--sr01-wall-h:132px;--sr01-space-h:97px;
+  --sr01-gap-st:7px;--sr01-gap-tw:7px;--sr01-gap-ws:6px;
   --sr01-macro-strip:221px;--sr01-macro-h:216px;--sr01-bottom:5px;
   --sr01-meter-content-h:376px;--sr01-meter-slot-w:20px;--sr01-meter-slot-h:178px;
   --sr01-meter-mode-top:273px;--sr01-meter-mode-h:30px;
@@ -32,7 +32,7 @@ body.ui-01 .workspace{
   gap:var(--sr01-col-gap);
   padding:0 var(--sr01-pad) 8px;
 }
-body.ui-01 .module-rail{height:521px;gap:0}
+body.ui-01 .module-rail{height:520px;gap:0}
 body.ui-01 .module-card[data-type="SOURCE"]{height:var(--sr01-source-h);min-height:var(--sr01-source-h);margin-bottom:var(--sr01-gap-st)}
 body.ui-01 .module-card[data-type="TRANSMISSION"]{height:var(--sr01-trans-h);min-height:var(--sr01-trans-h);margin-bottom:var(--sr01-gap-tw)}
 body.ui-01 .module-card[data-type="WALL_COVER"]{height:var(--sr01-wall-h);min-height:var(--sr01-wall-h);margin-bottom:var(--sr01-gap-ws)}
@@ -110,6 +110,8 @@ body.ui-02 .macro-strip{
   padding:var(--sr02-macro-top) var(--sr02-pad) var(--sr02-bottom);
 }
 body.ui-02 .macro-strip .macro{height:var(--sr02-macro-h)}
+body.ui-02 .macro-strip .macro-knob{--knob-size:76px}
+body.ui-02 .macro-strip .macro-mix .macro-knob{--knob-size:76px}
 body.ui-02 .macro-strip .macro[data-open="MOTION"]{display:none}
 body.ui-02 .macro-strip .macro[data-open="TRANSMISSION"]{grid-column:1}
 body.ui-02 .macro-strip .macro[data-open="CONDITION"]{grid-column:2}
@@ -183,12 +185,12 @@ body.ui-02 .meter-fill{
 /* UI_01 semantic card interior proportions.
    Outer heights are REF-locked; only header/image split adapts to each measured card. */
 body.ui-01 .module-card[data-type="SOURCE"] .module-meta{height:46px}
-body.ui-01 .module-card[data-type="SOURCE"] .module-art{top:46px}
+body.ui-01 .module-card[data-type="SOURCE"] .module-art{top:57px}
 body.ui-01 .module-card[data-type="TRANSMISSION"] .module-meta{height:44px}
-body.ui-01 .module-card[data-type="TRANSMISSION"] .module-art{top:44px}
+body.ui-01 .module-card[data-type="TRANSMISSION"] .module-art{top:56px}
 body.ui-01 .module-card[data-type="WALL_COVER"] .module-meta{height:44px}
-body.ui-01 .module-card[data-type="WALL_COVER"] .module-art{top:44px}
+body.ui-01 .module-card[data-type="WALL_COVER"] .module-art{top:57px}
 body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-meta{height:40px}
-body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-art{top:40px}
+body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-art{top:55px}
 body.ui-01 .module-meta{padding-top:7px}
 body.ui-01 .module-actions{top:8px}

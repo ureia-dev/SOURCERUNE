@@ -3,7 +3,7 @@
   "name": "SOURCERUNE Runtime P1 Skin V1",
   "status": "ASSET_READY_P1_V1",
   "generated": "2026-10-05",
-  "pngCount": 52,
+  "pngCount": 54,
   "designBasis": [
     "UI_01 approved reference",
     "UI_02 approved reference",
@@ -36,7 +36,7 @@
     "motionGlyph": 1,
     "imageArrows": 4,
     "moduleIcons": 22,
-    "toolIcons": 4
+    "toolIcons": 6
   },
   "files": [
     "Common/Analysis/RT_EQ_NODE_HOVER.png",
@@ -81,6 +81,8 @@
     "Common/Icons/RT_TOOL_ICON_FOLDER_IDLE.png",
     "Common/Icons/RT_TOOL_ICON_GEAR_HOVER.png",
     "Common/Icons/RT_TOOL_ICON_GEAR_IDLE.png",
+    "Common/Icons/RT_TOOL_ICON_SHUFFLE_HOVER.png",
+    "Common/Icons/RT_TOOL_ICON_SHUFFLE_IDLE.png",
     "Common/Meter/RT_METER_SEGMENT.png",
     "Common/Scene/RT_MOTION_CAR_GLYPH.png",
     "Common/Scene/RT_SCENE_POINT_HOVER.png",
