@@ -185,12 +185,12 @@ body.ui-02 .meter-fill{
 /* UI_01 semantic card interior proportions.
    Outer heights are REF-locked; only header/image split adapts to each measured card. */
 body.ui-01 .module-card[data-type="SOURCE"] .module-meta{height:46px}
-body.ui-01 .module-card[data-type="SOURCE"] .module-art{top:57px}
+body.ui-01 .module-card[data-type="SOURCE"] .module-art{top:56px}
 body.ui-01 .module-card[data-type="TRANSMISSION"] .module-meta{height:44px}
-body.ui-01 .module-card[data-type="TRANSMISSION"] .module-art{top:56px}
+body.ui-01 .module-card[data-type="TRANSMISSION"] .module-art{top:55px}
 body.ui-01 .module-card[data-type="WALL_COVER"] .module-meta{height:44px}
-body.ui-01 .module-card[data-type="WALL_COVER"] .module-art{top:57px}
+body.ui-01 .module-card[data-type="WALL_COVER"] .module-art{top:56px}
 body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-meta{height:40px}
-body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-art{top:55px}
+body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-art{top:54px}
 body.ui-01 .module-meta{padding-top:7px}
 body.ui-01 .module-actions{top:8px}
