@@ -292,3 +292,53 @@ Shared alignment evidence: title/name starts cluster at x80–82; chevrons align
 The following remain **APPROX / unknown**: font family, nominal font size, weight, tracking, line-height, exact baseline, antialiasing metrics, and optical kerning. These values must not be promoted to CONFIRMED from raster bounds alone. Implementation remains **CODE-DRAWN / live text/icon**; no text PNG or REF crop is permitted.
 
 Status: **RASTER BOUNDS DOCUMENTED / FONT METRICS NOT CONFIRMED / no runtime change.**
+
+
+## Checkpoint 34 — UI_01 center Scene structural geometry
+
+The approved UI_01 geometry and the current Native/Web contracts converge on the following center Scene structure. Coordinates are plugin-local.
+
+| Object | x | y | w | h | Status |
+|---|---:|---:|---:|---:|---|
+| Center column | 333 | 58 | 967 | 517 | CONFIRMED from shell/column closure |
+| Scene panel | 333 | 58 | 967 | 262 | CONFIRMED |
+| Scene header band | 333 | 58 | 967 | 34 | CONFIRMED |
+| Scene live SVG viewport box | 333 | 92 | 967 | 186 | CONFIRMED box height; contents live |
+| Scene residual below SVG | 333 | 278 | 967 | 42 | CONFIRMED residual total |
+| Scene waveform runtime strip | x≈342 | y≈278 | w≈949 | h=38 | APPROX runtime implementation, REF split not yet promoted |
+| Scene bottom residual | — | y≈316 | — | 4 | APPROX runtime implementation |
+| Scene → Analysis gap | 333 | 320 | 967 | 8 | CONFIRMED |
+| Analysis panel | 333 | 328 | 967 | 247 | CONFIRMED |
+
+Closure:
+
+```text
+Scene 262 + gap 8 + Analysis 247 = 517 px
+Scene: header 34 + SVG 186 + residual 42 = 262 px
+Current runtime residual split: waveform 38 + bottom 4 = 42 px
+```
+
+The UI_01 live scene profile is applied by `app.js` at runtime, not by baking a REF image:
+
+- SVG DOM viewport box remains 967×186 in plugin space.
+- UI_01 internal SVG viewBox is live-switched to `0 140 1000 192`.
+- Listener runtime anchor is switched to `translate(500 250)` in SVG implementation coordinates.
+- Motion path is live-switched to `M110 300 C340 225 650 225 900 300`.
+- Source position, motion-car position, distance line, distance callout and labels continue to update from live state.
+
+Important coordinate rule: the 1000×420 / cropped `0 140 1000 192` SVG implementation space is **not REF poster pixel space**. Internal marker/path coordinates therefore remain CODE-DRAWN / implementation-space and must not be mislabeled as REF-confirmed plugin coordinates.
+
+Layer/asset classification:
+
+- Scene grid bed: **EXISTS-RUNTIME**, independent `RT_SCENE_GRID.png`.
+- Distance callout bed: **EXISTS-RUNTIME**, independent `RT_DISTANCE_CALLOUT.png`.
+- Waveform strip bed: **EXISTS-RUNTIME**, independent `RT_WAVEFORM_STRIP_BG.png`.
+- Source/Listener markers: **EXISTS-RUNTIME**, independent idle/active PNG states.
+- Start/Closest/End points: **EXISTS-RUNTIME**, independent idle/hover/selected PNG states.
+- Motion-car glyph: **EXISTS-RUNTIME**, independent PNG.
+- Motion path, distance line, dynamic Source/Listener positions, distance text and waveform trace: **CODE-DRAWN / live runtime**.
+- Scene buildings/floor treatment currently remain live SVG/CSS and are **MISSING-IN-SPEC / material REF overlay pending**, not automatically missing assets.
+
+No whole Scene screenshot or REF crop is permitted as a runtime component.
+
+Status: **SCENE STRUCTURAL BOX MODEL CONFIRMED / INTERNAL LIVE OBJECT REF COORDINATES STILL APPROX**.
