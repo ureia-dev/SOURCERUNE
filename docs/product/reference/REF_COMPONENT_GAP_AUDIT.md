@@ -146,3 +146,16 @@ Classification changes:
 - Web and Native geometry must use the same confirmed values above.
 
 The previous checkpoints 13/15/19 remain historical diagnostics and are superseded by this resolution.
+
+
+## Checkpoint 23 — UI_01 left-card semantic artwork availability
+
+Repository audit confirms the remaining UI_01 semantic-card artwork is already present as independent assets rather than missing REF crops:
+
+- TRANSMISSION: dedicated UI_01 `TRN_*` artwork plus Shared equivalents; ReferenceSheets includes `TRANSMISSION_24_ATLAS.png`.
+- WALL/COVER: dedicated UI_01 `CVR_*` artwork plus Shared equivalents; ReferenceSheets includes `WALL_COVER_32_ATLAS.png`.
+- SPACE/ENVIRONMENT: dedicated UI_01 `SPC_*` artwork plus Shared equivalents; ReferenceSheets includes `SPACE_ENVIRONMENT_56_ATLAS.png`.
+
+Classification for all three semantic artwork families: **EXISTS-RUNTIME / existing PNG**. No replacement semantic artwork should be generated and no REF screenshot/crop may be used.
+
+The unresolved items are geometry/specification, not semantic-image availability: image-holder bounds, title/text baseline, Edit/action-column bounds, arrow rectangle, internal padding/gaps, and card chrome/material layering remain **APPROX / MISSING-IN-SPEC** until measured from the approved full UI_01 REF. Reference atlases prove artwork inventory only and must not be used to infer plugin-local coordinates.
