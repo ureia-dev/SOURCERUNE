@@ -599,5 +599,45 @@
       "status": "APPROX"
     },
     "rule": "No baked path/value/coordinates and no REF crop."
+  },
+  "compact_meter_audit": {
+    "checkpoint": 56,
+    "status": "RUNTIME-EXACT / REF-FINE-ANCHOR-APPROX",
+    "ref_anchor": {
+      "x1": 1167,
+      "x2": 1604,
+      "status": "APPROX"
+    },
+    "runtime": {
+      "rail": {
+        "x": 1160,
+        "y": 8,
+        "w": 440,
+        "h": 62,
+        "status": "CONFIRMED-runtime"
+      },
+      "meters_row_h": 54,
+      "block": {
+        "label_w": 48,
+        "gap": 8,
+        "slot_w": 150,
+        "total_w": 206
+      },
+      "block_gap": 22,
+      "two_block_total_w": 434,
+      "left_flex_residual": 6,
+      "slot": {
+        "w": 150,
+        "h": 15
+      },
+      "fill_inset": 2,
+      "mode_toggle": "hidden",
+      "value_block": "hidden"
+    },
+    "live_contract": [
+      "meter_fill_width",
+      "meter_labels"
+    ],
+    "rule": "Do not promote runtime exact coordinates to REF-confirmed while REF anchor remains approximate."
   }
 }
