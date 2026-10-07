@@ -376,3 +376,35 @@ Status: **UI_02 COMPACT METER RASTER GAP = NONE / REF FINE ALIGNMENT PENDING**.
 Current runtime uses a shared 74 px header/image split, but that value is implementation evidence only and must not be promoted to REF-CONFIRMED until SOURCE, TRANSMISSION, WALL/COVER and SPACE/ENVIRONMENT are measured separately from the approved REF.
 
 Status: **CARD ASSET INVENTORY SUFFICIENT / INTERNAL REF GEOMETRY PENDING**.
+
+
+## Checkpoint 65 — formal full-REF source availability blocker
+
+Repository inspection confirms that `Assets/UI/ReferenceSheets/` currently contains semantic atlases and `STYLE_GUIDE_V1.png`, but **does not contain the full approved UI_01 or UI_02 REF bitmap/poster** used for the earlier measured contracts.
+
+Present ReferenceSheets:
+
+- SOURCE atlas
+- TRANSMISSION atlas
+- WALL/COVER atlas
+- SPACE/ENVIRONMENT atlas
+- SCENE PRESET HERO atlas
+- STYLE GUIDE
+
+Missing formal measurement sources:
+
+- `UI_01_FULL_APPROVED_REF` — not present in repo
+- `UI_02_FULL_APPROVED_REF` — not present in repo
+
+Impact:
+
+- already measured/validated geometry remains valid and may stay CONFIRMED;
+- runtime/Native parity work can continue;
+- asset inventory and binding audits can continue;
+- **new fine pixel promotion** for text baselines, exact font metrics, per-card UI_02 internal bounds, knob centers/ticks, topbar anchor pixels, shadows/highlights/material radii and similar unresolved items is blocked from CONFIRMED status without the formal full REF source;
+- atlas dimensions must not be used as a substitute for plugin-local REF coordinates;
+- no value may be upgraded from APPROX merely because current runtime has an exact CSS number.
+
+Classification: **EXTERNAL INPUT BLOCKER FOR NEW REF-FINE CONFIRMATION ONLY**. This does not block runtime parity fixes, existing-confirmed regression guards, CI validation, or asset/binding gap audits.
+
+Status: **FULL REF BITMAP ABSENT / DO NOT GUESS**.
