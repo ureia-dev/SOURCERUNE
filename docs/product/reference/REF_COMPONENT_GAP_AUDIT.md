@@ -302,3 +302,22 @@ True confirmed new UI_02 raster requirement at this checkpoint: **0**.
 The lack of a dedicated Runtime/UI_02 directory therefore remains a packaging/organization fact, not evidence for NEEDS-NEW-ASSET. New PNG/9-slice material is allowed only after a direct REF overlay proves Common/runtime material cannot converge.
 
 Status: **UI_02 MAJOR ASSET INVENTORY SUFFICIENT / FINE MATERIAL AND STATE AUDIT CONTINUES**.
+
+
+## Checkpoint 51 — UI_02 topbar component gap classification
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI02_TOPBAR_PREV | EXISTS-RUNTIME / geometry APPROX | existing arrow PNG + live button |
+| UI02_TOPBAR_NEXT | EXISTS-RUNTIME / geometry APPROX | existing arrow PNG + live button |
+| UI02_TOPBAR_PRESET | EXISTS-RUNTIME / geometry APPROX | live select |
+| UI02_TOPBAR_SHUFFLE_ICON_IDLE/HOVER | EXISTS-RUNTIME | existing Common icon PNGs |
+| UI02_TOPBAR_SHUFFLE_CONTROL | **MISSING-IN-RUNTIME binding** | add live control only after semantics are formally defined |
+| UI02_TOPBAR_AB | EXISTS-RUNTIME / geometry APPROX | live snapshot buttons |
+| UI02_TOPBAR_FOLDER | EXISTS-RUNTIME / geometry APPROX | existing folder PNG + live button |
+| UI02_TOPBAR_METER | EXISTS-RUNTIME | live horizontal meter; fill remains live |
+| UI02_TOPBAR_GEAR | EXISTS-RUNTIME / geometry APPROX | existing gear PNG + live button |
+
+No new topbar raster asset is required at this checkpoint. The only confirmed functional/runtime gap is the missing independent Shuffle control binding; its icon states already exist. Fine topbar anchoring remains **MISSING-IN-SPEC / APPROX** because the measured REF x ranges are approximate and must not be converted into hard pixel locks without direct overlay confirmation.
+
+Status: **TOPBAR RASTER INVENTORY COMPLETE / SHUFFLE BINDING MISSING / POSITION FINE-SCAN PENDING**.
