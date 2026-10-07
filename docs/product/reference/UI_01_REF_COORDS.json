@@ -282,5 +282,232 @@
     ],
     "geometry_status": "APPROX / MISSING-IN-SPEC",
     "rule": "Reference atlases confirm inventory only; they do not establish plugin-local REF coordinates. Whole/cropped REF images remain forbidden as runtime assets."
+  },
+  "left_card_internal_geometry": {
+    "checkpoint": 26,
+    "coordinate_space": "plugin-local",
+    "status": "CONFIRMED major rectangles / text baselines APPROX",
+    "common_x": {
+      "card_x": 10,
+      "card_w": 313,
+      "icon_box_x": 19,
+      "icon_box_w": 47,
+      "title_x": 81,
+      "name_x": 81,
+      "header_chevron_x": 244,
+      "edit_x": 270,
+      "edit_w": 48,
+      "image_x": 19,
+      "image_w": 239,
+      "arrow_box_x": 269,
+      "arrow_box_w": 49
+    },
+    "cards": {
+      "SOURCE": {
+        "card": {
+          "y": 58,
+          "h": 136
+        },
+        "icon_box": {
+          "x": 19,
+          "y": 68,
+          "w": 47,
+          "h": 42
+        },
+        "title_bbox": {
+          "x": 81,
+          "y": 72,
+          "w": 50,
+          "h": 11,
+          "status": "APPROX-text-pixels"
+        },
+        "name_bbox": {
+          "x": 81,
+          "y": 93,
+          "w": 86,
+          "h": 17,
+          "status": "APPROX-text-pixels"
+        },
+        "header_chevron": {
+          "x": 244,
+          "y": 96,
+          "w": 5,
+          "h": 8,
+          "status": "APPROX"
+        },
+        "edit": {
+          "x": 270,
+          "y": 72,
+          "w": 48,
+          "h": 34
+        },
+        "image_holder": {
+          "x": 19,
+          "y": 115,
+          "w": 239,
+          "h": 72
+        },
+        "arrow_box": {
+          "x": 269,
+          "y": 115,
+          "w": 49,
+          "h": 72
+        }
+      },
+      "TRANSMISSION": {
+        "card": {
+          "y": 201,
+          "h": 132
+        },
+        "icon_box": {
+          "x": 18,
+          "y": 209,
+          "w": 48,
+          "h": 43
+        },
+        "title_bbox": {
+          "x": 80,
+          "y": 214,
+          "w": 98,
+          "h": 11,
+          "status": "APPROX-text-pixels"
+        },
+        "name_bbox": {
+          "x": 82,
+          "y": 235,
+          "w": 76,
+          "h": 13,
+          "status": "APPROX-text-pixels"
+        },
+        "header_chevron": {
+          "x": 244,
+          "y": 237,
+          "w": 5,
+          "h": 9,
+          "status": "APPROX"
+        },
+        "edit": {
+          "x": 270,
+          "y": 213,
+          "w": 48,
+          "h": 34
+        },
+        "image_holder": {
+          "x": 19,
+          "y": 257,
+          "w": 239,
+          "h": 70
+        },
+        "arrow_box": {
+          "x": 269,
+          "y": 257,
+          "w": 49,
+          "h": 70
+        }
+      },
+      "WALL_COVER": {
+        "card": {
+          "y": 340,
+          "h": 132
+        },
+        "icon_box": {
+          "x": 19,
+          "y": 348,
+          "w": 47,
+          "h": 43
+        },
+        "title_bbox": {
+          "x": 81,
+          "y": 353,
+          "w": 93,
+          "h": 11,
+          "status": "APPROX-text-pixels"
+        },
+        "name_bbox": {
+          "x": 81,
+          "y": 374,
+          "w": 99,
+          "h": 13,
+          "status": "APPROX-text-pixels"
+        },
+        "header_chevron": {
+          "x": 244,
+          "y": 377,
+          "w": 5,
+          "h": 9,
+          "status": "APPROX"
+        },
+        "edit": {
+          "x": 270,
+          "y": 353,
+          "w": 48,
+          "h": 34
+        },
+        "image_holder": {
+          "x": 19,
+          "y": 397,
+          "w": 239,
+          "h": 69
+        },
+        "arrow_box": {
+          "x": 269,
+          "y": 397,
+          "w": 49,
+          "h": 70
+        }
+      },
+      "SPACE_ENVIRONMENT": {
+        "card": {
+          "y": 478,
+          "h": 97
+        },
+        "icon_box": {
+          "x": 19,
+          "y": 485,
+          "w": 47,
+          "h": 42
+        },
+        "title_bbox": {
+          "x": 81,
+          "y": 490,
+          "w": 149,
+          "h": 11,
+          "status": "APPROX-text-pixels"
+        },
+        "name_bbox": {
+          "x": 81,
+          "y": 511,
+          "w": 77,
+          "h": 13,
+          "status": "APPROX-text-pixels"
+        },
+        "header_chevron": {
+          "x": 244,
+          "y": 513,
+          "w": 5,
+          "h": 9,
+          "status": "APPROX"
+        },
+        "edit": {
+          "x": 270,
+          "y": 489,
+          "w": 48,
+          "h": 34
+        },
+        "image_holder": {
+          "x": 19,
+          "y": 533,
+          "w": 239,
+          "h": 35
+        },
+        "arrow_box": {
+          "x": 269,
+          "y": 532,
+          "w": 49,
+          "h": 36
+        }
+      }
+    },
+    "implementation_rule": "Use existing semantic PNGs/icons/arrows. Do not crop REF. Text stays live; exact font identity remains unknown."
   }
 }

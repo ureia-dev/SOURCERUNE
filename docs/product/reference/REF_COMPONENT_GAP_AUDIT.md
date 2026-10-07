@@ -159,3 +159,12 @@ Repository audit confirms the remaining UI_01 semantic-card artwork is already p
 Classification for all three semantic artwork families: **EXISTS-RUNTIME / existing PNG**. No replacement semantic artwork should be generated and no REF screenshot/crop may be used.
 
 The unresolved items are geometry/specification, not semantic-image availability: image-holder bounds, title/text baseline, Edit/action-column bounds, arrow rectangle, internal padding/gaps, and card chrome/material layering remain **APPROX / MISSING-IN-SPEC** until measured from the approved full UI_01 REF. Reference atlases prove artwork inventory only and must not be used to infer plugin-local coordinates.
+
+
+## Checkpoint 26 — UI_01 left-card internal asset decision
+
+The approved REF scan confirms that the four left cards share the same reusable horizontal structure: independent module icon, live title/name, Edit button cap, semantic image holder, and independent right-arrow box.
+
+No new semantic image, arrow, or module-icon asset is missing. The only unresolved visual question is whether the existing Common Edit/button cap matches the REF material closely enough; keep it **EXISTS-RUNTIME / MISSING-IN-SPEC** until overlay comparison.
+
+Potential new raster assets from the left cards: **0 confirmed**.

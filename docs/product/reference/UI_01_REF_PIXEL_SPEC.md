@@ -181,3 +181,58 @@ module rail              h520
 The automated audit previously still checked the superseded 521 px reconstruction (137/125/131/108), so it could report a false pass against obsolete geometry. The audit now checks the same values used by REF coordinates, Web V7 and Native LayoutSpec.
 
 Status: **PARITY-CONFIRMED / automated geometry gate corrected.**
+
+
+## Checkpoint 26 — left-card internal rectangles
+
+Direct scan of the approved four-card REF establishes a shared horizontal template for the UI_01 semantic cards.
+
+| Element | x | w | Status |
+|---|---:|---:|---|
+| Card | 10 | 313 | CONFIRMED |
+| Module icon box | 19 (SOURCE/WALL/SPACE), 18 (TRANSMISSION) | 47–48 | CONFIRMED |
+| Title/name text start | 80–82 | — | APPROX text pixels |
+| Header chevron | 244 | ≈5 | APPROX |
+| Edit button | 270 | 48 | CONFIRMED |
+| Semantic image holder | 19 | 239 | CONFIRMED |
+| Right arrow box | 269 | 49 | CONFIRMED |
+
+Vertical rectangles:
+
+```text
+SOURCE:
+  icon  y68  h42
+  Edit  y72  h34
+  image y115 h72
+  arrow y115 h72
+
+TRANSMISSION:
+  icon  y209 h43
+  Edit  y213 h34
+  image y257 h70
+  arrow y257 h70
+
+WALL/COVER:
+  icon  y348 h43
+  Edit  y353 h34
+  image y397 h69
+  arrow y397 h70
+
+SPACE/ENVIRONMENT:
+  icon  y485 h42
+  Edit  y489 h34
+  image y533 h35
+  arrow y532 h36
+```
+
+Text pixels begin at x≈80–82. Title glyph height is ≈10–11 px; item-name glyph height is ≈12–13 px. Exact font family remains **unknown** and must not be promoted to confirmed from raster evidence alone.
+
+Asset classification:
+- module icons: **EXISTS-RUNTIME**
+- semantic art: **EXISTS-RUNTIME**
+- right arrow: **EXISTS-RUNTIME**
+- Edit cap: existing common button cap should be tested first
+- labels/names/chevrons: **CODE-DRAWN / live text/icon**
+- dedicated REF crops: **forbidden**
+
+Status: **major internal rectangles CONFIRMED; typography metrics remain APPROX.**
