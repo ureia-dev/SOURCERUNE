@@ -1,0 +1,210 @@
+{
+  "schema": "sourcerune.ref-coordinates.v1",
+  "coordinate_space": {
+    "origin": "plugin-local",
+    "shell_width": 1499,
+    "shell_height": 807,
+    "source_ref": "approved UI_01 REF",
+    "status": "mixed CONFIRMED/APPROX"
+  },
+  "regions": [
+    {
+      "id": "shell",
+      "x": 0,
+      "y": 0,
+      "w": 1499,
+      "h": 807,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "topbar",
+      "x": 0,
+      "y": 0,
+      "w": 1499,
+      "h": 58,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "workspace",
+      "x": 0,
+      "y": 58,
+      "w": 1499,
+      "h": 528,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "left_rail",
+      "x": 10,
+      "y": 58,
+      "w": 313,
+      "h": 521,
+      "status": "APPROX"
+    },
+    {
+      "id": "center",
+      "x": 333,
+      "y": 58,
+      "w": 967,
+      "h": 517,
+      "status": "APPROX"
+    },
+    {
+      "id": "meter_rail",
+      "x": 1310,
+      "y": 58,
+      "w": 179,
+      "h": 520,
+      "status": "APPROX"
+    },
+    {
+      "id": "bottom_macro_strip",
+      "x": 0,
+      "y": 586,
+      "w": 1499,
+      "h": 221,
+      "status": "CONFIRMED"
+    }
+  ],
+  "left_cards": [
+    {
+      "id": "SOURCE",
+      "x": 10,
+      "y": 58,
+      "w": 313,
+      "h": 137,
+      "gap_after": 6,
+      "status": "APPROX",
+      "runtime": "EXISTS-RUNTIME"
+    },
+    {
+      "id": "TRANSMISSION",
+      "x": 10,
+      "y": 201,
+      "w": 313,
+      "h": 125,
+      "gap_after": 8,
+      "status": "APPROX",
+      "runtime": "EXISTS-RUNTIME"
+    },
+    {
+      "id": "WALL_COVER",
+      "x": 10,
+      "y": 334,
+      "w": 313,
+      "h": 131,
+      "gap_after": 6,
+      "status": "APPROX",
+      "runtime": "EXISTS-RUNTIME"
+    },
+    {
+      "id": "SPACE_ENVIRONMENT",
+      "x": 10,
+      "y": 471,
+      "w": 313,
+      "h": 108,
+      "gap_after": null,
+      "status": "APPROX",
+      "runtime": "EXISTS-RUNTIME"
+    }
+  ],
+  "source_card_internal": [
+    {
+      "id": "semantic_image",
+      "x": 19,
+      "y": 116,
+      "w": 238,
+      "h": 68,
+      "status": "APPROX"
+    },
+    {
+      "id": "action_column",
+      "x": 287,
+      "y": 68,
+      "w": 47,
+      "h": 116,
+      "status": "APPROX"
+    }
+  ],
+  "meter": [
+    {
+      "id": "meter_visual_bed",
+      "x": 1310,
+      "y": 58,
+      "w": 179,
+      "h": 266,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "in_block",
+      "x": 1324,
+      "y": 85,
+      "w": 40,
+      "h": 213,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "out_block",
+      "x": 1424,
+      "y": 85,
+      "w": 40,
+      "h": 213,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "in_slot",
+      "x": 1334,
+      "y": 112,
+      "w": 20,
+      "h": 178,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "out_slot",
+      "x": 1434,
+      "y": 112,
+      "w": 20,
+      "h": 178,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "db_labels",
+      "x": 1386,
+      "y": 107,
+      "w": 28,
+      "h": 214,
+      "status": "APPROX"
+    },
+    {
+      "id": "peak_rms",
+      "x": 1320,
+      "y": 331,
+      "w": 159,
+      "h": 30,
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "lufs",
+      "x": 1320,
+      "y": 365,
+      "w": 159,
+      "h": 69,
+      "status": "CONFIRMED"
+    }
+  ],
+  "live_contract": [
+    "Spectrum",
+    "Space Response curves",
+    "waveform",
+    "Motion path",
+    "distance line",
+    "meter fill",
+    "numeric values",
+    "knob pointer",
+    "knob value",
+    "knob label"
+  ],
+  "notes": [
+    "APPROX values must not be promoted to CONFIRMED without direct approved-REF overlay measurement.",
+    "REF crops are forbidden as runtime assets."
+  ]
+}
