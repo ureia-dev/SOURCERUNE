@@ -31,6 +31,10 @@ function auditReferenceGeometry(){
     const meterMode=document.querySelector(".meter-mode-toggle");
     const gear=document.querySelector("#settingsBtn");
     const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
+    const cardPart=(type,sel)=>document.querySelector(`.module-card[data-type="${type}"] ${sel}`);
+    const art=Object.fromEntries(["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"].map(t=>[t,cardPart(t,".module-art")]));
+    const edit=Object.fromEntries(["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"].map(t=>[t,cardPart(t,"[data-edit]")]));
+    const arrow=Object.fromEntries(["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"].map(t=>[t,cardPart(t,".module-cycle-next")]));
     const checks={
       appW:near(box(app).w,1499), appH:near(box(app).h,807),
       topH:near(box(topbar).h,58),
@@ -52,6 +56,21 @@ function auditReferenceGeometry(){
       transmissionCard:cards.TRANSMISSION?near(cards.TRANSMISSION.h,132)&&near(cards.TRANSMISSION.y,201):false,
       wallCard:cards.WALL_COVER?near(cards.WALL_COVER.h,132)&&near(cards.WALL_COVER.y,340):false,
       spaceCard:cards.SPACE_ENVIRONMENT?near(cards.SPACE_ENVIRONMENT.h,97)&&near(cards.SPACE_ENVIRONMENT.y,478):false,
+
+      sourceArt:art.SOURCE?near(box(art.SOURCE).x,19)&&near(box(art.SOURCE).y,115)&&near(box(art.SOURCE).w,239)&&near(box(art.SOURCE).h,72):false,
+      transmissionArt:art.TRANSMISSION?near(box(art.TRANSMISSION).x,19)&&near(box(art.TRANSMISSION).y,257)&&near(box(art.TRANSMISSION).w,239)&&near(box(art.TRANSMISSION).h,70):false,
+      wallArt:art.WALL_COVER?near(box(art.WALL_COVER).x,19)&&near(box(art.WALL_COVER).y,397)&&near(box(art.WALL_COVER).w,239)&&near(box(art.WALL_COVER).h,69):false,
+      spaceArt:art.SPACE_ENVIRONMENT?near(box(art.SPACE_ENVIRONMENT).x,19)&&near(box(art.SPACE_ENVIRONMENT).y,533)&&near(box(art.SPACE_ENVIRONMENT).w,239)&&near(box(art.SPACE_ENVIRONMENT).h,35):false,
+
+      sourceEdit:edit.SOURCE?near(box(edit.SOURCE).x,270)&&near(box(edit.SOURCE).y,72)&&near(box(edit.SOURCE).w,48)&&near(box(edit.SOURCE).h,34):false,
+      transmissionEdit:edit.TRANSMISSION?near(box(edit.TRANSMISSION).x,270)&&near(box(edit.TRANSMISSION).y,213)&&near(box(edit.TRANSMISSION).w,48)&&near(box(edit.TRANSMISSION).h,34):false,
+      wallEdit:edit.WALL_COVER?near(box(edit.WALL_COVER).x,270)&&near(box(edit.WALL_COVER).y,353)&&near(box(edit.WALL_COVER).w,48)&&near(box(edit.WALL_COVER).h,34):false,
+      spaceEdit:edit.SPACE_ENVIRONMENT?near(box(edit.SPACE_ENVIRONMENT).x,270)&&near(box(edit.SPACE_ENVIRONMENT).y,489)&&near(box(edit.SPACE_ENVIRONMENT).w,48)&&near(box(edit.SPACE_ENVIRONMENT).h,34):false,
+
+      sourceArrow:arrow.SOURCE?near(box(arrow.SOURCE).x,269)&&near(box(arrow.SOURCE).y,115)&&near(box(arrow.SOURCE).w,49)&&near(box(arrow.SOURCE).h,72):false,
+      transmissionArrow:arrow.TRANSMISSION?near(box(arrow.TRANSMISSION).x,269)&&near(box(arrow.TRANSMISSION).y,257)&&near(box(arrow.TRANSMISSION).w,49)&&near(box(arrow.TRANSMISSION).h,70):false,
+      wallArrow:arrow.WALL_COVER?near(box(arrow.WALL_COVER).x,269)&&near(box(arrow.WALL_COVER).y,397)&&near(box(arrow.WALL_COVER).w,49)&&near(box(arrow.WALL_COVER).h,70):false,
+      spaceArrow:arrow.SPACE_ENVIRONMENT?near(box(arrow.SPACE_ENVIRONMENT).x,269)&&near(box(arrow.SPACE_ENVIRONMENT).y,532)&&near(box(arrow.SPACE_ENVIRONMENT).w,49)&&near(box(arrow.SPACE_ENVIRONMENT).h,36):false,
 
       centerX:near(box(center).x,333),
       meterX:meter?near(box(meter).x,1310):false,
