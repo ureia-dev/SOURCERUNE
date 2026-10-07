@@ -344,3 +344,18 @@ Status: **TOPBAR RASTER INVENTORY COMPLETE / SHUFFLE BINDING MISSING / POSITION 
 No new Scene/Motion raster asset is confirmed as necessary. The remaining work is direct REF overlay for exact dial center, pointer/tick geometry, motion graph rectangle, readout baselines and optical material details.
 
 Status: **SCENE/MOTION ASSET INVENTORY SUFFICIENT / FINE CONTROL GEOMETRY PENDING**.
+
+
+## Checkpoint 57 — UI_02 compact meter component gap audit
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI02_TOP_METER_RAIL | EXISTS-RUNTIME | live CSS/grid |
+| UI02_TOP_METER_LABELS | CODE-DRAWN / typography APPROX | live text |
+| UI02_TOP_METER_FILL | CODE-DRAWN | live analyzer-driven width |
+| UI02_TOP_METER_OPTICAL_DIVISIONS | CODE-DRAWN | CSS repeating divisions |
+| UI02_TOP_METER_BAKED_SCREENSHOT | NOT REQUIRED | do not create |
+
+No new raster asset is justified for the compact UI_02 top meter. Remaining uncertainty is REF fine anchoring and typography/material matching only.
+
+Status: **UI_02 COMPACT METER RASTER GAP = NONE / REF FINE ALIGNMENT PENDING**.
