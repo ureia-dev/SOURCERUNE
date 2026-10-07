@@ -87,7 +87,18 @@ function auditReferenceGeometry(){
       macroMix:macros.MIX?near(macros.MIX.x,1054)&&near(macros.MIX.y,586)&&near(macros.MIX.w,115)&&near(macros.MIX.h,216):false,
       macroEq:macros.EQ_TONE?near(macros.EQ_TONE.x,1177)&&near(macros.EQ_TONE.y,586)&&near(macros.EQ_TONE.w,312)&&near(macros.EQ_TONE.h,216):false
     };
-    return {ui:"UI_01",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks)};
+    const measurements={
+      scene:box(scene),
+      analysis:ana?box(ana):null,
+      meter:meter?box(meter):null,
+      moduleRail:rail?box(rail):null,
+      cards,
+      art:Object.fromEntries(Object.entries(art).map(([k,e])=>[k,e?box(e):null])),
+      edit:Object.fromEntries(Object.entries(edit).map(([k,e])=>[k,e?box(e):null])),
+      arrow:Object.fromEntries(Object.entries(arrow).map(([k,e])=>[k,e?box(e):null])),
+      macros
+    };
+    return {ui:"UI_01",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks),measurements};
   }
 
   const cards=Object.fromEntries([...document.querySelectorAll(".module-card")].map(e=>[e.dataset.type,box(e)]));
@@ -141,6 +152,18 @@ function auditReferenceGeometry(){
 
     ambience:macros.AMBIENCE?near(macros.AMBIENCE.w,322)&&near(macros.AMBIENCE.h,350)&&near(macros.AMBIENCE.x,1337)&&near(macros.AMBIENCE.y,380):false
   };
-  return {ui:"UI_02",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks)};
+  const measurements={
+    workspace:box(ws),
+    center:box(center),
+    scene:box(scene),
+    sceneSvg:sceneSvg?box(sceneSvg):null,
+    motionDeck:motionDeck?box(motionDeck):null,
+    meter:meter?box(meter):null,
+    cards,
+    macros,
+    bottomKnob:bottomKnob?box(bottomKnob):null,
+    mixKnob:mixKnob?box(mixKnob):null
+  };
+  return {ui:"UI_02",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks),measurements};
 }
 window.auditReferenceGeometry=auditReferenceGeometry;
