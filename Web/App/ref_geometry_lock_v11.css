@@ -110,6 +110,8 @@ body.ui-02 .macro-strip{
   padding:var(--sr02-macro-top) var(--sr02-pad) var(--sr02-bottom);
 }
 body.ui-02 .macro-strip .macro{height:var(--sr02-macro-h)}
+body.ui-02 .macro-strip .macro-knob{--knob-size:76px}
+body.ui-02 .macro-strip .macro-mix .macro-knob{--knob-size:76px}
 body.ui-02 .macro-strip .macro[data-open="MOTION"]{display:none}
 body.ui-02 .macro-strip .macro[data-open="TRANSMISSION"]{grid-column:1}
 body.ui-02 .macro-strip .macro[data-open="CONDITION"]{grid-column:2}
