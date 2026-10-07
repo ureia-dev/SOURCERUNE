@@ -168,3 +168,19 @@ The approved REF scan confirms that the four left cards share the same reusable 
 No new semantic image, arrow, or module-icon asset is missing. The only unresolved visual question is whether the existing Common Edit/button cap matches the REF material closely enough; keep it **EXISTS-RUNTIME / MISSING-IN-SPEC** until overlay comparison.
 
 Potential new raster assets from the left cards: **0 confirmed**.
+
+
+## Checkpoint 32 — UI_01 left-card typography gap classification
+
+Checkpoint 30/31 establishes raster glyph bounds only. The left-card title, item-name and chevron remain **CODE-DRAWN / live text-icon**; there is no justified raster-text asset gap.
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI01_LEFT_CARD_TITLE_TEXT | CODE-DRAWN / font metrics APPROX | live text |
+| UI01_LEFT_CARD_ITEM_NAME | CODE-DRAWN / font metrics APPROX | live text |
+| UI01_LEFT_CARD_CHEVRON | CODE-DRAWN / raster bounds APPROX | live icon/CSS/SVG |
+| UI01_LEFT_CARD_TEXT_PNG | NOT REQUIRED | do not create |
+
+Observed alignment evidence is x≈80–82 for title/name starts and x≈244 for chevrons. Font family remains `unknown`; nominal font size, weight, tracking, line-height, exact baseline, antialiasing and optical kerning remain **MISSING-IN-SPEC / APPROX**, not **NEEDS-NEW-ASSET**.
+
+No REF crop or baked text PNG is permitted. If later overlay proves live typography cannot converge, first adjust live CSS/font metrics; only a non-text material element may qualify for a new raster asset under the true-missing-asset rule.
