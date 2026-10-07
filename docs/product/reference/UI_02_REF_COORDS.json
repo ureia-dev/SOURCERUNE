@@ -178,5 +178,213 @@
   "notes": [
     "Ranges and ≈ anchors remain APPROX in machine-readable form even where the prose spec calls their major bounds confirmed; exact single-pixel promotion requires direct overlay.",
     "REF crops are forbidden as runtime assets."
-  ]
+  ],
+  "major_geometry": {
+    "checkpoint": 47,
+    "status": "CONFIRMED-STRUCTURE / FINE-INTERNALS-PENDING",
+    "coordinate_space": "plugin-local",
+    "shell": {
+      "x": 0,
+      "y": 0,
+      "w": 1672,
+      "h": 941,
+      "status": "CONFIRMED"
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 1672,
+      "h": 78,
+      "status": "CONFIRMED"
+    },
+    "workspace": {
+      "x": 0,
+      "y": 78,
+      "w": 1672,
+      "h": 653,
+      "status": "CONFIRMED"
+    },
+    "columns": {
+      "left": {
+        "x": 13,
+        "y": 86,
+        "w": 334,
+        "h": 644,
+        "status": "CONFIRMED-structural-allocation"
+      },
+      "center": {
+        "x": 356,
+        "y": 86,
+        "w": 972,
+        "h": 644,
+        "status": "CONFIRMED-structural-allocation"
+      },
+      "right": {
+        "x": 1337,
+        "y": 86,
+        "w": 322,
+        "h": 644,
+        "status": "CONFIRMED-structural-allocation"
+      }
+    },
+    "rows": [
+      {
+        "y": 86,
+        "h": 213,
+        "status": "CONFIRMED"
+      },
+      {
+        "y": 308,
+        "h": 63,
+        "status": "CONFIRMED"
+      },
+      {
+        "y": 380,
+        "h": 94,
+        "status": "CONFIRMED"
+      },
+      {
+        "y": 483,
+        "h": 247,
+        "status": "CONFIRMED"
+      }
+    ],
+    "workspace_bottom_residual": {
+      "y": 730,
+      "h": 1,
+      "status": "CONFIRMED-by-closure"
+    },
+    "cards": {
+      "SOURCE": {
+        "x": 13,
+        "y": 86,
+        "w": 334,
+        "h": 213,
+        "status": "CONFIRMED"
+      },
+      "TRANSMISSION": {
+        "x": 13,
+        "y": 308,
+        "w": 334,
+        "h": 166,
+        "status": "CONFIRMED"
+      },
+      "WALL_COVER": {
+        "x": 13,
+        "y": 483,
+        "w": 334,
+        "h": 247,
+        "status": "CONFIRMED"
+      },
+      "SPACE_ENVIRONMENT": {
+        "x": 1337,
+        "y": 86,
+        "w": 322,
+        "h": 285,
+        "status": "CONFIRMED"
+      },
+      "AMBIENCE": {
+        "x": 1337,
+        "y": 380,
+        "w": 322,
+        "h": 350,
+        "status": "CONFIRMED"
+      }
+    },
+    "center_scene": {
+      "x": 356,
+      "y": 86,
+      "w": 972,
+      "h": 641,
+      "status": "CONFIRMED"
+    },
+    "scene_visual": {
+      "x": 356,
+      "y": 86,
+      "w": 972,
+      "h": 358,
+      "status": "CONFIRMED"
+    },
+    "motion_deck": {
+      "x": 356,
+      "y": 444,
+      "w": 972,
+      "h": 283,
+      "status": "CONFIRMED"
+    },
+    "bottom_strip": {
+      "x": 0,
+      "y": 731,
+      "w": 1672,
+      "h": 210,
+      "status": "CONFIRMED",
+      "top_gap": 20,
+      "panel_h": 172,
+      "bottom_residual": 18,
+      "gap": 11,
+      "padding_x": 13
+    },
+    "bottom_panels": [
+      {
+        "id": "BAD_SIGNAL",
+        "runtime_key": "TRANSMISSION",
+        "x": 13,
+        "y": 751,
+        "w": 337,
+        "h": 172,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "CONDITION",
+        "runtime_key": "CONDITION",
+        "x": 361,
+        "y": 751,
+        "w": 315,
+        "h": 172,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "INTELLIGIBILITY",
+        "runtime_key": "INTELLIGIBILITY",
+        "x": 687,
+        "y": 751,
+        "w": 297,
+        "h": 172,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "MIX",
+        "runtime_key": "MIX",
+        "x": 995,
+        "y": 751,
+        "w": 316,
+        "h": 172,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "EQ_TONE",
+        "runtime_key": "EQ_TONE",
+        "x": 1322,
+        "y": 751,
+        "w": 337,
+        "h": 172,
+        "status": "CONFIRMED"
+      }
+    ],
+    "top_meter": {
+      "x": 1160,
+      "y": 8,
+      "w": 440,
+      "h": 62,
+      "status": "CONFIRMED-runtime-contract",
+      "slot_w": 150,
+      "slot_h": 15,
+      "right_inset": 72
+    },
+    "rules": [
+      "MOTION lives in the center Motion deck, not the bottom strip.",
+      "AMBIENCE is the right-side 322x350 card, not a bottom panel.",
+      "BAD SIGNAL visible label maps to runtime TRANSMISSION."
+    ]
+  }
 }
