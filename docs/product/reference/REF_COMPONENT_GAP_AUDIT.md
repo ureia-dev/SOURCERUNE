@@ -274,3 +274,31 @@ Current confirmed new raster requirement for the bottom seven panels: **0**.
 Remaining work is fine REF measurement of knob centers, ring/tick geometry, label/value baselines, title baselines, mode-button/select/preview rectangles and optical material matching. These remain **MISSING-IN-SPEC / APPROX**, not NEEDS-NEW-ASSET.
 
 Status: **BOTTOM PANEL ASSET INVENTORY SUFFICIENT / FINE INTERNAL REF GEOMETRY PENDING**.
+
+
+## Checkpoint 48 — UI_02 major component gap classification
+
+UI_02 currently has no dedicated `Assets/UI/Runtime/UI_02/**` raster layer, but this is **not** equivalent to “UI_02 is missing its assets.” The current approved composition can reuse Common runtime controls plus UI_02 semantic libraries and live code.
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI02_SOURCE / TRANSMISSION / WALL_COVER / SPACE semantic art | EXISTS-RUNTIME | existing UI_02 semantic PNGs |
+| UI02_AMBIENCE environment art | EXISTS-RUNTIME | existing SPACE/ENVIRONMENT semantic PNG |
+| UI02_SCENE_ENVIRONMENT_BED | EXISTS-RUNTIME semantic source + live composition | existing semantic art, no REF crop |
+| UI02_SCENE_MARKERS/PATH/DISTANCE | EXISTS-RUNTIME + CODE-DRAWN | Common markers + live SVG/state |
+| UI02_TOPBAR_PREV/NEXT | EXISTS-RUNTIME | existing image-arrow PNG states |
+| UI02_TOPBAR_SHUFFLE | EXISTS-RUNTIME | existing Common shuffle icon states |
+| UI02_TOPBAR_FOLDER | EXISTS-RUNTIME | existing Common folder icon states |
+| UI02_TOPBAR_GEAR | EXISTS-RUNTIME | existing Common gear icon states |
+| UI02_TOPBAR_METER | CODE-DRAWN / existing meter primitives | live horizontal fill |
+| UI02_DISTANCE_DIAL | CODE-DRAWN + reusable knob/control material | live control; tick geometry pending |
+| UI02_MOTION_SMALL_KNOBS | EXISTS-RUNTIME control bases + live pointer/text | existing knob bases |
+| UI02_BOTTOM_MACRO_KNOBS | EXISTS-RUNTIME control bases + live pointer/text | existing knob bases |
+| UI02_CARD_CHROME | NOT-AUTOMATIC-GAP | reuse Common frame/CSS first; new raster only after overlay proof |
+| UI02_TEXT / VALUES / LABELS | CODE-DRAWN | live text; font family unknown until proven |
+
+True confirmed new UI_02 raster requirement at this checkpoint: **0**.
+
+The lack of a dedicated Runtime/UI_02 directory therefore remains a packaging/organization fact, not evidence for NEEDS-NEW-ASSET. New PNG/9-slice material is allowed only after a direct REF overlay proves Common/runtime material cannot converge.
+
+Status: **UI_02 MAJOR ASSET INVENTORY SUFFICIENT / FINE MATERIAL AND STATE AUDIT CONTINUES**.
