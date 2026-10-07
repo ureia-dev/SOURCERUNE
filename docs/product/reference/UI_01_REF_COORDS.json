@@ -60,7 +60,7 @@
       "y": 58,
       "w": 179,
       "h": 520,
-      "status": "APPROX"
+      "status": "CONFIRMED"
     },
     {
       "id": "bottom_macro_strip",
@@ -879,5 +879,104 @@
       "implementation": "live text"
     },
     "rule": "No baked spectrum/curves/signal-flow/text and no REF crop."
+  },
+  "meter_geometry": {
+    "checkpoint": 41,
+    "status": "ALLOCATION-AND-CORE-GEOMETRY-CONFIRMED / TYPOGRAPHY-APPROX",
+    "coordinate_space": "plugin-local",
+    "allocation": {
+      "x": 1310,
+      "y": 58,
+      "w": 179,
+      "h": 520,
+      "status": "CONFIRMED"
+    },
+    "content": {
+      "x": 1310,
+      "y": 58,
+      "w": 179,
+      "h": 376,
+      "status": "CONFIRMED"
+    },
+    "visual_bed": {
+      "x": 1310,
+      "y": 58,
+      "w": 179,
+      "h": 266,
+      "status": "CONFIRMED"
+    },
+    "in_block": {
+      "x": 1324,
+      "y": 85,
+      "w": 40,
+      "h": 213,
+      "status": "CONFIRMED"
+    },
+    "out_block": {
+      "x": 1424,
+      "y": 85,
+      "w": 40,
+      "h": 213,
+      "status": "CONFIRMED"
+    },
+    "in_slot": {
+      "x": 1334,
+      "y": 112,
+      "w": 20,
+      "h": 178,
+      "status": "CONFIRMED"
+    },
+    "out_slot": {
+      "x": 1434,
+      "y": 112,
+      "w": 20,
+      "h": 178,
+      "status": "CONFIRMED"
+    },
+    "db_scale": {
+      "x": 1386,
+      "y": 107,
+      "w": 28,
+      "h": 214,
+      "status": "APPROX-vertical-text-extent"
+    },
+    "peak_rms": {
+      "x": 1320,
+      "y": 331,
+      "w": 159,
+      "h": 30,
+      "status": "CONFIRMED"
+    },
+    "lufs": {
+      "x": 1320,
+      "y": 365,
+      "w": 159,
+      "h": 69,
+      "status": "CONFIRMED"
+    },
+    "unused_allocation_below_content": {
+      "h": 144,
+      "status": "CONFIRMED-by-closure"
+    },
+    "layers": {
+      "frame": {
+        "status": "EXISTS-RUNTIME",
+        "asset": "Assets/UI/Runtime/Common/Meter/RT_METER_FRAME.png"
+      },
+      "segment": {
+        "status": "EXISTS-RUNTIME",
+        "asset": "Assets/UI/Runtime/Common/Meter/RT_METER_SEGMENT.png"
+      },
+      "fill": {
+        "status": "CODE-DRAWN",
+        "implementation": "live level math + repeated segment"
+      },
+      "labels": {
+        "status": "CODE-DRAWN",
+        "implementation": "live text",
+        "font_family": "unknown/APPROX"
+      }
+    },
+    "rule": "Do not stretch 376px content to fill 520px allocation; do not bake meter levels or scale labels."
   }
 }
