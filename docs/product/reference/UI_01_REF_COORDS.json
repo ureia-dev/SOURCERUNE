@@ -5,7 +5,12 @@
     "shell_width": 1499,
     "shell_height": 807,
     "source_ref": "approved UI_01 REF",
-    "status": "mixed CONFIRMED/APPROX"
+    "status": "mixed CONFIRMED/APPROX",
+    "edge_convention": "[x0,x1) / [y0,y1), right/bottom exclusive",
+    "edge_status": "MISMATCH-QUEUED",
+    "workspace_content_height": 520,
+    "left_cards_measured_span": 521,
+    "left_cards_delta": 1
   },
   "regions": [
     {
@@ -74,7 +79,8 @@
       "h": 137,
       "gap_after": 6,
       "status": "APPROX",
-      "runtime": "EXISTS-RUNTIME"
+      "runtime": "EXISTS-RUNTIME",
+      "edge_convention": "[x0,x1) / [y0,y1)"
     },
     {
       "id": "TRANSMISSION",
@@ -84,7 +90,8 @@
       "h": 125,
       "gap_after": 8,
       "status": "APPROX",
-      "runtime": "EXISTS-RUNTIME"
+      "runtime": "EXISTS-RUNTIME",
+      "edge_convention": "[x0,x1) / [y0,y1)"
     },
     {
       "id": "WALL_COVER",
@@ -94,7 +101,8 @@
       "h": 131,
       "gap_after": 6,
       "status": "APPROX",
-      "runtime": "EXISTS-RUNTIME"
+      "runtime": "EXISTS-RUNTIME",
+      "edge_convention": "[x0,x1) / [y0,y1)"
     },
     {
       "id": "SPACE_ENVIRONMENT",
@@ -104,7 +112,8 @@
       "h": 108,
       "gap_after": null,
       "status": "APPROX",
-      "runtime": "EXISTS-RUNTIME"
+      "runtime": "EXISTS-RUNTIME",
+      "edge_convention": "[x0,x1) / [y0,y1)"
     }
   ],
   "source_card_internal": [
@@ -205,6 +214,8 @@
   ],
   "notes": [
     "APPROX values must not be promoted to CONFIRMED without direct approved-REF overlay measurement.",
-    "REF crops are forbidden as runtime assets."
+    "REF crops are forbidden as runtime assets.",
+    "Checkpoint 14: all card bounds use right/bottom-exclusive coordinates; current 521 px measured span versus 520 px runtime content remains unresolved and must not be normalized by arbitrarily subtracting 1 px from a card.",
+    "Before runtime implementation, remeasure all four outer boundaries from the same approved REF under the exclusive-edge convention and require exact 520 px closure; if delta remains +1, identify the actual shared border/overlap row."
   ]
 }
