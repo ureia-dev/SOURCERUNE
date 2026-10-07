@@ -501,3 +501,14 @@ The Web runtime already avoids using an `art-required` hero as the main Scene ba
 Fast CI now verifies that catalog IDs equal the 224 baseline IDs plus the 26 expansion IDs, expansion catalog records stay marked `art-required`, and the Scene Preset ID set matches the catalog Scene IDs.
 
 Status: **PRESET CONFIG COMPLETE / EXPANSION HERO ART 78 PNG STILL REQUIRED**.
+
+
+## Checkpoint 82 — catalog taxonomy vs art-manifest taxonomy
+
+Cross-checking the 224 baseline rows against the Web catalog found **0 differences** in ID, type, name, UI_01 path, UI_02 path, Shared path, or approval status. All 74 Scene Presets also reference existing catalog IDs with matching semantic types.
+
+There are 24 category-label differences, all within existing `SCENE_PRESET_HERO` items: the Web catalog groups them under runtime-navigation categories such as `01 Source / Emitter`, `02 Motion / Distance`, and `03 Space / Environment`, while `asset_manifest_v2.csv` retains the original art/content categories (e.g. Phone / Telephony, Vehicle / Motion, Through / Behind / Cover).
+
+No repository document currently proves that either category taxonomy should replace the other. Therefore category labels remain intentionally **not parity-enforced** and no category rewrite is performed. Fast CI now enforces only the unambiguous identity/path/status fields plus Preset selection ID/type validity.
+
+Status: **IDENTITY/PATH/PRESET BINDING PARITY = PASS / CATEGORY TAXONOMY DIVERGENCE PRESERVED**.
