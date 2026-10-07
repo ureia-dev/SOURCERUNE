@@ -74,7 +74,35 @@ function updateGains(){if(!audioCtx)return;inGain.gain.value=gain(state.params.i
 async function loadAudio(e){const f=e.target.files?.[0];if(!f)return;await setupAudio();audio.src=URL.createObjectURL(f);$("#buildLabel").textContent="WEB TEST · "+f.name+" · DSP PASS-THROUGH";mark("AUDIO LOADED")}async function play(){await setupAudio();await audioCtx.resume();if(audio.src)audio.play()}function stop(){audio.pause();audio.currentTime=0}
 function stats(a){if(!a)return{peak:-Infinity,rms:-Infinity,pct:0};const d=new Uint8Array(a.fftSize);a.getByteTimeDomainData(d);let p=0,s=0;for(const x of d){const v=(x-128)/128;p=Math.max(p,Math.abs(v));s+=v*v}p=db(p);const r=db(Math.sqrt(s/d.length));return{peak:p,rms:r,pct:Math.max(0,Math.min(100,(p+60)/60*100))}}
 function meters(){const i=stats(inAn),o=stats(outAn);peakIn=Math.max(peakIn,i.peak);peakOut=Math.max(peakOut,o.peak);const im=$("#inMeter"),om=$("#outMeter"),ui2=state?.ui==="UI_02",pct=v=>Math.max(0,Math.min(100,(v+60)/60*100)),iv=meterMode==="RMS"?i.rms:i.peak,ov=meterMode==="RMS"?o.rms:o.peak,ip=meterMode==="RMS"?pct(i.rms):i.pct,op=meterMode==="RMS"?pct(o.rms):o.pct;if(ui2){im.style.width=ip+"%";om.style.width=op+"%";im.style.height="100%";om.style.height="100%"}else{im.style.height=ip+"%";om.style.height=op+"%";im.style.width="";om.style.width=""}$("#peakInValue").textContent=fmt(iv);$("#peakOutValue").textContent=fmt(ov);$("#rmsInValue").textContent=fmt(i.rms);$("#rmsOutValue").textContent=fmt(o.rms)}
-function spectrum(){const c=$("#spectrumCanvas"),x=c.getContext("2d"),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.fillStyle="#0b1013";x.fillRect(0,0,w,h);x.strokeStyle="#233038";for(let i=1;i<8;i++){x.beginPath();x.moveTo(i*w/8,0);x.lineTo(i*w/8,h);x.stroke()}if(!outAn)return;const d=new Uint8Array(outAn.frequencyBinCount);outAn.getByteFrequencyData(d);x.strokeStyle="#89c8d8";x.lineWidth=2;x.beginPath();for(let a=0;a<w;a++){const n=Math.floor(a/w*(d.length-1)),y=h-d[n]/255*h*.92;a?x.lineTo(a,y):x.moveTo(a,y)}x.stroke()}
+function spectrum(){
+  const c=$("#spectrumCanvas"),x=c.getContext("2d"),w=c.width,h=c.height;
+  x.clearRect(0,0,w,h);x.fillStyle="#081015";x.fillRect(0,0,w,h);
+  const left=38,right=10,top=8,bottom=22,pw=w-left-right,ph=h-top-bottom;
+  const lx=f=>left+Math.log10(f/20)/Math.log10(20000/20)*pw;
+  x.lineWidth=1;x.font="10px ui-monospace,Consolas,monospace";x.textBaseline="middle";
+  for(const dbv of [0,-12,-24,-36,-48,-60]){
+    const yy=top+(-dbv/60)*ph;
+    x.strokeStyle=dbv===0?"#31434d":"#1b2a31";
+    x.beginPath();x.moveTo(left,yy);x.lineTo(w-right,yy);x.stroke();
+    x.fillStyle="#71858e";x.textAlign="right";x.fillText(String(dbv),left-6,yy);
+  }
+  for(const f of [20,50,100,200,500,1000,2000,5000,10000,20000]){
+    const xx=lx(f);
+    x.strokeStyle="#1b2a31";x.beginPath();x.moveTo(xx,top);x.lineTo(xx,top+ph);x.stroke();
+    x.fillStyle="#71858e";x.textAlign="center";
+    x.fillText(f>=1000?(f/1000)+"k":String(f),xx,h-9);
+  }
+  if(!outAn)return;
+  const d=new Float32Array(outAn.frequencyBinCount);outAn.getFloatFrequencyData(d);
+  const sr=audioCtx?.sampleRate||48000,ny=sr/2;
+  x.strokeStyle="#55cfff";x.lineWidth=1.7;x.beginPath();
+  for(let px=0;px<=Math.floor(pw);px++){
+    const f=20*Math.pow(20000/20,px/pw),bin=Math.max(0,Math.min(d.length-1,Math.round(f/ny*(d.length-1))));
+    const dbv=Math.max(-60,Math.min(0,d[bin])),yy=top+(-dbv/60)*ph,xx=left+px;
+    px?x.lineTo(xx,yy):x.moveTo(xx,yy);
+  }
+  x.stroke();
+}
 function waveform(){const c=$("#sceneWaveformCanvas");if(!c)return;const x=c.getContext("2d"),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle="#315564";x.lineWidth=1;x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();if(!inAn)return;const d=new Uint8Array(inAn.fftSize);inAn.getByteTimeDomainData(d);x.strokeStyle="#5cc9ee";x.lineWidth=1.5;x.beginPath();for(let a=0;a<w;a++){const n=Math.floor(a/w*(d.length-1)),yy=d[n]/255*h;a?x.lineTo(a,yy):x.moveTo(a,yy)}x.stroke()}
 function time(){const t=audio.currentTime||0,m=Math.floor(t/60),s=Math.floor(t%60),ms=Math.floor(t%1*1000);$("#transportTime").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${String(ms).padStart(3,"0")}`;if(audio.duration)$("#seekSlider").value=Math.round(t/audio.duration*1000)}
 function animate(){requestAnimationFrame(animate);time();spectrum();waveform();meters();updateScene()}
