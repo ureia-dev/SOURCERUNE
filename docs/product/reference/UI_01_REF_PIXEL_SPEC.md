@@ -164,3 +164,20 @@ Plugin-local coordinates are therefore SOURCE y58/h136, TRANSMISSION y201/h132, 
 The earlier 521 px result was caused by including lower workspace/divider pixels in the SPACE/ENVIRONMENT card and by mixed inclusive/exclusive edge counting. No arbitrary 1 px compensation was used.
 
 Status: **CONFIRMED / Web-Native update required together / no new asset required.**
+
+
+## Checkpoint 25 — render audit baseline aligned
+
+The live `Web/App/geometry_audit.js` UI_01 checks are now aligned with the confirmed checkpoint 21 left-rail geometry:
+
+```text
+SOURCE             y58  h136
+TRANSMISSION       y201 h132
+WALL/COVER         y340 h132
+SPACE/ENVIRONMENT  y478 h97
+module rail              h520
+```
+
+The automated audit previously still checked the superseded 521 px reconstruction (137/125/131/108), so it could report a false pass against obsolete geometry. The audit now checks the same values used by REF coordinates, Web V7 and Native LayoutSpec.
+
+Status: **PARITY-CONFIRMED / automated geometry gate corrected.**

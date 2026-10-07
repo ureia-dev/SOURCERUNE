@@ -22,6 +22,7 @@ function auditReferenceGeometry(){
   if(!ui2){
     const cards=Object.fromEntries([...document.querySelectorAll(".module-card")].map(e=>[e.dataset.type,box(e)]));
     const ana=document.querySelector(".analysis-panel");
+    const rail=document.querySelector(".module-rail");
     const meter=document.querySelector(".meter-rail");
     const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
     const checks={
@@ -31,12 +32,13 @@ function auditReferenceGeometry(){
       sceneH:near(box(scene).h,262),
       analysisH:ana?near(box(ana).h,247):false,
       meterH:meter?near(box(meter).h,376):false,
+      moduleRailH:rail?near(box(rail).h,520):false,
       macroStripH:near(box(macro).h,221),
 
-      sourceCard:cards.SOURCE?near(cards.SOURCE.h,137)&&near(cards.SOURCE.x,10)&&near(cards.SOURCE.y,58):false,
-      transmissionCard:cards.TRANSMISSION?near(cards.TRANSMISSION.h,125)&&near(cards.TRANSMISSION.y,201):false,
-      wallCard:cards.WALL_COVER?near(cards.WALL_COVER.h,131)&&near(cards.WALL_COVER.y,334):false,
-      spaceCard:cards.SPACE_ENVIRONMENT?near(cards.SPACE_ENVIRONMENT.h,108)&&near(cards.SPACE_ENVIRONMENT.y,471):false,
+      sourceCard:cards.SOURCE?near(cards.SOURCE.h,136)&&near(cards.SOURCE.x,10)&&near(cards.SOURCE.y,58):false,
+      transmissionCard:cards.TRANSMISSION?near(cards.TRANSMISSION.h,132)&&near(cards.TRANSMISSION.y,201):false,
+      wallCard:cards.WALL_COVER?near(cards.WALL_COVER.h,132)&&near(cards.WALL_COVER.y,340):false,
+      spaceCard:cards.SPACE_ENVIRONMENT?near(cards.SPACE_ENVIRONMENT.h,97)&&near(cards.SPACE_ENVIRONMENT.y,478):false,
 
       centerX:near(box(center).x,333),
       meterX:meter?near(box(meter).x,1310):false,
