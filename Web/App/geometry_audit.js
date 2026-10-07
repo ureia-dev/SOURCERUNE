@@ -76,6 +76,8 @@ function auditReferenceGeometry(){
   const prev=document.querySelector("#presetPrevBtn");
   const next=document.querySelector("#presetNextBtn");
   const folder=document.querySelector("#presetVisualsBtn");
+  const bottomKnob=document.querySelector(".macro-badsignal .macro-knob-face");
+  const mixKnob=document.querySelector(".macro-mix .macro-knob-face");
   const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
   const checks={
     appW:near(box(app).w,1672), appH:near(box(app).h,941),
@@ -99,6 +101,8 @@ function auditReferenceGeometry(){
     presetPrev:prev?near(box(prev).w,42)&&near(box(prev).h,42):false,
     presetNext:next?near(box(next).w,42)&&near(box(next).h,42):false,
     presetFolder:folder?near(box(folder).w,44)&&near(box(folder).h,42):false,
+    bottomKnob76:bottomKnob?near(box(bottomKnob).w,76)&&near(box(bottomKnob).h,76):false,
+    mixKnob76:mixKnob?near(box(mixKnob).w,76)&&near(box(mixKnob).h,76):false,
 
     bottomTransmission:macros.TRANSMISSION?near(macros.TRANSMISSION.w,337)&&near(macros.TRANSMISSION.x,13)&&near(macros.TRANSMISSION.y,751):false,
     bottomCondition:macros.CONDITION?near(macros.CONDITION.w,315)&&near(macros.CONDITION.x,361):false,
