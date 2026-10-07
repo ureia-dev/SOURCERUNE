@@ -274,3 +274,21 @@ Approved REF icon rectangles already measured in checkpoint 26:
 Icon artwork remains EXISTS-RUNTIME using existing independent PNG assets. Title/name and chevron raster bounds remain APPROX; font family remains unknown and text stays live runtime. Icon geometry must not be used to infer typography metrics.
 
 Status: ICON GEOMETRY CONFIRMED / TYPOGRAPHY APPROX / no runtime change.
+
+
+## Checkpoint 30 — left-card live typography raster bounds
+
+Approved REF raster evidence is sufficient to lock the **observed glyph bounding regions**, but not the font family or vector font metrics. Text therefore remains live runtime and the font family remains `unknown`.
+
+| Card | Title bbox | Item-name bbox | Chevron bbox | Status |
+|---|---|---|---|---|
+| SOURCE | x81 y72 w50 h11 | x81 y93 w86 h17 | x244 y96 w5 h8 | APPROX raster text/icon |
+| TRANSMISSION | x80 y214 w98 h11 | x82 y235 w76 h13 | x244 y237 w5 h9 | APPROX raster text/icon |
+| WALL/COVER | x81 y353 w93 h11 | x81 y374 w99 h13 | x244 y377 w5 h9 | APPROX raster text/icon |
+| SPACE/ENVIRONMENT | x81 y490 w149 h11 | x81 y511 w77 h13 | x244 y513 w5 h9 | APPROX raster text/icon |
+
+Shared alignment evidence: title/name starts cluster at x80–82; chevrons align at x244. Title glyph height is approximately 10–11 px. Item-name glyph height is approximately 12–13 px except SOURCE, whose observed raster region is taller and must not be normalized without stronger REF evidence.
+
+The following remain **APPROX / unknown**: font family, nominal font size, weight, tracking, line-height, exact baseline, antialiasing metrics, and optical kerning. These values must not be promoted to CONFIRMED from raster bounds alone. Implementation remains **CODE-DRAWN / live text/icon**; no text PNG or REF crop is permitted.
+
+Status: **RASTER BOUNDS DOCUMENTED / FONT METRICS NOT CONFIRMED / no runtime change.**
