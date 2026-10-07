@@ -459,3 +459,22 @@ Each semantic library currently contains:
 The separately planned Scene expansion `SCN_049–SCN_074` is still absent in all three semantic libraries (26 scene IDs × 3 exports = 78 PNG). This expansion is **not part of the existing 672 legacy semantic baseline**, so it must not be conflated with a missing current REF/runtime asset.
 
 Status: **CURRENT SEMANTIC BASELINE COMPLETE / FUTURE SCENE EXPANSION STILL ABSENT**.
+
+
+## Checkpoint 75 — semantic CSV/path parity
+
+`Assets/UI/asset_manifest_v2.csv` was validated row-by-row against the actual Git trees for Shared / UI_01 / UI_02.
+
+```text
+manifest rows: 224
+art-approved-v2 rows: 224
+expected semantic paths: 672
+actual semantic PNG paths: 672
+manifest targets missing on disk: 0
+semantic PNG paths absent from manifest: 0
+CSV parse failures: 0
+```
+
+The current 224-ID semantic baseline is therefore fully mirrored across all three surfaces. SCN_049–SCN_074 remains a separate expansion manifest and is intentionally not part of `asset_manifest_v2.csv` yet.
+
+Status: **ASSET_MANIFEST_V2 ↔ SEMANTIC FILE PARITY = PASS**.
