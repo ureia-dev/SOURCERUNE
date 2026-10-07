@@ -23,14 +23,24 @@ function auditReferenceGeometry(){
     const cards=Object.fromEntries([...document.querySelectorAll(".module-card")].map(e=>[e.dataset.type,box(e)]));
     const ana=document.querySelector(".analysis-panel");
     const meter=document.querySelector(".meter-rail");
+    const panelHead=document.querySelector(".scene-panel .panel-head");
+    const sceneSvg=document.querySelector("#sceneSvg");
+    const tabs=document.querySelector(".analysis-panel .tabs");
+    const meterSlot=document.querySelector(".meter-slot");
+    const meterMode=document.querySelector(".meter-mode-toggle");
     const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
     const checks={
       appW:near(box(app).w,1499), appH:near(box(app).h,807),
       topH:near(box(topbar).h,58),
       wsH:near(box(ws).h,528),
       sceneH:near(box(scene).h,262),
+      sceneHeadH:panelHead?near(box(panelHead).h,34):false,
+      sceneGraphH:sceneSvg?near(box(sceneSvg).h,186):false,
       analysisH:ana?near(box(ana).h,247):false,
+      analysisTabsH:tabs?near(box(tabs).h,37):false,
       meterH:meter?near(box(meter).h,376):false,
+      meterSlot:meterSlot?near(box(meterSlot).w,20)&&near(box(meterSlot).h,178):false,
+      meterMode:meterMode?near(box(meterMode).y,331)&&near(box(meterMode).h,30):false,
       macroStripH:near(box(macro).h,221),
 
       sourceCard:cards.SOURCE?near(cards.SOURCE.h,137)&&near(cards.SOURCE.x,10)&&near(cards.SOURCE.y,58):false,
@@ -54,12 +64,17 @@ function auditReferenceGeometry(){
 
   const cards=Object.fromEntries([...document.querySelectorAll(".module-card")].map(e=>[e.dataset.type,box(e)]));
   const meter=document.querySelector(".meter-rail");
+  const sceneSvg=document.querySelector("#sceneSvg");
+  const motionDeck=document.querySelector(".motion-readouts");
+  const meterSlot=document.querySelector(".meter-slot");
   const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
   const checks={
     appW:near(box(app).w,1672), appH:near(box(app).h,941),
     topH:near(box(topbar).h,78),
     wsH:near(box(ws).h,653),
     scenePanelH:near(box(scene).h,641),
+    sceneVisualH:sceneSvg?near(box(sceneSvg).h,358):false,
+    motionDeckH:motionDeck?near(box(motionDeck).h,283):false,
 
     sourceCard:cards.SOURCE?near(cards.SOURCE.w,334)&&near(cards.SOURCE.h,213)&&near(cards.SOURCE.x,13)&&near(cards.SOURCE.y,86):false,
     transmissionCard:cards.TRANSMISSION?near(cards.TRANSMISSION.w,334)&&near(cards.TRANSMISSION.h,166)&&near(cards.TRANSMISSION.x,13)&&near(cards.TRANSMISSION.y,308):false,
@@ -68,6 +83,7 @@ function auditReferenceGeometry(){
 
     centerX:near(box(center).x,356),
     meter:meter?near(box(meter).w,440)&&near(box(meter).x,1160)&&near(box(meter).y,8):false,
+    meterSlot:meterSlot?near(box(meterSlot).w,150)&&near(box(meterSlot).h,15):false,
     macroStripH:near(box(macro).h,210),
 
     bottomTransmission:macros.TRANSMISSION?near(macros.TRANSMISSION.w,337)&&near(macros.TRANSMISSION.x,13)&&near(macros.TRANSMISSION.y,751):false,
