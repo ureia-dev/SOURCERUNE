@@ -55,6 +55,79 @@ jobs:
           print("FAST preset/data smoke: PASS")
           PY
 
+      - name: UI asset parity smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          ui = Path("Assets/UI")
+
+          with (ui / "asset_manifest_v2.csv").open(encoding="utf-8", newline="") as fh:
+              rows = list(csv.DictReader(fh))
+          assert len(rows) == 224, f"semantic manifest row count: {len(rows)}"
+          assert all(r["status"] == "art-approved-v2" for r in rows), "non-approved semantic manifest row"
+
+          expected_semantic = set()
+          for row in rows:
+              for key in ("ui01_asset", "ui02_asset", "master_asset"):
+                  rel = row[key].replace("\\", "/")
+                  assert (ui / rel).is_file(), f"missing semantic asset: {rel}"
+                  expected_semantic.add(rel)
+
+          actual_semantic = set()
+          for surface in ("Shared", "UI_01", "UI_02"):
+              base = ui / surface
+              actual_semantic.update(
+                  str(p.relative_to(ui)).replace("\\", "/")
+                  for p in base.rglob("*.png")
+              )
+          assert expected_semantic == actual_semantic, (
+              f"semantic manifest mismatch missing={sorted(expected_semantic-actual_semantic)[:5]} "
+              f"extra={sorted(actual_semantic-expected_semantic)[:5]}"
+          )
+
+          runtime_root = ui / "Runtime"
+          expected_runtime = set()
+          for manifest_name in (
+              "p0_skin_manifest_v1.json",
+              "p1_skin_manifest_v1.json",
+              "p2_skin_manifest_v1.json",
+          ):
+              data = json.loads((runtime_root / manifest_name).read_text(encoding="utf-8"))
+              files = data.get("files", [])
+              assert data["pngCount"] == len(files), f"{manifest_name}: pngCount/files mismatch"
+              for rel in files:
+                  assert (runtime_root / rel).is_file(), f"{manifest_name}: missing {rel}"
+              overlap = expected_runtime.intersection(files)
+              assert not overlap, f"runtime asset listed in multiple manifests: {sorted(overlap)[:5]}"
+              expected_runtime.update(files)
+
+          actual_runtime = {
+              str(p.relative_to(runtime_root)).replace("\\", "/")
+              for p in runtime_root.rglob("*.png")
+          }
+          assert expected_runtime == actual_runtime, (
+              f"runtime manifest mismatch missing={sorted(expected_runtime-actual_runtime)[:5]} "
+              f"extra={sorted(actual_runtime-expected_runtime)[:5]}"
+          )
+
+          refs = list((ui / "ReferenceSheets").glob("*.png"))
+          integrity = json.loads((ui / "asset_integrity_v3.json").read_text(encoding="utf-8"))
+          assert integrity["legacy"]["presentSemanticRuntime"] == len(actual_semantic)
+          assert integrity["legacy"]["missing"] == 0
+          assert integrity["current"]["runtimeChrome"] == len(actual_runtime)
+          assert integrity["current"]["legacySemanticAndReference"] == len(actual_semantic) + len(refs)
+          assert integrity["current"]["totalPng"] == len(actual_semantic) + len(actual_runtime) + len(refs)
+
+          print(
+              "FAST UI asset parity: PASS",
+              f"semantic={len(actual_semantic)} runtime={len(actual_runtime)} refs={len(refs)}",
+          )
+          PY
+
       - name: Required structure
         shell: bash
         run: |
