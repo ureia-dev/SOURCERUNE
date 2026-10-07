@@ -24,6 +24,7 @@ inline constexpr Insets kShellBgInsetsPx2x { 24, 24, 24, 24 };
 inline constexpr Insets kTopBarBgInsetsPx2x { 20, 20, 20, 20 };
 inline constexpr Insets kPanelFrameInsetsPx2x { 22, 22, 22, 22 };
 inline constexpr Insets kCardFrameInsetsPx2x { 20, 20, 20, 20 };
+inline constexpr bool kFrameChromeBehindLiveContent = true;
 
 static_assert (kShellBgInsetsPx2x.left == kShellBgInsetsPx2x.right);
 static_assert (kPanelFrameInsetsPx2x.top == kPanelFrameInsetsPx2x.bottom);

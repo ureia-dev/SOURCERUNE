@@ -1,0 +1,58 @@
+{
+  "commit": "85a676a14c59cc04458c9e8652b9609ba2134f7a",
+  "results": {
+    "UI_01": {
+      "ui": "UI_01",
+      "ok": true,
+      "checks": {
+        "appW": true,
+        "appH": true,
+        "topH": true,
+        "wsH": true,
+        "sceneH": true,
+        "analysisH": true,
+        "meterH": true,
+        "macroStripH": true,
+        "sourceCard": true,
+        "transmissionCard": true,
+        "wallCard": true,
+        "spaceCard": true,
+        "centerX": true,
+        "meterX": true,
+        "macroMotion": true,
+        "macroTransmission": true,
+        "macroCondition": true,
+        "macroIntelligibility": true,
+        "macroAmbience": true,
+        "macroMix": true,
+        "macroEq": true
+      },
+      "failures": []
+    },
+    "UI_02": {
+      "ui": "UI_02",
+      "ok": true,
+      "checks": {
+        "appW": true,
+        "appH": true,
+        "topH": true,
+        "wsH": true,
+        "scenePanelH": true,
+        "sourceCard": true,
+        "transmissionCard": true,
+        "wallCard": true,
+        "spaceCard": true,
+        "centerX": true,
+        "meter": true,
+        "macroStripH": true,
+        "bottomTransmission": true,
+        "bottomCondition": true,
+        "bottomIntelligibility": true,
+        "bottomMix": true,
+        "bottomEq": true,
+        "ambience": true
+      },
+      "failures": []
+    }
+  }
+}

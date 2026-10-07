@@ -24,7 +24,7 @@ inline constexpr int kBottomMacroHeight = 172;
 inline constexpr int kMacroStripHeight = 210;
 inline constexpr int kMacroTopGap = 20;
 inline constexpr int kShellBottomPadding = 18;
-inline constexpr int kAmbienceTop = 374;
+inline constexpr int kAmbienceTop = 380;
 inline constexpr int kMeterTop = 8;
 inline constexpr int kSourceCardHeight = 213;
 inline constexpr int kTransmissionCardHeight = 166;
@@ -51,6 +51,7 @@ inline constexpr int kWorkspaceHeight = 653;
 inline constexpr int kScenePanelHeight = 641;
 inline constexpr int kMeterRight = 72;
 inline constexpr int kMeterWidth = 440;
+inline constexpr bool kShowMeterModeToggle = false;
 
 enum class Area
 {
@@ -95,6 +96,16 @@ inline constexpr std::array<Section, 12> kDetailDrawer {
     Section::Feedback,
     Section::Generators,
 };
+
+static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
+    + kLeftRailWidth + 2 * kWorkspaceGap + kCenterWidth + kRightRailWidth);
+static_assert (kReferenceHeight == kTopBarHeight + kWorkspaceHeight + kMacroStripHeight);
+static_assert (kTransmissionCardHeight == kGridRow2 + kWorkspaceGap + kGridRow3);
+static_assert (kSpaceCardHeight == kGridRow1 + kWorkspaceGap + kGridRow2);
+static_assert (kMacroStripHeight == kMacroTopGap + kBottomMacroHeight + kShellBottomPadding);
+static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
+    + kBottomBadSignalWidth + kBottomConditionWidth + kBottomIntelligibilityWidth
+    + kBottomMixWidth + kBottomEqWidth + 4 * kBottomGridGap);
 
 static_assert (kSceneComponentDock.size() == 4);
 static_assert (kFastBottomMacros.size() == 7);

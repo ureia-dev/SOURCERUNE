@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -29,6 +29,76 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Render UI reference audit
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          mkdir -p Web/App/preview/rendered
+          rm -f Web/App/preview/rendered/render-log.txt
+          (
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/sourcerune-preview-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/Web/App/ >/dev/null; then break; fi
+            sleep 1
+          done
+
+          CHROME_PATH="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME_PATH" ]; then
+            echo "No Chrome/Chromium found on runner"
+            exit 1
+          fi
+
+          npm install --silent --no-save --prefix /tmp/sourcerune-ui-audit puppeteer-core@24
+          NODE_PATH=/tmp/sourcerune-ui-audit/node_modules CHROME_PATH="$CHROME_PATH" node <<'NODE'
+          const fs = require("fs");
+          const puppeteer = require("puppeteer-core");
+
+          (async () => {
+            const browser = await puppeteer.launch({
+              executablePath: process.env.CHROME_PATH,
+              headless: true,
+              args: ["--no-sandbox", "--disable-dev-shm-usage"]
+            });
+            const targets = [
+              ["UI_01", 1499, 807],
+              ["UI_02", 1672, 941]
+            ];
+            const results = {};
+            for (const [ui, width, height] of targets) {
+              const page = await browser.newPage();
+              await page.setViewport({ width, height, deviceScaleFactor: 1 });
+              await page.goto(`http://127.0.0.1:4173/Web/App/?ui=${ui}`, { waitUntil: "networkidle0", timeout: 30000 });
+              await page.waitForFunction(() => !!window.__geometryAudit, { timeout: 15000 });
+              results[ui] = await page.evaluate(() => window.__geometryAudit);
+              await page.screenshot({
+                path: `Web/App/preview/rendered/${ui}.png`,
+                fullPage: false
+              });
+              await page.close();
+            }
+            await browser.close();
+            fs.writeFileSync(
+              "Web/App/preview/rendered/geometry-report.json",
+              JSON.stringify({ commit: process.env.GITHUB_SHA || null, results }, null, 2)
+            );
+          })().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+          ) >Web/App/preview/rendered/render-log.txt 2>&1
+          STATUS=$?
+          if [ "$STATUS" -ne 0 ]; then
+            echo "render audit failed with status $STATUS" >>Web/App/preview/rendered/render-log.txt
+          else
+            echo "render audit completed successfully" >>Web/App/preview/rendered/render-log.txt
+          fi
+          exit 0
+
       - name: Prepare static preview
         shell: bash
         run: |
@@ -44,7 +114,7 @@ jobs:
           s = p.read_text(encoding="utf-8")
           rev = os.environ.get("GITHUB_SHA", "dev")[:12]
           s = re.sub(r'href="(\./[^"]+\.css)"', lambda m: f'href="{m.group(1)}?v={rev}"', s)
-          s = re.sub(r'src="(\./app\.js)"', lambda m: f'src="{m.group(1)}?v={rev}"', s)
+          s = re.sub(r'src="(\./[^"]+\.js)"', lambda m: f'src="{m.group(1)}?v={rev}"', s)
           p.write_text(s, encoding="utf-8")
           PY
           cat > _site/index.html <<'EOF'
@@ -62,3 +132,23 @@ jobs:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Publish current render audit to repo
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "main advanced during render; skip stale audit commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A Web/App/preview/rendered
+          if git diff --cached --quiet; then
+            echo "render audit unchanged"
+            exit 0
+          fi
+          git commit -m "chore: update UI render audit [skip ci]"
+          git push origin HEAD:main

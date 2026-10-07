@@ -98,3 +98,7 @@ body.global-tools-open .global-tools-popover{display:grid}
   gap:5px;
 }
 body.ui-02 .global-tools-popover{top:66px}
+
+
+/* UI_02 REF keeps only the compact horizontal meters in the top bar. */
+body.ui-02 .meter-mode-toggle{display:none!important}

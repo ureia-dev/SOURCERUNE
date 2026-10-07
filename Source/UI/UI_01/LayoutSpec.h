@@ -44,6 +44,7 @@ inline constexpr int kMeterSlotWidth = 20;
 inline constexpr int kMeterSlotHeight = 178;
 inline constexpr int kMeterModeTop = 273;
 inline constexpr int kMeterModeHeight = 30;
+inline constexpr bool kShowMeterModeToggle = true;
 inline constexpr int kSceneHeaderHeight = 34;
 inline constexpr int kSceneGraphHeight = 186;
 inline constexpr int kAnalysisTabHeight = 37;
@@ -103,8 +104,19 @@ inline constexpr std::array<Section, 12> kDetailDrawer {
     Section::Generators,
 };
 
+static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
+    + kLeftRailWidth + 2 * kWorkspaceGap + kCenterWidth + kMeterRailWidth);
+static_assert (kReferenceHeight == kTopBarHeight + kWorkspaceHeight + kMacroStripHeight);
+static_assert (kModuleRailHeight == kSourceCardHeight + kSourceToTransmissionGap
+    + kTransmissionCardHeight + kTransmissionToWallGap
+    + kWallCardHeight + kWallToSpaceGap + kSpaceCardHeight + kLeftRailBottomResidual);
+static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
+    + kBottomMotionWidth + kBottomBadSignalWidth + kBottomConditionWidth
+    + kBottomIntelligibilityWidth + kBottomAmbienceWidth + kBottomMixWidth
+    + kBottomEqWidth + 6 * kBottomGridGap);
+static_assert (kMacroStripHeight == kBottomMacroHeight + kShellBottomPadding);
+
 static_assert (kLeftSceneModules.size() == 4);
-static_assert (kSourceCardHeight + kSourceToTransmissionGap + kTransmissionCardHeight + kTransmissionToWallGap + kWallCardHeight + kWallToSpaceGap + kSpaceCardHeight + kLeftRailBottomResidual == kModuleRailHeight);
 static_assert (kFastBottomMacros.size() == 7);
 static_assert (kDetailDrawer.size() == 12);
 } // namespace sourcerune::ui::ui01
