@@ -408,3 +408,27 @@ Impact:
 Classification: **EXTERNAL INPUT BLOCKER FOR NEW REF-FINE CONFIRMATION ONLY**. This does not block runtime parity fixes, existing-confirmed regression guards, CI validation, or asset/binding gap audits.
 
 Status: **FULL REF BITMAP ABSENT / DO NOT GUESS**.
+
+
+## Checkpoint 70 — Runtime manifest/file parity restored
+
+A full Runtime PNG inventory was cross-checked against `p0_skin_manifest_v1.json`, `p1_skin_manifest_v1.json`, and `p2_skin_manifest_v1.json`.
+
+Repairs completed before this checkpoint:
+
+- P1 now registers `RT_TOOL_ICON_SHUFFLE_IDLE.png` and `RT_TOOL_ICON_SHUFFLE_HOVER.png` (Checkpoint 67).
+- The logical component manifest now registers `RT_TOOL_ICON_SHUFFLE` as asset-ready with runtime binding pending (Checkpoint 68).
+- P0 now includes an explicit `files[]` list for its 33 PNG files (Checkpoint 69), so all three skin manifests support deterministic file-level parity checks.
+
+Current verified inventory:
+
+```text
+Runtime PNG files scanned: 113
+Manifest-listed PNG paths: 113
+Unlisted Runtime PNG files: 0
+Manifest entries missing on disk: 0
+```
+
+This is an inventory/parity correction only. It does not add Shuffle semantics and does not add or replace any raster file.
+
+Status: **RUNTIME PNG ↔ P0/P1/P2 MANIFEST PARITY = PASS**.
