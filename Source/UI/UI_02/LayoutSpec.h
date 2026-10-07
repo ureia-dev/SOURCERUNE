@@ -51,6 +51,7 @@ inline constexpr int kWorkspaceHeight = 653;
 inline constexpr int kScenePanelHeight = 641;
 inline constexpr int kMeterRight = 72;
 inline constexpr int kMeterWidth = 440;
+inline constexpr bool kShowMeterModeToggle = false;
 
 enum class Area
 {
