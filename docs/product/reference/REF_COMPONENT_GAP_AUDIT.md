@@ -432,3 +432,30 @@ Manifest entries missing on disk: 0
 This is an inventory/parity correction only. It does not add Shuffle semantics and does not add or replace any raster file.
 
 Status: **RUNTIME PNG ↔ P0/P1/P2 MANIFEST PARITY = PASS**.
+
+
+## Checkpoint 73 — semantic inventory count refresh
+
+Direct Git-tree recount of the three semantic libraries confirms the current legacy/runtime semantic baseline is complete:
+
+```text
+Shared: 224 PNG
+UI_01: 224 PNG
+UI_02: 224 PNG
+semantic total: 672 / 672
+ReferenceSheets: 6 PNG
+legacy + reference total: 678 / 678
+legacy semantic missing: 0
+```
+
+Each semantic library currently contains:
+
+- SCENE_PRESET_HERO: 48
+- SOURCE: 64
+- SPACE_ENVIRONMENT: 56
+- TRANSMISSION: 24
+- WALL_COVER: 32
+
+The separately planned Scene expansion `SCN_049–SCN_074` is still absent in all three semantic libraries (26 scene IDs × 3 exports = 78 PNG). This expansion is **not part of the existing 672 legacy semantic baseline**, so it must not be conflated with a missing current REF/runtime asset.
+
+Status: **CURRENT SEMANTIC BASELINE COMPLETE / FUTURE SCENE EXPANSION STILL ABSENT**.
