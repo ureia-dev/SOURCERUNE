@@ -202,3 +202,14 @@ The REF prose anchor (`x≈1167..1604`) remains **APPROX** and should not be ove
 Meter labels remain live text; fill width remains analyzer-driven live state. The UI_02 horizontal meter uses CSS/grid/repeating optical divisions and does not require a baked meter screenshot.
 
 Status: **RUNTIME METER GEOMETRY EXACT / REF FINE ANCHOR APPROX / LIVE FILL PRESERVED**.
+
+
+## Checkpoint 59 — UI_02 bottom knob parity correction
+
+Native `Source/UI/UI_02/LayoutSpec.h` and the approved UI_02 geometry contract define the bottom macro knob face diameter as **76 px**. Web had a higher-specificity optical rule that left the MIX knob at **88 px**, producing a real Web/Native/REF parity mismatch.
+
+Checkpoint 58 corrected the last-loaded V11 rules so all five visible bottom macro knob faces, including MIX, resolve to **76 px**.
+
+This correction changes geometry only. Knob pointer, value, label and active ring remain live; no DSP, parameter semantics, preset content or processing order changed.
+
+Status: **WEB/NATIVE BOTTOM KNOB DIAMETER PARITY RESTORED — 76 px**.
