@@ -144,3 +144,38 @@ No new Shuffle PNG should be generated. The behavior must not be invented from t
 Current V10 presetbar starts at x=430 with 42 px Prev/Next buttons, which does not prove exact REF alignment. Do not promote those current CSS values to CONFIRMED merely because they render.
 
 Status: **TOPBAR ASSET INVENTORY MOSTLY COMPLETE / SHUFFLE BINDING MISSING / FINE ANCHORS APPROX**.
+
+
+## Checkpoint 52 — UI_02 Scene / Motion deck live-control contract
+
+The center Scene panel is 972×641 at plugin-local (356,86). It is split into a 972×358 visual scene and a 972×283 Motion deck. The visual scene uses existing semantic environment art as its background while markers/path/values remain live.
+
+### Motion deck confirmed control sizes
+
+- Current-distance dial face diameter: **300 px — CONFIRMED contract**.
+- Speed / Doppler / Width small knob face diameter: **54 px — CONFIRMED contract**.
+- Motion deck total height: **283 px — CONFIRMED**.
+
+Current Web runtime placement details are implementation evidence and remain APPROX until direct REF overlay:
+
+- large dial material: `RT_KNOB_L_BASE.png`, current background origin about x=22 within Motion deck;
+- current-distance value block around x≈55..295, y≈94 relative to Motion deck, width≈240;
+- live distance pointer: CSS pseudo-element, CODE-DRAWN;
+- Motion graph/control group: starts around 42% width, top≈18, right≈22, height≈158;
+- Motion mode select: width≈250, height≈36;
+- live path graph: ≈104 px high;
+- Start / Closest / End readouts: live text beneath path;
+- Speed / Doppler / Width readout boxes: runtime boxes ≈86×76 with 54×54 knob base centered at the top;
+- small-knob pointers: live pseudo-elements, CODE-DRAWN.
+
+The UI_02 scene itself keeps the following live contract:
+
+- environment/photo bed from selected SPACE/ENVIRONMENT semantic art: EXISTS-RUNTIME;
+- source/listener markers and point states: existing independent Common PNG assets;
+- motion path, distance line, marker coordinates and distance values: CODE-DRAWN / live state;
+- no baked path/value/marker coordinates;
+- no REF screenshot or cropped scene as a runtime component.
+
+Text/font metrics inside Motion deck remain `unknown` / APPROX until direct REF measurement.
+
+Status: **SCENE/MOTION MAJOR GEOMETRY + KNOB DIAMETERS CONFIRMED / INTERNAL PLACEMENT FINE SCAN APPROX**.
