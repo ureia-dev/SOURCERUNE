@@ -546,5 +546,122 @@
     "asset_status": "EXISTS-RUNTIME / existing independent PNG",
     "typography_status": "APPROX; font family unknown; live runtime",
     "runtime_change": "NONE"
+  },
+  "left_card_typography_audit": {
+    "checkpoint": 31,
+    "status": "RASTER-BOUNDS-DOCUMENTED / FONT-METRICS-APPROX",
+    "coordinate_space": "plugin-local",
+    "implementation": "CODE-DRAWN / live text-icon",
+    "font_family": "unknown",
+    "shared_alignment": {
+      "title_name_x": "80-82",
+      "chevron_x": 244,
+      "title_glyph_h": "10-11",
+      "item_name_glyph_h": "12-13 except SOURCE taller"
+    },
+    "cards": {
+      "SOURCE": {
+        "title_bbox": {
+          "x": 81,
+          "y": 72,
+          "w": 50,
+          "h": 11,
+          "status": "APPROX-raster"
+        },
+        "item_name_bbox": {
+          "x": 81,
+          "y": 93,
+          "w": 86,
+          "h": 17,
+          "status": "APPROX-raster"
+        },
+        "chevron_bbox": {
+          "x": 244,
+          "y": 96,
+          "w": 5,
+          "h": 8,
+          "status": "APPROX-raster"
+        }
+      },
+      "TRANSMISSION": {
+        "title_bbox": {
+          "x": 80,
+          "y": 214,
+          "w": 98,
+          "h": 11,
+          "status": "APPROX-raster"
+        },
+        "item_name_bbox": {
+          "x": 82,
+          "y": 235,
+          "w": 76,
+          "h": 13,
+          "status": "APPROX-raster"
+        },
+        "chevron_bbox": {
+          "x": 244,
+          "y": 237,
+          "w": 5,
+          "h": 9,
+          "status": "APPROX-raster"
+        }
+      },
+      "WALL_COVER": {
+        "title_bbox": {
+          "x": 81,
+          "y": 353,
+          "w": 93,
+          "h": 11,
+          "status": "APPROX-raster"
+        },
+        "item_name_bbox": {
+          "x": 81,
+          "y": 374,
+          "w": 99,
+          "h": 13,
+          "status": "APPROX-raster"
+        },
+        "chevron_bbox": {
+          "x": 244,
+          "y": 377,
+          "w": 5,
+          "h": 9,
+          "status": "APPROX-raster"
+        }
+      },
+      "SPACE_ENVIRONMENT": {
+        "title_bbox": {
+          "x": 81,
+          "y": 490,
+          "w": 149,
+          "h": 11,
+          "status": "APPROX-raster"
+        },
+        "item_name_bbox": {
+          "x": 81,
+          "y": 511,
+          "w": 77,
+          "h": 13,
+          "status": "APPROX-raster"
+        },
+        "chevron_bbox": {
+          "x": 244,
+          "y": 513,
+          "w": 5,
+          "h": 9,
+          "status": "APPROX-raster"
+        }
+      }
+    },
+    "unresolved": [
+      "nominal_font_size",
+      "font_weight",
+      "tracking",
+      "line_height",
+      "exact_baseline",
+      "antialiasing_metrics",
+      "optical_kerning"
+    ],
+    "rule": "Raster glyph bounds do not establish vector font metrics. Keep font family unknown and text live; no text PNG or REF crop."
   }
 }
