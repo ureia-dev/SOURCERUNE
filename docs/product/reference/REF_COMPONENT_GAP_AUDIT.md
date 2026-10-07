@@ -114,3 +114,14 @@ The current `Web/App/ref_geometry_lock_v7.css` is therefore a **provisional reco
 This is a geometry defect, not an asset defect. No new PNG, REF crop, knob material, card frame, or semantic image is justified by this mismatch. The correction gate remains: one direct approved-REF scan under the right/bottom-exclusive convention must identify the shared 1 px border/overlap row and produce exact 520 px closure before runtime dimensions are changed.
 
 Status: **IMPLEMENTATION-AHEAD-OF-SPEC / CORRECTION-GATED**.
+
+
+## Checkpoint 19 — Native/Web parity gate
+
+Repository verification shows Native LayoutSpec and Web V7 currently carry the same provisional UI_01 left-rail geometry: SOURCE 137, gap 6, TRANSMISSION 125, gap 8, WALL/COVER 131, gap 6, SPACE/ENVIRONMENT 108, total 521 px. The approved workspace content target remains 520 px.
+
+Native/Web agreement is therefore parity evidence only; it does not promote these REF measurements from APPROX to CONFIRMED. Both implementations are IMPLEMENTATION-AHEAD-OF-SPEC for this one-pixel closure.
+
+When the approved REF identifies the shared edge/overlap row, Native and Web must be corrected together and verified to close at exactly 520 px. Until then, no independent one-pixel compensation and no new raster asset is allowed.
+
+Status: PARITY-CONFIRMED / REF-CLOSURE-PENDING.
