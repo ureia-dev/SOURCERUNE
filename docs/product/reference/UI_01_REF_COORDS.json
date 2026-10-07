@@ -7,10 +7,11 @@
     "source_ref": "approved UI_01 REF",
     "status": "mixed CONFIRMED/APPROX",
     "edge_convention": "[x0,x1) / [y0,y1), right/bottom exclusive",
-    "edge_status": "MISMATCH-QUEUED",
+    "edge_status": "CONFIRMED",
     "workspace_content_height": 520,
-    "left_cards_measured_span": 521,
-    "left_cards_delta": 1
+    "left_cards_measured_span": 520,
+    "left_cards_delta": 0,
+    "left_rail_bottom_residual": 3
   },
   "regions": [
     {
@@ -42,8 +43,8 @@
       "x": 10,
       "y": 58,
       "w": 313,
-      "h": 521,
-      "status": "APPROX"
+      "h": 520,
+      "status": "CONFIRMED"
     },
     {
       "id": "center",
@@ -76,9 +77,9 @@
       "x": 10,
       "y": 58,
       "w": 313,
-      "h": 137,
-      "gap_after": 6,
-      "status": "APPROX",
+      "h": 136,
+      "gap_after": 7,
+      "status": "CONFIRMED",
       "runtime": "EXISTS-RUNTIME",
       "edge_convention": "[x0,x1) / [y0,y1)"
     },
@@ -87,31 +88,31 @@
       "x": 10,
       "y": 201,
       "w": 313,
-      "h": 125,
-      "gap_after": 8,
-      "status": "APPROX",
+      "h": 132,
+      "gap_after": 7,
+      "status": "CONFIRMED",
       "runtime": "EXISTS-RUNTIME",
       "edge_convention": "[x0,x1) / [y0,y1)"
     },
     {
       "id": "WALL_COVER",
       "x": 10,
-      "y": 334,
+      "y": 340,
       "w": 313,
-      "h": 131,
+      "h": 132,
       "gap_after": 6,
-      "status": "APPROX",
+      "status": "CONFIRMED",
       "runtime": "EXISTS-RUNTIME",
       "edge_convention": "[x0,x1) / [y0,y1)"
     },
     {
       "id": "SPACE_ENVIRONMENT",
       "x": 10,
-      "y": 471,
+      "y": 478,
       "w": 313,
-      "h": 108,
+      "h": 97,
       "gap_after": null,
-      "status": "APPROX",
+      "status": "CONFIRMED",
       "runtime": "EXISTS-RUNTIME",
       "edge_convention": "[x0,x1) / [y0,y1)"
     }
@@ -213,29 +214,30 @@
     "knob label"
   ],
   "notes": [
-    "APPROX values must not be promoted to CONFIRMED without direct approved-REF overlay measurement.",
-    "REF crops are forbidden as runtime assets.",
-    "Checkpoint 14: all card bounds use right/bottom-exclusive coordinates; current 521 px measured span versus 520 px runtime content remains unresolved and must not be normalized by arbitrarily subtracting 1 px from a card.",
-    "Before runtime implementation, remeasure all four outer boundaries from the same approved REF under the exclusive-edge convention and require exact 520 px closure; if delta remains +1, identify the actual shared border/overlap row."
+    "Checkpoint 21: direct approved-REF scan resolved the prior 521/520 mismatch using right/bottom-exclusive boundaries.",
+    "Confirmed full-image vertical edges: SOURCE [174,310), TRANSMISSION [317,449), WALL/COVER [456,588), SPACE/ENVIRONMENT [594,691), workspace content end 694.",
+    "Plugin-local stack: SOURCE y58 h136, gap7; TRANSMISSION y201 h132, gap7; WALL/COVER y340 h132, gap6; SPACE/ENVIRONMENT y478 h97; bottom residual 3. Total = 520 px.",
+    "REF crops are forbidden as runtime assets."
   ],
   "runtime_validation": {
-    "checkpoint": 16,
+    "checkpoint": 21,
     "observed_file": "Web/App/ref_geometry_lock_v7.css",
     "target_content_height": 520,
-    "observed_module_rail_height": 521,
+    "observed_module_rail_height": 520,
     "observed_card_stack": {
-      "SOURCE": 137,
-      "gap1": 6,
-      "TRANSMISSION": 125,
-      "gap2": 8,
-      "WALL_COVER": 131,
+      "SOURCE": 136,
+      "gap1": 7,
+      "TRANSMISSION": 132,
+      "gap2": 7,
+      "WALL_COVER": 132,
       "gap3": 6,
-      "SPACE_ENVIRONMENT": 108,
-      "total": 521
+      "SPACE_ENVIRONMENT": 97,
+      "bottom_residual": 3,
+      "total": 520
     },
-    "delta": 1,
-    "status": "IMPLEMENTATION-AHEAD-OF-SPEC",
-    "correction_gate": "Do not alter a card dimension until direct approved-REF exclusive-edge overlay identifies the shared border/overlap row and closes exactly to 520 px.",
+    "delta": 0,
+    "status": "PASS / REF-CONFIRMED",
+    "correction_gate": "Resolved by direct approved-REF exclusive-edge scan; Web and Native updated together.",
     "asset_impact": "NONE"
   }
 }

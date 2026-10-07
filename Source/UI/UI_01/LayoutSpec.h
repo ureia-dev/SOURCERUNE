@@ -24,14 +24,15 @@ inline constexpr int kBottomMacroHeight = 216;
 inline constexpr int kMacroStripHeight = 221;
 inline constexpr int kShellBottomPadding = 5;
 inline constexpr int kModuleCardHeight = 124; // legacy/fallback only
-inline constexpr int kSourceCardHeight = 137;
-inline constexpr int kTransmissionCardHeight = 125;
-inline constexpr int kWallCardHeight = 131;
-inline constexpr int kSpaceCardHeight = 108;
-inline constexpr int kSourceToTransmissionGap = 6;
-inline constexpr int kTransmissionToWallGap = 8;
+inline constexpr int kSourceCardHeight = 136;
+inline constexpr int kTransmissionCardHeight = 132;
+inline constexpr int kWallCardHeight = 132;
+inline constexpr int kSpaceCardHeight = 97;
+inline constexpr int kSourceToTransmissionGap = 7;
+inline constexpr int kTransmissionToWallGap = 7;
 inline constexpr int kWallToSpaceGap = 6;
-inline constexpr int kModuleRailHeight = 521;
+inline constexpr int kLeftRailBottomResidual = 3;
+inline constexpr int kModuleRailHeight = 520;
 inline constexpr int kModuleGap = 8;
 inline constexpr int kWorkspaceGap = 10;
 inline constexpr int kWorkspacePaddingX = 10;
@@ -103,6 +104,7 @@ inline constexpr std::array<Section, 12> kDetailDrawer {
 };
 
 static_assert (kLeftSceneModules.size() == 4);
+static_assert (kSourceCardHeight + kSourceToTransmissionGap + kTransmissionCardHeight + kTransmissionToWallGap + kWallCardHeight + kWallToSpaceGap + kSpaceCardHeight + kLeftRailBottomResidual == kModuleRailHeight);
 static_assert (kFastBottomMacros.size() == 7);
 static_assert (kDetailDrawer.size() == 12);
 } // namespace sourcerune::ui::ui01

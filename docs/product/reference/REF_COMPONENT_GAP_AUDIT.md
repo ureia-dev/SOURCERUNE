@@ -125,3 +125,24 @@ Native/Web agreement is therefore parity evidence only; it does not promote thes
 When the approved REF identifies the shared edge/overlap row, Native and Web must be corrected together and verified to close at exactly 520 px. Until then, no independent one-pixel compensation and no new raster asset is allowed.
 
 Status: PARITY-CONFIRMED / REF-CLOSURE-PENDING.
+
+
+## Checkpoint 21 — UI_01 left-rail mismatch resolved
+
+Direct approved-REF measurement under a single right/bottom-exclusive convention resolved the 521/520 discrepancy.
+
+```text
+136 SOURCE + 7 gap + 132 TRANSMISSION + 7 gap
++ 132 WALL/COVER + 6 gap + 97 SPACE/ENVIRONMENT
++ 3 bottom residual = 520 px
+```
+
+Root cause: the previous SPACE/ENVIRONMENT measurement included lower workspace/divider pixels, while earlier card boundaries mixed inclusive and exclusive edge conventions.
+
+Classification changes:
+- `UI01_LEFT_RAIL_CARD_STACK`: **CONFIRMED / EXISTS-RUNTIME**
+- `UI01_LEFT_RAIL_CONTENT_BOX`: **CONFIRMED / 520 px**
+- new PNG/material requirement: **NONE**
+- Web and Native geometry must use the same confirmed values above.
+
+The previous checkpoints 13/15/19 remain historical diagnostics and are superseded by this resolution.

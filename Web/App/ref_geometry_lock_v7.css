@@ -3,26 +3,26 @@
    No DSP/state/preset changes. */
 
 body.ui-01 .module-rail{
-  height:521px;
+  height:520px;
   gap:0;
 }
 body.ui-01 .module-card[data-type="SOURCE"]{
-  height:137px;
-  min-height:137px;
-  margin-bottom:6px;
+  height:136px;
+  min-height:136px;
+  margin-bottom:7px;
 }
 body.ui-01 .module-card[data-type="TRANSMISSION"]{
-  height:125px;
-  min-height:125px;
-  margin-bottom:8px;
+  height:132px;
+  min-height:132px;
+  margin-bottom:7px;
 }
 body.ui-01 .module-card[data-type="WALL_COVER"]{
-  height:131px;
-  min-height:131px;
+  height:132px;
+  min-height:132px;
   margin-bottom:6px;
 }
 body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"]{
-  height:108px;
-  min-height:108px;
+  height:97px;
+  min-height:97px;/
   margin-bottom:0;
 }

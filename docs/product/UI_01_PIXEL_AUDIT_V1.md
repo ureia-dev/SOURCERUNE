@@ -178,3 +178,26 @@ Approved four-card UI_01 REF scan:
 ```
 
 This replaces the obsolete equal-height 4×124 assumption. The latest native LayoutSpec on main already contains these unequal REF-derived heights, so future web/runtime convergence must preserve them rather than reverting to V5 equal cards.
+
+
+## Checkpoint 21 — exact left-rail closure resolved
+
+Direct REF scan with a single `[top,bottom)` edge convention found the true four-card stack:
+
+```text
+SOURCE             y174..310 = 136
+gap                310..317  = 7
+TRANSMISSION       317..449  = 132
+gap                449..456  = 7
+WALL/COVER         456..588  = 132
+gap                588..594  = 6
+SPACE/ENVIRONMENT  594..691  = 97
+bottom residual    691..694  = 3
+TOTAL                         = 520 px
+```
+
+The earlier 521 px mismatch was measurement convention error, not a runtime asset defect. The lower cyan/workspace separator was previously counted as part of SPACE/ENVIRONMENT.
+
+Action: Web V7 and Native LayoutSpec are updated together to these confirmed values. No DSP, preset, parameter semantics or raster assets changed.
+
+Status: **PASS — 520/520 exact closure.**

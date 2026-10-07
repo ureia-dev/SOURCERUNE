@@ -11,7 +11,7 @@ Status vocabulary: CONFIRMED / APPROX / EXISTS-RUNTIME / MISSING-IN-RUNTIME / NE
 | Shell | 0 | 0 | 1499 | 807 | CONFIRMED |
 | Topbar | 0 | 0 | 1499 | 58 | CONFIRMED |
 | Workspace | 0 | 58 | 1499 | 528 | CONFIRMED |
-| Left rail | 10 | 58 | 313 | 521 | APPROX |
+| Left rail | 10 | 58 | 313 | 520 | CONFIRMED |
 | Center | 333 | 58 | 967 | 517 | APPROX |
 | Meter rail | 1310 | 58 | 179 | 520 | APPROX |
 | Bottom macro strip | 0 | 586 | 1499 | 221 | CONFIRMED |
@@ -20,10 +20,10 @@ Status vocabulary: CONFIRMED / APPROX / EXISTS-RUNTIME / MISSING-IN-RUNTIME / NE
 
 | Object | y | h | gap-after | Runtime |
 |---|---:|---:|---:|---|
-| SOURCE | 58 | 137 | 6 | EXISTS-RUNTIME |
-| TRANSMISSION | 201 | 125 | 8 | EXISTS-RUNTIME |
-| WALL/COVER | 334 | 131 | 6 | EXISTS-RUNTIME |
-| SPACE/ENVIRONMENT | 471 | 108 | — | EXISTS-RUNTIME |
+| SOURCE | 58 | 136 | 7 | EXISTS-RUNTIME |
+| TRANSMISSION | 201 | 132 | 7 | EXISTS-RUNTIME |
+| WALL/COVER | 340 | 132 | 6 | EXISTS-RUNTIME |
+| SPACE/ENVIRONMENT | 478 | 97 | — | EXISTS-RUNTIME |
 
 SOURCE measured internal anchors: image left inset ≈9; image top inset ≈58; image ≈238×68; right action column ≈47; bottom residual ≈10. Other card internals remain APPROX until their per-pixel internal scan is completed.
 
@@ -138,3 +138,29 @@ Asset decision: existing knob-base PNGs are reusable first. Tick rings, pointers
 Native LayoutSpec and Web V7 both currently encode the same provisional stack: 137 + 6 + 125 + 8 + 131 + 6 + 108 = 521 px. The workspace side-rail content target remains 520 px.
 
 This confirms Native/Web parity only. The four card heights and three gaps remain APPROX until approved REF evidence resolves the shared one-pixel boundary. The eventual correction must update Native and Web together and close exactly to 520 px. No asset change is implied.
+
+
+## Checkpoint 21 — left-rail exact 520 px closure
+
+A direct pixel scan of the approved four-card REF was repeated using one coordinate convention only: `[x0,x1) / [y0,y1)`, with right/bottom edges exclusive.
+
+Confirmed full-reference vertical bounds:
+
+```text
+SOURCE             [174,310) = 136 px
+gap                 [310,317) =   7 px
+TRANSMISSION       [317,449) = 132 px
+gap                 [449,456) =   7 px
+WALL/COVER         [456,588) = 132 px
+gap                 [588,594) =   6 px
+SPACE/ENVIRONMENT  [594,691) =  97 px
+bottom residual     [691,694) =   3 px
+---------------------------------------
+workspace content                 520 px
+```
+
+Plugin-local coordinates are therefore SOURCE y58/h136, TRANSMISSION y201/h132, WALL/COVER y340/h132, SPACE/ENVIRONMENT y478/h97, with a 3 px residual below the last card.
+
+The earlier 521 px result was caused by including lower workspace/divider pixels in the SPACE/ENVIRONMENT card and by mixed inclusive/exclusive edge counting. No arbitrary 1 px compensation was used.
+
+Status: **CONFIRMED / Web-Native update required together / no new asset required.**
