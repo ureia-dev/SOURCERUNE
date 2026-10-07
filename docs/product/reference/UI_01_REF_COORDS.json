@@ -52,7 +52,7 @@
       "y": 58,
       "w": 967,
       "h": 517,
-      "status": "APPROX"
+      "status": "CONFIRMED"
     },
     {
       "id": "meter_rail",
@@ -663,5 +663,131 @@
       "optical_kerning"
     ],
     "rule": "Raster glyph bounds do not establish vector font metrics. Keep font family unknown and text live; no text PNG or REF crop."
+  },
+  "scene_geometry": {
+    "checkpoint": 35,
+    "coordinate_space": "plugin-local unless implementation_space is explicitly stated",
+    "status": "STRUCTURE-CONFIRMED / INTERNAL-LIVE-REF-COORDS-APPROX",
+    "center": {
+      "x": 333,
+      "y": 58,
+      "w": 967,
+      "h": 517,
+      "status": "CONFIRMED"
+    },
+    "scene_panel": {
+      "x": 333,
+      "y": 58,
+      "w": 967,
+      "h": 262,
+      "status": "CONFIRMED"
+    },
+    "header": {
+      "x": 333,
+      "y": 58,
+      "w": 967,
+      "h": 34,
+      "status": "CONFIRMED"
+    },
+    "svg_viewport_box": {
+      "x": 333,
+      "y": 92,
+      "w": 967,
+      "h": 186,
+      "status": "CONFIRMED"
+    },
+    "residual_below_svg": {
+      "x": 333,
+      "y": 278,
+      "w": 967,
+      "h": 42,
+      "status": "CONFIRMED-total"
+    },
+    "waveform_strip_runtime": {
+      "x": 342,
+      "y": 278,
+      "w": 949,
+      "h": 38,
+      "bottom_residual": 4,
+      "status": "APPROX-runtime-split"
+    },
+    "scene_to_analysis_gap": {
+      "x": 333,
+      "y": 320,
+      "w": 967,
+      "h": 8,
+      "status": "CONFIRMED"
+    },
+    "analysis_panel": {
+      "x": 333,
+      "y": 328,
+      "w": 967,
+      "h": 247,
+      "status": "CONFIRMED"
+    },
+    "implementation_space": {
+      "svg_base": "1000x420",
+      "ui01_viewBox": "0 140 1000 192",
+      "listener_anchor": [
+        500,
+        250
+      ],
+      "motion_path": "M110 300 C340 225 650 225 900 300",
+      "status": "CODE-DRAWN / implementation-space, not REF pixels"
+    },
+    "layers": {
+      "scene_grid": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing PNG",
+        "asset": "Assets/UI/Runtime/UI_01/Scene/RT_SCENE_GRID.png"
+      },
+      "distance_callout": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing PNG",
+        "asset": "Assets/UI/Runtime/UI_01/Scene/RT_DISTANCE_CALLOUT.png"
+      },
+      "waveform_bed": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing PNG",
+        "asset": "Assets/UI/Runtime/UI_01/Scene/RT_WAVEFORM_STRIP_BG.png"
+      },
+      "source_listener_markers": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing independent PNG states"
+      },
+      "scene_points": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing independent PNG states"
+      },
+      "motion_car": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing PNG"
+      },
+      "motion_path": {
+        "status": "CODE-DRAWN",
+        "implementation": "live SVG"
+      },
+      "distance_line": {
+        "status": "CODE-DRAWN",
+        "implementation": "live SVG"
+      },
+      "dynamic_positions": {
+        "status": "CODE-DRAWN",
+        "implementation": "live state"
+      },
+      "distance_text": {
+        "status": "CODE-DRAWN",
+        "implementation": "live text"
+      },
+      "waveform_trace": {
+        "status": "CODE-DRAWN",
+        "implementation": "live canvas"
+      },
+      "buildings_floor_material": {
+        "status": "MISSING-IN-SPEC",
+        "implementation": "current live SVG/CSS; REF overlay pending"
+      }
+    },
+    "rule": "Do not use Scene/REF screenshots or crops as runtime assets."
   }
 }
