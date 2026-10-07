@@ -217,5 +217,25 @@
     "REF crops are forbidden as runtime assets.",
     "Checkpoint 14: all card bounds use right/bottom-exclusive coordinates; current 521 px measured span versus 520 px runtime content remains unresolved and must not be normalized by arbitrarily subtracting 1 px from a card.",
     "Before runtime implementation, remeasure all four outer boundaries from the same approved REF under the exclusive-edge convention and require exact 520 px closure; if delta remains +1, identify the actual shared border/overlap row."
-  ]
+  ],
+  "runtime_validation": {
+    "checkpoint": 16,
+    "observed_file": "Web/App/ref_geometry_lock_v7.css",
+    "target_content_height": 520,
+    "observed_module_rail_height": 521,
+    "observed_card_stack": {
+      "SOURCE": 137,
+      "gap1": 6,
+      "TRANSMISSION": 125,
+      "gap2": 8,
+      "WALL_COVER": 131,
+      "gap3": 6,
+      "SPACE_ENVIRONMENT": 108,
+      "total": 521
+    },
+    "delta": 1,
+    "status": "IMPLEMENTATION-AHEAD-OF-SPEC",
+    "correction_gate": "Do not alter a card dimension until direct approved-REF exclusive-edge overlay identifies the shared border/overlap row and closes exactly to 520 px.",
+    "asset_impact": "NONE"
+  }
 }
