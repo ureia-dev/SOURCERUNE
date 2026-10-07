@@ -789,5 +789,95 @@
       }
     },
     "rule": "Do not use Scene/REF screenshots or crops as runtime assets."
+  },
+  "analysis_geometry": {
+    "checkpoint": 38,
+    "status": "STRUCTURE-CONFIRMED / FINE-INSETS-APPROX",
+    "coordinate_space": "plugin-local",
+    "panel": {
+      "x": 333,
+      "y": 328,
+      "w": 967,
+      "h": 247,
+      "status": "CONFIRMED"
+    },
+    "tabs": {
+      "x": 333,
+      "y": 328,
+      "w": 967,
+      "h": 37,
+      "status": "CONFIRMED"
+    },
+    "content": {
+      "x": 333,
+      "y": 365,
+      "w": 967,
+      "h": 210,
+      "status": "CONFIRMED"
+    },
+    "spectrum_canvas_runtime": {
+      "x": 340,
+      "y": 365,
+      "w": 953,
+      "h": 203,
+      "status": "APPROX-runtime-CSS"
+    },
+    "space_legend_runtime": {
+      "x": 333,
+      "y": 365,
+      "w": 967,
+      "h": 24,
+      "status": "APPROX-runtime-CSS"
+    },
+    "space_response_svg_runtime": {
+      "x": 333,
+      "y": 389,
+      "w": 967,
+      "h": 184,
+      "status": "APPROX-runtime-CSS"
+    },
+    "modes": {
+      "SPECTRUM": {
+        "status": "CODE-DRAWN",
+        "implementation": "live canvas"
+      },
+      "SPACE_RESPONSE": {
+        "status": "CODE-DRAWN",
+        "implementation": "live SVG curves"
+      },
+      "SIGNAL_FLOW": {
+        "status": "CODE-DRAWN",
+        "implementation": "live DOM/routing"
+      }
+    },
+    "assets": {
+      "graph_grid": {
+        "status": "EXISTS-RUNTIME",
+        "asset": "Assets/UI/Runtime/Common/Analysis/RT_GRAPH_GRID.png",
+        "implementation": "existing PNG tiled at runtime"
+      },
+      "eq_nodes": {
+        "status": "EXISTS-RUNTIME",
+        "assets": [
+          "RT_EQ_NODE_IDLE.png",
+          "RT_EQ_NODE_HOVER.png",
+          "RT_EQ_NODE_SELECTED.png"
+        ]
+      },
+      "flow_node_caps": {
+        "status": "EXISTS-RUNTIME",
+        "assets": [
+          "RT_FLOW_NODE_CAP_DEFAULT.png",
+          "RT_FLOW_NODE_CAP_SELECTED.png",
+          "RT_FLOW_NODE_CAP_BYPASSED.png"
+        ]
+      }
+    },
+    "typography": {
+      "status": "APPROX",
+      "font_family": "unknown",
+      "implementation": "live text"
+    },
+    "rule": "No baked spectrum/curves/signal-flow/text and no REF crop."
   }
 }
