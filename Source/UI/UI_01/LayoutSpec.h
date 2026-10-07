@@ -102,6 +102,18 @@ inline constexpr std::array<Section, 12> kDetailDrawer {
     Section::Generators,
 };
 
+static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
+    + kLeftRailWidth + 2 * kWorkspaceGap + kCenterWidth + kMeterRailWidth);
+static_assert (kReferenceHeight == kTopBarHeight + kWorkspaceHeight + kMacroStripHeight);
+static_assert (kModuleRailHeight == kSourceCardHeight + kSourceToTransmissionGap
+    + kTransmissionCardHeight + kTransmissionToWallGap
+    + kWallCardHeight + kWallToSpaceGap + kSpaceCardHeight);
+static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
+    + kBottomMotionWidth + kBottomBadSignalWidth + kBottomConditionWidth
+    + kBottomIntelligibilityWidth + kBottomAmbienceWidth + kBottomMixWidth
+    + kBottomEqWidth + 6 * kBottomGridGap);
+static_assert (kMacroStripHeight == kBottomMacroHeight + kShellBottomPadding);
+
 static_assert (kLeftSceneModules.size() == 4);
 static_assert (kFastBottomMacros.size() == 7);
 static_assert (kDetailDrawer.size() == 12);
