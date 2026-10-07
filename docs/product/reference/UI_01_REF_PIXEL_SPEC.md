@@ -342,3 +342,35 @@ Layer/asset classification:
 No whole Scene screenshot or REF crop is permitted as a runtime component.
 
 Status: **SCENE STRUCTURAL BOX MODEL CONFIRMED / INTERNAL LIVE OBJECT REF COORDINATES STILL APPROX**.
+
+
+## Checkpoint 37 — UI_01 Spectrum / Analysis structural geometry
+
+Plugin-local major geometry:
+
+| Object | x | y | w | h | Status |
+|---|---:|---:|---:|---:|---|
+| Analysis panel | 333 | 328 | 967 | 247 | CONFIRMED |
+| Tabs band | 333 | 328 | 967 | 37 | CONFIRMED |
+| Tab content region | 333 | 365 | 967 | 210 | CONFIRMED by panel closure |
+| Spectrum runtime canvas inset | x≈340 | y≈365 | w≈953 | h≈203 | APPROX runtime CSS, REF fine overlay pending |
+| Space Response live SVG | x≈333 | y≈389 | w≈967 | h≈184 | APPROX runtime CSS |
+| Space legend | x≈333 | y≈365 | w≈967 | h≈24 | APPROX runtime CSS |
+
+Closure:
+
+```text
+37 tabs + 210 content = 247 px
+```
+
+The three visible analysis modes remain live runtime surfaces:
+
+- **SPECTRUM**: live `canvas#spectrumCanvas`; analyzer trace is CODE-DRAWN.
+- **SPACE RESPONSE**: live SVG curves `directCurve / earlyCurve / tailCurve`; curves are CODE-DRAWN.
+- **SIGNAL FLOW**: live DOM nodes/arrows generated from current routing/bypass state; CODE-DRAWN.
+
+The graph bed is an existing independent reusable runtime asset: `Assets/UI/Runtime/Common/Analysis/RT_GRAPH_GRID.png`, tiled at runtime underneath Spectrum and Space Response. Existing EQ-node states (`RT_EQ_NODE_IDLE/HOVER/SELECTED.png`) and Signal Flow node cap states also exist in Common/Analysis. Their presence is inventory evidence only; no REF coordinate is inferred from the asset itself.
+
+Tab labels, graph labels, axis/tick labels and dynamic values stay live text. Font family/metrics remain `unknown` / APPROX unless directly measured from the approved REF. A baked Spectrum, baked Space Response curve, baked Signal Flow or baked text PNG is forbidden.
+
+Status: **ANALYSIS PANEL/TABS CONFIRMED / FINE GRAPH INSETS AND TYPOGRAPHY APPROX / LIVE DATA PRESERVED**.
