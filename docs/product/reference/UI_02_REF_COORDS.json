@@ -490,5 +490,114 @@
       }
     },
     "rule": "Do not generate new shuffle icons and do not invent shuffle semantics from the icon alone."
+  },
+  "scene_motion_audit": {
+    "checkpoint": 53,
+    "status": "MAJOR-GEOMETRY-AND-CONTROL-SIZES-CONFIRMED / INTERNAL-PLACEMENT-APPROX",
+    "coordinate_space": "plugin-local unless noted runtime-relative",
+    "scene": {
+      "x": 356,
+      "y": 86,
+      "w": 972,
+      "h": 641,
+      "status": "CONFIRMED"
+    },
+    "scene_visual": {
+      "x": 356,
+      "y": 86,
+      "w": 972,
+      "h": 358,
+      "status": "CONFIRMED"
+    },
+    "motion_deck": {
+      "x": 356,
+      "y": 444,
+      "w": 972,
+      "h": 283,
+      "status": "CONFIRMED"
+    },
+    "controls": {
+      "distance_dial": {
+        "diameter": 300,
+        "status": "CONFIRMED-contract",
+        "asset": "RT_KNOB_L_BASE.png",
+        "pointer": "CODE-DRAWN"
+      },
+      "speed_knob": {
+        "diameter": 54,
+        "status": "CONFIRMED-contract",
+        "asset": "RT_KNOB_S_BASE.png",
+        "pointer": "CODE-DRAWN"
+      },
+      "doppler_knob": {
+        "diameter": 54,
+        "status": "CONFIRMED-contract",
+        "asset": "RT_KNOB_S_BASE.png",
+        "pointer": "CODE-DRAWN"
+      },
+      "width_knob": {
+        "diameter": 54,
+        "status": "CONFIRMED-contract",
+        "asset": "RT_KNOB_S_BASE.png",
+        "pointer": "CODE-DRAWN"
+      }
+    },
+    "runtime_approx": {
+      "distance_value_block": {
+        "x_relative": 55,
+        "y_relative": 94,
+        "w": 240,
+        "status": "APPROX-runtime"
+      },
+      "motion_graph_group": {
+        "left": "42%",
+        "top": 18,
+        "right": 22,
+        "h": 158,
+        "status": "APPROX-runtime"
+      },
+      "motion_mode_select": {
+        "w": 250,
+        "h": 36,
+        "status": "APPROX-runtime"
+      },
+      "graph_h": 104,
+      "small_readout_box": {
+        "w": 86,
+        "h": 76,
+        "status": "APPROX-runtime"
+      }
+    },
+    "scene_layers": {
+      "environment_bed": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "selected SPACE_ENVIRONMENT semantic art"
+      },
+      "markers": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "Common independent PNG states"
+      },
+      "path": {
+        "status": "CODE-DRAWN",
+        "implementation": "live SVG"
+      },
+      "distance_line": {
+        "status": "CODE-DRAWN",
+        "implementation": "live SVG"
+      },
+      "positions": {
+        "status": "CODE-DRAWN",
+        "implementation": "live state"
+      },
+      "values": {
+        "status": "CODE-DRAWN",
+        "implementation": "live text"
+      }
+    },
+    "typography": {
+      "font_family": "unknown",
+      "status": "APPROX"
+    },
+    "rule": "No baked path/value/coordinates and no REF crop."
   }
 }
