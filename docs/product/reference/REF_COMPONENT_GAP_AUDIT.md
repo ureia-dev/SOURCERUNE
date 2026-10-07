@@ -512,3 +512,23 @@ There are 24 category-label differences, all within existing `SCENE_PRESET_HERO`
 No repository document currently proves that either category taxonomy should replace the other. Therefore category labels remain intentionally **not parity-enforced** and no category rewrite is performed. Fast CI now enforces only the unambiguous identity/path/status fields plus Preset selection ID/type validity.
 
 Status: **IDENTITY/PATH/PRESET BINDING PARITY = PASS / CATEGORY TAXONOMY DIVERGENCE PRESERVED**.
+
+
+## Checkpoint 85 — raster panel frame owns the border box
+
+The first post-merge Chrome render of merge `9054c051...` exposed a shared box-model defect: generic `.panel{border:1px}` was still active even though `runtime_skin_frame_fix_v1.css` already renders the real panel frame with the independent 9-slice `RT_PANEL_FRAME.png` overlay.
+
+Consequences observed in the render audit:
+
+- UI_02 Scene panel outer rectangle and child heights were correct, but `#sceneSvg` and `.motion-readouts` were inset by the CSS border and their total 358+283 live height competed with a 639 px content box inside a 641 px outer panel.
+- The same duplicate-border pattern could clip/inset other live panel content even when the outer REF geometry was correct.
+
+Checkpoint 84 removes the generic layout border in the runtime frame-fix layer (`border:0!important`) while preserving the independent raster frame overlay. Outer panel geometry does not change; the full locked panel box becomes available to live content.
+
+Classification:
+
+- `RT_PANEL_FRAME.png`: **EXISTS-RUNTIME / authoritative panel border material**.
+- generic 1 px CSS panel border: **REMOVED DUPLICATE CHROME**.
+- new raster requirement: **NONE**.
+
+Status: **PANEL FRAME MATERIAL / CONTENT BOX PARITY CORRECTED — pending post-merge Chrome confirmation**.
