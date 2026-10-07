@@ -44,7 +44,7 @@ jobs:
           s = p.read_text(encoding="utf-8")
           rev = os.environ.get("GITHUB_SHA", "dev")[:12]
           s = re.sub(r'href="(\./[^"]+\.css)"', lambda m: f'href="{m.group(1)}?v={rev}"', s)
-          s = re.sub(r'src="(\./app\.js)"', lambda m: f'src="{m.group(1)}?v={rev}"', s)
+          s = re.sub(r'src="(\./[^"]+\.js)"', lambda m: f'src="{m.group(1)}?v={rev}"', s)
           p.write_text(s, encoding="utf-8")
           PY
           cat > _site/index.html <<'EOF'
