@@ -1,29 +1,46 @@
 {
-  "commit": "b81a8d960846273923e86cdf14f257dced98df57",
+  "commit": "9054c051b56d44057d6ae90ff768ae6fbc3f4aee",
   "results": {
     "UI_01": {
       "ui": "UI_01",
-      "ok": true,
+      "ok": false,
       "checks": {
         "appW": true,
         "appH": true,
         "topH": true,
         "wsH": true,
         "sceneH": true,
+        "sceneRect": true,
         "sceneHeadH": true,
         "sceneGraphH": true,
         "sceneViewBox": true,
         "analysisH": true,
+        "analysisRect": true,
         "analysisTabsH": true,
         "meterH": true,
+        "meterRect": true,
+        "moduleRailH": true,
         "meterSlot": true,
         "meterMode": true,
         "macroStripH": true,
+        "macroStripRect": true,
         "gear": true,
         "sourceCard": true,
         "transmissionCard": true,
         "wallCard": true,
         "spaceCard": true,
+        "sourceArt": false,
+        "transmissionArt": false,
+        "wallArt": false,
+        "spaceArt": false,
+        "sourceEdit": true,
+        "transmissionEdit": true,
+        "wallEdit": true,
+        "spaceEdit": true,
+        "sourceArrow": true,
+        "transmissionArrow": true,
+        "wallArrow": true,
+        "spaceArrow": true,
         "centerX": true,
         "meterX": true,
         "macroMotion": true,
@@ -34,32 +51,45 @@
         "macroMix": true,
         "macroEq": true
       },
-      "failures": []
+      "failures": [
+        "sourceArt",
+        "transmissionArt",
+        "wallArt",
+        "spaceArt"
+      ]
     },
     "UI_02": {
       "ui": "UI_02",
-      "ok": true,
+      "ok": false,
       "checks": {
         "appW": true,
         "appH": true,
         "topH": true,
         "wsH": true,
+        "workspaceRect": true,
         "scenePanelH": true,
+        "scenePanelRect": true,
         "sceneVisualH": true,
+        "sceneVisualRect": false,
         "sceneViewBox": true,
         "motionDeckH": true,
+        "motionDeckRect": false,
         "sourceCard": true,
         "transmissionCard": true,
         "wallCard": true,
         "spaceCard": true,
         "centerX": true,
+        "centerWidth": true,
         "meter": true,
         "meterSlot": true,
         "macroStripH": true,
+        "macroStripRect": true,
         "gear": true,
         "presetPrev": true,
         "presetNext": true,
         "presetFolder": true,
+        "bottomKnob76": true,
+        "mixKnob76": true,
         "bottomTransmission": true,
         "bottomCondition": true,
         "bottomIntelligibility": true,
@@ -67,7 +97,10 @@
         "bottomEq": true,
         "ambience": true
       },
-      "failures": []
+      "failures": [
+        "sceneVisualRect",
+        "motionDeckRect"
+      ]
     }
   }
 }
