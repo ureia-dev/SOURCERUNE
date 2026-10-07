@@ -43,6 +43,7 @@ inline constexpr int kMeterSlotWidth = 20;
 inline constexpr int kMeterSlotHeight = 178;
 inline constexpr int kMeterModeTop = 273;
 inline constexpr int kMeterModeHeight = 30;
+inline constexpr bool kShowMeterModeToggle = true;
 inline constexpr int kSceneHeaderHeight = 34;
 inline constexpr int kSceneGraphHeight = 186;
 inline constexpr int kAnalysisTabHeight = 37;
