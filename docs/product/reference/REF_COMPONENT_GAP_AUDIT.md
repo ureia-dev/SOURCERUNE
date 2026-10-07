@@ -359,3 +359,20 @@ Status: **SCENE/MOTION ASSET INVENTORY SUFFICIENT / FINE CONTROL GEOMETRY PENDIN
 No new raster asset is justified for the compact UI_02 top meter. Remaining uncertainty is REF fine anchoring and typography/material matching only.
 
 Status: **UI_02 COMPACT METER RASTER GAP = NONE / REF FINE ALIGNMENT PENDING**.
+
+
+## Checkpoint 63 — UI_02 semantic-card internal gap classification
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI02_CARD_SEMANTIC_ART | EXISTS-RUNTIME | existing UI_02 semantic PNGs |
+| UI02_CARD_PREV/NEXT_ARROWS | EXISTS-RUNTIME | existing image-arrow PNG states |
+| UI02_CARD_ACTION_CHEVRON | EXISTS-RUNTIME | existing right-arrow PNG state |
+| UI02_CARD_TITLE / ITEM_NAME | CODE-DRAWN / typography APPROX | live text |
+| UI02_CARD_HEADER/IMAGE-HOLDER GEOMETRY | MISSING-IN-SPEC | direct REF per-card scan required |
+| UI02_CARD_CHROME/MATERIAL | MISSING-IN-SPEC | reuse existing Common/CSS first |
+| UI02_CARD_NEW_RASTER | NOT REQUIRED YET | only after direct overlay proves reuse cannot converge |
+
+Current runtime uses a shared 74 px header/image split, but that value is implementation evidence only and must not be promoted to REF-CONFIRMED until SOURCE, TRANSMISSION, WALL/COVER and SPACE/ENVIRONMENT are measured separately from the approved REF.
+
+Status: **CARD ASSET INVENTORY SUFFICIENT / INTERNAL REF GEOMETRY PENDING**.
