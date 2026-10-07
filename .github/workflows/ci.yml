@@ -89,6 +89,25 @@ jobs:
               f"extra={sorted(actual_semantic-expected_semantic)[:5]}"
           )
 
+          catalog = json.loads(Path("Web/App/data/catalog.json").read_text(encoding="utf-8"))
+          assert catalog["count"] == len(catalog["items"]), "catalog count/items mismatch"
+          baseline_ids = {r["id"] for r in rows}
+          expansion = json.loads((ui / "scene_hero_049_074_manifest_v1.json").read_text(encoding="utf-8"))
+          expansion_ids = {s["id"] for s in expansion["scenes"]}
+          assert len(expansion_ids) == 26, f"scene expansion IDs: {len(expansion_ids)}"
+          catalog_ids = {item["id"] for item in catalog["items"]}
+          assert catalog_ids == baseline_ids | expansion_ids, (
+              f"catalog ID mismatch missing={sorted((baseline_ids|expansion_ids)-catalog_ids)[:5]} "
+              f"extra={sorted(catalog_ids-(baseline_ids|expansion_ids))[:5]}"
+          )
+          for item in catalog["items"]:
+              if item["id"] in expansion_ids:
+                  assert "art-required" in item.get("status", ""), f"expansion art status: {item['id']}"
+
+          scene_catalog_ids = {item["id"] for item in catalog["items"] if item["type"] == "SCENE_PRESET_HERO"}
+          preset_data = json.loads(Path("Assets/FactoryPresets/scene_presets_v1.json").read_text(encoding="utf-8"))
+          assert set(preset_data["presets"]) == scene_catalog_ids, "scene preset/catalog ID mismatch"
+
           runtime_root = ui / "Runtime"
           expected_runtime = set()
           for manifest_name in (
