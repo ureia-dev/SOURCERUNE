@@ -1,5 +1,5 @@
 {
-  "commit": "04fa4cc2ea0db9caa29cbb5510e158411957fae7",
+  "commit": "4219a7046597a4dfd1297cf347f5d078083283be",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -12,6 +12,7 @@
         "sceneH": true,
         "sceneHeadH": true,
         "sceneGraphH": true,
+        "sceneViewBox": true,
         "analysisH": true,
         "analysisTabsH": true,
         "meterH": true,
@@ -45,6 +46,7 @@
         "wsH": true,
         "scenePanelH": true,
         "sceneVisualH": true,
+        "sceneViewBox": true,
         "motionDeckH": true,
         "sourceCard": true,
         "transmissionCard": true,
