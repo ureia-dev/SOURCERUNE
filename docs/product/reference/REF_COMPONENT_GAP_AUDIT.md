@@ -232,3 +232,21 @@ Status: **SCENE ASSET INVENTORY SUFFICIENT / MATERIAL DETAIL REF OVERLAY PENDING
 No new Analysis raster asset is currently justified. Fine graph inset, axis/tick geometry, tab typography and material/shadow details remain **MISSING-IN-SPEC / APPROX** until approved REF overlay measurement. Existing graph grid and node assets must be reused first.
 
 Status: **ANALYSIS ASSET INVENTORY SUFFICIENT / FINE SPEC PENDING**.
+
+
+## Checkpoint 42 — UI_01 Meter component gap audit completion
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI01_METER_FRAME | EXISTS-RUNTIME | existing PNG `RT_METER_FRAME.png` |
+| UI01_METER_SEGMENT | EXISTS-RUNTIME | existing PNG `RT_METER_SEGMENT.png` repeated by live fill |
+| UI01_METER_FILL | CODE-DRAWN | live level math / dynamic height |
+| UI01_METER_SCALE_LABELS | CODE-DRAWN / typography APPROX | live text |
+| UI01_METER_IN_OUT_LABELS | CODE-DRAWN / typography APPROX | live text |
+| UI01_METER_PEAK_RMS | EXISTS-RUNTIME control geometry + live text | CSS/live state |
+| UI01_METER_LUFS | CODE-DRAWN | live text/value; no fake value |
+| UI01_METER_BAKED_LEVEL | NOT REQUIRED | do not create |
+
+No new Meter raster asset is justified. Remaining uncertainty is typography/material fine matching only and stays **MISSING-IN-SPEC / APPROX**, not NEEDS-NEW-ASSET.
+
+Status: **METER ASSET INVENTORY COMPLETE FOR CURRENT REF CONTRACT**.
