@@ -406,3 +406,46 @@ The lower 144 px of the 520 px workspace allocation is intentional unused/alloca
 No dedicated baked scale-label image or baked meter fill is required.
 
 Status: **METER ALLOCATION + CORE GEOMETRY CONFIRMED / TYPOGRAPHY FINE METRICS APPROX**.
+
+
+## Checkpoint 43 — UI_01 bottom seven-panel structural geometry
+
+The bottom strip occupies plugin-local y=586..807 and closes exactly to the shell bottom.
+
+| Panel | Runtime data-open | x | y | w | h | Status |
+|---|---|---:|---:|---:|---:|---|
+| MOTION | MOTION | 10 | 586 | 269 | 216 | CONFIRMED |
+| BAD SIGNAL | TRANSMISSION | 287 | 586 | 178 | 216 | CONFIRMED |
+| CONDITION | CONDITION | 473 | 586 | 201 | 216 | CONFIRMED |
+| INTELLIGIBILITY | INTELLIGIBILITY | 682 | 586 | 201 | 216 | CONFIRMED |
+| AMBIENCE | AMBIENCE | 891 | 586 | 155 | 216 | CONFIRMED |
+| MIX | MIX | 1054 | 586 | 115 | 216 | CONFIRMED |
+| EQ / TONE | EQ_TONE | 1177 | 586 | 312 | 216 | CONFIRMED |
+
+Shared geometry:
+
+```text
+left padding 10
+panels: 269 + 178 + 201 + 201 + 155 + 115 + 312
+six gaps: 6 × 8
+right padding 10
+= 1499 px
+
+macro content height 216 + shell bottom residual 5 = 221 px
+```
+
+Current live control-size contracts (runtime evidence; face centers/fine optical placement still APPROX until REF overlay):
+
+- MOTION Distance / Speed / Doppler / Width knob face: 55 px.
+- BAD SIGNAL Amount: 68 px.
+- CONDITION Amount: 68 px.
+- INTELLIGIBILITY Amount: 68 px.
+- AMBIENCE Amount: 68 px.
+- MIX Wet: 82 px.
+- EQ / TONE graph: live mini-EQ SVG; no baked curve.
+
+Existing reusable runtime control assets include `RT_KNOB_S_BASE.png`, `RT_KNOB_M_BASE.png`, `RT_KNOB_L_BASE.png`, button/segment/dropdown caps and slider track/thumb states. Knob pointer, active ring, numeric value and labels stay live.
+
+Important naming contract: the second visible panel is **BAD SIGNAL**, but its runtime navigation/data-open key is `TRANSMISSION`; documentation must preserve this distinction rather than renaming the visible panel to TRANSMISSION.
+
+Status: **SEVEN PANEL BOUNDARIES CONFIRMED / INTERNAL CONTROL FINE GEOMETRY PARTLY APPROX**.
