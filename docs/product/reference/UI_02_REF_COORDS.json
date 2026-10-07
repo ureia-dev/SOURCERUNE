@@ -639,5 +639,60 @@
       "meter_labels"
     ],
     "rule": "Do not promote runtime exact coordinates to REF-confirmed while REF anchor remains approximate."
+  },
+  "semantic_card_runtime_template": {
+    "checkpoint": 62,
+    "status": "RUNTIME-EXACT / REF-INTERNAL-GEOMETRY-APPROX",
+    "shared": {
+      "meta_h": 74,
+      "meta_padding": {
+        "top": 15,
+        "right": 62,
+        "bottom": 8,
+        "left": 18
+      },
+      "image_inset": {
+        "top": 74,
+        "right": 14,
+        "bottom": 14,
+        "left": 14
+      },
+      "action": {
+        "top": 13,
+        "right": 12,
+        "w": 32,
+        "h": 32,
+        "implementation": "existing right-arrow PNG"
+      },
+      "bypass": "hidden",
+      "cycle": {
+        "w": 38,
+        "h": 62,
+        "bottom": 42,
+        "prev_left": 17,
+        "next_right": 17,
+        "icon_w": 20,
+        "icon_h": 32
+      }
+    },
+    "typography": {
+      "title_runtime_px": 10.5,
+      "item_name_runtime_px": 15.5,
+      "font_family": "unknown",
+      "status": "APPROX-vs-REF"
+    },
+    "applies_to": [
+      "SOURCE",
+      "TRANSMISSION",
+      "WALL_COVER",
+      "SPACE_ENVIRONMENT"
+    ],
+    "assets": {
+      "semantic_art": "EXISTS-RUNTIME",
+      "cycle_arrows": "EXISTS-RUNTIME",
+      "action_chevron": "EXISTS-RUNTIME",
+      "text": "CODE-DRAWN"
+    },
+    "rule": "Do not promote shared runtime template to REF-CONFIRMED before per-card direct REF scan."
   }
 }
