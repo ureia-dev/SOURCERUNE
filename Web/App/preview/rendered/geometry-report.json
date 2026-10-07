@@ -1,5 +1,5 @@
 {
-  "commit": "c84c9729d1360d5863e39348452f6a381057c916",
+  "commit": "85a676a14c59cc04458c9e8652b9609ba2134f7a",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -31,17 +31,17 @@
     },
     "UI_02": {
       "ui": "UI_02",
-      "ok": false,
+      "ok": true,
       "checks": {
         "appW": true,
         "appH": true,
         "topH": true,
         "wsH": true,
         "scenePanelH": true,
-        "sourceCard": false,
-        "transmissionCard": false,
-        "wallCard": false,
-        "spaceCard": false,
+        "sourceCard": true,
+        "transmissionCard": true,
+        "wallCard": true,
+        "spaceCard": true,
         "centerX": true,
         "meter": true,
         "macroStripH": true,
@@ -52,12 +52,7 @@
         "bottomEq": true,
         "ambience": true
       },
-      "failures": [
-        "sourceCard",
-        "transmissionCard",
-        "wallCard",
-        "spaceCard"
-      ]
+      "failures": []
     }
   }
 }
