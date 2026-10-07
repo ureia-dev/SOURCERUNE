@@ -978,5 +978,130 @@
       }
     },
     "rule": "Do not stretch 376px content to fill 520px allocation; do not bake meter levels or scale labels."
+  },
+  "bottom_macro_geometry": {
+    "checkpoint": 44,
+    "status": "PANEL-BOUNDARIES-CONFIRMED / INTERNAL-FINE-GEOMETRY-MIXED",
+    "coordinate_space": "plugin-local",
+    "strip": {
+      "x": 0,
+      "y": 586,
+      "w": 1499,
+      "h": 221,
+      "status": "CONFIRMED"
+    },
+    "content_h": 216,
+    "bottom_residual": 5,
+    "gap": 8,
+    "left_padding": 10,
+    "right_padding": 10,
+    "panels": [
+      {
+        "id": "MOTION",
+        "runtime_key": "MOTION",
+        "x": 10,
+        "y": 586,
+        "w": 269,
+        "h": 216,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "BAD_SIGNAL",
+        "runtime_key": "TRANSMISSION",
+        "x": 287,
+        "y": 586,
+        "w": 178,
+        "h": 216,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "CONDITION",
+        "runtime_key": "CONDITION",
+        "x": 473,
+        "y": 586,
+        "w": 201,
+        "h": 216,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "INTELLIGIBILITY",
+        "runtime_key": "INTELLIGIBILITY",
+        "x": 682,
+        "y": 586,
+        "w": 201,
+        "h": 216,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "AMBIENCE",
+        "runtime_key": "AMBIENCE",
+        "x": 891,
+        "y": 586,
+        "w": 155,
+        "h": 216,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "MIX",
+        "runtime_key": "MIX",
+        "x": 1054,
+        "y": 586,
+        "w": 115,
+        "h": 216,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": "EQ_TONE",
+        "runtime_key": "EQ_TONE",
+        "x": 1177,
+        "y": 586,
+        "w": 312,
+        "h": 216,
+        "status": "CONFIRMED"
+      }
+    ],
+    "runtime_knob_faces": {
+      "MOTION": {
+        "diameter": 55,
+        "status": "APPROX-runtime"
+      },
+      "BAD_SIGNAL": {
+        "diameter": 68,
+        "status": "APPROX-runtime"
+      },
+      "CONDITION": {
+        "diameter": 68,
+        "status": "APPROX-runtime"
+      },
+      "INTELLIGIBILITY": {
+        "diameter": 68,
+        "status": "APPROX-runtime"
+      },
+      "AMBIENCE": {
+        "diameter": 68,
+        "status": "APPROX-runtime"
+      },
+      "MIX": {
+        "diameter": 82,
+        "status": "APPROX-runtime"
+      }
+    },
+    "control_assets": {
+      "knobs": [
+        "RT_KNOB_S_BASE.png",
+        "RT_KNOB_M_BASE.png",
+        "RT_KNOB_L_BASE.png"
+      ],
+      "other_states": "button/segment/dropdown/slider assets exist in Runtime/Common/Controls",
+      "status": "EXISTS-RUNTIME"
+    },
+    "live_contract": [
+      "knob_pointer",
+      "knob_active_ring",
+      "numeric_value",
+      "labels",
+      "EQ_TONE_curve"
+    ],
+    "naming_rule": "Visible BAD SIGNAL panel maps to runtime data-open TRANSMISSION."
   }
 }
