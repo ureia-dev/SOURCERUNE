@@ -478,3 +478,26 @@ CSV parse failures: 0
 The current 224-ID semantic baseline is therefore fully mirrored across all three surfaces. SCN_049–SCN_074 remains a separate expansion manifest and is intentionally not part of `asset_manifest_v2.csv` yet.
 
 Status: **ASSET_MANIFEST_V2 ↔ SEMANTIC FILE PARITY = PASS**.
+
+
+## Checkpoint 80 — Scene expansion catalog/preset classification
+
+SCN_049–SCN_074 is intentionally a **preset-ready / hero-art-pending** expansion, not a missing preset set.
+
+Verified relationship:
+
+```text
+baseline asset_manifest_v2 IDs: 224
+scene expansion IDs: 26
+Web catalog IDs: 250 (=224+26)
+Factory scene preset IDs: 74
+Web scene preset mirror IDs: 74
+SCN_049–SCN_074 preset configs present: 26/26
+SCN_049–SCN_074 hero PNG exports present: 0/78
+```
+
+The Web runtime already avoids using an `art-required` hero as the main Scene background and falls back to the current SPACE/ENVIRONMENT art. Therefore the missing expansion PNGs are an **art-production gap**, not a Preset-content gap. Preset availability/content must not be removed or altered to hide the missing hero art.
+
+Fast CI now verifies that catalog IDs equal the 224 baseline IDs plus the 26 expansion IDs, expansion catalog records stay marked `art-required`, and the Scene Preset ID set matches the catalog Scene IDs.
+
+Status: **PRESET CONFIG COMPLETE / EXPANSION HERO ART 78 PNG STILL REQUIRED**.
