@@ -667,6 +667,16 @@
       "webBinding": "Web/App/runtime_skin_p1.css"
     },
     {
+      "id": "RT_TOOL_ICON_SHUFFLE",
+      "ui": "UI_02",
+      "group": "Icon",
+      "implementation": "VECTOR_OR_PNG",
+      "purpose": "UI_02 crossed-arrow / Shuffle icon; runtime action binding pending formal semantics",
+      "masterTarget": "32x32 @2x",
+      "states": "idle/hover",
+      "status": "ASSET_READY_P1_V1"
+    },
+    {
       "id": "RT_TOOL_ICON_UNDO",
       "ui": "COMMON",
       "group": "Icon",
@@ -788,8 +798,8 @@
   "p1": {
     "version": 1,
     "status": "ASSET_READY_AND_WEB_PARTIALLY_BOUND",
-    "logicalComponents": 28,
-    "pngFiles": 52,
+    "logicalComponents": 29,
+    "pngFiles": 54,
     "manifest": "Assets/UI/Runtime/p1_skin_manifest_v1.json",
     "webSkin": "Web/App/runtime_skin_p1.css",
     "liveSceneBinding": [
@@ -802,7 +812,8 @@
       "RT_EQ_NODE",
       "RT_IMAGE_ARROW_L",
       "RT_IMAGE_ARROW_R",
-      "RT_TOOL_ICON_GEAR"
+      "RT_TOOL_ICON_GEAR",
+      "RT_TOOL_ICON_SHUFFLE"
     ],
     "note": "Asset-ready-only pieces are intentionally not forced into UI controls that do not yet expose a matching runtime surface."
   }
