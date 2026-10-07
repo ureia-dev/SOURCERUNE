@@ -116,3 +116,31 @@ Current REF-derived runtime geometry places the compact horizontal meter at:
 The meter fill remains live and must never be baked.
 
 Status: **UI_02 MAJOR STRUCTURE CONFIRMED / FINE INTERNAL CONTROL AND TYPOGRAPHY SCAN STILL PENDING**.
+
+
+## Checkpoint 49 — UI_02 topbar runtime/REF audit
+
+The approved REF provides major topbar anchors, but the current runtime is still a mixed exact/approximate composition. Existing anchors remain **APPROX** where the REF measurement itself is approximate:
+
+| Control/region | REF anchor | Runtime status | Classification |
+|---|---|---|---|
+| Prev | x≈435–484 | existing button, current V10 width 42 | EXISTS-RUNTIME / geometry mismatch pending |
+| Next | x≈484–534 | existing button, current V10 width 42 | EXISTS-RUNTIME / geometry mismatch pending |
+| Preset selector | x≈534–872 | existing live select | EXISTS-RUNTIME / geometry APPROX |
+| Crossed-arrow / Shuffle | x≈881–930 | no independent DOM control currently | **MISSING-IN-RUNTIME binding**; icon assets exist |
+| A/B snapshots | x≈949–1020 | existing live snapshot buttons | EXISTS-RUNTIME / geometry APPROX |
+| Folder | x≈1036–1096 | existing `presetVisualsBtn` + folder icon | EXISTS-RUNTIME / geometry APPROX |
+| Compact meter region | x≈1167–1604 | existing live horizontal meter | EXISTS-RUNTIME / live fill |
+| Gear | center x≈1642 | existing live button + gear icon | EXISTS-RUNTIME / geometry close, final anchor APPROX |
+
+Asset state for missing Shuffle binding:
+
+- `RT_TOOL_ICON_SHUFFLE_IDLE.png`: EXISTS-RUNTIME asset.
+- `RT_TOOL_ICON_SHUFFLE_HOVER.png`: EXISTS-RUNTIME asset.
+- Missing piece is the dedicated runtime control/action binding, not the icon raster.
+
+No new Shuffle PNG should be generated. The behavior must not be invented from the icon alone; until the intended action is formally defined, this remains **MISSING-IN-RUNTIME binding / semantics pending**.
+
+Current V10 presetbar starts at x=430 with 42 px Prev/Next buttons, which does not prove exact REF alignment. Do not promote those current CSS values to CONFIRMED merely because they render.
+
+Status: **TOPBAR ASSET INVENTORY MOSTLY COMPLETE / SHUFFLE BINDING MISSING / FINE ANCHORS APPROX**.
