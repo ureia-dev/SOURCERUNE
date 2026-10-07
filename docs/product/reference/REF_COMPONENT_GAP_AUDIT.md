@@ -250,3 +250,27 @@ Status: **ANALYSIS ASSET INVENTORY SUFFICIENT / FINE SPEC PENDING**.
 No new Meter raster asset is justified. Remaining uncertainty is typography/material fine matching only and stays **MISSING-IN-SPEC / APPROX**, not NEEDS-NEW-ASSET.
 
 Status: **METER ASSET INVENTORY COMPLETE FOR CURRENT REF CONTRACT**.
+
+
+## Checkpoint 45 — UI_01 bottom seven-panel component gap audit
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI01_BOTTOM_KNOB_S/M/L_BASES | EXISTS-RUNTIME | existing PNG knob bases |
+| UI01_BOTTOM_KNOB_POINTERS | CODE-DRAWN | live CSS/SVG |
+| UI01_BOTTOM_KNOB_ACTIVE_RINGS | CODE-DRAWN / REF fine geometry pending | live CSS/SVG |
+| UI01_BOTTOM_KNOB_VALUES_LABELS | CODE-DRAWN / typography APPROX | live text |
+| UI01_BOTTOM_MODE_BUTTONS | EXISTS-RUNTIME control caps + live text | existing segment/button caps |
+| UI01_BOTTOM_DROPDOWNS | EXISTS-RUNTIME | existing dropdown cap/caret states |
+| UI01_BOTTOM_SLIDERS | EXISTS-RUNTIME | existing track/thumb states |
+| UI01_BAD_SIGNAL_DEVICE_TEXT | CODE-DRAWN | live selected TRANSMISSION name |
+| UI01_AMBIENCE_PREVIEW | EXISTS-RUNTIME semantic art | existing SPACE/ENVIRONMENT PNG |
+| UI01_AMBIENCE_WAVE | CODE-DRAWN | live/CSS decorative waveform |
+| UI01_EQ_TONE_GRAPH | CODE-DRAWN | live mini-EQ SVG |
+| UI01_EQ_TONE_TEXT_VALUES | CODE-DRAWN | live text |
+
+Current confirmed new raster requirement for the bottom seven panels: **0**.
+
+Remaining work is fine REF measurement of knob centers, ring/tick geometry, label/value baselines, title baselines, mode-button/select/preview rectangles and optical material matching. These remain **MISSING-IN-SPEC / APPROX**, not NEEDS-NEW-ASSET.
+
+Status: **BOTTOM PANEL ASSET INVENTORY SUFFICIENT / FINE INTERNAL REF GEOMETRY PENDING**.
