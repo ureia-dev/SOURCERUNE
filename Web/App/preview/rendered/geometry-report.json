@@ -1,9 +1,9 @@
 {
-  "commit": "9054c051b56d44057d6ae90ff768ae6fbc3f4aee",
+  "commit": "457817beb7659bca81736f63a5a89e671270ebf2",
   "results": {
     "UI_01": {
       "ui": "UI_01",
-      "ok": false,
+      "ok": true,
       "checks": {
         "appW": true,
         "appH": true,
@@ -29,10 +29,10 @@
         "transmissionCard": true,
         "wallCard": true,
         "spaceCard": true,
-        "sourceArt": false,
-        "transmissionArt": false,
-        "wallArt": false,
-        "spaceArt": false,
+        "sourceArt": true,
+        "transmissionArt": true,
+        "wallArt": true,
+        "spaceArt": true,
         "sourceEdit": true,
         "transmissionEdit": true,
         "wallEdit": true,
@@ -51,16 +51,185 @@
         "macroMix": true,
         "macroEq": true
       },
-      "failures": [
-        "sourceArt",
-        "transmissionArt",
-        "wallArt",
-        "spaceArt"
-      ]
+      "failures": [],
+      "measurements": {
+        "scene": {
+          "w": 967,
+          "h": 262,
+          "x": 333,
+          "y": 58
+        },
+        "analysis": {
+          "w": 967,
+          "h": 247,
+          "x": 333,
+          "y": 328
+        },
+        "meter": {
+          "w": 179,
+          "h": 376,
+          "x": 1310,
+          "y": 58
+        },
+        "moduleRail": {
+          "w": 313,
+          "h": 520,
+          "x": 10,
+          "y": 58
+        },
+        "cards": {
+          "SOURCE": {
+            "w": 313,
+            "h": 136,
+            "x": 10,
+            "y": 58
+          },
+          "TRANSMISSION": {
+            "w": 313,
+            "h": 132,
+            "x": 10,
+            "y": 201
+          },
+          "WALL_COVER": {
+            "w": 313,
+            "h": 132,
+            "x": 10,
+            "y": 340
+          },
+          "SPACE_ENVIRONMENT": {
+            "w": 313,
+            "h": 97,
+            "x": 10,
+            "y": 478
+          }
+        },
+        "art": {
+          "SOURCE": {
+            "w": 239,
+            "h": 72,
+            "x": 19,
+            "y": 115
+          },
+          "TRANSMISSION": {
+            "w": 239,
+            "h": 70,
+            "x": 19,
+            "y": 257
+          },
+          "WALL_COVER": {
+            "w": 239,
+            "h": 69,
+            "x": 19,
+            "y": 397
+          },
+          "SPACE_ENVIRONMENT": {
+            "w": 239,
+            "h": 35,
+            "x": 19,
+            "y": 533
+          }
+        },
+        "edit": {
+          "SOURCE": {
+            "w": 48,
+            "h": 34,
+            "x": 269,
+            "y": 73
+          },
+          "TRANSMISSION": {
+            "w": 48,
+            "h": 34,
+            "x": 269,
+            "y": 214
+          },
+          "WALL_COVER": {
+            "w": 48,
+            "h": 34,
+            "x": 269,
+            "y": 354
+          },
+          "SPACE_ENVIRONMENT": {
+            "w": 48,
+            "h": 34,
+            "x": 269,
+            "y": 490
+          }
+        },
+        "arrow": {
+          "SOURCE": {
+            "w": 49,
+            "h": 72,
+            "x": 268,
+            "y": 116
+          },
+          "TRANSMISSION": {
+            "w": 49,
+            "h": 70,
+            "x": 268,
+            "y": 258
+          },
+          "WALL_COVER": {
+            "w": 49,
+            "h": 70,
+            "x": 268,
+            "y": 398
+          },
+          "SPACE_ENVIRONMENT": {
+            "w": 49,
+            "h": 36,
+            "x": 268,
+            "y": 533
+          }
+        },
+        "macros": {
+          "MOTION": {
+            "w": 269,
+            "h": 216,
+            "x": 10,
+            "y": 586
+          },
+          "TRANSMISSION": {
+            "w": 178,
+            "h": 216,
+            "x": 287,
+            "y": 586
+          },
+          "CONDITION": {
+            "w": 201,
+            "h": 216,
+            "x": 473,
+            "y": 586
+          },
+          "INTELLIGIBILITY": {
+            "w": 201,
+            "h": 216,
+            "x": 682,
+            "y": 586
+          },
+          "AMBIENCE": {
+            "w": 155,
+            "h": 216,
+            "x": 891,
+            "y": 586
+          },
+          "MIX": {
+            "w": 115,
+            "h": 216,
+            "x": 1054,
+            "y": 586
+          },
+          "EQ_TONE": {
+            "w": 312,
+            "h": 216,
+            "x": 1177,
+            "y": 586
+          }
+        }
+      }
     },
     "UI_02": {
       "ui": "UI_02",
-      "ok": false,
+      "ok": true,
       "checks": {
         "appW": true,
         "appH": true,
@@ -70,10 +239,10 @@
         "scenePanelH": true,
         "scenePanelRect": true,
         "sceneVisualH": true,
-        "sceneVisualRect": false,
+        "sceneVisualRect": true,
         "sceneViewBox": true,
         "motionDeckH": true,
-        "motionDeckRect": false,
+        "motionDeckRect": true,
         "sourceCard": true,
         "transmissionCard": true,
         "wallCard": true,
@@ -97,10 +266,127 @@
         "bottomEq": true,
         "ambience": true
       },
-      "failures": [
-        "sceneVisualRect",
-        "motionDeckRect"
-      ]
+      "failures": [],
+      "measurements": {
+        "workspace": {
+          "w": 1672,
+          "h": 653,
+          "x": 0,
+          "y": 78
+        },
+        "center": {
+          "w": 972,
+          "h": 644,
+          "x": 356,
+          "y": 86
+        },
+        "scene": {
+          "w": 972,
+          "h": 641,
+          "x": 356,
+          "y": 86
+        },
+        "sceneSvg": {
+          "w": 972,
+          "h": 358,
+          "x": 356,
+          "y": 86
+        },
+        "motionDeck": {
+          "w": 972,
+          "h": 283,
+          "x": 356,
+          "y": 444
+        },
+        "meter": {
+          "w": 440,
+          "h": 62,
+          "x": 1160,
+          "y": 8
+        },
+        "cards": {
+          "SOURCE": {
+            "w": 334,
+            "h": 213,
+            "x": 13,
+            "y": 86
+          },
+          "TRANSMISSION": {
+            "w": 334,
+            "h": 166,
+            "x": 13,
+            "y": 308
+          },
+          "WALL_COVER": {
+            "w": 334,
+            "h": 247,
+            "x": 13,
+            "y": 483
+          },
+          "SPACE_ENVIRONMENT": {
+            "w": 322,
+            "h": 285,
+            "x": 1337,
+            "y": 86
+          }
+        },
+        "macros": {
+          "MOTION": {
+            "w": 0,
+            "h": 0,
+            "x": 0,
+            "y": 0
+          },
+          "TRANSMISSION": {
+            "w": 337,
+            "h": 172,
+            "x": 13,
+            "y": 751
+          },
+          "CONDITION": {
+            "w": 315,
+            "h": 172,
+            "x": 361,
+            "y": 751
+          },
+          "INTELLIGIBILITY": {
+            "w": 297,
+            "h": 172,
+            "x": 687,
+            "y": 751
+          },
+          "AMBIENCE": {
+            "w": 322,
+            "h": 350,
+            "x": 1337,
+            "y": 380
+          },
+          "MIX": {
+            "w": 316,
+            "h": 172,
+            "x": 995,
+            "y": 751
+          },
+          "EQ_TONE": {
+            "w": 337,
+            "h": 172,
+            "x": 1322,
+            "y": 751
+          }
+        },
+        "bottomKnob": {
+          "w": 76,
+          "h": 76,
+          "x": 28,
+          "y": 796
+        },
+        "mixKnob": {
+          "w": 76,
+          "h": 76,
+          "x": 1115,
+          "y": 796
+        }
+      }
     }
   }
 }
