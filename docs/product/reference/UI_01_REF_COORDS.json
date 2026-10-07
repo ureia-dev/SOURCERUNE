@@ -509,5 +509,42 @@
       }
     },
     "implementation_rule": "Use existing semantic PNGs/icons/arrows. Do not crop REF. Text stays live; exact font identity remains unknown."
+  },
+  "left_card_icon_audit": {
+    "checkpoint": 29,
+    "status": "CONFIRMED icon rectangles / typography APPROX",
+    "cards": {
+      "SOURCE": {
+        "x": 19,
+        "y": 68,
+        "w": 47,
+        "h": 42,
+        "status": "CONFIRMED"
+      },
+      "TRANSMISSION": {
+        "x": 18,
+        "y": 209,
+        "w": 48,
+        "h": 43,
+        "status": "CONFIRMED"
+      },
+      "WALL_COVER": {
+        "x": 19,
+        "y": 348,
+        "w": 47,
+        "h": 43,
+        "status": "CONFIRMED"
+      },
+      "SPACE_ENVIRONMENT": {
+        "x": 19,
+        "y": 485,
+        "w": 47,
+        "h": 42,
+        "status": "CONFIRMED"
+      }
+    },
+    "asset_status": "EXISTS-RUNTIME / existing independent PNG",
+    "typography_status": "APPROX; font family unknown; live runtime",
+    "runtime_change": "NONE"
   }
 }
