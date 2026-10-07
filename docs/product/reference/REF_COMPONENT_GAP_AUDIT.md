@@ -213,3 +213,22 @@ The approved Scene structural boxes are already represented by Web/Native geomet
 Also note the resolved Web cascade regression: the last-loaded `ref_geometry_lock_v11.css` previously reintroduced the superseded 521 px left rail and old semantic-image top offsets. Checkpoint 33 aligned V11 to the confirmed 520 px left-rail contract and Checkpoint 27 holder tops. This is a runtime parity fix, not an asset gap.
 
 Status: **SCENE ASSET INVENTORY SUFFICIENT / MATERIAL DETAIL REF OVERLAY PENDING**.
+
+
+## Checkpoint 39 — UI_01 Analysis component gap audit
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI01_ANALYSIS_GRAPH_GRID | EXISTS-RUNTIME | existing PNG `RT_GRAPH_GRID.png` |
+| UI01_ANALYSIS_EQ_NODE_IDLE/HOVER/SELECTED | EXISTS-RUNTIME | existing independent PNG states |
+| UI01_ANALYSIS_FLOW_NODE_DEFAULT/SELECTED/BYPASSED | EXISTS-RUNTIME | existing independent PNG states |
+| UI01_SPECTRUM_TRACE | CODE-DRAWN | live canvas |
+| UI01_SPACE_RESPONSE_DIRECT/EARLY/TAIL | CODE-DRAWN | live SVG |
+| UI01_SIGNAL_FLOW_NODES/ARROWS | CODE-DRAWN | live DOM/state |
+| UI01_ANALYSIS_TAB_LABELS | CODE-DRAWN / typography APPROX | live text |
+| UI01_ANALYSIS_AXIS_TICKS_LABELS | MISSING-IN-SPEC / CODE-DRAWN | live text after REF fine scan |
+| UI01_ANALYSIS_BAKED_GRAPH | NOT REQUIRED | do not create |
+
+No new Analysis raster asset is currently justified. Fine graph inset, axis/tick geometry, tab typography and material/shadow details remain **MISSING-IN-SPEC / APPROX** until approved REF overlay measurement. Existing graph grid and node assets must be reused first.
+
+Status: **ANALYSIS ASSET INVENTORY SUFFICIENT / FINE SPEC PENDING**.
