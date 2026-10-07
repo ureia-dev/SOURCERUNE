@@ -184,3 +184,32 @@ Checkpoint 30/31 establishes raster glyph bounds only. The left-card title, item
 Observed alignment evidence is x≈80–82 for title/name starts and x≈244 for chevrons. Font family remains `unknown`; nominal font size, weight, tracking, line-height, exact baseline, antialiasing and optical kerning remain **MISSING-IN-SPEC / APPROX**, not **NEEDS-NEW-ASSET**.
 
 No REF crop or baked text PNG is permitted. If later overlay proves live typography cannot converge, first adjust live CSS/font metrics; only a non-text material element may qualify for a new raster asset under the true-missing-asset rule.
+
+
+## Checkpoint 36 — UI_01 Scene component/material gap audit
+
+The center Scene is not missing a monolithic raster. Existing independent runtime parts already cover the major raster roles:
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI01_SCENE_GRID_BED | EXISTS-RUNTIME | existing PNG `RT_SCENE_GRID.png` |
+| UI01_SCENE_DISTANCE_CALLOUT | EXISTS-RUNTIME | existing PNG `RT_DISTANCE_CALLOUT.png` |
+| UI01_SCENE_WAVEFORM_BED | EXISTS-RUNTIME | existing PNG `RT_WAVEFORM_STRIP_BG.png` |
+| UI01_SCENE_SOURCE_MARKER_IDLE/ACTIVE | EXISTS-RUNTIME | existing independent PNG states |
+| UI01_SCENE_LISTENER_MARKER_IDLE/ACTIVE | EXISTS-RUNTIME | existing independent PNG states |
+| UI01_SCENE_POINT_IDLE/HOVER/SELECTED | EXISTS-RUNTIME | existing independent PNG states |
+| UI01_SCENE_MOTION_CAR | EXISTS-RUNTIME | existing PNG |
+| UI01_SCENE_MOTION_PATH | CODE-DRAWN | live SVG |
+| UI01_SCENE_DISTANCE_LINE | CODE-DRAWN | live SVG |
+| UI01_SCENE_DYNAMIC_POSITIONS | CODE-DRAWN | live state/transform |
+| UI01_SCENE_DISTANCE_TEXT | CODE-DRAWN | live text |
+| UI01_SCENE_WAVEFORM_TRACE | CODE-DRAWN | live canvas |
+| UI01_SCENE_BUILDINGS_FLOOR_MATERIAL | MISSING-IN-SPEC | keep current SVG/CSS until REF material overlay proves a raster need |
+
+Current true new raster requirement for Scene: **0 confirmed**.
+
+The approved Scene structural boxes are already represented by Web/Native geometry. Internal SVG implementation coordinates are not REF coordinates and must remain separate in documentation. No full Scene screenshot, REF crop, baked motion path, baked distance text, or baked waveform is allowed.
+
+Also note the resolved Web cascade regression: the last-loaded `ref_geometry_lock_v11.css` previously reintroduced the superseded 521 px left rail and old semantic-image top offsets. Checkpoint 33 aligned V11 to the confirmed 520 px left-rail contract and Checkpoint 27 holder tops. This is a runtime parity fix, not an asset gap.
+
+Status: **SCENE ASSET INVENTORY SUFFICIENT / MATERIAL DETAIL REF OVERLAY PENDING**.
