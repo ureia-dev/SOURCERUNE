@@ -59,3 +59,38 @@ A component may be promoted to **NEEDS-NEW-ASSET** only when all three condition
 Until those conditions are met, metal/graphite grain, recesses, bevels, cap highlights, rubber rings, cyan/amber glow and similar appearance differences remain **MISSING-IN-SPEC**, not automatically missing files.
 
 This prevents unnecessary duplicate PNG generation and keeps values, labels, ticks, meters, curves, paths and coordinates live.
+
+
+## Checkpoint 13 — left-rail edge convention / 1 px mismatch queue
+
+The approved UI_01 scan currently yields the following **APPROX edge-inclusive measurements**:
+
+```text
+SOURCE 137
+gap 6
+TRANSMISSION 125
+gap 8
+WALL/COVER 131
+gap 6
+SPACE/ENVIRONMENT 108
+----------------------
+measured span = 521 px
+runtime content box = 520 px
+delta = +1 px
+```
+
+This is **not yet evidence that one card must be reduced by 1 px**. The most likely unresolved cause is mixed edge convention: poster scans may count both boundary pixels while CSS box geometry measures the distance between edges. Until a direct overlay identifies the exact shared boundary, all four non-equal card heights remain APPROX and the runtime 4×124 template must not be replaced by an arbitrary 1 px correction.
+
+Resolution rule for the implementation checkpoint:
+
+1. Lock a single coordinate convention: `[x0, x1)` / `[y0, y1)` (right/bottom exclusive).
+2. Re-measure all four card outer boundaries from the same approved REF using that convention.
+3. Require exact closure to the 520 px workspace content box before changing CSS.
+4. If the four-card/gap sum still equals 521 px after exclusive-edge conversion, locate the actual 1 px overlap/border row in the REF rather than subtracting 1 px from a visually chosen card.
+5. Only then promote the affected boundaries from APPROX to CONFIRMED and implement the non-equal template.
+
+Status: **MISMATCH-QUEUED / NO RUNTIME CHANGE**.
+
+### Related asset decision
+
+The mismatch is geometry-only. It does not justify new card PNGs or REF crops. Existing semantic images, module icons and arrow assets remain reusable; card frame/background should remain independent runtime chrome / 9-slice or CSS unless a later material scan proves otherwise.
