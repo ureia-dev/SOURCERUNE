@@ -178,3 +178,17 @@ body.ui-02 .meter-fill{
   background:linear-gradient(90deg,#3f98ab 0 72%,#c29b58 72% 90%,#c65d55 90%);
   box-shadow:0 0 5px rgba(82,193,219,.28);
 }
+
+
+/* UI_01 semantic card interior proportions.
+   Outer heights are REF-locked; only header/image split adapts to each measured card. */
+body.ui-01 .module-card[data-type="SOURCE"] .module-meta{height:46px}
+body.ui-01 .module-card[data-type="SOURCE"] .module-art{top:46px}
+body.ui-01 .module-card[data-type="TRANSMISSION"] .module-meta{height:44px}
+body.ui-01 .module-card[data-type="TRANSMISSION"] .module-art{top:44px}
+body.ui-01 .module-card[data-type="WALL_COVER"] .module-meta{height:44px}
+body.ui-01 .module-card[data-type="WALL_COVER"] .module-art{top:44px}
+body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-meta{height:40px}
+body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-art{top:40px}
+body.ui-01 .module-meta{padding-top:7px}
+body.ui-01 .module-actions{top:8px}
