@@ -23,6 +23,6 @@ body.ui-01 .module-card[data-type="WALL_COVER"]{
 }
 body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"]{
   height:97px;
-  min-height:97px;/
+  min-height:97px;
   margin-bottom:0;
 }
