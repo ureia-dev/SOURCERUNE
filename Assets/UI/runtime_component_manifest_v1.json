@@ -5,10 +5,10 @@
   "rule": "Assemble UI from semantic art + reusable runtime chrome + live code. Never use a full-interface screenshot as implementation.",
   "currentAudit": {
     "expectedLegacyPng": 678,
-    "currentRepoPng": 650,
-    "currentRuntimeSemantic": 644,
+    "currentRepoPng": 678,
+    "currentRuntimeSemantic": 672,
     "expectedRuntimeSemantic": 672,
-    "missingLegacyRuntimeSemantic": 28,
+    "missingLegacyRuntimeSemantic": 0,
     "newSceneSemanticMissing": {
       "sceneIds": "SCN_049-SCN_074",
       "semanticScenes": 26,
@@ -20,7 +20,9 @@
       "p1": "complete",
       "p2": "complete",
       "p2Png": 26
-    }
+    },
+    "legacySemanticStatus": "COMPLETE",
+    "sceneExpansionStatus": "SCN_049-SCN_074 still planned/missing; not part of 672 legacy semantic baseline"
   },
   "components": [
     {
