@@ -239,5 +239,48 @@
     "status": "PASS / REF-CONFIRMED",
     "correction_gate": "Resolved by direct approved-REF exclusive-edge scan; Web and Native updated together.",
     "asset_impact": "NONE"
+  },
+  "left_card_internal_audit": {
+    "checkpoint": 24,
+    "status": "PARTIAL / INVENTORY-CONFIRMED / GEOMETRY-PENDING",
+    "semantic_artwork": {
+      "TRANSMISSION": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing PNG",
+        "families": [
+          "UI_01 TRN_*",
+          "Shared equivalent",
+          "ReferenceSheets TRANSMISSION_24_ATLAS.png"
+        ]
+      },
+      "WALL_COVER": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing PNG",
+        "families": [
+          "UI_01 CVR_*",
+          "Shared equivalent",
+          "ReferenceSheets WALL_COVER_32_ATLAS.png"
+        ]
+      },
+      "SPACE_ENVIRONMENT": {
+        "status": "EXISTS-RUNTIME",
+        "implementation": "existing PNG",
+        "families": [
+          "UI_01 SPC_*",
+          "Shared equivalent",
+          "ReferenceSheets SPACE_ENVIRONMENT_56_ATLAS.png"
+        ]
+      }
+    },
+    "geometry_pending": [
+      "image_holder_bounds",
+      "title_text_bbox_baseline",
+      "edit_action_column_bounds",
+      "arrow_rectangle",
+      "internal_padding_gaps",
+      "card_chrome_material_layers"
+    ],
+    "geometry_status": "APPROX / MISSING-IN-SPEC",
+    "rule": "Reference atlases confirm inventory only; they do not establish plugin-local REF coordinates. Whole/cropped REF images remain forbidden as runtime assets."
   }
 }
