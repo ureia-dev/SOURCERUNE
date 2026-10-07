@@ -40,16 +40,20 @@ function auditReferenceGeometry(){
       topH:near(box(topbar).h,58),
       wsH:near(box(ws).h,528),
       sceneH:near(box(scene).h,262),
+      sceneRect:near(box(scene).x,333)&&near(box(scene).y,58)&&near(box(scene).w,967)&&near(box(scene).h,262),
       sceneHeadH:panelHead?near(box(panelHead).h,34):false,
       sceneGraphH:sceneSvg?near(box(sceneSvg).h,186):false,
       sceneViewBox:sceneSvg?sceneSvg.getAttribute("viewBox")==="0 140 1000 192":false,
       analysisH:ana?near(box(ana).h,247):false,
+      analysisRect:ana?near(box(ana).x,333)&&near(box(ana).y,328)&&near(box(ana).w,967)&&near(box(ana).h,247):false,
       analysisTabsH:tabs?near(box(tabs).h,37):false,
       meterH:meter?near(box(meter).h,376):false,
+      meterRect:meter?near(box(meter).x,1310)&&near(box(meter).y,58)&&near(box(meter).w,179)&&near(box(meter).h,376):false,
       moduleRailH:rail?near(box(rail).h,520):false,
       meterSlot:meterSlot?near(box(meterSlot).w,20)&&near(box(meterSlot).h,178):false,
       meterMode:meterMode?near(box(meterMode).y,331)&&near(box(meterMode).h,30):false,
       macroStripH:near(box(macro).h,221),
+      macroStripRect:near(box(macro).x,0)&&near(box(macro).y,586)&&near(box(macro).w,1499)&&near(box(macro).h,221),
       gear:gear?near(box(gear).w,38)&&near(box(gear).h,38)&&near(box(gear).y,9)&&near(box(gear).x,1451):false,
 
       sourceCard:cards.SOURCE?near(cards.SOURCE.h,136)&&near(cards.SOURCE.x,10)&&near(cards.SOURCE.y,58):false,
@@ -75,13 +79,13 @@ function auditReferenceGeometry(){
       centerX:near(box(center).x,333),
       meterX:meter?near(box(meter).x,1310):false,
 
-      macroMotion:macros.MOTION?near(macros.MOTION.w,269)&&near(macros.MOTION.x,10):false,
-      macroTransmission:macros.TRANSMISSION?near(macros.TRANSMISSION.w,178)&&near(macros.TRANSMISSION.x,287):false,
-      macroCondition:macros.CONDITION?near(macros.CONDITION.w,201)&&near(macros.CONDITION.x,473):false,
-      macroIntelligibility:macros.INTELLIGIBILITY?near(macros.INTELLIGIBILITY.w,201)&&near(macros.INTELLIGIBILITY.x,682):false,
-      macroAmbience:macros.AMBIENCE?near(macros.AMBIENCE.w,155)&&near(macros.AMBIENCE.x,891):false,
-      macroMix:macros.MIX?near(macros.MIX.w,115)&&near(macros.MIX.x,1054):false,
-      macroEq:macros.EQ_TONE?near(macros.EQ_TONE.w,312)&&near(macros.EQ_TONE.x,1177):false
+      macroMotion:macros.MOTION?near(macros.MOTION.x,10)&&near(macros.MOTION.y,586)&&near(macros.MOTION.w,269)&&near(macros.MOTION.h,216):false,
+      macroTransmission:macros.TRANSMISSION?near(macros.TRANSMISSION.x,287)&&near(macros.TRANSMISSION.y,586)&&near(macros.TRANSMISSION.w,178)&&near(macros.TRANSMISSION.h,216):false,
+      macroCondition:macros.CONDITION?near(macros.CONDITION.x,473)&&near(macros.CONDITION.y,586)&&near(macros.CONDITION.w,201)&&near(macros.CONDITION.h,216):false,
+      macroIntelligibility:macros.INTELLIGIBILITY?near(macros.INTELLIGIBILITY.x,682)&&near(macros.INTELLIGIBILITY.y,586)&&near(macros.INTELLIGIBILITY.w,201)&&near(macros.INTELLIGIBILITY.h,216):false,
+      macroAmbience:macros.AMBIENCE?near(macros.AMBIENCE.x,891)&&near(macros.AMBIENCE.y,586)&&near(macros.AMBIENCE.w,155)&&near(macros.AMBIENCE.h,216):false,
+      macroMix:macros.MIX?near(macros.MIX.x,1054)&&near(macros.MIX.y,586)&&near(macros.MIX.w,115)&&near(macros.MIX.h,216):false,
+      macroEq:macros.EQ_TONE?near(macros.EQ_TONE.x,1177)&&near(macros.EQ_TONE.y,586)&&near(macros.EQ_TONE.w,312)&&near(macros.EQ_TONE.h,216):false
     };
     return {ui:"UI_01",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks)};
   }
