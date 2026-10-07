@@ -123,11 +123,11 @@ function auditReferenceGeometry(){
     bottomKnob76:bottomKnob?near(box(bottomKnob).w,76)&&near(box(bottomKnob).h,76):false,
     mixKnob76:mixKnob?near(box(mixKnob).w,76)&&near(box(mixKnob).h,76):false,
 
-    bottomTransmission:macros.TRANSMISSION?near(macros.TRANSMISSION.w,337)&&near(macros.TRANSMISSION.x,13)&&near(macros.TRANSMISSION.y,751):false,
-    bottomCondition:macros.CONDITION?near(macros.CONDITION.w,315)&&near(macros.CONDITION.x,361):false,
-    bottomIntelligibility:macros.INTELLIGIBILITY?near(macros.INTELLIGIBILITY.w,297)&&near(macros.INTELLIGIBILITY.x,687):false,
-    bottomMix:macros.MIX?near(macros.MIX.w,316)&&near(macros.MIX.x,995):false,
-    bottomEq:macros.EQ_TONE?near(macros.EQ_TONE.w,337)&&near(macros.EQ_TONE.x,1322):false,
+    bottomTransmission:macros.TRANSMISSION?near(macros.TRANSMISSION.w,337)&&near(macros.TRANSMISSION.h,172)&&near(macros.TRANSMISSION.x,13)&&near(macros.TRANSMISSION.y,751):false,
+    bottomCondition:macros.CONDITION?near(macros.CONDITION.w,315)&&near(macros.CONDITION.h,172)&&near(macros.CONDITION.x,361)&&near(macros.CONDITION.y,751):false,
+    bottomIntelligibility:macros.INTELLIGIBILITY?near(macros.INTELLIGIBILITY.w,297)&&near(macros.INTELLIGIBILITY.h,172)&&near(macros.INTELLIGIBILITY.x,687)&&near(macros.INTELLIGIBILITY.y,751):false,
+    bottomMix:macros.MIX?near(macros.MIX.w,316)&&near(macros.MIX.h,172)&&near(macros.MIX.x,995)&&near(macros.MIX.y,751):false,
+    bottomEq:macros.EQ_TONE?near(macros.EQ_TONE.w,337)&&near(macros.EQ_TONE.h,172)&&near(macros.EQ_TONE.x,1322)&&near(macros.EQ_TONE.y,751):false,
 
     ambience:macros.AMBIENCE?near(macros.AMBIENCE.w,322)&&near(macros.AMBIENCE.h,350)&&near(macros.AMBIENCE.x,1337)&&near(macros.AMBIENCE.y,380):false
   };
