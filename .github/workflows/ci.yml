@@ -104,9 +104,31 @@ jobs:
               if item["id"] in expansion_ids:
                   assert "art-required" in item.get("status", ""), f"expansion art status: {item['id']}"
 
+          catalog_by_id = {item["id"]: item for item in catalog["items"]}
+          for row in rows:
+              item = catalog_by_id[row["id"]]
+              for manifest_key, catalog_key in (
+                  ("type", "type"),
+                  ("name", "name"),
+                  ("ui01_asset", "ui01"),
+                  ("ui02_asset", "ui02"),
+                  ("master_asset", "master"),
+                  ("status", "status"),
+              ):
+                  assert item[catalog_key] == row[manifest_key], (
+                      f"catalog/manifest mismatch {row['id']} {catalog_key}: "
+                      f"{item[catalog_key]!r} != {row[manifest_key]!r}"
+                  )
+
           scene_catalog_ids = {item["id"] for item in catalog["items"] if item["type"] == "SCENE_PRESET_HERO"}
           preset_data = json.loads(Path("Assets/FactoryPresets/scene_presets_v1.json").read_text(encoding="utf-8"))
           assert set(preset_data["presets"]) == scene_catalog_ids, "scene preset/catalog ID mismatch"
+          for hero_id, preset in preset_data["presets"].items():
+              for selection_type, asset_id in preset.get("selection", {}).items():
+                  assert asset_id in catalog_by_id, f"{hero_id}: missing selection asset {asset_id}"
+                  assert catalog_by_id[asset_id]["type"] == selection_type, (
+                      f"{hero_id}: {asset_id} type {catalog_by_id[asset_id]['type']} != {selection_type}"
+                  )
 
           runtime_root = ui / "Runtime"
           expected_runtime = set()
