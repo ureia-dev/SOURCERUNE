@@ -386,5 +386,109 @@
       "AMBIENCE is the right-side 322x350 card, not a bottom panel.",
       "BAD SIGNAL visible label maps to runtime TRANSMISSION."
     ]
+  },
+  "topbar_runtime_audit": {
+    "checkpoint": 50,
+    "status": "MIXED EXISTS-RUNTIME / GEOMETRY-APPROX / SHUFFLE-BINDING-MISSING",
+    "controls": {
+      "prev": {
+        "ref_x": [
+          435,
+          484
+        ],
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "EXISTS-RUNTIME",
+          "width": 42
+        }
+      },
+      "next": {
+        "ref_x": [
+          484,
+          534
+        ],
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "EXISTS-RUNTIME",
+          "width": 42
+        }
+      },
+      "preset": {
+        "ref_x": [
+          534,
+          872
+        ],
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "EXISTS-RUNTIME",
+          "implementation": "live select"
+        }
+      },
+      "shuffle": {
+        "ref_x": [
+          881,
+          930
+        ],
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "MISSING-IN-RUNTIME binding",
+          "assets": [
+            "RT_TOOL_ICON_SHUFFLE_IDLE.png",
+            "RT_TOOL_ICON_SHUFFLE_HOVER.png"
+          ],
+          "asset_status": "EXISTS-RUNTIME",
+          "semantics": "pending"
+        }
+      },
+      "ab": {
+        "ref_x": [
+          949,
+          1020
+        ],
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "EXISTS-RUNTIME",
+          "implementation": "live snapshot buttons"
+        }
+      },
+      "folder": {
+        "ref_x": [
+          1036,
+          1096
+        ],
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "EXISTS-RUNTIME",
+          "control": "presetVisualsBtn",
+          "assets": [
+            "RT_TOOL_ICON_FOLDER_IDLE.png",
+            "RT_TOOL_ICON_FOLDER_HOVER.png"
+          ]
+        }
+      },
+      "meter_region": {
+        "ref_x": [
+          1167,
+          1604
+        ],
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "EXISTS-RUNTIME",
+          "implementation": "live horizontal meter"
+        }
+      },
+      "gear": {
+        "ref_cx": 1642,
+        "ref_status": "APPROX",
+        "runtime": {
+          "status": "EXISTS-RUNTIME",
+          "assets": [
+            "RT_TOOL_ICON_GEAR_IDLE.png",
+            "RT_TOOL_ICON_GEAR_HOVER.png"
+          ]
+        }
+      }
+    },
+    "rule": "Do not generate new shuffle icons and do not invent shuffle semantics from the icon alone."
   }
 }
