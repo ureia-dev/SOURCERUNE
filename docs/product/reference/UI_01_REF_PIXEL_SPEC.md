@@ -131,3 +131,10 @@ For every knob, the following are explicitly pending and must remain APPROX unti
 - knob-to-mode-button / selector / preview gap.
 
 Asset decision: existing knob-base PNGs are reusable first. Tick rings, pointers, values and labels stay live CSS/SVG/text. A new knob PNG is only justified if a later direct REF overlay proves the existing cap material itself cannot converge.
+
+
+## Checkpoint 20 — left-rail parity
+
+Native LayoutSpec and Web V7 both currently encode the same provisional stack: 137 + 6 + 125 + 8 + 131 + 6 + 108 = 521 px. The workspace side-rail content target remains 520 px.
+
+This confirms Native/Web parity only. The four card heights and three gaps remain APPROX until approved REF evidence resolves the shared one-pixel boundary. The eventual correction must update Native and Web together and close exactly to 520 px. No asset change is implied.
