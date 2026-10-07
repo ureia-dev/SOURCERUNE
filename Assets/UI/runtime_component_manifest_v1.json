@@ -512,7 +512,8 @@
       "purpose": "卡片圖片左箭頭",
       "masterTarget": "32x48 @2x",
       "states": "idle/hover",
-      "status": "ASSET_READY_P1_V1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/visual_convergence_v2.css + Web/App/ref_topbar_lock_v10.css"
     },
     {
       "id": "RT_IMAGE_ARROW_R",
@@ -522,7 +523,8 @@
       "purpose": "卡片圖片右箭頭",
       "masterTarget": "32x48 @2x",
       "states": "idle/hover",
-      "status": "ASSET_READY_P1_V1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/visual_convergence_v2.css + Web/App/ref_topbar_lock_v10.css"
     },
     {
       "id": "RT_MODULE_ICON_SOURCE",
@@ -653,7 +655,8 @@
       "purpose": "Settings",
       "masterTarget": "32x32 @2x",
       "states": "idle/hover",
-      "status": "ASSET_READY_P1_V1"
+      "status": "ASSET_READY_P1_V1",
+      "webBinding": "Web/App/ref_topbar_lock_v10.css"
     },
     {
       "id": "RT_TOOL_ICON_FOLDER",
@@ -810,11 +813,13 @@
     "assetReadyOnly": [
       "RT_BYPASS_TOGGLE",
       "RT_EQ_NODE",
-      "RT_IMAGE_ARROW_L",
-      "RT_IMAGE_ARROW_R",
-      "RT_TOOL_ICON_GEAR",
       "RT_TOOL_ICON_SHUFFLE"
     ],
-    "note": "Asset-ready-only pieces are intentionally not forced into UI controls that do not yet expose a matching runtime surface."
+    "note": "Asset-ready-only now lists components with no current Web runtime binding. Arrow and Gear assets are bound by later convergence/topbar CSS; Shuffle asset exists but its action semantics/binding remain pending.",
+    "webBoundOutsideP1": [
+      "RT_IMAGE_ARROW_L",
+      "RT_IMAGE_ARROW_R",
+      "RT_TOOL_ICON_GEAR"
+    ]
   }
 }
