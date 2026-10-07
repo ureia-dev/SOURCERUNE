@@ -321,3 +321,26 @@ Status: **UI_02 MAJOR ASSET INVENTORY SUFFICIENT / FINE MATERIAL AND STATE AUDIT
 No new topbar raster asset is required at this checkpoint. The only confirmed functional/runtime gap is the missing independent Shuffle control binding; its icon states already exist. Fine topbar anchoring remains **MISSING-IN-SPEC / APPROX** because the measured REF x ranges are approximate and must not be converted into hard pixel locks without direct overlay confirmation.
 
 Status: **TOPBAR RASTER INVENTORY COMPLETE / SHUFFLE BINDING MISSING / POSITION FINE-SCAN PENDING**.
+
+
+## Checkpoint 54 — UI_02 Scene / Motion deck component gap audit
+
+| Component | Classification | Preferred implementation |
+|---|---|---|
+| UI02_SCENE_ENVIRONMENT_BED | EXISTS-RUNTIME | existing SPACE/ENVIRONMENT semantic PNG |
+| UI02_SCENE_SOURCE_LISTENER_MARKERS | EXISTS-RUNTIME | existing Common marker PNG states |
+| UI02_SCENE_MOTION_PATH | CODE-DRAWN | live SVG |
+| UI02_SCENE_DISTANCE_LINE | CODE-DRAWN | live SVG |
+| UI02_SCENE_DYNAMIC_COORDINATES | CODE-DRAWN | live state/transform |
+| UI02_SCENE_DISTANCE_VALUE | CODE-DRAWN | live text |
+| UI02_DISTANCE_DIAL_BASE | EXISTS-RUNTIME | reuse `RT_KNOB_L_BASE.png` |
+| UI02_DISTANCE_DIAL_POINTER | CODE-DRAWN | live CSS/SVG |
+| UI02_MOTION_SMALL_KNOB_BASE | EXISTS-RUNTIME | reuse `RT_KNOB_S_BASE.png` |
+| UI02_MOTION_SMALL_KNOB_POINTERS | CODE-DRAWN | live CSS/SVG |
+| UI02_MOTION_GRAPH | CODE-DRAWN | live SVG |
+| UI02_MOTION_MODE_SELECT | EXISTS-RUNTIME control style | live select/dropdown |
+| UI02_MOTION_TEXT_VALUES | CODE-DRAWN / typography APPROX | live text |
+
+No new Scene/Motion raster asset is confirmed as necessary. The remaining work is direct REF overlay for exact dial center, pointer/tick geometry, motion graph rectangle, readout baselines and optical material details.
+
+Status: **SCENE/MOTION ASSET INVENTORY SUFFICIENT / FINE CONTROL GEOMETRY PENDING**.
