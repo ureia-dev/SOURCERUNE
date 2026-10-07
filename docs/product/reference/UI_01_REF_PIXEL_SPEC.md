@@ -260,3 +260,17 @@ SPACE:        image top55 bottom7; Edit top11; arrow top54 h36
 This checkpoint intentionally does **not** change module-icon box geometry or title/name typography. Those remain the next independent scan/fix so a typography/icon adjustment cannot contaminate the now-confirmed holder/action rectangles.
 
 Status: **IMPLEMENTED / semantic art unchanged / REF crops not used.**
+
+
+## Checkpoint 28 — left-card icon geometry
+
+Approved REF icon rectangles already measured in checkpoint 26:
+
+- SOURCE: x19 y68 w47 h42 — CONFIRMED
+- TRANSMISSION: x18 y209 w48 h43 — CONFIRMED
+- WALL/COVER: x19 y348 w47 h43 — CONFIRMED
+- SPACE/ENVIRONMENT: x19 y485 w47 h42 — CONFIRMED
+
+Icon artwork remains EXISTS-RUNTIME using existing independent PNG assets. Title/name and chevron raster bounds remain APPROX; font family remains unknown and text stays live runtime. Icon geometry must not be used to infer typography metrics.
+
+Status: ICON GEOMETRY CONFIRMED / TYPOGRAPHY APPROX / no runtime change.
