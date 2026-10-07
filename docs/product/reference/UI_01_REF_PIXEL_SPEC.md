@@ -236,3 +236,27 @@ Asset classification:
 - dedicated REF crops: **forbidden**
 
 Status: **major internal rectangles CONFIRMED; typography metrics remain APPROX.**
+
+
+## Checkpoint 27 — left-card holder/action geometry implemented
+
+Web V7 now uses the confirmed checkpoint 26 rectangles rather than the old equal internal template.
+
+Implemented:
+- semantic image holder x = card + 9 px; right residual = 65 px;
+- Edit cap width/height = 48×34 px, right residual = 5 px;
+- right-arrow hit box width = 49 px, right residual = 5 px;
+- per-card image top/bottom and arrow top/height match the approved REF scan.
+
+Per-card vertical implementation:
+
+```text
+SOURCE:       image top57 bottom7; Edit top14; arrow top57 h72
+TRANSMISSION: image top56 bottom6; Edit top12; arrow top56 h70
+WALL/COVER:   image top57 bottom6; Edit top13; arrow top57 h70
+SPACE:        image top55 bottom7; Edit top11; arrow top54 h36
+```
+
+This checkpoint intentionally does **not** change module-icon box geometry or title/name typography. Those remain the next independent scan/fix so a typography/icon adjustment cannot contaminate the now-confirmed holder/action rectangles.
+
+Status: **IMPLEMENTED / semantic art unchanged / REF crops not used.**
