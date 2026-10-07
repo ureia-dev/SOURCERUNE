@@ -806,4 +806,4 @@
     ],
     "note": "Asset-ready-only pieces are intentionally not forced into UI controls that do not yet expose a matching runtime surface."
   }
-}\n
+}
