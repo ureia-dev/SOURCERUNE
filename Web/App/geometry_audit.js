@@ -37,6 +37,7 @@ function auditReferenceGeometry(){
       sceneH:near(box(scene).h,262),
       sceneHeadH:panelHead?near(box(panelHead).h,34):false,
       sceneGraphH:sceneSvg?near(box(sceneSvg).h,186):false,
+      sceneViewBox:sceneSvg?sceneSvg.getAttribute("viewBox")==="0 140 1000 192":false,
       analysisH:ana?near(box(ana).h,247):false,
       analysisTabsH:tabs?near(box(tabs).h,37):false,
       meterH:meter?near(box(meter).h,376):false,
@@ -80,6 +81,7 @@ function auditReferenceGeometry(){
     wsH:near(box(ws).h,653),
     scenePanelH:near(box(scene).h,641),
     sceneVisualH:sceneSvg?near(box(sceneSvg).h,358):false,
+    sceneViewBox:sceneSvg?sceneSvg.getAttribute("viewBox")==="0 0 1000 420":false,
     motionDeckH:motionDeck?near(box(motionDeck).h,283):false,
 
     sourceCard:cards.SOURCE?near(cards.SOURCE.w,334)&&near(cards.SOURCE.h,213)&&near(cards.SOURCE.x,13)&&near(cards.SOURCE.y,86):false,
