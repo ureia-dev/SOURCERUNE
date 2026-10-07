@@ -94,3 +94,23 @@ Status: **MISMATCH-QUEUED / NO RUNTIME CHANGE**.
 ### Related asset decision
 
 The mismatch is geometry-only. It does not justify new card PNGs or REF crops. Existing semantic images, module icons and arrow assets remain reusable; card frame/background should remain independent runtime chrome / 9-slice or CSS unless a later material scan proves otherwise.
+
+
+## Runtime geometry consistency audit — checkpoint 15
+
+Direct repository verification found a concrete implementation/spec mismatch in the UI_01 left rail:
+
+| Item | Approved REF contract | Current runtime evidence | Classification | Action |
+|---|---|---|---|---|
+| UI01_LEFT_RAIL_CONTENT_BOX | 520 px | workspace side-rail contract = 520 px | CONFIRMED | preserve 520 px target |
+| UI01_LEFT_RAIL_CARD_STACK | exact 520 px closure required | V7 CSS uses 137 + 6 + 125 + 8 + 131 + 6 + 108 = 521 px | MISSING-IN-RUNTIME / geometry mismatch | do not promote V7 values to final; remeasure shared borders |
+| UI01_SOURCE_CARD_HEIGHT | pending exclusive-edge overlay | 137 px | APPROX | no arbitrary correction |
+| UI01_TRANSMISSION_CARD_HEIGHT | pending exclusive-edge overlay | 125 px | APPROX | no arbitrary correction |
+| UI01_WALL_COVER_CARD_HEIGHT | pending exclusive-edge overlay | 131 px | APPROX | no arbitrary correction |
+| UI01_SPACE_ENVIRONMENT_CARD_HEIGHT | pending exclusive-edge overlay | 108 px | APPROX | no arbitrary correction |
+
+The current `Web/App/ref_geometry_lock_v7.css` is therefore a **provisional reconstruction**, not a confirmed REF lock. Its `.module-rail{height:521px}` and four card dimensions must not be treated as source-of-truth merely because they exist in runtime code.
+
+This is a geometry defect, not an asset defect. No new PNG, REF crop, knob material, card frame, or semantic image is justified by this mismatch. The correction gate remains: one direct approved-REF scan under the right/bottom-exclusive convention must identify the shared 1 px border/overlap row and produce exact 520 px closure before runtime dimensions are changed.
+
+Status: **IMPLEMENTATION-AHEAD-OF-SPEC / CORRECTION-GATED**.
