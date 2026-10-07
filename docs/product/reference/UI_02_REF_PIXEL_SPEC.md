@@ -213,3 +213,35 @@ Checkpoint 58 corrected the last-loaded V11 rules so all five visible bottom mac
 This correction changes geometry only. Knob pointer, value, label and active ring remain live; no DSP, parameter semantics, preset content or processing order changed.
 
 Status: **WEB/NATIVE BOTTOM KNOB DIAMETER PARITY RESTORED — 76 px**.
+
+
+## Checkpoint 61 — UI_02 semantic-card internal runtime template audit
+
+Formal REF fine internal coordinates are still pending, so the values below are recorded as **runtime exact / REF APPROX**, not REF-confirmed.
+
+Current shared Web template:
+
+- header/meta band height: 74 px;
+- meta padding: top 15, right 62, bottom 8, left 18;
+- semantic image holder: top 74, left/right/bottom 14 px;
+- title font runtime ≈10.5 px; item-name runtime ≈15.5 px; font identity remains unknown relative to REF;
+- action control: top 13, right 12;
+- BYP hidden;
+- EDIT is rendered as a right-chevron affordance, 32×32, using existing right-arrow PNG state;
+- both image-cycle arrows remain visible in UI_02;
+- cycle hit box: 38×62, bottom 42;
+- cycle prev left=17; cycle next right=17; icon raster displayed ≈20×32.
+
+These rules apply across SOURCE / TRANSMISSION / WALL-COVER / SPACE-ENVIRONMENT, whose outer rectangles are already CONFIRMED by Checkpoint 46.
+
+Asset classification remains:
+
+- semantic images: EXISTS-RUNTIME;
+- left/right arrow states: EXISTS-RUNTIME;
+- title/item name: CODE-DRAWN live text;
+- action chevron: existing arrow PNG;
+- card material/chrome: reuse existing runtime/CSS first; direct REF material overlay pending.
+
+Do not promote this shared 74px template to REF-confirmed until each card's approved-REF image holder, title/name baseline, action rectangle and arrow boxes are measured directly.
+
+Status: **RUNTIME TEMPLATE DOCUMENTED / REF INTERNAL GEOMETRY STILL APPROX**.
