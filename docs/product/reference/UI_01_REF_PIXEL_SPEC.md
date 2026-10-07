@@ -374,3 +374,35 @@ The graph bed is an existing independent reusable runtime asset: `Assets/UI/Runt
 Tab labels, graph labels, axis/tick labels and dynamic values stay live text. Font family/metrics remain `unknown` / APPROX unless directly measured from the approved REF. A baked Spectrum, baked Space Response curve, baked Signal Flow or baked text PNG is forbidden.
 
 Status: **ANALYSIS PANEL/TABS CONFIRMED / FINE GRAPH INSETS AND TYPOGRAPHY APPROX / LIVE DATA PRESERVED**.
+
+
+## Checkpoint 40 — UI_01 right Meter allocation / layer completion
+
+The right workspace column is part of the confirmed shell closure, so its allocation is no longer APPROX:
+
+| Object | x | y | w | h | Status |
+|---|---:|---:|---:|---:|---|
+| Meter workspace allocation | 1310 | 58 | 179 | 520 | CONFIRMED |
+| Meter live content block | 1310 | 58 | 179 | 376 | CONFIRMED |
+| Meter visual bed | 1310 | 58 | 179 | 266 | CONFIRMED |
+| IN block | 1324 | 85 | 40 | 213 | CONFIRMED |
+| OUT block | 1424 | 85 | 40 | 213 | CONFIRMED |
+| IN slot | 1334 | 112 | 20 | 178 | CONFIRMED |
+| OUT slot | 1434 | 112 | 20 | 178 | CONFIRMED |
+| Center dB scale column | 1386 | 107 | 28 | ≈214 | APPROX vertical raster/text extent; column placement confirmed |
+| Peak/RMS control | 1320 | 331 | 159 | 30 | CONFIRMED |
+| LUFS region | 1320 | 365 | 159 | 69 | CONFIRMED |
+
+Runtime layering contract:
+
+1. `RT_METER_FRAME.png`: existing independent frame/slot raster, **EXISTS-RUNTIME**.
+2. `RT_METER_SEGMENT.png`: existing independent segment raster repeated vertically by the live meter fill, **EXISTS-RUNTIME**.
+3. Meter fill amount/level math: **CODE-DRAWN / live runtime**; never bake a fixed level into a PNG.
+4. Scale labels `0 / -6 / -12 / -24 / -36 / -60`, IN/OUT labels, Peak/RMS text, LUFS label/value: **CODE-DRAWN / live text**.
+5. Typography remains APPROX unless directly measured; current runtime monospace choice is implementation evidence, not proof of REF font identity.
+
+The lower 144 px of the 520 px workspace allocation is intentional unused/allocation space relative to the 376 px meter content block and must not be filled by stretching the meter.
+
+No dedicated baked scale-label image or baked meter fill is required.
+
+Status: **METER ALLOCATION + CORE GEOMETRY CONFIRMED / TYPOGRAPHY FINE METRICS APPROX**.
