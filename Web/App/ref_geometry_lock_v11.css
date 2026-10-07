@@ -131,3 +131,20 @@ body.ui-02 .meter-rail{
 body.ui-02 .meter-head,body.ui-02 .meter-values,body.ui-02 .meter-mode-toggle{display:none!important}
 body.ui-02 .meter-block{grid-template-columns:var(--sr02-meter-label) var(--sr02-meter-slot-w)}
 body.ui-02 .meter-slot{width:var(--sr02-meter-slot-w);height:var(--sr02-meter-slot-h);min-height:var(--sr02-meter-slot-h)}
+
+
+/* UI_01 live waveform strip: real Runtime bed + live canvas overlay. */
+body.ui-01 .scene-waveform-strip{
+  height:38px;
+  margin:0 9px 4px;
+  overflow:hidden;
+  background:
+    url("../../Assets/UI/Runtime/UI_01/Scene/RT_WAVEFORM_STRIP_BG.png") center/100% 100% no-repeat,
+    #081015;
+}
+body.ui-01 .scene-waveform-strip canvas{
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  opacity:.94;
+}
