@@ -1,5 +1,15 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## UI_02 全原圖 REF 10 倍像素掃描（2026-10-08；GitHub 真檔案）
+
+- **UI_02 原圖已在 GitHub**：`Assets/UI/UI_02/UI_02_REF/UI_02_REF.png`，1672×941 RGB，SHA-256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff`。由 Actions artifact 取回原始 PNG 並核對尺寸/雜湊。
+- **UI_02 的 GitHub 10× 圖也已實際寫入**：`Assets/UI/UI_02/UI_02_REF/UI_02_REF_10X_PIXEL.png`，16720×9410，SHA-256 `bc7aa52be5db2ae0cce9d70e6e6841288c86229bb64f8e059047a83b24cff389`；容器重算輸出與 GitHub 成品 byte-for-byte 完全一致。
+- 掃描：`docs/product/reference/UI_02_REF_10X_SCAN_20261008.json/.md`（25 個結構矩形、8 topbar 錨點、8 尺寸）；`UI_02_REF_DETAILED_COMPONENTS_20261008.json/.md`（139 細部元件、內容/功能/座標）；`UI_02_REF_PIXEL_EDGE_EVIDENCE_20261008.json/.md`（15 組真原圖 RGB 相鄰像素邊界證據）。
+- UI_02 10× 為原像素複製，不產生新資訊；細部 bbox 仍 `APPROX-VISUAL`，操作狀態/精確字基線/VST3 音訊皆 `PENDING`。
+- 已刪除本輪臨時 GitHub Actions 原圖產生器工作流程，不增加第四 CI tier；只改 REF 檔案與掃描文件，未改 Web、Native、DSP、Preset、safety rounds。
+- **UI_01 不可混同**：當次已核准 1508×808 清潔原圖，142 項 MD/JSON 與放大程式已在 GitHub，唯 **UI_01 原圖及 10× PNG binary 尚未上傳 Repo**，標 `PENDING-BINARY-UPLOAD`。
+
+
 ## UI_01 clean REF scan 1508×808（本輪新增 checkpoint，2026-10-08）
 
 - 使用者當次核准的 UI_01 無說明直接附件：1508×808 RGBA；原圖 SHA-256 `96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916`；精確 10 倍逐像素 PNG 為 15080×8080，SHA-256 `94044c004f47b01f214cf62cfc3c306fd1afcf7c4c82b5a62e0fb4967bae53a8`。
