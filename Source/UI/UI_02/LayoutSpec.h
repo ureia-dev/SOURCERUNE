@@ -41,6 +41,27 @@ inline constexpr int kTransmissionCardHeight = 166;
 inline constexpr int kWallCardHeight = 247;
 inline constexpr int kSpaceCardHeight = 285;
 inline constexpr int kAmbienceCardHeight = 350;
+
+// Shared UI_02 semantic-card interior: Web runtime-exact template only.
+// REF-fine card internals and font metrics remain APPROX until original bitmap overlay.
+inline constexpr int kCardMetaHeight = 74;
+inline constexpr int kCardMetaPaddingTop = 15;
+inline constexpr int kCardMetaPaddingRight = 62;
+inline constexpr int kCardMetaPaddingBottom = 8;
+inline constexpr int kCardMetaPaddingLeft = 18;
+inline constexpr int kCardImageTop = 74;
+inline constexpr int kCardImageSideInset = 14;
+inline constexpr int kCardImageBottomInset = 14;
+inline constexpr int kCardActionSize = 32;
+inline constexpr int kCardActionTop = 13;
+inline constexpr int kCardActionRight = 12;
+inline constexpr int kCardCycleHitWidth = 38;
+inline constexpr int kCardCycleHitHeight = 62;
+inline constexpr int kCardCycleBottom = 42;
+inline constexpr int kCardCyclePrevLeft = 17;
+inline constexpr int kCardCycleNextRight = 17;
+inline constexpr int kCardCycleIconWidth = 20;
+inline constexpr int kCardCycleIconHeight = 32;
 inline constexpr int kDistanceDialDiameter = 300;
 inline constexpr int kMotionSmallKnobDiameter = 54;
 inline constexpr int kBottomMacroKnobDiameter = 76;
@@ -123,6 +144,10 @@ static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
     + kBottomBadSignalWidth + kBottomConditionWidth + kBottomIntelligibilityWidth
     + kBottomMixWidth + kBottomEqWidth + 4 * kBottomGridGap);
 
+static_assert (kCardImageTop == kCardMetaHeight);
+static_assert (kCardMetaPaddingTop + kCardMetaPaddingBottom < kCardMetaHeight);
+static_assert (kCardCycleIconWidth <= kCardCycleHitWidth && kCardCycleIconHeight <= kCardCycleHitHeight);
+static_assert (kCardActionSize <= kCardMetaHeight);
 static_assert (kSceneComponentDock.size() == 4);
 static_assert (kFastBottomMacros.size() == 5);
 static_assert (kFastBottomMacros[0] == Section::Transmission);
