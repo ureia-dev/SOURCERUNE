@@ -1,5 +1,5 @@
 {
-  "commit": "09e6fe832c1aa5917eaeb986b8590fbb8a6dea8b",
+  "commit": "f9c847797b65d919d4f41e4088670522f97781fa",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -22,6 +22,12 @@
         "moduleRailH": true,
         "meterSlots": true,
         "meterMode": true,
+        "motionKnobFaces55": true,
+        "badSignalKnob68": true,
+        "conditionKnob68": true,
+        "intelligibilityKnob68": true,
+        "ambienceKnob68": true,
+        "mixKnob82": true,
         "macroStripH": true,
         "macroStripRect": true,
         "gear": true,
@@ -179,6 +185,64 @@
             "h": 36,
             "x": 269,
             "y": 532
+          }
+        },
+        "knobFaces": {
+          "motion": [
+            {
+              "w": 55,
+              "h": 55,
+              "x": 25.5,
+              "y": 626
+            },
+            {
+              "w": 55,
+              "h": 55,
+              "x": 86.5,
+              "y": 626
+            },
+            {
+              "w": 55,
+              "h": 55,
+              "x": 147.5,
+              "y": 626
+            },
+            {
+              "w": 55,
+              "h": 55,
+              "x": 208.5,
+              "y": 626
+            }
+          ],
+          "badSignal": {
+            "w": 68,
+            "h": 68,
+            "x": 297,
+            "y": 626
+          },
+          "condition": {
+            "w": 68,
+            "h": 68,
+            "x": 483,
+            "y": 626
+          },
+          "intelligibility": {
+            "w": 68,
+            "h": 68,
+            "x": 748.5,
+            "y": 626
+          },
+          "ambience": {
+            "w": 68,
+            "h": 68,
+            "x": 934.5,
+            "y": 656
+          },
+          "mix": {
+            "w": 82,
+            "h": 82,
+            "x": 1070.5,
+            "y": 626
           }
         },
         "macros": {
