@@ -54,6 +54,12 @@
 - **研究不等於擅自部署／壓測**：研究結果進 evidence ledger 和決策表；實作需符合使用者當次授權、既有 UI/DSP/Factory 鎖定與 Fast/Deep/Release 次數規則。不要因八階段研究就自行觸發 100 次 Release。
 - **跨對話永久保存**：每次新研究、產品決策必須更新本憲章的相應決策與 `docs/research/` 規格／資料，禁止只留在一次聊天交接。AGENTS.md 應迫使每篇 GPT 一開始就先讀本節和研究標準。
 
+### 原始產品討論：不可遺漏的設計理由
+
+**[最初產品決議對照](docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md)** 從原始可見對話依主題復原：Speakerphone 常用核心與 ADV 簡化 LFO；FutzBox／AudioThing Speakers／Audacity 合法功能借鑑；SOURCE／COVER／SPACE 自主建模與程序化無限 Ambience、背景交談語言特徵；真正 Distance/Motion 與 Pro Tools 級 Automation；1× native rate、極低 CPU；全球音訊工程師定位；UI_01/UI_02 可重排元件；224 語意圖資與後續 74 Factory。**SOURCERUNE 是產品型號／專案名稱，品牌／公司名稱未定。** 此檔只保存最終有效決策，不用舊配色／早期圖集／已被取代方案覆蓋現行 REF。
+
+新 GPT 依序用研究 evidence standard 判斷「為何要做」，DSP ownership 判斷「誰做與如何試聽」，原始決議對照理解「最初核准什麼」，最後以最新 Factory／REF／真實程式及 HEAD 驗證「目前實際是什麼」。
+
 ## 原則與規格正文
 
 本文件將 2026-10-08 完整交接中屬於**長期製作契約**的內容完整收編，與歷史進度拆開。章內曾提及的舊測量與改善歷程僅用於解釋**為什麼規格如此**；最新 runtime/commit/測試一律重新查證。
