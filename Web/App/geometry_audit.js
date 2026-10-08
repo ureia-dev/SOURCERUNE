@@ -78,10 +78,12 @@ function auditReferenceGeometry(){
       macroStripRect:near(box(macro).x,0)&&near(box(macro).y,586)&&near(box(macro).w,1499)&&near(box(macro).h,221),
       gear:gear?near(box(gear).w,38)&&near(box(gear).h,38)&&near(box(gear).y,9)&&near(box(gear).x,1451):false,
 
-      sourceCard:cards.SOURCE?near(cards.SOURCE.h,136)&&near(cards.SOURCE.x,10)&&near(cards.SOURCE.y,58):false,
-      transmissionCard:cards.TRANSMISSION?near(cards.TRANSMISSION.h,132)&&near(cards.TRANSMISSION.y,201):false,
-      wallCard:cards.WALL_COVER?near(cards.WALL_COVER.h,132)&&near(cards.WALL_COVER.y,340):false,
-      spaceCard:cards.SPACE_ENVIRONMENT?near(cards.SPACE_ENVIRONMENT.h,97)&&near(cards.SPACE_ENVIRONMENT.y,478):false,
+      // The four UI_01 card outer rectangles are REF-confirmed. Validate
+      // all four edges rather than only heights/Y, and reject 1px drift.
+      sourceCard:cards.SOURCE?["x","y","w","h"].every((k,i)=>lockedPixel(cards.SOURCE[k],[10,58,313,136][i])):false,
+      transmissionCard:cards.TRANSMISSION?["x","y","w","h"].every((k,i)=>lockedPixel(cards.TRANSMISSION[k],[10,201,313,132][i])):false,
+      wallCard:cards.WALL_COVER?["x","y","w","h"].every((k,i)=>lockedPixel(cards.WALL_COVER[k],[10,340,313,132][i])):false,
+      spaceCard:cards.SPACE_ENVIRONMENT?["x","y","w","h"].every((k,i)=>lockedPixel(cards.SPACE_ENVIRONMENT[k],[10,478,313,97][i])):false,
 
       sourceArt:art.SOURCE?near(box(art.SOURCE).x,19)&&near(box(art.SOURCE).y,115)&&near(box(art.SOURCE).w,239)&&near(box(art.SOURCE).h,72):false,
       transmissionArt:art.TRANSMISSION?near(box(art.TRANSMISSION).x,19)&&near(box(art.TRANSMISSION).y,257)&&near(box(art.TRANSMISSION).w,239)&&near(box(art.TRANSMISSION).h,70):false,
