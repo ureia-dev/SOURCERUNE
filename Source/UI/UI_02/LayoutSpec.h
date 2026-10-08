@@ -72,12 +72,15 @@ inline constexpr std::array<Section, 4> kSceneComponentDock {
     Section::SpaceEnvironment,
 };
 
-inline constexpr std::array<Section, 7> kFastBottomMacros {
-    Section::Motion,
-    Section::Transmission,
+// UI_02 places Motion in the center deck and Ambience in the right rail.
+// Only these five sections are visually allocated to the bottom macro row.
+// The full feature inventory remains accessible through kDetailDrawer.
+inline constexpr Section kCenterMotionDeck = Section::Motion;
+inline constexpr Section kRightAmbienceCard = Section::Ambience;
+inline constexpr std::array<Section, 5> kFastBottomMacros {
+    Section::Transmission, // visible BAD SIGNAL panel
     Section::Condition,
     Section::Intelligibility,
-    Section::Ambience,
     Section::MixOutput,
     Section::EqTone,
 };
@@ -108,6 +111,9 @@ static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
     + kBottomMixWidth + kBottomEqWidth + 4 * kBottomGridGap);
 
 static_assert (kSceneComponentDock.size() == 4);
-static_assert (kFastBottomMacros.size() == 7);
+static_assert (kFastBottomMacros.size() == 5);
+static_assert (kFastBottomMacros[0] == Section::Transmission);
+static_assert (kFastBottomMacros[4] == Section::EqTone);
+static_assert (kCenterMotionDeck == Section::Motion && kRightAmbienceCard == Section::Ambience);
 static_assert (kDetailDrawer.size() == 12);
 } // namespace sourcerune::ui::ui02
