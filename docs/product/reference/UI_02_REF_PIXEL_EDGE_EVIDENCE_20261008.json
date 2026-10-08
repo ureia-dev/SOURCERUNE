@@ -1,0 +1,363 @@
+{
+  "schema": "sourcerune.ui02.ref-original-pixel-edge-difference.v1",
+  "origin": {
+    "file": "Assets/UI/UI_02/UI_02_REF/UI_02_REF.png",
+    "sha256": "dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB"
+  },
+  "factor": 10,
+  "method": "For each row y and column x inside ROI sum |R1-R2|+|G1-G2|+|B1-B2| over pixels sampled every 3 positions; row compares y to y+1, column x to x+1. Highest scores locate visual contrast boundaries, not necessarily runtime allocation or full object bboxes.",
+  "classification": "PIXEL-OBSERVED-BORDER-CANDIDATE",
+  "status": "MEASURED-RAW-PIXELS-NOT-EXACT-ALL-OBJECTS",
+  "scans": [
+    {
+      "id": "TOPBAR_HORIZONTAL",
+      "axis": "row",
+      "roi": {
+        "x0": 0,
+        "x1": 1672,
+        "y0": 70,
+        "y1": 93
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 77,
+          "coordinate_10x": 770,
+          "difference_score": 51048
+        },
+        {
+          "coordinate_1x": 86,
+          "coordinate_10x": 860,
+          "difference_score": 25412
+        },
+        {
+          "coordinate_1x": 75,
+          "coordinate_10x": 750,
+          "difference_score": 16371
+        }
+      ]
+    },
+    {
+      "id": "SOURCE_CARD_BOUNDARY",
+      "axis": "row",
+      "roi": {
+        "x0": 13,
+        "x1": 346,
+        "y0": 289,
+        "y1": 311
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 298,
+          "coordinate_10x": 2980,
+          "difference_score": 12793
+        },
+        {
+          "coordinate_1x": 305,
+          "coordinate_10x": 3050,
+          "difference_score": 9897
+        }
+      ]
+    },
+    {
+      "id": "TRANSMISSION_CARD_BOUNDARY",
+      "axis": "row",
+      "roi": {
+        "x0": 13,
+        "x1": 346,
+        "y0": 473,
+        "y1": 495
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 492,
+          "coordinate_10x": 4920,
+          "difference_score": 14695
+        },
+        {
+          "coordinate_1x": 494,
+          "coordinate_10x": 4940,
+          "difference_score": 8564
+        }
+      ]
+    },
+    {
+      "id": "WALL_COVER_CARD_BOUNDARY",
+      "axis": "row",
+      "roi": {
+        "x0": 13,
+        "x1": 346,
+        "y0": 722,
+        "y1": 747
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 723,
+          "coordinate_10x": 7230,
+          "difference_score": 18263
+        },
+        {
+          "coordinate_1x": 722,
+          "coordinate_10x": 7220,
+          "difference_score": 14892
+        }
+      ]
+    },
+    {
+      "id": "SCENE_TO_MOTION_MATERIAL",
+      "axis": "row",
+      "roi": {
+        "x0": 356,
+        "x1": 1300,
+        "y0": 433,
+        "y1": 454
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 448,
+          "coordinate_10x": 4480,
+          "difference_score": 37229
+        },
+        {
+          "coordinate_1x": 450,
+          "coordinate_10x": 4500,
+          "difference_score": 22888
+        }
+      ]
+    },
+    {
+      "id": "MOTION_DECK_TO_STRIP",
+      "axis": "row",
+      "roi": {
+        "x0": 356,
+        "x1": 1300,
+        "y0": 720,
+        "y1": 748
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 740,
+          "coordinate_10x": 7400,
+          "difference_score": 4378
+        },
+        {
+          "coordinate_1x": 720,
+          "coordinate_10x": 7200,
+          "difference_score": 2215
+        }
+      ]
+    },
+    {
+      "id": "SPACE_AMBIENCE",
+      "axis": "row",
+      "roi": {
+        "x0": 1310,
+        "x1": 1637,
+        "y0": 361,
+        "y1": 387
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 380,
+          "coordinate_10x": 3800,
+          "difference_score": 9394
+        },
+        {
+          "coordinate_1x": 381,
+          "coordinate_10x": 3810,
+          "difference_score": 4065
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_START",
+      "axis": "row",
+      "roi": {
+        "x0": 0,
+        "x1": 1672,
+        "y0": 732,
+        "y1": 759
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 751,
+          "coordinate_10x": 7510,
+          "difference_score": 60120
+        },
+        {
+          "coordinate_1x": 753,
+          "coordinate_10x": 7530,
+          "difference_score": 43136
+        },
+        {
+          "coordinate_1x": 752,
+          "coordinate_10x": 7520,
+          "difference_score": 17556
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_END",
+      "axis": "row",
+      "roi": {
+        "x0": 0,
+        "x1": 1672,
+        "y0": 907,
+        "y1": 926
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 922,
+          "coordinate_10x": 9220,
+          "difference_score": 44080
+        },
+        {
+          "coordinate_1x": 923,
+          "coordinate_10x": 9230,
+          "difference_score": 43388
+        },
+        {
+          "coordinate_1x": 924,
+          "coordinate_10x": 9240,
+          "difference_score": 26978
+        }
+      ]
+    },
+    {
+      "id": "LEFT_CENTER_DIVIDER",
+      "axis": "column",
+      "roi": {
+        "x0": 333,
+        "x1": 365,
+        "y0": 86,
+        "y1": 727
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 348,
+          "coordinate_10x": 3480,
+          "difference_score": 34595
+        },
+        {
+          "coordinate_1x": 346,
+          "coordinate_10x": 3460,
+          "difference_score": 19249
+        }
+      ]
+    },
+    {
+      "id": "CENTER_RIGHT_DIVIDER",
+      "axis": "column",
+      "roi": {
+        "x0": 1290,
+        "x1": 1340,
+        "y0": 85,
+        "y1": 727
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 1328,
+          "coordinate_10x": 13280,
+          "difference_score": 23792
+        },
+        {
+          "coordinate_1x": 1330,
+          "coordinate_10x": 13300,
+          "difference_score": 11930
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_BAD_CONDITION",
+      "axis": "column",
+      "roi": {
+        "x0": 339,
+        "x1": 369,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 349,
+          "coordinate_10x": 3490,
+          "difference_score": 3638
+        },
+        {
+          "coordinate_1x": 347,
+          "coordinate_10x": 3470,
+          "difference_score": 2787
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_CONDITION_INTELL",
+      "axis": "column",
+      "roi": {
+        "x0": 663,
+        "x1": 688,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 674,
+          "coordinate_10x": 6740,
+          "difference_score": 4279
+        },
+        {
+          "coordinate_1x": 673,
+          "coordinate_10x": 6730,
+          "difference_score": 3162
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_INTELL_MIX",
+      "axis": "column",
+      "roi": {
+        "x0": 969,
+        "x1": 995,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 982,
+          "coordinate_10x": 9820,
+          "difference_score": 4619
+        },
+        {
+          "coordinate_1x": 980,
+          "coordinate_10x": 9800,
+          "difference_score": 2325
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_MIX_EQ",
+      "axis": "column",
+      "roi": {
+        "x0": 1289,
+        "x1": 1322,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 1309,
+          "coordinate_10x": 13090,
+          "difference_score": 2128
+        },
+        {
+          "coordinate_1x": 1308,
+          "coordinate_10x": 13080,
+          "difference_score": 1846
+        }
+      ]
+    }
+  ]
+}
