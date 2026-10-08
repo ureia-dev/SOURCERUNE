@@ -1,9 +1,12 @@
 curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
+[UI_01] Browser console: TypeError: $(...).forEach is not a function
+[UI_01] Browser console: Failed to load resource: the server responded with a status of 404 (File not found)
+[UI_01] Geometry audit timeout diagnostics: {"readyState":"complete","buildLabel":"WEB TEST · INIT ERROR","geometryFunction":"function","geometryResult":"undefined","appScripts":["http://127.0.0.1:4173/Web/App/geometry_audit.js","http://127.0.0.1:4173/Web/App/app.js"]}
 TimeoutError: Waiting failed: 15000ms exceeded
     at new WaitTask (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/common/WaitTask.js:49:34)
     at IsolatedWorld.waitForFunction (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Realm.js:52:26)
     at CdpFrame.waitForFunction (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:583:43)
     at CdpFrame.<anonymous> (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/util/decorators.js:109:27)
     at CdpPage.waitForFunction (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:1451:37)
-    at [stdin]:19:16
+    at [stdin]:28:18
 render audit failed with status 1
