@@ -8,6 +8,12 @@
 >
 > **歷史原稿完整永久封存：** [docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md](docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md)。使用者任何永久新原則都應更新 `PROJECT_CONSTITUTION.md` 而非只寫在某篇交接。
 
+## 2026-10-08 永久研究時數限制更正
+
+使用者指出：先前文件把某次「八小時、每小時一類論壇」的工作排程誤升為永久產品原則。已更正為：**SOURCERUNE 的實證研究必須貫穿整個產品生命週期，八個來源／分析維度可以並行與持續循環，沒有八小時截止**。10,000 候選、1,000 留存是歷史初期規模里程碑，不是停止條件；完成與否仍需核對真實資料庫。此為**文件原則更正**，未宣稱任何新論壇資料已蒐集或 DSP 已修改。
+
+權威永久來源：`PROJECT_RULES.md`、`PROJECT_CONSTITUTION.md`、`docs/research/RESEARCH_EVIDENCE_STANDARD.md`、`AGENTS.md`。歷史排程應留在歷史記錄，不能再當作後續研究的時間限制。
+
 ## 如何延續工作
 
 1. 先完整讀 `PROJECT_CONSTITUTION.md` 和 `PROJECT_RULES.md`；確認使用者當次要求，切勿重新詢問已核准事項。
