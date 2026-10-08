@@ -1,0 +1,3642 @@
+{
+  "schema": "sourcerune.ref.scan.v1",
+  "ui": "UI_01",
+  "source": {
+    "user_approved": true,
+    "file_name": "UI_01_REF.png",
+    "original_width": 1508,
+    "original_height": 808,
+    "mode": "RGBA",
+    "sha256": "96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916",
+    "approved_png_repo_uploaded": false,
+    "proposed_repo_path": "Assets/UI/UI_01/UI_01_REF/UI_01_REF_ORIGINAL_1508x808.png"
+  },
+  "pixel_zoom": {
+    "factor": 10,
+    "algorithm": "nearest-neighbor exact source pixel replication; no AI detail",
+    "width": 15080,
+    "height": 8080,
+    "sha256": "94044c004f47b01f214cf62cfc3c306fd1afcf7c4c82b5a62e0fb4967bae53a8",
+    "zoom_png_repo_uploaded": false,
+    "proposed_repo_path": "Assets/UI/UI_01/UI_01_REF/UI_01_REF_10X_PIXEL.png"
+  },
+  "coordinate_contract": {
+    "origin": "top-left of 1508x808 clean user-supplied PNG",
+    "edge": "left/top-inclusive, right/bottom-exclusive",
+    "ten_x": "x,y,w,h multiply by ten",
+    "old_spec": "The existing 1499x807 plugin-local coordinates originated from a 1536x1024 reference poster; NEVER overwrite or equate the two source grids",
+    "confidence": "APPROX for visual bbox candidates unless explicitly PIXEL-OBSERVED"
+  },
+  "verification": {
+    "original": "LOCAL-VERIFIED",
+    "zoom": "LOCAL-VERIFIED sampled pixel equivalence",
+    "content_inventory": "DOCUMENTED",
+    "binary_on_github": "PENDING",
+    "web_interaction": "PENDING",
+    "native_interaction": "PENDING",
+    "fine_typography_scan": "PENDING",
+    "ref_overlay": "PENDING"
+  },
+  "prohibitions": [
+    "REF-only: do not bake/ship static plot/waveform/meter values as runtime UI",
+    "Do not change DSP, parameters, factory presets or sound semantics from screenshot",
+    "Do not infer hover, disabled states, pointer behaviors, parameter ranges, actual host synchronization or measured LUFS from still image",
+    "Do not call visual bbox estimates pixel-exact confirmed"
+  ],
+  "implementation_references": [
+    "docs/product/UI_FUNCTION_CONTRACT.md",
+    "Web/App/index.html",
+    "Web/App/app.js",
+    "Source/UI/UI_01/LayoutSpec.h",
+    "docs/product/reference/UI_01_REF_COORDS.json",
+    "docs/product/reference/UI_01_REF_PIXEL_SPEC.md"
+  ],
+  "count": 142,
+  "kinds": {
+    "brand": 1,
+    "browser_preview": 1,
+    "button": 35,
+    "button_select": 5,
+    "canvas": 1,
+    "checkbox": 9,
+    "dynamic_curve": 1,
+    "dynamic_marker": 4,
+    "dynamic_meter": 2,
+    "dynamic_readout": 1,
+    "dynamic_text": 3,
+    "dynamic_tooltip": 1,
+    "dynamic_value_panel": 1,
+    "graph": 1,
+    "grid": 1,
+    "icon": 9,
+    "image": 4,
+    "interactive_graph": 1,
+    "knob": 9,
+    "live_graph": 1,
+    "macro_panel": 7,
+    "node": 5,
+    "panel": 4,
+    "rail": 1,
+    "scale": 5,
+    "select": 7,
+    "semantic_card": 4,
+    "slider": 1,
+    "tab": 3,
+    "text": 11,
+    "topbar": 1,
+    "waveform": 1,
+    "workspace": 1
+  },
+  "objects": [
+    {
+      "id": "CANVAS",
+      "parent": "ROOT",
+      "kind": "canvas",
+      "bbox_1x": {
+        "x": 0,
+        "y": 0,
+        "w": 1508,
+        "h": 808
+      },
+      "bbox_10x": {
+        "x": 0,
+        "y": 0,
+        "w": 15080,
+        "h": 8080
+      },
+      "center_1x": [
+        754,
+        404
+      ],
+      "visible_text": "核准無說明 PNG",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "PIXEL-EXACT-DIMENSIONS"
+    },
+    {
+      "id": "HEADER",
+      "parent": "CANVAS",
+      "kind": "topbar",
+      "bbox_1x": {
+        "x": 4,
+        "y": 0,
+        "w": 1499,
+        "h": 57
+      },
+      "bbox_10x": {
+        "x": 40,
+        "y": 0,
+        "w": 14990,
+        "h": 570
+      },
+      "center_1x": [
+        753.5,
+        28.5
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "WORKSPACE",
+      "parent": "CANVAS",
+      "kind": "workspace",
+      "bbox_1x": {
+        "x": 4,
+        "y": 57,
+        "w": 1499,
+        "h": 523
+      },
+      "bbox_10x": {
+        "x": 40,
+        "y": 570,
+        "w": 14990,
+        "h": 5230
+      },
+      "center_1x": [
+        753.5,
+        318.5
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "LEFT_RAIL",
+      "parent": "CANVAS",
+      "kind": "rail",
+      "bbox_1x": {
+        "x": 4,
+        "y": 57,
+        "w": 325,
+        "h": 523
+      },
+      "bbox_10x": {
+        "x": 40,
+        "y": 570,
+        "w": 3250,
+        "h": 5230
+      },
+      "center_1x": [
+        166.5,
+        318.5
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_PANEL",
+      "parent": "CANVAS",
+      "kind": "panel",
+      "bbox_1x": {
+        "x": 337,
+        "y": 57,
+        "w": 969,
+        "h": 268
+      },
+      "bbox_10x": {
+        "x": 3370,
+        "y": 570,
+        "w": 9690,
+        "h": 2680
+      },
+      "center_1x": [
+        821.5,
+        191
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_PANEL",
+      "parent": "CANVAS",
+      "kind": "panel",
+      "bbox_1x": {
+        "x": 337,
+        "y": 332,
+        "w": 969,
+        "h": 243
+      },
+      "bbox_10x": {
+        "x": 3370,
+        "y": 3320,
+        "w": 9690,
+        "h": 2430
+      },
+      "center_1x": [
+        821.5,
+        453.5
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "RIGHT_METER_RAIL",
+      "parent": "CANVAS",
+      "kind": "panel",
+      "bbox_1x": {
+        "x": 1314,
+        "y": 57,
+        "w": 180,
+        "h": 383
+      },
+      "bbox_10x": {
+        "x": 13140,
+        "y": 570,
+        "w": 1800,
+        "h": 3830
+      },
+      "center_1x": [
+        1404,
+        248.5
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BOTTOM_STRIP",
+      "parent": "CANVAS",
+      "kind": "panel",
+      "bbox_1x": {
+        "x": 4,
+        "y": 580,
+        "w": 1499,
+        "h": 228
+      },
+      "bbox_10x": {
+        "x": 40,
+        "y": 5800,
+        "w": 14990,
+        "h": 2280
+      },
+      "center_1x": [
+        753.5,
+        694
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BRAND_LOGO",
+      "parent": "HEADER",
+      "kind": "brand",
+      "bbox_1x": {
+        "x": 17,
+        "y": 7,
+        "w": 210,
+        "h": 41
+      },
+      "bbox_10x": {
+        "x": 170,
+        "y": 70,
+        "w": 2100,
+        "h": 410
+      },
+      "center_1x": [
+        122,
+        27.5
+      ],
+      "visible_text": "SCENE / ACOUSTIC REALITY ENGINE",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_CLOSE",
+      "parent": "HEADER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 500,
+        "y": 11,
+        "w": 40,
+        "h": 35
+      },
+      "bbox_10x": {
+        "x": 5000,
+        "y": 110,
+        "w": 400,
+        "h": 350
+      },
+      "center_1x": [
+        520,
+        28.5
+      ],
+      "visible_text": "X",
+      "expected_function_unverified": "未知，勿推定關閉 host",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_EMPTY_TOOL",
+      "parent": "HEADER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 543,
+        "y": 11,
+        "w": 41,
+        "h": 36
+      },
+      "bbox_10x": {
+        "x": 5430,
+        "y": 110,
+        "w": 410,
+        "h": 360
+      },
+      "center_1x": [
+        563.5,
+        29
+      ],
+      "visible_text": "",
+      "expected_function_unverified": "未知，勿自動補上功能",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "PRESET_SELECTOR",
+      "parent": "HEADER",
+      "kind": "select",
+      "bbox_1x": {
+        "x": 593,
+        "y": 10,
+        "w": 336,
+        "h": 36
+      },
+      "bbox_10x": {
+        "x": 5930,
+        "y": 100,
+        "w": 3360,
+        "h": 360
+      },
+      "center_1x": [
+        761,
+        28
+      ],
+      "visible_text": "Car Pass By - City Street",
+      "expected_function_unverified": "選擇 Scene Preset",
+      "web_binding_candidate": "#presetSelect",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_PRESET_ICON",
+      "parent": "HEADER",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 599,
+        "y": 20,
+        "w": 22,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 5990,
+        "y": 200,
+        "w": 220,
+        "h": 190
+      },
+      "center_1x": [
+        610,
+        29.5
+      ],
+      "visible_text": "clock/scene",
+      "expected_function_unverified": "圖示身分待核對",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_AB_A",
+      "parent": "HEADER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 989,
+        "y": 11,
+        "w": 46,
+        "h": 33
+      },
+      "bbox_10x": {
+        "x": 9890,
+        "y": 110,
+        "w": 460,
+        "h": 330
+      },
+      "center_1x": [
+        1012,
+        27.5
+      ],
+      "visible_text": "A",
+      "expected_function_unverified": "A Snapshot",
+      "web_binding_candidate": "[data-snapshot=\"A\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_AB_B",
+      "parent": "HEADER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1035,
+        "y": 11,
+        "w": 46,
+        "h": 33
+      },
+      "bbox_10x": {
+        "x": 10350,
+        "y": 110,
+        "w": 460,
+        "h": 330
+      },
+      "center_1x": [
+        1058,
+        27.5
+      ],
+      "visible_text": "B",
+      "expected_function_unverified": "B Snapshot",
+      "web_binding_candidate": "[data-snapshot=\"B\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_COPY",
+      "parent": "HEADER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1098,
+        "y": 13,
+        "w": 47,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 10980,
+        "y": 130,
+        "w": 470,
+        "h": 290
+      },
+      "center_1x": [
+        1121.5,
+        27.5
+      ],
+      "visible_text": "COPY",
+      "expected_function_unverified": "複製狀態",
+      "web_binding_candidate": "#copyStateBtn",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_PASTE",
+      "parent": "HEADER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1146,
+        "y": 13,
+        "w": 58,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 11460,
+        "y": 130,
+        "w": 580,
+        "h": 290
+      },
+      "center_1x": [
+        1175,
+        27.5
+      ],
+      "visible_text": "PASTE",
+      "expected_function_unverified": "貼上狀態",
+      "web_binding_candidate": "#pasteStateBtn",
+      "precision": "APPROX"
+    },
+    {
+      "id": "HEADER_GEAR",
+      "parent": "HEADER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1464,
+        "y": 15,
+        "w": 28,
+        "h": 28
+      },
+      "bbox_10x": {
+        "x": 14640,
+        "y": 150,
+        "w": 280,
+        "h": 280
+      },
+      "center_1x": [
+        1478,
+        29
+      ],
+      "visible_text": "gear",
+      "expected_function_unverified": "開啟工具與設定",
+      "web_binding_candidate": "#settingsBtn",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE",
+      "parent": "LEFT_RAIL",
+      "kind": "semantic_card",
+      "bbox_1x": {
+        "x": 15,
+        "y": 59,
+        "w": 313,
+        "h": 138
+      },
+      "bbox_10x": {
+        "x": 150,
+        "y": 590,
+        "w": 3130,
+        "h": 1380
+      },
+      "center_1x": [
+        171.5,
+        128
+      ],
+      "visible_text": "SOURCE / Car Speaker",
+      "expected_function_unverified": "開啟相關素材選擇器",
+      "web_binding_candidate": ".module-card[data-type=\"SOURCE\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE_ICON",
+      "parent": "CARD_SOURCE",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 24,
+        "y": 71,
+        "w": 45,
+        "h": 41
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 710,
+        "w": 450,
+        "h": 410
+      },
+      "center_1x": [
+        46.5,
+        91.5
+      ],
+      "visible_text": "car",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE_TITLE",
+      "parent": "CARD_SOURCE",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 70,
+        "w": 175,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 700,
+        "w": 1750,
+        "h": 190
+      },
+      "center_1x": [
+        169.5,
+        79.5
+      ],
+      "visible_text": "SOURCE",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE_NAME",
+      "parent": "CARD_SOURCE",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 91,
+        "w": 175,
+        "h": 23
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 910,
+        "w": 1750,
+        "h": 230
+      },
+      "center_1x": [
+        169.5,
+        102.5
+      ],
+      "visible_text": "Car Speaker",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE_HEADER_CHEVRON",
+      "parent": "CARD_SOURCE",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 245,
+        "y": 92,
+        "w": 12,
+        "h": 18
+      },
+      "bbox_10x": {
+        "x": 2450,
+        "y": 920,
+        "w": 120,
+        "h": 180
+      },
+      "center_1x": [
+        251,
+        101
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "是否獨立按鈕待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE_EDIT",
+      "parent": "CARD_SOURCE",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 73,
+        "w": 51,
+        "h": 35
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 730,
+        "w": 510,
+        "h": 350
+      },
+      "center_1x": [
+        298.5,
+        90.5
+      ],
+      "visible_text": "Edit",
+      "expected_function_unverified": "開啟進階參數",
+      "web_binding_candidate": "[data-edit=\"SOURCE\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE_ART",
+      "parent": "CARD_SOURCE",
+      "kind": "image",
+      "bbox_1x": {
+        "x": 24,
+        "y": 119,
+        "w": 237,
+        "h": 71
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 1190,
+        "w": 2370,
+        "h": 710
+      },
+      "center_1x": [
+        142.5,
+        154.5
+      ],
+      "visible_text": "speaker photo",
+      "expected_function_unverified": "顯示所選素材",
+      "web_binding_candidate": ".module-card[data-type=\"SOURCE\"] .module-art",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SOURCE_ARROW",
+      "parent": "CARD_SOURCE",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 119,
+        "w": 51,
+        "h": 71
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 1190,
+        "w": 510,
+        "h": 710
+      },
+      "center_1x": [
+        298.5,
+        154.5
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "切換語意素材下一項",
+      "web_binding_candidate": "[data-cycle=\"SOURCE\"][data-dir=\"1\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION",
+      "parent": "LEFT_RAIL",
+      "kind": "semantic_card",
+      "bbox_1x": {
+        "x": 15,
+        "y": 204,
+        "w": 313,
+        "h": 131
+      },
+      "bbox_10x": {
+        "x": 150,
+        "y": 2040,
+        "w": 3130,
+        "h": 1310
+      },
+      "center_1x": [
+        171.5,
+        269.5
+      ],
+      "visible_text": "TRANSMISSION / Mobile Call",
+      "expected_function_unverified": "開啟相關素材選擇器",
+      "web_binding_candidate": ".module-card[data-type=\"TRANSMISSION\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION_ICON",
+      "parent": "CARD_TRANSMISSION",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 24,
+        "y": 216,
+        "w": 45,
+        "h": 41
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 2160,
+        "w": 450,
+        "h": 410
+      },
+      "center_1x": [
+        46.5,
+        236.5
+      ],
+      "visible_text": "phone",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION_TITLE",
+      "parent": "CARD_TRANSMISSION",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 215,
+        "w": 175,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 2150,
+        "w": 1750,
+        "h": 190
+      },
+      "center_1x": [
+        169.5,
+        224.5
+      ],
+      "visible_text": "TRANSMISSION",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION_NAME",
+      "parent": "CARD_TRANSMISSION",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 236,
+        "w": 175,
+        "h": 23
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 2360,
+        "w": 1750,
+        "h": 230
+      },
+      "center_1x": [
+        169.5,
+        247.5
+      ],
+      "visible_text": "Mobile Call",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION_HEADER_CHEVRON",
+      "parent": "CARD_TRANSMISSION",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 245,
+        "y": 237,
+        "w": 12,
+        "h": 18
+      },
+      "bbox_10x": {
+        "x": 2450,
+        "y": 2370,
+        "w": 120,
+        "h": 180
+      },
+      "center_1x": [
+        251,
+        246
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "是否獨立按鈕待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION_EDIT",
+      "parent": "CARD_TRANSMISSION",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 218,
+        "w": 51,
+        "h": 35
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 2180,
+        "w": 510,
+        "h": 350
+      },
+      "center_1x": [
+        298.5,
+        235.5
+      ],
+      "visible_text": "Edit",
+      "expected_function_unverified": "開啟進階參數",
+      "web_binding_candidate": "[data-edit=\"TRANSMISSION\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION_ART",
+      "parent": "CARD_TRANSMISSION",
+      "kind": "image",
+      "bbox_1x": {
+        "x": 24,
+        "y": 260,
+        "w": 237,
+        "h": 69
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 2600,
+        "w": 2370,
+        "h": 690
+      },
+      "center_1x": [
+        142.5,
+        294.5
+      ],
+      "visible_text": "call phone photo",
+      "expected_function_unverified": "顯示所選素材",
+      "web_binding_candidate": ".module-card[data-type=\"TRANSMISSION\"] .module-art",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_TRANSMISSION_ARROW",
+      "parent": "CARD_TRANSMISSION",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 260,
+        "w": 51,
+        "h": 69
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 2600,
+        "w": 510,
+        "h": 690
+      },
+      "center_1x": [
+        298.5,
+        294.5
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "切換語意素材下一項",
+      "web_binding_candidate": "[data-cycle=\"TRANSMISSION\"][data-dir=\"1\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER",
+      "parent": "LEFT_RAIL",
+      "kind": "semantic_card",
+      "bbox_1x": {
+        "x": 15,
+        "y": 343,
+        "w": 313,
+        "h": 132
+      },
+      "bbox_10x": {
+        "x": 150,
+        "y": 3430,
+        "w": 3130,
+        "h": 1320
+      },
+      "center_1x": [
+        171.5,
+        409
+      ],
+      "visible_text": "WALL / COVER / Wooden Door",
+      "expected_function_unverified": "開啟相關素材選擇器",
+      "web_binding_candidate": ".module-card[data-type=\"WALL_COVER\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER_ICON",
+      "parent": "CARD_WALL_COVER",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 24,
+        "y": 355,
+        "w": 45,
+        "h": 41
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 3550,
+        "w": 450,
+        "h": 410
+      },
+      "center_1x": [
+        46.5,
+        375.5
+      ],
+      "visible_text": "door",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER_TITLE",
+      "parent": "CARD_WALL_COVER",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 354,
+        "w": 175,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 3540,
+        "w": 1750,
+        "h": 190
+      },
+      "center_1x": [
+        169.5,
+        363.5
+      ],
+      "visible_text": "WALL / COVER",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER_NAME",
+      "parent": "CARD_WALL_COVER",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 375,
+        "w": 175,
+        "h": 23
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 3750,
+        "w": 1750,
+        "h": 230
+      },
+      "center_1x": [
+        169.5,
+        386.5
+      ],
+      "visible_text": "Wooden Door",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER_HEADER_CHEVRON",
+      "parent": "CARD_WALL_COVER",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 245,
+        "y": 376,
+        "w": 12,
+        "h": 18
+      },
+      "bbox_10x": {
+        "x": 2450,
+        "y": 3760,
+        "w": 120,
+        "h": 180
+      },
+      "center_1x": [
+        251,
+        385
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "是否獨立按鈕待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER_EDIT",
+      "parent": "CARD_WALL_COVER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 357,
+        "w": 51,
+        "h": 35
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 3570,
+        "w": 510,
+        "h": 350
+      },
+      "center_1x": [
+        298.5,
+        374.5
+      ],
+      "visible_text": "Edit",
+      "expected_function_unverified": "開啟進階參數",
+      "web_binding_candidate": "[data-edit=\"WALL_COVER\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER_ART",
+      "parent": "CARD_WALL_COVER",
+      "kind": "image",
+      "bbox_1x": {
+        "x": 24,
+        "y": 399,
+        "w": 237,
+        "h": 70
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 3990,
+        "w": 2370,
+        "h": 700
+      },
+      "center_1x": [
+        142.5,
+        434
+      ],
+      "visible_text": "wood door photo",
+      "expected_function_unverified": "顯示所選素材",
+      "web_binding_candidate": ".module-card[data-type=\"WALL_COVER\"] .module-art",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_WALL_COVER_ARROW",
+      "parent": "CARD_WALL_COVER",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 399,
+        "w": 51,
+        "h": 70
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 3990,
+        "w": 510,
+        "h": 700
+      },
+      "center_1x": [
+        298.5,
+        434
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "切換語意素材下一項",
+      "web_binding_candidate": "[data-cycle=\"WALL_COVER\"][data-dir=\"1\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT",
+      "parent": "LEFT_RAIL",
+      "kind": "semantic_card",
+      "bbox_1x": {
+        "x": 15,
+        "y": 482,
+        "w": 313,
+        "h": 97
+      },
+      "bbox_10x": {
+        "x": 150,
+        "y": 4820,
+        "w": 3130,
+        "h": 970
+      },
+      "center_1x": [
+        171.5,
+        530.5
+      ],
+      "visible_text": "SPACE / ENVIRONMENT / City Street",
+      "expected_function_unverified": "開啟相關素材選擇器",
+      "web_binding_candidate": ".module-card[data-type=\"SPACE_ENVIRONMENT\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_ICON",
+      "parent": "CARD_SPACE_ENVIRONMENT",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 24,
+        "y": 494,
+        "w": 45,
+        "h": 41
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 4940,
+        "w": 450,
+        "h": 410
+      },
+      "center_1x": [
+        46.5,
+        514.5
+      ],
+      "visible_text": "cube",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_TITLE",
+      "parent": "CARD_SPACE_ENVIRONMENT",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 493,
+        "w": 175,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 4930,
+        "w": 1750,
+        "h": 190
+      },
+      "center_1x": [
+        169.5,
+        502.5
+      ],
+      "visible_text": "SPACE / ENVIRONMENT",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_NAME",
+      "parent": "CARD_SPACE_ENVIRONMENT",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 82,
+        "y": 514,
+        "w": 175,
+        "h": 23
+      },
+      "bbox_10x": {
+        "x": 820,
+        "y": 5140,
+        "w": 1750,
+        "h": 230
+      },
+      "center_1x": [
+        169.5,
+        525.5
+      ],
+      "visible_text": "City Street",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_HEADER_CHEVRON",
+      "parent": "CARD_SPACE_ENVIRONMENT",
+      "kind": "icon",
+      "bbox_1x": {
+        "x": 245,
+        "y": 515,
+        "w": 12,
+        "h": 18
+      },
+      "bbox_10x": {
+        "x": 2450,
+        "y": 5150,
+        "w": 120,
+        "h": 180
+      },
+      "center_1x": [
+        251,
+        524
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "是否獨立按鈕待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_EDIT",
+      "parent": "CARD_SPACE_ENVIRONMENT",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 496,
+        "w": 51,
+        "h": 35
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 4960,
+        "w": 510,
+        "h": 350
+      },
+      "center_1x": [
+        298.5,
+        513.5
+      ],
+      "visible_text": "Edit",
+      "expected_function_unverified": "開啟進階參數",
+      "web_binding_candidate": "[data-edit=\"SPACE_ENVIRONMENT\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_ART",
+      "parent": "CARD_SPACE_ENVIRONMENT",
+      "kind": "image",
+      "bbox_1x": {
+        "x": 24,
+        "y": 536,
+        "w": 237,
+        "h": 37
+      },
+      "bbox_10x": {
+        "x": 240,
+        "y": 5360,
+        "w": 2370,
+        "h": 370
+      },
+      "center_1x": [
+        142.5,
+        554.5
+      ],
+      "visible_text": "street photo",
+      "expected_function_unverified": "顯示所選素材",
+      "web_binding_candidate": ".module-card[data-type=\"SPACE_ENVIRONMENT\"] .module-art",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_ARROW",
+      "parent": "CARD_SPACE_ENVIRONMENT",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 273,
+        "y": 536,
+        "w": 51,
+        "h": 37
+      },
+      "bbox_10x": {
+        "x": 2730,
+        "y": 5360,
+        "w": 510,
+        "h": 370
+      },
+      "center_1x": [
+        298.5,
+        554.5
+      ],
+      "visible_text": "›",
+      "expected_function_unverified": "切換語意素材下一項",
+      "web_binding_candidate": "[data-cycle=\"SPACE_ENVIRONMENT\"][data-dir=\"1\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_TITLE",
+      "parent": "SCENE_PANEL",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 350,
+        "y": 69,
+        "w": 135,
+        "h": 22
+      },
+      "bbox_10x": {
+        "x": 3500,
+        "y": 690,
+        "w": 1350,
+        "h": 220
+      },
+      "center_1x": [
+        417.5,
+        80
+      ],
+      "visible_text": "SCENE VIEW",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MODE_APPROACH",
+      "parent": "SCENE_PANEL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 687,
+        "y": 69,
+        "w": 80,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 6870,
+        "y": 690,
+        "w": 800,
+        "h": 300
+      },
+      "center_1x": [
+        727,
+        84
+      ],
+      "visible_text": "Approach",
+      "expected_function_unverified": "移動模式",
+      "web_binding_candidate": "[data-motion-mode=\"APPROACH\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MODE_PASS_BY",
+      "parent": "SCENE_PANEL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 770,
+        "y": 69,
+        "w": 80,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 7700,
+        "y": 690,
+        "w": 800,
+        "h": 300
+      },
+      "center_1x": [
+        810,
+        84
+      ],
+      "visible_text": "Pass By",
+      "expected_function_unverified": "移動模式",
+      "web_binding_candidate": "[data-motion-mode=\"PASS_BY\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MODE_LEAVE",
+      "parent": "SCENE_PANEL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 853,
+        "y": 69,
+        "w": 74,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 8530,
+        "y": 690,
+        "w": 740,
+        "h": 300
+      },
+      "center_1x": [
+        890,
+        84
+      ],
+      "visible_text": "Leave",
+      "expected_function_unverified": "移動模式",
+      "web_binding_candidate": "[data-motion-mode=\"LEAVE\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MODE_MANUAL",
+      "parent": "SCENE_PANEL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 929,
+        "y": 69,
+        "w": 80,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 9290,
+        "y": 690,
+        "w": 800,
+        "h": 300
+      },
+      "center_1x": [
+        969,
+        84
+      ],
+      "visible_text": "Manual",
+      "expected_function_unverified": "移動模式",
+      "web_binding_candidate": "[data-motion-mode=\"MANUAL\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_ZOOM",
+      "parent": "SCENE_PANEL",
+      "kind": "slider",
+      "bbox_1x": {
+        "x": 1121,
+        "y": 75,
+        "w": 129,
+        "h": 22
+      },
+      "bbox_10x": {
+        "x": 11210,
+        "y": 750,
+        "w": 1290,
+        "h": 220
+      },
+      "center_1x": [
+        1185.5,
+        86
+      ],
+      "visible_text": "Zoom",
+      "expected_function_unverified": "調整 Scene 顯示倍率",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_ZOOM_RESET",
+      "parent": "SCENE_PANEL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1261,
+        "y": 81,
+        "w": 37,
+        "h": 15
+      },
+      "bbox_10x": {
+        "x": 12610,
+        "y": 810,
+        "w": 370,
+        "h": 150
+      },
+      "center_1x": [
+        1279.5,
+        88.5
+      ],
+      "visible_text": "RESET",
+      "expected_function_unverified": "重設顯示倍率",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_GRAPH",
+      "parent": "SCENE_PANEL",
+      "kind": "graph",
+      "bbox_1x": {
+        "x": 397,
+        "y": 94,
+        "w": 805,
+        "h": 149
+      },
+      "bbox_10x": {
+        "x": 3970,
+        "y": 940,
+        "w": 8050,
+        "h": 1490
+      },
+      "center_1x": [
+        799.5,
+        168.5
+      ],
+      "visible_text": "0–10秒 / 1–100公尺",
+      "expected_function_unverified": "動態移動與距離圖",
+      "web_binding_candidate": "#sceneSvg",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_GRID",
+      "parent": "SCENE_PANEL",
+      "kind": "grid",
+      "bbox_1x": {
+        "x": 400,
+        "y": 96,
+        "w": 794,
+        "h": 144
+      },
+      "bbox_10x": {
+        "x": 4000,
+        "y": 960,
+        "w": 7940,
+        "h": 1440
+      },
+      "center_1x": [
+        797,
+        168
+      ],
+      "visible_text": "grid",
+      "expected_function_unverified": "網格線由程式生成",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_Y_AXIS",
+      "parent": "SCENE_PANEL",
+      "kind": "scale",
+      "bbox_1x": {
+        "x": 349,
+        "y": 104,
+        "w": 44,
+        "h": 133
+      },
+      "bbox_10x": {
+        "x": 3490,
+        "y": 1040,
+        "w": 440,
+        "h": 1330
+      },
+      "center_1x": [
+        371,
+        170.5
+      ],
+      "visible_text": "100m;50m;10m;1m",
+      "expected_function_unverified": "標尺",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_X_AXIS",
+      "parent": "SCENE_PANEL",
+      "kind": "scale",
+      "bbox_1x": {
+        "x": 393,
+        "y": 250,
+        "w": 803,
+        "h": 22
+      },
+      "bbox_10x": {
+        "x": 3930,
+        "y": 2500,
+        "w": 8030,
+        "h": 220
+      },
+      "center_1x": [
+        794.5,
+        261
+      ],
+      "visible_text": "0s;2s;4s;6s;8s;10s",
+      "expected_function_unverified": "時間標籤",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_PATH",
+      "parent": "SCENE_PANEL",
+      "kind": "dynamic_curve",
+      "bbox_1x": {
+        "x": 399,
+        "y": 144,
+        "w": 801,
+        "h": 98
+      },
+      "bbox_10x": {
+        "x": 3990,
+        "y": 1440,
+        "w": 8010,
+        "h": 980
+      },
+      "center_1x": [
+        799.5,
+        193
+      ],
+      "visible_text": "cyan distance path",
+      "expected_function_unverified": "動態繪製移動路徑",
+      "web_binding_candidate": "#motionPath",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_CAR",
+      "parent": "SCENE_PANEL",
+      "kind": "dynamic_marker",
+      "bbox_1x": {
+        "x": 769,
+        "y": 117,
+        "w": 47,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 7690,
+        "y": 1170,
+        "w": 470,
+        "h": 320
+      },
+      "center_1x": [
+        792.5,
+        133
+      ],
+      "visible_text": "car glyph",
+      "expected_function_unverified": "Source 位置",
+      "web_binding_candidate": "#motionCarGlyph",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_DISTANCE_CALLOUT",
+      "parent": "SCENE_PANEL",
+      "kind": "dynamic_tooltip",
+      "bbox_1x": {
+        "x": 531,
+        "y": 141,
+        "w": 68,
+        "h": 57
+      },
+      "bbox_10x": {
+        "x": 5310,
+        "y": 1410,
+        "w": 680,
+        "h": 570
+      },
+      "center_1x": [
+        565,
+        169.5
+      ],
+      "visible_text": "25.0m / 0.8s",
+      "expected_function_unverified": "跟隨選點更新",
+      "web_binding_candidate": "#distanceCallout",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_SYNC_LINE",
+      "parent": "SCENE_PANEL",
+      "kind": "dynamic_marker",
+      "bbox_1x": {
+        "x": 470,
+        "y": 108,
+        "w": 6,
+        "h": 141
+      },
+      "bbox_10x": {
+        "x": 4700,
+        "y": 1080,
+        "w": 60,
+        "h": 1410
+      },
+      "center_1x": [
+        473,
+        178.5
+      ],
+      "visible_text": "sync line",
+      "expected_function_unverified": "跟隨 Transport",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_STATS",
+      "parent": "SCENE_PANEL",
+      "kind": "dynamic_value_panel",
+      "bbox_1x": {
+        "x": 1201,
+        "y": 103,
+        "w": 95,
+        "h": 140
+      },
+      "bbox_10x": {
+        "x": 12010,
+        "y": 1030,
+        "w": 950,
+        "h": 1400
+      },
+      "center_1x": [
+        1248.5,
+        173
+      ],
+      "visible_text": "Start80m;Closest3m;End120m",
+      "expected_function_unverified": "顯示距離標記",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_SYNC_BUTTON",
+      "parent": "SCENE_PANEL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1200,
+        "y": 250,
+        "w": 97,
+        "h": 31
+      },
+      "bbox_10x": {
+        "x": 12000,
+        "y": 2500,
+        "w": 970,
+        "h": 310
+      },
+      "center_1x": [
+        1248.5,
+        265.5
+      ],
+      "visible_text": "Sync to DAW",
+      "expected_function_unverified": "宿主/Web 時間同步",
+      "web_binding_candidate": "#syncToggle",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_WAVEFORM",
+      "parent": "SCENE_PANEL",
+      "kind": "waveform",
+      "bbox_1x": {
+        "x": 348,
+        "y": 278,
+        "w": 947,
+        "h": 42
+      },
+      "bbox_10x": {
+        "x": 3480,
+        "y": 2780,
+        "w": 9470,
+        "h": 420
+      },
+      "center_1x": [
+        821.5,
+        299
+      ],
+      "visible_text": "waveform + markers",
+      "expected_function_unverified": "實際波形/時間軸",
+      "web_binding_candidate": "#sceneWaveformCanvas",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_WAVEFORM_START",
+      "parent": "SCENE_PANEL",
+      "kind": "dynamic_marker",
+      "bbox_1x": {
+        "x": 549,
+        "y": 276,
+        "w": 23,
+        "h": 43
+      },
+      "bbox_10x": {
+        "x": 5490,
+        "y": 2760,
+        "w": 230,
+        "h": 430
+      },
+      "center_1x": [
+        560.5,
+        297.5
+      ],
+      "visible_text": "start",
+      "expected_function_unverified": "Start handle",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SCENE_WAVEFORM_END",
+      "parent": "SCENE_PANEL",
+      "kind": "dynamic_marker",
+      "bbox_1x": {
+        "x": 1091,
+        "y": 276,
+        "w": 20,
+        "h": 43
+      },
+      "bbox_10x": {
+        "x": 10910,
+        "y": 2760,
+        "w": 200,
+        "h": 430
+      },
+      "center_1x": [
+        1101,
+        297.5
+      ],
+      "visible_text": "end",
+      "expected_function_unverified": "End handle",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_TAB_SPECTRUM",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "tab",
+      "bbox_1x": {
+        "x": 345,
+        "y": 339,
+        "w": 108,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 3450,
+        "y": 3390,
+        "w": 1080,
+        "h": 300
+      },
+      "center_1x": [
+        399,
+        354
+      ],
+      "visible_text": "SPECTRUM",
+      "expected_function_unverified": "切換分析頁籤",
+      "web_binding_candidate": "[data-tab=\"SPECTRUM\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_TAB_SPACE_RESPONSE",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "tab",
+      "bbox_1x": {
+        "x": 455,
+        "y": 339,
+        "w": 138,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 4550,
+        "y": 3390,
+        "w": 1380,
+        "h": 300
+      },
+      "center_1x": [
+        524,
+        354
+      ],
+      "visible_text": "SPACE RESPONSE",
+      "expected_function_unverified": "切換分析頁籤",
+      "web_binding_candidate": "[data-tab=\"SPACE_RESPONSE\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_TAB_SIGNAL_FLOW",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "tab",
+      "bbox_1x": {
+        "x": 593,
+        "y": 339,
+        "w": 119,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 5930,
+        "y": 3390,
+        "w": 1190,
+        "h": 300
+      },
+      "center_1x": [
+        652.5,
+        354
+      ],
+      "visible_text": "SIGNAL FLOW",
+      "expected_function_unverified": "切換分析頁籤",
+      "web_binding_candidate": "[data-tab=\"SIGNAL_FLOW\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_PRE",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "button_select",
+      "bbox_1x": {
+        "x": 945,
+        "y": 340,
+        "w": 74,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 9450,
+        "y": 3400,
+        "w": 740,
+        "h": 290
+      },
+      "center_1x": [
+        982,
+        354.5
+      ],
+      "visible_text": "Pre",
+      "expected_function_unverified": "分析呈現選項",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_POST",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "button_select",
+      "bbox_1x": {
+        "x": 1026,
+        "y": 340,
+        "w": 72,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 10260,
+        "y": 3400,
+        "w": 720,
+        "h": 290
+      },
+      "center_1x": [
+        1062,
+        354.5
+      ],
+      "visible_text": "Post",
+      "expected_function_unverified": "分析呈現選項",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_RTA",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "button_select",
+      "bbox_1x": {
+        "x": 1112,
+        "y": 340,
+        "w": 38,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 11120,
+        "y": 3400,
+        "w": 380,
+        "h": 290
+      },
+      "center_1x": [
+        1131,
+        354.5
+      ],
+      "visible_text": "RTA",
+      "expected_function_unverified": "分析呈現選項",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_SMOOTHING",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "button_select",
+      "bbox_1x": {
+        "x": 1154,
+        "y": 340,
+        "w": 48,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 11540,
+        "y": 3400,
+        "w": 480,
+        "h": 290
+      },
+      "center_1x": [
+        1178,
+        354.5
+      ],
+      "visible_text": "1/3",
+      "expected_function_unverified": "分析呈現選項",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "ANALYSIS_CHANNEL",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "button_select",
+      "bbox_1x": {
+        "x": 1211,
+        "y": 340,
+        "w": 88,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 12110,
+        "y": 3400,
+        "w": 880,
+        "h": 290
+      },
+      "center_1x": [
+        1255,
+        354.5
+      ],
+      "visible_text": "L+R",
+      "expected_function_unverified": "分析呈現選項",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SPECTRUM_PLOT",
+      "parent": "ANALYSIS_PANEL",
+      "kind": "live_graph",
+      "bbox_1x": {
+        "x": 396,
+        "y": 377,
+        "w": 897,
+        "h": 151
+      },
+      "bbox_10x": {
+        "x": 3960,
+        "y": 3770,
+        "w": 8970,
+        "h": 1510
+      },
+      "center_1x": [
+        844.5,
+        452.5
+      ],
+      "visible_text": "blue spectrum + white compare",
+      "expected_function_unverified": "音訊分析 live canvas",
+      "web_binding_candidate": "#spectrumCanvas",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SPECTRUM_Y_TICKS",
+      "parent": "SPECTRUM_PLOT",
+      "kind": "scale",
+      "bbox_1x": {
+        "x": 348,
+        "y": 372,
+        "w": 43,
+        "h": 160
+      },
+      "bbox_10x": {
+        "x": 3480,
+        "y": 3720,
+        "w": 430,
+        "h": 1600
+      },
+      "center_1x": [
+        369.5,
+        452
+      ],
+      "visible_text": "0;-12;-24;-36;-48;-60",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "SPECTRUM_X_TICKS",
+      "parent": "SPECTRUM_PLOT",
+      "kind": "scale",
+      "bbox_1x": {
+        "x": 388,
+        "y": 530,
+        "w": 907,
+        "h": 28
+      },
+      "bbox_10x": {
+        "x": 3880,
+        "y": 5300,
+        "w": 9070,
+        "h": 280
+      },
+      "center_1x": [
+        841.5,
+        544
+      ],
+      "visible_text": "20;50;100;200;500;1K;2K;5K;10K;20K",
+      "expected_function_unverified": "",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_IN_LABEL",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 1336,
+        "y": 87,
+        "w": 37,
+        "h": 21
+      },
+      "bbox_10x": {
+        "x": 13360,
+        "y": 870,
+        "w": 370,
+        "h": 210
+      },
+      "center_1x": [
+        1354.5,
+        97.5
+      ],
+      "visible_text": "IN",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_OUT_LABEL",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "text",
+      "bbox_1x": {
+        "x": 1430,
+        "y": 87,
+        "w": 47,
+        "h": 21
+      },
+      "bbox_10x": {
+        "x": 14300,
+        "y": 870,
+        "w": 470,
+        "h": 210
+      },
+      "center_1x": [
+        1453.5,
+        97.5
+      ],
+      "visible_text": "OUT",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_IN_SLOT",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "dynamic_meter",
+      "bbox_1x": {
+        "x": 1337,
+        "y": 113,
+        "w": 27,
+        "h": 179
+      },
+      "bbox_10x": {
+        "x": 13370,
+        "y": 1130,
+        "w": 270,
+        "h": 1790
+      },
+      "center_1x": [
+        1350.5,
+        202.5
+      ],
+      "visible_text": "Input meter",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_OUT_SLOT",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "dynamic_meter",
+      "bbox_1x": {
+        "x": 1441,
+        "y": 113,
+        "w": 26,
+        "h": 179
+      },
+      "bbox_10x": {
+        "x": 14410,
+        "y": 1130,
+        "w": 260,
+        "h": 1790
+      },
+      "center_1x": [
+        1454,
+        202.5
+      ],
+      "visible_text": "Output meter",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_DB_TICKS",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "scale",
+      "bbox_1x": {
+        "x": 1380,
+        "y": 108,
+        "w": 33,
+        "h": 201
+      },
+      "bbox_10x": {
+        "x": 13800,
+        "y": 1080,
+        "w": 330,
+        "h": 2010
+      },
+      "center_1x": [
+        1396.5,
+        208.5
+      ],
+      "visible_text": "0;-6;-12;-24;-36;-60",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_IN_VALUE",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "dynamic_text",
+      "bbox_1x": {
+        "x": 1325,
+        "y": 303,
+        "w": 80,
+        "h": 22
+      },
+      "bbox_10x": {
+        "x": 13250,
+        "y": 3030,
+        "w": 800,
+        "h": 220
+      },
+      "center_1x": [
+        1365,
+        314
+      ],
+      "visible_text": "-18.2 dB",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_OUT_VALUE",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "dynamic_text",
+      "bbox_1x": {
+        "x": 1426,
+        "y": 303,
+        "w": 72,
+        "h": 22
+      },
+      "bbox_10x": {
+        "x": 14260,
+        "y": 3030,
+        "w": 720,
+        "h": 220
+      },
+      "center_1x": [
+        1462,
+        314
+      ],
+      "visible_text": "-19.1 dB",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_PEAK",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1325,
+        "y": 334,
+        "w": 77,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 13250,
+        "y": 3340,
+        "w": 770,
+        "h": 300
+      },
+      "center_1x": [
+        1363.5,
+        349
+      ],
+      "visible_text": "Peak",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_RMS",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1406,
+        "y": 334,
+        "w": 78,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 14060,
+        "y": 3340,
+        "w": 780,
+        "h": 300
+      },
+      "center_1x": [
+        1445,
+        349
+      ],
+      "visible_text": "RMS",
+      "expected_function_unverified": "即時顯示／切換",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "METER_LUFS",
+      "parent": "RIGHT_METER_RAIL",
+      "kind": "dynamic_readout",
+      "bbox_1x": {
+        "x": 1325,
+        "y": 379,
+        "w": 146,
+        "h": 57
+      },
+      "bbox_10x": {
+        "x": 13250,
+        "y": 3790,
+        "w": 1460,
+        "h": 570
+      },
+      "center_1x": [
+        1398,
+        407.5
+      ],
+      "visible_text": "LUFS -23.6",
+      "expected_function_unverified": "真正 LUFS 演算法待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MACRO_MOTION",
+      "parent": "BOTTOM_STRIP",
+      "kind": "macro_panel",
+      "bbox_1x": {
+        "x": 14,
+        "y": 587,
+        "w": 272,
+        "h": 216
+      },
+      "bbox_10x": {
+        "x": 140,
+        "y": 5870,
+        "w": 2720,
+        "h": 2160
+      },
+      "center_1x": [
+        150,
+        695
+      ],
+      "visible_text": "MOTION",
+      "expected_function_unverified": "開啟模組詳細控制",
+      "web_binding_candidate": ".macro[data-open=\"MOTION\"]",
+      "precision": "PIXEL-OBSERVED-COLORED-EDGE"
+    },
+    {
+      "id": "MACRO_BAD_SIGNAL",
+      "parent": "BOTTOM_STRIP",
+      "kind": "macro_panel",
+      "bbox_1x": {
+        "x": 292,
+        "y": 587,
+        "w": 178,
+        "h": 216
+      },
+      "bbox_10x": {
+        "x": 2920,
+        "y": 5870,
+        "w": 1780,
+        "h": 2160
+      },
+      "center_1x": [
+        381,
+        695
+      ],
+      "visible_text": "BAD SIGNAL",
+      "expected_function_unverified": "開啟模組詳細控制",
+      "web_binding_candidate": ".macro[data-open=\"TRANSMISSION\"]",
+      "precision": "PIXEL-OBSERVED-COLORED-EDGE"
+    },
+    {
+      "id": "MACRO_CONDITION",
+      "parent": "BOTTOM_STRIP",
+      "kind": "macro_panel",
+      "bbox_1x": {
+        "x": 477,
+        "y": 587,
+        "w": 203,
+        "h": 216
+      },
+      "bbox_10x": {
+        "x": 4770,
+        "y": 5870,
+        "w": 2030,
+        "h": 2160
+      },
+      "center_1x": [
+        578.5,
+        695
+      ],
+      "visible_text": "CONDITION",
+      "expected_function_unverified": "開啟模組詳細控制",
+      "web_binding_candidate": ".macro[data-open=\"CONDITION\"]",
+      "precision": "PIXEL-OBSERVED-COLORED-EDGE"
+    },
+    {
+      "id": "MACRO_INTELLIGIBILITY",
+      "parent": "BOTTOM_STRIP",
+      "kind": "macro_panel",
+      "bbox_1x": {
+        "x": 687,
+        "y": 587,
+        "w": 200,
+        "h": 216
+      },
+      "bbox_10x": {
+        "x": 6870,
+        "y": 5870,
+        "w": 2000,
+        "h": 2160
+      },
+      "center_1x": [
+        787,
+        695
+      ],
+      "visible_text": "INTELLIGIBILITY",
+      "expected_function_unverified": "開啟模組詳細控制",
+      "web_binding_candidate": ".macro[data-open=\"INTELLIGIBILITY\"]",
+      "precision": "PIXEL-OBSERVED-COLORED-EDGE"
+    },
+    {
+      "id": "MACRO_AMBIENCE",
+      "parent": "BOTTOM_STRIP",
+      "kind": "macro_panel",
+      "bbox_1x": {
+        "x": 895,
+        "y": 587,
+        "w": 157,
+        "h": 216
+      },
+      "bbox_10x": {
+        "x": 8950,
+        "y": 5870,
+        "w": 1570,
+        "h": 2160
+      },
+      "center_1x": [
+        973.5,
+        695
+      ],
+      "visible_text": "AMBIENCE",
+      "expected_function_unverified": "開啟模組詳細控制",
+      "web_binding_candidate": ".macro[data-open=\"AMBIENCE\"]",
+      "precision": "PIXEL-OBSERVED-COLORED-EDGE"
+    },
+    {
+      "id": "MACRO_MIX",
+      "parent": "BOTTOM_STRIP",
+      "kind": "macro_panel",
+      "bbox_1x": {
+        "x": 1058,
+        "y": 587,
+        "w": 116,
+        "h": 216
+      },
+      "bbox_10x": {
+        "x": 10580,
+        "y": 5870,
+        "w": 1160,
+        "h": 2160
+      },
+      "center_1x": [
+        1116,
+        695
+      ],
+      "visible_text": "MIX",
+      "expected_function_unverified": "開啟模組詳細控制",
+      "web_binding_candidate": ".macro[data-open=\"MIX\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MACRO_EQ_TONE",
+      "parent": "BOTTOM_STRIP",
+      "kind": "macro_panel",
+      "bbox_1x": {
+        "x": 1181,
+        "y": 587,
+        "w": 313,
+        "h": 216
+      },
+      "bbox_10x": {
+        "x": 11810,
+        "y": 5870,
+        "w": 3130,
+        "h": 2160
+      },
+      "center_1x": [
+        1337.5,
+        695
+      ],
+      "visible_text": "EQ / TONE (ADVANCED)",
+      "expected_function_unverified": "開啟模組詳細控制",
+      "web_binding_candidate": ".macro[data-open=\"EQ_TONE\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MOTION_DISTANCE",
+      "parent": "MACRO_MOTION",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 25,
+        "y": 664,
+        "w": 63,
+        "h": 55
+      },
+      "bbox_10x": {
+        "x": 250,
+        "y": 6640,
+        "w": 630,
+        "h": 550
+      },
+      "center_1x": [
+        56.5,
+        691.5
+      ],
+      "visible_text": "DISTANCE 25.0 m",
+      "expected_function_unverified": "拖曳／滾輪，shared param",
+      "web_binding_candidate": "[data-macro=\"distance\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MOTION_SPEED",
+      "parent": "MACRO_MOTION",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 108,
+        "y": 664,
+        "w": 41,
+        "h": 44
+      },
+      "bbox_10x": {
+        "x": 1080,
+        "y": 6640,
+        "w": 410,
+        "h": 440
+      },
+      "center_1x": [
+        128.5,
+        686
+      ],
+      "visible_text": "SPEED 60%",
+      "expected_function_unverified": "拖曳／滾輪，shared param",
+      "web_binding_candidate": "[data-macro=\"speed\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MOTION_DOPPLER",
+      "parent": "MACRO_MOTION",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 171,
+        "y": 664,
+        "w": 41,
+        "h": 44
+      },
+      "bbox_10x": {
+        "x": 1710,
+        "y": 6640,
+        "w": 410,
+        "h": 440
+      },
+      "center_1x": [
+        191.5,
+        686
+      ],
+      "visible_text": "DOPPLER 70%",
+      "expected_function_unverified": "拖曳／滾輪，shared param",
+      "web_binding_candidate": "[data-macro=\"doppler\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MOTION_WIDTH",
+      "parent": "MACRO_MOTION",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 234,
+        "y": 664,
+        "w": 41,
+        "h": 44
+      },
+      "bbox_10x": {
+        "x": 2340,
+        "y": 6640,
+        "w": 410,
+        "h": 440
+      },
+      "center_1x": [
+        254.5,
+        686
+      ],
+      "visible_text": "WIDTH 40%",
+      "expected_function_unverified": "拖曳／滾輪，shared param",
+      "web_binding_candidate": "[data-macro=\"width\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MOTION_BUTTON_APPROACH",
+      "parent": "MACRO_MOTION",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 27,
+        "y": 754,
+        "w": 78,
+        "h": 36
+      },
+      "bbox_10x": {
+        "x": 270,
+        "y": 7540,
+        "w": 780,
+        "h": 360
+      },
+      "center_1x": [
+        66,
+        772
+      ],
+      "visible_text": "APPROACH",
+      "expected_function_unverified": "移動模式",
+      "web_binding_candidate": "[data-motion-mode=\"APPROACH\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MOTION_BUTTON_PASS_BY",
+      "parent": "MACRO_MOTION",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 112,
+        "y": 754,
+        "w": 82,
+        "h": 36
+      },
+      "bbox_10x": {
+        "x": 1120,
+        "y": 7540,
+        "w": 820,
+        "h": 360
+      },
+      "center_1x": [
+        153,
+        772
+      ],
+      "visible_text": "PASS_BY",
+      "expected_function_unverified": "移動模式",
+      "web_binding_candidate": "[data-motion-mode=\"PASS_BY\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MOTION_BUTTON_LEAVE",
+      "parent": "MACRO_MOTION",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 196,
+        "y": 754,
+        "w": 79,
+        "h": 36
+      },
+      "bbox_10x": {
+        "x": 1960,
+        "y": 7540,
+        "w": 790,
+        "h": 360
+      },
+      "center_1x": [
+        235.5,
+        772
+      ],
+      "visible_text": "LEAVE",
+      "expected_function_unverified": "移動模式",
+      "web_binding_candidate": "[data-motion-mode=\"LEAVE\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BAD_AMOUNT",
+      "parent": "MACRO_BAD_SIGNAL",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 306,
+        "y": 665,
+        "w": 56,
+        "h": 56
+      },
+      "bbox_10x": {
+        "x": 3060,
+        "y": 6650,
+        "w": 560,
+        "h": 560
+      },
+      "center_1x": [
+        334,
+        693
+      ],
+      "visible_text": "20%",
+      "expected_function_unverified": "Bad Signal amount",
+      "web_binding_candidate": "[data-macro=\"badSignal\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BAD_TYPE",
+      "parent": "MACRO_BAD_SIGNAL",
+      "kind": "select",
+      "bbox_1x": {
+        "x": 372,
+        "y": 634,
+        "w": 87,
+        "h": 31
+      },
+      "bbox_10x": {
+        "x": 3720,
+        "y": 6340,
+        "w": 870,
+        "h": 310
+      },
+      "center_1x": [
+        415.5,
+        649.5
+      ],
+      "visible_text": "Mobile",
+      "expected_function_unverified": "Transmission family",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BAD_CHECK_STATIC",
+      "parent": "MACRO_BAD_SIGNAL",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 372,
+        "y": 681,
+        "w": 88,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 3720,
+        "y": 6810,
+        "w": 880,
+        "h": 190
+      },
+      "center_1x": [
+        416,
+        690.5
+      ],
+      "visible_text": "Static",
+      "expected_function_unverified": "切換同名訊號劣化，映射待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BAD_CHECK_DROPOUT",
+      "parent": "MACRO_BAD_SIGNAL",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 372,
+        "y": 705,
+        "w": 88,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 3720,
+        "y": 7050,
+        "w": 880,
+        "h": 190
+      },
+      "center_1x": [
+        416,
+        714.5
+      ],
+      "visible_text": "Dropout",
+      "expected_function_unverified": "切換同名訊號劣化，映射待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BAD_CHECK_INTERFERENCE",
+      "parent": "MACRO_BAD_SIGNAL",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 372,
+        "y": 729,
+        "w": 88,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 3720,
+        "y": 7290,
+        "w": 880,
+        "h": 190
+      },
+      "center_1x": [
+        416,
+        738.5
+      ],
+      "visible_text": "Interference",
+      "expected_function_unverified": "切換同名訊號劣化，映射待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "BAD_CHECK_LOW_BITRATE",
+      "parent": "MACRO_BAD_SIGNAL",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 372,
+        "y": 753,
+        "w": 88,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 3720,
+        "y": 7530,
+        "w": 880,
+        "h": 190
+      },
+      "center_1x": [
+        416,
+        762.5
+      ],
+      "visible_text": "Low Bitrate",
+      "expected_function_unverified": "切換同名訊號劣化，映射待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CONDITION_AMOUNT",
+      "parent": "MACRO_CONDITION",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 498,
+        "y": 664,
+        "w": 65,
+        "h": 60
+      },
+      "bbox_10x": {
+        "x": 4980,
+        "y": 6640,
+        "w": 650,
+        "h": 600
+      },
+      "center_1x": [
+        530.5,
+        694
+      ],
+      "visible_text": "Amount 40%",
+      "expected_function_unverified": "Condition Amount",
+      "web_binding_candidate": "[data-macro=\"condition\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CONDITION_TYPE",
+      "parent": "MACRO_CONDITION",
+      "kind": "select",
+      "bbox_1x": {
+        "x": 573,
+        "y": 635,
+        "w": 97,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 5730,
+        "y": 6350,
+        "w": 970,
+        "h": 300
+      },
+      "center_1x": [
+        621.5,
+        650
+      ],
+      "visible_text": "USED",
+      "expected_function_unverified": "設備狀態類型",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CONDITION_USED",
+      "parent": "MACRO_CONDITION",
+      "kind": "dynamic_text",
+      "bbox_1x": {
+        "x": 511,
+        "y": 729,
+        "w": 45,
+        "h": 30
+      },
+      "bbox_10x": {
+        "x": 5110,
+        "y": 7290,
+        "w": 450,
+        "h": 300
+      },
+      "center_1x": [
+        533.5,
+        744
+      ],
+      "visible_text": "30% USED",
+      "expected_function_unverified": "同圖出現獨立數值，語意待驗證",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CONDITION_CHECK_1",
+      "parent": "MACRO_CONDITION",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 579,
+        "y": 681,
+        "w": 89,
+        "h": 20
+      },
+      "bbox_10x": {
+        "x": 5790,
+        "y": 6810,
+        "w": 890,
+        "h": 200
+      },
+      "center_1x": [
+        623.5,
+        691
+      ],
+      "visible_text": "Rattle",
+      "expected_function_unverified": "開關劣化項",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "CONDITION_CHECK_2",
+      "parent": "MACRO_CONDITION",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 579,
+        "y": 705,
+        "w": 89,
+        "h": 20
+      },
+      "bbox_10x": {
+        "x": 5790,
+        "y": 7050,
+        "w": 890,
+        "h": 200
+      },
+      "center_1x": [
+        623.5,
+        715
+      ],
+      "visible_text": "Wow/Flutter",
+      "expected_function_unverified": "開關劣化項",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "INTELLIGIBILITY_MAIN",
+      "parent": "MACRO_INTELLIGIBILITY",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 701,
+        "y": 662,
+        "w": 68,
+        "h": 72
+      },
+      "bbox_10x": {
+        "x": 7010,
+        "y": 6620,
+        "w": 680,
+        "h": 720
+      },
+      "center_1x": [
+        735,
+        698
+      ],
+      "visible_text": "75%",
+      "expected_function_unverified": "清晰度 Amount",
+      "web_binding_candidate": "[data-macro=\"intelligibility\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "INTELLIGIBILITY_MODE_1",
+      "parent": "MACRO_INTELLIGIBILITY",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 790,
+        "y": 634,
+        "w": 89,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 7900,
+        "y": 6340,
+        "w": 890,
+        "h": 320
+      },
+      "center_1x": [
+        834.5,
+        650
+      ],
+      "visible_text": "Natural",
+      "expected_function_unverified": "清晰度模式",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "INTELLIGIBILITY_MODE_2",
+      "parent": "MACRO_INTELLIGIBILITY",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 790,
+        "y": 670,
+        "w": 89,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 7900,
+        "y": 6700,
+        "w": 890,
+        "h": 320
+      },
+      "center_1x": [
+        834.5,
+        686
+      ],
+      "visible_text": "More Clear",
+      "expected_function_unverified": "清晰度模式",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "INTELLIGIBILITY_MODE_3",
+      "parent": "MACRO_INTELLIGIBILITY",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 790,
+        "y": 706,
+        "w": 89,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 7900,
+        "y": 7060,
+        "w": 890,
+        "h": 320
+      },
+      "center_1x": [
+        834.5,
+        722
+      ],
+      "visible_text": "Muffled",
+      "expected_function_unverified": "清晰度模式",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "INTELLIGIBILITY_CHECK_1",
+      "parent": "MACRO_INTELLIGIBILITY",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 703,
+        "y": 746,
+        "w": 92,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 7030,
+        "y": 7460,
+        "w": 920,
+        "h": 190
+      },
+      "center_1x": [
+        749,
+        755.5
+      ],
+      "visible_text": "Presence",
+      "expected_function_unverified": "控制開關",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "INTELLIGIBILITY_CHECK_2",
+      "parent": "MACRO_INTELLIGIBILITY",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 703,
+        "y": 770,
+        "w": 92,
+        "h": 19
+      },
+      "bbox_10x": {
+        "x": 7030,
+        "y": 7700,
+        "w": 920,
+        "h": 190
+      },
+      "center_1x": [
+        749,
+        779.5
+      ],
+      "visible_text": "Dynamic",
+      "expected_function_unverified": "控制開關",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "AMBIENCE_TYPE",
+      "parent": "MACRO_AMBIENCE",
+      "kind": "select",
+      "bbox_1x": {
+        "x": 910,
+        "y": 636,
+        "w": 129,
+        "h": 28
+      },
+      "bbox_10x": {
+        "x": 9100,
+        "y": 6360,
+        "w": 1290,
+        "h": 280
+      },
+      "center_1x": [
+        974.5,
+        650
+      ],
+      "visible_text": "Traffic",
+      "expected_function_unverified": "選擇環境聲",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "AMBIENCE_AMOUNT",
+      "parent": "MACRO_AMBIENCE",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 918,
+        "y": 672,
+        "w": 58,
+        "h": 56
+      },
+      "bbox_10x": {
+        "x": 9180,
+        "y": 6720,
+        "w": 580,
+        "h": 560
+      },
+      "center_1x": [
+        947,
+        700
+      ],
+      "visible_text": "40%",
+      "expected_function_unverified": "環境聲音量",
+      "web_binding_candidate": "[data-macro=\"ambience\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "AMBIENCE_S",
+      "parent": "MACRO_AMBIENCE",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 977,
+        "y": 672,
+        "w": 32,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 9770,
+        "y": 6720,
+        "w": 320,
+        "h": 290
+      },
+      "center_1x": [
+        993,
+        686.5
+      ],
+      "visible_text": "S",
+      "expected_function_unverified": "聲道模式，勿憑圖示自行定義",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "AMBIENCE_M",
+      "parent": "MACRO_AMBIENCE",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1011,
+        "y": 672,
+        "w": 32,
+        "h": 29
+      },
+      "bbox_10x": {
+        "x": 10110,
+        "y": 6720,
+        "w": 320,
+        "h": 290
+      },
+      "center_1x": [
+        1027,
+        686.5
+      ],
+      "visible_text": "M",
+      "expected_function_unverified": "聲道模式，勿憑圖示自行定義",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "AMBIENCE_DUCK",
+      "parent": "MACRO_AMBIENCE",
+      "kind": "checkbox",
+      "bbox_1x": {
+        "x": 982,
+        "y": 715,
+        "w": 63,
+        "h": 22
+      },
+      "bbox_10x": {
+        "x": 9820,
+        "y": 7150,
+        "w": 630,
+        "h": 220
+      },
+      "center_1x": [
+        1013.5,
+        726
+      ],
+      "visible_text": "Duck",
+      "expected_function_unverified": "Duck on/off",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "AMBIENCE_WAVEFORM",
+      "parent": "MACRO_AMBIENCE",
+      "kind": "browser_preview",
+      "bbox_1x": {
+        "x": 905,
+        "y": 751,
+        "w": 137,
+        "h": 50
+      },
+      "bbox_10x": {
+        "x": 9050,
+        "y": 7510,
+        "w": 1370,
+        "h": 500
+      },
+      "center_1x": [
+        973.5,
+        776
+      ],
+      "visible_text": "waveform",
+      "expected_function_unverified": "環境素材選擇/預覽",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MIX_KNOB",
+      "parent": "MACRO_MIX",
+      "kind": "knob",
+      "bbox_1x": {
+        "x": 1084,
+        "y": 636,
+        "w": 72,
+        "h": 72
+      },
+      "bbox_10x": {
+        "x": 10840,
+        "y": 6360,
+        "w": 720,
+        "h": 720
+      },
+      "center_1x": [
+        1120,
+        672
+      ],
+      "visible_text": "100%",
+      "expected_function_unverified": "Dry/Scene Mix",
+      "web_binding_candidate": "[data-macro=\"mix\"]",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MIX_WET",
+      "parent": "MACRO_MIX",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1079,
+        "y": 740,
+        "w": 78,
+        "h": 27
+      },
+      "bbox_10x": {
+        "x": 10790,
+        "y": 7400,
+        "w": 780,
+        "h": 270
+      },
+      "center_1x": [
+        1118,
+        753.5
+      ],
+      "visible_text": "Wet",
+      "expected_function_unverified": "Wet mode",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "MIX_PHASE",
+      "parent": "MACRO_MIX",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1079,
+        "y": 772,
+        "w": 78,
+        "h": 26
+      },
+      "bbox_10x": {
+        "x": 10790,
+        "y": 7720,
+        "w": 780,
+        "h": 260
+      },
+      "center_1x": [
+        1118,
+        785
+      ],
+      "visible_text": "Ø",
+      "expected_function_unverified": "Phase/Mute 不可憑靜態圖猜測",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_ON",
+      "parent": "MACRO_EQ_TONE",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1384,
+        "y": 598,
+        "w": 60,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 13840,
+        "y": 5980,
+        "w": 600,
+        "h": 320
+      },
+      "center_1x": [
+        1414,
+        614
+      ],
+      "visible_text": "On",
+      "expected_function_unverified": "開啟 EQ/Tone",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_POWER",
+      "parent": "MACRO_EQ_TONE",
+      "kind": "button",
+      "bbox_1x": {
+        "x": 1454,
+        "y": 598,
+        "w": 32,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 14540,
+        "y": 5980,
+        "w": 320,
+        "h": 320
+      },
+      "center_1x": [
+        1470,
+        614
+      ],
+      "visible_text": "power",
+      "expected_function_unverified": "EQ bypass",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_GRAPH",
+      "parent": "MACRO_EQ_TONE",
+      "kind": "interactive_graph",
+      "bbox_1x": {
+        "x": 1217,
+        "y": 637,
+        "w": 267,
+        "h": 88
+      },
+      "bbox_10x": {
+        "x": 12170,
+        "y": 6370,
+        "w": 2670,
+        "h": 880
+      },
+      "center_1x": [
+        1350.5,
+        681
+      ],
+      "visible_text": "colored multi-node EQ curve",
+      "expected_function_unverified": "節點控制 Frequency/Gain/Q（動作待驗證）",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_NODE_1",
+      "parent": "EQ_GRAPH",
+      "kind": "node",
+      "bbox_1x": {
+        "x": 1244,
+        "y": 675,
+        "w": 12,
+        "h": 12
+      },
+      "bbox_10x": {
+        "x": 12440,
+        "y": 6750,
+        "w": 120,
+        "h": 120
+      },
+      "center_1x": [
+        1250,
+        681
+      ],
+      "visible_text": "EQ handle",
+      "expected_function_unverified": "拖曳頻段節點，圖中五點不代表真有五個可控 Band",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_NODE_2",
+      "parent": "EQ_GRAPH",
+      "kind": "node",
+      "bbox_1x": {
+        "x": 1296,
+        "y": 664,
+        "w": 12,
+        "h": 12
+      },
+      "bbox_10x": {
+        "x": 12960,
+        "y": 6640,
+        "w": 120,
+        "h": 120
+      },
+      "center_1x": [
+        1302,
+        670
+      ],
+      "visible_text": "EQ handle",
+      "expected_function_unverified": "拖曳頻段節點，圖中五點不代表真有五個可控 Band",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_NODE_3",
+      "parent": "EQ_GRAPH",
+      "kind": "node",
+      "bbox_1x": {
+        "x": 1348,
+        "y": 687,
+        "w": 12,
+        "h": 12
+      },
+      "bbox_10x": {
+        "x": 13480,
+        "y": 6870,
+        "w": 120,
+        "h": 120
+      },
+      "center_1x": [
+        1354,
+        693
+      ],
+      "visible_text": "EQ handle",
+      "expected_function_unverified": "拖曳頻段節點，圖中五點不代表真有五個可控 Band",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_NODE_4",
+      "parent": "EQ_GRAPH",
+      "kind": "node",
+      "bbox_1x": {
+        "x": 1392,
+        "y": 665,
+        "w": 12,
+        "h": 12
+      },
+      "bbox_10x": {
+        "x": 13920,
+        "y": 6650,
+        "w": 120,
+        "h": 120
+      },
+      "center_1x": [
+        1398,
+        671
+      ],
+      "visible_text": "EQ handle",
+      "expected_function_unverified": "拖曳頻段節點，圖中五點不代表真有五個可控 Band",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_NODE_5",
+      "parent": "EQ_GRAPH",
+      "kind": "node",
+      "bbox_1x": {
+        "x": 1441,
+        "y": 682,
+        "w": 12,
+        "h": 12
+      },
+      "bbox_10x": {
+        "x": 14410,
+        "y": 6820,
+        "w": 120,
+        "h": 120
+      },
+      "center_1x": [
+        1447,
+        688
+      ],
+      "visible_text": "EQ handle",
+      "expected_function_unverified": "拖曳頻段節點，圖中五點不代表真有五個可控 Band",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_HPF",
+      "parent": "MACRO_EQ_TONE",
+      "kind": "select",
+      "bbox_1x": {
+        "x": 1192,
+        "y": 766,
+        "w": 76,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 11920,
+        "y": 7660,
+        "w": 760,
+        "h": 320
+      },
+      "center_1x": [
+        1230,
+        782
+      ],
+      "visible_text": "HPF 40 Hz",
+      "expected_function_unverified": "Final tone shaping",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_LPF",
+      "parent": "MACRO_EQ_TONE",
+      "kind": "select",
+      "bbox_1x": {
+        "x": 1279,
+        "y": 766,
+        "w": 78,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 12790,
+        "y": 7660,
+        "w": 780,
+        "h": 320
+      },
+      "center_1x": [
+        1318,
+        782
+      ],
+      "visible_text": "LPF 14.0 kHz",
+      "expected_function_unverified": "Final tone shaping",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    },
+    {
+      "id": "EQ_TONE",
+      "parent": "MACRO_EQ_TONE",
+      "kind": "select",
+      "bbox_1x": {
+        "x": 1366,
+        "y": 766,
+        "w": 119,
+        "h": 32
+      },
+      "bbox_10x": {
+        "x": 13660,
+        "y": 7660,
+        "w": 1190,
+        "h": 320
+      },
+      "center_1x": [
+        1425.5,
+        782
+      ],
+      "visible_text": "TONE Natural",
+      "expected_function_unverified": "Final tone shaping",
+      "web_binding_candidate": "",
+      "precision": "APPROX"
+    }
+  ]
+}
