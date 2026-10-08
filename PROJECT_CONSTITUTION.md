@@ -374,6 +374,25 @@ checkpoint：<編號／具體檔案／實測差值／PASS/FAIL>
 
 ---
 
+## 永久資產分類、共用邏輯與驗證標準
+
+這些是**規劃與 ID 類別**，不是宣稱 GitHub 現在有幾張已完成的 binary；實際現存檔案、尺寸、CRC、工作進度必須每次重新查 manifest／GitHub tree，記在動態交接。
+
+- **Semantic master 共 224 個已定義類型**：SOURCE **64**、TRANSMISSION **24**、WALL/COVER **32**、SPACE/ENVIRONMENT **56**、Scene Preset Hero **48**。每個 semantic identity 各有 Shared、UI_01、UI_02 三個不同 display export。**224×3=672** 是舊一代 semantic 交付計畫的總規格，不代表永遠不擴增。
+- ReferenceSheets 是設計比對圖譜／style guide／review atlas，**不能替代真正語意圖、正式 full UI REF 原圖，也不能直接作 runtime skin**。
+- Runtime chrome 按 P0（基礎 shell/frame/button/knob）、P1（卡片、icon、刻度／meter/marker/divider）、P2（進階 control caps/flow/utilities）分類，**既有 Common Runtime 元件優先共用**，不要因 UI_02 另一外觀就自動複製一套相同 PNG。
+- 最後缺少的四張 Shared SPACE master `SPC_053_Drive_Thru_Window.png`、`SPC_054_Security_Checkpoint.png`、`SPC_055_Prison_Visiting_Room.png`、`SPC_056_Phone_Booth.png` 曾由使用者最初的 V2 ZIP 精確還原。舊 V2 的完成紀錄保存在歷史交接；此處記錄**不可重製或拿截圖替代原圖**的原則。
+- Scene Hero 擴充 SCN049–074 是 **26×3＝78 張獨立 PNG 的新增專案**，不是 672 舊 V2 semantic 檔案缺失；需獨立工作 branch／manifest／美術驗證／state mapping／audition status。不得把圖片完成等同音效審聽完成。
+- 所有 raster 先核尺寸、RGBA/alpha（適用時）、PNG integrity／CRC、色調、足夠 HiDPI、是否符合共享 runtime skin；所有 CSS/HTML/Native binding 要有 machine-readable id 映射，不可靜態圖檔有了卻 selector 永遠沒用到。
+- **永遠區分：缺實體二進位圖片、缺 binding、缺 REF 測量、缺某個 UI 狀態、缺 live 控件、缺聲學行為**；這六種缺口不能混稱「缺圖」或「已修復」。
+
+## 不同 AI 平台的正式閱讀入口
+
+- Repo 任何 coding agent：**`AGENTS.md` → 本文件**；`AGENTS.md` 是**真正的根目錄入口和精簡硬規則**，不能只寫「請看上一份交接」。
+- GitHub Copilot：`.github/copilot-instructions.md` 明確要求先讀同一套永久憲章；避免建立與本文件競爭的另一份製作原則。
+- GitHub README：於專案首頁直接連結 `AGENTS.md` 與 `PROJECT_CONSTITUTION.md`。
+- **一般 ChatGPT 新對話不保證自動載入 GitHub 文件**。若新聊天沒有 repo 的上下文或未讀到連結，必須先取得 GitHub 資料，而非聲稱已自動遵守；如使用 ChatGPT Project，可在 Project 指示中固定「先讀 repo 的 AGENTS.md」，這個 ChatGPT 設定不屬於 GitHub repository API 所能代改。
+
 ## 永久規範的修訂流程與防遺失機制
 
 - **新的一篇 ChatGPT 對話的交接不是新規範的取代品。** 交接永遠要指回 `AGENTS.md` + 本文件；不可只靠上一個聊天室的記憶。
