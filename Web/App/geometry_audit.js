@@ -34,6 +34,17 @@ function auditReferenceGeometry(){
     const meterMode=document.querySelector(".meter-mode-toggle");
     const gear=document.querySelector("#settingsBtn");
     const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
+    // UI_01 runtime-size contract (not a claim of fine REF pixel confirmation).
+    // Measure the rendered knob face, rather than trusting the CSS variable.
+    const motionKnobFaces=[...document.querySelectorAll(".macro-motion .macro-knob-face")];
+    const macroKnobFaces=Object.fromEntries([
+      ["badSignal",".macro-badsignal"],
+      ["condition",".macro-condition"],
+      ["intelligibility",".macro-intelligibility"],
+      ["ambience",".macro-ambience"],
+      ["mix",".macro-mix"]
+    ].map(([id,selector])=>[id,document.querySelector(selector+" .macro-knob-face")]));
+    const faceDiameter=(e,n)=>!!e&&near(box(e).w,n,0.25)&&near(box(e).h,n,0.25);
     const cardPart=(type,sel)=>document.querySelector(`.module-card[data-type="${type}"] ${sel}`);
     const art=Object.fromEntries(["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"].map(t=>[t,cardPart(t,".module-art")]));
     const edit=Object.fromEntries(["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"].map(t=>[t,cardPart(t,"[data-edit]")]));
@@ -55,6 +66,14 @@ function auditReferenceGeometry(){
       moduleRailH:rail?near(box(rail).h,520):false,
       meterSlots:meterSlots.length===2&&meterSlots.every(el=>near(box(el).w,20)&&near(box(el).h,178)),
       meterMode:meterMode?near(box(meterMode).y,331)&&near(box(meterMode).h,30):false,
+      // A late CSS cascade must not silently change the established UI_01
+      // runtime knob sizes. Fine REF positions remain APPROX in the spec.
+      motionKnobFaces55:motionKnobFaces.length===4&&motionKnobFaces.every(e=>faceDiameter(e,55)),
+      badSignalKnob68:faceDiameter(macroKnobFaces.badSignal,68),
+      conditionKnob68:faceDiameter(macroKnobFaces.condition,68),
+      intelligibilityKnob68:faceDiameter(macroKnobFaces.intelligibility,68),
+      ambienceKnob68:faceDiameter(macroKnobFaces.ambience,68),
+      mixKnob82:faceDiameter(macroKnobFaces.mix,82),
       macroStripH:near(box(macro).h,221),
       macroStripRect:near(box(macro).x,0)&&near(box(macro).y,586)&&near(box(macro).w,1499)&&near(box(macro).h,221),
       gear:gear?near(box(gear).w,38)&&near(box(gear).h,38)&&near(box(gear).y,9)&&near(box(gear).x,1451):false,
@@ -99,6 +118,10 @@ function auditReferenceGeometry(){
       art:Object.fromEntries(Object.entries(art).map(([k,e])=>[k,e?box(e):null])),
       edit:Object.fromEntries(Object.entries(edit).map(([k,e])=>[k,e?box(e):null])),
       arrow:Object.fromEntries(Object.entries(arrow).map(([k,e])=>[k,e?box(e):null])),
+      knobFaces:{
+        motion:motionKnobFaces.map(box),
+        ...Object.fromEntries(Object.entries(macroKnobFaces).map(([k,e])=>[k,e?box(e):null]))
+      },
       macros
     };
     return {ui:"UI_01",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks),measurements};
