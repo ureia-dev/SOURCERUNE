@@ -421,6 +421,7 @@ checkpoint：<編號／具體檔案／實測差值／PASS/FAIL>
 ## 17. 查找正式資料與歷史文件索引
 
 **進入專案：**
+- `AGENTS.md`：repo 根目錄 AI／GPT 快速入口，會導向本文件與高優先專案規則。
 - \`README.md\`：產品與主線架構。
 - \`PROJECT_RULES.md\`：CI 三層／safety 觸發次數／VST3-Web 部署規則。
 - \`docs/architecture/PROJECT_STRUCTURE.md\`、\`WEB_RUNTIME.md\`：架構詳情。
