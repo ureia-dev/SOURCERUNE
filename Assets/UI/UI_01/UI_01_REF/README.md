@@ -1,16 +1,21 @@
-# UI_01 — 唯一核准清潔 REF 來源登錄
+# UI_01 正式無說明 REF — 2.5× 現行版本
 
-## 身分及二進位檔狀態
+> 使用者已取消舊 10 倍，**僅 2.5× 為有效掃描倍率**。原圖保留 1508×808，不使用重新生成的 AI 圖替換。
 
-使用者於 2026-10-08 核准的無說明 UI_01 PNG（本對話直接附件）為**1508×808 RGBA**。此圖不是舊版 **1536×1024 海報 / 1499×807 shell**，也不是 image-gen 重新繪製版。
+| 項目 | 已核對的來源與狀態 |
+|---|---|
+| 原圖 | 1508×808 RGBA，SHA-256 `96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916` |
+| 2.5× 圖 | 3770×2020 RGBA，Pillow NEAREST，SHA-256 `f67c59046f2c1f90379837f1898a63a98e9abbf3d0e57a82945f4e5b2afb773e` |
+| 正式原圖預定路徑 | `Assets/UI/UI_01/UI_01_REF/UI_01_REF_ORIGINAL_1508x808.png`，**PENDING-BINARY-UPLOAD** |
+| 2.5× 圖預定路徑 | `Assets/UI/UI_01/UI_01_REF/UI_01_REF_2_5X_PIXEL.png`，**PENDING-BINARY-UPLOAD** |
+| 幾何／功能清冊 | `docs/product/reference/UI_01_REF_CLEAN_SCAN_20261008.json` + 同名 MD，142 筆，原圖與 2.5× 位置／尺寸／中心點、功能線索 |
+| 重現工具 | `tools/ref_scan/upscale_png_stream.py`（保留舊路徑但已改 Pillow 2.5× nearest） |
 
-- 原始 SHA-256：`96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916`
-- 10x 像素複製 SHA-256：`94044c004f47b01f214cf62cfc3c306fd1afcf7c4c82b5a62e0fb4967bae53a8`；尺寸 15080×8080。
-- `UI_01_REF_ORIGINAL_1508x808.png`：**PENDING**，須補進本資料夾並驗 SHA。
-- `UI_01_REF_10X_PIXEL.png`：**PENDING**，須補進本資料夾並驗 SHA。
-- 工具：`tools/ref_scan/upscale_png_stream.py`；逐掃描列生成，避免 10x 圖造成記憶體耗盡。
-- 數據：`docs/product/reference/UI_01_REF_CLEAN_SCAN_20261008.json` + 同名 MD，142 項／原圖與 10x 座標。
+用法：`python tools/ref_scan/upscale_png_stream.py UI_01_REF_ORIGINAL_1508x808.png UI_01_REF_2_5X_PIXEL.png`。
 
-**嚴禁宣稱沒有真的上傳的 PNG 已入 GitHub；二進位存檔及核准 hash 都是另一個獨立 gate。**
-不能以 10x 放大圖冒充 10x 光學原始資訊；不能從此圖裁靜態 Spectrum/Meter/文字當 runtime。
-UI_02 有另外的既存 `Assets/UI/UI_02/UI_02_REF/UI_02_REF.png`，必須等 UI_01 完成後再獨立掃描。
+### 坐標與驗證護欄
+
+- X、Y、W、H、中心點：**1× × 2.5**；遇小數不要先取整。輸出光柵使用 nearest-neighbor，絕不推論放大圖帶有新細節。
+- 舊的 1536×1024 原海報和 1499×807 plugin-local shell 座標不是同一個來源座標系統，未註冊對齊前不直接重映射。
+- 這兩張 PNG 在工作容器已實際生成與比對，但**尚未存放 GitHub**，別將本文誤當成圖片成功入庫。
+- 曲線、Meter、波形、動態值與互動必須由 Web/Native live code 完成，不能切 REF 圖作實際控制。

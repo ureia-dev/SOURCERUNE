@@ -1,11 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
-## UI_01 clean REF scan 1508×808（本輪新增 checkpoint，2026-10-08）
+## UI_01 清潔 REF 正式 2.5× 檢視（新決定取代 10×）
 
-- 使用者當次核准的 UI_01 無說明直接附件：1508×808 RGBA；原圖 SHA-256 `96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916`；精確 10 倍逐像素 PNG 為 15080×8080，SHA-256 `94044c004f47b01f214cf62cfc3c306fd1afcf7c4c82b5a62e0fb4967bae53a8`。
-- 詳見 `docs/product/reference/UI_01_REF_CLEAN_SCAN_20261008.md`／JSON：元件、文字、位置、十倍座標、功能候選與 Web 實作對照；**不可覆寫舊 1499×807 shell 座標空間**。
-- 原圖及 10× PNG 在作業環境已完成；GitHub PNG 二進位因現有連接器不可直接由對話檔案上傳，明確狀態 `PENDING-BINARY-UPLOAD`，預計位置 `Assets/UI/UI_01/UI_01_REF/`，勿報已上傳。
-- 視覺候選框仍為 `APPROX`，實際操作/Web/VST3 驗證仍為 `PENDING`；UI_02 獨立下一輪掃描，勿兩張一起混用。
+- 正式無說明來源 1508×808 RGBA，SHA-256 `96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916`，原圖不改；正式掃描倍率為 **2.5 倍**，3770×2020 PNG，Pillow NEAREST，SHA-256 `f67c59046f2c1f90379837f1898a63a98e9abbf3d0e57a82945f4e5b2afb773e`，本機兩次重現及逐像素比對通過。
+- 更新 `docs/product/reference/UI_01_REF_CLEAN_SCAN_20261008.json` 及同名 MD：**142 筆** `bbox_1x`、`bbox_2_5x`、`center_1x`、`center_2_5x`，保留內容、功能候選、Web 元件與精度。
+- `Assets/UI/UI_01/UI_01_REF/` 尚只有 README；原圖及 2.5× PNG 檔案**仍待二進位 GitHub 上傳**，不可報完成。原圖目標 `UI_01_REF_ORIGINAL_1508x808.png`，掃描圖目標 `UI_01_REF_2_5X_PIXEL.png`。
+- 1499×807 既有 Web/Native shell 與 1508×808 REF 不是同一座標系；疊圖校準/細字與狀態/互動/Native 實測仍 PENDING。此步不改 UI_02、DSP、Preset 或 CI 門檻。
+
 
 > 本檔**只放最新可核對狀態、待完成清單與下一步**。不是產品憲章／DSP 規格／論壇研究規則；永久原則從 [AGENTS.md](AGENTS.md) 讀取。任何快照只代表當日，**執行時先查 live main/branches/open PR/CI/Pages**，不要沿用這裡的舊 SHA。
 
