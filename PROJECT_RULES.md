@@ -1,5 +1,7 @@
 # SOURCERUNE Project Rules
 
+> 此檔的 Fast/Deep/Release、安全測試觸發與 VST3／WEB 同步為最高優先專案限制；產品方向、完整使用者永久原則與 UI/REF/資產製程另見 **[PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)**，新 GPT 應從 **[AGENTS.md](AGENTS.md)** 進入。進度交接不是憲章替代品。
+
 ## GitHub CI 三層制與安全測試鎖定（最高優先）
 
 1. 所有 CI 固定分成 **Fast / Deep / Release** 三層；不得自行新增第四層，或把 Deep／Release 偷塞進日常 Fast。
