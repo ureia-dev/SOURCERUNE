@@ -55,7 +55,7 @@
 - [ ] **U01-11｜Meter/Peak/RMS/LUFS**（P1/P3）— REF 彩色分段/完整 dB/LUFS，Web 簡化；修真外觀並使用 Live Peak/RMS，LUFS 須真標準測量。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-12｜BAD SIGNAL 四勾選**（P0）— REF Static/Dropout/Interference/Low Bitrate，Web 僅文字數值；補主卡可操作 Checkbox 與 Advanced/State 同步。
-  - **驗收/進度**：`PARTIAL — WEB IMPLEMENTED / BROWSER E2E PENDING`；Web 主卡已改為四個真 checkbox，映射原有 range IDs 而不新增參數；UI_02 保持原顯示。需等 PR Fast CI、Web Preview 瀏覽器 `interactionSmoke.U01-12` 真點擊/Advanced/Undo/Redo PASS，才能完成 Web 部分；Native VST3 Host/聲音 DSP 仍由 `CROSS-08`／`CROSS-15` 追蹤。未通過不可勾本項。
+  - **驗收/進度**：`PARTIAL — WEB IMPLEMENTED / BROWSER E2E PENDING`；Web Preview #77 發現既有 `data-macro-selectbox` 控制被誤用單元素 `$()` 後呼叫 `.forEach()`，Chrome 在初始化前就中止；本 checkpoint 修正為 `$()`，待下一次真 Chrome render／互動結果確認後才可勾選。其餘原有說明：Web 主卡已改為四個真 checkbox，映射原有 range IDs 而不新增參數；UI_02 保持原顯示。需等 PR Fast CI、Web Preview 瀏覽器 `interactionSmoke.U01-12` 真點擊/Advanced/Undo/Redo PASS，才能完成 Web 部分；Native VST3 Host/聲音 DSP 仍由 `CROSS-08`／`CROSS-15` 追蹤。未通過不可勾本項。
 - [ ] **U01-13｜CONDITION 勾選/USED**（P0）— REF Rattle、Wow/Flutter checkbox、USED 比例，Web 簡化；補可直接操作和一套 State/數值。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-14｜INTELLIGIBILITY Presence/Dynamic**（P0/待核准）— REF 有兩 checkbox，Web 無；先核實這兩項與現行參數的語意，再接入 State，不能憑圖新造 DSP。
