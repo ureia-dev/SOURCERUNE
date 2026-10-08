@@ -1,2 +1,9 @@
 curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
-render audit completed successfully
+TimeoutError: Waiting failed: 15000ms exceeded
+    at new WaitTask (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/common/WaitTask.js:49:34)
+    at IsolatedWorld.waitForFunction (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Realm.js:52:26)
+    at CdpFrame.waitForFunction (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:583:43)
+    at CdpFrame.<anonymous> (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/util/decorators.js:109:27)
+    at CdpPage.waitForFunction (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:1451:37)
+    at [stdin]:19:16
+render audit failed with status 1
