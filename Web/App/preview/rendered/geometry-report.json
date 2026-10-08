@@ -1,5 +1,5 @@
 {
-  "commit": "26ca46aa79e05f7462cc489506f22a12172814de",
+  "commit": "d3e52f9a1b90ef15064f907237d6fcd4d4d1d75c",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -288,6 +288,18 @@
             "x": 1177,
             "y": 586
           }
+        }
+      },
+      "interactionSmoke": {
+        "U01-12": {
+          "ok": true,
+          "allVisible": true,
+          "initialChecked": true,
+          "toggledOff": true,
+          "advancedSynced": true,
+          "undoRestored": true,
+          "redoOff": true,
+          "backToBaseline": true
         }
       }
     },
