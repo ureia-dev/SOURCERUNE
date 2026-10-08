@@ -1,5 +1,7 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+> **最新 P0 Checkpoint（2026-10-09）**：U01-12 `[x]`（UI_01 Web 四個 Checkbox／共用 State／Advanced／Undo/Redo 已 Chrome 真驗收），**目前 11 項 `[x]`、54 項 `[ ]`**；CROSS-01（兩張 UI_01 正式 PNG binary 入 GitHub）仍 BLOCKED，其他 P0 仍待辦。文末「初次登錄統計」是歷史數值，不可當現況。
+
 > 2026-10-09 建立；承接使用者選取的完整缺項稽核。**每完成一個工作 ID，要直接在這份 GitHub 文件中將 `[ ]` 更新為 `[x]`，填入 PR／Commit／CI／正式 REF 與真 Web/Native 驗收證據。** 不另建立重複競爭工作清單。純文件的登錄不等於任何修復完成。
 
 ## 基準與不可誤判的事項
@@ -54,8 +56,11 @@
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-11｜Meter/Peak/RMS/LUFS**（P1/P3）— REF 彩色分段/完整 dB/LUFS，Web 簡化；修真外觀並使用 Live Peak/RMS，LUFS 須真標準測量。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
-- [ ] **U01-12｜BAD SIGNAL 四勾選**（P0）— REF Static/Dropout/Interference/Low Bitrate，Web 僅文字數值；補主卡可操作 Checkbox 與 Advanced/State 同步。
-  - **驗收/進度**：`PARTIAL — WEB IMPLEMENTED / BROWSER E2E PENDING`；Web Preview #77 發現既有 `data-macro-selectbox` 控制被誤用單元素 `$()` 後呼叫 `.forEach()`，Chrome 在初始化前就中止；本 checkpoint 修正為 `$()`，待下一次真 Chrome render／互動結果確認後才可勾選。其餘原有說明：Web 主卡已改為四個真 checkbox，映射原有 range IDs 而不新增參數；UI_02 保持原顯示。需等 PR Fast CI、Web Preview 瀏覽器 `interactionSmoke.U01-12` 真點擊/Advanced/Undo/Redo PASS，才能完成 Web 部分；Native VST3 Host/聲音 DSP 仍由 `CROSS-08`／`CROSS-15` 追蹤。未通過不可勾本項。
+- [x] **U01-12｜BAD SIGNAL 四勾選**（P0 · WEB 主卡與共享 State 已驗收）— REF Static／Dropout／Interference／Low Bitrate 四項原本只顯示文字，現已修為四個可直接操作的 Checkbox。
+  - **實作**：`Web/App/app.js` 以 `data-signal-checkbox` 對應 `noiseStatic`、`dropout`、`interference`、`bitrateArtifacts` 的既有 0–100 數值（關閉＝0、再啟用＝前次正值或 schema 預設）；`Web/App/visual_convergence_v3.css` 僅調整 UI_01 樣式。Advanced／Undo／Redo 直接共用既有 State，未新增 DSP ID；UI_02 仍用原本版面。
+  - **正式驗收及證據**：PR [#58](https://github.com/ureia-dev/SOURCERUNE/pull/58) 合併 `9212424b8becf63f95ca1fd714b0de98eb7afd46`，啟動失敗後單選/複選 `$()`/ `$$()` 根因修復 PR [#59](https://github.com/ureia-dev/SOURCERUNE/pull/59) 合併 `d3e52f9a1b90ef15064f907237d6fcd4d4d1d75c`，四項完整 Chrome test PR [#60](https://github.com/ureia-dev/SOURCERUNE/pull/60) 合併 `a9b1ddb19cda51274b3a28d27d9b8175a6b24212`；Fast CI #103／#104／#105 PASS（Deep／Release skipped）。
+  - **實際瀏覽器驗證：DONE（2026-10-09）**：GitHub [Web Preview #79](https://github.com/ureia-dev/SOURCERUNE/actions/runs/37818887999)；`Web/App/preview/rendered/geometry-report.json` 的 `results.UI_01.interactionSmoke.U01-12` **ok=true**，四 ID 各自 `toggled=true`、`advancedSynced=true`、`undoRestored=true`、`redoToggled=true`、`backToBaseline=true`，四控制均在原卡可見範圍；`results.UI_01.ok=true`／`results.UI_02.ok=true`，兩 UI failures=[]；`render-log.txt` 為 `render audit completed successfully`。截圖：`Web/App/preview/rendered/UI_01.png`。
+  - **完成範圍**：本 ID 僅標示 **UI_01 Web 主介面可直接操作與共用數值/Undo/Redo PASS**。Chrome log 仍有未定位的一筆 404，另由 `CROSS-06` 處理；Native VST3 Host/DSP 仍 PENDING，見 `CROSS-07`／`CROSS-08`／`CROSS-15`；不得延伸宣稱聲音已實作、1:1 美術已全部收斂。
 - [ ] **U01-13｜CONDITION 勾選/USED**（P0）— REF Rattle、Wow/Flutter checkbox、USED 比例，Web 簡化；補可直接操作和一套 State/數值。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-14｜INTELLIGIBILITY Presence/Dynamic**（P0/待核准）— REF 有兩 checkbox，Web 無；先核實這兩項與現行參數的語意，再接入 State，不能憑圖新造 DSP。
