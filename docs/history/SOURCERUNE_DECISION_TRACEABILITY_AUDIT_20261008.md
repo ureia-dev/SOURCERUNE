@@ -4,6 +4,21 @@
 >
 > 本次稽核日期：2026-10-08。主線基準：GitHub `main` at `d614c7a2476b238b1af509627205d7f08de1d7ac`（開始前）；後續 SHA 依 live GitHub。資料覆蓋：本次可見的使用者對話、歷史封存 `docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md`、目前 repo 下列正式契約、可查到的部分先前談話摘要。**不可取得的更早逐字消息標為 `UNVERIFIED-PREVIOUS-CHAT`，不捏造完整度。**
 
+## 0A. 使用者已找回真正的最初產品設計對話（原始來源校正）
+
+**2026-10-08 使用者明確更正：最初討論 SOURCERUNE 的產品方向、DSP 責任、研究方法與各項細節的對話，是：**
+
+- **原始對話 URL：** https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3
+- **原始對話識別碼：** `6abfd770-e594-83e8-adc4-992fa6ed47b3`
+- **來源身分：** `USER-IDENTIFIED-ORIGINAL-CONVERSATION`（使用者明確指定的正本）
+- **全文讀取狀態：** `CONTENT-NOT-ACCESSIBLE-YET`。該 `/c/` 網址為登入使用者的私人聊天入口；本次工具無法取得該對話完整逐字稿，歷史個人對話檢索也沒有返回對應的完整內容。
+- **逐字完整核對狀態：** `PENDING-VERBATIM`／`SOURCE-COVERAGE-PARTIAL`。**不得標示 100% 已核對，也不得把這份對話當成真的已完整閱讀。**
+- **取得全文後的強制工作：** 從第 1 則到最後 1 則，逐條標 `SOURCE MESSAGE → INITIAL REQUIREMENT → LATER MODIFICATION → FINAL APPROVED DECISION → PERMANENT/ONE-OFF/SCHEDULE → AUTHORITATIVE DOC PATH → VERIFIED CHECKPOINT`；修補遺漏與矛盾，保留先前已完成 checkpoint，逐段審核，不以另一份摘要替代原文。
+
+**重要來源更正：** 先前本次交接工作誤把後續「UI_01／UI_02 REF 精掃、每小時進度」的聊天當成「最初全部產品討論」。這些聊天及 `docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md` **仍屬有效的後續要求／歷史整理**，但**不是最初產品對話的全文替代品**。舊摘要保留，並在來源層級上低於上述使用者指定的正本。
+
+**行動界線：** 本次只校正「原始對話是誰、是否真的已讀」。在未取得完整訊息之前不能憑空追加或宣稱復原原始產品核准值；已由使用者再次明確確認的 DSP 主責、免提供 IR、試聽驗收與立即執行等要求仍維持有效。
+
 ## 0. 上次整理錯在哪
 
 1. **以摘要轉抄摘要**：歷史 `SOURCERUNE_MASTER_HANDOFF.md` 已遺漏 DSP 角色分工；新的永久憲章仍從它抽取，導致原本討論過的實作責任再次消失。
