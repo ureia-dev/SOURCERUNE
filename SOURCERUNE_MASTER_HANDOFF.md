@@ -8,6 +8,15 @@
 >
 > **歷史原稿完整永久封存：** [docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md](docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md)。使用者任何永久新原則都應更新 `PROJECT_CONSTITUTION.md` 而非只寫在某篇交接。
 
+## 2026-10-08 最初產品對話核對／PR #33 已合併
+
+- **已完成文件修補：** PR [#33](https://github.com/ureia-dev/SOURCERUNE/pull/33) 合併到 main，merge SHA `1bffc7cee4ae9a8a06cf3ec8190dde6fc98c4946`。沒有順便變更 DSP、UI、Preset、Workflow 或測試強度。
+- **所有新 GPT 先讀** `AGENTS.md` → `PROJECT_RULES.md`（多論壇大數據最高原則／CI 限制） → `PROJECT_CONSTITUTION.md` → `docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md`（這篇最初產品聊天可見決議／最終取捨） → `docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md`（GPT 主責 DSP，使用者主責試聽、不必提供 IR） → `docs/research/RESEARCH_EVIDENCE_STANDARD.md` → 本進度表與實際 GitHub HEAD。
+- **已核對本輪對話可見重點：** Speakerphone 常用核心＋ADV 才簡化 LFO，FutzBox／AudioThing Speakers／Audacity 的合法原創優點，Source/Cover/Space 自算，Ambience 程序化＋語言背景，Motion/Pro Tools 級 automation，極低 CPU/1×，兩套 UI，可拆 PNG 與 224/74 演進，研究 10k→1k 是起始里程碑而非已完成，8 小時是歷史單次排程而非永久截止。
+- **來源完整性要誠實：** 本輪可見原始產品對話中間有部分折疊，不能稱「每則原話逐字 100%」；已把所有**可確認的最終決議**與 supersession 寫入永久索引，原始逐字全量仍 `PENDING-VERBATIM`。
+- **當次 main 實掃快照：** PNG **793**（Shared 224 + UI01 224 + UI02 224 + ReferenceSheets 6 + Runtime 113），此數字會變，下一次仍需查 Git tree；`SCN_049–074` 的 78 張獨立 Hero、真 C++ DSP/WASM/VST3 host tests、真 LUFS、Golden/Parity、1k 實證研究與用戶試聽，**不可由文件完備推斷已完成**。
+- **下一步**：回到最新實際 UI／DSP／圖資／研究工作線，查 open PR 和最後 checkpoint 再做；不得因交接更新重跑已有工作或重新拆 Public/Private 雙 repo。
+
 ## 2026-10-08 永久研究時數限制更正
 
 使用者指出：先前文件把某次「八小時、每小時一類論壇」的工作排程誤升為永久產品原則。已更正為：**SOURCERUNE 的實證研究必須貫穿整個產品生命週期，八個來源／分析維度可以並行與持續循環，沒有八小時截止**。10,000 候選、1,000 留存是歷史初期規模里程碑，不是停止條件；完成與否仍需核對真實資料庫。此為**文件原則更正**，未宣稱任何新論壇資料已蒐集或 DSP 已修改。
