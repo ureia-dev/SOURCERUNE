@@ -100,24 +100,31 @@ jobs:
                 const smoke = await page.evaluate(() => {
                   const ids = ["noiseStatic","dropout","interference","bitrateArtifacts"];
                   const get = id => document.querySelector(`[data-signal-checkbox="${id}"]`);
-                  const allVisible = ids.every(id => {
-                    const e=get(id),r=e?.getBoundingClientRect();
-                    return !!e && !!r && r.width > 0 && r.height > 0;
+                  const panel = document.querySelector(".macro-badsignal")?.getBoundingClientRect();
+                  const allVisible = !!panel && ids.every(id => {
+                    const e=get(id),rect=e?.getBoundingClientRect();
+                    return !!rect && rect.width>0 && rect.height>0 && rect.left>=panel.left && rect.right<=panel.right && rect.top>=panel.top && rect.bottom<=panel.bottom;
                   });
-                  const initialChecked = get("dropout")?.checked === true;
-                  if (!allVisible || !initialChecked) return {ok:false,allVisible,initialChecked};
-                  get("dropout").click();
-                  const toggledOff = get("dropout")?.checked === false;
-                  document.querySelector(".macro-badsignal h3")?.click();
-                  const advancedSynced = document.querySelector(`[data-param="dropout"]`)?.value === "0";
-                  document.querySelector("#advancedCloseBtn")?.click();
-                  document.querySelector("#undoBtn")?.click();
-                  const undoRestored = get("dropout")?.checked === true;
-                  document.querySelector("#redoBtn")?.click();
-                  const redoOff = get("dropout")?.checked === false;
-                  document.querySelector("#undoBtn")?.click();
-                  const backToBaseline = get("dropout")?.checked === true;
-                  return {ok:allVisible&&initialChecked&&toggledOff&&advancedSynced&&undoRestored&&redoOff&&backToBaseline,allVisible,initialChecked,toggledOff,advancedSynced,undoRestored,redoOff,backToBaseline};
+                  if (!allVisible) return {ok:false,allVisible,missing:ids.filter(id=>!get(id))};
+                  const controls = {};
+                  for (const id of ids) {
+                    const initialChecked = get(id).checked;
+                    get(id).click();
+                    const toggled = get(id)?.checked === !initialChecked;
+                    document.querySelector(".macro-badsignal h3")?.click();
+                    const advanced = document.querySelector(`[data-param="${id}"]`);
+                    const amount = advanced ? Number(advanced.value) : NaN;
+                    const advancedSynced = Number.isFinite(amount) && (initialChecked ? amount===0 : amount>0);
+                    document.querySelector("#advancedCloseBtn")?.click();
+                    document.querySelector("#undoBtn")?.click();
+                    const undoRestored = get(id)?.checked === initialChecked;
+                    document.querySelector("#redoBtn")?.click();
+                    const redoToggled = get(id)?.checked === !initialChecked;
+                    document.querySelector("#undoBtn")?.click();
+                    const backToBaseline = get(id)?.checked === initialChecked;
+                    controls[id] = {initialChecked,toggled,advancedSynced,undoRestored,redoToggled,backToBaseline,ok:toggled&&advancedSynced&&undoRestored&&redoToggled&&backToBaseline};
+                  }
+                  return {ok:allVisible&&ids.every(id=>controls[id].ok),allVisible,controls};
                 });
                 results[ui].interactionSmoke = {"U01-12":smoke};
                 if (!smoke.ok) throw new Error(`[UI_01] BAD SIGNAL checkbox smoke failed: ${JSON.stringify(smoke)}`);
