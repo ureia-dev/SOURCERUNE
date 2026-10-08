@@ -140,6 +140,14 @@ function auditReferenceGeometry(){
   const folder=document.querySelector("#presetVisualsBtn");
   const motionAdjustIds=["speed","doppler","width"];
   const motionAdjust=Object.fromEntries(motionAdjustIds.map(id=>[id,document.querySelector('[data-motion-adjust="'+id+'"]')]));
+  // These are live CSS-bound independent PNG components, not REF crops.
+  // Guard the computed asset and its configured native face size so a later
+  // stylesheet cannot silently remove the knob image while retaining its box.
+  const imageBinding=(el,asset,size)=>{
+    if(!el)return false;
+    const css=getComputedStyle(el);
+    return css.backgroundImage.includes(asset)&&css.backgroundSize.includes(size+"px "+size+"px");
+  };
   const bottomKnob=document.querySelector(".macro-badsignal .macro-knob-face");
   const conditionKnob=document.querySelector(".macro-condition .macro-knob-face");
   const intelligibilityKnob=document.querySelector(".macro-intelligibility .macro-knob-face");
@@ -175,6 +183,8 @@ function auditReferenceGeometry(){
     presetFolder:folder?near(box(folder).w,44)&&near(box(folder).h,42):false,
     motionAdjustKnobs:motionAdjustIds.every(id=>{const el=motionAdjust[id];return el&&el.getAttribute("role")==="slider"&&el.tabIndex===0&&el.getAttribute("aria-label")}), 
     motionAdjustGeometry:motionAdjustIds.every(id=>{const el=motionAdjust[id];return el&&near(box(el).w,86)&&near(box(el).h,76)}),
+    motionDialAsset300:motionDeck?imageBinding(motionDeck,"RT_KNOB_L_BASE.png",300):false,
+    motionSmallKnobAssets54:motionAdjustIds.every(id=>imageBinding(motionAdjust[id],"RT_KNOB_S_BASE.png",54)),
     motionAdjustReadouts:motionAdjustIds.every(id=>{const el=motionAdjust[id],readout=document.getElementById(id+"Readout");if(!el||!readout)return false;const value=el.getAttribute("aria-valuenow");return value!==null&&Number.isFinite(Number(value))&&readout.textContent===value+(id==="speed"?" km/h":"%")}),
     bottomKnob76:bottomKnob?near(box(bottomKnob).w,76)&&near(box(bottomKnob).h,76):false,
     conditionKnob76:conditionKnob?near(box(conditionKnob).w,76)&&near(box(conditionKnob).h,76):false,
@@ -200,6 +210,13 @@ function auditReferenceGeometry(){
     macros,
     bottomKnob:bottomKnob?box(bottomKnob):null,
     motionAdjust:Object.fromEntries(motionAdjustIds.map(id=>[id,motionAdjust[id]?box(motionAdjust[id]):null])),
+    motionKnobAssetBindings:{
+      dial:motionDeck?{image:getComputedStyle(motionDeck).backgroundImage,size:getComputedStyle(motionDeck).backgroundSize}:null,
+      small:Object.fromEntries(motionAdjustIds.map(id=>[id,motionAdjust[id]?{
+        image:getComputedStyle(motionAdjust[id]).backgroundImage,
+        size:getComputedStyle(motionAdjust[id]).backgroundSize
+      }:null]))
+    },
     mixKnob:mixKnob?box(mixKnob):null
   };
   return {ui:"UI_02",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks),measurements};
