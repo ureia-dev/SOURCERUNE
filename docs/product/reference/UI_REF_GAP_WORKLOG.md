@@ -1,0 +1,160 @@
+# SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
+
+> 2026-10-09 建立；承接使用者選取的完整缺項稽核。**每完成一個工作 ID，要直接在這份 GitHub 文件中將 `[ ]` 更新為 `[x]`，填入 PR／Commit／CI／正式 REF 與真 Web/Native 驗收證據。** 不另建立重複競爭工作清單。純文件的登錄不等於任何修復完成。
+
+## 基準與不可誤判的事項
+
+- 建立時 `main=2bf84e5ca05306324f995095f0aa26f1d2647e47`，無 open PR；Fast CI #100/#101 成功。**每次新對話仍須重新查 live HEAD/PR/CI**。
+- REF 原圖與最新掃描倍率只有 **2.5×**：UI_01 核准無說明圖 1508×808 → 3770×2020（PNG binary 尚未入 Git）；UI_02 1672×941 → 4180×2353（原圖/2.5×/標註三 PNG 已入 Git）。已取消舊 10 倍。
+- 基準實際 Chrome 畫面來源：GitHub `Web Preview #76`（run `37806243525`）、`Web/App/preview/rendered/{UI_01,UI_02}.png`、`geometry-report.json` 與 `render-log.txt`；UI_01 51 項幾何、UI_02 41 項幾何 PASS **不等於**細部 REF 外觀/功能/DSP PASS。
+- UI_01 142 筆與 UI_02 139 筆掃描資料在 `docs/product/reference/`，UI_02 另有 25 大框、15 組 RGB 邊界。UI_01 新 REF 的 1508×808 與 Web 1499×807 不可直接當同一原點。
+- **待核准語意**：SCENE Logo 與產品正式品牌、Shuffle、S/M、Ø、∞、Speed 60% vs km/h、REF 的範例 Preset/模型/數值。須先釐清，不能自行加 DSP 或更改已核准預設。
+
+## 優先順序索引
+
+- **P0 缺真主控**：CROSS-01、U01-10、U01-12～17、U02-01/16/18/20/21/22；待核准語意不自動決定。
+- **P1 REF 外觀/圖片**：其他 UI 外觀、CROSS-02 Scene Hero 品質、CROSS-14 新 78 張美術。
+- **P2 互動/疊圖實測**：CROSS-03～06/12/15。真 Chrome click/drag/wheel/keyboard、Undo/Redo、1:1 局部疊圖/刻度/焦點。
+- **P3 真音效/VST3**：CROSS-07～11/13/15。C++ DSP、WebAssembly/AudioWorklet、真 LUFS、Host/Offline parity。
+
+## 已完成的限定範圍（不表示 UI 全部驗收）
+
+- [x] **BASE-01｜UI_01 大區塊幾何** — Web Preview #76 geometry-report UI_01 PASS／51 checks；非 REF 細節驗收。
+- [x] **BASE-02｜UI_02 大區塊幾何** — Web Preview #76 geometry-report UI_02 PASS／41 checks；非 REF 細節驗收。
+- [x] **BASE-03｜UI_01 左四卡及底部七區外框** — Web/App/geometry_audit.js 有 rectangles guards，未驗卡內控件。
+- [x] **BASE-04｜UI_02 五個底部模組外框** — Web/App/geometry_audit.js 有尺寸/位置 guard。
+- [x] **BASE-05｜UI_02 300px Distance/54px Motion 基礎幾何** — Source/UI/UI_02/LayoutSpec.h／Web audit 有 guard，外觀另驗。
+- [x] **BASE-06｜UI_02 76px 底部 Knob 幾何** — Source/UI/UI_02/LayoutSpec.h／Web audit 有 guard，材質另驗。
+- [x] **BASE-07｜64 個共同 State/參數 ID 已登錄** — ui_controls.json + ParameterIds.h；不代表 DSP 真完成。
+- [x] **BASE-08｜UI_02 Speed/Doppler/Width Web Binding 已編寫** — bindMotionKnobs() 支援指標/滾輪/鍵盤，實際 E2E 尚待測。
+- [x] **BASE-09｜UI_02 三張正式 REF PNG 已入 GitHub** — UI_02_REF 原圖/2.5×/標註圖，PR #55、Fast CI #100、Action 37811957946。
+- [x] **BASE-10｜UI_01 142／UI_02 139 個 2.5× 清冊已保存** — UI_01_REF_CLEAN_SCAN_20261008.json、UI_02_REF_2_5X_DETAILED_COMPONENTS_20261009.json；UI_02 另有 15 組 RGB 邊界。
+
+## UI_01：18 個待辦
+
+- [ ] **U01-01｜頂部 Logo**（P1/待核准）— REF 是 SCENE 字型/金屬圖示，Web 是 SOURCERUNE；先核准正式品牌後再驗證字型、位置、材質，不得直接改產品名。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-02｜頂部按鈕**（P1）— X、小工具按鈕及部分圖示/位置和 REF 未對齊；須逐個驗尺寸、滑鼠操作與圖示/排列。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-03｜Preset 預設顯示**（P1/待核准）— REF 為 Car Pass By - City Street、Web 初始未選；先區分展示例圖與正式開機預設，再驗場景 State。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-04｜四張素材卡所選模型**（P1/待核准）— REF 是 Car Speaker、Mobile Call、Wooden Door、City Street，Web 初始不同；核正式模型 ID/圖片及場景映射，不擅改產品預設。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-05｜四張卡圖示/照片/框架**（P1）— 各卡圖示、照片風格及縮圖裁切、亮度、位置、邊框和 REF 不同；逐張 1:1 校準與獨立素材核對。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-06｜Scene 距離曲線**（P1）— REF 有亮藍時間/距離曲線、X/Y 刻度與節點；Web 不完整；補 Live SVG/Canvas 的曲線、網格、節點及值。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-07｜Scene 汽車/標記/浮動數值**（P1）— REF 有車、時間標記與浮動值，Web 是簡化標記；核對獨立 Live Source/Listener/汽車元件及其 Motion 位置。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-08｜Scene Zoom/RESET/距離小面板**（P1）— REF 有 Zoom、RESET、Start/Closest/End；Web 主畫面未完整；補可見及真操作且與現有 State 共用。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-09｜Waveform 與時間手柄**（P1）— REF 藍色波形、白色時間 marker；Web 簡化；驗真 live 波形、拖曳/seek/時間同步。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-10｜Spectrum Pre/Post/RTA/1/3/L+R**（P0）— REF 有完整分析主控制列，Web 缺等價控件；補真操作/狀態與 Audio Analyzer 綁定，禁止純裝飾。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-11｜Meter/Peak/RMS/LUFS**（P1/P3）— REF 彩色分段/完整 dB/LUFS，Web 簡化；修真外觀並使用 Live Peak/RMS，LUFS 須真標準測量。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-12｜BAD SIGNAL 四勾選**（P0）— REF Static/Dropout/Interference/Low Bitrate，Web 僅文字數值；補主卡可操作 Checkbox 與 Advanced/State 同步。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-13｜CONDITION 勾選/USED**（P0）— REF Rattle、Wow/Flutter checkbox、USED 比例，Web 簡化；補可直接操作和一套 State/數值。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-14｜INTELLIGIBILITY Presence/Dynamic**（P0/待核准）— REF 有兩 checkbox，Web 無；先核實這兩項與現行參數的語意，再接入 State，不能憑圖新造 DSP。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-15｜AMBIENCE S/M、Duck、波形/箭頭**（P0/待核准）— REF 有 S/M、Duck、環境波形、切換箭頭；需核 S/M 真義及所有 Live controls/預覽。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-16｜MIX Wet/Ø**（P0/待核准）— REF 有 Wet 與 Ø 可點控制，Web 只有文字；先核准 Ø 功能再實作，勿擅加相位反轉。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-17｜EQ/TONE 彩色曲線/三下拉/On/Power**（P0）— REF 有 HPF/LPF/Tone 選擇、節點、On/Power；須按現有 4-band 做真可調/Undo/Bypass，不憑圖增加 Band。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U01-18｜底部七區材質/字型/刻度/間距**（P1）— 七卡旋鈕、金屬材質、對比、留白、刻度與 REF 不同；逐區 1:1 REF/實際 Web 重疊驗證。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+
+## UI_02：22 個待辦
+
+- [ ] **U02-01｜Topbar Shuffle**（P0/待核准）— REF 有交叉箭頭，Web 無獨立 Shuffle 控制；待核准 Shuffle/Seed/Scene/Undo 語意，不能自行加入功能。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-02｜Topbar Folder/A-B 排列**（P1）— Folder 位於 A/B 後，Web 圖示造型/排列不同；須保持已驗 Topbar 大框並校內部排列。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-03｜Preset 初始場景**（P1/待核准）— REF Car Pass By - City Street，Web 初始空白；釐清是否展示預設並驗載入 SCN037 真場景。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-04｜Input/Output Meter**（P1）— REF 亮藍橫向 Meter/刻度，Web 簡化；保留 440×62 幾何，補 Live 色段/值/標尺。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-05｜SOURCE 汽車圖片**（P1/待核准）— REF Car Speaker 車照，Web Smartphone Speakerphone；須按正式模型/SCN037 State 選圖。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-06｜TRANSMISSION Mobile Call**（P1/待核准）— REF Mobile Call，Web GSM Stable；確認例圖與正式預設後校模型/選單/照片。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-07｜WALL/COVER 玻璃場景圖片**（P1）— REF 玻璃室內圖、Web 其他場景；需正確獨立素材與照片裁切、框架驗證。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-08｜Scene 背景濕地夜景/車/人物**（P1/素材）— REF 細緻夜景、Web 模糊日間 Scene；需獨立高品質背景美術與角色層，非整張 REF 裁圖。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-09｜Source/Listener 前景**（P1）— REF 有真汽車/人物；Web 小圖示/文字；需可獨立移動人物、車輛及遮擋、深度位置。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-10｜Distance 300px 外圈/刻度/∞**（P1/待核准）— 300px 大框已有；缺 ∞、0.2/1/5/20/100 刻度及材質；先核 ∞ 語意再驗 Live 指針。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-11｜Distance 25.0m vs 3.0m**（P1/待核准）— REF 25.0m、Web 3.0m；應用相同 Scene/Time/Motion 重現狀態，不直接改全域預設。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-12｜Motion 路徑/汽車/點位**（P1）— REF 白色軌跡/汽車定位，Web 簡化；需 Live Scene SVG 跟 Motion/Transport 走。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-13｜三顆小旋鈕 Speed/Doppler/Width**（P1/P2）— Web drag/wheel/key binding 已寫，但 54px 指針、材質、字體與 REF 不同；驗真 pointer 值/Undo。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-14｜Speed 60% vs 60 km/h**（P1/待核准）— REF 百分比、Web 公里時速；須先確認產品單位，不可改掉物理速度。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-15｜SPACE/ENVIRONMENT 下拉與夜景**（P1）— REF City Street 夜景，Web Busy City Street/圖框不同；校 selector、State、獨立素材。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-16｜AMBIENCE Traffic 獨立圖/綁定**（P0）— REF 獨立夜間 Traffic，Web 重複 Environment 圖；應用真正 ambience 素材、Duck/Level/Selector 綁定。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-17｜AMBIENCE 70% vs 35%**（P1/待核准）— REF 範例 70%、Web 35%；依 Scene/State 核對，不擅改預設。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-18｜BAD SIGNAL 波形預覽/Mobile 下拉**（P0）— REF 有獨立 waveform 與 Mobile selector，Web 簡化小字；需要真操作/動態波形。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-19｜CONDITION 金屬旋鈕/USED**（P1）— REF 大金屬 Knob/USED，Web 材質/比例不同；保持既有 76px 幾何並核真操作。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-20｜INTELLIGIBILITY 數值/底部溢出**（P0）— REF 75% 且主旋鈕在框內，Web 70% 和模式鈕可能溢出；先測可見/遮蔽/互動，數值先核 Scene。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-21｜MIX Wet 下拉/箭頭**（P0/待核准）— REF 有 Wet 下拉、右箭頭，Web 缺同等可操作控件；先核真 Mix 語意，再做 State+Undo。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **U02-22｜EQ/TONE Natural/曲線/On-Power**（P0）— REF 細緻 EQ 曲線與 Natural 下拉、On/Power；Web 簡化；需真 4-band/HPF/LPF/Tone/Bypass。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+
+## 共用圖片品質／操作／DSP／VST3：15 個待辦
+
+- [ ] **CROSS-01｜UI_01 正式兩張 PNG 真入 GitHub**（P0）— 1508×808 RGBA 原圖與 3770×2020 2.5× PNG 只在工作檔案，repo 目前只有 README；必須實際提交二進位、原 SHA256 96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916 與 2.5× SHA256 f67c59046f2c1f90379837f1898a63a98e9abbf3d0e57a82945f4e5b2afb773e 都驗證。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-02｜SCN037 Scene Hero 512×256 問題**（P1/素材）— 部署圖含烘焙文字且尺寸比 Scene 顯示小，與核准夜景 REF 不符；需真正高解析獨立美術/前景。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-03｜主介面全部操作 E2E**（P2）— 兩套 UI 真 click、drag、wheel、keyboard、開關、Undo/Redo、數值/Focus/Bypass；不可只憑 Geometry PASS 打勾。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-04｜UI_01 1508×808 ↔ 1499×807 註冊**（P2）— 兩套座標原點不同；需錨點對齊、局部 overlay、誤差及細字 baseline/刻度實測。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-05｜UI_02 REF 1:1 細節疊圖**（P2）— 25 大框/139 候選仍多 APPROX；需文字、邊框、Knob、材質、Hitbox、亮暗/開關逐區驗證。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-06｜Web Preview 未定位 404**（P2）— #76 render-log 有 404 但 URL 未查出；需查失敗資源與根因並以新 log 驗證解決。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-07｜完整可執行 C++ 聲學 DSP**（P3）— Source/Motion/Space/Transmission/Condition/Cover/Ambience 等真訊號模型、相位/延遲/CPU/Golden 需驗證。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-08｜真正 Native VST3 可載入 Plugin**（P3）— Source/Plugin/VST3 僅 .gitkeep；需真 editor/build/Host 介面、狀態操作與產物。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-09｜WebAssembly/AudioWorklet DSP**（P3）— 目前 Web Gain→Analyzer pass-through；要真共用 C++ 聲學、音檔處理與 parity。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-10｜真正 LUFS**（P3）— Web 有 Peak/RMS，不是真 LUFS；要標準計算、Live 更新及測試向量。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-11｜Host Automation/Recall/Offline Render**（P3）— 可載入 VST3 後驗 automation、保存/開啟、複製、離線輸出與正確聲音。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-12｜EQ 曲線節點主區拖曳**（P2/P3）— 兩套 UI 需真拖 Freq/Gain/Q，反映到 4-band DSP、Advanced、Undo 及 Native。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-13｜DAW Sync/Motion 真時間**（P3）— 驗真 DAW timeline seek/loop/locate、Doppler/Distance/Scene 同步與 Host。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-14｜SCN049–074 新 78 張 Hero**（P1/素材）— Manifest 已有但 26 Scene×Shared/UI01/UI02 78 真獨立 PNG 未完成；需裁切、畫質、CRC/State 驗證。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-15｜Web/Native 64參數/74場景 parity**（P2/P3）— 64 參數 ID 已在規格，但兩 UI/Native state/Seed/Preset/A-B-C-D/Undo、Host recall 尚無完整證據。
+  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+
+## 後續 GPT 工作日誌維護契約
+
+1. 每次動 UI_01/UI_02／REF／其 DSP parity：先讀 `AGENTS.md`、`PROJECT_RULES.md`、`PROJECT_CONSTITUTION.md`、本工作日誌、當次專屬 REF/程式、`SOURCERUNE_MASTER_HANDOFF.md`；核 live main/PR/CI/Pages。**同一問題必須回填同一 ID，禁止重開新工作單。**
+2. **有一項真的修好，就在同一 PR 或下一 checkpoint，把該 ID `[ ]→[x]`**；將該項 `PENDING` 更新為 `DONE: PR #、Commit SHA、Fast CI、來源/正式 PNG SHA、Web/Native 真實截圖/事件/聲音測試、日期`。若只完成部分，保留 `[ ]` 並註記 `PARTIAL: 已完成子項/尚缺子項`。
+3. `NEEDS-DECISION`（產品語意）、`BLOCKED`（取檔/環境/Host）、`APPROX`（REF 細像素）都**不是 DONE**。正確圖在 repo、幾何 PASS、DOM 顯示、真操作、真正音效、Native Host 各有獨立驗收門檻；不能以任一項充數。
+4. 真正修改正式 UI／參數／DSP 時依 `PROJECT_RULES.md` 同時評估 Web/Native；VST3 尚無可建置目標時不能回報 parity 已完成。Fast 為日常測試；Deep／Release／20/100 次安全測試須使用者另行同意。
+5. 每次成功合併時更新 `SOURCERUNE_MASTER_HANDOFF.md` 的本日誌摘要與最後 checkpoint；本檔是**逐項狀態權威**，handoff 只放入口／總結，勿複製第二張全部待辦表。Fast CI 綠燈也要檢查真 Web Preview log/audit。
+
+初次登錄統計：**已驗基礎 10 項**、**待辦 55 項**（UI_01 18、UI_02 22、共用 15）；不代表完成百分比。
