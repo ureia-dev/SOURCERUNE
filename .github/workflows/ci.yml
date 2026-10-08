@@ -84,6 +84,8 @@ jobs:
               "UI_01/UI_01_REF/UI_01_REF_ORIGINAL_1508x808.png",
               "UI_01/UI_01_REF/UI_01_REF_10X_PIXEL.png",
               "UI_02/UI_02_REF/UI_02_REF.png",
+              "UI_02/UI_02_REF/UI_02_REF_10X_PIXEL.png",
+              "UI_02/UI_02_REF/UI_02_REF_SCAN_OVERLAY_1X.png",
           }
           actual_full_refs = set()
           actual_semantic = set()
