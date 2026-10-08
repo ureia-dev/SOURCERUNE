@@ -1,48 +1,20 @@
 # SOURCERUNE
 
-## 永久製作原則：任何新 GPT / 開發者都必須先讀
+**專業聲音後期世界化／發音體／聲學場景處理器**：SOURCE、TRANSMISSION、CONDITION、WALL/COVER、DISTANCE/MOTION、SPACE/ENVIRONMENT、AMBIENCE、INTELLIGIBILITY、EQ/TONE。目標是可信、低 CPU、可自動化的真實聲音；不只電話 EQ 或一般殘響。
 
-> **最高任務交接提醒：** 新 GPT 先讀永久專案規範，再讀 [DSP 主責與試聽契約](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md) 與 [逐項決議追溯稽核](docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md)。**GPT 研發 DSP／技術驗證、使用者只負責聆聽驗收且不必提供 IR；可即時做的指令要立即做，不擅自拆成八小時。**
+- **專案**：`ureia-dev/SOURCERUNE`，單一 **Public** repo。
+- **同等產品主線**：Native **VST3** 與 **WEB TEST**，共享 C++ DSP／參數／State；WEB 透過 WASM／AudioWorklet，**UI_01 與 UI_02** 為兩種正式介面。
+- **角色**：GPT／開發助手負責實際 DSP 建模、程式、客觀測試與可試聽交付；使用者負責最後聽感審核，**不必交 IR**。
 
-**最初研發決議與最後取捨**：[原始產品對話決議對照](docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md) — 保留大數據最高原則、GPT 做 DSP／使用者只試聽且不必交 IR，以及 Speakerphone 等競品研究、低 CPU、Motion、圖資、74 Preset 的決策脈絡。
+## 新 GPT／Codex 必讀
 
-1. **[AGENTS.md](AGENTS.md)** — AI 的根目錄第一入口，標記必讀順序與最低限度硬規則。
-2. **[PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)** — **永久且完整**的產品方向、使用者要求、REF/所有元件與材質標準、UI01/02、工作方法、禁止事項；第幾篇交接都不得覆蓋。
-3. **[PROJECT_RULES.md](PROJECT_RULES.md)** — **產品大數據實證先行最高原則**，加上 Fast／Deep／Release CI 規則與 VST3／WEB 同步。
-4. **[docs/research/RESEARCH_EVIDENCE_STANDARD.md](docs/research/RESEARCH_EVIDENCE_STANDARD.md)** — 持續循環的八個研究維度（非八小時限制）／初始約 10,000 候選／去重保留約 1,000 真實證據里程碑方法、40/30/30 核心方向、74 Factory 與參數／DSP 工程驗證。
-5. **[SOURCERUNE_MASTER_HANDOFF.md](SOURCERUNE_MASTER_HANDOFF.md)** — 只有**當前工作進度、checkpoint、未完成事項**（先查最新 GitHub 才能相信）。
-6. **[docs/product/reference/](docs/product/reference/)** — REF 像素座標／文字旋鈕／材質與 runtime 缺件明細。
+**從 [AGENTS.md](AGENTS.md) 開始**。該檔會依次指向：
 
-> **注意：交接文件只交接進度；新增永久原則必須更新 PROJECT_CONSTITUTION.md。**
+- [PROJECT_RULES.md](PROJECT_RULES.md)：真正跨論壇大數據、Fast/Deep/Release 與 VST3/WEB 同步最高規則。
+- [PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)：永久已核准的方向。
+- [最初產品決議與取捨](docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md)：Speakerphone、競品、Source/Cover/Space 自主 DSP、Motion／Ambience、UI／Preset 演進。
+- [DSP 主責／免 IR／試聽契約](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md)。
+- [研究證據標準](docs/research/RESEARCH_EVIDENCE_STANDARD.md)：10,000 候選／1,000 留存是研究**初期目標，不是已完成成績**。
+- [SOURCERUNE_MASTER_HANDOFF.md](SOURCERUNE_MASTER_HANDOFF.md)：帶日期的最新交接；執行前須重新檢查 GitHub main/PR/CI/部署。
 
-
-SOURCERUNE is an audio-post/worldizing scene processor focused on source transformation, transmission, occlusion, distance and motion, acoustic space, ambience, intelligibility, and reliable recall.
-
-## Mainline targets
-
-SOURCERUNE now has two equal mainline runtime targets:
-
-- **VST3** — native DAW/plugin build.
-- **WEB** — browser test/product runtime built from the same C++ DSP core through WebAssembly.
-
-AAX is not part of the current mainline. It may be added later as a secondary target without changing the core DSP architecture.
-
-## Current repository policy
-
-Development currently stays in this **single public repository** so VST3/WEB/UI iteration and WEB TEST deployment remain fast. No separate private core repository is part of the current plan.
-
-
-## Architecture rules
-
-- C++20 shared DSP/scene/state core.
-- VST3 and WEB must share algorithms and parameter/state definitions; no separate "web-only sound".
-- WEB audio processing must run through WebAssembly/AudioWorklet, not the browser UI thread.
-- Low-CPU native sample-rate processing; no routine oversampling baseline.
-- Deterministic state/render behavior where applicable.
-- Modular scene engine with directly testable DSP stages.
-- WEB has a dedicated TEST harness for fast listening, regression, and parameter verification.
-
-See:
-- `docs/architecture/PROJECT_STRUCTURE.md`
-- `docs/architecture/STRUCTURE_REVIEW_100.md`
-- `docs/architecture/WEB_RUNTIME.md`
+**重要**：永久規則只在其權威檔維護；精確 UI 座標、Preset、圖資與 DSP 行為以對應 MD/JSON/manifest／真實程式為準。歷史交接只作追溯，不可把過時 PNG 數、舊版草圖或未完成測試當現況。
