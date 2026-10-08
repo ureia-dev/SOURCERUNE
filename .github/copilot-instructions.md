@@ -1,5 +1,7 @@
 # SOURCERUNE — Copilot instructions
 
+**Automatic project-context trigger across conversations:** Whenever a request explicitly names `SOURCERUNE` / `ureia-dev/SOURCERUNE`, or the active repository, files, branch or ongoing discussion clearly concern that project, **first fetch and read the current root [AGENTS.md](../AGENTS.md)**, then its canonical policies, relevant task-specific specs and the latest live repository state **before** answering or changing files. This applies to status questions, UI, DSP, audio, assets, research, presets, CI and deployments—not only a literal "continue SOURCERUNE" command. Do not apply these rules to unrelated projects. Public files can be read without GitHub write access. If actual retrieval fails, report that honestly rather than claiming to have read the instructions.
+
 This file is a **pointer**, not an alternative project policy. **Read [AGENTS.md](../AGENTS.md) first**, then the authoritative documents it lists, especially:
 
 - [PROJECT_RULES.md](../PROJECT_RULES.md): verifiable multi-forum research as the highest product-design principle; locked Fast/Deep/Release and VST3/Web parity.
