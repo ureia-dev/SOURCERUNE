@@ -1,0 +1,35 @@
+[
+  {
+    "id": "TRN_001_Direct_Clean",
+    "master": "docs/artwork/shared_hires/pilots/TRN_001_Direct_Clean_MASTER_3X.png",
+    "master_dimensions": [
+      1536,
+      1475
+    ],
+    "method": "SVG vector re-authoring of label/grid/frame + traced original signal geometry",
+    "status": "UNAPPROVED CANDIDATE",
+    "runtime_replaced": false
+  },
+  {
+    "id": "TRN_002_Narrowband_Clean",
+    "master": "docs/artwork/shared_hires/pilots/TRN_002_Narrowband_Clean_MASTER_3X.png",
+    "master_dimensions": [
+      1536,
+      1469
+    ],
+    "method": "SVG vector re-authoring of label/grid/frame + traced original signal geometry",
+    "status": "UNAPPROVED CANDIDATE",
+    "runtime_replaced": false
+  },
+  {
+    "id": "TRN_023_Signal_Dropout",
+    "master": "docs/artwork/shared_hires/pilots/TRN_023_Signal_Dropout_MASTER_3X.png",
+    "master_dimensions": [
+      1536,
+      1469
+    ],
+    "method": "SVG vector re-authoring of label/grid/frame + traced original signal geometry",
+    "status": "UNAPPROVED CANDIDATE",
+    "runtime_replaced": false
+  }
+]

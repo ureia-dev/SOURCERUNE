@@ -1,6 +1,6 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
-> **最新 P0 Checkpoint（2026-10-09）**：U01-12 `[x]`（UI_01 Web 四個 Checkbox／共用 State／Advanced／Undo/Redo 已 Chrome 真驗收），**目前 11 項 `[x]`、54 項 `[ ]`**；CROSS-01（兩張 UI_01 正式 PNG binary 入 GitHub）仍 BLOCKED，其他 P0 仍待辦。文末「初次登錄統計」是歷史數值，不可當現況。
+> **最新 P0 Checkpoint（2026-10-09）**：U01-12 `[x]`（UI_01 Web 四個 Checkbox／共用 State／Advanced／Undo/Redo 已 Chrome 真驗收），**目前 11 項 `[x]`、55 項 `[ ]`（含 ART-SHARED-001）**；CROSS-01（兩張 UI_01 正式 PNG binary 入 GitHub）仍 BLOCKED，其他 P0 仍待辦。文末「初次登錄統計」是歷史數值，不可當現況。
 
 > 2026-10-09 建立；承接使用者選取的完整缺項稽核。**每完成一個工作 ID，要直接在這份 GitHub 文件中將 `[ ]` 更新為 `[x]`，填入 PR／Commit／CI／正式 REF 與真 Web/Native 驗收證據。** 不另建立重複競爭工作清單。純文件的登錄不等於任何修復完成。
 
@@ -153,6 +153,13 @@
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-15｜Web/Native 64參數/74場景 parity**（P2/P3）— 64 參數 ID 已在規格，但兩 UI/Native state/Seed/Preset/A-B-C-D/Undo、Host recall 尚無完整證據。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+
+## 插入優先工作：Shared 224 張高清重製（2026-10-09 使用者核准）
+
+- [ ] **ART-SHARED-001｜Shared 224 張真正高解析重製及兩套 UI 對應圖**（P1／插入執行）— 原圖只有約 169～228px 寬，用戶要求**全部跟原來一樣但清楚**，禁止直接放大糊圖交差。正式目標是 224 個 3× 高解析母圖（至少 1536px 寬）與 224×2 個 UI_01／UI_02 2× runtime PNG（預設 768×288／1024×512）；細 icon 可單張採 3×。
+  - **來源及逐張工作單**：`docs/artwork/shared_hires/PRODUCTION_RULES.md`、`docs/artwork/shared_hires/asset_inventory_v1.json`。機器清單保留 224 個 ID 的三份舊 PNG SHA/尺寸/路徑，不開第二套重複 UI TODO。
+  - **真完成條件**：每張的外觀、主體、文字、光影、構圖和原版一樣；從獨立重繪、可編輯高解析美術源產生 Shared/UI01/UI02 三份正式 PNG，同步 Web/Native 使用，通過 Chrome HiDPI/圖片檔案/CI/Host 可用時的真驗收；畫面/反覆使用需保持同一 State，不得烘焙動態控制。
+  - **目前進度**：`PARTIAL: 224/224 已查原圖與 UI01/UI02 共 672 份檔案 SHA／尺寸；TRN_001／TRN_002／TRN_023 共 3/224 個真正向量重繪候選（未核准）；0/224 新母圖正式核准；0/672 正式 PNG 已替換；照片式重製、Web 和 Native 仍待辦。` **本項維持未勾選。** 候選來源及渲染證據：`docs/artwork/shared_hires/pilots/`；首次 GitHub One-off Action run `37824025285` 已成功。
 
 ## 後續 GPT 工作日誌維護契約
 

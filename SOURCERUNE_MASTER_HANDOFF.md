@@ -1,5 +1,13 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 最新插入 checkpoint — Shared 224 張高清美術重製（2026-10-09）
+
+- 使用者已核准 **全部 Shared 舊圖重做同樣樣子但清楚**。真圖尺寸只有 169～228px；Web 另用 `UI_01` 384×144、`UI_02` 512×256，故需同批重建 Shared 224 + Web/UI01 224 + Web/UI02 224，共 672 張；不是直接將糊 PNG 放大就算完成。
+- 正式目標：3× 1536px 起可編輯母圖；一般 runtime 2×（UI01 768×288、UI02 1024×512），細 icon 個別 3×。以 `docs/artwork/shared_hires/PRODUCTION_RULES.md` 與 `asset_inventory_v1.json` 作來源/逐件狀態，唯一總工作日誌新增 `ART-SHARED-001`，仍 `[ ]`。
+- GitHub One-off run `37824025285` 成功：完整驗了 224 Shared + 448 UI 既有圖 PNG，建立 224 個原始 SHA/尺寸/ID 資料；三張 TRN_001、TRN_002、TRN_023 **真正 SVG 重畫候選**已放 `docs/artwork/shared_hires/pilots/`，尚未獲正式核准或覆寫 runtime；其餘照片類需獨立高解析美術來源，0/672 正式版更換。
+- 本作業只是插入材質品質改善線。之前 P0 U01-12 Web Controls 已完成不重做；CROSS-01 正式 UI01 REF PNG 缺檔、其他 P0／P2／P3 保留原狀。
+
+
 ## P0 最新可恢復 Checkpoint — UI_01 BAD SIGNAL 四 Checkbox（2026-10-09）
 
 - **U01-12 = `[x]` Web 主卡功能完成**：四個 Checkbox 對應既有 noiseStatic/dropout/interference/bitrateArtifacts；UI_02 沒改排版。PR #58 `9212424b`（實作）／#59 `d3e52f9a`（修正 `data-macro-selectbox` 單元素 forEach 啟動回歸）／#60 `a9b1ddb1`（完整四組 Browser smoke）；Fast #103–#105 成功。
