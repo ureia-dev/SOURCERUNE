@@ -15,6 +15,13 @@
 
 **即使使用者只說「繼續」、「照原則做」、「修 UI」，也不能跳過永久憲章，只看最新交接。** 在不同對話、不同 branch、重新連線時都要執行。
 
+## 新 GPT 必讀：完整決議稽核與 DSP 工作分工
+
+- **[docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md)**：GPT 負責 DSP 研究／實作／技術測試與可試聽成品；使用者主責聆聽與最終音質方向，**不必提供 IR／錄音／量測資料或自己修 CI**。
+- **[docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md](docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md)**：各個已討論決議的證據來源、永久/單次/排程分類、已知文件遺漏與不能冒稱全篇 100% 的來源限制。
+- **立即做與排程不同**：使用者說「做／繼續／現在跑」就應當回合實際做授權工作並留下 checkpoint；使用者明確說「排程／每小時」才建立排程。歷史八小時研究不是每個指令的強制工作時間。
+- 研究資料達標、文件寫好、DSP 編譯可用、客觀驗證、使用者聽感核准是不同狀態，不得混成「完成」。
+
 ## 最高原則：產品／參數不是 GPT 猜出來的
 
 不論任務來自新對話、GitHub PR、排程或使用者只說「繼續」：所有**新增／調整 SOURCERUNE 功能、算法方向、參數值／範圍、Preset／音色搭配與產品優先級**的決策，必須符合 `PROJECT_RULES.md` 的「產品決策最高原則」及完整研究證據標準。不得拿廠商宣傳或三五個同源論壇貼文假裝萬筆大數據；必須辨認來源、去重、分類、高頻／高價值、工程與聽感驗證。10,000/1,000 是初始里程碑而非研究結束條件；達標前回報實際數量與 PENDING，達標後仍持續研究。核心優先 SOURCE 40%／MOTION 30%／SPACE 30%；Factory 74 不能因重複性就擅自刪到 50。已核准 UI／DSP／Preset 仍按當次授權、別的任務不可擅改。
