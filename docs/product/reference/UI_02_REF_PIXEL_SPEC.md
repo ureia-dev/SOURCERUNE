@@ -1,5 +1,13 @@
 # UI_02 REF Pixel Spec
 
+## 2026-10-09 正式原圖與 2.5× 細部掃描補充
+
+- GitHub 正式核准原圖：`Assets/UI/UI_02/UI_02_REF/UI_02_REF.png`，**1672×941 RGB**，SHA-256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff`，真正下載並解碼核對；不使用重新生成的類似畫面。
+- **正式檢視倍率 2.5×**：`UI_02_REF_2_5X_PIXEL.png`，**4180×2353**，SHA-256 `734f107d1c9a74f7e0caf746419fac3539e6b6c418f0bd8a60efa6da0f45d3e6`。高度的 0.5 光柵像素採 round-half-up，所有理論座標仍以 1× ×2.5 保留小數。
+- 新增 `UI_02_REF_2_5X_SCAN_20261009.{json,md}`：25 大區、8 頂部 X 錨點、8 控制尺寸；`UI_02_REF_2_5X_DETAILED_COMPONENTS_20261009.{json,md}`：139 元件／文字／功能候選；`UI_02_REF_2_5X_PIXEL_EDGE_EVIDENCE_20261009.{json,md}`：15 組真正 RGB 邊緣差分證據及 2.5× 候選座標。
+- 此輪 **REF 掃描 binary/資料核實通過**，但視覺候選框仍標 `APPROX-VISUAL`；文字基線、字體、旋鈕刻度、hitbox 與 Web/VST3 Host 真實互動、DSP 仍 `PENDING`。下方舊章節以其當時狀態追溯，不得推翻此最新來源身分。
+
+
 Source of truth: approved UI_02 REF, 1672×941.
 
 ## Major geometry
