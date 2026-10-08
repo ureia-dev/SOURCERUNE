@@ -110,6 +110,8 @@ function auditReferenceGeometry(){
   const prev=document.querySelector("#presetPrevBtn");
   const next=document.querySelector("#presetNextBtn");
   const folder=document.querySelector("#presetVisualsBtn");
+  const motionAdjustIds=["speed","doppler","width"];
+  const motionAdjust=Object.fromEntries(motionAdjustIds.map(id=>[id,document.querySelector('[data-motion-adjust="'+id+'"]')]));
   const bottomKnob=document.querySelector(".macro-badsignal .macro-knob-face");
   const mixKnob=document.querySelector(".macro-mix .macro-knob-face");
   const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
@@ -141,6 +143,9 @@ function auditReferenceGeometry(){
     presetPrev:prev?near(box(prev).w,42)&&near(box(prev).h,42):false,
     presetNext:next?near(box(next).w,42)&&near(box(next).h,42):false,
     presetFolder:folder?near(box(folder).w,44)&&near(box(folder).h,42):false,
+    motionAdjustKnobs:motionAdjustIds.every(id=>{const el=motionAdjust[id];return el&&el.getAttribute("role")==="slider"&&el.tabIndex===0&&el.getAttribute("aria-label")}), 
+    motionAdjustGeometry:motionAdjustIds.every(id=>{const el=motionAdjust[id];return el&&near(box(el).w,86)&&near(box(el).h,76)}),
+    motionAdjustReadouts:motionAdjustIds.every(id=>{const el=motionAdjust[id],readout=document.getElementById(id+"Readout");if(!el||!readout)return false;const value=el.getAttribute("aria-valuenow");return value!==null&&Number.isFinite(Number(value))&&readout.textContent===value+(id==="speed"?" km/h":"%")}),
     bottomKnob76:bottomKnob?near(box(bottomKnob).w,76)&&near(box(bottomKnob).h,76):false,
     mixKnob76:mixKnob?near(box(mixKnob).w,76)&&near(box(mixKnob).h,76):false,
 
@@ -162,6 +167,7 @@ function auditReferenceGeometry(){
     cards,
     macros,
     bottomKnob:bottomKnob?box(bottomKnob):null,
+    motionAdjust:Object.fromEntries(motionAdjustIds.map(id=>[id,motionAdjust[id]?box(motionAdjust[id]):null])),
     mixKnob:mixKnob?box(mixKnob):null
   };
   return {ui:"UI_02",ok:Object.values(checks).every(Boolean),checks,failures:fail(checks),measurements};
