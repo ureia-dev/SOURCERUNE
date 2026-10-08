@@ -532,3 +532,24 @@ Classification:
 - new raster requirement: **NONE**.
 
 Status: **PANEL FRAME MATERIAL / CONTENT BOX PARITY CORRECTED — pending post-merge Chrome confirmation**.
+
+## Checkpoint 88 — UI_02 Motion deck interactive small knobs
+
+Concrete earlier runtime gap: the UI_02 Motion deck rendered the 54px Speed / Doppler / Width PNG knob faces, labels, values, and live pointers, but those three visible readout regions were not independently adjustable. The same shared parameters remained accessible through Advanced or the UI_01 Motion macro.
+
+This focused batch closes the **Web direct-manipulation binding** for those existing shared parameters, without modifying the native DSP, parameter names, preset values, signal order, approved positions, or raster assets:
+
+| UI_02 knob | Shared parameter ID | Existing range | Direct actions |
+|---|---|---|---|
+| SPEED | `speed` | 0–300 km/h, 1 km/h steps | Vertical pointer drag, scroll, keyboard arrows, PageUp/Down, Home/End |
+| DOPPLER | `doppler` | 0–100%, 1% steps | Same |
+| WIDTH | `width` | 0–100%, 1% steps | Same |
+
+- `Web/App/index.html`: focusable control targets with slider semantics, live labels and accessible numeric values.
+- `Web/App/app.js`: uses `ui_controls.json` for min/max/step, shared `state.params`, one Undo checkpoint per completed drag, and normal history on scroll/keyboard change; no duplicate parameter state.
+- `Web/App/UI_02/ui02.css`: adds pointer/focus affordances without moving the 86×76 control target or 54px independent base PNG.
+- `Web/App/geometry_audit.js`: adds UI_02 live-slider existence, geometry and numeric readout synchronization to the **existing** one-pass geometry report; no extra Deep/Release/stress test loops.
+- Large `CURRENT DISTANCE` is **derived from Motion position and motion mode**. No undocumented independent Distance parameter or arbitrary reverse-mapping of PASS_BY was introduced.
+- Approval status: **BINDING IMPLEMENTED / FAST-CI AND POST-MERGE WEB RENDER VERIFICATION PENDING** until this branch is validated and deployed. A successful geometry report validates its listed structure, not a subjective visual match to a missing approved full REF bitmap or audio DSP behavior.
+
+No new component PNG is required for these already-existing 54px knob assets.
