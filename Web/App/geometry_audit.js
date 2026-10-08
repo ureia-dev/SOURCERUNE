@@ -145,7 +145,7 @@ function auditReferenceGeometry(){
     presetFolder:folder?near(box(folder).w,44)&&near(box(folder).h,42):false,
     motionAdjustKnobs:motionAdjustIds.every(id=>{const el=motionAdjust[id];return el&&el.getAttribute("role")==="slider"&&el.tabIndex===0&&el.getAttribute("aria-label")}), 
     motionAdjustGeometry:motionAdjustIds.every(id=>{const el=motionAdjust[id];return el&&near(box(el).w,86)&&near(box(el).h,76)}),
-    motionAdjustReadouts:motionAdjustIds.every(id=>{const el=motionAdjust[id],readout=document.getElementById(id+"Readout");if(!el||!readout)return false;const value=el.getAttribute("aria-valuenow");return value!==null&&Number.isFinite(Number(value))&&readout.textContent.startsWith(value)}),
+    motionAdjustReadouts:motionAdjustIds.every(id=>{const el=motionAdjust[id],readout=document.getElementById(id+"Readout");if(!el||!readout)return false;const value=el.getAttribute("aria-valuenow");return value!==null&&Number.isFinite(Number(value))&&readout.textContent===value+(id==="speed"?" km/h":"%")}),
     bottomKnob76:bottomKnob?near(box(bottomKnob).w,76)&&near(box(bottomKnob).h,76):false,
     mixKnob76:mixKnob?near(box(mixKnob).w,76)&&near(box(mixKnob).h,76):false,
 
