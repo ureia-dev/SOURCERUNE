@@ -85,10 +85,10 @@ function auditReferenceGeometry(){
       wallCard:cards.WALL_COVER?["x","y","w","h"].every((k,i)=>lockedPixel(cards.WALL_COVER[k],[10,340,313,132][i])):false,
       spaceCard:cards.SPACE_ENVIRONMENT?["x","y","w","h"].every((k,i)=>lockedPixel(cards.SPACE_ENVIRONMENT[k],[10,478,313,97][i])):false,
 
-      sourceArt:art.SOURCE?near(box(art.SOURCE).x,19)&&near(box(art.SOURCE).y,115)&&near(box(art.SOURCE).w,239)&&near(box(art.SOURCE).h,72):false,
-      transmissionArt:art.TRANSMISSION?near(box(art.TRANSMISSION).x,19)&&near(box(art.TRANSMISSION).y,257)&&near(box(art.TRANSMISSION).w,239)&&near(box(art.TRANSMISSION).h,70):false,
-      wallArt:art.WALL_COVER?near(box(art.WALL_COVER).x,19)&&near(box(art.WALL_COVER).y,397)&&near(box(art.WALL_COVER).w,239)&&near(box(art.WALL_COVER).h,69):false,
-      spaceArt:art.SPACE_ENVIRONMENT?near(box(art.SPACE_ENVIRONMENT).x,19)&&near(box(art.SPACE_ENVIRONMENT).y,533)&&near(box(art.SPACE_ENVIRONMENT).w,239)&&near(box(art.SPACE_ENVIRONMENT).h,35):false,
+      sourceArt:art.SOURCE?["x","y","w","h"].every((k,i)=>lockedPixel(box(art.SOURCE)[k],[19,115,239,72][i])):false,
+      transmissionArt:art.TRANSMISSION?["x","y","w","h"].every((k,i)=>lockedPixel(box(art.TRANSMISSION)[k],[19,257,239,70][i])):false,
+      wallArt:art.WALL_COVER?["x","y","w","h"].every((k,i)=>lockedPixel(box(art.WALL_COVER)[k],[19,397,239,69][i])):false,
+      spaceArt:art.SPACE_ENVIRONMENT?["x","y","w","h"].every((k,i)=>lockedPixel(box(art.SPACE_ENVIRONMENT)[k],[19,533,239,35][i])):false,
 
       sourceEdit:edit.SOURCE?lockedPixel(box(edit.SOURCE).x,270)&&lockedPixel(box(edit.SOURCE).y,72)&&lockedPixel(box(edit.SOURCE).w,48)&&lockedPixel(box(edit.SOURCE).h,34):false,
       transmissionEdit:edit.TRANSMISSION?lockedPixel(box(edit.TRANSMISSION).x,270)&&lockedPixel(box(edit.TRANSMISSION).y,213)&&lockedPixel(box(edit.TRANSMISSION).w,48)&&lockedPixel(box(edit.TRANSMISSION).h,34):false,
