@@ -24,6 +24,12 @@
 
 權威長期規範見 `PROJECT_RULES.md`、`PROJECT_CONSTITUTION.md`、`docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md`。本次**只修文件，不修改 DSP、Preset、UI 或啟用任何排程**。2026-10-08 查得 SOURCERUNE 的「每小時持續收斂」及「8 小時論壇研究」排程均為 disabled；不因修改文件而擅自啟用。
 
+## 2026-10-08 原始產品對話來源校正（尚待讀取全文）
+
+使用者找到真正的最初 SOURCERUNE 產品方向與全套討論對話：**https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3**。先前標為「完整對話交接」的 `docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md` **不是這篇原始對話的逐字原文**，而是後續 UI/REF/開發流程聊天的整理，不能當作最初產品決議百分百已核對。
+
+本次已將該 URL 與來源層級／待驗證狀態寫入 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` §0A；`/c/` 私人聊天無法透過當前工具完整讀取，狀態是 `USER-IDENTIFIED-ORIGINAL-CONVERSATION / CONTENT-NOT-ACCESSIBLE-YET / PENDING-VERBATIM`。**不能說 100%**。取得使用者提供的可存取分享頁面或原始對話匯出文字後，才開始從首句到末句做全文逐段比對，依 checkpoints 實際修補永久原則。
+
 ## 如何延續工作
 
 1. 先完整讀 `PROJECT_CONSTITUTION.md` 和 `PROJECT_RULES.md`；確認使用者當次要求，切勿重新詢問已核准事項。
