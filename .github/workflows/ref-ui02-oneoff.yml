@@ -23,6 +23,12 @@ jobs:
         shell: bash
         run: |
           /tmp/sourcerune-ref-venv/bin/python tools/ref_scan/scan_ui02_binary.py
+      - name: Export the original GitHub REF for detailed 1x visual audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui02-original-approved-ref
+          path: Assets/UI/UI_02/UI_02_REF/UI_02_REF.png
+          retention-days: 2
       - name: Check in only approved-REF-derived artifacts
         shell: bash
         run: |
