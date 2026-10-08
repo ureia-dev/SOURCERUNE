@@ -4,6 +4,8 @@
 
 > **最高任務交接提醒：** 新 GPT 先讀永久專案規範，再讀 [DSP 主責與試聽契約](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md) 與 [逐項決議追溯稽核](docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md)。**GPT 研發 DSP／技術驗證、使用者只負責聆聽驗收且不必提供 IR；可即時做的指令要立即做，不擅自拆成八小時。**
 
+**最初研發決議與最後取捨**：[原始產品對話決議對照](docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md) — 保留大數據最高原則、GPT 做 DSP／使用者只試聽且不必交 IR，以及 Speakerphone 等競品研究、低 CPU、Motion、圖資、74 Preset 的決策脈絡。
+
 1. **[AGENTS.md](AGENTS.md)** — AI 的根目錄第一入口，標記必讀順序與最低限度硬規則。
 2. **[PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)** — **永久且完整**的產品方向、使用者要求、REF/所有元件與材質標準、UI01/02、工作方法、禁止事項；第幾篇交接都不得覆蓋。
 3. **[PROJECT_RULES.md](PROJECT_RULES.md)** — **產品大數據實證先行最高原則**，加上 Fast／Deep／Release CI 規則與 VST3／WEB 同步。
