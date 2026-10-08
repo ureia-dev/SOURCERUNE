@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## P0 逐項收斂 — UI_01 BAD SIGNAL 四 Checkbox（本輪 checkpoint）
+
+- CROSS-01：兩份正式 UI_01 PNG 在工作環境已驗 SHA；GitHub 原圖 binary 傳輸仍 BLOCKED（connector 不收本機 PNG，container DNS 不通），詳見單一工作日誌。禁止擅用重畫圖代替。
+- U01-12：本輪實作 UI_01 BAD SIGNAL 四個主介面 Checkbox，直接覆用既有 4 個 numeric param；保持 UI_02 版面不變，並在既有 Web Preview 增加一次性真 click／Advanced 值／Undo-Redo 瀏覽器 smoke。**須等 Fast CI 與實際 Web Preview render-log/geometry-report 成功，未驗前標 PARTIAL**。
+- Native 仍無可編譯 VST3，不能把 Web 成功當聲音/Host parity；後續逐項更新 `docs/product/reference/UI_REF_GAP_WORKLOG.md` 原 ID 和證據。
+
+
 ## UI_01／UI_02 REF 正式缺項工作日誌（2026-10-09）
 
 - **最新唯一可勾選工作單**：[`docs/product/reference/UI_REF_GAP_WORKLOG.md`](docs/product/reference/UI_REF_GAP_WORKLOG.md)；逐項保存使用者本輪貼出的 **UI_01 18 項、UI_02 22 項、共同 15 項待辦**，另保留 **10 項有實際證據且範圍有限的已驗基礎**。詳細內容只在該工作單，不複製第二份清單。

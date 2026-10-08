@@ -52,9 +52,41 @@ function macroKnob(id,label,unit="",klass=""){const c=findControl(id),v=state.pa
 function macroSelect(id,klass=""){const c=findControl(id);return`<select class="macro-select ${klass}" data-macro-selectbox="${id}">${c.options.map(o=>`<option value="${o}" ${state.params[id]===o?"selected":""}>${pretty(o)}</option>`).join("")}</select>`}
 function modeButtons(id,vals,labels={}){return`<div class="macro-mode-row">${vals.map(v=>`<button data-macro-select="${id}" data-value="${v}" class="${state.params[id]===v?"active":""}">${labels[v]||pretty(v)}</button>`).join("")}</div>`}
 function miniEqSvg(){const fs=[20,state.params.b1Freq,state.params.b2Freq,state.params.b3Freq,state.params.b4Freq,20000],gs=[0,state.params.b1Gain,state.params.b2Gain,state.params.b3Gain,state.params.b4Gain,0];const lx=f=>Math.log10(Math.max(20,f)/20)/3*100,y=g=>50-Math.max(-18,Math.min(18,g))/18*34;const pts=fs.map((f,i)=>[lx(f),y(gs[i])]);const path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");return`<svg class="macro-eq-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><g class="macro-eq-grid"><path d="M0 25H100M0 50H100M0 75H100M25 0V100M50 0V100M75 0V100"/></g><path class="macro-eq-line" d="${path}"/>${pts.slice(1,5).map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.7"/>`).join("")}</svg>`}
+// UI_01's four reference checkboxes re-use the existing numeric controls.
+// Zero means inactive; when checked again, restore the previous positive
+// intensity (or the published schema default/minimum). No new DSP ID.
+const lastUi01SignalIntensity=Object.create(null);
+function ui01SignalDetail(){
+  const rows=[["noiseStatic","Static"],["dropout","Dropout"],["interference","Interference"],["bitrateArtifacts","Low Bitrate"]];
+  if(state.ui!=="UI_01")return rows.map(([id,label])=>`<span>${label} ${state.params[id]}%</span>`).join("");
+  return `<div class="macro-signal-toggles">${rows.map(([id,label])=>{
+    const amount=Number(state.params[id])||0;
+    return `<label class="macro-signal-toggle" title="${label}: ${amount}% (set amount in Advanced)">
+      <input type="checkbox" data-signal-checkbox="${id}" aria-label="${label} signal, ${amount}%" ${amount>0?"checked":""}>
+      <span>${label}</span></label>`;
+  }).join("")}</div>`;
+}
+function bindUi01SignalCheckboxes(){
+  $$("[data-signal-checkbox]").forEach(box=>box.onchange=()=>{
+    const id=box.dataset.signalCheckbox,previous=Number(state.params[id])||0,def=findControl(id);
+    if(!def || def.type!=="range")return;
+    let next;
+    if(box.checked){
+      next=Number(lastUi01SignalIntensity[id]??def.default??0);
+      next=Math.max(Number(def.min),Math.min(Number(def.max),next));
+      if(next<=0)next=Math.max(Number(def.step)||1,1);
+    }else{
+      if(previous>0)lastUi01SignalIntensity[id]=previous;
+      next=0;
+    }
+    if(next!==previous)mut(()=>{state.params[id]=next});
+    else renderMacros();
+    $("[data-signal-checkbox='"+id+"']")?.focus({preventScroll:true});
+  });
+}
 function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML=
 `<div class="macro macro-motion ${state.advanced==="MOTION"?"selected":""}" data-open="MOTION"><h3>MOTION</h3><div class="motion-knob-row"><div class="macro-knob macro-knob-readonly" style="--pct:${Math.max(0,Math.min(100,d/100*100))}"><div class="macro-knob-face"><strong class="macro-knob-value">${d}m</strong></div><span class="macro-knob-label">DISTANCE</span></div>${macroKnob("speed","SPEED","", "compact")}${macroKnob("doppler","DOPPLER","%","compact")}${macroKnob("width","WIDTH","%","compact")}</div>${modeButtons("motionMode",["APPROACH","PASS_BY","LEAVE"])}</div>`+
-`<div class="macro macro-badsignal ${state.advanced==="TRANSMISSION"?"selected":""}" data-open="TRANSMISSION"><h3>BAD SIGNAL</h3><div class="macro-two-col">${macroKnob("badSignal","AMOUNT","%")}<div class="macro-side"><span class="macro-device-name">${selected("TRANSMISSION").name}</span><span>Static ${state.params.noiseStatic}%</span><span>Dropout ${state.params.dropout}%</span><span>Interference ${state.params.interference}%</span><span>Low Bitrate ${state.params.bitrateArtifacts}%</span></div></div></div>`+
+`<div class="macro macro-badsignal ${state.advanced==="TRANSMISSION"?"selected":""}" data-open="TRANSMISSION"><h3>BAD SIGNAL</h3><div class="macro-two-col">${macroKnob("badSignal","AMOUNT","%")}<div class="macro-side"><span class="macro-device-name">${selected("TRANSMISSION").name}</span>${ui01SignalDetail()}</div></div></div>`+
 `<div class="macro macro-condition ${state.advanced==="CONDITION"?"selected":""}" data-open="CONDITION"><h3>CONDITION</h3><div class="macro-two-col">${macroKnob("condition","AMOUNT","%")}<div class="macro-side">${macroSelect("conditionMode")}<span>Rattle ${state.params.rattle}%</span><span>Wow/Flutter ${state.params.wowFlutter}%</span></div></div></div>`+
 `<div class="macro macro-intelligibility ${state.advanced==="INTELLIGIBILITY"?"selected":""}" data-open="INTELLIGIBILITY"><h3>INTELLIGIBILITY</h3>${macroKnob("intelligibility","AMOUNT","%","centered")}${modeButtons("intelligibilityMode",["NATURAL","DIALOGUE","AGGRESSIVE"],{NATURAL:"Natural",DIALOGUE:"More Clear",AGGRESSIVE:"Muffled"})}</div>`+
 `<div class="macro macro-ambience ${state.advanced==="AMBIENCE"?"selected":""}" data-open="AMBIENCE"><h3>AMBIENCE</h3>${macroSelect("ambienceType")}<div class="ambience-preview"><img src="${assetUrl(selected("SPACE_ENVIRONMENT"))}" alt=""></div>${macroKnob("ambience","AMOUNT","%","centered")}<div class="macro-wave" aria-hidden="true"></div></div>`+
@@ -63,7 +95,7 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(!x.target.closest("input,button,select")){openAdvanced(e.dataset.open)}});
 $$("[data-macro]").forEach(r=>{r.onpointerdown=()=>r.dataset.before=JSON.stringify(core());r.oninput=e=>{const id=e.target.dataset.macro;state.params[id]=+e.target.value;const k=e.target.closest(".macro-knob");if(k){const pct=macroPct(id);k.style.setProperty("--pct",pct);k.style.setProperty("--angle",(-135+pct*2.7)+"deg");const unit=findControl(id).unit||"";k.dataset.value=state.params[id]+unit;const v=k.querySelector(".macro-knob-value");if(v)v.textContent=state.params[id]+unit}updateScene();updateGains();updateCurves()};r.onchange=e=>{if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}});
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
-$$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value))}
+$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes()}
 function findControl(id){for(const g of Object.values(schema.groups)){const c=g.controls.find(x=>x.id===id);if(c)return c}}
 function renderFlow(){const n=[["INPUT"],["TRANSMISSION","TRANSMISSION"],["SOURCE","SOURCE"],["CONDITION","CONDITION"],["COVER","WALL_COVER"],["DISTANCE / MOTION","MOTION"],["SPACE","SPACE_ENVIRONMENT"],["AMBIENCE","AMBIENCE"],["INTELLIGIBILITY","INTELLIGIBILITY"],["TONE","EQ_TONE"],["MIX / OUTPUT"]];$("#signalFlow").innerHTML=n.map(([x,k],i)=>`<span class="flow-node ${k&&state.bypass[k]?"bypassed":""} ${k&&state.advanced===k?"selected":""}">${x}</span>${i<n.length-1?'<span class="flow-arrow">→</span>':""}`).join("")}
 function renderNav(){$("#advancedNav").innerHTML=Object.entries(schema.groups).map(([k,g])=>`<button data-adv="${k}">${g.label}</button>`).join("");$$("[data-adv]").forEach(b=>b.onclick=()=>{state.advanced=b.dataset.adv;renderAdvanced();renderMacros()})}
