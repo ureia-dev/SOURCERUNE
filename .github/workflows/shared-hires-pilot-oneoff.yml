@@ -1,0 +1,54 @@
+name: Shared HIRES artwork candidates (one-off, not a new CI tier)
+on:
+  push:
+    branches:
+      - art/shared-224-hq-rebuild-audit-pilots-20261009
+    paths:
+      - .github/workflows/shared-hires-pilot-oneoff.yml
+permissions:
+  contents: write
+jobs:
+  verify-source-and-make-art-candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact approved sources
+        uses: actions/checkout@v7
+      - name: Pinned rendering dependencies
+        run: |
+          python3 -m venv /tmp/shared-art
+          /tmp/shared-art/bin/pip install --quiet pillow==12.3.0 numpy==2.3.5 CairoSVG==2.8.2
+      - name: Check all 224 Shared / 448 UI existing PNGs
+        run: /tmp/shared-art/bin/python tools/assets/shared_hires_audit.py
+      - name: Re-authored 3 vector master candidates
+        run: /tmp/shared-art/bin/python tools/assets/shared_hires_vector_pilot.py
+      - name: Validate candidate files and preserve existing artwork
+        run: |
+          /tmp/shared-art/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image
+          p=Path("docs/artwork/shared_hires")
+          manifest=json.loads((p/"asset_inventory_v1.json").read_text())
+          assert manifest["count"]==224 and sum(manifest["groups"].values())==224
+          pilot=json.loads((p/"pilots/pilot_report.json").read_text())
+          assert len(pilot)==3
+          for item in pilot:
+              src=Path(item["master"])
+              assert src.exists()
+              with Image.open(src) as im:
+                  assert im.width==1536 and im.height>=1400
+              stem=src.name.replace("_MASTER_3X.png","")
+              assert (src.parent/(stem+"_MASTER.svg")).is_file()
+              assert (src.parent/(stem+"_BEFORE_AFTER.png")).is_file()
+          print("224 SEMANTIC IDS + 672 FILES VERIFIED; THREE HIGHRES VECTOR PILOTS; ZERO RUNTIME REPLACEMENTS")
+          PY
+      - name: Commit three UNAPPROVED HQ candidates and full asset inventory
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- docs/artwork/shared_hires/asset_inventory_v1.json docs/artwork/shared_hires/pilots/
+          git rm -- .github/workflows/shared-hires-pilot-oneoff.yml
+          git commit -m "chore(art): audit 224 sources and add three vector candidates [skip ci]"
+          git push origin HEAD:refs/heads/art/shared-224-hq-rebuild-audit-pilots-20261009
