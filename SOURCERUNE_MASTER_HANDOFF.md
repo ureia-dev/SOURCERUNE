@@ -14,6 +14,16 @@
 
 權威永久來源：`PROJECT_RULES.md`、`PROJECT_CONSTITUTION.md`、`docs/research/RESEARCH_EVIDENCE_STANDARD.md`、`AGENTS.md`。歷史排程應留在歷史記錄，不能再當作後續研究的時間限制。
 
+## 2026-10-08 漏項修正：DSP 主責、免使用者 IR 與立即執行
+
+原先的「100% 完整」文件是從不完整的歷史 handoff 摘要衍生，沒有逐條比對所有可見對話／技術契約。這次發現並修正：
+- **最高長期分工**：GPT 承擔聲學 DSP 研究、設計、實作、測試、修正，交付可試聽版本；使用者只負責主觀試聽、反饋、核准，**不需要提供 IR、錄音或自己負責工程測試**。
+- **不預設 IR 依賴**：程序化／參數化建模優先；合法 IR 可當技術校準參考，但不要求使用者蒐集／授權特殊 IR。
+- **一個指令可現在做就現在做**：從錯誤的「第 1～8 小時」固定分工移出，歷史八小時任務是當時的執行安排，不是永久研發進度或即時工作拖延依據。
+- **來源覆蓋狀態是部分而非 100%**：詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` 的決議矩陣與 `PENDING-VERBATIM`，避免後續只抄錯誤摘要又稱已全部核對。
+
+權威長期規範見 `PROJECT_RULES.md`、`PROJECT_CONSTITUTION.md`、`docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md`。本次**只修文件，不修改 DSP、Preset、UI 或啟用任何排程**。2026-10-08 查得 SOURCERUNE 的「每小時持續收斂」及「8 小時論壇研究」排程均為 disabled；不因修改文件而擅自啟用。
+
 ## 如何延續工作
 
 1. 先完整讀 `PROJECT_CONSTITUTION.md` 和 `PROJECT_RULES.md`；確認使用者當次要求，切勿重新詢問已核准事項。
