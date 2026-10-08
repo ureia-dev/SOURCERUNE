@@ -6,13 +6,18 @@
 
 ## 在回答、修改、部署或研究此專案之前，必須依序讀
 
-1. **[PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)** — 永久專案憲章：使用者提出過的長期製作原則／全部功能方向／UI01-UI02／所有 REF 物件與文字旋鈕坐標、背景材質、獨立 PNG、Scene Hero、工作流程與禁止事項。**後續幾十次聊天交接都不能取代它。**
-2. **[PROJECT_RULES.md](PROJECT_RULES.md)** — 最高優先的 Fast/Deep/Release CI、安全／壓測倍數與 VST3／WEB 同步規則。
-3. **[SOURCERUNE_MASTER_HANDOFF.md](SOURCERUNE_MASTER_HANDOFF.md)** — 當前最新 checkpoint、已合併/未合併工作、歷史及下一步；**此檔是會更新的進度紀錄，不是產品原則的唯一來源**。
-4. **[docs/product/reference/](docs/product/reference/)** 的 `UI_01_REF_PIXEL_SPEC.md`、`UI_02_REF_PIXEL_SPEC.md`、`UI_01_REF_COORDS.json`、`UI_02_REF_COORDS.json`、`REF_COMPONENT_GAP_AUDIT.md` — 精確數值的權威規格與缺件。
-5. 按任務閱讀 `docs/product/UI_FUNCTION_CONTRACT.md`、`docs/product/VISUAL_STYLE_V2.md`、`docs/product/SCENE_HERO_049_074_PRODUCTION_V1.md`、`Assets/UI/*manifest*`、`Web/App`、`Source/UI` 與 `.github/workflows`。
+1. **[PROJECT_RULES.md](PROJECT_RULES.md)** — **最高優先同時包含實證大數據產品方向，以及 Fast/Deep/Release、測試次數與 VST3／WEB 同步限制**。研究與安全兩者皆不可省略。
+2. **[PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)** — 永久專案憲章，包含使用者所有核心方向、UI01/02、正式 REF、元件／材料、Scene Hero。
+3. **[docs/research/RESEARCH_EVIDENCE_STANDARD.md](docs/research/RESEARCH_EVIDENCE_STANDARD.md)** — **任何功能／參數／音質／Preset 的決策前必讀**：8 小時 8 階段、約 10,000 候選→去重→1,000 高價值留存、跨社群／工程驗證、40/30/30、Factory 74。禁止假數據。
+4. **[SOURCERUNE_MASTER_HANDOFF.md](SOURCERUNE_MASTER_HANDOFF.md)** — 當前最新 checkpoint、已合併/未合併工作、歷史及下一步；**此檔是會更新的進度紀錄，不是產品原則的唯一來源**。
+5. **[docs/product/reference/](docs/product/reference/)** 的 `UI_01_REF_PIXEL_SPEC.md`、`UI_02_REF_PIXEL_SPEC.md`、`UI_01_REF_COORDS.json`、`UI_02_REF_COORDS.json`、`REF_COMPONENT_GAP_AUDIT.md` — 精確數值的權威規格與缺件。
+6. 按任務閱讀 `docs/product/UI_FUNCTION_CONTRACT.md`、`docs/product/VISUAL_STYLE_V2.md`、`docs/product/SCENE_HERO_049_074_PRODUCTION_V1.md`、`Assets/UI/*manifest*`、`Web/App`、`Source/UI` 與 `.github/workflows`。
 
 **即使使用者只說「繼續」、「照原則做」、「修 UI」，也不能跳過永久憲章，只看最新交接。** 在不同對話、不同 branch、重新連線時都要執行。
+
+## 最高原則：產品／參數不是 GPT 猜出來的
+
+不論任務來自新對話、GitHub PR、排程或使用者只說「繼續」：所有**新增／調整 SOURCERUNE 功能、算法方向、參數值／範圍、Preset／音色搭配與產品優先級**的決策，必須符合 `PROJECT_RULES.md` 的「產品決策最高原則」及完整研究證據標準。不得拿廠商宣傳或三五個同源論壇貼文假裝萬筆大數據；必須辨認來源、去重、分類、高頻／高價值、工程與聽感驗證。未達 10,000/1,000 就回報實際數量與 PENDING。核心優先 SOURCE 40%／MOTION 30%／SPACE 30%；Factory 74 不能因重複性就擅自刪到 50。已核准 UI／DSP／Preset 仍按當次授權、別的任務不可擅改。
 
 ## 每次動手的不可跳過步驟
 

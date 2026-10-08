@@ -18,6 +18,22 @@
 4. 需變更 UI/DSP/CI/資產前先確定權限／目的；能自行安全開 PR、合併、部署就自行處理；同錯 2 次停止盲目重試，查根因；外部 runner/infra 明確標記外部阻塞。
 5. 只用**繁體中文**回覆使用者。任何未知寫 UNKNOWN／APPROX／PENDING／BLOCKED，不能推測成 100% 完成。
 
+## 最高製作原則：SOURCERUNE 由真實大數據需求與工程驗證決定
+
+> 這是**產品方向、功能取捨、參數設定、Preset／場景選擇、聲學模型**的最上層決策原則，不是可做可不做的市場調查。**完整研究方法必讀 [docs/research/RESEARCH_EVIDENCE_STANDARD.md](docs/research/RESEARCH_EVIDENCE_STANDARD.md)**；最高優先限制亦寫於 `PROJECT_RULES.md`。所有後續 GPT 都要先照此原則理解整個產品。
+
+- **先大量蒐集、再整合、再決定**：依使用者指定的 **8 小時／8 階段**跨專業音訊／後期／game-audio 論壇與書籍論文，目標約 **10,000 候選相關討論／頁面**，必須展開檢視、canonical URL 去重、群聚、交叉論壇驗證，最後保留約 **1,000 筆真正反覆、多人需求或高度獨特有用的證據**。這是目標不是已達成宣告，不能湊數、編論壇、假 URL、假用戶比例。
+- **論壇範圍**：Gearspace/Gearslutz、KVR、Avid DUC、Reddit r/AudioPost / r/SoundDesign、Creative COW、VI-Control、Cockos/REAPER 與 game-audio；另以開源 DSP、論文、學術／聲學書籍、官方技術 manuals 查證實現可行性。廠商行銷是功能參考，不能算需求人氣。
+- **保留真正高價值資訊**：重複提問、抱怨、工作流程不足、設備與場景典型用途、實際工程師願意使用的參數、起始值／可用範圍／數值分布、模組先後順序／搭配鏈路、跨功能問題、相位／音質／CPU／host automation 經驗；並保留少見但非常有特色的需求，不因量少就抹掉。
+- **排序要有根據**：跨社群重複 > 同社群多位獨立使用者 > 長期高互動討論 > 具體參數搭配 > 稀有高價值。所有分類、來源數、獨立數、參數、決策記錄要留 machine-readable evidence／URL／去重 key。沒有讀到的來源不能宣稱已研究。
+- **核心 40／30／30**：SOURCE/EMITTER（發音體／裝置）**40%**，MOTION/DISTANCE（移動／距離）**30%**，SPACE/ENVIRONMENT（場域／遮蔽）**30%**。這是產品核心研究／代表性設計的優先級，**不是 Factory 只能有 50 個或能刪掉 CONDITION 等模組的配額**。
+- **使用者已核准保留 74 個 Factory Preset**：50 核心（20/15/15）曾配 24 reserve，但使用者明確要求 24 個也恢復 active，不可任意刪除電話／無線電／PA／cover 變體。先檢視 `docs/research/PRESET_PORTFOLIO_REBALANCE_2026-10-05.md` 與最新 preset JSON，再決定新增／修改；數值只是 audition 起點，不等於「公認最佳參數」。
+- **產品結果還要物理與 DSP 正確**：重複被推薦不代表聲學正確；用聲源頻響／傳輸失真／材質透射／移動與 Doppler／direct-early-late／戶外反射等物理模型、可信開源算法、真量測與受控聆聽比較，不可只用「AI 估算很多次」取代測試。工程方法要低 CPU、可靠 latency、同一 C++ DSP 對 Native/Web 行為一致。
+- **必須先比對現有功能與 74 Preset 才談缺口**：每項需求標記 `already-supported`、`partially-supported`、`missing`、`duplicate`、`research-insufficient`、`audition-pending`；保留數據、工程與最小可重現案例，不可用個人偏好直接替換核准設計。
+- **不可虛報進度**：曾有八階段研究摘要與加權重排，但 `docs/research/EVIDENCE_LEDGER.md` 仍記錄大型證據填充未完成。**無可核對 10k 原始池／1k 獨立留存證據，不准宣稱大數據研究 100% 完成。** 當前研究統計必須分別記 candidate/reviewed/independent/deduplicated/retained 真實數字。
+- **研究不等於擅自部署／壓測**：研究結果進 evidence ledger 和決策表；實作需符合使用者當次授權、既有 UI/DSP/Factory 鎖定與 Fast/Deep/Release 次數規則。不要因八階段研究就自行觸發 100 次 Release。
+- **跨對話永久保存**：每次新研究、產品決策必須更新本憲章的相應決策與 `docs/research/` 規格／資料，禁止只留在一次聊天交接。AGENTS.md 應迫使每篇 GPT 一開始就先讀本節和研究標準。
+
 ## 原則與規格正文
 
 本文件將 2026-10-08 完整交接中屬於**長期製作契約**的內容完整收編，與歷史進度拆開。章內曾提及的舊測量與改善歷程僅用於解釋**為什麼規格如此**；最新 runtime/commit/測試一律重新查證。

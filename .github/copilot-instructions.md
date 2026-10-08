@@ -5,9 +5,10 @@
 Before producing an answer, plan, code change, pull request, CI action, or deployment:
 
 1. Read **[AGENTS.md](../AGENTS.md)** and the complete **[PROJECT_CONSTITUTION.md](../PROJECT_CONSTITUTION.md)**. The constitution is the *permanent source of user-approved project direction and production principles*; chat-to-chat handoffs are not replacements.
-2. Read **[PROJECT_RULES.md](../PROJECT_RULES.md)** for locked Fast / Deep / Release testing, safety repetition rules and VST3/Web parity.
-3. Read **[SOURCERUNE_MASTER_HANDOFF.md](../SOURCERUNE_MASTER_HANDOFF.md)** only for the latest known progress and historical checkpoint, then verify live repository main / branch / PR / CI / deployment. Never trust a dated SHA without checking.
-4. Read the related **[docs/product/reference/](../docs/product/reference/)** REF specification and the applicable Web/Native/DSP/asset manifests before editing.
+2. Read **[PROJECT_RULES.md](../PROJECT_RULES.md)** for the *highest-priority evidence-led big-data product design principle*, locked Fast / Deep / Release testing, safety repetition rules and VST3/Web parity.
+3. **Mandatory for product/DSP/parameter/preset decisions:** read [docs/research/RESEARCH_EVIDENCE_STANDARD.md](../docs/research/RESEARCH_EVIDENCE_STANDARD.md). Real multi-forum demand, an eight-stage 10,000-candidate to 1,000-retained **target** with auditable deduplication (not fabricated counts), independent source weighting, physical DSP validation, SOURCE 40% / MOTION 30% / SPACE 30% core weighting and preservation of 74 active Factory Presets are binding. Do not claim the large dataset exists until verified.
+4. Read **[SOURCERUNE_MASTER_HANDOFF.md](../SOURCERUNE_MASTER_HANDOFF.md)** only for the latest known progress and historical checkpoint, then verify live repository main / branch / PR / CI / deployment. Never trust a dated SHA without checking.
+5. Read the related **[docs/product/reference/](../docs/product/reference/)** REF specification and the applicable Web/Native/DSP/asset manifests before editing.
 
 Non-negotiables:
 - Reply to the user in Traditional Chinese.
