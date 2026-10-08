@@ -8,7 +8,10 @@
 
 **2026-10-08 使用者明確更正：最初討論 SOURCERUNE 的產品方向、DSP 責任、研究方法與各項細節的對話，是：**
 
-- **原始對話 URL：** https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3
+- **原始私人對話 URL（使用者確認的正本）：** https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3
+- **原始對話的分享網址（使用者於 2026-10-08 提供）：** https://chatgpt.com/share/6ac7214c-b178-83ec-96a4-d2e255912d3a
+- **分享頁面擷取狀態：** `SHARE-URL-RECEIVED / FETCH-UNAVAILABLE`；目前工具讀取該 URL 顯示 cache miss，**沒有取得任何可供逐字核對的原始訊息正文**。這是存取阻塞，不代表分享連結本身錯誤或使用者沒有分享。
+- **後續整理優先次序：** 取得完整 transcript → 逐條比對最後核准版本 → 將永久原則去重並壓縮 → 移除一次性排程／過時方案／重複歷史 → 將重要實作細節保留在權威 domain spec → 驗證每個原始決議皆有位置。**未取得 transcript 之前不得做會造成資訊遺失的刪除。**
 - **原始對話識別碼：** `6abfd770-e594-83e8-adc4-992fa6ed47b3`
 - **來源身分：** `USER-IDENTIFIED-ORIGINAL-CONVERSATION`（使用者明確指定的正本）
 - **全文讀取狀態：** `CONTENT-NOT-ACCESSIBLE-YET`。該 `/c/` 網址為登入使用者的私人聊天入口；本次工具無法取得該對話完整逐字稿，歷史個人對話檢索也沒有返回對應的完整內容。
