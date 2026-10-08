@@ -1,5 +1,11 @@
 # SOURCERUNE
 
+## 新的 GPT／開發者請先讀（正式交接）
+
+- **[SOURCERUNE_MASTER_HANDOFF.md](SOURCERUNE_MASTER_HANDOFF.md)**：完整需求、使用者指示、GitHub/CI/斷線恢復規則、UI_01／UI_02 REF pixel 工作、元件缺口、歷史 checkpoints、最新查核方式。
+- **[AGENTS.md](AGENTS.md)**：給 AI 助手的快速操作入口；必須先查最新 main／PR／CI，不能從歷史 SHA 盲目重做。
+- REF 細部座標與元件／材質缺口：**[docs/product/reference/](docs/product/reference/)**。
+
 SOURCERUNE is an audio-post/worldizing scene processor focused on source transformation, transmission, occlusion, distance and motion, acoustic space, ambience, intelligibility, and reliable recall.
 
 ## Mainline targets
