@@ -1,5 +1,14 @@
 # REF Component Gap Audit
 
+## 最新原圖來源狀態（2026-10-09；取代歷史 Checkpoint 65 的「不存在」判斷）
+
+- **UI_02 已有真正完整 REF bitmap**：`Assets/UI/UI_02/UI_02_REF/UI_02_REF.png`，1672×941 RGB；SHA-256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff`，Git blob `dbb2c3cde3ee53ec3424b5d0f79b0dcd9fad1b59`。
+- **UI_02 現行只用 2.5×**：`Assets/UI/UI_02/UI_02_REF/UI_02_REF_2_5X_PIXEL.png` 4180×2353，SHA-256 `734f107d1c9a74f7e0caf746419fac3539e6b6c418f0bd8a60efa6da0f45d3e6`。同資料夾的 `UI_02_REF_SCAN_OVERLAY_1X.png` 是僅作檢視的彩框圖。三個 PNG 均已實際進入 GitHub，Actions #1 `37811957946` 真正從原始 PNG 放大、比對 42 點並產生分支 binary，Fast CI #100 成功，PR #55 已合併。
+- **不再混用已取消的 10×**：舊 PR #53 由 PR #55 替代且關閉；原本 25 大框、8 頂部錨點、8 控制直徑、139 個部件/功能候選、15 組真 RGB 像素邊界證據已完整保留到 `UI_02_REF_2_5X_*_20261009.{json,md}`。
+- **UI_01 是另一張**：1508×808 無說明 PNG，142 筆 2.5× 掃描 JSON/MD 已在 `main`，但其兩張真 PNG binary 仍待上傳，不能誤報與 UI_02 一樣已驗收。
+- 有真實圖片可測 **不等於**文字 baseline、亮暗狀態、滑鼠 hitbox 或 VST3 Host 已全部測過；原本細部 `APPROX`／`PENDING` 不自行升級。
+
+
 Current main inventory: Runtime/Common 108 PNG; Runtime/UI_01 5 PNG; Runtime/UI_02 0 PNG; Shared semantic art 224 PNG; UI_01 semantic art 224 PNG; UI_02 semantic art 224 PNG.
 
 ## Present and reusable
@@ -378,7 +387,7 @@ Current runtime uses a shared 74 px header/image split, but that value is implem
 Status: **CARD ASSET INVENTORY SUFFICIENT / INTERNAL REF GEOMETRY PENDING**.
 
 
-## Checkpoint 65 — formal full-REF source availability blocker
+## Checkpoint 65 — historical full-REF source availability blocker (SUPERSEDED on 2026-10-09)
 
 Repository inspection confirms that `Assets/UI/ReferenceSheets/` currently contains semantic atlases and `STYLE_GUIDE_V1.png`, but **does not contain the full approved UI_01 or UI_02 REF bitmap/poster** used for the earlier measured contracts.
 
@@ -407,7 +416,7 @@ Impact:
 
 Classification: **EXTERNAL INPUT BLOCKER FOR NEW REF-FINE CONFIRMATION ONLY**. This does not block runtime parity fixes, existing-confirmed regression guards, CI validation, or asset/binding gap audits.
 
-Status: **FULL REF BITMAP ABSENT / DO NOT GUESS**.
+Historical status (at Checkpoint 65 only): **FULL REF BITMAP ABSENT / DO NOT GUESS**. **UI_02 SOURCE BLOCKER RESOLVED** by official SHA-verified full PNG and 2.5× scan PR #55; UI_01 PNG binary remains pending. Do not treat this old paragraph as current progress.
 
 
 ## Checkpoint 70 — Runtime manifest/file parity restored
