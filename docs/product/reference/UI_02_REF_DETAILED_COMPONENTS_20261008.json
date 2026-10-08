@@ -1,0 +1,3972 @@
+{
+  "schema": "sourcerune.ref.ui02-detailed.v1",
+  "type": "SEMANTIC_IMAGE_INVENTORY",
+  "ui": "UI_02",
+  "source_ref": "Assets/UI/UI_02/UI_02_REF/UI_02_REF.png",
+  "source_sha256": "dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff",
+  "zoom_ref": "Assets/UI/UI_02/UI_02_REF/UI_02_REF_10X_PIXEL.png",
+  "zoom_sha256": "bc7aa52be5db2ae0cce9d70e6e6841288c86229bb64f8e059047a83b24cff389",
+  "source_size": [
+    1672,
+    941
+  ],
+  "zoom_size": [
+    16720,
+    9410
+  ],
+  "bounding_edge_convention": "[x0,x1) / [y0,y1) right-and-bottom exclusive",
+  "methodology": [
+    "True source PNG retrieved via GitHub Actions artifact; SHA/size verified, visually reviewed at original pixel resolution",
+    "Every detailed bbox is an approximated visual location at 1x, scaled exactly 10x; do not mislabel as exact pixel scan",
+    "Separate source visual content from runtime behavior and future VST3 host validation",
+    "Major layout rectangles stay in existing UI_02_REF_COORDS.json; do not override those with this approximate control inventory"
+  ],
+  "objects_count": 139,
+  "types": {
+    "button": 24,
+    "card": 5,
+    "dynamic_callout": 1,
+    "dynamic_icon": 1,
+    "dynamic_marker": 6,
+    "dynamic_readout": 4,
+    "dynamic_text": 8,
+    "icon": 16,
+    "interactive_graph": 1,
+    "knob": 8,
+    "live_graph": 1,
+    "live_meter": 4,
+    "live_path": 1,
+    "logo": 1,
+    "macro_panel": 5,
+    "meter_frame": 2,
+    "node": 3,
+    "panel": 1,
+    "photo": 6,
+    "scale": 4,
+    "scene": 1,
+    "select": 8,
+    "slider": 2,
+    "symbol": 1,
+    "text": 22,
+    "toggle": 1,
+    "waveform": 2
+  },
+  "objects": [
+    {
+      "id": "BRAND_LOGO_ICON",
+      "group": "GLOBAL",
+      "kind": "logo",
+      "box_1x": {
+        "x": 29,
+        "y": 21,
+        "w": 70,
+        "h": 42
+      },
+      "box_10x": {
+        "x": 290,
+        "y": 210,
+        "w": 700,
+        "h": 420
+      },
+      "center_1x": [
+        64,
+        42
+      ],
+      "visible_content": "blue acoustic line symbol",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BRAND_NAME",
+      "group": "GLOBAL",
+      "kind": "text",
+      "box_1x": {
+        "x": 112,
+        "y": 15,
+        "w": 159,
+        "h": 31
+      },
+      "box_10x": {
+        "x": 1120,
+        "y": 150,
+        "w": 1590,
+        "h": 310
+      },
+      "center_1x": [
+        191.5,
+        30.5
+      ],
+      "visible_content": "SCENE",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BRAND_SUBTITLE",
+      "group": "GLOBAL",
+      "kind": "text",
+      "box_1x": {
+        "x": 111,
+        "y": 48,
+        "w": 176,
+        "h": 20
+      },
+      "box_10x": {
+        "x": 1110,
+        "y": 480,
+        "w": 1760,
+        "h": 200
+      },
+      "center_1x": [
+        199,
+        58
+      ],
+      "visible_content": "AUDIO REALITY ENGINE",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_PREVIOUS",
+      "group": "GLOBAL",
+      "kind": "button",
+      "box_1x": {
+        "x": 429,
+        "y": 16,
+        "w": 49,
+        "h": 46
+      },
+      "box_10x": {
+        "x": 4290,
+        "y": 160,
+        "w": 490,
+        "h": 460
+      },
+      "center_1x": [
+        453.5,
+        39
+      ],
+      "visible_content": "‹",
+      "expected_interaction": "Previous preset",
+      "web_selector_or_binding_hint": "#presetPrevBtn",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_NEXT",
+      "group": "GLOBAL",
+      "kind": "button",
+      "box_1x": {
+        "x": 479,
+        "y": 16,
+        "w": 47,
+        "h": 46
+      },
+      "box_10x": {
+        "x": 4790,
+        "y": 160,
+        "w": 470,
+        "h": 460
+      },
+      "center_1x": [
+        502.5,
+        39
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Next preset",
+      "web_selector_or_binding_hint": "#presetNextBtn",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_PRESET_SELECTOR",
+      "group": "GLOBAL",
+      "kind": "select",
+      "box_1x": {
+        "x": 527,
+        "y": 16,
+        "w": 333,
+        "h": 46
+      },
+      "box_10x": {
+        "x": 5270,
+        "y": 160,
+        "w": 3330,
+        "h": 460
+      },
+      "center_1x": [
+        693.5,
+        39
+      ],
+      "visible_content": "Car Pass By - City Street",
+      "expected_interaction": "Preset load",
+      "web_selector_or_binding_hint": "#presetSelect",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_PRESET_ARROW",
+      "group": "GLOBAL",
+      "kind": "icon",
+      "box_1x": {
+        "x": 828,
+        "y": 32,
+        "w": 23,
+        "h": 16
+      },
+      "box_10x": {
+        "x": 8280,
+        "y": 320,
+        "w": 230,
+        "h": 160
+      },
+      "center_1x": [
+        839.5,
+        40
+      ],
+      "visible_content": "▾",
+      "expected_interaction": "Preset dropdown",
+      "web_selector_or_binding_hint": "#presetSelect",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_SHUFFLE",
+      "group": "GLOBAL",
+      "kind": "icon",
+      "box_1x": {
+        "x": 876,
+        "y": 26,
+        "w": 31,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 8760,
+        "y": 260,
+        "w": 310,
+        "h": 270
+      },
+      "center_1x": [
+        891.5,
+        39.5
+      ],
+      "visible_content": "crossed arrows",
+      "expected_interaction": "SHUFFLE SEMANTICS UNAPPROVED; NO BINDING",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL+MISSING-RUNTIME",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_SNAPSHOT_A",
+      "group": "GLOBAL",
+      "kind": "button",
+      "box_1x": {
+        "x": 935,
+        "y": 17,
+        "w": 35,
+        "h": 45
+      },
+      "box_10x": {
+        "x": 9350,
+        "y": 170,
+        "w": 350,
+        "h": 450
+      },
+      "center_1x": [
+        952.5,
+        39.5
+      ],
+      "visible_content": "A",
+      "expected_interaction": "Recall/store Snapshot A",
+      "web_selector_or_binding_hint": "[data-snapshot=\"A\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_SNAPSHOT_B",
+      "group": "GLOBAL",
+      "kind": "button",
+      "box_1x": {
+        "x": 969,
+        "y": 17,
+        "w": 35,
+        "h": 45
+      },
+      "box_10x": {
+        "x": 9690,
+        "y": 170,
+        "w": 350,
+        "h": 450
+      },
+      "center_1x": [
+        986.5,
+        39.5
+      ],
+      "visible_content": "B",
+      "expected_interaction": "Recall/store Snapshot B",
+      "web_selector_or_binding_hint": "[data-snapshot=\"B\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_FOLDER",
+      "group": "GLOBAL",
+      "kind": "button",
+      "box_1x": {
+        "x": 1038,
+        "y": 29,
+        "w": 28,
+        "h": 23
+      },
+      "box_10x": {
+        "x": 10380,
+        "y": 290,
+        "w": 280,
+        "h": 230
+      },
+      "center_1x": [
+        1052,
+        40.5
+      ],
+      "visible_content": "folder icon",
+      "expected_interaction": "Open preset library",
+      "web_selector_or_binding_hint": "#presetVisualsBtn",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_SETTINGS",
+      "group": "GLOBAL",
+      "kind": "button",
+      "box_1x": {
+        "x": 1604,
+        "y": 26,
+        "w": 27,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 16040,
+        "y": 260,
+        "w": 270,
+        "h": 270
+      },
+      "center_1x": [
+        1617.5,
+        39.5
+      ],
+      "visible_content": "gear icon",
+      "expected_interaction": "Open Settings",
+      "web_selector_or_binding_hint": "#settingsBtn",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_INPUT_LABEL",
+      "group": "GLOBAL",
+      "kind": "text",
+      "box_1x": {
+        "x": 1151,
+        "y": 14,
+        "w": 65,
+        "h": 30
+      },
+      "box_10x": {
+        "x": 11510,
+        "y": 140,
+        "w": 650,
+        "h": 300
+      },
+      "center_1x": [
+        1183.5,
+        29
+      ],
+      "visible_content": "INPUT",
+      "expected_interaction": "Shows input meters",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_INPUT_METER_BG",
+      "group": "GLOBAL",
+      "kind": "meter_frame",
+      "box_1x": {
+        "x": 1207,
+        "y": 10,
+        "w": 167,
+        "h": 62
+      },
+      "box_10x": {
+        "x": 12070,
+        "y": 100,
+        "w": 1670,
+        "h": 620
+      },
+      "center_1x": [
+        1290.5,
+        41
+      ],
+      "visible_content": "input stereo bars",
+      "expected_interaction": "Live input meter",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_INPUT_METER_UPPER",
+      "group": "GLOBAL",
+      "kind": "live_meter",
+      "box_1x": {
+        "x": 1218,
+        "y": 18,
+        "w": 140,
+        "h": 9
+      },
+      "box_10x": {
+        "x": 12180,
+        "y": 180,
+        "w": 1400,
+        "h": 90
+      },
+      "center_1x": [
+        1288,
+        22.5
+      ],
+      "visible_content": "Input upper channel",
+      "expected_interaction": "Live scale and fill",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_INPUT_METER_LOWER",
+      "group": "GLOBAL",
+      "kind": "live_meter",
+      "box_1x": {
+        "x": 1218,
+        "y": 32,
+        "w": 140,
+        "h": 9
+      },
+      "box_10x": {
+        "x": 12180,
+        "y": 320,
+        "w": 1400,
+        "h": 90
+      },
+      "center_1x": [
+        1288,
+        36.5
+      ],
+      "visible_content": "Input lower channel",
+      "expected_interaction": "Live scale and fill",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_INPUT_SCALE",
+      "group": "GLOBAL",
+      "kind": "scale",
+      "box_1x": {
+        "x": 1209,
+        "y": 49,
+        "w": 158,
+        "h": 18
+      },
+      "box_10x": {
+        "x": 12090,
+        "y": 490,
+        "w": 1580,
+        "h": 180
+      },
+      "center_1x": [
+        1288,
+        58
+      ],
+      "visible_content": "-60 -36 -24 -12 -6 0",
+      "expected_interaction": "Live/static meter tick labeling",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_OUTPUT_LABEL",
+      "group": "GLOBAL",
+      "kind": "text",
+      "box_1x": {
+        "x": 1388,
+        "y": 14,
+        "w": 77,
+        "h": 30
+      },
+      "box_10x": {
+        "x": 13880,
+        "y": 140,
+        "w": 770,
+        "h": 300
+      },
+      "center_1x": [
+        1426.5,
+        29
+      ],
+      "visible_content": "OUTPUT",
+      "expected_interaction": "Shows output meters",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_OUTPUT_METER_BG",
+      "group": "GLOBAL",
+      "kind": "meter_frame",
+      "box_1x": {
+        "x": 1461,
+        "y": 10,
+        "w": 129,
+        "h": 62
+      },
+      "box_10x": {
+        "x": 14610,
+        "y": 100,
+        "w": 1290,
+        "h": 620
+      },
+      "center_1x": [
+        1525.5,
+        41
+      ],
+      "visible_content": "output stereo bars",
+      "expected_interaction": "Live output meter",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_OUTPUT_METER_UPPER",
+      "group": "GLOBAL",
+      "kind": "live_meter",
+      "box_1x": {
+        "x": 1469,
+        "y": 18,
+        "w": 108,
+        "h": 9
+      },
+      "box_10x": {
+        "x": 14690,
+        "y": 180,
+        "w": 1080,
+        "h": 90
+      },
+      "center_1x": [
+        1523,
+        22.5
+      ],
+      "visible_content": "Output upper channel",
+      "expected_interaction": "Live scale and fill",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_OUTPUT_METER_LOWER",
+      "group": "GLOBAL",
+      "kind": "live_meter",
+      "box_1x": {
+        "x": 1469,
+        "y": 32,
+        "w": 108,
+        "h": 9
+      },
+      "box_10x": {
+        "x": 14690,
+        "y": 320,
+        "w": 1080,
+        "h": 90
+      },
+      "center_1x": [
+        1523,
+        36.5
+      ],
+      "visible_content": "Output lower channel",
+      "expected_interaction": "Live scale and fill",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "TOPBAR_OUTPUT_SCALE",
+      "group": "GLOBAL",
+      "kind": "scale",
+      "box_1x": {
+        "x": 1468,
+        "y": 49,
+        "w": 121,
+        "h": 18
+      },
+      "box_10x": {
+        "x": 14680,
+        "y": 490,
+        "w": 1210,
+        "h": 180
+      },
+      "center_1x": [
+        1528.5,
+        58
+      ],
+      "visible_content": "-60 -36 -24 -12 -6 0",
+      "expected_interaction": "Live/static meter ticks",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_FRAME",
+      "group": "CARD_SOURCE",
+      "kind": "card",
+      "box_1x": {
+        "x": 14,
+        "y": 87,
+        "w": 329,
+        "h": 205
+      },
+      "box_10x": {
+        "x": 140,
+        "y": 870,
+        "w": 3290,
+        "h": 2050
+      },
+      "center_1x": [
+        178.5,
+        189.5
+      ],
+      "visible_content": "SOURCE / Car Speaker",
+      "expected_interaction": "Card model/asset selection",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"SOURCE\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_ICON",
+      "group": "CARD_SOURCE",
+      "kind": "icon",
+      "box_1x": {
+        "x": 32,
+        "y": 106,
+        "w": 39,
+        "h": 40
+      },
+      "box_10x": {
+        "x": 320,
+        "y": 1060,
+        "w": 390,
+        "h": 400
+      },
+      "center_1x": [
+        51.5,
+        126
+      ],
+      "visible_content": "car",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_TITLE",
+      "group": "CARD_SOURCE",
+      "kind": "text",
+      "box_1x": {
+        "x": 95,
+        "y": 104,
+        "w": 166,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 950,
+        "y": 1040,
+        "w": 1660,
+        "h": 270
+      },
+      "center_1x": [
+        178,
+        117.5
+      ],
+      "visible_content": "SOURCE",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_SELECTED",
+      "group": "CARD_SOURCE",
+      "kind": "text",
+      "box_1x": {
+        "x": 99,
+        "y": 133,
+        "w": 190,
+        "h": 26
+      },
+      "box_10x": {
+        "x": 990,
+        "y": 1330,
+        "w": 1900,
+        "h": 260
+      },
+      "center_1x": [
+        194,
+        146
+      ],
+      "visible_content": "Car Speaker",
+      "expected_interaction": "Selected semantic model; click to switch",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"SOURCE\"] .module-meta",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_SMALL_CHEVRON",
+      "group": "CARD_SOURCE",
+      "kind": "icon",
+      "box_1x": {
+        "x": 275,
+        "y": 138,
+        "w": 15,
+        "h": 13
+      },
+      "box_10x": {
+        "x": 2750,
+        "y": 1380,
+        "w": 150,
+        "h": 130
+      },
+      "center_1x": [
+        282.5,
+        144.5
+      ],
+      "visible_content": "⌄",
+      "expected_interaction": "Next semantic item? Unknown",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_HEADER_NEXT",
+      "group": "CARD_SOURCE",
+      "kind": "button",
+      "box_1x": {
+        "x": 296,
+        "y": 133,
+        "w": 27,
+        "h": 32
+      },
+      "box_10x": {
+        "x": 2960,
+        "y": 1330,
+        "w": 270,
+        "h": 320
+      },
+      "center_1x": [
+        309.5,
+        149
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Asset navigation candidate",
+      "web_selector_or_binding_hint": "[data-cycle=\"SOURCE\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_HERO_IMAGE",
+      "group": "CARD_SOURCE",
+      "kind": "photo",
+      "box_1x": {
+        "x": 31,
+        "y": 168,
+        "w": 295,
+        "h": 116
+      },
+      "box_10x": {
+        "x": 310,
+        "y": 1680,
+        "w": 2950,
+        "h": 1160
+      },
+      "center_1x": [
+        178.5,
+        226
+      ],
+      "visible_content": "SOURCE photographic semantic art",
+      "expected_interaction": "Swap selected image",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"SOURCE\"] .module-art",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_IMAGE_PREV",
+      "group": "CARD_SOURCE",
+      "kind": "button",
+      "box_1x": {
+        "x": 35,
+        "y": 206,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 350,
+        "y": 2060,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        50.5,
+        226.5
+      ],
+      "visible_content": "‹",
+      "expected_interaction": "Previous available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"SOURCE\"][data-dir=\"-1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SOURCE_IMAGE_NEXT",
+      "group": "CARD_SOURCE",
+      "kind": "button",
+      "box_1x": {
+        "x": 292,
+        "y": 206,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 2920,
+        "y": 2060,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        307.5,
+        226.5
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Next available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"SOURCE\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_FRAME",
+      "group": "CARD_TRANSMISSION",
+      "kind": "card",
+      "box_1x": {
+        "x": 14,
+        "y": 303,
+        "w": 329,
+        "h": 174
+      },
+      "box_10x": {
+        "x": 140,
+        "y": 3030,
+        "w": 3290,
+        "h": 1740
+      },
+      "center_1x": [
+        178.5,
+        390
+      ],
+      "visible_content": "TRANSMISSION / Mobile Call",
+      "expected_interaction": "Card model/asset selection",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"TRANSMISSION\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_ICON",
+      "group": "CARD_TRANSMISSION",
+      "kind": "icon",
+      "box_1x": {
+        "x": 32,
+        "y": 322,
+        "w": 39,
+        "h": 40
+      },
+      "box_10x": {
+        "x": 320,
+        "y": 3220,
+        "w": 390,
+        "h": 400
+      },
+      "center_1x": [
+        51.5,
+        342
+      ],
+      "visible_content": "phone",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_TITLE",
+      "group": "CARD_TRANSMISSION",
+      "kind": "text",
+      "box_1x": {
+        "x": 95,
+        "y": 320,
+        "w": 166,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 950,
+        "y": 3200,
+        "w": 1660,
+        "h": 270
+      },
+      "center_1x": [
+        178,
+        333.5
+      ],
+      "visible_content": "TRANSMISSION",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_SELECTED",
+      "group": "CARD_TRANSMISSION",
+      "kind": "text",
+      "box_1x": {
+        "x": 99,
+        "y": 349,
+        "w": 190,
+        "h": 26
+      },
+      "box_10x": {
+        "x": 990,
+        "y": 3490,
+        "w": 1900,
+        "h": 260
+      },
+      "center_1x": [
+        194,
+        362
+      ],
+      "visible_content": "Mobile Call",
+      "expected_interaction": "Selected semantic model; click to switch",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"TRANSMISSION\"] .module-meta",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_SMALL_CHEVRON",
+      "group": "CARD_TRANSMISSION",
+      "kind": "icon",
+      "box_1x": {
+        "x": 275,
+        "y": 354,
+        "w": 15,
+        "h": 13
+      },
+      "box_10x": {
+        "x": 2750,
+        "y": 3540,
+        "w": 150,
+        "h": 130
+      },
+      "center_1x": [
+        282.5,
+        360.5
+      ],
+      "visible_content": "⌄",
+      "expected_interaction": "Next semantic item? Unknown",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_HEADER_NEXT",
+      "group": "CARD_TRANSMISSION",
+      "kind": "button",
+      "box_1x": {
+        "x": 296,
+        "y": 349,
+        "w": 27,
+        "h": 32
+      },
+      "box_10x": {
+        "x": 2960,
+        "y": 3490,
+        "w": 270,
+        "h": 320
+      },
+      "center_1x": [
+        309.5,
+        365
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Asset navigation candidate",
+      "web_selector_or_binding_hint": "[data-cycle=\"TRANSMISSION\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_HERO_IMAGE",
+      "group": "CARD_TRANSMISSION",
+      "kind": "photo",
+      "box_1x": {
+        "x": 30,
+        "y": 382,
+        "w": 297,
+        "h": 84
+      },
+      "box_10x": {
+        "x": 300,
+        "y": 3820,
+        "w": 2970,
+        "h": 840
+      },
+      "center_1x": [
+        178.5,
+        424
+      ],
+      "visible_content": "TRANSMISSION photographic semantic art",
+      "expected_interaction": "Swap selected image",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"TRANSMISSION\"] .module-art",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_IMAGE_PREV",
+      "group": "CARD_TRANSMISSION",
+      "kind": "button",
+      "box_1x": {
+        "x": 34,
+        "y": 404,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 340,
+        "y": 4040,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        49.5,
+        424.5
+      ],
+      "visible_content": "‹",
+      "expected_interaction": "Previous available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"TRANSMISSION\"][data-dir=\"-1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_TRANSMISSION_IMAGE_NEXT",
+      "group": "CARD_TRANSMISSION",
+      "kind": "button",
+      "box_1x": {
+        "x": 293,
+        "y": 404,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 2930,
+        "y": 4040,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        308.5,
+        424.5
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Next available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"TRANSMISSION\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_FRAME",
+      "group": "CARD_WALL_COVER",
+      "kind": "card",
+      "box_1x": {
+        "x": 14,
+        "y": 488,
+        "w": 329,
+        "h": 241
+      },
+      "box_10x": {
+        "x": 140,
+        "y": 4880,
+        "w": 3290,
+        "h": 2410
+      },
+      "center_1x": [
+        178.5,
+        608.5
+      ],
+      "visible_content": "WALL / COVER / None",
+      "expected_interaction": "Card model/asset selection",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"WALL_COVER\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_ICON",
+      "group": "CARD_WALL_COVER",
+      "kind": "icon",
+      "box_1x": {
+        "x": 32,
+        "y": 507,
+        "w": 39,
+        "h": 40
+      },
+      "box_10x": {
+        "x": 320,
+        "y": 5070,
+        "w": 390,
+        "h": 400
+      },
+      "center_1x": [
+        51.5,
+        527
+      ],
+      "visible_content": "cube/cover",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_TITLE",
+      "group": "CARD_WALL_COVER",
+      "kind": "text",
+      "box_1x": {
+        "x": 95,
+        "y": 505,
+        "w": 166,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 950,
+        "y": 5050,
+        "w": 1660,
+        "h": 270
+      },
+      "center_1x": [
+        178,
+        518.5
+      ],
+      "visible_content": "WALL / COVER",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_SELECTED",
+      "group": "CARD_WALL_COVER",
+      "kind": "text",
+      "box_1x": {
+        "x": 99,
+        "y": 534,
+        "w": 190,
+        "h": 26
+      },
+      "box_10x": {
+        "x": 990,
+        "y": 5340,
+        "w": 1900,
+        "h": 260
+      },
+      "center_1x": [
+        194,
+        547
+      ],
+      "visible_content": "None",
+      "expected_interaction": "Selected semantic model; click to switch",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"WALL_COVER\"] .module-meta",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_SMALL_CHEVRON",
+      "group": "CARD_WALL_COVER",
+      "kind": "icon",
+      "box_1x": {
+        "x": 275,
+        "y": 539,
+        "w": 15,
+        "h": 13
+      },
+      "box_10x": {
+        "x": 2750,
+        "y": 5390,
+        "w": 150,
+        "h": 130
+      },
+      "center_1x": [
+        282.5,
+        545.5
+      ],
+      "visible_content": "⌄",
+      "expected_interaction": "Next semantic item? Unknown",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_HEADER_NEXT",
+      "group": "CARD_WALL_COVER",
+      "kind": "button",
+      "box_1x": {
+        "x": 296,
+        "y": 534,
+        "w": 27,
+        "h": 32
+      },
+      "box_10x": {
+        "x": 2960,
+        "y": 5340,
+        "w": 270,
+        "h": 320
+      },
+      "center_1x": [
+        309.5,
+        550
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Asset navigation candidate",
+      "web_selector_or_binding_hint": "[data-cycle=\"WALL_COVER\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_HERO_IMAGE",
+      "group": "CARD_WALL_COVER",
+      "kind": "photo",
+      "box_1x": {
+        "x": 30,
+        "y": 570,
+        "w": 297,
+        "h": 144
+      },
+      "box_10x": {
+        "x": 300,
+        "y": 5700,
+        "w": 2970,
+        "h": 1440
+      },
+      "center_1x": [
+        178.5,
+        642
+      ],
+      "visible_content": "WALL_COVER photographic semantic art",
+      "expected_interaction": "Swap selected image",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"WALL_COVER\"] .module-art",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_IMAGE_PREV",
+      "group": "CARD_WALL_COVER",
+      "kind": "button",
+      "box_1x": {
+        "x": 34,
+        "y": 622,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 340,
+        "y": 6220,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        49.5,
+        642.5
+      ],
+      "visible_content": "‹",
+      "expected_interaction": "Previous available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"WALL_COVER\"][data-dir=\"-1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_WALL_COVER_IMAGE_NEXT",
+      "group": "CARD_WALL_COVER",
+      "kind": "button",
+      "box_1x": {
+        "x": 293,
+        "y": 622,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 2930,
+        "y": 6220,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        308.5,
+        642.5
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Next available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"WALL_COVER\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_FRAME",
+      "group": "CARD_SPACE_ENVIRONMENT",
+      "kind": "card",
+      "box_1x": {
+        "x": 1310,
+        "y": 87,
+        "w": 326,
+        "h": 281
+      },
+      "box_10x": {
+        "x": 13100,
+        "y": 870,
+        "w": 3260,
+        "h": 2810
+      },
+      "center_1x": [
+        1473,
+        227.5
+      ],
+      "visible_content": "SPACE / ENVIRONMENT / City Street",
+      "expected_interaction": "Card model/asset selection",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"SPACE_ENVIRONMENT\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_ICON",
+      "group": "CARD_SPACE_ENVIRONMENT",
+      "kind": "icon",
+      "box_1x": {
+        "x": 1328,
+        "y": 106,
+        "w": 39,
+        "h": 40
+      },
+      "box_10x": {
+        "x": 13280,
+        "y": 1060,
+        "w": 390,
+        "h": 400
+      },
+      "center_1x": [
+        1347.5,
+        126
+      ],
+      "visible_content": "building",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_TITLE",
+      "group": "CARD_SPACE_ENVIRONMENT",
+      "kind": "text",
+      "box_1x": {
+        "x": 1389,
+        "y": 104,
+        "w": 226,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 13890,
+        "y": 1040,
+        "w": 2260,
+        "h": 270
+      },
+      "center_1x": [
+        1502,
+        117.5
+      ],
+      "visible_content": "SPACE / ENVIRONMENT",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_SELECT",
+      "group": "CARD_SPACE_ENVIRONMENT",
+      "kind": "select",
+      "box_1x": {
+        "x": 1390,
+        "y": 152,
+        "w": 205,
+        "h": 39
+      },
+      "box_10x": {
+        "x": 13900,
+        "y": 1520,
+        "w": 2050,
+        "h": 390
+      },
+      "center_1x": [
+        1492.5,
+        171.5
+      ],
+      "visible_content": "City Street",
+      "expected_interaction": "Choose semantic SPACE_ENVIRONMENT",
+      "web_selector_or_binding_hint": "[data-edit=\"SPACE_ENVIRONMENT\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_HERO_IMAGE",
+      "group": "CARD_SPACE_ENVIRONMENT",
+      "kind": "photo",
+      "box_1x": {
+        "x": 1328,
+        "y": 204,
+        "w": 290,
+        "h": 148
+      },
+      "box_10x": {
+        "x": 13280,
+        "y": 2040,
+        "w": 2900,
+        "h": 1480
+      },
+      "center_1x": [
+        1473,
+        278
+      ],
+      "visible_content": "SPACE_ENVIRONMENT photographic semantic art",
+      "expected_interaction": "Swap selected image",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"SPACE_ENVIRONMENT\"] .module-art",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_IMAGE_PREV",
+      "group": "CARD_SPACE_ENVIRONMENT",
+      "kind": "button",
+      "box_1x": {
+        "x": 1332,
+        "y": 258,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 13320,
+        "y": 2580,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        1347.5,
+        278.5
+      ],
+      "visible_content": "‹",
+      "expected_interaction": "Previous available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"SPACE_ENVIRONMENT\"][data-dir=\"-1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_SPACE_ENVIRONMENT_IMAGE_NEXT",
+      "group": "CARD_SPACE_ENVIRONMENT",
+      "kind": "button",
+      "box_1x": {
+        "x": 1584,
+        "y": 258,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 15840,
+        "y": 2580,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        1599.5,
+        278.5
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Next available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"SPACE_ENVIRONMENT\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_AMBIENCE_FRAME",
+      "group": "CARD_AMBIENCE",
+      "kind": "card",
+      "box_1x": {
+        "x": 1310,
+        "y": 376,
+        "w": 326,
+        "h": 354
+      },
+      "box_10x": {
+        "x": 13100,
+        "y": 3760,
+        "w": 3260,
+        "h": 3540
+      },
+      "center_1x": [
+        1473,
+        553
+      ],
+      "visible_content": "AMBIENCE / Traffic",
+      "expected_interaction": "Card model/asset selection",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"AMBIENCE\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_AMBIENCE_ICON",
+      "group": "CARD_AMBIENCE",
+      "kind": "icon",
+      "box_1x": {
+        "x": 1328,
+        "y": 395,
+        "w": 39,
+        "h": 40
+      },
+      "box_10x": {
+        "x": 13280,
+        "y": 3950,
+        "w": 390,
+        "h": 400
+      },
+      "center_1x": [
+        1347.5,
+        415
+      ],
+      "visible_content": "waveform",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_AMBIENCE_TITLE",
+      "group": "CARD_AMBIENCE",
+      "kind": "text",
+      "box_1x": {
+        "x": 1389,
+        "y": 393,
+        "w": 226,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 13890,
+        "y": 3930,
+        "w": 2260,
+        "h": 270
+      },
+      "center_1x": [
+        1502,
+        406.5
+      ],
+      "visible_content": "AMBIENCE",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_AMBIENCE_SELECT",
+      "group": "CARD_AMBIENCE",
+      "kind": "select",
+      "box_1x": {
+        "x": 1390,
+        "y": 441,
+        "w": 205,
+        "h": 39
+      },
+      "box_10x": {
+        "x": 13900,
+        "y": 4410,
+        "w": 2050,
+        "h": 390
+      },
+      "center_1x": [
+        1492.5,
+        460.5
+      ],
+      "visible_content": "Traffic",
+      "expected_interaction": "Choose semantic AMBIENCE",
+      "web_selector_or_binding_hint": "[data-edit=\"AMBIENCE\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_AMBIENCE_HERO_IMAGE",
+      "group": "CARD_AMBIENCE",
+      "kind": "photo",
+      "box_1x": {
+        "x": 1328,
+        "y": 490,
+        "w": 290,
+        "h": 156
+      },
+      "box_10x": {
+        "x": 13280,
+        "y": 4900,
+        "w": 2900,
+        "h": 1560
+      },
+      "center_1x": [
+        1473,
+        568
+      ],
+      "visible_content": "AMBIENCE photographic semantic art",
+      "expected_interaction": "Swap selected image",
+      "web_selector_or_binding_hint": ".module-card[data-type=\"AMBIENCE\"] .module-art",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_AMBIENCE_IMAGE_PREV",
+      "group": "CARD_AMBIENCE",
+      "kind": "button",
+      "box_1x": {
+        "x": 1332,
+        "y": 548,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 13320,
+        "y": 5480,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        1347.5,
+        568.5
+      ],
+      "visible_content": "‹",
+      "expected_interaction": "Previous available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"AMBIENCE\"][data-dir=\"-1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CARD_AMBIENCE_IMAGE_NEXT",
+      "group": "CARD_AMBIENCE",
+      "kind": "button",
+      "box_1x": {
+        "x": 1584,
+        "y": 548,
+        "w": 31,
+        "h": 41
+      },
+      "box_10x": {
+        "x": 15840,
+        "y": 5480,
+        "w": 310,
+        "h": 410
+      },
+      "center_1x": [
+        1599.5,
+        568.5
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Next available semantic artwork",
+      "web_selector_or_binding_hint": "[data-cycle=\"AMBIENCE\"][data-dir=\"1\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_CONTAINER",
+      "group": "SCENE",
+      "kind": "scene",
+      "box_1x": {
+        "x": 355,
+        "y": 86,
+        "w": 944,
+        "h": 357
+      },
+      "box_10x": {
+        "x": 3550,
+        "y": 860,
+        "w": 9440,
+        "h": 3570
+      },
+      "center_1x": [
+        827,
+        264.5
+      ],
+      "visible_content": "City street at night, moving car and listener",
+      "expected_interaction": "Scene/motion renderer",
+      "web_selector_or_binding_hint": "#sceneSvg",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_PHOTO_BACKGROUND",
+      "group": "SCENE",
+      "kind": "photo",
+      "box_1x": {
+        "x": 356,
+        "y": 87,
+        "w": 941,
+        "h": 354
+      },
+      "box_10x": {
+        "x": 3560,
+        "y": 870,
+        "w": 9410,
+        "h": 3540
+      },
+      "center_1x": [
+        826.5,
+        264
+      ],
+      "visible_content": "Wet night urban street, moving vehicle and person",
+      "expected_interaction": "Scenario texture from selected space/environment",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_3D_VIEW_BUTTON",
+      "group": "SCENE",
+      "kind": "button",
+      "box_1x": {
+        "x": 1027,
+        "y": 101,
+        "w": 96,
+        "h": 38
+      },
+      "box_10x": {
+        "x": 10270,
+        "y": 1010,
+        "w": 960,
+        "h": 380
+      },
+      "center_1x": [
+        1075,
+        120
+      ],
+      "visible_content": "3D View",
+      "expected_interaction": "Switch 3D perspective",
+      "web_selector_or_binding_hint": "[data-view=\"3D\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_TOP_VIEW_BUTTON",
+      "group": "SCENE",
+      "kind": "button",
+      "box_1x": {
+        "x": 1124,
+        "y": 101,
+        "w": 99,
+        "h": 38
+      },
+      "box_10x": {
+        "x": 11240,
+        "y": 1010,
+        "w": 990,
+        "h": 380
+      },
+      "center_1x": [
+        1173.5,
+        120
+      ],
+      "visible_content": "Top View",
+      "expected_interaction": "Switch top-down perspective",
+      "web_selector_or_binding_hint": "[data-view=\"TOP\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_FULLSCREEN",
+      "group": "SCENE",
+      "kind": "button",
+      "box_1x": {
+        "x": 1240,
+        "y": 100,
+        "w": 43,
+        "h": 39
+      },
+      "box_10x": {
+        "x": 12400,
+        "y": 1000,
+        "w": 430,
+        "h": 390
+      },
+      "center_1x": [
+        1261.5,
+        119.5
+      ],
+      "visible_content": "⛶",
+      "expected_interaction": "Fullscreen",
+      "web_selector_or_binding_hint": "#sceneFullscreenBtn",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_CAR_GLYPH",
+      "group": "SCENE",
+      "kind": "dynamic_marker",
+      "box_1x": {
+        "x": 556,
+        "y": 296,
+        "w": 60,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 5560,
+        "y": 2960,
+        "w": 600,
+        "h": 370
+      },
+      "center_1x": [
+        586,
+        314.5
+      ],
+      "visible_content": "moving car source glow",
+      "expected_interaction": "Live moving emitter marker",
+      "web_selector_or_binding_hint": "#sourceNode",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_SOURCE_CALLOUT",
+      "group": "SCENE",
+      "kind": "dynamic_callout",
+      "box_1x": {
+        "x": 498,
+        "y": 213,
+        "w": 151,
+        "h": 58
+      },
+      "box_10x": {
+        "x": 4980,
+        "y": 2130,
+        "w": 1510,
+        "h": 580
+      },
+      "center_1x": [
+        573.5,
+        242
+      ],
+      "visible_content": "Source / Car Speaker",
+      "expected_interaction": "Labels emitter and source model",
+      "web_selector_or_binding_hint": "#sourceLabel",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_SOURCE_POINTER",
+      "group": "SCENE",
+      "kind": "dynamic_marker",
+      "box_1x": {
+        "x": 564,
+        "y": 281,
+        "w": 42,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 5640,
+        "y": 2810,
+        "w": 420,
+        "h": 370
+      },
+      "center_1x": [
+        585,
+        299.5
+      ],
+      "visible_content": "Source location",
+      "expected_interaction": "Drag/move via motion path (verify)",
+      "web_selector_or_binding_hint": "#sourceNode",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_LISTENER_GLYPH",
+      "group": "SCENE",
+      "kind": "dynamic_marker",
+      "box_1x": {
+        "x": 987,
+        "y": 325,
+        "w": 61,
+        "h": 48
+      },
+      "box_10x": {
+        "x": 9870,
+        "y": 3250,
+        "w": 610,
+        "h": 480
+      },
+      "center_1x": [
+        1017.5,
+        349
+      ],
+      "visible_content": "white listener node / target rings",
+      "expected_interaction": "Live listener marker",
+      "web_selector_or_binding_hint": "#listenerNode",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_LISTENER_LABEL",
+      "group": "SCENE",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 1040,
+        "y": 326,
+        "w": 83,
+        "h": 33
+      },
+      "box_10x": {
+        "x": 10400,
+        "y": 3260,
+        "w": 830,
+        "h": 330
+      },
+      "center_1x": [
+        1081.5,
+        342.5
+      ],
+      "visible_content": "Listener",
+      "expected_interaction": "Listener name label",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_TRANSPORT_WAVE",
+      "group": "SCENE",
+      "kind": "waveform",
+      "box_1x": {
+        "x": 696,
+        "y": 320,
+        "w": 327,
+        "h": 48
+      },
+      "box_10x": {
+        "x": 6960,
+        "y": 3200,
+        "w": 3270,
+        "h": 480
+      },
+      "center_1x": [
+        859.5,
+        344
+      ],
+      "visible_content": "white moving sound wave",
+      "expected_interaction": "Waveform must stay live",
+      "web_selector_or_binding_hint": "#sceneWaveformCanvas",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "SCENE_MOTION_DOTTED_PATH",
+      "group": "SCENE",
+      "kind": "live_path",
+      "box_1x": {
+        "x": 590,
+        "y": 332,
+        "w": 409,
+        "h": 23
+      },
+      "box_10x": {
+        "x": 5900,
+        "y": 3320,
+        "w": 4090,
+        "h": 230
+      },
+      "center_1x": [
+        794.5,
+        343.5
+      ],
+      "visible_content": "cyan dotted emitter→listener line",
+      "expected_interaction": "Source path must remain dynamic",
+      "web_selector_or_binding_hint": "#motionPath",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_DECK",
+      "group": "MOTION",
+      "kind": "panel",
+      "box_1x": {
+        "x": 355,
+        "y": 444,
+        "w": 944,
+        "h": 286
+      },
+      "box_10x": {
+        "x": 3550,
+        "y": 4440,
+        "w": 9440,
+        "h": 2860
+      },
+      "center_1x": [
+        827,
+        587
+      ],
+      "visible_content": "large distance dial + 3 knobs + mini path",
+      "expected_interaction": "Motion & distance controller",
+      "web_selector_or_binding_hint": ".motion-deck",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "DISTANCE_DIAL_RING",
+      "group": "MOTION",
+      "kind": "knob",
+      "box_1x": {
+        "x": 397,
+        "y": 391,
+        "w": 348,
+        "h": 322
+      },
+      "box_10x": {
+        "x": 3970,
+        "y": 3910,
+        "w": 3480,
+        "h": 3220
+      },
+      "center_1x": [
+        571,
+        552
+      ],
+      "visible_content": "blue circular distance dial; native base 300px",
+      "expected_interaction": "Adjust distance, pointer live",
+      "web_selector_or_binding_hint": ".distance-dial",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "DISTANCE_CENTER_VALUE",
+      "group": "MOTION",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 499,
+        "y": 525,
+        "w": 181,
+        "h": 55
+      },
+      "box_10x": {
+        "x": 4990,
+        "y": 5250,
+        "w": 1810,
+        "h": 550
+      },
+      "center_1x": [
+        589.5,
+        552.5
+      ],
+      "visible_content": "25.0 m",
+      "expected_interaction": "Current distance metres",
+      "web_selector_or_binding_hint": "[data-distance]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "DISTANCE_CAPTION",
+      "group": "MOTION",
+      "kind": "text",
+      "box_1x": {
+        "x": 522,
+        "y": 583,
+        "w": 114,
+        "h": 26
+      },
+      "box_10x": {
+        "x": 5220,
+        "y": 5830,
+        "w": 1140,
+        "h": 260
+      },
+      "center_1x": [
+        579,
+        596
+      ],
+      "visible_content": "DISTANCE",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "DISTANCE_INFINITY",
+      "group": "MOTION",
+      "kind": "symbol",
+      "box_1x": {
+        "x": 547,
+        "y": 618,
+        "w": 40,
+        "h": 26
+      },
+      "box_10x": {
+        "x": 5470,
+        "y": 6180,
+        "w": 400,
+        "h": 260
+      },
+      "center_1x": [
+        567,
+        631
+      ],
+      "visible_content": "∞",
+      "expected_interaction": "Signal/scale meaning pending",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "DISTANCE_MINI_SLIDER",
+      "group": "MOTION",
+      "kind": "slider",
+      "box_1x": {
+        "x": 463,
+        "y": 655,
+        "w": 208,
+        "h": 15
+      },
+      "box_10x": {
+        "x": 4630,
+        "y": 6550,
+        "w": 2080,
+        "h": 150
+      },
+      "center_1x": [
+        567,
+        662.5
+      ],
+      "visible_content": "blue progress 0.2–100",
+      "expected_interaction": "Distance adjustment",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "DISTANCE_SLIDER_TICKS",
+      "group": "MOTION",
+      "kind": "scale",
+      "box_1x": {
+        "x": 461,
+        "y": 677,
+        "w": 217,
+        "h": 26
+      },
+      "box_10x": {
+        "x": 4610,
+        "y": 6770,
+        "w": 2170,
+        "h": 260
+      },
+      "center_1x": [
+        569.5,
+        690
+      ],
+      "visible_content": "0.2 / 1 / 5 / 20 / 100",
+      "expected_interaction": "Distance scale labels",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_ICON",
+      "group": "MOTION",
+      "kind": "icon",
+      "box_1x": {
+        "x": 780,
+        "y": 468,
+        "w": 29,
+        "h": 22
+      },
+      "box_10x": {
+        "x": 7800,
+        "y": 4680,
+        "w": 290,
+        "h": 220
+      },
+      "center_1x": [
+        794.5,
+        479
+      ],
+      "visible_content": "car symbol",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_TITLE",
+      "group": "MOTION",
+      "kind": "text",
+      "box_1x": {
+        "x": 822,
+        "y": 460,
+        "w": 115,
+        "h": 34
+      },
+      "box_10x": {
+        "x": 8220,
+        "y": 4600,
+        "w": 1150,
+        "h": 340
+      },
+      "center_1x": [
+        879.5,
+        477
+      ],
+      "visible_content": "MOTION",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_MODE",
+      "group": "MOTION",
+      "kind": "select",
+      "box_1x": {
+        "x": 927,
+        "y": 455,
+        "w": 254,
+        "h": 44
+      },
+      "box_10x": {
+        "x": 9270,
+        "y": 4550,
+        "w": 2540,
+        "h": 440
+      },
+      "center_1x": [
+        1054,
+        477
+      ],
+      "visible_content": "Pass By",
+      "expected_interaction": "Select STATIC/Approach/Pass By/Leave/Manual",
+      "web_selector_or_binding_hint": "[data-motion-mode]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_GRAPH",
+      "group": "MOTION",
+      "kind": "interactive_graph",
+      "box_1x": {
+        "x": 779,
+        "y": 510,
+        "w": 494,
+        "h": 94
+      },
+      "box_10x": {
+        "x": 7790,
+        "y": 5100,
+        "w": 4940,
+        "h": 940
+      },
+      "center_1x": [
+        1026,
+        557
+      ],
+      "visible_content": "motion arc over time",
+      "expected_interaction": "Live distance/motion envelope",
+      "web_selector_or_binding_hint": "#motionPath",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_GRAPH_CAR",
+      "group": "MOTION",
+      "kind": "dynamic_icon",
+      "box_1x": {
+        "x": 993,
+        "y": 511,
+        "w": 57,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 9930,
+        "y": 5110,
+        "w": 570,
+        "h": 270
+      },
+      "center_1x": [
+        1021.5,
+        524.5
+      ],
+      "visible_content": "moving car on arc",
+      "expected_interaction": "Follow motion state",
+      "web_selector_or_binding_hint": "#motionCarGlyph",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_GRAPH_START",
+      "group": "MOTION",
+      "kind": "dynamic_marker",
+      "box_1x": {
+        "x": 798,
+        "y": 581,
+        "w": 40,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 7980,
+        "y": 5810,
+        "w": 400,
+        "h": 270
+      },
+      "center_1x": [
+        818,
+        594.5
+      ],
+      "visible_content": "Start point",
+      "expected_interaction": "Set start timing",
+      "web_selector_or_binding_hint": "[data-set-marker=\"start\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_GRAPH_CLOSEST",
+      "group": "MOTION",
+      "kind": "dynamic_marker",
+      "box_1x": {
+        "x": 1005,
+        "y": 539,
+        "w": 38,
+        "h": 68
+      },
+      "box_10x": {
+        "x": 10050,
+        "y": 5390,
+        "w": 380,
+        "h": 680
+      },
+      "center_1x": [
+        1024,
+        573
+      ],
+      "visible_content": "Closest point",
+      "expected_interaction": "Set closest timing",
+      "web_selector_or_binding_hint": "[data-set-marker=\"closest\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_GRAPH_END",
+      "group": "MOTION",
+      "kind": "dynamic_marker",
+      "box_1x": {
+        "x": 1217,
+        "y": 577,
+        "w": 42,
+        "h": 29
+      },
+      "box_10x": {
+        "x": 12170,
+        "y": 5770,
+        "w": 420,
+        "h": 290
+      },
+      "center_1x": [
+        1238,
+        591.5
+      ],
+      "visible_content": "End point",
+      "expected_interaction": "Set end timing",
+      "web_selector_or_binding_hint": "[data-set-marker=\"end\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_START_VALUE",
+      "group": "MOTION",
+      "kind": "dynamic_readout",
+      "box_1x": {
+        "x": 791,
+        "y": 600,
+        "w": 78,
+        "h": 52
+      },
+      "box_10x": {
+        "x": 7910,
+        "y": 6000,
+        "w": 780,
+        "h": 520
+      },
+      "center_1x": [
+        830,
+        626
+      ],
+      "visible_content": "Start 80 m",
+      "expected_interaction": "Start Distance",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_CLOSEST_VALUE",
+      "group": "MOTION",
+      "kind": "dynamic_readout",
+      "box_1x": {
+        "x": 988,
+        "y": 600,
+        "w": 80,
+        "h": 52
+      },
+      "box_10x": {
+        "x": 9880,
+        "y": 6000,
+        "w": 800,
+        "h": 520
+      },
+      "center_1x": [
+        1028,
+        626
+      ],
+      "visible_content": "Closest 3 m",
+      "expected_interaction": "Closest Distance",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_END_VALUE",
+      "group": "MOTION",
+      "kind": "dynamic_readout",
+      "box_1x": {
+        "x": 1198,
+        "y": 600,
+        "w": 86,
+        "h": 52
+      },
+      "box_10x": {
+        "x": 11980,
+        "y": 6000,
+        "w": 860,
+        "h": 520
+      },
+      "center_1x": [
+        1241,
+        626
+      ],
+      "visible_content": "End 120 m",
+      "expected_interaction": "End Distance",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_SPEED_KNOB",
+      "group": "MOTION",
+      "kind": "knob",
+      "box_1x": {
+        "x": 791,
+        "y": 663,
+        "w": 54,
+        "h": 54
+      },
+      "box_10x": {
+        "x": 7910,
+        "y": 6630,
+        "w": 540,
+        "h": 540
+      },
+      "center_1x": [
+        818,
+        690
+      ],
+      "visible_content": "SPEED circular cap",
+      "expected_interaction": "Drag/wheel/keyboard to adjust",
+      "web_selector_or_binding_hint": "[data-motion-adjust=\"speed\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_SPEED_LABEL",
+      "group": "MOTION",
+      "kind": "text",
+      "box_1x": {
+        "x": 866,
+        "y": 666,
+        "w": 81,
+        "h": 25
+      },
+      "box_10x": {
+        "x": 8660,
+        "y": 6660,
+        "w": 810,
+        "h": 250
+      },
+      "center_1x": [
+        906.5,
+        678.5
+      ],
+      "visible_content": "Speed",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_SPEED_VALUE",
+      "group": "MOTION",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 867,
+        "y": 691,
+        "w": 65,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 8670,
+        "y": 6910,
+        "w": 650,
+        "h": 270
+      },
+      "center_1x": [
+        899.5,
+        704.5
+      ],
+      "visible_content": "60%",
+      "expected_interaction": "Current SPEED state",
+      "web_selector_or_binding_hint": ".motion-speed-readout",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_DOPPLER_KNOB",
+      "group": "MOTION",
+      "kind": "knob",
+      "box_1x": {
+        "x": 963,
+        "y": 663,
+        "w": 54,
+        "h": 54
+      },
+      "box_10x": {
+        "x": 9630,
+        "y": 6630,
+        "w": 540,
+        "h": 540
+      },
+      "center_1x": [
+        990,
+        690
+      ],
+      "visible_content": "DOPPLER circular cap",
+      "expected_interaction": "Drag/wheel/keyboard to adjust",
+      "web_selector_or_binding_hint": "[data-motion-adjust=\"doppler\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_DOPPLER_LABEL",
+      "group": "MOTION",
+      "kind": "text",
+      "box_1x": {
+        "x": 1038,
+        "y": 666,
+        "w": 81,
+        "h": 25
+      },
+      "box_10x": {
+        "x": 10380,
+        "y": 6660,
+        "w": 810,
+        "h": 250
+      },
+      "center_1x": [
+        1078.5,
+        678.5
+      ],
+      "visible_content": "Doppler",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_DOPPLER_VALUE",
+      "group": "MOTION",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 1039,
+        "y": 691,
+        "w": 65,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 10390,
+        "y": 6910,
+        "w": 650,
+        "h": 270
+      },
+      "center_1x": [
+        1071.5,
+        704.5
+      ],
+      "visible_content": "70%",
+      "expected_interaction": "Current DOPPLER state",
+      "web_selector_or_binding_hint": ".motion-doppler-readout",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_WIDTH_KNOB",
+      "group": "MOTION",
+      "kind": "knob",
+      "box_1x": {
+        "x": 1151,
+        "y": 663,
+        "w": 54,
+        "h": 54
+      },
+      "box_10x": {
+        "x": 11510,
+        "y": 6630,
+        "w": 540,
+        "h": 540
+      },
+      "center_1x": [
+        1178,
+        690
+      ],
+      "visible_content": "WIDTH circular cap",
+      "expected_interaction": "Drag/wheel/keyboard to adjust",
+      "web_selector_or_binding_hint": "[data-motion-adjust=\"width\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_WIDTH_LABEL",
+      "group": "MOTION",
+      "kind": "text",
+      "box_1x": {
+        "x": 1226,
+        "y": 666,
+        "w": 81,
+        "h": 25
+      },
+      "box_10x": {
+        "x": 12260,
+        "y": 6660,
+        "w": 810,
+        "h": 250
+      },
+      "center_1x": [
+        1266.5,
+        678.5
+      ],
+      "visible_content": "Width",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MOTION_WIDTH_VALUE",
+      "group": "MOTION",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 1227,
+        "y": 691,
+        "w": 65,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 12270,
+        "y": 6910,
+        "w": 650,
+        "h": 270
+      },
+      "center_1x": [
+        1259.5,
+        704.5
+      ],
+      "visible_content": "40%",
+      "expected_interaction": "Current WIDTH state",
+      "web_selector_or_binding_hint": ".motion-width-readout",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "AMBIENCE_LEVEL_SLIDER",
+      "group": "AMBIENCE",
+      "kind": "slider",
+      "box_1x": {
+        "x": 1331,
+        "y": 677,
+        "w": 231,
+        "h": 12
+      },
+      "box_10x": {
+        "x": 13310,
+        "y": 6770,
+        "w": 2310,
+        "h": 120
+      },
+      "center_1x": [
+        1446.5,
+        683
+      ],
+      "visible_content": "horizontal level cyan",
+      "expected_interaction": "Ambience level adjustment",
+      "web_selector_or_binding_hint": "[data-macro=\"ambience\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "AMBIENCE_LEVEL_VALUE",
+      "group": "AMBIENCE",
+      "kind": "dynamic_readout",
+      "box_1x": {
+        "x": 1574,
+        "y": 671,
+        "w": 57,
+        "h": 33
+      },
+      "box_10x": {
+        "x": 15740,
+        "y": 6710,
+        "w": 570,
+        "h": 330
+      },
+      "center_1x": [
+        1602.5,
+        687.5
+      ],
+      "visible_content": "70%",
+      "expected_interaction": "Ambience level (reference sample)",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BOTTOM_BAD_SIGNAL_FRAME",
+      "group": "BOTTOM",
+      "kind": "macro_panel",
+      "box_1x": {
+        "x": 14,
+        "y": 744,
+        "w": 330,
+        "h": 168
+      },
+      "box_10x": {
+        "x": 140,
+        "y": 7440,
+        "w": 3300,
+        "h": 1680
+      },
+      "center_1x": [
+        179,
+        828
+      ],
+      "visible_content": "BAD SIGNAL",
+      "expected_interaction": "Module available; open Advanced",
+      "web_selector_or_binding_hint": "[data-open=\"TRANSMISSION\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BOTTOM_CONDITION_FRAME",
+      "group": "BOTTOM",
+      "kind": "macro_panel",
+      "box_1x": {
+        "x": 357,
+        "y": 744,
+        "w": 309,
+        "h": 168
+      },
+      "box_10x": {
+        "x": 3570,
+        "y": 7440,
+        "w": 3090,
+        "h": 1680
+      },
+      "center_1x": [
+        511.5,
+        828
+      ],
+      "visible_content": "CONDITION",
+      "expected_interaction": "Module available; open Advanced",
+      "web_selector_or_binding_hint": "[data-open=\"CONDITION\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BOTTOM_INTELLIGIBILITY_FRAME",
+      "group": "BOTTOM",
+      "kind": "macro_panel",
+      "box_1x": {
+        "x": 679,
+        "y": 744,
+        "w": 290,
+        "h": 168
+      },
+      "box_10x": {
+        "x": 6790,
+        "y": 7440,
+        "w": 2900,
+        "h": 1680
+      },
+      "center_1x": [
+        824,
+        828
+      ],
+      "visible_content": "INTELLIGIBILITY",
+      "expected_interaction": "Module available; open Advanced",
+      "web_selector_or_binding_hint": "[data-open=\"INTELLIGIBILITY\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BOTTOM_MIX_FRAME",
+      "group": "BOTTOM",
+      "kind": "macro_panel",
+      "box_1x": {
+        "x": 981,
+        "y": 744,
+        "w": 312,
+        "h": 168
+      },
+      "box_10x": {
+        "x": 9810,
+        "y": 7440,
+        "w": 3120,
+        "h": 1680
+      },
+      "center_1x": [
+        1137,
+        828
+      ],
+      "visible_content": "MIX",
+      "expected_interaction": "Module available; open Advanced",
+      "web_selector_or_binding_hint": "[data-open=\"MIX\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BOTTOM_EQ_FRAME",
+      "group": "BOTTOM",
+      "kind": "macro_panel",
+      "box_1x": {
+        "x": 1305,
+        "y": 744,
+        "w": 328,
+        "h": 168
+      },
+      "box_10x": {
+        "x": 13050,
+        "y": 7440,
+        "w": 3280,
+        "h": 1680
+      },
+      "center_1x": [
+        1469,
+        828
+      ],
+      "visible_content": "EQ / TONE (ADVANCED)",
+      "expected_interaction": "Module available; open Advanced",
+      "web_selector_or_binding_hint": "[data-open=\"EQ_TONE\"]",
+      "coordinate_confidence": "SPEC-DERIVED+APPROX-BORDER",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BAD_SIGNAL_ICON",
+      "group": "BOTTOM_BAD_SIGNAL",
+      "kind": "icon",
+      "box_1x": {
+        "x": 43,
+        "y": 760,
+        "w": 39,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 430,
+        "y": 7600,
+        "w": 390,
+        "h": 370
+      },
+      "center_1x": [
+        62.5,
+        778.5
+      ],
+      "visible_content": "BAD_SIGNAL icon",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BAD_SIGNAL_TITLE",
+      "group": "BOTTOM_BAD_SIGNAL",
+      "kind": "text",
+      "box_1x": {
+        "x": 95,
+        "y": 762,
+        "w": 217,
+        "h": 34
+      },
+      "box_10x": {
+        "x": 950,
+        "y": 7620,
+        "w": 2170,
+        "h": 340
+      },
+      "center_1x": [
+        203.5,
+        779
+      ],
+      "visible_content": "BAD SIGNAL",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CONDITION_ICON",
+      "group": "BOTTOM_CONDITION",
+      "kind": "icon",
+      "box_1x": {
+        "x": 386,
+        "y": 760,
+        "w": 39,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 3860,
+        "y": 7600,
+        "w": 390,
+        "h": 370
+      },
+      "center_1x": [
+        405.5,
+        778.5
+      ],
+      "visible_content": "CONDITION icon",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CONDITION_TITLE",
+      "group": "BOTTOM_CONDITION",
+      "kind": "text",
+      "box_1x": {
+        "x": 438,
+        "y": 762,
+        "w": 197,
+        "h": 34
+      },
+      "box_10x": {
+        "x": 4380,
+        "y": 7620,
+        "w": 1970,
+        "h": 340
+      },
+      "center_1x": [
+        536.5,
+        779
+      ],
+      "visible_content": "CONDITION",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "INTELLIGIBILITY_ICON",
+      "group": "BOTTOM_INTELLIGIBILITY",
+      "kind": "icon",
+      "box_1x": {
+        "x": 708,
+        "y": 760,
+        "w": 39,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 7080,
+        "y": 7600,
+        "w": 390,
+        "h": 370
+      },
+      "center_1x": [
+        727.5,
+        778.5
+      ],
+      "visible_content": "INTELLIGIBILITY icon",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "INTELLIGIBILITY_TITLE",
+      "group": "BOTTOM_INTELLIGIBILITY",
+      "kind": "text",
+      "box_1x": {
+        "x": 760,
+        "y": 762,
+        "w": 178,
+        "h": 34
+      },
+      "box_10x": {
+        "x": 7600,
+        "y": 7620,
+        "w": 1780,
+        "h": 340
+      },
+      "center_1x": [
+        849,
+        779
+      ],
+      "visible_content": "INTELLIGIBILITY",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MIX_ICON",
+      "group": "BOTTOM_MIX",
+      "kind": "icon",
+      "box_1x": {
+        "x": 1010,
+        "y": 760,
+        "w": 39,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 10100,
+        "y": 7600,
+        "w": 390,
+        "h": 370
+      },
+      "center_1x": [
+        1029.5,
+        778.5
+      ],
+      "visible_content": "MIX icon",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MIX_TITLE",
+      "group": "BOTTOM_MIX",
+      "kind": "text",
+      "box_1x": {
+        "x": 1062,
+        "y": 762,
+        "w": 200,
+        "h": 34
+      },
+      "box_10x": {
+        "x": 10620,
+        "y": 7620,
+        "w": 2000,
+        "h": 340
+      },
+      "center_1x": [
+        1162,
+        779
+      ],
+      "visible_content": "MIX",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_TONE_ICON",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "icon",
+      "box_1x": {
+        "x": 1334,
+        "y": 760,
+        "w": 39,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 13340,
+        "y": 7600,
+        "w": 390,
+        "h": 370
+      },
+      "center_1x": [
+        1353.5,
+        778.5
+      ],
+      "visible_content": "EQ_TONE icon",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_TONE_TITLE",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "text",
+      "box_1x": {
+        "x": 1386,
+        "y": 762,
+        "w": 216,
+        "h": 34
+      },
+      "box_10x": {
+        "x": 13860,
+        "y": 7620,
+        "w": 2160,
+        "h": 340
+      },
+      "center_1x": [
+        1494,
+        779
+      ],
+      "visible_content": "EQ / TONE (ADVANCED)",
+      "expected_interaction": "",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BAD_SIGNAL_AMOUNT_KNOB",
+      "group": "BOTTOM_BAD_SIGNAL",
+      "kind": "knob",
+      "box_1x": {
+        "x": 57,
+        "y": 802,
+        "w": 85,
+        "h": 86
+      },
+      "box_10x": {
+        "x": 570,
+        "y": 8020,
+        "w": 850,
+        "h": 860
+      },
+      "center_1x": [
+        99.5,
+        845
+      ],
+      "visible_content": "Amount blue perimeter 20%",
+      "expected_interaction": "Transmission degradation intensity",
+      "web_selector_or_binding_hint": "[data-macro=\"badSignal\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BAD_SIGNAL_AMOUNT_VALUE",
+      "group": "BOTTOM_BAD_SIGNAL",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 156,
+        "y": 829,
+        "w": 66,
+        "h": 37
+      },
+      "box_10x": {
+        "x": 1560,
+        "y": 8290,
+        "w": 660,
+        "h": 370
+      },
+      "center_1x": [
+        189,
+        847.5
+      ],
+      "visible_content": "20%",
+      "expected_interaction": "Bad Signal intensity",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BAD_SIGNAL_WAVEFORM",
+      "group": "BOTTOM_BAD_SIGNAL",
+      "kind": "waveform",
+      "box_1x": {
+        "x": 218,
+        "y": 813,
+        "w": 109,
+        "h": 24
+      },
+      "box_10x": {
+        "x": 2180,
+        "y": 8130,
+        "w": 1090,
+        "h": 240
+      },
+      "center_1x": [
+        272.5,
+        825
+      ],
+      "visible_content": "cyan waveform preview",
+      "expected_interaction": "Preview from selected transmission state",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "BAD_SIGNAL_MODE_SELECTOR",
+      "group": "BOTTOM_BAD_SIGNAL",
+      "kind": "select",
+      "box_1x": {
+        "x": 218,
+        "y": 857,
+        "w": 109,
+        "h": 36
+      },
+      "box_10x": {
+        "x": 2180,
+        "y": 8570,
+        "w": 1090,
+        "h": 360
+      },
+      "center_1x": [
+        272.5,
+        875
+      ],
+      "visible_content": "Mobile",
+      "expected_interaction": "Select transmission family",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CONDITION_AMOUNT_KNOB",
+      "group": "BOTTOM_CONDITION",
+      "kind": "knob",
+      "box_1x": {
+        "x": 390,
+        "y": 800,
+        "w": 82,
+        "h": 89
+      },
+      "box_10x": {
+        "x": 3900,
+        "y": 8000,
+        "w": 820,
+        "h": 890
+      },
+      "center_1x": [
+        431,
+        844.5
+      ],
+      "visible_content": "Condition knob Used",
+      "expected_interaction": "Condition amount",
+      "web_selector_or_binding_hint": "[data-macro=\"condition\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "CONDITION_SELECTOR",
+      "group": "BOTTOM_CONDITION",
+      "kind": "select",
+      "box_1x": {
+        "x": 488,
+        "y": 817,
+        "w": 162,
+        "h": 45
+      },
+      "box_10x": {
+        "x": 4880,
+        "y": 8170,
+        "w": 1620,
+        "h": 450
+      },
+      "center_1x": [
+        569,
+        839.5
+      ],
+      "visible_content": "Used",
+      "expected_interaction": "Select device condition family",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "INTELLIGIBILITY_KNOB",
+      "group": "BOTTOM_INTELLIGIBILITY",
+      "kind": "knob",
+      "box_1x": {
+        "x": 716,
+        "y": 803,
+        "w": 94,
+        "h": 89
+      },
+      "box_10x": {
+        "x": 7160,
+        "y": 8030,
+        "w": 940,
+        "h": 890
+      },
+      "center_1x": [
+        763,
+        847.5
+      ],
+      "visible_content": "Intelligibility knob 75%",
+      "expected_interaction": "Intelligibility amount",
+      "web_selector_or_binding_hint": "[data-macro=\"intelligibility\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "INTELLIGIBILITY_VALUE",
+      "group": "BOTTOM_INTELLIGIBILITY",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 831,
+        "y": 823,
+        "w": 101,
+        "h": 40
+      },
+      "box_10x": {
+        "x": 8310,
+        "y": 8230,
+        "w": 1010,
+        "h": 400
+      },
+      "center_1x": [
+        881.5,
+        843
+      ],
+      "visible_content": "75%",
+      "expected_interaction": "Current intelligibility value",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MIX_KNOB",
+      "group": "BOTTOM_MIX",
+      "kind": "knob",
+      "box_1x": {
+        "x": 1035,
+        "y": 796,
+        "w": 86,
+        "h": 86
+      },
+      "box_10x": {
+        "x": 10350,
+        "y": 7960,
+        "w": 860,
+        "h": 860
+      },
+      "center_1x": [
+        1078,
+        839
+      ],
+      "visible_content": "Wet mix 100%",
+      "expected_interaction": "Mix original/full scene",
+      "web_selector_or_binding_hint": "[data-macro=\"mix\"]",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MIX_VALUE",
+      "group": "BOTTOM_MIX",
+      "kind": "dynamic_text",
+      "box_1x": {
+        "x": 1061,
+        "y": 878,
+        "w": 64,
+        "h": 27
+      },
+      "box_10x": {
+        "x": 10610,
+        "y": 8780,
+        "w": 640,
+        "h": 270
+      },
+      "center_1x": [
+        1093,
+        891.5
+      ],
+      "visible_content": "100%",
+      "expected_interaction": "Current Mix amount",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MIX_MODE_SELECTOR",
+      "group": "BOTTOM_MIX",
+      "kind": "select",
+      "box_1x": {
+        "x": 1157,
+        "y": 822,
+        "w": 113,
+        "h": 43
+      },
+      "box_10x": {
+        "x": 11570,
+        "y": 8220,
+        "w": 1130,
+        "h": 430
+      },
+      "center_1x": [
+        1213.5,
+        843.5
+      ],
+      "visible_content": "Wet",
+      "expected_interaction": "Select Wet",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "MIX_NEXT_CHEVRON",
+      "group": "BOTTOM_MIX",
+      "kind": "button",
+      "box_1x": {
+        "x": 1259,
+        "y": 765,
+        "w": 22,
+        "h": 23
+      },
+      "box_10x": {
+        "x": 12590,
+        "y": 7650,
+        "w": 220,
+        "h": 230
+      },
+      "center_1x": [
+        1270,
+        776.5
+      ],
+      "visible_content": "›",
+      "expected_interaction": "Open detail candidate",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_HEADER_ENABLE",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "toggle",
+      "box_1x": {
+        "x": 1546,
+        "y": 761,
+        "w": 33,
+        "h": 22
+      },
+      "box_10x": {
+        "x": 15460,
+        "y": 7610,
+        "w": 330,
+        "h": 220
+      },
+      "center_1x": [
+        1562.5,
+        772
+      ],
+      "visible_content": "On/Off graphic",
+      "expected_interaction": "EQ bypass state",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_POWER",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "button",
+      "box_1x": {
+        "x": 1582,
+        "y": 756,
+        "w": 36,
+        "h": 39
+      },
+      "box_10x": {
+        "x": 15820,
+        "y": 7560,
+        "w": 360,
+        "h": 390
+      },
+      "center_1x": [
+        1600,
+        775.5
+      ],
+      "visible_content": "power",
+      "expected_interaction": "EQ on/off",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_GRAPH",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "live_graph",
+      "box_1x": {
+        "x": 1330,
+        "y": 799,
+        "w": 288,
+        "h": 83
+      },
+      "box_10x": {
+        "x": 13300,
+        "y": 7990,
+        "w": 2880,
+        "h": 830
+      },
+      "center_1x": [
+        1474,
+        840.5
+      ],
+      "visible_content": "sloping spectrum response curve",
+      "expected_interaction": "EQ response must remain dynamically computed",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_CURVE_POINT_A",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "node",
+      "box_1x": {
+        "x": 1330,
+        "y": 825,
+        "w": 14,
+        "h": 14
+      },
+      "box_10x": {
+        "x": 13300,
+        "y": 8250,
+        "w": 140,
+        "h": 140
+      },
+      "center_1x": [
+        1337,
+        832
+      ],
+      "visible_content": "100Hz sample node",
+      "expected_interaction": "EQ node? actual DSP bands count pending",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_CURVE_POINT_B",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "node",
+      "box_1x": {
+        "x": 1440,
+        "y": 819,
+        "w": 14,
+        "h": 14
+      },
+      "box_10x": {
+        "x": 14400,
+        "y": 8190,
+        "w": 140,
+        "h": 140
+      },
+      "center_1x": [
+        1447,
+        826
+      ],
+      "visible_content": "~1K sample node",
+      "expected_interaction": "EQ node? actual DSP bands count pending",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_CURVE_POINT_C",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "node",
+      "box_1x": {
+        "x": 1559,
+        "y": 859,
+        "w": 14,
+        "h": 14
+      },
+      "box_10x": {
+        "x": 15590,
+        "y": 8590,
+        "w": 140,
+        "h": 140
+      },
+      "center_1x": [
+        1566,
+        866
+      ],
+      "visible_content": "10K sample node",
+      "expected_interaction": "EQ node? actual DSP bands count pending",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_CURVE_TICKS",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "scale",
+      "box_1x": {
+        "x": 1330,
+        "y": 879,
+        "w": 270,
+        "h": 24
+      },
+      "box_10x": {
+        "x": 13300,
+        "y": 8790,
+        "w": 2700,
+        "h": 240
+      },
+      "center_1x": [
+        1465,
+        891
+      ],
+      "visible_content": "100 / 1K / 10K",
+      "expected_interaction": "EQ chart frequency labels",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    },
+    {
+      "id": "EQ_TONE_SELECT",
+      "group": "BOTTOM_EQ_TONE",
+      "kind": "select",
+      "box_1x": {
+        "x": 1500,
+        "y": 800,
+        "w": 113,
+        "h": 33
+      },
+      "box_10x": {
+        "x": 15000,
+        "y": 8000,
+        "w": 1130,
+        "h": 330
+      },
+      "center_1x": [
+        1556.5,
+        816.5
+      ],
+      "visible_content": "Natural",
+      "expected_interaction": "Select final tone mode",
+      "web_selector_or_binding_hint": "",
+      "coordinate_confidence": "APPROX-VISUAL",
+      "static_ref_evidence": "VISIBLE-OR-APPROX",
+      "runtime_verification": "NOT-PROVEN-BY-STATIC-REF",
+      "host_parity": "PENDING"
+    }
+  ],
+  "state_evidence": {
+    "captured_state": "single approved static frame: car pass-by City Street; no OFF/HOVER/DRAG alternate screenshot supplied",
+    "visual_only": true,
+    "required_for_next_gate": [
+      "button selected/unselected",
+      "BYP/disabled",
+      "drag value changes",
+      "wheel coarse/fine",
+      "keyboard",
+      "asset carousel prev/next",
+      "topbar Shuffle semantics",
+      "scene and motion live sync",
+      "meter fill to real audio",
+      "Native host parity"
+    ]
+  },
+  "prohibitions": [
+    "Never use complete REF as interactive runtime background",
+    "No AI regeneration to fill missing text/pixels",
+    "Do not infer DSP band count from drawn EQ nodes",
+    "Do not treat '75%' or '70%' pictured sample values as actual runtime parameters",
+    "Do not overwrite existing 1672x941 confirmed structural JSON",
+    "No DSP/CI test rounds or Preset edits"
+  ]
+}
