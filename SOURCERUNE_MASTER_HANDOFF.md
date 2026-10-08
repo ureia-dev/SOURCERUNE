@@ -1,5 +1,13 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## UI_02 — 核准 2.5 倍 REF 真圖片掃描（2026-10-09）
+
+- GitHub 正式原圖 1672×941 RGB，SHA-256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff`，由 GitHub Actions artifact 實際取回與核驗；2.5× 最近鄰檢視 PNG 4180×2353 SHA-256 `734f107d1c9a74f7e0caf746419fac3539e6b6c418f0bd8a60efa6da0f45d3e6`（本機真實生成，42 個像素點位 PASS）。
+- 從未合併 PR #53 沿用 25 大區、8 Topbar 錨點、8 控制直徑、139 個部件與功能清冊、15 組真 RGB 邊界差分，全部原圖座標不變、2.5× 座標浮點換算。新文件 `docs/product/reference/UI_02_REF_2_5X_*_20261009` MD/JSON。
+- 目前此工作分支的 2.5× PNG 正在使用一次性 GitHub Action 入庫，請在 tree 出現對應 binary 且 SHA 驗證前標 **PENDING**；臨時 Workflow 會隨產物提交一併移除。
+- 10 倍舊 PR #53 不得合併；現行 UI_01 142 筆 2.5 倍規格與原圖完全保留；不改 DSP、Preset、Web/Native 實際 Runtime。
+
+
 ## UI_01 清潔 REF 正式 2.5× 檢視（新決定取代 10×）
 
 - 正式無說明來源 1508×808 RGBA，SHA-256 `96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916`，原圖不改；正式掃描倍率為 **2.5 倍**，3770×2020 PNG，Pillow NEAREST，SHA-256 `f67c59046f2c1f90379837f1898a63a98e9abbf3d0e57a82945f4e5b2afb773e`，本機兩次重現及逐像素比對通過。

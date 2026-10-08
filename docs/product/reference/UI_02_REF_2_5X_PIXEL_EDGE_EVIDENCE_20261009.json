@@ -1,0 +1,368 @@
+{
+  "schema": "sourcerune.ui02.ref-original-pixel-edge-difference.v1",
+  "origin": {
+    "file": "Assets/UI/UI_02/UI_02_REF/UI_02_REF.png",
+    "sha256": "dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB"
+  },
+  "factor": 2.5,
+  "method": "For each row y and column x inside ROI sum |R1-R2|+|G1-G2|+|B1-B2| over pixels sampled every 3 positions; row compares y to y+1, column x to x+1. Highest scores locate visual contrast boundaries, not necessarily runtime allocation or full object bboxes.",
+  "classification": "PIXEL-OBSERVED-BORDER-CANDIDATE",
+  "status": "MEASURED-RAW-PIXELS-NOT-EXACT-ALL-OBJECTS",
+  "scans": [
+    {
+      "id": "TOPBAR_HORIZONTAL",
+      "axis": "row",
+      "roi": {
+        "x0": 0,
+        "x1": 1672,
+        "y0": 70,
+        "y1": 93
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 77,
+          "difference_score": 51048,
+          "coordinate_2_5x": 192.5
+        },
+        {
+          "coordinate_1x": 86,
+          "difference_score": 25412,
+          "coordinate_2_5x": 215
+        },
+        {
+          "coordinate_1x": 75,
+          "difference_score": 16371,
+          "coordinate_2_5x": 187.5
+        }
+      ]
+    },
+    {
+      "id": "SOURCE_CARD_BOUNDARY",
+      "axis": "row",
+      "roi": {
+        "x0": 13,
+        "x1": 346,
+        "y0": 289,
+        "y1": 311
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 298,
+          "difference_score": 12793,
+          "coordinate_2_5x": 745
+        },
+        {
+          "coordinate_1x": 305,
+          "difference_score": 9897,
+          "coordinate_2_5x": 762.5
+        }
+      ]
+    },
+    {
+      "id": "TRANSMISSION_CARD_BOUNDARY",
+      "axis": "row",
+      "roi": {
+        "x0": 13,
+        "x1": 346,
+        "y0": 473,
+        "y1": 495
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 492,
+          "difference_score": 14695,
+          "coordinate_2_5x": 1230
+        },
+        {
+          "coordinate_1x": 494,
+          "difference_score": 8564,
+          "coordinate_2_5x": 1235
+        }
+      ]
+    },
+    {
+      "id": "WALL_COVER_CARD_BOUNDARY",
+      "axis": "row",
+      "roi": {
+        "x0": 13,
+        "x1": 346,
+        "y0": 722,
+        "y1": 747
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 723,
+          "difference_score": 18263,
+          "coordinate_2_5x": 1807.5
+        },
+        {
+          "coordinate_1x": 722,
+          "difference_score": 14892,
+          "coordinate_2_5x": 1805
+        }
+      ]
+    },
+    {
+      "id": "SCENE_TO_MOTION_MATERIAL",
+      "axis": "row",
+      "roi": {
+        "x0": 356,
+        "x1": 1300,
+        "y0": 433,
+        "y1": 454
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 448,
+          "difference_score": 37229,
+          "coordinate_2_5x": 1120
+        },
+        {
+          "coordinate_1x": 450,
+          "difference_score": 22888,
+          "coordinate_2_5x": 1125
+        }
+      ]
+    },
+    {
+      "id": "MOTION_DECK_TO_STRIP",
+      "axis": "row",
+      "roi": {
+        "x0": 356,
+        "x1": 1300,
+        "y0": 720,
+        "y1": 748
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 740,
+          "difference_score": 4378,
+          "coordinate_2_5x": 1850
+        },
+        {
+          "coordinate_1x": 720,
+          "difference_score": 2215,
+          "coordinate_2_5x": 1800
+        }
+      ]
+    },
+    {
+      "id": "SPACE_AMBIENCE",
+      "axis": "row",
+      "roi": {
+        "x0": 1310,
+        "x1": 1637,
+        "y0": 361,
+        "y1": 387
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 380,
+          "difference_score": 9394,
+          "coordinate_2_5x": 950
+        },
+        {
+          "coordinate_1x": 381,
+          "difference_score": 4065,
+          "coordinate_2_5x": 952.5
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_START",
+      "axis": "row",
+      "roi": {
+        "x0": 0,
+        "x1": 1672,
+        "y0": 732,
+        "y1": 759
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 751,
+          "difference_score": 60120,
+          "coordinate_2_5x": 1877.5
+        },
+        {
+          "coordinate_1x": 753,
+          "difference_score": 43136,
+          "coordinate_2_5x": 1882.5
+        },
+        {
+          "coordinate_1x": 752,
+          "difference_score": 17556,
+          "coordinate_2_5x": 1880
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_END",
+      "axis": "row",
+      "roi": {
+        "x0": 0,
+        "x1": 1672,
+        "y0": 907,
+        "y1": 926
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 922,
+          "difference_score": 44080,
+          "coordinate_2_5x": 2305
+        },
+        {
+          "coordinate_1x": 923,
+          "difference_score": 43388,
+          "coordinate_2_5x": 2307.5
+        },
+        {
+          "coordinate_1x": 924,
+          "difference_score": 26978,
+          "coordinate_2_5x": 2310
+        }
+      ]
+    },
+    {
+      "id": "LEFT_CENTER_DIVIDER",
+      "axis": "column",
+      "roi": {
+        "x0": 333,
+        "x1": 365,
+        "y0": 86,
+        "y1": 727
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 348,
+          "difference_score": 34595,
+          "coordinate_2_5x": 870
+        },
+        {
+          "coordinate_1x": 346,
+          "difference_score": 19249,
+          "coordinate_2_5x": 865
+        }
+      ]
+    },
+    {
+      "id": "CENTER_RIGHT_DIVIDER",
+      "axis": "column",
+      "roi": {
+        "x0": 1290,
+        "x1": 1340,
+        "y0": 85,
+        "y1": 727
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 1328,
+          "difference_score": 23792,
+          "coordinate_2_5x": 3320
+        },
+        {
+          "coordinate_1x": 1330,
+          "difference_score": 11930,
+          "coordinate_2_5x": 3325
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_BAD_CONDITION",
+      "axis": "column",
+      "roi": {
+        "x0": 339,
+        "x1": 369,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 349,
+          "difference_score": 3638,
+          "coordinate_2_5x": 872.5
+        },
+        {
+          "coordinate_1x": 347,
+          "difference_score": 2787,
+          "coordinate_2_5x": 867.5
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_CONDITION_INTELL",
+      "axis": "column",
+      "roi": {
+        "x0": 663,
+        "x1": 688,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 674,
+          "difference_score": 4279,
+          "coordinate_2_5x": 1685
+        },
+        {
+          "coordinate_1x": 673,
+          "difference_score": 3162,
+          "coordinate_2_5x": 1682.5
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_INTELL_MIX",
+      "axis": "column",
+      "roi": {
+        "x0": 969,
+        "x1": 995,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 982,
+          "difference_score": 4619,
+          "coordinate_2_5x": 2455
+        },
+        {
+          "coordinate_1x": 980,
+          "difference_score": 2325,
+          "coordinate_2_5x": 2450
+        }
+      ]
+    },
+    {
+      "id": "BOTTOM_MIX_EQ",
+      "axis": "column",
+      "roi": {
+        "x0": 1289,
+        "x1": 1322,
+        "y0": 744,
+        "y1": 912
+      },
+      "peaks": [
+        {
+          "coordinate_1x": 1309,
+          "difference_score": 2128,
+          "coordinate_2_5x": 3272.5
+        },
+        {
+          "coordinate_1x": 1308,
+          "difference_score": 1846,
+          "coordinate_2_5x": 3270
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "original_sha256": "dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff",
+    "measurement": "15 groups of RGB neighbor diffs measured in PR53; original pixel ROIs and scores retained",
+    "new_coordinates": "analytic original x2.5; not subpixel measured UI region evidence"
+  }
+}
