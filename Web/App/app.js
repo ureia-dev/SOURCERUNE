@@ -62,7 +62,7 @@ function motionKnobValue(def,raw){
   return Math.max(min,Math.min(max,Number((min+Math.round((raw-min)/step)*step).toFixed(6))));
 }
 function bindMotionKnobs(){
-  $("[data-motion-adjust]").forEach(node=>{
+  $$("[data-motion-adjust]").forEach(node=>{
     const id=node.dataset.motionAdjust,def=findControl(id);
     if(!def)return;
     let pointer=null,startY=0,startValue=0,original=null;
