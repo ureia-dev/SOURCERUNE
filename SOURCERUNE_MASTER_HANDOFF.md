@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## UI_01／UI_02 REF 正式缺項工作日誌（2026-10-09）
+
+- **最新唯一可勾選工作單**：[`docs/product/reference/UI_REF_GAP_WORKLOG.md`](docs/product/reference/UI_REF_GAP_WORKLOG.md)；逐項保存使用者本輪貼出的 **UI_01 18 項、UI_02 22 項、共同 15 項待辦**，另保留 **10 項有實際證據且範圍有限的已驗基礎**。詳細內容只在該工作單，不複製第二份清單。
+- **往後有做完就必須更新同一份日誌**：保留原 ID，把 `[ ]` 改 `[x]`，補上實際 PR／Commit／Fast CI／Web REF 局部疊圖或 Native Host／聲音測試證據；未完成或部分完成維持未勾，留下 `PENDING`／`PARTIAL`／`BLOCKED`／`NEEDS-DECISION` 與 checkpoint。
+- 初始缺項順序：**P0** 真 PNG／缺少的主卡操作／UI_02 Shuffle 語意待核；**P1** REF 細部和真 Scene 美術；**P2** 交互及像素疊圖；**P3** 真 DSP／WASM／LUFS／VST3 Host。UI_01 原圖兩張 PNG binary 仍未入庫；UI_02 三張已在 GitHub。Web 幾何 PASS 不能當 REF 外觀或 VST3 真功能完成。
+
+
 ## UI_02 — 核准 2.5 倍 REF 真圖片掃描（2026-10-09）
 
 - GitHub 正式原圖 1672×941 RGB，SHA-256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff`，由 GitHub Actions artifact 實際取回與核驗；2.5× 最近鄰檢視 PNG 4180×2353 SHA-256 `734f107d1c9a74f7e0caf746419fac3539e6b6c418f0bd8a60efa6da0f45d3e6`（本機真實生成，42 個像素點位 PASS）。
