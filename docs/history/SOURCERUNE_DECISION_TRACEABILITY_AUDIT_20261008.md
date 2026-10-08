@@ -119,3 +119,16 @@
 6. 若**當次全部歷史逐字稿無法取得**，明確標示 `SOURCE-COVERAGE-PARTIAL`，禁止再聲稱「全篇 100% 完整」。
 
 **本次真正要修的，不是增加文件字數，而是讓每個討論結論有身份、權威位置、是否永久的分類與可查核的現實狀態。**
+
+
+## 7. 2026-10-08 原始產品聊天可見內容補核（新增；不覆蓋來源 0A）
+
+後續一次整理取得了**本次聊天脈絡中可見的最初產品討論**，含最早「要做 Speakerphone 類世界化外掛」到「整理到 GitHub」的使用者要求及主要決策。**其中部分中間訊息在目前上下文以省略方式呈現，無法稱全部逐字訊息均已取得。** 因此修正 §0A 的絕對表述：當時 `FETCH-UNAVAILABLE` 屬**該次外部分享頁擷取結果**，但之後已能從對話上下文核對可見的多項原始使用者決議。全量逐字核對仍 `PENDING-VERBATIM`，已核對的最終決議另於以下文件成表。
+
+- **補核主檔**：[docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md](../../docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md)；包含最初產品定位與 Speakerphone/FutzBox/AudioThing/Audacity 取捨、物理與程序化 Source/Cover/Space/Ambience、語言化人群聲、Motion/Pro Tools workflow、用戶只聽/免 IR、低 CPU 1×、全球型號命名、UI_01/UI_02、224/74 圖資與 Preset、正式研究方式及 supersession。
+- **永久規格已同步鏈入**：`AGENTS.md`／`PROJECT_CONSTITUTION.md`／`docs/research/RESEARCH_EVIDENCE_STANDARD.md`／`README.md`。**不再靠後續 REF 聊天摘要代替原始產品決議**。
+- **實際研究原則**：原始對話有「把 10,000 筆候選擴大研究，最終留真正高價值 1,000 筆」的要求，及八小時排程的明確單次安排；**後續最新核准版**是持續八維度跨論壇／工程驗證，非八小時永久限制、非 10k/1k 已完成。
+- **當前資產真實性複核**：2026-10-08 查 `main d614c7a...` recursive tree 得 PNG **793**（Shared 224、UI_01 224、UI_02 224、ReferenceSheets 6、Runtime 113、合計 793）；**這是本次查詢的歷史檢查點，不是未來永久數字**。若其他文件仍有 789/791 或 PNG=0，應以最新 tree 重新掃描，不可擅自說檔案已遺失或多出來都通過美術 QA。
+- **驗證界線**：原始可見用戶訊息與完整遠端逐字 transcript 並非同一個證據層級，故可以說「已將能核對的產品最終要點寫入永久索引」；**不能說「第一句到最後一句 100% 逐字完整核對」**，直到所有被省略的中段與來源都能驗證。
+
+本次屬**文件追溯補漏**，沒有授權也沒有宣稱完成任何新 DSP build、1000 筆 evidence、Hero 78 張或主觀聲音驗收；所有真實完成 gate 仍以當次 GitHub／測試／使用者回饋為準。
