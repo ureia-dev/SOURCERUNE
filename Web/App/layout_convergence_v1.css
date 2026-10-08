@@ -402,3 +402,30 @@ body.ui-02 .macro-strip .macro[data-open="INTELLIGIBILITY"]{grid-column:3}
 body.ui-02 .macro-strip .macro[data-open="MIX"]{grid-column:4}
 body.ui-02 .macro-strip .macro[data-open="EQ_TONE"]{grid-column:5}
 body.ui-02 .advanced-drawer{display:none}
+
+/* Interaction-only Advanced layer. The approved UI_01/UI_02 REF
+   remains unchanged until a user activates EDIT or a macro panel.
+   No REF bitmap/crop is used, and all controls remain live. */
+body.advanced-open .app::after{
+  content:"";position:absolute;inset:0;z-index:39;
+  background:rgba(0,0,0,.62);
+}
+body.ui-01.advanced-open .advanced-drawer,
+body.ui-02.advanced-open .advanced-drawer{
+  display:flex;flex-direction:column;position:absolute;z-index:40;
+  top:64px;left:20px;right:20px;bottom:18px;
+  margin:0;min-height:0;overflow:hidden;
+  border:1px solid #4e6671;border-radius:8px;
+  background:#0d151a;
+  box-shadow:0 18px 65px rgba(0,0,0,.72);
+}
+body.ui-02.advanced-open .advanced-drawer{top:86px}
+body.advanced-open .advanced-body{flex:1;min-height:0;overflow:auto}
+body.advanced-open #advancedCloseBtn{
+  flex:0 0 auto;align-self:center;padding:8px 14px;
+  color:#d7e5ea;background:#18252b;border:1px solid #526a75;
+  border-radius:4px;cursor:pointer;
+}
+body.advanced-open #advancedCloseBtn:focus-visible{
+  outline:2px solid #76bed7;outline-offset:2px;
+}
