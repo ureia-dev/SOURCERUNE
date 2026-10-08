@@ -13,6 +13,8 @@
 5. **[docs/product/reference/](docs/product/reference/)** 的 `UI_01_REF_PIXEL_SPEC.md`、`UI_02_REF_PIXEL_SPEC.md`、`UI_01_REF_COORDS.json`、`UI_02_REF_COORDS.json`、`REF_COMPONENT_GAP_AUDIT.md` — 精確數值的權威規格與缺件。
 6. 按任務閱讀 `docs/product/UI_FUNCTION_CONTRACT.md`、`docs/product/VISUAL_STYLE_V2.md`、`docs/product/SCENE_HERO_049_074_PRODUCTION_V1.md`、`Assets/UI/*manifest*`、`Web/App`、`Source/UI` 與 `.github/workflows`。
 
+**最初產品決議必讀：** [docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md](docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md) 整理原始可見產品對話：Speakerphone/FutzBox/AudioThing/Audacity 取捨、低 CPU/1×、程序化模型＋語言化 Ambience、Motion/Host Automation、圖資/Preset，以及早期提案被新版取代的對照。此檔不是另一套工程規格；**與已核准最新版領域規格不同時，以新版為準**。對省略的聊天內容不得假稱逐字 100% 核對。
+
 **即使使用者只說「繼續」、「照原則做」、「修 UI」，也不能跳過永久憲章，只看最新交接。** 在不同對話、不同 branch、重新連線時都要執行。
 
 ## 使用者指定的真正原始產品對話（必先辨識來源）
