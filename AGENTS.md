@@ -35,6 +35,7 @@
 ## 文件分工（不要再造重複的永久規格）
 
 - 永久新決策寫 `PROJECT_CONSTITUTION.md`／相應專業規格；研究證據寫 `docs/research/`；原始決議的追溯寫 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md`（不要求每個任務重讀整份）。
+- **UI_01／UI_02 缺項的固定工作日誌**：先讀 [`docs/product/reference/UI_REF_GAP_WORKLOG.md`](docs/product/reference/UI_REF_GAP_WORKLOG.md)（18 個 UI_01、22 個 UI_02、15 個共用待辦，10 個限縮範圍已驗基礎）。每完成一個 ID，必須**同時更新日誌原 ID 的 `[ ]→[x]` 與 PR／Commit／Fast CI／真 Web 或 Native 驗收證據**；部分完成寫 `PARTIAL`、待核准寫 `NEEDS-DECISION`，不能擅自勾完成。`SOURCERUNE_MASTER_HANDOFF.md` 只保留本日誌入口、最新 checkpoint 與摘要，禁止重複整張工作清單。
 - 進度只更新 `SOURCERUNE_MASTER_HANDOFF.md`；歷史原稿 `docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md` 僅作封存，不再當目前執行指令。
 - 原始產品聊天只有**可見部分**已與永久決議對照，中間省略內容仍 `PENDING-VERBATIM`；不能聲稱第一句至末句逐字 100% 已核對。
 - 無法讀取 GitHub 檔案時，要明講，不可自稱已讀；不要重問使用者已在 repo 核准的決定。
