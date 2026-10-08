@@ -10,6 +10,8 @@
 >
 > **本文件不應每次交接重寫一份。** 接手的人都應從 repo 根目錄 `AGENTS.md` 進入，並直接閱讀本永久規範；每次進度變更應更新 HANDOFF 而不是竄改已核准的長期準則。
 
+> **原始決議來源警示（2026-10-08）**：使用者已指定 SOURCERUNE 最初完整產品討論正本為 `https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3`。這是私人聊天連結，當前尚未讀到全文；此前的完整交接檔是後續聊天整理而非原始正本。詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` §0A。**永久原則已保存可確認部分，但不能稱所有最初討論已 100% 覆蓋**。若日後取得正本全文，需逐訊息核對並把確認的新最終決議修訂於本憲章及相關規格。
+
 ## 開始任何工作的固定程序
 
 1. 讀 `AGENTS.md` → `PROJECT_RULES.md` → **本文件全部適用章節** → `SOURCERUNE_MASTER_HANDOFF.md`（僅當前進度）→ 受影響子系統 authoritative MD/JSON/manifest/程式碼。
