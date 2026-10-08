@@ -30,7 +30,7 @@ function auditReferenceGeometry(){
     const panelHead=document.querySelector(".scene-panel .panel-head");
     const sceneSvg=document.querySelector("#sceneSvg");
     const tabs=document.querySelector(".analysis-panel .tabs");
-    const meterSlot=document.querySelector(".meter-slot");
+    const meterSlots=[...document.querySelectorAll(".meter-slot")];
     const meterMode=document.querySelector(".meter-mode-toggle");
     const gear=document.querySelector("#settingsBtn");
     const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
@@ -53,7 +53,7 @@ function auditReferenceGeometry(){
       meterH:meter?near(box(meter).h,376):false,
       meterRect:meter?near(box(meter).x,1310)&&near(box(meter).y,58)&&near(box(meter).w,179)&&near(box(meter).h,376):false,
       moduleRailH:rail?near(box(rail).h,520):false,
-      meterSlot:meterSlot?near(box(meterSlot).w,20)&&near(box(meterSlot).h,178):false,
+      meterSlots:meterSlots.length===2&&meterSlots.every(el=>near(box(el).w,20)&&near(box(el).h,178)),
       meterMode:meterMode?near(box(meterMode).y,331)&&near(box(meterMode).h,30):false,
       macroStripH:near(box(macro).h,221),
       macroStripRect:near(box(macro).x,0)&&near(box(macro).y,586)&&near(box(macro).w,1499)&&near(box(macro).h,221),
@@ -108,7 +108,7 @@ function auditReferenceGeometry(){
   const meter=document.querySelector(".meter-rail");
   const sceneSvg=document.querySelector("#sceneSvg");
   const motionDeck=document.querySelector(".motion-readouts");
-  const meterSlot=document.querySelector(".meter-slot");
+  const meterSlots=[...document.querySelectorAll(".meter-slot")];
   const gear=document.querySelector("#settingsBtn");
   const prev=document.querySelector("#presetPrevBtn");
   const next=document.querySelector("#presetNextBtn");
@@ -141,7 +141,7 @@ function auditReferenceGeometry(){
     centerX:near(box(center).x,356),
     centerWidth:near(box(center).w,972),
     meter:meter?near(box(meter).w,440)&&near(box(meter).h,62)&&near(box(meter).x,1160)&&near(box(meter).y,8):false,
-    meterSlot:meterSlot?near(box(meterSlot).w,150)&&near(box(meterSlot).h,15):false,
+    meterSlots:meterSlots.length===2&&meterSlots.every(el=>near(box(el).w,150)&&near(box(el).h,15)),
     macroStripH:near(box(macro).h,210),
     macroStripRect:near(box(macro).x,0)&&near(box(macro).y,731)&&near(box(macro).w,1672)&&near(box(macro).h,210),
     gear:gear?near(box(gear).w,38)&&near(box(gear).h,38)&&near(box(gear).y,18)&&near(box(gear).x,1624):false,
