@@ -17,6 +17,9 @@ function auditReferenceGeometry(){
     x:(r.x-appRect.x)/scale,y:(r.y-appRect.y)/scale
   }};
   const near=(a,b,t=1)=>Math.abs(a-b)<=t;
+  // CONFIRMED action rectangles must reject a full pixel of drift.
+  // Small subpixel tolerance only accommodates CSS transform rounding.
+  const lockedPixel=(a,b)=>Math.abs(a-b)<0.25;
   const fail=checks=>Object.entries(checks).filter(([,v])=>!v).map(([k])=>k);
 
   if(!ui2){
@@ -66,15 +69,15 @@ function auditReferenceGeometry(){
       wallArt:art.WALL_COVER?near(box(art.WALL_COVER).x,19)&&near(box(art.WALL_COVER).y,397)&&near(box(art.WALL_COVER).w,239)&&near(box(art.WALL_COVER).h,69):false,
       spaceArt:art.SPACE_ENVIRONMENT?near(box(art.SPACE_ENVIRONMENT).x,19)&&near(box(art.SPACE_ENVIRONMENT).y,533)&&near(box(art.SPACE_ENVIRONMENT).w,239)&&near(box(art.SPACE_ENVIRONMENT).h,35):false,
 
-      sourceEdit:edit.SOURCE?near(box(edit.SOURCE).x,270)&&near(box(edit.SOURCE).y,72)&&near(box(edit.SOURCE).w,48)&&near(box(edit.SOURCE).h,34):false,
-      transmissionEdit:edit.TRANSMISSION?near(box(edit.TRANSMISSION).x,270)&&near(box(edit.TRANSMISSION).y,213)&&near(box(edit.TRANSMISSION).w,48)&&near(box(edit.TRANSMISSION).h,34):false,
-      wallEdit:edit.WALL_COVER?near(box(edit.WALL_COVER).x,270)&&near(box(edit.WALL_COVER).y,353)&&near(box(edit.WALL_COVER).w,48)&&near(box(edit.WALL_COVER).h,34):false,
-      spaceEdit:edit.SPACE_ENVIRONMENT?near(box(edit.SPACE_ENVIRONMENT).x,270)&&near(box(edit.SPACE_ENVIRONMENT).y,489)&&near(box(edit.SPACE_ENVIRONMENT).w,48)&&near(box(edit.SPACE_ENVIRONMENT).h,34):false,
+      sourceEdit:edit.SOURCE?lockedPixel(box(edit.SOURCE).x,270)&&lockedPixel(box(edit.SOURCE).y,72)&&lockedPixel(box(edit.SOURCE).w,48)&&lockedPixel(box(edit.SOURCE).h,34):false,
+      transmissionEdit:edit.TRANSMISSION?lockedPixel(box(edit.TRANSMISSION).x,270)&&lockedPixel(box(edit.TRANSMISSION).y,213)&&lockedPixel(box(edit.TRANSMISSION).w,48)&&lockedPixel(box(edit.TRANSMISSION).h,34):false,
+      wallEdit:edit.WALL_COVER?lockedPixel(box(edit.WALL_COVER).x,270)&&lockedPixel(box(edit.WALL_COVER).y,353)&&lockedPixel(box(edit.WALL_COVER).w,48)&&lockedPixel(box(edit.WALL_COVER).h,34):false,
+      spaceEdit:edit.SPACE_ENVIRONMENT?lockedPixel(box(edit.SPACE_ENVIRONMENT).x,270)&&lockedPixel(box(edit.SPACE_ENVIRONMENT).y,489)&&lockedPixel(box(edit.SPACE_ENVIRONMENT).w,48)&&lockedPixel(box(edit.SPACE_ENVIRONMENT).h,34):false,
 
-      sourceArrow:arrow.SOURCE?near(box(arrow.SOURCE).x,269)&&near(box(arrow.SOURCE).y,115)&&near(box(arrow.SOURCE).w,49)&&near(box(arrow.SOURCE).h,72):false,
-      transmissionArrow:arrow.TRANSMISSION?near(box(arrow.TRANSMISSION).x,269)&&near(box(arrow.TRANSMISSION).y,257)&&near(box(arrow.TRANSMISSION).w,49)&&near(box(arrow.TRANSMISSION).h,70):false,
-      wallArrow:arrow.WALL_COVER?near(box(arrow.WALL_COVER).x,269)&&near(box(arrow.WALL_COVER).y,397)&&near(box(arrow.WALL_COVER).w,49)&&near(box(arrow.WALL_COVER).h,70):false,
-      spaceArrow:arrow.SPACE_ENVIRONMENT?near(box(arrow.SPACE_ENVIRONMENT).x,269)&&near(box(arrow.SPACE_ENVIRONMENT).y,532)&&near(box(arrow.SPACE_ENVIRONMENT).w,49)&&near(box(arrow.SPACE_ENVIRONMENT).h,36):false,
+      sourceArrow:arrow.SOURCE?lockedPixel(box(arrow.SOURCE).x,269)&&lockedPixel(box(arrow.SOURCE).y,115)&&lockedPixel(box(arrow.SOURCE).w,49)&&lockedPixel(box(arrow.SOURCE).h,72):false,
+      transmissionArrow:arrow.TRANSMISSION?lockedPixel(box(arrow.TRANSMISSION).x,269)&&lockedPixel(box(arrow.TRANSMISSION).y,257)&&lockedPixel(box(arrow.TRANSMISSION).w,49)&&lockedPixel(box(arrow.TRANSMISSION).h,70):false,
+      wallArrow:arrow.WALL_COVER?lockedPixel(box(arrow.WALL_COVER).x,269)&&lockedPixel(box(arrow.WALL_COVER).y,397)&&lockedPixel(box(arrow.WALL_COVER).w,49)&&lockedPixel(box(arrow.WALL_COVER).h,70):false,
+      spaceArrow:arrow.SPACE_ENVIRONMENT?lockedPixel(box(arrow.SPACE_ENVIRONMENT).x,269)&&lockedPixel(box(arrow.SPACE_ENVIRONMENT).y,532)&&lockedPixel(box(arrow.SPACE_ENVIRONMENT).w,49)&&lockedPixel(box(arrow.SPACE_ENVIRONMENT).h,36):false,
 
       centerX:near(box(center).x,333),
       meterX:meter?near(box(meter).x,1310):false,
