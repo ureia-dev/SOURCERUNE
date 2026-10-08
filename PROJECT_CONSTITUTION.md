@@ -18,6 +18,16 @@
 4. 需變更 UI/DSP/CI/資產前先確定權限／目的；能自行安全開 PR、合併、部署就自行處理；同錯 2 次停止盲目重試，查根因；外部 runner/infra 明確標記外部阻塞。
 5. 只用**繁體中文**回覆使用者。任何未知寫 UNKNOWN／APPROX／PENDING／BLOCKED，不能推測成 100% 完成。
 
+## 永久工作責任與執行時間界線（不得從交接遺失）
+
+**角色分工是正式最高產品原則，不只是單次工作安排。** SOURCERUNE 的 DSP 研究、聲學算法選型、程式設計、測試訊號與客觀驗證、實作修復、音質／CPU 最佳化、Native VST3／WEB parity、可試聽成品準備，**由 GPT／開發助手在有工具和權限的前提下主導並完成**。使用者負責實際聽成品、提出聽感差異、接受／否決聲音方向；**無須提供任何 IR、場地錄音、麥克風量測或親自做技術測試作為一般研發前提**。
+
+優先建模／生成 SOURCE、WALL/COVER、SPACE、AMBIENCE，不以 IR 為強制核心依賴；合法的 IR/measurements 可作研發或校準參考，不從使用者索取，也不可在未知授權下打包。早期含「大量真實 IR」的概念屬歷史視覺提案，**不得覆蓋最新已核准的 GPT 主責研發、使用者只負責試聽**。真正音訊驗證必須有可重現程式／資料與試聽成品；空有 DSP 規格不等於 DSP 已編譯／驗收。
+
+**立即執行比錯誤排程優先**：用戶直接要求「做、修、繼續、現在跑」就當回合做，保持小步 checkpoint；任務大可多批連續完成，**不是將一個可完成指令擅自切成八小時或每小時一個動作**。只有用戶明確說「排程」才使用定時工作；任務時程不能變成產品研究時間上限，也不得以排程代替本輪實作。若用戶只是詢問／要求只讀檢查，不得擅改。
+
+本次追溯修正詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md`，永久領域契約見 **[docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md)**。沒有可取得的全部失落逐字稿時，只能宣稱**已核對可用來源及標記缺口**，不許寫 100% 全部歷史已復原。
+
 ## 最高製作原則：SOURCERUNE 由真實大數據需求與工程驗證決定
 
 > 這是**產品方向、功能取捨、參數設定、Preset／場景選擇、聲學模型**的最上層決策原則，不是可做可不做的市場調查。**完整研究方法必讀 [docs/research/RESEARCH_EVIDENCE_STANDARD.md](docs/research/RESEARCH_EVIDENCE_STANDARD.md)**；最高優先限制亦寫於 `PROJECT_RULES.md`。所有後續 GPT 都要先照此原則理解整個產品。
