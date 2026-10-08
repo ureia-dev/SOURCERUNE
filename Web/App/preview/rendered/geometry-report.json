@@ -1,5 +1,5 @@
 {
-  "commit": "a254e17b9bbeac03c26c57123f83b0be7bf89818",
+  "commit": "09e6fe832c1aa5917eaeb986b8590fbb8a6dea8b",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -20,7 +20,7 @@
         "meterH": true,
         "meterRect": true,
         "moduleRailH": true,
-        "meterSlot": true,
+        "meterSlots": true,
         "meterMode": true,
         "macroStripH": true,
         "macroStripRect": true,
@@ -250,7 +250,7 @@
         "centerX": true,
         "centerWidth": true,
         "meter": true,
-        "meterSlot": true,
+        "meterSlots": true,
         "macroStripH": true,
         "macroStripRect": true,
         "gear": true,
