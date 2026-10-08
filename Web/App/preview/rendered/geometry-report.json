@@ -1,5 +1,5 @@
 {
-  "commit": "9973cccd61ff7cd3b5761a69e3d5d627997096b2",
+  "commit": "6066c88b1085256dbf4ed73290436fe7f2d8f656",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -257,6 +257,9 @@
         "presetPrev": true,
         "presetNext": true,
         "presetFolder": true,
+        "motionAdjustKnobs": true,
+        "motionAdjustGeometry": true,
+        "motionAdjustReadouts": true,
         "bottomKnob76": true,
         "mixKnob76": true,
         "bottomTransmission": true,
@@ -379,6 +382,26 @@
           "h": 76,
           "x": 28,
           "y": 796
+        },
+        "motionAdjust": {
+          "speed": {
+            "w": 86,
+            "h": 76,
+            "x": 822.546875,
+            "y": 645
+          },
+          "doppler": {
+            "w": 86,
+            "h": 76,
+            "x": 987.796875,
+            "y": 645
+          },
+          "width": {
+            "w": 86,
+            "h": 76,
+            "x": 1153.03125,
+            "y": 645
+          }
         },
         "mixKnob": {
           "w": 76,
