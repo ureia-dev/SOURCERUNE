@@ -5,7 +5,7 @@
 1. **[AGENTS.md](AGENTS.md)** — AI 的根目錄第一入口，標記必讀順序與最低限度硬規則。
 2. **[PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)** — **永久且完整**的產品方向、使用者要求、REF/所有元件與材質標準、UI01/02、工作方法、禁止事項；第幾篇交接都不得覆蓋。
 3. **[PROJECT_RULES.md](PROJECT_RULES.md)** — **產品大數據實證先行最高原則**，加上 Fast／Deep／Release CI 規則與 VST3／WEB 同步。
-4. **[docs/research/RESEARCH_EVIDENCE_STANDARD.md](docs/research/RESEARCH_EVIDENCE_STANDARD.md)** — 原先承諾的跨 8 階段／約 10,000 候選／去重保留 1,000 真實證據方法、40/30/30 核心方向、74 Factory 與參數／DSP 工程驗證。
+4. **[docs/research/RESEARCH_EVIDENCE_STANDARD.md](docs/research/RESEARCH_EVIDENCE_STANDARD.md)** — 持續循環的八個研究維度（非八小時限制）／初始約 10,000 候選／去重保留約 1,000 真實證據里程碑方法、40/30/30 核心方向、74 Factory 與參數／DSP 工程驗證。
 5. **[SOURCERUNE_MASTER_HANDOFF.md](SOURCERUNE_MASTER_HANDOFF.md)** — 只有**當前工作進度、checkpoint、未完成事項**（先查最新 GitHub 才能相信）。
 6. **[docs/product/reference/](docs/product/reference/)** — REF 像素座標／文字旋鈕／材質與 runtime 缺件明細。
 

@@ -4,8 +4,8 @@
 
 ## 研究目標與當前可查核進度
 
-- 指定 **8 小時／8 階段**，跨 Gearspace、KVR、Avid DUC、Reddit AudioPost/SoundDesign、Creative COW、VI-Control、Cockos/REAPER、game-audio 與工程學術來源。
-- 蒐集／審閱約 **10,000 筆候選** → 來源／發文者與 canonical URL 去重 → semantic cluster → cross-forum independent confirmation → 保留約 **1,000 筆真正代表需求的證據**。這是目標，不是已完成數據。
+- **持續、不受固定時數限制**地覆蓋八個研究維度；歷史八小時分批只是當時的執行安排。跨 Gearspace、KVR、Avid DUC、Reddit AudioPost/SoundDesign、Creative COW、VI-Control、Cockos/REAPER、game-audio 與工程學術來源。
+- 初始規模里程碑為蒐集／審閱約 **10,000 筆候選** → 來源／發文者與 canonical URL 去重 → semantic cluster → cross-forum independent confirmation → 初期保留約 **1,000 筆真正代表需求的證據**。這不是已完成數據，也不是達標就停止的上限；後續持續擴充、重新聚類與技術驗證。
 - 據需求重複率、實際問題、參數與搭配、稀有高價值特色做排序；排除鏡像／行銷／無關貼文；來源不足必須誠實寫出。
 - 本 ledger 的**大規模填充目前仍待完成**。截至 2026-10-08，本倉庫未展示可稽核的完整 10,000 candidates／1,000 deduplicated retained records；不得在任何 GPT、PR、交接或產品介紹中宣稱已完成。
 - 已有的研究加權 Preset 決策見 [PRESET_PORTFOLIO_REBALANCE_2026-10-05.md](PRESET_PORTFOLIO_REBALANCE_2026-10-05.md)：SOURCE 40%／MOTION 30%／SPACE 30% 為核心優先；24 個舊 reserve 已依使用者要求恢復，Factory 保留 **74 active**；數值待 audition。
