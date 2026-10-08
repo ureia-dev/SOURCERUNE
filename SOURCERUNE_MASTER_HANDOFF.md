@@ -1,14 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
-## P0 逐項收斂 — UI_01 BAD SIGNAL 四 Checkbox（本輪 checkpoint）
+## P0 最新可恢復 Checkpoint — UI_01 BAD SIGNAL 四 Checkbox（2026-10-09）
 
-- Web Preview #77 的真正 `render-log.txt` **FAIL**：初始化 TypeError `$(...).forEach is not a function`，來源是 `data-macro-selectbox` 的單元素選取器回歸；已於後續修復分支修正，必須在下一輪 Preview 真操作及兩 UI geometry PASS 後才驗收 U01-12。
-
-- CROSS-01：兩份正式 UI_01 PNG 在工作環境已驗 SHA；GitHub 原圖 binary 傳輸仍 BLOCKED（connector 不收本機 PNG，container DNS 不通），詳見單一工作日誌。禁止擅用重畫圖代替。
-- U01-12：本輪實作 UI_01 BAD SIGNAL 四個主介面 Checkbox，直接覆用既有 4 個 numeric param；保持 UI_02 版面不變，並在既有 Web Preview 增加一次性真 click／Advanced 值／Undo-Redo 瀏覽器 smoke。**須等 Fast CI 與實際 Web Preview render-log/geometry-report 成功，未驗前標 PARTIAL**。
-- Native 仍無可編譯 VST3，不能把 Web 成功當聲音/Host parity；後續逐項更新 `docs/product/reference/UI_REF_GAP_WORKLOG.md` 原 ID 和證據。
-
-
+- **U01-12 = `[x]` Web 主卡功能完成**：四個 Checkbox 對應既有 noiseStatic/dropout/interference/bitrateArtifacts；UI_02 沒改排版。PR #58 `9212424b`（實作）／#59 `d3e52f9a`（修正 `data-macro-selectbox` 單元素 forEach 啟動回歸）／#60 `a9b1ddb1`（完整四組 Browser smoke）；Fast #103–#105 成功。
+- **Web Preview #79 真驗收**：run `37818887999` 已實際跑完；`Web/App/preview/rendered/geometry-report.json` 由 commit `a9b1ddb19cda51274b3a28d27d9b8175a6b24212` 產生；`UI_01.interactionSmoke.U01-12.ok=true`，四組 `noiseStatic/dropout/interference/bitrateArtifacts` 的 toggled、Advanced、Undo／Redo／復原**各自全部 true**，`UI_01.ok=true`／`UI_02.ok=true`，failures=[]；真 `render-log.txt` 顯示 render audit completed successfully。先前 Web Preview #77 的初始化失敗已在 #59 修好，不可仍當現況。
+- **CROSS-01 保留 `[ ] BLOCKED`**：使用者核准的 UI_01 原圖 1508×808 及 2.5× 3770×2020 本機 bytes/sha 都已核對，但 GitHub repo 尚無兩份 PNG。connector 不接受 container 本機檔案位元組，DNS 無法連 github.com；不能假裝已入庫，也不能用 AI 重畫取代。詳見唯一工單。
+- **尚缺**：Chrome log 仍有一項未定位 404，`CROSS-06` 跟進；真正 Native VST3 Host 與聲學 DSP 仍 PENDING（`CROSS-07/08/15`）；REF 細材質/字型與 UI01 其他 P0 項仍在單一日誌。
+- **工作入口**：`docs/product/reference/UI_REF_GAP_WORKLOG.md`（此輪標記 11 項 `[x]`、54 項 `[ ]`）；以後每項驗收照樣在原 ID 更新，不另生清單。
 ## UI_01／UI_02 REF 正式缺項工作日誌（2026-10-09）
 
 - **最新唯一可勾選工作單**：[`docs/product/reference/UI_REF_GAP_WORKLOG.md`](docs/product/reference/UI_REF_GAP_WORKLOG.md)；逐項保存使用者本輪貼出的 **UI_01 18 項、UI_02 22 項、共同 15 項待辦**，另保留 **10 項有實際證據且範圍有限的已驗基礎**。詳細內容只在該工作單，不複製第二份清單。
