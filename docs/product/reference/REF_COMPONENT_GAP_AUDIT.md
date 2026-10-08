@@ -407,7 +407,14 @@ Impact:
 
 Classification: **EXTERNAL INPUT BLOCKER FOR NEW REF-FINE CONFIRMATION ONLY**. This does not block runtime parity fixes, existing-confirmed regression guards, CI validation, or asset/binding gap audits.
 
-Status: **FULL REF BITMAP ABSENT / DO NOT GUESS**.
+Status: **FULL REF BITMAP ABSENT / DO NOT GUESS**. *(本段為歷史狀態；新現況如下。)*
+
+### 2026-10-08 新核准 REF 現況（覆蓋本節歷史阻塞，不刪原紀錄）
+
+上述 Checkpoint 65 為過往狀態，不可再稱兩張皆缺：**UI_02 原始完整 REF PNG 已在 GitHub** `Assets/UI/UI_02/UI_02_REF/UI_02_REF.png`；10×真像素放大與掃描疊圖也在 `Assets/UI/UI_02/UI_02_REF/`。詳細原圖雜湊、25 大框＋139 控制項＋15 原始像素邊界證據於 `docs/product/reference/UI_02_REF_*20261008.*`。
+**UI_01** 由使用者當次核准的是 1508×808 清潔 PNG（不同於原 1499×807 shell 座標），142 細項已記錄，原圖和 10× binary 尚未上傳 GitHub，標 `PENDING-BINARY-UPLOAD`。
+UI_02 原圖可供 fine scan，但目測 bbox 和文字 baseline 未逐一升級 `CONFIRMED`；不能把已驗證圖片來源誤報為已驗證全部控制/材質/Host。
+
 
 
 ## Checkpoint 70 — Runtime manifest/file parity restored
