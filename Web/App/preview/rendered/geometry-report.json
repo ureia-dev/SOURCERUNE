@@ -1,5 +1,5 @@
 {
-  "commit": "33b9414a6bc7c61da694ba6eb3f5b179d695ab3d",
+  "commit": "2bcfb3ff8ae1e287719356454618d0f09aa35adf",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -323,6 +323,8 @@
         "presetFolder": true,
         "motionAdjustKnobs": true,
         "motionAdjustGeometry": true,
+        "motionDialAsset300": true,
+        "motionSmallKnobAssets54": true,
         "motionAdjustReadouts": true,
         "bottomKnob76": true,
         "conditionKnob76": true,
@@ -467,6 +469,26 @@
             "h": 76,
             "x": 1153.03125,
             "y": 645
+          }
+        },
+        "motionKnobAssetBindings": {
+          "dial": {
+            "image": "radial-gradient(circle at 172px 142px, rgba(24, 44, 54, 0.3), rgba(0, 0, 0, 0) 165px), url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_KNOB_L_BASE.png\"), linear-gradient(rgb(13, 21, 26), rgb(8, 16, 20))",
+            "size": "auto, 300px 300px, auto"
+          },
+          "small": {
+            "speed": {
+              "image": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_KNOB_S_BASE.png\")",
+              "size": "54px 54px"
+            },
+            "doppler": {
+              "image": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_KNOB_S_BASE.png\")",
+              "size": "54px 54px"
+            },
+            "width": {
+              "image": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_KNOB_S_BASE.png\")",
+              "size": "54px 54px"
+            }
           }
         },
         "mixKnob": {
