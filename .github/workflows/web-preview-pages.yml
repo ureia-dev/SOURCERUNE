@@ -70,9 +70,29 @@ jobs:
             const results = {};
             for (const [ui, width, height] of targets) {
               const page = await browser.newPage();
+              page.on("pageerror", err => console.error(`[${ui}] JavaScript error: ${err.stack || err.message}`));
+              page.on("console", msg => {
+                if (msg.type() === "error") console.error(`[${ui}] Browser console: ${msg.text()}`);
+              });
+              page.on("response", response => {
+                if (response.status() >= 400 && /\/Web\/App\/(?:data\/|.*\.js)/.test(response.url()))
+                  console.error(`[${ui}] HTTP ${response.status()}: ${response.url()}`);
+              });
               await page.setViewport({ width, height, deviceScaleFactor: 1 });
               await page.goto(`http://127.0.0.1:4173/Web/App/?ui=${ui}`, { waitUntil: "networkidle0", timeout: 30000 });
-              await page.waitForFunction(() => !!window.__geometryAudit, { timeout: 15000 });
+              try {
+                await page.waitForFunction(() => !!window.__geometryAudit, { timeout: 15000 });
+              } catch (err) {
+                const diagnostic = await page.evaluate(() => ({
+                  readyState: document.readyState,
+                  buildLabel: document.querySelector("#buildLabel")?.textContent || null,
+                  geometryFunction: typeof window.auditReferenceGeometry,
+                  geometryResult: typeof window.__geometryAudit,
+                  appScripts: [...document.scripts].map(s => s.src)
+                })).catch(e => ({ evaluationError: String(e) }));
+                console.error(`[${ui}] Geometry audit timeout diagnostics: ${JSON.stringify(diagnostic)}`);
+                throw err;
+              }
               results[ui] = await page.evaluate(() => window.__geometryAudit);
               await page.screenshot({
                 path: `Web/App/preview/rendered/${ui}.png`,
