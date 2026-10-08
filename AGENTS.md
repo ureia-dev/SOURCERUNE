@@ -13,7 +13,23 @@
 5. **[docs/product/reference/](docs/product/reference/)** 的 `UI_01_REF_PIXEL_SPEC.md`、`UI_02_REF_PIXEL_SPEC.md`、`UI_01_REF_COORDS.json`、`UI_02_REF_COORDS.json`、`REF_COMPONENT_GAP_AUDIT.md` — 精確數值的權威規格與缺件。
 6. 按任務閱讀 `docs/product/UI_FUNCTION_CONTRACT.md`、`docs/product/VISUAL_STYLE_V2.md`、`docs/product/SCENE_HERO_049_074_PRODUCTION_V1.md`、`Assets/UI/*manifest*`、`Web/App`、`Source/UI` 與 `.github/workflows`。
 
+**最初產品決議必讀：** [docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md](docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md) 整理原始可見產品對話：Speakerphone/FutzBox/AudioThing/Audacity 取捨、低 CPU/1×、程序化模型＋語言化 Ambience、Motion/Host Automation、圖資/Preset，以及早期提案被新版取代的對照。此檔不是另一套工程規格；**與已核准最新版領域規格不同時，以新版為準**。對省略的聊天內容不得假稱逐字 100% 核對。
+
 **即使使用者只說「繼續」、「照原則做」、「修 UI」，也不能跳過永久憲章，只看最新交接。** 在不同對話、不同 branch、重新連線時都要執行。
+
+## 使用者指定的真正原始產品對話（必先辨識來源）
+
+- 最初 SOURCERUNE 產品方向與決策的**使用者指定原始聊天**：`https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3`。
+- 本 repo 的 `docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md` 是**後來一篇聊天的摘要**，不是上述正本的完整逐字稿，兩者不得混淆。
+- 該私人 `/c/` 聊天內容目前**尚未由本稽核完整讀取**；不得聲稱「最初全部逐字決議已經進入永久憲章」。詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` 的 **0A 原始來源校正**。
+- 若取得該對話完整可讀內容，須從第一則到最後一則逐段建立「要求／修正／最終核准決議／永久或排程／權威文件／驗證結果」對照表，然後更新永久憲章，不可拿先前摘要代替，也不能重做已完成工作。
+
+## 新 GPT 必讀：完整決議稽核與 DSP 工作分工
+
+- **[docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md)**：GPT 負責 DSP 研究／實作／技術測試與可試聽成品；使用者主責聆聽與最終音質方向，**不必提供 IR／錄音／量測資料或自己修 CI**。
+- **[docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md](docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md)**：各個已討論決議的證據來源、永久/單次/排程分類、已知文件遺漏與不能冒稱全篇 100% 的來源限制。
+- **立即做與排程不同**：使用者說「做／繼續／現在跑」就應當回合實際做授權工作並留下 checkpoint；使用者明確說「排程／每小時」才建立排程。歷史八小時研究不是每個指令的強制工作時間。
+- 研究資料達標、文件寫好、DSP 編譯可用、客觀驗證、使用者聽感核准是不同狀態，不得混成「完成」。
 
 ## 最高原則：產品／參數不是 GPT 猜出來的
 

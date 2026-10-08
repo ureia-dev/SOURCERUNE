@@ -10,6 +10,8 @@
 >
 > **本文件不應每次交接重寫一份。** 接手的人都應從 repo 根目錄 `AGENTS.md` 進入，並直接閱讀本永久規範；每次進度變更應更新 HANDOFF 而不是竄改已核准的長期準則。
 
+> **原始決議來源警示（2026-10-08）**：使用者已指定 SOURCERUNE 最初完整產品討論正本為 `https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3`。這是私人聊天連結，當前尚未讀到全文；此前的完整交接檔是後續聊天整理而非原始正本。詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` §0A。**永久原則已保存可確認部分，但不能稱所有最初討論已 100% 覆蓋**。若日後取得正本全文，需逐訊息核對並把確認的新最終決議修訂於本憲章及相關規格。
+
 ## 開始任何工作的固定程序
 
 1. 讀 `AGENTS.md` → `PROJECT_RULES.md` → **本文件全部適用章節** → `SOURCERUNE_MASTER_HANDOFF.md`（僅當前進度）→ 受影響子系統 authoritative MD/JSON/manifest/程式碼。
@@ -17,6 +19,24 @@
 3. 每輪 2–4 個或使用者指定量的相關微步驟，**每一個可驗證小步都獨立 commit/checkpoint**；對話易斷線，應在形成可持續成果後立即回報，不要長時間黑箱。
 4. 需變更 UI/DSP/CI/資產前先確定權限／目的；能自行安全開 PR、合併、部署就自行處理；同錯 2 次停止盲目重試，查根因；外部 runner/infra 明確標記外部阻塞。
 5. 只用**繁體中文**回覆使用者。任何未知寫 UNKNOWN／APPROX／PENDING／BLOCKED，不能推測成 100% 完成。
+
+## 其他容易被交接摘要遺漏的已核准開發方向
+
+- **單一 repo**：DSP、VST3、Web、UI、Presets、tests 與文件採 `ureia-dev/SOURCERUNE` 單一 repo，同步修改與驗證，避免拆出第二套來源造成 VST／Web 部署延遲；權威技術文件為 `docs/architecture/SINGLE_REPO_PUBLIC_POLICY.md`。
+- **Plugin 介面縮放**：先在核准 REF 原生尺寸鎖定 pixel geometry，再以等比例縮放／Fit Window 方式支援不同視窗，不要一改為滿版就扭曲原始位置、旋鈕比例或文字；先前方向包含約 75%～125% 的目標區間，但**實際支援範圍以最新 runtime/build 驗證，不能只靠文件宣稱已完成**。
+- **正式旋鈕美術製程**：先前 UI 製作方向偏好可重製、參數化的 Blender／3D 類比金屬質感、固定燈光和材質與多 frame 合成；不是每次要求修改時重新生成不一致的新 AI 外觀。此方向有較早討論摘要，尚未取得每一則逐字原文，參數或工法變更需和現行核准 REF/manifest 交叉核對，不得憑摘要取代使用者最新核准圖。
+- **不要混同個別概念圖、核准 REF、實際 runtime**：早期五卡 UI01 與其他音效空間草圖只供歷史參考；正式座標、啟用/停用狀態與材質需以核准 REF 和已驗證 JSON/spec 為準。
+- **工程驗證等級分開**：設計契約／素材庫存在／UI rendered／DSP build／VST3 host 可用／Web audio 可用／使用者 audition 核准為不同 gate。聲稱「已完成」必須指出哪一 gate、哪一個真 artifact 和 SHA。
+
+## 永久工作責任與執行時間界線（不得從交接遺失）
+
+**角色分工是正式最高產品原則，不只是單次工作安排。** SOURCERUNE 的 DSP 研究、聲學算法選型、程式設計、測試訊號與客觀驗證、實作修復、音質／CPU 最佳化、Native VST3／WEB parity、可試聽成品準備，**由 GPT／開發助手在有工具和權限的前提下主導並完成**。使用者負責實際聽成品、提出聽感差異、接受／否決聲音方向；**無須提供任何 IR、場地錄音、麥克風量測或親自做技術測試作為一般研發前提**。
+
+優先建模／生成 SOURCE、WALL/COVER、SPACE、AMBIENCE，不以 IR 為強制核心依賴；合法的 IR/measurements 可作研發或校準參考，不從使用者索取，也不可在未知授權下打包。早期含「大量真實 IR」的概念屬歷史視覺提案，**不得覆蓋最新已核准的 GPT 主責研發、使用者只負責試聽**。真正音訊驗證必須有可重現程式／資料與試聽成品；空有 DSP 規格不等於 DSP 已編譯／驗收。
+
+**立即執行比錯誤排程優先**：用戶直接要求「做、修、繼續、現在跑」就當回合做，保持小步 checkpoint；任務大可多批連續完成，**不是將一個可完成指令擅自切成八小時或每小時一個動作**。只有用戶明確說「排程」才使用定時工作；任務時程不能變成產品研究時間上限，也不得以排程代替本輪實作。若用戶只是詢問／要求只讀檢查，不得擅改。
+
+本次追溯修正詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md`，永久領域契約見 **[docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md)**。沒有可取得的全部失落逐字稿時，只能宣稱**已核對可用來源及標記缺口**，不許寫 100% 全部歷史已復原。
 
 ## 最高製作原則：SOURCERUNE 由真實大數據需求與工程驗證決定
 
@@ -33,6 +53,12 @@
 - **不可虛報進度**：曾有歷史八小時研究摘要與加權重排，但 `docs/research/EVIDENCE_LEDGER.md` 仍記錄大型證據填充未完成。**無可核對 10k 原始池／1k 獨立留存證據，不准宣稱大數據研究 100% 完成。** 當前研究統計必須分別記 candidate/reviewed/independent/deduplicated/retained 真實數字。
 - **研究不等於擅自部署／壓測**：研究結果進 evidence ledger 和決策表；實作需符合使用者當次授權、既有 UI/DSP/Factory 鎖定與 Fast/Deep/Release 次數規則。不要因八階段研究就自行觸發 100 次 Release。
 - **跨對話永久保存**：每次新研究、產品決策必須更新本憲章的相應決策與 `docs/research/` 規格／資料，禁止只留在一次聊天交接。AGENTS.md 應迫使每篇 GPT 一開始就先讀本節和研究標準。
+
+### 原始產品討論：不可遺漏的設計理由
+
+**[最初產品決議對照](docs/product/ORIGINAL_PRODUCT_DECISIONS_20261008.md)** 從原始可見對話依主題復原：Speakerphone 常用核心與 ADV 簡化 LFO；FutzBox／AudioThing Speakers／Audacity 合法功能借鑑；SOURCE／COVER／SPACE 自主建模與程序化無限 Ambience、背景交談語言特徵；真正 Distance/Motion 與 Pro Tools 級 Automation；1× native rate、極低 CPU；全球音訊工程師定位；UI_01/UI_02 可重排元件；224 語意圖資與後續 74 Factory。**SOURCERUNE 是產品型號／專案名稱，品牌／公司名稱未定。** 此檔只保存最終有效決策，不用舊配色／早期圖集／已被取代方案覆蓋現行 REF。
+
+新 GPT 依序用研究 evidence standard 判斷「為何要做」，DSP ownership 判斷「誰做與如何試聽」，原始決議對照理解「最初核准什麼」，最後以最新 Factory／REF／真實程式及 HEAD 驗證「目前實際是什麼」。
 
 ## 原則與規格正文
 

@@ -10,6 +10,8 @@ Before producing an answer, plan, code change, pull request, CI action, or deplo
 4. Read **[SOURCERUNE_MASTER_HANDOFF.md](../SOURCERUNE_MASTER_HANDOFF.md)** only for the latest known progress and historical checkpoint, then verify live repository main / branch / PR / CI / deployment. Never trust a dated SHA without checking.
 5. Read the related **[docs/product/reference/](../docs/product/reference/)** REF specification and the applicable Web/Native/DSP/asset manifests before editing.
 
+**Additional permanent contracts:** [DSP ownership and listening acceptance](../docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md) and [decision traceability / known omissions](../docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md). AI/developer owns sound-engine research, C++ DSP, technical validation and usable audition builds; human owner primarily judges the sound and does not need to provide IR/measurements/recordings. Direct "do it now"/"continue" instructions require immediate incremental execution; never silently schedule a one-turn task into eight hours. User-approved schedules are separate execution metadata, not permanent product limitations.
+
 Non-negotiables:
 - Reply to the user in Traditional Chinese.
 - Work in short, resumable, verifiable steps; commit checkpoints; no blind rerun; after 2 identical failures diagnose root cause. Mark GitHub runner/empty-steps infrastructure failures as external blockers.
