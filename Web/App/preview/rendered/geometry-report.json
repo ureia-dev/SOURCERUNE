@@ -1,5 +1,5 @@
 {
-  "commit": "d3e52f9a1b90ef15064f907237d6fcd4d4d1d75c",
+  "commit": "a9b1ddb19cda51274b3a28d27d9b8175a6b24212",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -294,12 +294,44 @@
         "U01-12": {
           "ok": true,
           "allVisible": true,
-          "initialChecked": true,
-          "toggledOff": true,
-          "advancedSynced": true,
-          "undoRestored": true,
-          "redoOff": true,
-          "backToBaseline": true
+          "controls": {
+            "noiseStatic": {
+              "initialChecked": false,
+              "toggled": true,
+              "advancedSynced": true,
+              "undoRestored": true,
+              "redoToggled": true,
+              "backToBaseline": true,
+              "ok": true
+            },
+            "dropout": {
+              "initialChecked": true,
+              "toggled": true,
+              "advancedSynced": true,
+              "undoRestored": true,
+              "redoToggled": true,
+              "backToBaseline": true,
+              "ok": true
+            },
+            "interference": {
+              "initialChecked": true,
+              "toggled": true,
+              "advancedSynced": true,
+              "undoRestored": true,
+              "redoToggled": true,
+              "backToBaseline": true,
+              "ok": true
+            },
+            "bitrateArtifacts": {
+              "initialChecked": false,
+              "toggled": true,
+              "advancedSynced": true,
+              "undoRestored": true,
+              "redoToggled": true,
+              "backToBaseline": true,
+              "ok": true
+            }
+          }
         }
       }
     },
