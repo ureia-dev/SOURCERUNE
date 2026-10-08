@@ -194,3 +194,21 @@ body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-meta{height:40px}
 body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-art{top:54px}
 body.ui-01 .module-meta{padding-top:7px}
 body.ui-01 .module-actions{top:8px}
+
+
+/* Checkpoint 87 — UI_01 card action pixel closure after the independent
+   raster frame was retained. The 1px CSS card border contributes to the
+   positioning containing block: the post-merge render audit measured Edit
+   x=269/y=REF+1 and next-arrow x=268/y=REF+1. These plugin-local offsets
+   restore the already CONFIRMED action rectangles without touching art,
+   typography, frame assets, UI_02, or live bindings. */
+body.ui-01 .module-card .module-actions,
+body.ui-01 .module-card .module-cycle-next{right:4px}
+body.ui-01 .module-card[data-type="SOURCE"] .module-actions{top:13px}
+body.ui-01 .module-card[data-type="TRANSMISSION"] .module-actions{top:11px}
+body.ui-01 .module-card[data-type="WALL_COVER"] .module-actions{top:12px}
+body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-actions{top:10px}
+body.ui-01 .module-card[data-type="SOURCE"] .module-cycle-next{top:56px}
+body.ui-01 .module-card[data-type="TRANSMISSION"] .module-cycle-next{top:55px}
+body.ui-01 .module-card[data-type="WALL_COVER"] .module-cycle-next{top:56px}
+body.ui-01 .module-card[data-type="SPACE_ENVIRONMENT"] .module-cycle-next{top:53px}
