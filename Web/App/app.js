@@ -67,7 +67,7 @@ function ui01SignalDetail(){
   }).join("")}</div>`;
 }
 function bindUi01SignalCheckboxes(){
-  $("[data-signal-checkbox]").forEach(box=>box.onchange=()=>{
+  $$("[data-signal-checkbox]").forEach(box=>box.onchange=()=>{
     const id=box.dataset.signalCheckbox,previous=Number(state.params[id])||0,def=findControl(id);
     if(!def || def.type!=="range")return;
     let next;
