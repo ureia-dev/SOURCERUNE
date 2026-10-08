@@ -15,6 +15,13 @@
 
 **即使使用者只說「繼續」、「照原則做」、「修 UI」，也不能跳過永久憲章，只看最新交接。** 在不同對話、不同 branch、重新連線時都要執行。
 
+## 使用者指定的真正原始產品對話（必先辨識來源）
+
+- 最初 SOURCERUNE 產品方向與決策的**使用者指定原始聊天**：`https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3`。
+- 本 repo 的 `docs/history/SOURCERUNE_FULL_CONVERSATION_HANDOFF_20261008.md` 是**後來一篇聊天的摘要**，不是上述正本的完整逐字稿，兩者不得混淆。
+- 該私人 `/c/` 聊天內容目前**尚未由本稽核完整讀取**；不得聲稱「最初全部逐字決議已經進入永久憲章」。詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` 的 **0A 原始來源校正**。
+- 若取得該對話完整可讀內容，須從第一則到最後一則逐段建立「要求／修正／最終核准決議／永久或排程／權威文件／驗證結果」對照表，然後更新永久憲章，不可拿先前摘要代替，也不能重做已完成工作。
+
 ## 新 GPT 必讀：完整決議稽核與 DSP 工作分工
 
 - **[docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md](docs/architecture/DSP_OWNERSHIP_AND_AUDITION_CONTRACT.md)**：GPT 負責 DSP 研究／實作／技術測試與可試聽成品；使用者主責聆聽與最終音質方向，**不必提供 IR／錄音／量測資料或自己修 CI**。
