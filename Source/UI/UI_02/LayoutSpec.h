@@ -26,6 +26,16 @@ inline constexpr int kMacroTopGap = 20;
 inline constexpr int kShellBottomPadding = 18;
 inline constexpr int kAmbienceTop = 380;
 inline constexpr int kMeterTop = 8;
+// UI_02 top horizontal meter: match validated Web runtime allocation.
+// REF-fine typography/anchor positions remain APPROX.
+inline constexpr int kMeterHeight = 62;
+inline constexpr int kMeterRowHeight = 54;
+inline constexpr int kMeterSlotWidth = 150;
+inline constexpr int kMeterSlotHeight = 15;
+inline constexpr int kMeterLabelWidth = 48;
+inline constexpr int kMeterLabelToSlotGap = 8;
+inline constexpr int kMeterBlockGap = 22;
+inline constexpr int kMeterFlexResidual = 6;
 inline constexpr int kSourceCardHeight = 213;
 inline constexpr int kTransmissionCardHeight = 166;
 inline constexpr int kWallCardHeight = 247;
@@ -106,6 +116,9 @@ static_assert (kReferenceHeight == kTopBarHeight + kWorkspaceHeight + kMacroStri
 static_assert (kTransmissionCardHeight == kGridRow2 + kWorkspaceGap + kGridRow3);
 static_assert (kSpaceCardHeight == kGridRow1 + kWorkspaceGap + kGridRow2);
 static_assert (kMacroStripHeight == kMacroTopGap + kBottomMacroHeight + kShellBottomPadding);
+static_assert (kMeterWidth == 2 * (kMeterLabelWidth + kMeterLabelToSlotGap + kMeterSlotWidth)
+    + kMeterBlockGap + kMeterFlexResidual);
+static_assert (kMeterHeight >= kMeterRowHeight && kMeterSlotHeight < kMeterRowHeight);
 static_assert (kReferenceWidth == 2 * kWorkspacePaddingX
     + kBottomBadSignalWidth + kBottomConditionWidth + kBottomIntelligibilityWidth
     + kBottomMixWidth + kBottomEqWidth + 4 * kBottomGridGap);
