@@ -116,6 +116,8 @@ function auditReferenceGeometry(){
   const motionAdjustIds=["speed","doppler","width"];
   const motionAdjust=Object.fromEntries(motionAdjustIds.map(id=>[id,document.querySelector('[data-motion-adjust="'+id+'"]')]));
   const bottomKnob=document.querySelector(".macro-badsignal .macro-knob-face");
+  const conditionKnob=document.querySelector(".macro-condition .macro-knob-face");
+  const intelligibilityKnob=document.querySelector(".macro-intelligibility .macro-knob-face");
   const mixKnob=document.querySelector(".macro-mix .macro-knob-face");
   const macros=Object.fromEntries([...document.querySelectorAll("#macroStrip .macro")].map(e=>[e.dataset.open,box(e)]));
   const checks={
@@ -150,6 +152,8 @@ function auditReferenceGeometry(){
     motionAdjustGeometry:motionAdjustIds.every(id=>{const el=motionAdjust[id];return el&&near(box(el).w,86)&&near(box(el).h,76)}),
     motionAdjustReadouts:motionAdjustIds.every(id=>{const el=motionAdjust[id],readout=document.getElementById(id+"Readout");if(!el||!readout)return false;const value=el.getAttribute("aria-valuenow");return value!==null&&Number.isFinite(Number(value))&&readout.textContent===value+(id==="speed"?" km/h":"%")}),
     bottomKnob76:bottomKnob?near(box(bottomKnob).w,76)&&near(box(bottomKnob).h,76):false,
+    conditionKnob76:conditionKnob?near(box(conditionKnob).w,76)&&near(box(conditionKnob).h,76):false,
+    intelligibilityKnob76:intelligibilityKnob?near(box(intelligibilityKnob).w,76)&&near(box(intelligibilityKnob).h,76):false,
     mixKnob76:mixKnob?near(box(mixKnob).w,76)&&near(box(mixKnob).h,76):false,
 
     bottomTransmission:macros.TRANSMISSION?near(macros.TRANSMISSION.w,337)&&near(macros.TRANSMISSION.h,172)&&near(macros.TRANSMISSION.x,13)&&near(macros.TRANSMISSION.y,751):false,
