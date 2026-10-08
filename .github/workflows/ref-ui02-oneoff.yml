@@ -1,0 +1,35 @@
+name: SOURCERUNE REF Bitmap Materialization (one-off, not CI)
+on:
+  push:
+    branches:
+      - "ref/ui02-original-pixel-upscale-oneoff-20261008"
+    paths:
+      - ".github/workflows/ref-ui02-oneoff.yml"
+permissions:
+  contents: write
+jobs:
+  materialize-ui02-ref:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact approved repository REF
+        uses: actions/checkout@v7
+      - name: Install non-CI image tooling
+        shell: bash
+        run: |
+          python3 -m venv /tmp/sourcerune-ref-venv
+          /tmp/sourcerune-ref-venv/bin/pip install --quiet pillow
+      - name: Materialize exact UI_02 x10 and bounded scan
+        shell: bash
+        run: |
+          /tmp/sourcerune-ref-venv/bin/python tools/ref_scan/scan_ui02_binary.py
+      - name: Check in only approved-REF-derived artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- Assets/UI/UI_02/UI_02_REF/UI_02_REF_10X_PIXEL.png Assets/UI/UI_02/UI_02_REF/UI_02_REF_SCAN_OVERLAY_1X.png docs/product/reference/UI_02_REF_10X_SCAN_20261008.json docs/product/reference/UI_02_REF_10X_SCAN_20261008.md
+          git diff --cached --quiet && exit 0
+          git commit -m "chore(ref): materialize UI_02 10x and geometry scan [skip ci]"
+          git push origin HEAD:refs/heads/ref/ui02-original-pixel-upscale-oneoff-20261008
