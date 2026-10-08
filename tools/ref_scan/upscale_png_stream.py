@@ -17,13 +17,13 @@ def magnify(source,output,factor=10):
         rgba=src.convert("RGBA")
         w,h=rgba.size
         with open(output,"wb") as out:
-            out.write(b"\\x89PNG\\r\\n\\x1a\\n")
+            out.write(b"\x89PNG\r\n\x1a\n")
             png_chunk(out,b"IHDR",struct.pack(">2I5B",w*factor,h*factor,8,6,0,0,0))
             compressor=zlib.compressobj(level=6)
             buffered=bytearray()
             for y in range(h):
                 raw=rgba.crop((0,y,w,y+1)).tobytes()
-                line=b"\\x00"+b"".join(raw[i:i+4]*factor for i in range(0,len(raw),4))
+                line=b"\x00"+b"".join(raw[i:i+4]*factor for i in range(0,len(raw),4))
                 for j in range(factor):
                     buffered.extend(compressor.compress(line))
                     while len(buffered)>1048576:
