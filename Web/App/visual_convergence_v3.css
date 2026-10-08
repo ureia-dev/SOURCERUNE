@@ -355,3 +355,14 @@ body.ui-02 .module-cycle{
 body.ui-02 .module-cycle:hover{
   filter:drop-shadow(0 0 4px rgba(96,210,250,.50));
 }
+
+
+/* UI_01 BAD SIGNAL — reference four direct checkboxes; UI_02 unchanged. */
+body.ui-01 .macro-badsignal .macro-two-col{gap:6px}
+body.ui-01 .macro-badsignal .macro-side{min-width:0;gap:4px}
+body.ui-01 .macro-signal-toggles{display:flex;flex-direction:column;gap:5px;min-width:0}
+body.ui-01 .macro-signal-toggle{display:flex;align-items:center;gap:4px;min-width:0;min-height:13px;white-space:nowrap;cursor:pointer;color:#c6d7dc;font-size:8px;line-height:13px;user-select:none}
+body.ui-01 .macro-signal-toggle input{appearance:auto;accent-color:#55ccee;width:11px;height:11px;flex:0 0 11px;margin:0;cursor:pointer}
+body.ui-01 .macro-signal-toggle span{overflow:visible;text-overflow:clip}
+body.ui-01 .macro-signal-toggle:hover{color:#fff}
+body.ui-01 .macro-signal-toggle:focus-within{outline:1px solid #5dd6f4;outline-offset:2px;border-radius:2px}

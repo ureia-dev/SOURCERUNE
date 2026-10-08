@@ -55,7 +55,7 @@
 - [ ] **U01-11｜Meter/Peak/RMS/LUFS**（P1/P3）— REF 彩色分段/完整 dB/LUFS，Web 簡化；修真外觀並使用 Live Peak/RMS，LUFS 須真標準測量。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-12｜BAD SIGNAL 四勾選**（P0）— REF Static/Dropout/Interference/Low Bitrate，Web 僅文字數值；補主卡可操作 Checkbox 與 Advanced/State 同步。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **驗收/進度**：`PARTIAL — WEB IMPLEMENTED / BROWSER E2E PENDING`；Web 主卡已改為四個真 checkbox，映射原有 range IDs 而不新增參數；UI_02 保持原顯示。需等 PR Fast CI、Web Preview 瀏覽器 `interactionSmoke.U01-12` 真點擊/Advanced/Undo/Redo PASS，才能完成 Web 部分；Native VST3 Host/聲音 DSP 仍由 `CROSS-08`／`CROSS-15` 追蹤。未通過不可勾本項。
 - [ ] **U01-13｜CONDITION 勾選/USED**（P0）— REF Rattle、Wow/Flutter checkbox、USED 比例，Web 簡化；補可直接操作和一套 State/數值。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-14｜INTELLIGIBILITY Presence/Dynamic**（P0/待核准）— REF 有兩 checkbox，Web 無；先核實這兩項與現行參數的語意，再接入 State，不能憑圖新造 DSP。
@@ -119,7 +119,7 @@
 ## 共用圖片品質／操作／DSP／VST3：15 個待辦
 
 - [ ] **CROSS-01｜UI_01 正式兩張 PNG 真入 GitHub**（P0）— 1508×808 RGBA 原圖與 3770×2020 2.5× PNG 只在工作檔案，repo 目前只有 README；必須實際提交二進位、原 SHA256 96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916 與 2.5× SHA256 f67c59046f2c1f90379837f1898a63a98e9abbf3d0e57a82945f4e5b2afb773e 都驗證。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **驗收/進度**：`BLOCKED — TRANSFER ONLY`（2026-10-09）：本回合 container 核實 `/mnt/data/SOURCERUNE_UI01_REF_ORIGINAL_1508x808.png` 2,084,284 bytes，SHA-256 `96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916`；2.5× PNG 2,044,051 bytes，SHA-256 `f67c59046f2c1f90379837f1898a63a98e9abbf3d0e57a82945f4e5b2afb773e`。**原圖都在、未上 Git**；GitHub connector 只接受 text/base64 payload、不接受本機檔案路徑，container DNS 無法解析 github.com，故本回合不可實際推送 bytes。禁止重畫或以文檔冒充 PNG 已存。可恢復：取得授權 binary 傳輸管道→commit 兩檔→驗原 SHA→勾本項。
 - [ ] **CROSS-02｜SCN037 Scene Hero 512×256 問題**（P1/素材）— 部署圖含烘焙文字且尺寸比 Scene 顯示小，與核准夜景 REF 不符；需真正高解析獨立美術/前景。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-03｜主介面全部操作 E2E**（P2）— 兩套 UI 真 click、drag、wheel、keyboard、開關、Undo/Redo、數值/Focus/Bypass；不可只憑 Geometry PASS 打勾。
