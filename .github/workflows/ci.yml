@@ -77,13 +77,28 @@ jobs:
                   assert (ui / rel).is_file(), f"missing semantic asset: {rel}"
                   expected_semantic.add(rel)
 
+          # Formal approved *full REF* PNGs are review-only and must never
+          # be counted as semantic runtime artwork. Keep the whitelist exact;
+          # any unknown PNG still fails the strict semantic manifest equality.
+          full_ref_only = {
+              "UI_01/UI_01_REF/UI_01_REF_ORIGINAL_1508x808.png",
+              "UI_01/UI_01_REF/UI_01_REF_10X_PIXEL.png",
+              "UI_02/UI_02_REF/UI_02_REF.png",
+          }
+          actual_full_refs = set()
           actual_semantic = set()
           for surface in ("Shared", "UI_01", "UI_02"):
               base = ui / surface
-              actual_semantic.update(
-                  str(p.relative_to(ui)).replace("\\", "/")
-                  for p in base.rglob("*.png")
-              )
+              for p in base.rglob("*.png"):
+                  rel = str(p.relative_to(ui)).replace("\\", "/")
+                  if rel in full_ref_only:
+                      with p.open("rb") as fh:
+                          assert fh.read(8) == bytes.fromhex("89504e470d0a1a0a"), (
+                              f"invalid PNG signature for full REF: {rel}"
+                          )
+                      actual_full_refs.add(rel)
+                  else:
+                      actual_semantic.add(rel)
           assert expected_semantic == actual_semantic, (
               f"semantic manifest mismatch missing={sorted(expected_semantic-actual_semantic)[:5]} "
               f"extra={sorted(actual_semantic-expected_semantic)[:5]}"
