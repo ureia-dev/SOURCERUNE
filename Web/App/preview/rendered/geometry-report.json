@@ -1,5 +1,5 @@
 {
-  "commit": "52fb20fed893b9500de61ab2ffda555cd3aab95d",
+  "commit": "a254e17b9bbeac03c26c57123f83b0be7bf89818",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -261,6 +261,8 @@
         "motionAdjustGeometry": true,
         "motionAdjustReadouts": true,
         "bottomKnob76": true,
+        "conditionKnob76": true,
+        "intelligibilityKnob76": true,
         "mixKnob76": true,
         "bottomTransmission": true,
         "bottomCondition": true,
