@@ -805,8 +805,9 @@
   "verification": {
     "original": "GitHub source SHA verified via artifact in real container",
     "zoom": "2.5x original-pixel nearest output SHA verified in container, 42/42 sample matches",
-    "git_zoom_png": "PENDING-ONEOFF-EXECUTION",
+    "git_zoom_png": "PASS-GITHUB-BINARY: Actions run 37811957946, commit 47a702691503b672655b2f0d527d67473104ce25, blob 7459620e174349ea53b0d5a38fa900b566022bc6, 4180x2353 SHA256 734f107d1c9a74f7e0caf746419fac3539e6b6c418f0bd8a60efa6da0f45d3e6",
     "web_native": "PENDING",
-    "typography": "APPROX"
+    "typography": "APPROX",
+    "git_overlay_png": "PASS-GITHUB-BINARY: blob 0007a42d28a5e90b718e3d93751173ccb0e6b16d, 1672x941 SHA256 afeae3e51a8d8b9631b764a0eca59436d5d662679310a51573b8e820a2826300"
   }
 }

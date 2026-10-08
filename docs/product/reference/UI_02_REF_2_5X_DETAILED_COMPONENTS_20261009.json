@@ -4525,5 +4525,11 @@
     "Do not overwrite existing 1672x941 confirmed structural JSON",
     "No DSP/CI test rounds or Preset edits"
   ],
-  "zoom_factor": 2.5
+  "zoom_factor": 2.5,
+  "binary_status": {
+    "source": "VERIFIED-GITHUB",
+    "zoom": "VERIFIED-GITHUB-ACTION-37811957946",
+    "overlay": "VERIFIED-GITHUB-ACTION-37811957946",
+    "host": "PENDING"
+  }
 }
