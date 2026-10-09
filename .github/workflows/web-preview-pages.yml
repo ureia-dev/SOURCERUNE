@@ -128,6 +128,61 @@ jobs:
                 });
                 results[ui].interactionSmoke = {"U01-12":smoke};
                 if (!smoke.ok) throw new Error(`[UI_01] BAD SIGNAL checkbox smoke failed: ${JSON.stringify(smoke)}`);
+
+                // U01-13: two CONDITION checkboxes share the published
+                // Rattle/Wow-Flutter numeric IDs, Advanced and one-step history.
+                const condition = await page.evaluate(() => {
+                  const ids = ["rattle","wowFlutter"];
+                  const get = id => document.querySelector('[data-condition-checkbox="'+id+'"]');
+                  const panel = document.querySelector(".macro-condition")?.getBoundingClientRect();
+                  const visible = !!panel && ids.every(id => {
+                    const el = get(id), box = el?.getBoundingClientRect();
+                    return !!box && box.width>0 && box.height>0 && box.left>=panel.left && box.right<=panel.right && box.top>=panel.top && box.bottom<=panel.bottom;
+                  });
+                  if (!visible) return {ok:false,visible,missing:ids.filter(id=>!get(id))};
+                  const controls = {};
+                  for(const id of ids){
+                    const before = get(id).checked;
+                    get(id).click();
+                    const toggled = get(id)?.checked === !before;
+                    document.querySelector(".macro-condition h3")?.click();
+                    const adv = document.querySelector('[data-param="'+id+'"]');
+                    const value = adv ? Number(adv.value) : NaN;
+                    const advancedSynced = Number.isFinite(value) && (before ? value===0 : value>0);
+                    document.querySelector("#advancedCloseBtn")?.click();
+                    document.querySelector("#undoBtn")?.click();
+                    const undoRestored = get(id)?.checked === before;
+                    document.querySelector("#redoBtn")?.click();
+                    const redoToggled = get(id)?.checked === !before;
+                    document.querySelector("#undoBtn")?.click();
+                    const backToBaseline = get(id)?.checked === before;
+                    controls[id] = {before,toggled,advancedSynced,undoRestored,redoToggled,backToBaseline,ok:toggled&&advancedSynced&&undoRestored&&redoToggled&&backToBaseline};
+                  }
+                  return {ok:visible&&ids.every(id=>controls[id].ok),visible,controls};
+                });
+                results[ui].interactionSmoke["U01-13"] = condition;
+                if (!condition.ok) throw new Error("[UI_01] CONDITION checkbox smoke failed: "+JSON.stringify(condition));
+                // U01-17 (power subtask): real EQ_TONE bypass, not just ON text.
+                const eqPower = await page.evaluate(() => {
+                  const get = () => document.querySelector("[data-eq-power]");
+                  const before = get()?.getAttribute("aria-pressed");
+                  if (before===null||before===undefined) return {ok:false,reason:"missing EQ power"};
+                  get().click();
+                  const toggled = get()?.getAttribute("aria-pressed")!==before;
+                  document.querySelector(".macro-eq h3")?.click();
+                  const adv = document.querySelector("#advBypass")?.textContent?.trim();
+                  const advancedSynced = adv === (before==="true" ? "BYPASSED" : "ACTIVE");
+                  document.querySelector("#advancedCloseBtn")?.click();
+                  document.querySelector("#undoBtn")?.click();
+                  const undoRestored = get()?.getAttribute("aria-pressed")===before;
+                  document.querySelector("#redoBtn")?.click();
+                  const redoToggled = get()?.getAttribute("aria-pressed")!==before;
+                  document.querySelector("#undoBtn")?.click();
+                  const backToBaseline = get()?.getAttribute("aria-pressed")===before;
+                  return {ok:toggled&&advancedSynced&&undoRestored&&redoToggled&&backToBaseline,toggled,advancedSynced,undoRestored,redoToggled,backToBaseline};
+                });
+                results[ui].interactionSmoke["U01-17-POWER"] = eqPower;
+                if (!eqPower.ok) throw new Error("[UI_01] EQ power smoke failed: "+JSON.stringify(eqPower));
               }
               await page.screenshot({
                 path: `Web/App/preview/rendered/${ui}.png`,
