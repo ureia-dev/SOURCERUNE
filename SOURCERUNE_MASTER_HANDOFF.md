@@ -1,14 +1,17 @@
 # SOURCERUNE — 工作交接與最新核查點
 
-## Web DSP MVP checkpoint — 2026-10-10（開發中）
+## Web DSP MVP checkpoint — 2026-10-10
 
 - 起點 main `ef3c7324`；分支 `feat/shared-dsp-web-mvp`。本次明確授權以 Web 真聲音 → Native VST3 優先，取代舊 UI-only 工作順序；保留 UI、64 public IDs、74 Preset 及既有安全測試次數。
 - 新增共用 C++20 `Source/DSP/SceneProcessor.*`、WASM adapter／build script、AudioWorklet 與現有兩套 UI 的即時參數／Bypass／Mix／Gain 接線，PLAY 可切換 PAUSE。
 - 模型是 PROVISIONAL 頻響／頻寬 audition 起點：SOURCE 001/002/003/011/040；TRANSMISSION 001/002/003/005/011。GSM 005 僅頻寬，沒有真 GSM codec。未支援型號跳過該模組且畫面明示；其他模組仍只存 state，不宣稱完整 Factory 聲音。
 - 能力：完整 git clone；正式 UI02 REF 1,976,915 bytes 的 Git blob `dbb2c3cd` 與 HEAD 相同；修改前 Chromium 真頁 geometry PASS、5 張圖載入。g++ Native 與 Zig WASM 可編譯。
-- 已驗：48 kHz、20,480 samples 的 Native/WASM 相同 fixture 最大誤差 0；有限輸出、有真 dry/wet 差異、reset 後 exact bypass/stereo PASS。瀏覽器音訊整合／Fast CI／PR／部署尚待本批後續。
+- 已驗：48 kHz、20,480 samples 的 Native/WASM 相同 fixture 最大誤差 0；有限輸出、有真 dry/wet 差異、reset 後 exact bypass/stereo PASS。Chromium 153 真 AudioWorklet 與 OfflineAudioContext PASS：處理 RMS -15.4 dBFS、Bypass IN/OUT 同為 -12.3 dBFS、即時加重頻寬損失後 -17.7 dBFS；8 kHz 輸入衰減約 26.3 dB，stereo error 0；load/play/pause/resume/stop、Factory load、兩 UI geometry PASS。可重現入口 `Tests/Audio/browser_smoke.cjs`。
 - 建置：`ZIG=/path/to/zig bash Tools/Build/build_wasm.sh`，或 clang++ + wasm-ld；無 Emscripten runtime／第三方聲音引擎。WASM binary 連同 source 保存，Pages 可直接使用。
-- Native VST3 wrapper/Host、完整聲學／LUFS／使用者試聽仍 PENDING；下一步完成真 Browser transport + DSP 驗證，再保存 PR。
+- GitHub 第一個有效開發 checkpoint：`f352d3d82072419945db2ed36facd9d7ce0382b7`（本機 `3f84758` 的同內容；經 connector 上傳，SHA 不相同）。本批後續驗收修復保存在相同遠端分支；Fast CI／PR merge／Pages 狀態需查 live GitHub，未確認前不得報完成。
+- 根因修復：舊 CSS 隱藏 LOAD/PLAY/STOP/LOOP/Bypass，現移到 plugin shell 外的 Web audition bar；`.module-meta` 原本攔住 EDIT click，改為不攔截指標。不改兩套 shell 幾何或原素材。試聽使用頁底 LOAD AUDIO → PLAY，TRANSMISSION EDIT 調 Bad Signal／Bandwidth Loss；GLOBAL BYPASS 比較原音。
+- Native VST3 wrapper/Host、完整聲學／LUFS／使用者試聽仍 PENDING；下一批沿用這份 C++ 建立最小 VST3 wrapper，先驗載入/參數/狀態，再擴 DSP。不得再把 Web 描述成純 pass-through。
+- 使用者補充（2026-10-10）：接近本輪 token 上限即停在有效節點、將程式與交接存 GitHub，等待使用者額度重置後說「繼續」；不假設背景會自行續作。
 
 
 ## 最新 P0 UI_01 控制功能／集中部署 checkpoint（2026-10-09）
