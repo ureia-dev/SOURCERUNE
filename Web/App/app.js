@@ -98,7 +98,7 @@ function ui01ConditionDetail(){
   }).join("")}</div>`;
 }
 function bindUi01ConditionCheckboxes(){
-  $("[data-condition-checkbox]").forEach(box=>box.onchange=()=>{
+  $$("[data-condition-checkbox]").forEach(box=>box.onchange=()=>{
     const id=box.dataset.conditionCheckbox,previous=Number(state.params[id])||0,def=findControl(id);
     if(!def||def.type!=="range")return;
     let next;
@@ -126,7 +126,7 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(!x.target.closest("input,button,select")){openAdvanced(e.dataset.open)}});
 $$("[data-macro]").forEach(r=>{r.onpointerdown=()=>r.dataset.before=JSON.stringify(core());r.oninput=e=>{const id=e.target.dataset.macro;state.params[id]=+e.target.value;const k=e.target.closest(".macro-knob");if(k){const pct=macroPct(id);k.style.setProperty("--pct",pct);k.style.setProperty("--angle",(-135+pct*2.7)+"deg");const unit=findControl(id).unit||"";k.dataset.value=state.params[id]+unit;const v=k.querySelector(".macro-knob-value");if(v)v.textContent=state.params[id]+unit}updateScene();updateGains();updateCurves()};r.onchange=e=>{if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}});
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
-$$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}))}
+$$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}))}
 function findControl(id){for(const g of Object.values(schema.groups)){const c=g.controls.find(x=>x.id===id);if(c)return c}}
 function renderFlow(){const n=[["INPUT"],["TRANSMISSION","TRANSMISSION"],["SOURCE","SOURCE"],["CONDITION","CONDITION"],["COVER","WALL_COVER"],["DISTANCE / MOTION","MOTION"],["SPACE","SPACE_ENVIRONMENT"],["AMBIENCE","AMBIENCE"],["INTELLIGIBILITY","INTELLIGIBILITY"],["TONE","EQ_TONE"],["MIX / OUTPUT"]];$("#signalFlow").innerHTML=n.map(([x,k],i)=>`<span class="flow-node ${k&&state.bypass[k]?"bypassed":""} ${k&&state.advanced===k?"selected":""}">${x}</span>${i<n.length-1?'<span class="flow-arrow">→</span>':""}`).join("")}
 function renderNav(){$("#advancedNav").innerHTML=Object.entries(schema.groups).map(([k,g])=>`<button data-adv="${k}">${g.label}</button>`).join("");$$("[data-adv]").forEach(b=>b.onclick=()=>{state.advanced=b.dataset.adv;renderAdvanced();renderMacros()})}
