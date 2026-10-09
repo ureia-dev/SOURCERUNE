@@ -1,5 +1,15 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 最新 P0 UI_01 控制功能／集中部署 checkpoint（2026-10-09）
+
+- **本輪**：U01-13 CONDITION Rattle/Wow-Flutter 真 Checkbox 接既有數值；U01-17 EQ/TONE 主卡 ON/OFF 真 Power 接既有 EQ_TONE bypass。未修改 UI_02 外觀、DSP、74 Preset、參數 ID、REF 外框。
+- **五個 micro-checkpoints**：9b49b1bc（Checkbox）、7e28b217（EQ Power）、4e6e5155（局部 CSS）、25538158（原有 Chrome 一次性 smoke）、0f7c8e45（唯一工作日誌 PARTIAL）。[PR #63](https://github.com/ureia-dev/SOURCERUNE/pull/63) merge 3e3799d3，Fast CI #108 PASS。
+- **真正失敗的首次驗收**：Web Preview #80 雖然 workflow SUCCESS，但 Chrome 顯示 INIT ERROR，原因是兩個新事件用了單元素 selector 卻呼叫 forEach，產生新的 geometry report 失敗；不得將 #80 當作 Browser PASS。
+- **最小修復**：[PR #64](https://github.com/ureia-dev/SOURCERUNE/pull/64) 修兩個 selector 為雙美元符號集合選取器；實作 c472b14f、merge 43bfcb6a，Fast #109 PASS；沒有修改其他 CI/音效或測試次數。
+- **真正驗收通過**：[Web Preview #81](https://github.com/ureia-dev/SOURCERUNE/actions/runs/37926258273) 部署 SUCCESS，Web/App/preview/rendered/geometry-report.json 由 43bfcb6a 產生；UI_01/02 幾何 ok=true；U01-12 四組、U01-13 兩組及 U01-17-POWER 的可見/切換/Advanced/Undo/Redo/復原全為 true；render-log.txt 明確記錄 render audit completed successfully。
+- **仍 PENDING**：U01-13 的 Native/聲學未驗；U01-17 僅 Power 通過，HPF/LPF/Tone 選單、EQ 曲線/節點與 Native 未完成。兩項在唯一 UI_REF_GAP_WORKLOG.md 保留未勾 PARTIAL。Chrome 尚有未定位的一筆 HTTP 404，由 CROSS-06 追查。
+- **下次恢復**：以最新 GitHub main/PR/CI/Pages 為準，從單一 UI_REF_GAP_WORKLOG.md 未完成 ID 續做；已驗證 Web 事件不要重做。部署後 render audit bot 會另行產生新的 main commit，勿誤判為未合併。
+
 ## 最新插入 checkpoint — Shared 224 張高清美術重製（2026-10-09）
 
 - 使用者已核准 **全部 Shared 舊圖重做同樣樣子但清楚**。真圖尺寸只有 169～228px；Web 另用 `UI_01` 384×144、`UI_02` 512×256，故需同批重建 Shared 224 + Web/UI01 224 + Web/UI02 224，共 672 張；不是直接將糊 PNG 放大就算完成。
