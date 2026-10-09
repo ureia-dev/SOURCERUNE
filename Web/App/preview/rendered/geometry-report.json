@@ -1,5 +1,5 @@
 {
-  "commit": "a9b1ddb19cda51274b3a28d27d9b8175a6b24212",
+  "commit": "43bfcb6ab680053d4b2a4ed0f3f8cbfb955e134d",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -332,6 +332,38 @@
               "ok": true
             }
           }
+        },
+        "U01-13": {
+          "ok": true,
+          "visible": true,
+          "controls": {
+            "rattle": {
+              "before": true,
+              "toggled": true,
+              "advancedSynced": true,
+              "undoRestored": true,
+              "redoToggled": true,
+              "backToBaseline": true,
+              "ok": true
+            },
+            "wowFlutter": {
+              "before": false,
+              "toggled": true,
+              "advancedSynced": true,
+              "undoRestored": true,
+              "redoToggled": true,
+              "backToBaseline": true,
+              "ok": true
+            }
+          }
+        },
+        "U01-17-POWER": {
+          "ok": true,
+          "toggled": true,
+          "advancedSynced": true,
+          "undoRestored": true,
+          "redoToggled": true,
+          "backToBaseline": true
         }
       }
     },
