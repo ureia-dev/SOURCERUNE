@@ -366,3 +366,17 @@ body.ui-01 .macro-signal-toggle input{appearance:auto;accent-color:#55ccee;width
 body.ui-01 .macro-signal-toggle span{overflow:visible;text-overflow:clip}
 body.ui-01 .macro-signal-toggle:hover{color:#fff}
 body.ui-01 .macro-signal-toggle:focus-within{outline:1px solid #5dd6f4;outline-offset:2px;border-radius:2px}
+
+/* UI_01 CONDITION: two real, focusable controls inside the existing card. */
+body.ui-01 .macro-condition .macro-two-col{gap:6px}
+body.ui-01 .macro-condition .macro-side{min-width:0;gap:6px}
+body.ui-01 .macro-condition .macro-condition-toggles{display:flex;flex-direction:column;gap:6px;min-width:0}
+body.ui-01 .macro-condition-toggle{display:flex;align-items:center;gap:4px;min-height:14px;min-width:0;white-space:nowrap;cursor:pointer;font-size:8px;line-height:14px;color:#c6d7dc;user-select:none}
+body.ui-01 .macro-condition-toggle input{appearance:auto;accent-color:#55ccee;width:11px;height:11px;flex:0 0 11px;margin:0;cursor:pointer}
+body.ui-01 .macro-condition-toggle:hover{color:#fff}
+body.ui-01 .macro-condition-toggle:focus-within{outline:1px solid #5dd6f4;outline-offset:2px;border-radius:2px}
+
+/* UI_01 EQ/TONE uses the existing bypass; UI_02 retains its current label. */
+body.ui-01 .macro-eq-power{font-size:9px;min-width:35px;min-height:23px;padding:2px 5px;border:1px solid #596570;border-radius:3px;background:#142026;color:#aab7be;cursor:pointer}
+body.ui-01 .macro-eq-power.active{border-color:#50add0;background:#102b37;color:#e3f8ff}
+body.ui-01 .macro-eq-power:focus-visible{outline:1px solid #5dd6f4;outline-offset:2px}
