@@ -62,7 +62,7 @@
   - **實際瀏覽器驗證：DONE（2026-10-09）**：GitHub [Web Preview #79](https://github.com/ureia-dev/SOURCERUNE/actions/runs/37818887999)；`Web/App/preview/rendered/geometry-report.json` 的 `results.UI_01.interactionSmoke.U01-12` **ok=true**，四 ID 各自 `toggled=true`、`advancedSynced=true`、`undoRestored=true`、`redoToggled=true`、`backToBaseline=true`，四控制均在原卡可見範圍；`results.UI_01.ok=true`／`results.UI_02.ok=true`，兩 UI failures=[]；`render-log.txt` 為 `render audit completed successfully`。截圖：`Web/App/preview/rendered/UI_01.png`。
   - **完成範圍**：本 ID 僅標示 **UI_01 Web 主介面可直接操作與共用數值/Undo/Redo PASS**。Chrome log 仍有未定位的一筆 404，另由 `CROSS-06` 處理；Native VST3 Host/DSP 仍 PENDING，見 `CROSS-07`／`CROSS-08`／`CROSS-15`；不得延伸宣稱聲音已實作、1:1 美術已全部收斂。
 - [ ] **U01-13｜CONDITION 勾選/USED**（P0）— REF Rattle、Wow/Flutter checkbox、USED 比例，Web 簡化；補可直接操作和一套 State/數值。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **驗收/進度**：`PARTIAL：UI_01 Web 的 Rattle／Wow-Flutter 兩個勾選已綁定既有 rattle/wowFlutter 0–100 State；關閉 0、重新啟用回復正值或 schema default/step，且 Advanced／Undo／Redo 共用同一路徑；UI_02 仍顯示原數值。功能 commit `9b49b1bc`、CSS `4e6e5155`。現有 Web Preview 單次 Chrome 操作檢查已新增，但 **Fast CI／真 Chrome 驗收及 Native 尚待結果**；不勾整項。`
 - [ ] **U01-14｜INTELLIGIBILITY Presence/Dynamic**（P0/待核准）— REF 有兩 checkbox，Web 無；先核實這兩項與現行參數的語意，再接入 State，不能憑圖新造 DSP。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-15｜AMBIENCE S/M、Duck、波形/箭頭**（P0/待核准）— REF 有 S/M、Duck、環境波形、切換箭頭；需核 S/M 真義及所有 Live controls/預覽。
@@ -70,7 +70,7 @@
 - [ ] **U01-16｜MIX Wet/Ø**（P0/待核准）— REF 有 Wet 與 Ø 可點控制，Web 只有文字；先核准 Ø 功能再實作，勿擅加相位反轉。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-17｜EQ/TONE 彩色曲線/三下拉/On/Power**（P0）— REF 有 HPF/LPF/Tone 選擇、節點、On/Power；須按現有 4-band 做真可調/Undo/Bypass，不憑圖增加 Band。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **驗收/進度**：`PARTIAL：UI_01 主卡 ON/OFF 已改為按鈕，可直接切換既有 EQ_TONE bypass、Advanced 及 Undo/Redo；UI_02 原標籤不變。實作 commit `7e28b217`、CSS `4e6e5155`。**HPF/LPF/TONE 選單、曲線/節點和 Native 仍 PENDING；Fast／Chrome 尚待驗證，不勾整項**。`
 - [ ] **U01-18｜底部七區材質/字型/刻度/間距**（P1）— 七卡旋鈕、金屬材質、對比、留白、刻度與 REF 不同；逐區 1:1 REF/實際 Web 重疊驗證。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 
