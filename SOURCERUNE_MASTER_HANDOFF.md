@@ -1,5 +1,16 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## Web DSP MVP checkpoint — 2026-10-10（開發中）
+
+- 起點 main `ef3c7324`；分支 `feat/shared-dsp-web-mvp`。本次明確授權以 Web 真聲音 → Native VST3 優先，取代舊 UI-only 工作順序；保留 UI、64 public IDs、74 Preset 及既有安全測試次數。
+- 新增共用 C++20 `Source/DSP/SceneProcessor.*`、WASM adapter／build script、AudioWorklet 與現有兩套 UI 的即時參數／Bypass／Mix／Gain 接線，PLAY 可切換 PAUSE。
+- 模型是 PROVISIONAL 頻響／頻寬 audition 起點：SOURCE 001/002/003/011/040；TRANSMISSION 001/002/003/005/011。GSM 005 僅頻寬，沒有真 GSM codec。未支援型號跳過該模組且畫面明示；其他模組仍只存 state，不宣稱完整 Factory 聲音。
+- 能力：完整 git clone；正式 UI02 REF 1,976,915 bytes 的 Git blob `dbb2c3cd` 與 HEAD 相同；修改前 Chromium 真頁 geometry PASS、5 張圖載入。g++ Native 與 Zig WASM 可編譯。
+- 已驗：48 kHz、20,480 samples 的 Native/WASM 相同 fixture 最大誤差 0；有限輸出、有真 dry/wet 差異、reset 後 exact bypass/stereo PASS。瀏覽器音訊整合／Fast CI／PR／部署尚待本批後續。
+- 建置：`ZIG=/path/to/zig bash Tools/Build/build_wasm.sh`，或 clang++ + wasm-ld；無 Emscripten runtime／第三方聲音引擎。WASM binary 連同 source 保存，Pages 可直接使用。
+- Native VST3 wrapper/Host、完整聲學／LUFS／使用者試聽仍 PENDING；下一步完成真 Browser transport + DSP 驗證，再保存 PR。
+
+
 ## 最新 P0 UI_01 控制功能／集中部署 checkpoint（2026-10-09）
 
 - **本輪**：U01-13 CONDITION Rattle/Wow-Flutter 真 Checkbox 接既有數值；U01-17 EQ/TONE 主卡 ON/OFF 真 Power 接既有 EQ_TONE bypass。未修改 UI_02 外觀、DSP、74 Preset、參數 ID、REF 外框。
