@@ -136,11 +136,13 @@
 - [ ] **CROSS-06｜Web Preview 未定位 404**（P2）— #76 render-log 有 404 但 URL 未查出；需查失敗資源與根因並以新 log 驗證解決。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-07｜完整可執行 C++ 聲學 DSP**（P3）— Source/Motion/Space/Transmission/Condition/Cover/Ambience 等真訊號模型、相位/延遲/CPU/Golden 需驗證。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **驗收/進度**：`PARTIAL`（2026-10-10）：`Source/DSP/SceneProcessor.*` 真共用 C++ MVP；Native/WASM 48 kHz、20,480 samples parity 最大誤差 0。SOURCE／TRANSMISSION 頻響子集已接，完整聲學／CPU／Golden 仍 PENDING。起始實作 GitHub `f352d3d8`；本批 PR/Fast/deploy 以 MASTER_HANDOFF 及 live GitHub 為準。
+
 - [ ] **CROSS-08｜真正 Native VST3 可載入 Plugin**（P3）— Source/Plugin/VST3 僅 .gitkeep；需真 editor/build/Host 介面、狀態操作與產物。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
-- [ ] **CROSS-09｜WebAssembly/AudioWorklet DSP**（P3）— 目前 Web Gain→Analyzer pass-through；要真共用 C++ 聲學、音檔處理與 parity。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+- [ ] **CROSS-09｜WebAssembly/AudioWorklet DSP**（P3）— 共用 C++ MVP 已接入；完整聲學、音檔處理與跨平台 parity 持續驗證。
+  - **驗收/進度**：`PARTIAL`（2026-10-10）：共用 C++ WASM / AudioWorklet 已在真 Chromium 153 跑通；兩 UI geometry、WAV load/play/pause/resume/stop、參數即時改音、Bypass、OfflineAudioContext 8 kHz 衰減與 stereo PASS。新增 Web 試聽列解開原本隱藏的 transport。完整模組／跨瀏覽器／Native VST3 parity 仍待驗，不勾整項完成。
+
 - [ ] **CROSS-10｜真正 LUFS**（P3）— Web 有 Peak/RMS，不是真 LUFS；要標準計算、Live 更新及測試向量。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-11｜Host Automation/Recall/Offline Render**（P3）— 可載入 VST3 後驗 automation、保存/開啟、複製、離線輸出與正確聲音。
@@ -152,9 +154,7 @@
 - [ ] **CROSS-14｜SCN049–074 新 78 張 Hero**（P1/素材）— Manifest 已有但 26 Scene×Shared/UI01/UI02 78 真獨立 PNG 未完成；需裁切、畫質、CRC/State 驗證。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-15｜Web/Native 64參數/74場景 parity**（P2/P3）— 64 參數 ID 已在規格，但兩 UI/Native state/Seed/Preset/A-B-C-D/Undo、Host recall 尚無完整證據。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
-
-## 插入優先工作：Shared 224 張高清重製（2026-10-09 使用者核准）
+  - **驗收/進度**：`PARTIAL`（2026-10-10）：保留 64 IDs／74 Preset，兩 UI 共用 MVP 音訊；本次 Native/WASM core fixture PASS，僅支援 sourceCharacter/badSignal/bandwidthLoss/inputGain/mix/outputGain、對應 selectors／bypass。完整 64 參數、74 場景與 VST3 Host recall PENDING。
 
 - [ ] **ART-SHARED-001｜Shared 224 張真正高解析重製及兩套 UI 對應圖**（P1／插入執行）— 原圖只有約 169～228px 寬，用戶要求**全部跟原來一樣但清楚**，禁止直接放大糊圖交差。正式目標是 224 個 3× 高解析母圖（至少 1536px 寬）與 224×2 個 UI_01／UI_02 2× runtime PNG（預設 768×288／1024×512）；細 icon 可單張採 3×。
   - **來源及逐張工作單**：`docs/artwork/shared_hires/PRODUCTION_RULES.md`、`docs/artwork/shared_hires/asset_inventory_v1.json`。機器清單保留 224 個 ID 的三份舊 PNG SHA/尺寸/路徑，不開第二套重複 UI TODO。

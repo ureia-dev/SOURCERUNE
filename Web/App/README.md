@@ -1,4 +1,4 @@
-# SOURCERUNE Web App — UI Foundation V1
+# SOURCERUNE Web App — Shared DSP MVP
 
 This is the first functional browser UI shell for both UI_01 and UI_02.
 
@@ -8,13 +8,17 @@ Implemented now:
 - live source/listener Scene View with 3D/Top presentation switch
 - Motion/Bad Signal/Condition/Intelligibility/Ambience/Mix/Speed macros
 - Spectrum / Space Response / Signal Flow tabs
-- local audio loading, play/stop/loop
-- real pass-through Peak/RMS metering and spectrum from Web Audio
+- local audio loading, play/pause/stop/loop using the visible Web audition bar
+- real shared C++ / WASM / AudioWorklet processing, input/output Peak/RMS and output spectrum
 - A/B/C/D in-memory UI snapshots
 - scene preset browser wiring
 - image-path wiring with graceful fallback while PNGs are absent
 
-Important: current audio is intentionally **pass-through**. No fake browser DSP is implemented. The next DSP phase must connect the shared C++ engine through Wasm/AudioWorklet.
+Audio is now processed by `Source/DSP/SceneProcessor.cpp`. Open the hosted Web App (HTTPS), choose **LOAD AUDIO → PLAY**, adjust SOURCE Character or TRANSMISSION Bad Signal/Bandwidth Loss, and compare **GLOBAL BYPASS**. PLAY toggles PAUSE. Files stay local.
+
+Supported provisional models: SOURCE 001/002/003/011/040 (earpiece, bottom speaker, speakerphone, walkie, megaphone); TRANSMISSION 001/002/003/005/011 (direct, narrowband, PSTN, GSM bandwidth only, walkie). Other models skip that module and show a pending notice. All 74 presets remain selectable; only supported SOURCE/TRANSMISSION and Mix/Gain currently affect sound. Codec/noise/dropout/Condition/Cover/Motion/Space/Ambience/Intelligibility/EQ and LUFS remain pending. This is not a measured-device or full-scene simulation yet.
+
+Native VST3 wrapper/Host is pending; the native C++ processor already uses the same source. Build and validation commands: `Source/DSP/README.md`.
 
 ## UI state / browser manual acceptance (Web TEST)
 
@@ -25,6 +29,6 @@ These are reproducible **manual checks**, not a claim of completed human visual 
 3. Select **SPACE RESPONSE** or **SIGNAL FLOW**, change UI_01/UI_02, Undo/Redo or restore a Snapshot: the active tab button and displayed panel must both match the restored `state.tab`.
 4. Load different Factory/User presets, then Undo/Redo or restore a Snapshot: preset dropdown and Scene title must follow the active restored `state.preset` (or show the neutral scene title when no preset is selected).
 5. Save a User preset: its newly saved name must appear immediately as the Scene title, with the dropdown selection updated.
-6. Confirm no change to audio pass-through, DSP, control parameter IDs, original REF geometry or native UI layout.
+6. Compare processed sound with GLOBAL BYPASS; original public parameter IDs and plugin shell geometry remain unchanged. Web transport lives outside the plugin shell.
 
 Fast CI checks source syntax/structure; browser interaction and subjective visual approval are **separate** from CI and require actual Web TEST observation.
