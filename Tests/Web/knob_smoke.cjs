@@ -328,6 +328,21 @@ async function auditHpf(page,ui){
   return {ok:true,ui,init,changed,undo:true,redo:true,curve:points,audio,realWorklet};
 }
 async function auditMiniEq(page,ui){
+  // Validate graph-only display zoom for a flat, medium and even out-of-range
+  // bell without changing a live parameter or touching the C++ DSP.
+  const fixedScale=await page.evaluate(async()=>{
+    const {eqGraph}=await import('./eq_graph.js');
+    const p={hpf:20,lpf:20000,b1Freq:120,b1Gain:0,b1Q:.7,
+      b2Freq:600,b2Gain:0,b2Q:1,b3Freq:2400,b3Gain:0,b3Q:1};
+    const state={params:p,bypass:{EQ_TONE:false}};
+    return [0,6,9,14,-18].map(g=>{
+      p.b2Gain=g;
+      const result=eqGraph(state,48000);
+      return {gain:g,displayRange:result.displayRange,nodeY:result.nodes.find(n=>n.id==='b2').y};
+    });
+  });
+  assert(fixedScale.every(x=>x.displayRange===12),ui+' EQ graph must remain fixed +/-12 dB for any active Gain');
+  assert.equal(fixedScale[0].nodeY,50,ui+' fixed +/-12 dB must keep zero dB on centreline');
   const names=await page.$$eval('.macro-eq-svg [data-eq-node]',els=>els.map(e=>e.dataset.eqNode));
   assert.deepEqual(names,['hpf','b1','b2','b3','lpf'],ui+' must have HPF LPF and exactly 3 EQ bands');
   const results={};
@@ -356,7 +371,7 @@ async function auditMiniEq(page,ui){
     assert.equal(undone,before,ui+' '+id+' EQ drag missing atomic undo');
     results[id]={before,dragged:after,undone};
   }
-  return {ok:true,nodes:names,values:results};
+  return {ok:true,nodes:names,values:results,fixedScale};
 }
 
 

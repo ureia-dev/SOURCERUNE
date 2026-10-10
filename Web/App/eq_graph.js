@@ -25,10 +25,10 @@ export function eqGraph(state,sampleRate=48000){
     }
     return Math.max(-36,Math.min(18,v));
   };
-  // VVChain-style auto-fit: display-only +/-6, +/-12, +/-18 dB.
-  // No audio parameter, preset, gain value or response formula is modified.
-  const maxGain=Math.max(...[1,2,3].map(b=>Math.abs(Number(p["b"+b+"Gain"])||0)));
-  const displayRange=maxGain<=6?6:maxGain<=12?12:18;
+  // User-approved fixed +/-12 dB visual scale in both layouts and future
+  // enlarged editor. This is display-only: native gain range, presets,
+  // transfer-function coefficients, automation and DSP remain unchanged.
+  const displayRange=12;
   const y=f=>Math.max(4,Math.min(96,50-response(f)/displayRange*34));
   const path=Array.from({length:101},(_,i)=>{
     const f=20*Math.pow(1000,i/100);
