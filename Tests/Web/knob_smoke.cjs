@@ -58,7 +58,8 @@ async function auditKnobs(page,ui){
   const dialogs=await auditCompactAdvanced(page,ui);
   const motion=ui==="UI_02"?await auditUi02MotionSmallKnobs(page):[];
   const knobValues=await auditRefKnobValueComposition(page,ui);
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues};
+  const hpf=await auditHpf(page,ui);
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
@@ -232,5 +233,96 @@ async function auditRefKnobValueComposition(page,ui){
       "UI_02 approved bottom metal dial uses 76px for "+id);
   }
   return {ok:true,values:result};
+}
+
+// Same existing one-shot Web Preview Chrome smoke, no extra CI tier.
+async function auditHpf(page,ui){
+  const selector='[data-eq-hpf]';
+  const box=await page.$eval(selector,e=>{
+    const r=e.getBoundingClientRect();
+    return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width,h:r.height};
+  });
+  assert(box.w>45&&box.h>0,ui+" bottom EQ HPF control is not visible");
+  const init=await page.$eval(selector,e=>Number(e.value));
+  assert.equal(init,20,ui+" untouched HPF default must be neutral/OFF");
+  await page.$eval(selector,e=>e.focus());
+  await page.keyboard.press('ArrowRight');
+  const changed=await page.$eval(selector,e=>Number(e.value));
+  assert.equal(changed,21,ui+" real keyboard did not change HPF cutoff");
+  assert.equal(await page.$eval('[data-eq-hpf-value]',e=>e.textContent.trim()),'21 Hz');
+  const points=await page.$eval('[data-eq-hpf-path]',e=>e.getAttribute('d'));
+  assert(points!=='M0 50H100',ui+" HPF curve did not update");
+  await page.click('.macro-eq h3');
+  assert.equal(await page.$eval('[data-param="hpf"]',e=>Number(e.value)),21,
+    ui+" Advanced HPF does not reflect main-control state");
+  await page.click('#advancedCloseBtn');
+  await page.click('#undoBtn');
+  assert.equal(await page.$eval(selector,e=>Number(e.value)),20,ui+" HPF Undo failed");
+  await page.click('#redoBtn');
+  assert.equal(await page.$eval(selector,e=>Number(e.value)),21,ui+" HPF Redo failed");
+  await page.click('#undoBtn');
+  // Test actual real shared C++ WASM filter, not merely state/visual updates.
+  const audio=await page.evaluate(async()=>{
+    const response=await fetch('./audio/hpf.wasm');
+    if(!response.ok)throw new Error('HPF WASM HTTP '+response.status);
+    const exp=new WebAssembly.Instance(new WebAssembly.Module(await response.arrayBuffer()),
+      {env:{sinf:Math.sin,cosf:Math.cos}}).exports;
+    if(exp.sr_hpf_version()!==1)throw new Error('invalid HPF ABI');
+    exp.sr_hpf_prepare(48000);
+    exp.sr_hpf_set(240,1);
+    exp.sr_hpf_reset();
+    const a=new Float32Array(exp.memory.buffer,exp.sr_hpf_buffer(0),128);
+    const b=new Float32Array(exp.memory.buffer,exp.sr_hpf_buffer(1),128);
+    const rms=f=>{
+      exp.sr_hpf_reset();let sum=0;
+      for(let j=0;j<375;j++){
+        for(let i=0;i<128;i++){const v=.25*Math.sin(2*Math.PI*f*(j*128+i)/48000);a[i]=b[i]=v;}
+        exp.sr_hpf_process(128);
+        if(j>=188)for(let i=0;i<128;i++)sum+=a[i]*a[i];
+      }
+      return Math.sqrt(sum/(187*128));
+    };
+    const low=rms(40),high=rms(4000);
+    const attenuation=20*Math.log10(low/high);
+    exp.sr_hpf_set(20,1);exp.sr_hpf_reset();
+    const bypassIdle=exp.sr_hpf_active()===0;
+    for(let i=0;i<128;i++)a[i]=b[i]=i/128*.2;
+    exp.sr_hpf_process(128);
+    const bypassExact=a.every((v,i)=>v===Math.fround(i/128*.2));
+    return {low,high,attenuation,bypassIdle,bypassExact};
+  });
+  assert(audio.attenuation<-20,ui+" real HPF failed frequency attenuation "+JSON.stringify(audio));
+  assert(audio.bypassIdle&&audio.bypassExact,ui+" OFF must be sample-exact");
+  let realWorklet=null;
+  if(ui==="UI_01"){
+    // Real end-to-end OfflineAudioContext -> existing SOURCE WASM -> new
+    // shared C++ HPF WASM, without speakers or a separate CI tier.
+    realWorklet=await page.evaluate(async()=>{
+      const {createSceneNode}=await import('./audio/engine.js');
+      async function run(hpf){
+        const context=new OfflineAudioContext(2,24000,48000);
+        const state={
+          params:{sourceCharacter:50,badSignal:0,bandwidthLoss:0,inputGain:0,mix:100,outputGain:0,hpf},
+          selection:{SOURCE:'SRC_003_Smartphone_Speakerphone',TRANSMISSION:'TRN_001_Direct_Clean'},
+          bypass:{SOURCE:true,TRANSMISSION:true,EQ_TONE:false},globalBypass:false
+        };
+        const node=await createSceneNode(context,state);
+        const input=context.createBuffer(2,24000,48000);
+        for(let c=0;c<2;c++)for(let i=0;i<24000;i++)
+          input.getChannelData(c)[i]=.25*Math.sin(2*Math.PI*40*i/48000);
+        const source=context.createBufferSource();
+        source.buffer=input;source.connect(node);node.connect(context.destination);
+        source.start();const rendered=await context.startRendering();
+        let energy=0;for(let i=12000;i<24000;i++){
+          const y=rendered.getChannelData(0)[i];energy+=y*y;
+        }
+        return Math.sqrt(energy/12000);
+      }
+      return {off:await run(20),on:await run(240)};
+    });
+    assert(realWorklet.off>.16&&realWorklet.on<realWorklet.off*.12,
+      "HPF not working in actual Web AudioWorklet: "+JSON.stringify(realWorklet));
+  }
+  return {ok:true,ui,init,changed,undo:true,redo:true,curve:points,audio,realWorklet};
 }
 module.exports={auditKnobs};

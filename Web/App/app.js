@@ -1,4 +1,4 @@
-import {createSceneNode, parametersFromState, audioSupportNote} from "./audio/engine.js";
+import {createSceneNode, parametersFromState, hpfFromState, audioSupportNote} from "./audio/engine.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
 const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"],LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT",SCENE_PRESET_HERO:"SCENE PRESET HERO"};
 const DEFSEL={SOURCE:"SRC_003_Smartphone_Speakerphone",TRANSMISSION:"TRN_005_GSM_Stable",WALL_COVER:"CVR_001_None_Open",SPACE_ENVIRONMENT:"SPC_022_Busy_City_Street"};
@@ -75,7 +75,68 @@ function macroPct(id){const c=findControl(id),v=+state.params[id];return Math.ma
 function macroKnob(id,label,unit="",klass=""){const c=findControl(id),v=state.params[id],pct=macroPct(id),angle=-135+pct*2.7;return`<div class="macro-knob ${klass}" data-value="${v}${unit}" style="--pct:${pct};--angle:${angle}deg"><div class="macro-knob-face"><strong class="macro-knob-value">${v}${unit}</strong></div><span class="macro-knob-label">${label}</span><input class="macro-knob-range" data-macro="${id}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${v}" aria-label="${label}" aria-valuetext="${v}${c.unit||""}" title="Drag vertically, scroll, arrow keys, Shift for fine drag, double click to reset"></div>`}
 function macroSelect(id,klass=""){const c=findControl(id);return`<select class="macro-select ${klass}" data-macro-selectbox="${id}">${c.options.map(o=>`<option value="${o}" ${state.params[id]===o?"selected":""}>${pretty(o)}</option>`).join("")}</select>`}
 function modeButtons(id,vals,labels={}){return`<div class="macro-mode-row">${vals.map(v=>`<button data-macro-select="${id}" data-value="${v}" class="${state.params[id]===v?"active":""}">${labels[v]||pretty(v)}</button>`).join("")}</div>`}
-function miniEqSvg(){const fs=[20,state.params.b1Freq,state.params.b2Freq,state.params.b3Freq,state.params.b4Freq,20000],gs=[0,state.params.b1Gain,state.params.b2Gain,state.params.b3Gain,state.params.b4Gain,0];const lx=f=>Math.log10(Math.max(20,f)/20)/3*100,y=g=>50-Math.max(-18,Math.min(18,g))/18*34;const pts=fs.map((f,i)=>[lx(f),y(gs[i])]);const path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");return`<svg class="macro-eq-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><g class="macro-eq-grid"><path d="M0 25H100M0 50H100M0 75H100M25 0V100M50 0V100M75 0V100"/></g><path class="macro-eq-line" d="${path}"/>${pts.slice(1,5).map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.7"/>`).join("")}</svg>`}
+function hpfEqPath(){
+  const hz=Number(state.params.hpf);
+  if(state.bypass.EQ_TONE||hz<=20)return "M0 50H100";
+  const lx=f=>Math.log10(Math.max(20,f)/20)/3*100;
+  const y=Math.min(95,50+Math.max(0,Math.log2(hz/20))*12);
+  return "M0 "+y.toFixed(1)+" L"+lx(hz).toFixed(1)+" 50 H100";
+}
+function miniEqSvg(){
+  const x=Math.log10(Math.max(20,state.params.hpf)/20)/3*100;
+  return `<svg class="macro-eq-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="HPF live response (other EQ bands pending)">
+    <g class="macro-eq-grid"><path d="M0 25H100M0 50H100M0 75H100M25 0V100M50 0V100M75 0V100"/></g>
+    <path data-eq-hpf-path class="macro-eq-line" d="${hpfEqPath()}"/>
+    <circle data-eq-hpf-marker cx="${x.toFixed(1)}" cy="50" r="2.7"/>
+  </svg>`;
+}
+function syncHpfUi(){
+  const input=$("[data-eq-hpf]");
+  if(input){
+    input.value=String(state.params.hpf);
+    const out=$("[data-eq-hpf-value]");
+    if(out)out.textContent=state.params.hpf<=20?"OFF":state.params.hpf+" Hz";
+  }
+  const path=$("[data-eq-hpf-path]");
+  if(path)path.setAttribute("d",hpfEqPath());
+  const marker=$("[data-eq-hpf-marker]");
+  if(marker)marker.setAttribute("cx",(Math.log10(Math.max(20,state.params.hpf)/20)/3*100).toFixed(1));
+}
+function bindEqHpf(){
+  const el=$("[data-eq-hpf]");
+  if(!el)return;
+  let before=null;
+  const apply=raw=>{
+    const def=findControl("hpf");
+    const hz=Math.max(def.min,Math.min(def.max,Math.round(Number(raw))));
+    if(!Number.isFinite(hz)||hz===state.params.hpf)return;
+    state.params.hpf=hz;
+    syncHpfUi();
+    updateGains();
+    const detail=$('[data-param="hpf"]');
+    if(detail){detail.value=String(hz);const value=detail.closest(".adv-control")?.querySelector(".value");
+      if(value)value.textContent=hz+" Hz";}
+  };
+  el.addEventListener("pointerdown",e=>{if(e.button===0)before=core();});
+  el.addEventListener("keydown",()=>{if(!before)before=core();});
+  el.addEventListener("input",e=>apply(e.target.value));
+  el.addEventListener("change",e=>{
+    apply(e.target.value);
+    if(before)finishMacroKnobChange(before,"hpf");
+    before=null;
+  });
+  el.addEventListener("wheel",e=>{
+    if(e.ctrlKey||e.deltaY===0)return;
+    e.preventDefault();e.stopPropagation();
+    const old=core();apply(Number(state.params.hpf)+(e.deltaY<0?1:-1));
+    finishMacroKnobChange(old,"hpf");
+  },{passive:false});
+  el.addEventListener("dblclick",e=>{
+    e.preventDefault();e.stopPropagation();
+    const old=core();apply(20);finishMacroKnobChange(old,"hpf");
+  });
+}
+
 // UI_01's four reference checkboxes re-use the existing numeric controls.
 // Zero means inactive; when checked again, restore the previous positive
 // intensity (or the published schema default/minimum). No new DSP ID.
@@ -271,9 +332,9 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 `<div class="macro macro-intelligibility ${state.advanced==="INTELLIGIBILITY"?"selected":""}" data-open="INTELLIGIBILITY"><h3>INTELLIGIBILITY</h3>${macroKnob("intelligibility","AMOUNT","%","centered")}${modeButtons("intelligibilityMode",["NATURAL","DIALOGUE","AGGRESSIVE"],{NATURAL:"Natural",DIALOGUE:"More Clear",AGGRESSIVE:"Muffled"})}</div>`+
 `<div class="macro macro-ambience ${state.advanced==="AMBIENCE"?"selected":""}" data-open="AMBIENCE"><h3>AMBIENCE</h3>${macroSelect("ambienceType")}<div class="ambience-preview"><img src="${assetUrl(selected("SPACE_ENVIRONMENT"))}" alt=""></div>${macroKnob("ambience","AMOUNT","%","centered")}<div class="macro-wave" aria-hidden="true"></div></div>`+
 `<div class="macro macro-mix ${state.advanced==="MIX"?"selected":""}" data-open="MIX"><h3>MIX</h3>${macroKnob("mix","WET","%","large centered")}<span class="macro-mix-mode">WET</span></div>`+
-`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3>${state.ui==="UI_01"?`<button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button>`:`<span>${state.bypass.EQ_TONE?"OFF":"ON"}</span>`}</div>${miniEqSvg()}<div class="macro-eq-foot"><span>HPF ${state.params.hpf} Hz</span><span>LPF ${(state.params.lpf/1000).toFixed(1)} kHz</span><span>TONE ${state.params.finalTone}</span></div></div>`;
+`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><label class="eq-hpf-control"><span>HPF</span><input type="range" data-eq-hpf min="20" max="1000" step="1" value="${state.params.hpf}" title="HPF 20 Hz = OFF; 21–1000 Hz is active"/><output data-eq-hpf-value>${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</output></label><span class="eq-pending">LPF · 4-BAND · TONE: PENDING</span></div></div>`;
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(x.target.closest(".macro-knob,input,button,select,[role=slider]"))return;openAdvanced(e.dataset.open)});
-bindMacroKnobs();
+bindMacroKnobs();bindEqHpf();
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
 $$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}))}
 function findControl(id){for(const g of Object.values(schema.groups)){const c=g.controls.find(x=>x.id===id);if(c)return c}}
@@ -290,7 +351,7 @@ function renderAdvanced(){const k=state.advanced,g=schema.groups[k];
     drawer.style.setProperty("--advanced-cols",String(total<=2?2:total<=6?3:4));
     drawer.dataset.section=k;
     drawer.dataset.controlCount=String(total);
-  }$(".advanced-drawer")?.classList.toggle("bypassed",!!state.bypass[k]);$$("[data-adv]").forEach(b=>b.classList.toggle("active",b.dataset.adv===k));$("#advancedTitle").textContent=g.label;let extra="";if(g.assetType)extra=`<div class="adv-control wide"><label>MODEL / TYPE</label><div class="value">${selected(g.assetType).name}</div><button data-library="${g.assetType}">SELECT FROM LIBRARY</button></div>`;if(g.special==="motion")extra+=`<div class="adv-control wide"><label>TIMELINE</label><div class="adv-buttons"><button data-set-marker="start">SET START</button><button data-set-marker="closest">SET CLOSEST</button><button data-set-marker="end">SET END</button><button id="advSync">${state.sync?"SYNC ON":"SYNC OFF"}</button></div></div>`;if(g.special==="seed")extra+=`<div class="adv-control wide"><label>DETERMINISTIC SEED</label><div class="adv-buttons"><input id="seedInput" type="number" value="${state.seed}"><button id="applySeed">APPLY</button><button id="newSeed">NEW SEED</button></div></div>`;if(g.special==="generator")extra+=`<div class="adv-control"><label>GENERATOR STATE</label><button id="generatorToggle" class="${state.generatorOn?"active":""}">${state.generatorOn?"ON":"OFF"}</button></div>`;const bp=g.bypass?`<button id="advBypass" class="${state.bypass[k]?"active":""}">${state.bypass[k]?"BYPASSED":"ACTIVE"}</button>`:"";$("#advancedBody").innerHTML=`<div class="adv-top"><div class="adv-summary">${g.assetType?selected(g.assetType).name:g.label}</div><div>${bp}</div></div><div class="adv-grid">${g.controls.map(control).join("")}${extra}</div><div class="state-note">${audioSupportNote(state)}。已支援：SOURCE Character、Bad Signal／Bandwidth Loss、Mix／Gain／Bypass；其餘控制僅保存狀態。</div>`;bindAdvanced()}
+  }$(".advanced-drawer")?.classList.toggle("bypassed",!!state.bypass[k]);$$("[data-adv]").forEach(b=>b.classList.toggle("active",b.dataset.adv===k));$("#advancedTitle").textContent=g.label;let extra="";if(g.assetType)extra=`<div class="adv-control wide"><label>MODEL / TYPE</label><div class="value">${selected(g.assetType).name}</div><button data-library="${g.assetType}">SELECT FROM LIBRARY</button></div>`;if(g.special==="motion")extra+=`<div class="adv-control wide"><label>TIMELINE</label><div class="adv-buttons"><button data-set-marker="start">SET START</button><button data-set-marker="closest">SET CLOSEST</button><button data-set-marker="end">SET END</button><button id="advSync">${state.sync?"SYNC ON":"SYNC OFF"}</button></div></div>`;if(g.special==="seed")extra+=`<div class="adv-control wide"><label>DETERMINISTIC SEED</label><div class="adv-buttons"><input id="seedInput" type="number" value="${state.seed}"><button id="applySeed">APPLY</button><button id="newSeed">NEW SEED</button></div></div>`;if(g.special==="generator")extra+=`<div class="adv-control"><label>GENERATOR STATE</label><button id="generatorToggle" class="${state.generatorOn?"active":""}">${state.generatorOn?"ON":"OFF"}</button></div>`;const bp=g.bypass?`<button id="advBypass" class="${state.bypass[k]?"active":""}">${state.bypass[k]?"BYPASSED":"ACTIVE"}</button>`:"";$("#advancedBody").innerHTML=`<div class="adv-top"><div class="adv-summary">${g.assetType?selected(g.assetType).name:g.label}</div><div>${bp}</div></div><div class="adv-grid">${g.controls.map(control).join("")}${extra}</div><div class="state-note">${audioSupportNote(state)}。已支援：SOURCE Character、Bad Signal／Bandwidth Loss、Mix／Gain／Bypass；HPF 已有真 DSP，LPF／4-band／其餘控制仍僅保存狀態。</div>`;bindAdvanced()}
 function bindAdvanced(){$$("[data-library]").forEach(b=>b.onclick=()=>openBrowser(b.dataset.library));$$("[data-param]").forEach(c=>{c.onpointerdown=()=>c.dataset.before=JSON.stringify(core());const apply=e=>{const id=e.target.dataset.param,def=findControl(id);state.params[id]=def.type==="select"?e.target.value:+e.target.value;updateScene();updateGains();updateCurves();const v=e.target.closest(".adv-control")?.querySelector(".value");if(v&&def.type==="range")v.textContent=state.params[id]+" "+(def.unit||"")};c.oninput=apply;c.onchange=e=>{apply(e);if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}});const bp=$("#advBypass");if(bp)bp.onclick=()=>mut(()=>state.bypass[state.advanced]=!state.bypass[state.advanced]);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));const sy=$("#advSync");if(sy)sy.onclick=()=>mut(()=>state.sync=!state.sync);const ap=$("#applySeed");if(ap)ap.onclick=()=>mut(()=>state.seed=Math.max(0,Math.floor(+$("#seedInput").value||0)));const ns=$("#newSeed");if(ns)ns.onclick=()=>mut(()=>state.seed=(Math.imul(state.seed||1,1664525)+1013904223)>>>0);const gt=$("#generatorToggle");if(gt)gt.onclick=()=>mut(()=>state.generatorOn=!state.generatorOn)}
 // UI_02 Motion deck reuses the already-defined shared parameters; no new DSP state.
 // Drag commits one history entry on release. Wheel/keyboard commit single value steps.
@@ -404,7 +465,7 @@ async function setupAudio(){
   try{await audioSetup;}finally{audioSetup=null;}
 }
 function updateGains(){
-  if(sceneNode)sceneNode.port.postMessage({type:"parameters",values:parametersFromState(state)});
+  if(sceneNode)sceneNode.port.postMessage({type:"parameters",values:parametersFromState(state),hpf:hpfFromState(state)});
   const label=$("#buildLabel");
   if(label){label.textContent="WEB TEST · "+(audioName?audioName+" · ":"")+audioSupportNote(state);label.title=label.textContent;}
 }

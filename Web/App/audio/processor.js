@@ -8,6 +8,17 @@ class SceneWorklet extends AudioWorkletProcessor {
         sinf:Math.sin,cosf:Math.cos,powf:Math.pow
       }});
       this.dsp=instance.exports;
+      // Same C++ HighPass core as Native, tiny independent WASM binary.
+      const tone=new WebAssembly.Instance(new WebAssembly.Module(options.processorOptions.toneBytes),{
+        env:{sinf:Math.sin,cosf:Math.cos}
+      });
+      this.tone=tone.exports;
+      if(this.tone.sr_hpf_version()!==1)throw new Error('HPF ABI 不相容');
+      this.tone.sr_hpf_prepare(sampleRate);
+      this.tone.sr_hpf_set(...options.processorOptions.hpf);
+      this.tone.sr_hpf_reset();
+      this.toneBuf=[0,1].map(c=>new Float32Array(
+        this.tone.memory.buffer,this.tone.sr_hpf_buffer(c),128));
       if(this.dsp.sr_version()!==1)throw new Error('DSP ABI 不相容');
       this.dsp.sr_prepare(sampleRate);
       this.dsp.sr_parameters(...options.processorOptions.parameters);
@@ -15,8 +26,14 @@ class SceneWorklet extends AudioWorkletProcessor {
       this.input=[0,1].map(c=>new Float32Array(this.dsp.memory.buffer,this.dsp.sr_input(c),128));
       this.output=[0,1].map(c=>new Float32Array(this.dsp.memory.buffer,this.dsp.sr_output(c),128));
       this.port.onmessage=({data})=>{
-        if(data.type==='parameters')this.dsp.sr_parameters(...data.values);
-        if(data.type==='reset')this.dsp.sr_reset();
+        if(data.type==='parameters'){
+          this.dsp.sr_parameters(...data.values);
+          if(data.hpf)this.tone.sr_hpf_set(...data.hpf);
+        }
+        if(data.type==='reset'){
+          this.dsp.sr_reset();
+          this.tone.sr_hpf_reset();
+        }
       };
       this.port.postMessage({type:'ready'});
     } catch(error) { this.dsp=null;this.port.postMessage({type:'error',message:String(error)}); }
@@ -32,7 +49,14 @@ class SceneWorklet extends AudioWorkletProcessor {
         for(let i=0;i<n;i++)this.input[c][i]=src?src[offset+i]:0;
       }
       this.dsp.sr_process(n);
-      for(let c=0;c<output.length;c++)for(let i=0;i<n;i++)output[c][offset+i]=this.output[c][i];
+      // OFF path avoids both the HPF work and the extra buffer copies.
+      const useHpf=!!this.tone.sr_hpf_active();
+      if(useHpf){
+        for(let c=0;c<2;c++)this.toneBuf[c].set(this.output[c].subarray(0,n));
+        this.tone.sr_hpf_process(n);
+      }
+      const rendered=useHpf?this.toneBuf:this.output;
+      for(let c=0;c<output.length;c++)for(let i=0;i<n;i++)output[c][offset+i]=rendered[c][i];
     }
     return true;
   }
