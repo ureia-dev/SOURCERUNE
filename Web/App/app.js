@@ -5,6 +5,7 @@ import {attachEqInteractions,dismissEqFloat} from "./eq_interactions.js";
 import {eqMiniInlineMarkup,bindEqMiniInline,syncEqMiniInline,selectEqMiniInline} from "./eq_mini_inline.js";
 import {openEqFocus,eqFocusIsOpen,markMiniEqInert,syncEqFocus,repositionEqFocus} from "./eq_focus.js";
 import {sceneViewBox,syncSceneZoom,syncSceneGuide,syncSceneTime,bindSceneView} from "./scene_view_ref_stage1.js";
+import {ambienceRefMarkup,bindAmbienceRef,paintAmbienceOutput} from "./ui01_bottom_ref.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
 const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"],LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT",SCENE_PRESET_HERO:"SCENE PRESET HERO"};
 const DEFSEL={SOURCE:"SRC_003_Smartphone_Speakerphone",TRANSMISSION:"TRN_005_GSM_Stable",WALL_COVER:"CVR_001_None_Open",SPACE_ENVIRONMENT:"SPC_022_Busy_City_Street"};
@@ -336,13 +337,13 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 `<div class="macro macro-badsignal ${state.advanced==="TRANSMISSION"?"selected":""}" data-open="TRANSMISSION"><h3>BAD SIGNAL</h3><div class="macro-two-col">${macroKnob("badSignal","AMOUNT","%")}<div class="macro-side"><span class="macro-device-name">${selected("TRANSMISSION").name}</span>${ui01SignalDetail()}</div></div></div>`+
 `<div class="macro macro-condition ${state.advanced==="CONDITION"?"selected":""}" data-open="CONDITION"><h3>CONDITION</h3><div class="macro-two-col">${macroKnob("condition","AMOUNT","%")}<div class="macro-side">${macroSelect("conditionMode")}${ui01ConditionDetail()}</div></div></div>`+
 `<div class="macro macro-intelligibility ${state.advanced==="INTELLIGIBILITY"?"selected":""}" data-open="INTELLIGIBILITY"><h3>INTELLIGIBILITY</h3>${macroKnob("intelligibility","AMOUNT","%","centered")}${modeButtons("intelligibilityMode",["NATURAL","DIALOGUE","AGGRESSIVE"],{NATURAL:"Natural",DIALOGUE:"More Clear",AGGRESSIVE:"Muffled"})}</div>`+
-`<div class="macro macro-ambience ${state.advanced==="AMBIENCE"?"selected":""}" data-open="AMBIENCE"><h3>AMBIENCE</h3>${macroSelect("ambienceType")}<div class="ambience-preview"><img src="${assetUrl(selected("SPACE_ENVIRONMENT"))}" alt=""></div>${macroKnob("ambience","AMOUNT","%","centered")}<div class="macro-wave" aria-hidden="true"></div></div>`+
+`<div class="macro macro-ambience ${state.advanced==="AMBIENCE"?"selected":""}" data-open="AMBIENCE"><h3>AMBIENCE</h3>${macroSelect("ambienceType")}<div class="ambience-preview"><img src="${assetUrl(selected("SPACE_ENVIRONMENT"))}" alt=""></div>${macroKnob("ambience","AMOUNT","%","centered")}<div class="macro-wave" aria-hidden="true"></div>${ambienceRefMarkup(state)}</div>`+
 `<div class="macro macro-mix ${state.advanced==="MIX"?"selected":""}" data-open="MIX"><h3>MIX</h3>${macroKnob("mix","WET","%","large centered")}<span class="macro-mix-mode">WET</span></div>`+
 `<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" data-eq-zoom-in class="macro-eq-zoom-in" aria-label="Zoom in EQ editor" title="Zoom In · expand EQ">⤢</button><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><div class="eq-cut-indicators" aria-label="HPF and LPF are draggable in graph"><span>HPF <strong data-eq-readout="hpf">${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</strong></span><span class="eq-cut-caption">DRAG EQ POINTS</span><span>LPF <strong data-eq-readout="lpf">${state.params.lpf>=20000?"OFF":(state.params.lpf/1000).toFixed(1)+" kHz"}</strong></span></div>${eqMiniInlineMarkup()}</div></div>`;
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(x.target.closest(".macro-knob,input,button,select,[role=slider]"))return;openAdvanced(e.dataset.open)});
 bindMacroKnobs();if(eqFocusIsOpen())markMiniEqInert();else bindMiniEq();bindMiniEqInline();
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
-$$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}));
+$$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();bindAmbienceRef({getState:()=>state,findControl,mut});$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}));
   $$("[data-eq-zoom-in]").forEach(b=>b.onclick=e=>{
     e.preventDefault();e.stopPropagation();dismissEqFloat();
     openEqFocus({getState:()=>state,onDismiss:dismissEqFloat,
@@ -666,6 +667,6 @@ function spectrum(){
 }
 function waveform(){const c=$("#sceneWaveformCanvas");if(!c)return;const x=c.getContext("2d"),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle="#315564";x.lineWidth=1;x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();if(!inAn)return;const d=new Uint8Array(inAn.fftSize);inAn.getByteTimeDomainData(d);x.strokeStyle="#5cc9ee";x.lineWidth=1.5;x.beginPath();for(let a=0;a<w;a++){const n=Math.floor(a/w*(d.length-1)),yy=d[n]/255*h;a?x.lineTo(a,yy):x.moveTo(a,yy)}x.stroke()}
 function time(){const t=audio.currentTime||0,m=Math.floor(t/60),s=Math.floor(t%60),ms=Math.floor(t%1*1000);$("#transportTime").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${String(ms).padStart(3,"0")}`;if(audio.duration)$("#seekSlider").value=Math.round(t/audio.duration*1000);syncSceneTime(state,audio)}
-function animate(){requestAnimationFrame(animate);time();spectrum();waveform();meters();updateScene()}
+function animate(){requestAnimationFrame(animate);time();spectrum();waveform();meters();paintAmbienceOutput(outAn,!audio.paused,performance.now());updateScene()}
 init().catch(e=>{console.error(e);$("#buildLabel").textContent="WEB TEST · INIT ERROR";mark("INIT ERROR")});
 window.addEventListener("resize",fitRuntimeShell,{passive:true});
