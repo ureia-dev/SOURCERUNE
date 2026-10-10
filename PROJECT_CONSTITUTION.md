@@ -1,5 +1,13 @@
 # SOURCERUNE PROJECT CONSTITUTION — 永久製作原則與完整規格
 
+## 2026-10-10 最新 EQ UI 限定：小視窗不得浮黑框／HPF & LPF 放進頻譜
+
+**2026-10-10 目前最新用戶 EQ 五項更正（在 UI 產品契約中取代歷史小框／滑桿規則）**：節點旁/焦點不准出現黑色方塊；小 EQ 點選/拖曳/滾輪完全不顯示數值浮動資訊框，只有 Zoom In Focus 大 EQ 使用 Freq/Gain/Q 浮框；HPF 原獨立 slider 移除，HPF 與 LPF 直接作為小頻譜五個實際可拖曳點的兩端，另有 Band1–3 三點；配色採 VVChain 式分明 HPF 綠/B1 紅/B2 黃/B3 藍/LPF 粉的鮮明但不刺眼色彩；頻譜**只參考 private chen2622113/VVChain 的 UI 呈現**，對數頻率、功率平均、7-tap 空間平滑、快升慢降，並使用 SOURCERUNE 既有 post-DSP AnalyserNode 一次 FFT 讀數（不創第二 FFT／音訊節點、不變聲音）；真 EQ 曲線及 ±24dB 顯示不變。僅 Web UI_01/02；Native VST3 自訂視窗與 Host 驗收 PENDING。**DSP changed NO**。當輪工作分支 fix/eq-spectrum-node-ux-vvchain-reference-20261010，已修改 Web/App/eq_interactions.js、eq_analyzer_v1.js、eq_graph.js、app.js、eq_polish_v1.css、Tests/Web/knob_smoke.cjs；**Fast/Chromium/deploy 尚待 PR 驗收，不能冒稱通過。**
+
+## 2026-10-10 最新核准決策：EQ 固定 ±24 dB 的高精度 Web 圖形（取代 ±12）
+
+右下小 EQ 及內建 Zoom In 放大視窗須採 **同一套真實 HPF／LPF／Band1–3 EQ**。其顯示固定 ±24 dB，不再自動縮放；**實際 Band Gain 範圍仍為 −18～+18 dB**，不得為了圖改演算法。按核准專業 EQ 示意圖，節點要細小等比例圓形（Web 實測 mini 4.4–4.5 px、Focus 6.9 px），保留獨立透明滑鼠命中區以方便拖曳；曲線細緻、彩色柔和漸層、網格低對比。Focus 11 個 Freq/Gain/Q 旋鈕必須對應既有同一份狀態／Undo／AudioWorklet，控制方式沿用 VVChain UI_A 的滑鼠操作語意，但嚴禁搬 VVChain DSP。未實作的 24 dB/oct 滤波斜率、額外 Band Bypass、Phase/濾波 Type 不可呈現成假功能，現有 HPF／LPF 仍固定真 12 dB/oct。主實作 [PR #104](https://github.com/ureia-dev/SOURCERUNE/pull/104) 已合併，Fast #38047626674 PASS，真 Web Preview #38047739428 UI_01/02 eqFocus/eqMouse/geometry PASS。Native 自訂 EQ GUI 仍 PENDING；DSP unchanged，未觸發新 DSP restore。完整可操作數值規格與 10+10+10+2 證據參照 `docs/product/UI_FUNCTION_CONTRACT.md`、`docs/product/reference/EQ_24DB_MOUSE_PRECISION_AUDIT_20261010.md`。
+
 > **永久規範；任何 GPT、Codex、GitHub Copilot、開發者、排程、PR、分支、交接與後續新對話均應遵守。**
 >
 > **唯一專案：`ureia-dev/SOURCERUNE`。** 不要與 VVChain 或其他專案混淆。
@@ -11,6 +19,10 @@
 > **本文件不應每次交接重寫一份。** 接手的人都應從 repo 根目錄 `AGENTS.md` 進入，並直接閱讀本永久規範；每次進度變更應更新 HANDOFF 而不是竄改已核准的長期準則。
 
 > **原始決議來源警示（2026-10-08）**：使用者已指定 SOURCERUNE 最初完整產品討論正本為 `https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3`。這是私人聊天連結，當前尚未讀到全文；此前的完整交接檔是後續聊天整理而非原始正本。詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` §0A。**永久原則已保存可確認部分，但不能稱所有最初討論已 100% 覆蓋**。若日後取得正本全文，需逐訊息核對並把確認的新最終決議修訂於本憲章及相關規格。
+
+## DSP 最高優先凍結補充決議（2026-10-10）
+
+正式核准的新規範：現有 DSP 聲音演算法在沒有**使用者對本次精確變更的明確核准**前一律不准動；獲准後改前、獨立再審、改後須三次核對，**每次實際修改前必須另建立且從 GitHub 遠端驗證一筆 DSP 還原點**。任何自主 DSP 研發責任、舊版規劃、UI/CI 建置授權均不能取代此條。細節、範圍、例外、驗收及不宣稱虛假保護等，單一權威見 [DSP_FREEZE_AND_RESTORE_POLICY.md](docs/architecture/DSP_FREEZE_AND_RESTORE_POLICY.md)。
 
 ## 開始任何工作的固定程序
 

@@ -1,5 +1,5 @@
 {
-  "commit": "3d1652ee8704ac0b63a9745c873b4d969ae7f9e5",
+  "commit": "b5676adf1aa2d1b29f7679f66c203f180829b431",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -193,50 +193,50 @@
               "w": 54.99998158701009,
               "h": 54.99999003271587,
               "x": 25.499992768313753,
-              "y": 625.9997661644874
+              "y": 650.9997984878926
             },
             {
-              "w": 54.99999003271587,
-              "h": 54.99999003271587,
-              "x": 86.49997265375062,
-              "y": 625.9997661644874
+              "w": 42.999993435862336,
+              "h": 42.999993435862336,
+              "x": 108.49995515370772,
+              "y": 650.9997984878926
             },
             {
-              "w": 54.99999003271587,
-              "h": 54.99999003271587,
-              "x": 147.4999440934817,
-              "y": 625.9997661644874
+              "w": 42.999993435862336,
+              "h": 42.999993435862336,
+              "x": 169.49994348485035,
+              "y": 650.9997984878926
             },
             {
-              "w": 54.99995624989276,
-              "h": 54.99999003271587,
-              "x": 208.4999493160359,
-              "y": 625.9997661644874
+              "w": 42.999993435862336,
+              "h": 42.999993435862336,
+              "x": 230.499931815993,
+              "y": 650.9997984878926
             }
           ],
           "badSignal": {
             "w": 67.99999197644438,
-            "h": 68.00002575926749,
+            "h": 67.99995819362127,
             "x": 296.9998988807134,
-            "y": 625.9997661644874
+            "y": 657.4060352342153
           },
           "condition": {
             "w": 67.99995819362127,
-            "h": 68.00002575926749,
+            "h": 67.99995819362127,
             "x": 482.99984613194306,
-            "y": 625.9997661644874
+            "y": 650.9997984878926
           },
           "intelligibility": {
             "w": 68.00002575926749,
             "h": 68.00002575926749,
-            "x": 748.4997286087986,
-            "y": 625.9997661644874
+            "x": 697.9997457456086,
+            "y": 661.9997559550479
           },
           "ambience": {
             "w": 67.99995819362127,
-            "h": 67.99995819362127,
-            "x": 934.4997096428515,
-            "y": 655.9997914394443
+            "h": 68.00002575926749,
+            "x": 902.9997270218167,
+            "y": 663.999766648798
           },
           "mix": {
             "w": 82.0001006155172,
@@ -364,6 +364,400 @@
           "undoRestored": true,
           "redoToggled": true,
           "backToBaseline": true
+        }
+      },
+      "knobSmoke": {
+        "ok": true,
+        "ui": "UI_01",
+        "before": 20,
+        "dragged": 42,
+        "scrolled": 41,
+        "keyed": 42,
+        "advanced": 42,
+        "undid": 41,
+        "redid": 42,
+        "restored": 20,
+        "ambience": null,
+        "allVisible": [
+          {
+            "id": "speed",
+            "before": 60,
+            "dragged": 100,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "doppler",
+            "before": 70,
+            "dragged": 83,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "width",
+            "before": 40,
+            "dragged": 53,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "badSignal",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "condition",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "intelligibility",
+            "before": 70,
+            "dragged": 83,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "ambience",
+            "before": 35,
+            "dragged": 48,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "mix",
+            "before": 100,
+            "dragged": 87,
+            "hit": true,
+            "alignment": 0
+          }
+        ],
+        "dialogs": {
+          "small": {
+            "width": 470,
+            "height": 234.5625,
+            "parent": "BODY",
+            "cols": "2"
+          },
+          "medium": {
+            "width": 750,
+            "height": 393.375
+          },
+          "large": {
+            "width": 940,
+            "height": 391.375,
+            "viewportHeight": 807
+          },
+          "outsideDismiss": true,
+          "escapeDismiss": true
+        },
+        "motion": [],
+        "knobValues": {
+          "ok": true,
+          "values": {
+            "speed": {
+              "valueText": "60",
+              "controlValue": "60",
+              "hidden": false,
+              "faceDiameter": 43,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 170.45538330078125,
+              "faceTop": 588.0780639648438
+            },
+            "doppler": {
+              "valueText": "70%",
+              "controlValue": "70",
+              "hidden": false,
+              "faceDiameter": 43,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 225.55947875976562,
+              "faceTop": 588.0780639648438
+            },
+            "width": {
+              "valueText": "40%",
+              "controlValue": "40",
+              "hidden": false,
+              "faceDiameter": 43,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 280.66357421875,
+              "faceTop": 588.0780639648438
+            },
+            "badSignal": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 340.7360534667969,
+              "faceTop": 593.8651123046875
+            },
+            "condition": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 508.75836181640625,
+              "faceTop": 588.0780639648438
+            },
+            "intelligibility": {
+              "valueText": "70%",
+              "controlValue": "70",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 702.9776611328125,
+              "faceTop": 598.0148315429688
+            },
+            "ambience": {
+              "valueText": "35%",
+              "controlValue": "35",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 888.16357421875,
+              "faceTop": 599.821533203125
+            },
+            "mix": {
+              "valueText": "100%",
+              "controlValue": "100",
+              "hidden": false,
+              "faceDiameter": 82,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 1039.473876953125,
+              "faceTop": 565.494384765625
+            }
+          }
+        },
+        "hpf": {
+          "ok": true,
+          "ui": "UI_01",
+          "init": "OFF",
+          "changed": "21 Hz",
+          "integratedGraph": true,
+          "noStandaloneSlider": true,
+          "noBlackPopup": true,
+          "undo": true,
+          "redo": true,
+          "curve": "M0 54.89 L1 54.02 L2 53.26 L3 52.62 L4 52.08 L5 51.64 L6 51.28 L7 51.00 L8 50.77 L9 50.59 L10 50.45 L11 50.35 L12 50.27 L13 50.20 L14 50.15 L15 50.12 L16 50.09 L17 50.07 L18 50.05 L19 50.04 L20 50.03 L21 50.02 L22 50.02 L23 50.01 L24 50.01 L25 50.01 L26 50.01 L27 50.00 L28 50.00 L29 50.00 L30 50.00 L31 50.00 L32 50.00 L33 50.00 L34 50.00 L35 50.00 L36 50.00 L37 50.00 L38 50.00 L39 50.00 L40 50.00 L41 50.00 L42 50.00 L43 50.00 L44 50.00 L45 50.00 L46 50.00 L47 50.00 L48 50.00 L49 50.00 L50 50.00 L51 50.00 L52 50.00 L53 50.00 L54 50.00 L55 50.00 L56 50.00 L57 50.00 L58 50.00 L59 50.00 L60 50.00 L61 50.00 L62 50.00 L63 50.00 L64 50.00 L65 50.00 L66 50.00 L67 50.00 L68 50.00 L69 50.00 L70 50.00 L71 50.00 L72 50.00 L73 50.00 L74 50.00 L75 50.00 L76 50.00 L77 50.00 L78 50.00 L79 50.00 L80 50.00 L81 50.00 L82 50.00 L83 50.00 L84 50.00 L85 50.00 L86 50.00 L87 50.00 L88 50.00 L89 50.00 L90 50.00 L91 50.00 L92 50.00 L93 50.00 L94 50.00 L95 50.00 L96 50.00 L97 50.00 L98 50.00 L99 50.00 L100 50.00",
+          "audio": {
+            "low": 0.004914465814464016,
+            "high": 0.17677454446938118,
+            "attenuation": -31.11886816733262,
+            "bypassIdle": true,
+            "bypassExact": true
+          },
+          "realWorklet": {
+            "off": 0.17677669493967038,
+            "on": 0.004907983511890018
+          }
+        },
+        "eq": {
+          "ok": true,
+          "nodes": [
+            "hpf",
+            "b1",
+            "b2",
+            "b3",
+            "lpf"
+          ],
+          "values": {
+            "hpf": {
+              "before": 20,
+              "dragged": 29,
+              "undone": 20
+            },
+            "b1": {
+              "before": 0,
+              "dragged": 3.8,
+              "undone": 0
+            },
+            "b2": {
+              "before": 0,
+              "dragged": 3.8,
+              "undone": 0
+            },
+            "b3": {
+              "before": 0,
+              "dragged": 3.8,
+              "undone": 0
+            },
+            "lpf": {
+              "before": 20000,
+              "dragged": 13860,
+              "undone": 20000
+            }
+          },
+          "fixedScale": [
+            {
+              "gain": 0,
+              "displayRange": 24,
+              "nodeY": 50
+            },
+            {
+              "gain": 6,
+              "displayRange": 24,
+              "nodeY": 41.5
+            },
+            {
+              "gain": 9,
+              "displayRange": 24,
+              "nodeY": 37.25
+            },
+            {
+              "gain": 14,
+              "displayRange": 24,
+              "nodeY": 30.166666666666664
+            },
+            {
+              "gain": -18,
+              "displayRange": 24,
+              "nodeY": 75.5
+            }
+          ]
+        },
+        "eqMouse": {
+          "ok": true,
+          "onlyMiniNodes": true,
+          "noBlackPopup": true,
+          "noOpaqueNodeFocus": true,
+          "nodeWheelQ": [
+            1,
+            0.9
+          ],
+          "gainDrag": [
+            0,
+            7.6
+          ],
+          "bellDoubleClickGain": 0,
+          "cutPoints": true,
+          "vividNodes": [
+            "rgb(34, 197, 94)",
+            "rgb(239, 68, 68)",
+            "rgb(250, 204, 21)",
+            "rgb(59, 130, 246)",
+            "rgb(244, 114, 182)"
+          ],
+          "analyzerReference": true,
+          "noAdvanced": true,
+          "undo": true
+        },
+        "eqInline": {
+          "ok": true,
+          "contained": true,
+          "selectedB2": true,
+          "wheel": [
+            "+0 dB",
+            "+0.1 dB"
+          ],
+          "verticalDrag": [
+            "+0 dB",
+            "+1.4 dB"
+          ],
+          "typedFreq": "1700 Hz",
+          "atomicUndo": true,
+          "cutsFreqOnly": true,
+          "miniPopupNever": true
+        },
+        "eqFocus": {
+          "ok": true,
+          "sharedLiveSVG": true,
+          "inertSmall": true,
+          "nodes": [
+            "hpf",
+            "b1",
+            "b2",
+            "b3",
+            "lpf"
+          ],
+          "largeSize": [
+            813,
+            452
+          ],
+          "b2Gain": [
+            "+0.0 dB",
+            "+2.1 dB"
+          ],
+          "qWheel": [
+            "1.00",
+            "0.90"
+          ],
+          "undo": true,
+          "redo": true,
+          "readoutPopup": true,
+          "escape": true,
+          "reopen": true,
+          "viewportContained": true,
+          "zoomOut": true,
+          "closeX": true,
+          "fixedRange": 24,
+          "nodeDimensions": {
+            "mini": {
+              "w": 4.46923828125,
+              "h": 4.40423583984375
+            },
+            "miniHit": {
+              "w": 17.876708984375,
+              "h": 17.61700439453125
+            },
+            "focus": {
+              "w": 6.9000244140625,
+              "h": 6.9000244140625
+            },
+            "focusHit": {
+              "w": 22,
+              "h": 22
+            },
+            "line": "url(#sr-eq-line-91)"
+          },
+          "liveControls": [
+            "hpf",
+            "b1Freq",
+            "b1Gain",
+            "b1Q",
+            "b2Freq",
+            "b2Gain",
+            "b2Q",
+            "b3Freq",
+            "b3Gain",
+            "b3Q",
+            "lpf"
+          ],
+          "knobGesture": [
+            "+0.0 dB",
+            "+1.3 dB"
+          ],
+          "knobWheel": true,
+          "accessibleSliders": true,
+          "keyboardPopup": true
         }
       }
     },
@@ -524,27 +918,27 @@
         "bottomKnob": {
           "w": 76.00003640004896,
           "h": 76.00003640004896,
-          "x": 28.000010783503857,
+          "x": 57.00002730003672,
           "y": 796.000370734456
         },
         "motionAdjust": {
           "speed": {
             "w": 86.00002717864643,
             "h": 76.00003640004896,
-            "x": 822.547241947931,
-            "y": 645.0003036673871
+            "x": 775.5472387023381,
+            "y": 663.0003403102168
           },
           "doppler": {
-            "w": 85.99996062695384,
+            "w": 86.00002717864643,
             "h": 76.00003640004896,
-            "x": 987.797357434817,
-            "y": 645.0003036673871
+            "x": 946.7973220357054,
+            "y": 663.0003403102168
           },
           "width": {
-            "w": 86.00009373033903,
+            "w": 85.99996062695384,
             "h": 76.00003640004896,
-            "x": 1153.031766722249,
-            "y": 645.0003036673871
+            "x": 1135.031796631112,
+            "y": 663.0003403102168
           }
         },
         "motionKnobAssetBindings": {
@@ -570,8 +964,355 @@
         "mixKnob": {
           "w": 76.00003640004896,
           "h": 76.00003640004896,
-          "x": 1115.0005357783944,
+          "x": 1036.0004821792584,
           "y": 796.000370734456
+        }
+      },
+      "knobSmoke": {
+        "ok": true,
+        "ui": "UI_02",
+        "before": 20,
+        "dragged": 42,
+        "scrolled": 41,
+        "keyed": 42,
+        "advanced": 42,
+        "undid": 41,
+        "redid": 42,
+        "restored": 20,
+        "ambience": {
+          "first": 35,
+          "changed": 82,
+          "reverted": 35
+        },
+        "allVisible": [
+          {
+            "id": "badSignal",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "condition",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "intelligibility",
+            "before": 70,
+            "dragged": 83,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "mix",
+            "before": 100,
+            "dragged": 87,
+            "hit": true,
+            "alignment": 0
+          }
+        ],
+        "dialogs": {
+          "small": {
+            "width": 470,
+            "height": 234.5625,
+            "parent": "BODY",
+            "cols": "2"
+          },
+          "medium": {
+            "width": 750,
+            "height": 393.375
+          },
+          "large": {
+            "width": 940,
+            "height": 391.375,
+            "viewportHeight": 941
+          },
+          "outsideDismiss": true,
+          "escapeDismiss": true
+        },
+        "motion": [
+          {
+            "id": "speed",
+            "before": 60,
+            "dragged": 84,
+            "wheel": 83,
+            "keyed": 84,
+            "restored": 60,
+            "art": "RT_KNOB_S_BASE.png"
+          },
+          {
+            "id": "doppler",
+            "before": 70,
+            "dragged": 94,
+            "wheel": 93,
+            "keyed": 94,
+            "restored": 70,
+            "art": "RT_KNOB_S_BASE.png"
+          },
+          {
+            "id": "width",
+            "before": 40,
+            "dragged": 64,
+            "wheel": 63,
+            "keyed": 64,
+            "restored": 40,
+            "art": "RT_KNOB_S_BASE.png"
+          }
+        ],
+        "knobValues": {
+          "ok": true,
+          "values": {
+            "badSignal": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": false,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": false,
+              "valueRight": true,
+              "insideCard": true,
+              "faceLeft": 121.57174682617188,
+              "faceTop": 730.0191040039062
+            },
+            "condition": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": true,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": false,
+              "valueRight": true,
+              "insideCard": true,
+              "faceLeft": 426.96917724609375,
+              "faceTop": 730.0191040039062
+            },
+            "intelligibility": {
+              "valueText": "70%",
+              "controlValue": "70",
+              "hidden": false,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": false,
+              "valueRight": true,
+              "insideCard": true,
+              "faceLeft": 725.9468383789062,
+              "faceTop": 730.0191040039062
+            },
+            "mix": {
+              "valueText": "100%",
+              "controlValue": "100",
+              "hidden": false,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 1019.421875,
+              "faceTop": 730.0191040039062
+            }
+          }
+        },
+        "hpf": {
+          "ok": true,
+          "ui": "UI_02",
+          "init": "OFF",
+          "changed": "21 Hz",
+          "integratedGraph": true,
+          "noStandaloneSlider": true,
+          "noBlackPopup": true,
+          "undo": true,
+          "redo": true,
+          "curve": "M0 54.89 L1 54.02 L2 53.26 L3 52.62 L4 52.08 L5 51.64 L6 51.28 L7 51.00 L8 50.77 L9 50.59 L10 50.45 L11 50.35 L12 50.27 L13 50.20 L14 50.15 L15 50.12 L16 50.09 L17 50.07 L18 50.05 L19 50.04 L20 50.03 L21 50.02 L22 50.02 L23 50.01 L24 50.01 L25 50.01 L26 50.01 L27 50.00 L28 50.00 L29 50.00 L30 50.00 L31 50.00 L32 50.00 L33 50.00 L34 50.00 L35 50.00 L36 50.00 L37 50.00 L38 50.00 L39 50.00 L40 50.00 L41 50.00 L42 50.00 L43 50.00 L44 50.00 L45 50.00 L46 50.00 L47 50.00 L48 50.00 L49 50.00 L50 50.00 L51 50.00 L52 50.00 L53 50.00 L54 50.00 L55 50.00 L56 50.00 L57 50.00 L58 50.00 L59 50.00 L60 50.00 L61 50.00 L62 50.00 L63 50.00 L64 50.00 L65 50.00 L66 50.00 L67 50.00 L68 50.00 L69 50.00 L70 50.00 L71 50.00 L72 50.00 L73 50.00 L74 50.00 L75 50.00 L76 50.00 L77 50.00 L78 50.00 L79 50.00 L80 50.00 L81 50.00 L82 50.00 L83 50.00 L84 50.00 L85 50.00 L86 50.00 L87 50.00 L88 50.00 L89 50.00 L90 50.00 L91 50.00 L92 50.00 L93 50.00 L94 50.00 L95 50.00 L96 50.00 L97 50.00 L98 50.00 L99 50.00 L100 50.00",
+          "audio": {
+            "low": 0.004914465814464016,
+            "high": 0.17677454446938118,
+            "attenuation": -31.11886816733262,
+            "bypassIdle": true,
+            "bypassExact": true
+          },
+          "realWorklet": null
+        },
+        "eq": {
+          "ok": true,
+          "nodes": [
+            "hpf",
+            "b1",
+            "b2",
+            "b3",
+            "lpf"
+          ],
+          "values": {
+            "hpf": {
+              "before": 20,
+              "dragged": 28,
+              "undone": 20
+            },
+            "b1": {
+              "before": 0,
+              "dragged": 4.9,
+              "undone": 0
+            },
+            "b2": {
+              "before": 0,
+              "dragged": 4.9,
+              "undone": 0
+            },
+            "b3": {
+              "before": 0,
+              "dragged": 4.9,
+              "undone": 0
+            },
+            "lpf": {
+              "before": 20000,
+              "dragged": 14190,
+              "undone": 20000
+            }
+          },
+          "fixedScale": [
+            {
+              "gain": 0,
+              "displayRange": 24,
+              "nodeY": 50
+            },
+            {
+              "gain": 6,
+              "displayRange": 24,
+              "nodeY": 41.5
+            },
+            {
+              "gain": 9,
+              "displayRange": 24,
+              "nodeY": 37.25
+            },
+            {
+              "gain": 14,
+              "displayRange": 24,
+              "nodeY": 30.166666666666664
+            },
+            {
+              "gain": -18,
+              "displayRange": 24,
+              "nodeY": 75.5
+            }
+          ]
+        },
+        "eqMouse": {
+          "ok": true,
+          "onlyMiniNodes": true,
+          "noBlackPopup": true,
+          "noOpaqueNodeFocus": true,
+          "nodeWheelQ": [
+            1,
+            0.9
+          ],
+          "gainDrag": [
+            0,
+            9.8
+          ],
+          "bellDoubleClickGain": 0,
+          "cutPoints": true,
+          "vividNodes": [
+            "rgb(34, 197, 94)",
+            "rgb(239, 68, 68)",
+            "rgb(250, 204, 21)",
+            "rgb(59, 130, 246)",
+            "rgb(244, 114, 182)"
+          ],
+          "analyzerReference": true,
+          "noAdvanced": true,
+          "undo": true
+        },
+        "eqInline": {
+          "ok": true,
+          "contained": true,
+          "selectedB2": true,
+          "wheel": [
+            "+0 dB",
+            "+0.1 dB"
+          ],
+          "verticalDrag": [
+            "+0 dB",
+            "+1.4 dB"
+          ],
+          "typedFreq": "1700 Hz",
+          "atomicUndo": true,
+          "cutsFreqOnly": true,
+          "miniPopupNever": true
+        },
+        "eqFocus": {
+          "ok": true,
+          "sharedLiveSVG": true,
+          "inertSmall": true,
+          "nodes": [
+            "hpf",
+            "b1",
+            "b2",
+            "b3",
+            "lpf"
+          ],
+          "largeSize": [
+            825,
+            459
+          ],
+          "b2Gain": [
+            "+0.0 dB",
+            "+2.0 dB"
+          ],
+          "qWheel": [
+            "1.00",
+            "0.90"
+          ],
+          "undo": true,
+          "redo": true,
+          "readoutPopup": true,
+          "escape": true,
+          "reopen": true,
+          "viewportContained": true,
+          "zoomOut": true,
+          "closeX": true,
+          "fixedRange": 24,
+          "nodeDimensions": {
+            "mini": {
+              "w": 4.470703125,
+              "h": 4.375
+            },
+            "miniHit": {
+              "w": 17.8828125,
+              "h": 17.5
+            },
+            "focus": {
+              "w": 6.899993896484375,
+              "h": 6.9000244140625
+            },
+            "focusHit": {
+              "w": 22,
+              "h": 22
+            },
+            "line": "url(#sr-eq-line-71)"
+          },
+          "liveControls": [
+            "hpf",
+            "b1Freq",
+            "b1Gain",
+            "b1Q",
+            "b2Freq",
+            "b2Gain",
+            "b2Q",
+            "b3Freq",
+            "b3Gain",
+            "b3Q",
+            "lpf"
+          ],
+          "knobGesture": [
+            "+0.0 dB",
+            "+1.3 dB"
+          ],
+          "knobWheel": true,
+          "accessibleSliders": true,
+          "keyboardPopup": true
         }
       }
     }

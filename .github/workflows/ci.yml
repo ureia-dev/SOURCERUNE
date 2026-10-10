@@ -31,8 +31,26 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: DSP protected-path change guard
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.sha }}"
+          python3 Tools/Build/dsp_change_guard.py --base "${{ github.event.pull_request.base.sha }}" --head "$GITHUB_SHA"
+
       - name: JavaScript syntax
         run: node --check Web/App/app.js
+
+      - name: Shared three-band EQ compile and bounded smoke
+        run: |
+          set -euo pipefail
+          node --check Web/App/eq_graph.js
+          node --check Web/App/eq_interactions.js
+          node --check Web/App/eq_focus.js
+          node --check Web/App/eq_mini_inline.js
+          g++ -std=c++20 -O2 -ffp-contract=off -Wall -Wextra -Werror Tests/Audio/eq3_smoke.cpp -o /tmp/sourcerune-eq3-smoke
+          /tmp/sourcerune-eq3-smoke
 
       - name: JSON and preset mirror smoke
         shell: bash

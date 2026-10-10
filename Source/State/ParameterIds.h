@@ -57,6 +57,8 @@ inline constexpr std::array<Entry, 64> kPublicParameters {{
     Entry{"b3Freq", "EQ_TONE"},
     Entry{"b3Gain", "EQ_TONE"},
     Entry{"b3Q", "EQ_TONE"},
+    // Deprecated IDs stay reserved so public-array indices/host state never shift.
+    // These three are LEGACY ONLY: no active UI schema, no fourth DSP filter.
     Entry{"b4Freq", "EQ_TONE"},
     Entry{"b4Gain", "EQ_TONE"},
     Entry{"b4Q", "EQ_TONE"},

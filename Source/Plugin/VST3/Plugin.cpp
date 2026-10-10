@@ -1,4 +1,6 @@
 #include "../../DSP/SceneProcessor.h"
+#include "../../DSP/Tone/Hpf.h"
+#include "../../DSP/Tone/Parametric3.h"
 #include "../../State/NativeParameterIds.h"
 #include "public.sdk/source/vst/vstaudioeffect.h"
 #include "public.sdk/source/vst/vsteditcontroller.h"
@@ -16,19 +18,27 @@ namespace sourcerune::plugin {
 // Permanent component/controller identities, independent of model/preset/UI.
 const FUID processorId(0x5749BC01,0xEB244D2D,0x9D4475AC,0xAE23D901);
 const FUID controllerId(0x5749BC02,0xEB244D2D,0x9D4475AC,0xAE23D901);
-using Values=std::array<double,11>;
+using Values=std::array<double,23>;
 static_assert(std::atomic<double>::is_always_lock_free);
 
 bool readState(IBStream* stream,Values& values){
     if(!stream)return false;
-    IBStreamer reader(stream,kLittleEndian);int32 magic=0,version=0;Values candidate;
-    if(!reader.readInt32(magic)||magic!=0x53524E31||!reader.readInt32(version)||version!=1)return false;
-    for(double& x:candidate)if(!reader.readDouble(x)||!std::isfinite(x)||x<0||x>1)return false;
+    IBStreamer reader(stream,kLittleEndian);int32 magic=0,version=0;
+    Values candidate=sr::defaults;
+    if(!reader.readInt32(magic)||magic!=0x53524E31||!reader.readInt32(version)||
+       (version!=1&&version!=2&&version!=3))return false;
+    // Recall of existing 11-parameter V1 projects must not break.
+    const unsigned count=version==1?11:version==2?13:unsigned(candidate.size());
+    for(unsigned i=0;i<count;++i){
+        double x=0;
+        if(!reader.readDouble(x)||!std::isfinite(x)||x<0||x>1)return false;
+        candidate[i]=x;
+    }
     values=candidate;return true;
 }
 bool writeState(IBStream* stream,const Values& values){
     if(!stream)return false;IBStreamer writer(stream,kLittleEndian);
-    if(!writer.writeInt32(0x53524E31)||!writer.writeInt32(1))return false;
+    if(!writer.writeInt32(0x53524E31)||!writer.writeInt32(3))return false;
     for(double x:values)if(!writer.writeDouble(x))return false;
     return true;
 }
@@ -56,10 +66,12 @@ public:
     tresult PLUGIN_API setupProcessing(ProcessSetup& setup) override {
         if(setup.symbolicSampleSize!=kSample32||!std::isfinite(setup.sampleRate)||setup.sampleRate<8000||setup.sampleRate>192000)return kResultFalse;
         engine.prepare(float(setup.sampleRate));engine.setParameters(toDSP(snapshot()));engine.reset();
+        tone.prepare(float(setup.sampleRate));toneEq.prepare(float(setup.sampleRate));
+        syncTone(snapshot());tone.reset();toneEq.reset();
         return AudioEffect::setupProcessing(setup);
     }
-    tresult PLUGIN_API setActive(TBool active) override {if(active){engine.setParameters(toDSP(snapshot()));engine.reset();}return AudioEffect::setActive(active);}
-    tresult PLUGIN_API setProcessing(TBool active) override {if(active){engine.setParameters(toDSP(snapshot()));engine.reset();}return kResultOk;}
+    tresult PLUGIN_API setActive(TBool active) override {if(active){const auto v=snapshot();engine.setParameters(toDSP(v));engine.reset();syncTone(v);tone.reset();toneEq.reset();}return AudioEffect::setActive(active);}
+    tresult PLUGIN_API setProcessing(TBool active) override {if(active){const auto v=snapshot();engine.setParameters(toDSP(v));engine.reset();syncTone(v);tone.reset();toneEq.reset();}return kResultOk;}
     uint32 PLUGIN_API getLatencySamples() override {return 0;}
     uint32 PLUGIN_API getTailSamples() override {return 0;}
     tresult PLUGIN_API setState(IBStream* state) override {
@@ -77,7 +89,8 @@ public:
             if(i>=0&&queue->getPointCount()>0&&queue->getPoint(queue->getPointCount()-1,offset,value)==kResultTrue&&std::isfinite(value))
                 values[unsigned(i)].store(std::clamp(value,0.0,1.0),std::memory_order_relaxed);
         }
-        engine.setParameters(toDSP(snapshot()));
+        const auto current=snapshot();
+        engine.setParameters(toDSP(current));syncTone(current);
         if(data.numSamples<=0||data.numOutputs==0)return kResultOk;
         if(data.symbolicSampleSize!=kSample32||!data.outputs||data.outputs[0].numChannels<1||data.outputs[0].numChannels>2)return kResultFalse;
         auto& out=data.outputs[0];if(!out.channelBuffers32||!out.channelBuffers32[0]||(out.numChannels==2&&!out.channelBuffers32[1]))return kResultFalse;
@@ -94,14 +107,34 @@ public:
             engine.process(left?left+offset:nullptr,
                 right?right+offset:out.numChannels==2?zeros:nullptr,
                 out.channelBuffers32[0]+offset,out.numChannels==2?out.channelBuffers32[1]+offset:nullptr,unsigned(n));
+            // Shared tone is post-MVP-scene; OFF and bypass are a no-work path.
+            if(tone.active())tone.process(out.channelBuffers32[0]+offset,
+                out.numChannels==2?out.channelBuffers32[1]+offset:nullptr,unsigned(n));
+            if(toneEq.active())toneEq.process(out.channelBuffers32[0]+offset,
+                out.numChannels==2?out.channelBuffers32[1]+offset:nullptr,unsigned(n));
         }
         out.silenceFlags=0;
         return kResultOk;
     }
 private:
+    void syncTone(const Values& v){
+        const float hz=20.0f+980.0f*float(v[11]);
+        tone.set(hz,v[12]<.5&&v[10]<.5);
+        dsp::Parametric3::Params p;
+        p.lpf=1000.f+19000.f*float(v[13]);
+        for(unsigned band=0;band<3;++band){
+            p.frequency[band]=20.f+19980.f*float(v[14+3*band]);
+            p.gain[band]=-18.f+36.f*float(v[15+3*band]);
+            p.q[band]=.1f+11.9f*float(v[16+3*band]);
+        }
+        p.bypass=v[12]>=.5||v[10]>=.5;
+        toneEq.set(p);
+    }
     Values snapshot() const {Values out;for(unsigned i=0;i<values.size();++i)out[i]=values[i].load(std::memory_order_relaxed);return out;}
-    std::array<std::atomic<double>,11> values;
+    std::array<std::atomic<double>,23> values;
     dsp::SceneProcessor engine;
+    dsp::HighPass tone;
+    dsp::Parametric3 toneEq;
     const float zeros[128]{};
 };
 
@@ -123,6 +156,23 @@ public:
         parameters.addParameter(STR16("Source Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate,1100);
         parameters.addParameter(STR16("Transmission Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate,1101);
         parameters.addParameter(STR16("Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate|ParameterInfo::kIsBypass,2000);
+        parameters.addParameter(new RangeParameter(STR16("HPF"),42,STR16("Hz"),20,1000,20));
+        parameters.addParameter(STR16("EQ / TONE Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate,1102);
+        auto addEq=[&](const TChar* name,const TChar* unit,unsigned i,double lo,double hi,double plain){
+            auto* param=new RangeParameter(name,sr::ids[i],unit,lo,hi,plain);
+            param->getInfo().defaultNormalizedValue=sr::defaults[i];
+            parameters.addParameter(param);
+        };
+        addEq(STR16("EQ LPF"),STR16("Hz"),13,1000,20000,20000);
+        const TChar* namesFreq[]{STR16("EQ Band 1 Freq"),STR16("EQ Band 2 Freq"),STR16("EQ Band 3 Freq")};
+        const TChar* namesGain[]{STR16("EQ Band 1 Gain"),STR16("EQ Band 2 Gain"),STR16("EQ Band 3 Gain")};
+        const TChar* namesQ[]{STR16("EQ Band 1 Q"),STR16("EQ Band 2 Q"),STR16("EQ Band 3 Q")};
+        const double frequencies[]{120,600,2400},qualities[]{0.7,1,1};
+        for(unsigned band=0;band<3;++band){
+            addEq(namesFreq[band],STR16("Hz"),14+3*band,20,20000,frequencies[band]);
+            addEq(namesGain[band],STR16("dB"),15+3*band,-18,18,0);
+            addEq(namesQ[band],STR16(""),16+3*band,0.1,12,qualities[band]);
+        }
         for(unsigned i=0;i<sr::ids.size();++i)setParamNormalized(sr::ids[i],sr::defaults[i]);
         return kResultOk;
     }

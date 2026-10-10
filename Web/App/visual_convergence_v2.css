@@ -99,11 +99,14 @@ body.ui-02 .module-art{box-shadow:inset 0 0 0 1px rgba(112,137,149,.18)}
 }
 .macro-knob-range{
   position:absolute;
-  inset:0 0 14px;
+  /* The face uses --knob-size; never size the invisible hit target
+     from a percentage of an auto-height container. */
+  inset:0 0 auto 0;
   width:100%;
-  height:calc(100% - 14px);
+  height:var(--knob-size);
   opacity:0!important;
-  cursor:ew-resize;
+  cursor:ns-resize;
+  touch-action:none;
   z-index:4;
 }
 .macro-knob.compact{--knob-size:54px}
@@ -391,6 +394,7 @@ body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-knob-label{
   display:none;
 }
 body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-knob-range{
+  touch-action:auto;
   position:relative;
   inset:auto;
   display:block;
