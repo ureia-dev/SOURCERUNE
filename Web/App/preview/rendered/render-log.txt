@@ -1,3 +1,14 @@
 curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
 [UI_01] Browser console: Failed to load resource: the server responded with a status of 404 (File not found)
-render audit completed successfully
+Error [TypeError]: xs.map is not a function
+    at $eval ($eval at auditEqMouseGestures (/home/runner/work/SOURCERUNE/SOURCERUNE/Tests/Web/knob_smoke.cjs:376:27), <anonymous>:0:8)
+    at #evaluate (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:391:56)
+    at async ExecutionContext.evaluate (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ExecutionContext.js:277:16)
+    at async IsolatedWorld.evaluate (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/IsolatedWorld.js:105:16)
+    at async CdpJSHandle.evaluate (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/JSHandle.js:149:20)
+    at async CdpElementHandle.evaluate (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/ElementHandle.js:347:20)
+    at async CdpElementHandle.$eval (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/ElementHandle.js:501:24)
+    at async CdpFrame.$eval (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Frame.js:467:20)
+    at async CdpPage.$eval (/tmp/sourcerune-ui-audit/node_modules/puppeteer-core/lib/cjs/puppeteer/api/Page.js:460:20)
+    at async auditEqMouseGestures (/home/runner/work/SOURCERUNE/SOURCERUNE/Tests/Web/knob_smoke.cjs:376:16)
+render audit failed with status 1
