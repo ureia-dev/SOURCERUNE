@@ -97,7 +97,7 @@ export function closeEqFocus(){
     else card.appendChild(c.svg);
   }
   c.overlay.remove();
-  requestAnimationFrame(()=>sizeEqMarkers(c.svg));
+  sizeEqMarkers(c.svg); // exact compact marker size on immediate close
   const restore=document.querySelector("[data-eq-zoom-in]");
   if(restore)restore.focus({preventScroll:true});
 }
@@ -147,7 +147,7 @@ export function openEqFocus({getState,onPower,onDismiss,getControl,onChange,snap
   dialog.querySelector("[data-eq-focus-graph]").append(small);
   current={svg:small,overlay,dialog,getState,onPower,onDismiss,getControl,onChange,snapshot,commit,position:null,docListener:null,resizeListener:null};
   const c=current;
-  reposition(false);syncEqFocus();
+  reposition(false);sizeEqMarkers(c.svg);syncEqFocus();
   requestAnimationFrame(()=>{if(current===c)sizeEqMarkers(c.svg);});
   // No second graph listener; all mouse, keyboard, hover and undo stay bound
   // to the SAME SVG and EQ state as the original mini graph.
