@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 旋鈕／Live 數值依 UI_01、UI_02 REF 排版（2026-10-10）
+
+- 已合併 PR #78 `9393bc32`、#79 `73964644`，UI Web `Web/App/knob_value_ref_alignment_v1.css` 最後覆蓋既有圖面與輸入 hitbox：UI_01 小旋鈕 43px、一般 68px、Mix 82px，數字在下／標籤在上；UI_02 Motion 54px、底部四顆 76px，Bad Signal／Intelligibility 數字右、Mix 數字下、Condition 保留 Used selector。真參數／真單位仍沿用 ui_controls.json（Speed 為 km/h），**不照搬 REF 示意 60%／75% 等到 State/Preset**。沒有改原音效、Factory74、公共 ID 或 Native。
+- UI_02 真核准 REF 1672×941 RGB SHA256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff` 從已有來源核對；UI_01 正式 1508×808 RGBA SHA256 `96045478ce47347ac28cb56830c19d91870188865b8bde5a6e6038f453677916` **仍缺 GitHub binary**，因此 UI01 的 142 項掃描僅 `APPROX`，不可聲稱 pixel-perfect。
+- 真 Chromium [Web Preview #38026732851](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38026732851) 成功，最新 `Web/App/preview/rendered/geometry-report.json` 來源 `73964644`，UI01/02 `geometry.ok=true`、`knobSmoke.ok=true`、`knobValues.ok=true`；UI01 8 顆 knob label 上/value 下，UI02 4 顆底部 knob value right/below、Speed/Doppler/Width 3 顆互動，沒有超出卡片或破壞 Undo/滾輪。日志結尾為 `render audit completed successfully`。UI_02 已有真原圖但還沒有全面 1:1 像素疊圖；UI01 缺原圖 binary，REF 材質/字距/指針角度仍需詳細掃描。Native VST3 generic editor 未有兩套 custom UI。
+- 本輪誤將檔案更新寫進 main，已以**非強制**的原樹 revert commit `3df08f49` 恢復，真正修改整理在 PR #78 後正式合併；不以被取消／舊 Pages run 冒充驗收。唯一缺項日誌見 `docs/product/reference/UI_REF_GAP_WORKLOG.md`，目前範圍維持 PARTIAL。
+
 ## 最新 checkpoint：UI_01／UI_02 主旋鈕與 Advanced 視窗修復（2026-10-10）
 
 - **起因與根因**：前次雖把範圍值事件接上，但較晚的 `.macro input {position:relative}` 與 range 的 margin 使透明 hitbox 離開正式 PNG 旋鈕，使用者實際拖動反而按到卡片觸發 Advanced；Advanced 又受 `.app` scale、overflow 裁切，使用 `left/right/top/bottom` 填滿整個 Web shell，必須按 CLOSE。不能把舊 `knobSmoke` 單顆 Bad Signal 成功視為全 UI 完成。
