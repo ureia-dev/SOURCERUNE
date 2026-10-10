@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 最新 checkpoint：右下 EQ Zoom In 放大浮動編輯視窗 Web DONE（2026-10-10）
+
+- **本次已正式做／部署**：使用者核准先完整規劃再自行實作、部署；[PR #102](https://github.com/ureia-dev/SOURCERUNE/pull/102) 合併 `dacad91676e92c6bc555b36ab2437ef65624ee61`（基底 `d96d6d6f`），新增 `Web/App/eq_focus.js`／`eq_focus_v1.css`、`app.js` 綁定標題右側 Zoom In `⤢`、`eq_interactions.js` 加清除焦點／浮動框；原 `eq_graph.js` 固定 ±12 dB 不變。Zoom In 在**現有效果器視窗內**開啟約 900×500 logical、依現有 UI_01／UI_02 縮放與畫面 90% 上限自適應的可拖曳浮動板，Zoom Out/X/Esc 關閉、回復按鈕焦點。五節點 HPF/B1/B2/B3/LPF／Q Wheel／Gain Drag／數值浮框與 Undo 直接共用已有 listener-bound **同一 SVG**（打開時移動活 SVG，mini 留 inert 即時視覺縮圖；關閉移回，嚴禁第二個 DSP、AudioContext、FFT）。主卡 REF 大小、原功能不改，維持一套 AudioWorklet/C++ EQ。
+- **真驗收而非綠燈**：Normal Fast [#38037200663](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38037200663) PASS（含 DSP protected path guard），真 [Web Preview #38037254808](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38037254808) `Web/App/preview/rendered/geometry-report.json` `commit=dacad916`，UI_01、UI_02 全部 `geometry.ok=true, knobSmoke.eqFocus.ok=true`；B2 拖 Gain +0→+1.6dB、Q wheel 1.00→0.90、Undo/Redo、mini/focus 曲線一致、keyboard Esc、Zoom Out、X、再開、焦點還原、改變 viewport 仍在插件內、五節點存在、mini 無鼠標操作。真 log 結尾 `render audit completed successfully`（既存非阻塞一筆404，另案）。兩版本 Focus 畫面量測約 813×452／825×459 physical pixels，對應 900×500 logical 的 runtime transform scale。實際 Web 頁 https://ureia-dev.github.io/SOURCERUNE/Web/App/ 。
+- **DSP freeze 確認**：本次 DSP changed? **NO**。未修改 Source/DSP/**、Web AudioWorklet/音訊、Native VST3 參數或路徑、74 Factory Presets；Fast DSP guard 已驗，故**無 DSP 變更、無需新 DSP 還原點**，既有聲音還原點不受碰觸。
+- **界線／未完成**：Native VST3 generic Host 尚無 UI_01/UI_02 自訂圖形 Editor，Zoom In/滑鼠 UI 不得宣稱 Native DONE；Windows/macOS Host 實機、全 EQ Tone/最終 signal flow、真正 CPU benchmark、其他 REF 對位仍 PENDING。U01-17、U02-22 仍 [ ]／PARTIAL；**Web 放大子項已驗收 DONE**。唯一正式規格 `docs/product/UI_FUNCTION_CONTRACT.md`。舊 PR #100 僅含先前固定 ±12dB 說明且已與主線進度衝突，不可用它覆蓋新已完成規格。
+
 ## DSP HARD LOCK 2026-10-10 — 新核准永久決議（規則與 CI 防護，無 DSP 修改）
 
 - **最高原則**：使用者明確要求「DSP 沒有經過精確確認嚴禁修改；再三確認；每修改都 100% 先做 DSP 還原點」。永久契約寫入 `docs/architecture/DSP_FREEZE_AND_RESTORE_POLICY.md`、`PROJECT_RULES.md`、`AGENTS.md`、`PROJECT_CONSTITUTION.md`；普通 PR 加 fail-closed DSP guard。每次新 DSP 修改必須先獲得具體核准，再分別建立自己的遠端還原 ref、核查 pre-change SHA 與測試證據。
