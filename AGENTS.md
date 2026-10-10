@@ -2,6 +2,10 @@
 
 > 專案僅指 **`ureia-dev/SOURCERUNE`**（單一 **Public** repo）。與使用者溝通一律**繁體中文**。本檔負責**閱讀順序與最低限度護欄**，不再複製各份完整規範。
 
+## 最高優先：DSP 聲音演算法凍結（2026-10-10）
+
+**在任何修 UI／Native／Web／DSP 的工作之前，先讀 [DSP 嚴格凍結與還原制度](docs/architecture/DSP_FREEZE_AND_RESTORE_POLICY.md)。未經使用者對該次具體聲音改動核准，嚴禁更動 DSP／聲音路徑。** 授權後仍須三次精確核對，**每次修改前另建並遠端驗證全新 DSP 還原點**，缺一不做；本原則優先於「GPT 主責 DSP」與舊的自主改善提案。普通 PR 的 DSP Guard 為 fail-closed；不得以改 guard、改名、換平台逃避鎖定。每次回報是否有變更、還原分支／SHA／驗證證據，無法實證即停止。
+
 ## 跨對話的自動識別與第一動作（最高啟動規則）
 
 **適用於每一個新對話／舊對話／GPT、Codex、Copilot／工作代理，不限定使用者說「繼續 SOURCERUNE」。** 只要使用者明確提及 `SOURCERUNE`、`ureia-dev/SOURCERUNE`，或從當前對話的上下文、repo/branch/檔案、已接續的工作可**清楚辨識**是在處理 SOURCERUNE，無論任務是詢問進度、分析論壇、UI_01/UI_02、DSP/音質、PNG/REF、美術、Factory Preset、研究、CI、修程式、部署或只讀核對，都必須依序：

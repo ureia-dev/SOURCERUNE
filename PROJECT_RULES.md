@@ -2,6 +2,14 @@
 
 > 此檔的 Fast/Deep/Release、安全測試觸發與 VST3／WEB 同步為最高優先專案限制；產品方向、完整使用者永久原則與 UI/REF/資產製程另見 **[PROJECT_CONSTITUTION.md](PROJECT_CONSTITUTION.md)**，新 GPT 應從 **[AGENTS.md](AGENTS.md)** 進入。進度交接不是憲章替代品。
 
+## 最優先永久 DSP 硬鎖：未精確確認，嚴禁修改聲音演算法（2026-10-10）
+
+**已存在 DSP 演算法預設凍結／唯讀。未經使用者針對本次明確範圍核准，不得修改、優化、重構或連帶變更聲音行為；「GPT 主責 DSP 研發」不等於自動授權 DSP 修改。**
+
+任何經核准的 DSP 修改都必須**改前、獨立覆核、改後共三次精確確認**，每次修改前**100% 先建立獨立的 GitHub 遠端 DSP 還原點**，重新核對完整 commit SHA、遠端 ref，保留測試與還原證據；第二次修正前要再建立新的還原點，不得沿用舊的。沒有核准、三重核查、可驗證遠端還原點或實際比對證據則停止，不修改、不合併、不部署。普通 UI、Build、Preset、Web/VST3 連線工作不得順手碰聲音算法。
+
+**唯一完整操作規範**：[DSP_FREEZE_AND_RESTORE_POLICY.md](docs/architecture/DSP_FREEZE_AND_RESTORE_POLICY.md)。一般 PR Fast 應拒絕受保護 DSP 路徑的改動；放行須額外、事前、明確核准，禁止在同一 DSP PR 修改 guard 來繞過。GitHub main 與還原分支須另行設定 branch protection/ruleset，否則不能宣稱 100% 技術性鎖定。
+
 ## 永久最高執行原則：有指令立即做，排程只在明確要求時使用
 
 1. 使用者說「做／修改／修好／部署／現在跑／繼續／詳細研究」時，**當回合立即執行授權且可做的工作，建立實際 commit、測試、研究記錄或可驗證交付**。不能自行把原本一個指令就可完成的工作拖成「第 1～8 小時」，或只回「已排程」但本輪沒有成果。

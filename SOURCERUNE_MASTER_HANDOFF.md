@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## DSP HARD LOCK 2026-10-10 — 新核准永久決議（規則與 CI 防護，無 DSP 修改）
+
+- **最高原則**：使用者明確要求「DSP 沒有經過精確確認嚴禁修改；再三確認；每修改都 100% 先做 DSP 還原點」。永久契約寫入 `docs/architecture/DSP_FREEZE_AND_RESTORE_POLICY.md`、`PROJECT_RULES.md`、`AGENTS.md`、`PROJECT_CONSTITUTION.md`；普通 PR 加 fail-closed DSP guard。每次新 DSP 修改必須先獲得具體核准，再分別建立自己的遠端還原 ref、核查 pre-change SHA 與測試證據。
+- **本輪前的真實 GitHub 基準**：main `feff1774ab2f63e8f8a2aea9b982fa418689c583`；已建立遠端分支 `dsp-restore/baseline-20261010-feff1774` 指向相同 commit，供查找目前凍結前的完整還原快照。該 ref 不是未來每次 DSP 改動的共用備份。
+- **本輪邊界**：僅治理文件／Fast PR guard，不更動 `Source/DSP/`、VST3 DSP、Worklet、WASM、音色、音訊參數、Preset 或計算行為。CI／PR 真結果需查此政策 PR 的 GitHub workflow；不要把「政策已寫入」說成「branch protection 已啟用」。
+- **待後續由 repo 管理員完成**：main ruleset／禁止直接 push／要求 PR 與 guard status check、限制 DSP 還原 ref 改寫刪除。2026-10-10 查詢時 main `protected=false`，若仍未設定不能宣稱不可繞過的 100% 強制阻擋。
+
 ## 2026-10-10 更新：EQ 畫面固定 ±12 dB；Zoom In 放大視窗僅完成設計（尚未新增按鈕）
 
 - **目前這輪修改（Web）**：`Web/App/eq_graph.js` 的 `displayRange=12` 永久固定，移除以前依三段 Gain 自動跳 ±6/±12/±18 的邏輯；只動計算曲線 Y 軸及節點畫面位置，原 HPF+LPF+B1–B3 真正 C++ DSP／Gain 參數範圍、Automation、74 個 Factory Preset、EQ 滑鼠感度都不改。`Tests/Web/knob_smoke.cjs` 既有一次 Chromium UI01／UI02 驗收中增加 0、6、9、14、-18dB 皆顯示固定 `displayRange===12` 的不變條件；實際驗收結果須看當輪 `Web/App/preview/rendered/geometry-report.json`／`render-log.txt`，不能只看 Pages 綠燈。
