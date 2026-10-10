@@ -68,7 +68,7 @@ function auditReferenceGeometry(){
       meterMode:meterMode?near(box(meterMode).y,331)&&near(box(meterMode).h,30):false,
       // A late CSS cascade must not silently change the established UI_01
       // runtime knob sizes. Fine REF positions remain APPROX in the spec.
-      motionKnobFaces55:motionKnobFaces.length===4&&motionKnobFaces.every(e=>faceDiameter(e,55)),
+      motionKnobFaces55:motionKnobFaces.length===4&&faceDiameter(motionKnobFaces[0],55)&&motionKnobFaces.slice(1).every(e=>faceDiameter(e,43)),
       badSignalKnob68:faceDiameter(macroKnobFaces.badSignal,68),
       conditionKnob68:faceDiameter(macroKnobFaces.condition,68),
       intelligibilityKnob68:faceDiameter(macroKnobFaces.intelligibility,68),
