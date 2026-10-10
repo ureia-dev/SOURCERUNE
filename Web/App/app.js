@@ -1,6 +1,6 @@
 import {createSceneNode, parametersFromState, hpfFromState, eq3FromState, audioSupportNote} from "./audio/engine.js";
 import {eqGraph,miniEqSvg as renderThreeBandEq,updateEqPlot,sizeEqMarkers} from "./eq_graph.js";
-import {updateEqAnalyzer} from "./eq_analyzer_v1.js";
+import {updateEqAnalyzer,createSpectrumDisplayTrace} from "./eq_analyzer_v1.js";
 import {attachEqInteractions,dismissEqFloat} from "./eq_interactions.js";
 import {eqMiniInlineMarkup,bindEqMiniInline,syncEqMiniInline,selectEqMiniInline} from "./eq_mini_inline.js";
 import {openEqFocus,eqFocusIsOpen,markMiniEqInert,syncEqFocus,repositionEqFocus} from "./eq_focus.js";
@@ -576,6 +576,8 @@ function meters(){const i=stats(inAn),o=stats(outAn);peakIn=Math.max(peakIn,i.pe
 let spectrumBins=null;
 let spectrumPreBins=null;
 const spectrumView={source:"POST",rta:true,smooth:true};
+const spectrumMainPre=createSpectrumDisplayTrace();
+const spectrumMainPost=createSpectrumDisplayTrace();
 function bindSpectrumView(){
   const sync=()=>{
     document.querySelectorAll("[data-spectrum-source]").forEach(b=>{const active=b.dataset.spectrumSource===spectrumView.source;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});
@@ -585,7 +587,7 @@ function bindSpectrumView(){
   };
   document.querySelectorAll("[data-spectrum-source]").forEach(b=>b.addEventListener("click",()=>{spectrumView.source=b.dataset.spectrumSource;sync()}));
   $("[data-spectrum-rta]")?.addEventListener("click",()=>{spectrumView.rta=!spectrumView.rta;sync()});
-  $("[data-spectrum-smoothing]")?.addEventListener("click",()=>{spectrumView.smooth=!spectrumView.smooth;sync()});
+  $("[data-spectrum-smoothing]")?.addEventListener("click",()=>{spectrumView.smooth=!spectrumView.smooth;spectrumMainPre.reset();spectrumMainPost.reset();sync()});
   sync();
 }
 function spectrum(){
@@ -619,44 +621,48 @@ function spectrum(){
       spectrumPreBins=new Float32Array(inAn.frequencyBinCount);
     inAn.getFloatFrequencyData(spectrumPreBins);
   }
-  const primary=spectrumView.source==="PRE"?spectrumPreBins:spectrumBins;
-  const other=spectrumView.source==="PRE"?spectrumBins:spectrumPreBins;
-  const sr=audioCtx?.sampleRate||48000,ny=sr/2;
-  const makePowerPrefix=d=>{
-    if(!spectrumView.smooth)return null;
-    const pref=new Float64Array(d.length+1);
-    for(let i=0;i<d.length;i++){
-      const v=Number.isFinite(d[i])?Math.max(-160,Math.min(20,d[i])):-160;
-      pref[i+1]=pref[i]+Math.pow(10,v/10);
+  const now=performance.now(),sr=audioCtx?.sampleRate||48000;
+  const opts={octaveWidth:spectrumView.smooth?1/3:1/24,
+    frequencySmoothing:spectrumView.smooth};
+  const pre=spectrumPreBins?spectrumMainPre.update(spectrumPreBins,sr,now,true,opts):null;
+  const post=spectrumMainPost.update(spectrumBins,sr,now,true,opts);
+  const primary=spectrumView.source==="PRE"?pre:post;
+  const other=spectrumView.source==="PRE"?post:pre;
+  // Draw exactly the same 129-point shape-preserving cubic spline as mini EQ;
+  // the dB scale remains the REF main graph's -60..0 dB range.
+  const drawTrace=(levels,color,alpha,lineWidth,fill)=>{
+    if(!levels)return;
+    const count=levels.length,dx=pw/(count-1);
+    const ys=new Float32Array(count),slopes=new Float32Array(count-1);
+    const tangents=new Float32Array(count);
+    for(let i=0;i<count;i++)ys[i]=top+(Math.max(0,Math.min(60,-levels[i]))/60)*ph;
+    for(let i=0;i<count-1;i++)slopes[i]=(ys[i+1]-ys[i])/dx;
+    tangents[0]=slopes[0];tangents[count-1]=slopes[count-2];
+    for(let i=1;i<count-1;i++){
+      const a=slopes[i-1],b=slopes[i];
+      tangents[i]=a*b<=0?0:2*a*b/(a+b);
     }
-    return pref;
-  };
-  const primarySum=primary?makePowerPrefix(primary):null;
-  const otherSum=other?makePowerPrefix(other):null;
-  const getDb=(bins,prefix,f)=>{
-    const len=bins.length,binHz=ny/len;
-    const nearest=Math.min(len-1,Math.max(0,Math.round(f/binHz)));
-    if(!prefix)return Number.isFinite(bins[nearest])?bins[nearest]:-160;
-    // True 1/3-octave *power average*: +/- 1/6 octave around f.
-    const lo=Math.max(0,Math.min(len-1,Math.floor(f*Math.pow(2,-1/6)/binHz)));
-    const hi=Math.max(lo,Math.min(len-1,Math.ceil(f*Math.pow(2,1/6)/binHz)));
-    const power=Math.max(1e-16,(prefix[hi+1]-prefix[lo])/(hi-lo+1));
-    return 10*Math.log10(power);
-  };
-  const drawTrace=(bins,prefix,color,opacity,width)=>{
-    if(!bins)return;
-    x.strokeStyle=color;x.globalAlpha=opacity;x.lineWidth=width;x.beginPath();
-    for(let px=0;px<=Math.floor(pw);px++){
-      const f=20*Math.pow(20000/20,px/pw);
-      const dbv=Math.max(-60,Math.min(0,getDb(bins,prefix,f)));
-      const yy=top+(-dbv/60)*ph,xx=left+px;
-      px?x.lineTo(xx,yy):x.moveTo(xx,yy);
+    x.save();x.globalAlpha=alpha;x.lineJoin="round";
+    const linePath=new Path2D();linePath.moveTo(left,ys[0]);
+    for(let i=0;i<count-1;i++){
+      const x0=left+i*dx,dy=dx/3;
+      linePath.bezierCurveTo(x0+dy,Math.max(top,Math.min(top+ph,ys[i]+tangents[i]*dy)),
+        x0+dx-dy,Math.max(top,Math.min(top+ph,ys[i+1]-tangents[i+1]*dy)),
+        x0+dx,ys[i+1]);
     }
-    x.stroke();x.globalAlpha=1;
+    if(fill){
+      const fillPath=new Path2D(linePath);
+      fillPath.lineTo(left+pw,top+ph);fillPath.lineTo(left,top+ph);fillPath.closePath();
+      const grad=x.createLinearGradient(0,top,0,top+ph);
+      grad.addColorStop(0,"rgba(93,199,225,.16)");
+      grad.addColorStop(1,"rgba(93,199,225,.005)");
+      x.fillStyle=grad;x.fill(fillPath);
+    }
+    x.strokeStyle=color;x.lineWidth=lineWidth;x.stroke(linePath);x.restore();
   };
-  // White comparator is the actual opposite pre/post analyser, not a template.
-  drawTrace(other,otherSum,"#d1e4eb",.40,1.05);
-  drawTrace(primary,primarySum,"#65ceef",1,1.7);
+  // Actual secondary analyser; no reference/template shape is synthesized.
+  drawTrace(other,"#c5dce5",.38,1,false);
+  drawTrace(primary,"#66cce9",1,1.6,true);
 }
 function waveform(){const c=$("#sceneWaveformCanvas");if(!c)return;const x=c.getContext("2d"),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle="#315564";x.lineWidth=1;x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();if(!inAn)return;const d=new Uint8Array(inAn.fftSize);inAn.getByteTimeDomainData(d);x.strokeStyle="#5cc9ee";x.lineWidth=1.5;x.beginPath();for(let a=0;a<w;a++){const n=Math.floor(a/w*(d.length-1)),yy=d[n]/255*h;a?x.lineTo(a,yy):x.moveTo(a,yy)}x.stroke()}
 function time(){const t=audio.currentTime||0,m=Math.floor(t/60),s=Math.floor(t%60),ms=Math.floor(t%1*1000);$("#transportTime").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${String(ms).padStart(3,"0")}`;if(audio.duration)$("#seekSlider").value=Math.round(t/audio.duration*1000);syncSceneTime(state,audio)}
