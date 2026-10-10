@@ -1,0 +1,63 @@
+{
+  "ui": "UI_01",
+  "geometryOk": true,
+  "geometryFailed": [],
+  "app": {
+    "w": 1499,
+    "h": 807
+  },
+  "sceneHeight": 262,
+  "sceneSvgHeight": 186,
+  "waveformHeight": 37,
+  "semanticArt": [
+    {
+      "src": "../../Assets/UI/UI_01/SOURCE/SRC_003_Smartphone_Speakerphone.png",
+      "naturalWidth": 384,
+      "loaded": true
+    },
+    {
+      "src": "../../Assets/UI/UI_01/TRANSMISSION/TRN_005_GSM_Stable.png",
+      "naturalWidth": 512,
+      "loaded": true
+    },
+    {
+      "src": "../../Assets/UI/UI_01/WALL_COVER/CVR_001_None_Open.png",
+      "naturalWidth": 384,
+      "loaded": true
+    },
+    {
+      "src": "../../Assets/UI/UI_01/SPACE_ENVIRONMENT/SPC_022_Busy_City_Street.png",
+      "naturalWidth": 384,
+      "loaded": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "/Assets/UI/Runtime/Common/Scene/RT_MOTION_CAR_GLYPH.png",
+      "status": 200,
+      "bytes": 2242
+    },
+    {
+      "path": "/Assets/UI/Runtime/Common/Scene/RT_SCENE_SOURCE_MARKER_IDLE.png",
+      "status": 200,
+      "bytes": 1094
+    },
+    {
+      "path": "/Assets/UI/Runtime/Common/Scene/RT_SCENE_LISTENER_MARKER_IDLE.png",
+      "status": 200,
+      "bytes": 8798
+    },
+    {
+      "path": "/Assets/UI/Runtime/UI_01/Scene/RT_DISTANCE_CALLOUT.png",
+      "status": 200,
+      "bytes": 1277
+    },
+    {
+      "path": "/Assets/UI/Runtime/UI_01/Scene/RT_WAVEFORM_STRIP_BG.png",
+      "status": 200,
+      "bytes": 954
+    }
+  ],
+  "sha": "31d50b854792133803f5074ee5b99c69b5981027",
+  "screenshotSha256": "42c55825d6107d7eab1c15bc487a2552b70f3814b9a1c4ac4d246d683c366a08"
+}
