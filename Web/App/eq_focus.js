@@ -1,3 +1,4 @@
+import {sizeEqMarkers} from "./eq_graph.js";
 // UI-only EQ Focus panel: MOVE the existing bound SVG, never clone an active
 // filter, create an AudioContext, change state IDs, or touch C++ DSP.
 let current=null;
@@ -29,6 +30,7 @@ function reposition(preserve=true){
   const y=preserve&&pos?pos.y:(b.height-ph)/2;
   current.position={x:clamp(x,4,Math.max(4,b.width-pw-4)),y:clamp(y,4,Math.max(4,b.height-ph-4))};
   current.dialog.style.left=current.position.x+"px";current.dialog.style.top=current.position.y+"px";
+  requestAnimationFrame(()=>{if(current)sizeEqMarkers(current.svg);});
 }
 export function eqFocusIsOpen(){return Boolean(current);}
 export function repositionEqFocus(){reposition();}
@@ -72,6 +74,7 @@ export function closeEqFocus(){
     else card.appendChild(c.svg);
   }
   c.overlay.remove();
+  requestAnimationFrame(()=>sizeEqMarkers(c.svg));
   const restore=document.querySelector("[data-eq-zoom-in]");
   if(restore)restore.focus({preventScroll:true});
 }
@@ -83,6 +86,19 @@ export function openEqFocus({getState,onPower,onDismiss}){
   ghost.dataset.eqFocusGhost="1";ghost.setAttribute("aria-hidden","true");ghost.inert=true;
   ghost.style.pointerEvents="none";
   parent.insertBefore(ghost,small);
+  // A ghost has its own live response but NEVER accepts pointer input.
+  // Its duplicate SVG gradient IDs are resolved to unique inactive copies.
+  const sourceDefs=small.querySelectorAll("linearGradient");
+  ghost.querySelectorAll("linearGradient").forEach((g,i)=>{
+    const original=sourceDefs[i]?.id;
+    if(!original)return;
+    const next=original+"-preview";
+    g.id=next;
+    ghost.querySelectorAll('[stroke="url(#'+original+')"],[fill="url(#'+original+')"]').forEach(el=>{
+      if(el.getAttribute("stroke")==="url(#"+original+")")el.setAttribute("stroke","url(#"+next+")");
+      if(el.getAttribute("fill")==="url(#"+original+")")el.setAttribute("fill","url(#"+next+")");
+    });
+  });
   const overlay=document.createElement("div");
   overlay.id="eqFocusOverlay";
   overlay.className="sr-eq-focus-overlay";
@@ -90,13 +106,13 @@ export function openEqFocus({getState,onPower,onDismiss}){
   overlay.innerHTML=
     '<section class="sr-eq-focus" id="eqFocusDialog" role="dialog" aria-modal="true" aria-label="Expanded EQ editor">'
     +'<header class="sr-eq-focus-head" data-eq-focus-drag>'
-    +'<div class="sr-eq-focus-title" tabindex="-1"><strong>EQ / TONE</strong><small>FREQUENCY RESPONSE · ±12 dB</small></div>'
+    +'<div class="sr-eq-focus-title" tabindex="-1"><strong>EQ / TONE</strong><small>FREQUENCY RESPONSE · ±24 dB</small></div>'
     +'<div class="sr-eq-focus-actions"><button type="button" data-eq-focus-power aria-label="EQ Power"></button>'
     +'<button type="button" data-eq-focus-zoom-out title="Zoom out" aria-label="Zoom out EQ">↙</button>'
     +'<button type="button" data-eq-focus-close title="Close" aria-label="Close expanded EQ">×</button></div></header>'
     +'<div class="sr-eq-focus-main"><div class="sr-eq-focus-y">'
-    +'<span style="top:16%">+12</span><span style="top:33%">+6</span><span style="top:50%">0</span>'
-    +'<span style="top:67%">−6</span><span style="top:84%">−12</span></div>'
+    +'<span style="top:16%">+24</span><span style="top:33%">+12</span><span style="top:50%">0</span>'
+    +'<span style="top:67%">−12</span><span style="top:84%">−24</span></div>'
     +'<div class="sr-eq-focus-plot"><div class="sr-eq-focus-graph-host" data-eq-focus-graph></div>'
     +'<div class="sr-eq-focus-x"><span>20</span><span>100</span><span>1k</span><span>10k</span><span>20k Hz</span></div></div></div>'
     +'<div class="sr-eq-focus-readouts">'+ids.map(id=>'<button type="button" data-eq-focus-select="'+id+'" aria-label="Edit '+label[id]+'"><strong>'+label[id]+'</strong>'+valueHTML(id)+'</button>').join("")+'</div>'
@@ -109,6 +125,7 @@ export function openEqFocus({getState,onPower,onDismiss}){
   current={svg:small,overlay,dialog,getState,onPower,onDismiss,position:null,docListener:null,resizeListener:null};
   const c=current;
   reposition(false);syncEqFocus();
+  requestAnimationFrame(()=>{if(current===c)sizeEqMarkers(c.svg);});
   // No second graph listener; all mouse, keyboard, hover and undo stay bound
   // to the SAME SVG and EQ state as the original mini graph.
   dialog.querySelectorAll("[data-eq-focus-select]").forEach(button=>{
