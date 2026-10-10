@@ -1,5 +1,8 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+> **2026-10-11 UI REF 最新候選**：原 Draft PR #116 UI_01 Fast/Chromium 已成功；本輪接續同一 PR 的 UI_02 卡片／Scene、Motion／Meter、Intelligibility 溢出與底部材質三組候選，五個可恢復 commit 已建構，尚待一次集中推送及必要 CI。詳細 commit、驗收界線及恢復點只看 `docs/product/reference/UI_REF_GAP_WORKLOG.md` 首節。沒有 DSP 修改、沒有合併或正式部署；未有本輪真截圖不得聲稱 UI_02 視覺已驗收。
+
+
 ## 最新 checkpoint：五色 EQ／小窗直接編輯／VVChain 頻譜 Web 已驗收；聲音新增功能維持凍結（2026-10-10）
 
 - **本輪 UI 已接入且真 Chrome 驗收 PASS**：使用者最新圖片紅框的底部空白處改為在原卡片內常駐可調欄位。點五個節點（HPF／B1–3／LPF）選擇對應數值，Bell 的 FREQ／GAIN／Q 均可直接輸入、單格滾輪、上下拖曳（Shift 微調），單一拖曳寫入原 `state.params`／Undo／Redo；HPF／LPF 現有 DSP 僅有 FREQ，所以另外兩欄只顯示禁用「—」，不可假裝有聲音功能；小視窗原本就禁用浮動數值 popup，放大 Focus 繼續保留。來源 `Web/App/eq_mini_inline.js`／`eq_mini_inline_v1.css`／`app.js`／`eq_interactions.js`，以及 `Tests/Web/knob_smoke.cjs`。兩個 UI_01／UI_02 使用相同資料與功能，原 5 個彩色點、固定 ±24dB、不透明黑框消除／獨立 LPF/HPF 點仍維持已完成的主分支版本。
