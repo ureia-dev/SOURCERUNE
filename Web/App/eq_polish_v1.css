@@ -182,3 +182,77 @@
 /* LPF stays visually distinct (muted warm magenta) as in approved preview. */
 .macro-eq-svg [data-eq-ring="lpf"]{stroke:#e58eac;fill:#2e1c2a;}
 .macro-eq-svg [data-eq-center="lpf"]{fill:#ffd1e1;}
+
+
+/* 2026-10-10 approval: five clearly colored handles, truly invisible hitbox.
+   Native SVG keyboard focus is represented by the colorful ring, never a
+   browser default black focus rectangle around an interactive SVG ellipse. */
+.macro-eq-svg, .macro-eq-svg:focus, .macro-eq-svg:focus-within,
+.macro-eq-svg [data-eq-node],.macro-eq-svg [data-eq-node]:focus,
+.macro-eq-svg [data-eq-node]:focus-visible,.macro-eq-svg [data-eq-node]:active{
+  outline:none!important;background:transparent!important;
+  box-shadow:none!important;
+}
+.macro-eq-svg .sr-eq-node-hit,
+.macro-eq .macro-eq-svg .sr-eq-node-hit,
+.sr-eq-focus .macro-eq-svg .sr-eq-node-hit{
+  fill:transparent!important;stroke:transparent!important;
+  filter:none!important;outline:none!important;box-shadow:none!important;
+  vector-effect:non-scaling-stroke;
+}
+.macro-eq-svg:focus-within .sr-eq-node-hit:focus-visible{
+  fill:transparent!important;stroke:transparent!important;
+  stroke-width:0!important;
+}
+.macro-eq-svg .sr-eq-node-ring{
+  fill:rgba(10,19,25,.5);stroke-width:1.2;opacity:1;
+}
+.macro-eq-svg [data-eq-ring="hpf"]{stroke:#22c55e;fill:#143322}
+.macro-eq-svg [data-eq-center="hpf"]{fill:#86efac}
+.macro-eq-svg [data-eq-ring="b1"]{stroke:#ef4444;fill:#3f191b}
+.macro-eq-svg [data-eq-center="b1"]{fill:#fecaca}
+.macro-eq-svg [data-eq-ring="b2"]{stroke:#facc15;fill:#423619}
+.macro-eq-svg [data-eq-center="b2"]{fill:#fef08a}
+.macro-eq-svg [data-eq-ring="b3"]{stroke:#3b82f6;fill:#172c55}
+.macro-eq-svg [data-eq-center="b3"]{fill:#bfdbfe}
+.macro-eq-svg [data-eq-ring="lpf"]{stroke:#f472b6;fill:#431a35}
+.macro-eq-svg [data-eq-center="lpf"]{fill:#fbcfe8}
+.macro-eq-svg:has([data-eq-node]:focus-visible) .sr-eq-node-ring{
+  stroke-width:1.4;
+}
+.macro-eq-svg .macro-eq-analyzer-line,
+.macro-eq-svg .macro-eq-analyzer-fill{pointer-events:none!important}
+.macro-eq-svg .macro-eq-analyzer-fill{
+  fill:rgba(144,187,194,.16);stroke:none;
+}
+.macro-eq-svg .macro-eq-analyzer-line{
+  fill:none;stroke:#acc9d0;stroke-width:.95;opacity:.64;
+  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;
+}
+.sr-eq-focus .macro-eq-svg .macro-eq-analyzer-line{
+  stroke:#b7d2d7;stroke-width:1.1;opacity:.70;
+}
+.sr-eq-focus .macro-eq-svg .macro-eq-analyzer-fill{
+  fill:rgba(154,198,204,.19);
+}
+.macro-eq-svg .macro-eq-line{opacity:1;stroke-width:1.35;}
+.sr-eq-focus .macro-eq-svg .macro-eq-line{stroke-width:1.7;}
+.macro-eq-svg .macro-eq-halo{opacity:.13;stroke-width:2.8;}
+.macro-eq .macro-eq-foot .eq-cut-indicators{
+  display:flex;justify-content:space-between;align-items:center;gap:5px;
+  min-width:0;width:100%;box-sizing:border-box;
+  margin:0;padding:1px 4px 0;line-height:12px;
+  font:600 9px/12px "Segoe UI",Arial,sans-serif;
+  letter-spacing:.015em;color:#92a7b1;
+  user-select:none;pointer-events:none;
+}
+.macro-eq .eq-cut-indicators span{white-space:nowrap}
+.macro-eq .eq-cut-indicators span:first-child{color:#52c98c}
+.macro-eq .eq-cut-indicators span:last-child{color:#ef89b9}
+.macro-eq .eq-cut-indicators strong{
+  color:#d6e6e9;font-weight:500;font-variant-numeric:tabular-nums;
+}
+.macro-eq .eq-cut-indicators .eq-cut-caption{
+  color:#778f99;font-weight:400;font-size:8px;letter-spacing:.055em;
+}
+.macro-eq .macro-eq-foot{min-height:15px!important;}
