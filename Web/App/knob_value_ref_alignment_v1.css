@@ -112,3 +112,6 @@ body.ui-02 .motion-readouts>div[data-motion-adjust] strong{
 }
 /* Preserve existing horizontal AMBIENCE: no round dial/value override here. */
 body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-knob-value{display:none;}
+
+/* Browser REF audit compares face diameter in unscaled CSS pixels; the WEB
+   plugin shell is deliberately transformed to fit the current viewport. */
