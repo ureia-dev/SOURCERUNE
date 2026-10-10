@@ -1,5 +1,16 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+## 2026-10-11｜PR #116 UI_01 視覺整批修正（同批多 commit、單次推送）
+
+- 使用者要求「一次改多一點，改多一點在丟上去 GITHUB」；從此 UI REF 工作以 **先集中審查需求→3 個可追蹤獨立 commit→單次推送→一次 Fast + 真 Chromium→統一回報** 為優先。此為工作方式而非自動增加測試量、修改 DSP 或默認合併授權；錯誤仍遵守二次上限與根因檢查。
+- 這批以唯一既有分支 `style/ui01-condition-eq-knob-ref-20261011`、草稿 PR #116 為基底，不建立平行 PR，不重做 #114/#115。每組先建立 Git commit 物件，最後將完整線一次 fast-forward 推送，避免每個像素調整都觸發 CI。
+- **A／卡片、Scene、分析器**：`fc78a991ac5e398d76e8c15257108ed3cb8d6cab`，涵蓋四卡 live 文字與照片低對比、EDIT/箭頭狀態、Scene 真 Zoom／時間標尺視覺、Spectrum PRE/POST/RTA 真控制的按鍵文字。保留所選模型、實際曲線、控制座標與真分析儀。
+- **B／Meter、Motion、Bad Signal、Condition、Intelligibility**：`51243b97b40fae8c6de85dba177ec44f54278868`，涵蓋真 Meter 刻度/LUFS pending 框低對比、Motion 3 模式狀態、Bad Signal 四顆原有 Checkbox 改用正式 Runtime ON/OFF/DISABLED PNG、Condition 文字、Intelligibility 三模式狀態和未核准控件灰階。所有真參數／Undo 不變，不假造 LUFS。
+- **C／Ambience、Mix、EQ、七卡旋鈕**：`48a08eda8aab44815858c0240f13dacf04be8262`，涵蓋 Ambience Duck/OUT 波形框、S/M 停用外觀、Mix 真 WET/DRY 顯示與 Ø 停用、Mini EQ 已存在實際 Freq/Gain/Q 文字和鍵盤焦點、七卡上方文字與旋鈕光學狀態。聲音算法、State/ID/Factory Preset 不變。
+- 新增 `Web/App/ui01_ref_batch_a_v1.css`／`b_v1.css`／`c_v1.css`，以 UI_01-only scope 逐組最小覆蓋既有正式 PNG、所有鎖定外框／命中區均不改。**不改** `Source/DSP/**`、AudioWorklet／WASM、Native sound processing、`Assets/UI/ReferenceSheets/**`、Presets。UI_02 不改；Native Host parity 待實測。
+- 正式 REF UI_01 1508×808 原始檔仍未入庫，故外觀標示 **APPROX**；原 U01-13、17、18 及其他不足的 U01 ID 均保留 `[ ]`／PARTIAL，直到真實瀏覽器截圖與使用者確認，不能自動全勾。
+- **驗證狀態（推送前）**：本批 CSS/工作流已建立可追蹤檔案與 commit，但真 Chromium、Fast 與圖片尚未執行；禁止提前寫 PASS。新候選畫面交付路徑 `Web/App/preview/rendered/UI_01_REF_BATCH_PR116.png`，需等真正 Chromium 產生後才列為證據；只正常執行必要一次 Fast 和一次 Chromium。PR 保持 Draft、未合併／未正式部署。
+
 ## UI_01 Condition / EQ / 金屬旋鈕｜REF 外觀候選（2026-10-11，PR #116）
 
 - **目前目標**：延續前輪已合併的 PR #114／#115，只精修 UI_01 的 U01-13 Condition、U01-17 EQ/Tone、U01-18 旋鈕材質外觀。唯一分支 `style/ui01-condition-eq-knob-ref-20261011`、[Draft PR #116](https://github.com/ureia-dev/SOURCERUNE/pull/116)，**不合併／不部署**。起點 main `0d374288ea181f65a2c839b90432e068697d43df`。
