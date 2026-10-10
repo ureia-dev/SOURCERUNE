@@ -44,7 +44,7 @@ function applySceneViewportProfile(){
   const listener=$("#listenerNode");
   if(listener)listener.setAttribute("transform",ui1?"translate(500 250)":"translate(500 270)");
   const path=$("#motionPath");
-  if(path)path.setAttribute("d",ui1?"M110 300 C340 225 650 225 900 300":"M110 325 C340 250 650 250 900 325");
+  if(path&&!ui1)path.setAttribute("d","M110 325 C340 250 650 250 900 325");
 }
 function newState(){const p={};for(const g of Object.values(schema.groups))for(const c of g.controls)p[c.id]=c.default;return{ui:"UI_01",view:"3D",sceneZoom:1,tab:"spectrum",advanced:"MOTION",params:p,selection:{...DEFSEL},bypass:Object.fromEntries(Object.entries(schema.groups).filter(([,g])=>g.bypass).map(([k])=>[k,false])),sync:true,seed:48151623,markers:{start:null,closest:null,end:null},globalBypass:false,preset:null,snapshots:{A:null,B:null,C:null,D:null},generatorOn:false}}
 function migrateLegacyEq(s){

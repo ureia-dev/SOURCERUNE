@@ -2,6 +2,7 @@
 const clamp=(v,low,high)=>Math.max(low,Math.min(high,v));
 const $=sel=>document.querySelector(sel);
 let cachedCurve="";
+let cachedScenePath="";
 let cachedRuler="";
 function number(value,fallback){const n=Number(value);return Number.isFinite(n)?n:fallback}
 export function sceneViewBox(zoom){
@@ -32,10 +33,11 @@ export function syncSceneGuide(state){
   const maximum=Math.max(10,number(p.startDistance,80),number(p.closestDistance,3),number(p.endDistance,120));
   const at=t=>({x:110+790*t,y:190+clamp(sceneDistanceAt(p,t)/maximum,0,1)*105});
   const sig=[p.startDistance,p.closestDistance,p.endDistance,p.motionMode].join("/");
-  if(sig!==cachedCurve){
+  if(sig!==cachedCurve||$("#motionPath")?.getAttribute("d")!==cachedScenePath){
     const pts=Array.from({length:49},(_,i)=>at(i/48));
     const d=pts.map((pt,i)=>(i?"L":"M")+pt.x.toFixed(2)+" "+pt.y.toFixed(2)).join(" ");
     $("#motionPath")?.setAttribute("d",d);
+    cachedScenePath=d;
     for(const [id,t] of [["sceneStartMarker",0],["sceneClosestMarker",.5],["sceneEndMarker",1]]){
       const el=$("#"+id),point=at(t);
       if(el){el.setAttribute("x",(point.x-14).toFixed(2));el.setAttribute("y",(point.y-14).toFixed(2));}

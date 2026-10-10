@@ -57,13 +57,16 @@ jobs:
               await page.waitForFunction(()=>window.__geometryAudit && !!document.querySelector("#sceneSvg"),{timeout:15000});
               // Verify the displayed buttons really zoom and reset the live SVG.
               const initialBox=await page.$eval("#sceneSvg",n=>n.getAttribute("viewBox"));
+              const initialCurve=await page.$eval("#motionPath",n=>n.getAttribute("d"));
               await page.click('[data-scene-zoom="in"]');
               await page.waitForFunction(()=>document.querySelector("#sceneZoomReadout")?.textContent==="125%",{timeout:5000});
               const enlargedBox=await page.$eval("#sceneSvg",n=>n.getAttribute("viewBox"));
               await page.click('[data-scene-zoom="reset"]');
               await page.waitForFunction(()=>document.querySelector("#sceneZoomReadout")?.textContent==="100%",{timeout:5000});
               const resetBox=await page.$eval("#sceneSvg",n=>n.getAttribute("viewBox"));
+              const resetCurve=await page.$eval("#motionPath",n=>n.getAttribute("d"));
               if(initialBox!==resetBox||initialBox===enlargedBox)throw Error("Scene live zoom/reset did not update viewBox");
+              if(initialCurve!==resetCurve)throw Error("Live distance curve drifted after zoom/reset");
               const timeCount=await page.evaluate(()=>document.querySelectorAll(".scene-time-ruler [data-scene-time]").length);
               if(timeCount!==5)throw Error("Scene time ruler has "+timeCount+" labels");
               const labelOverlap=await page.evaluate(()=>{
