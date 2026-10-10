@@ -86,7 +86,7 @@ jobs:
               if(!initial.imgAssets.ambDisabled.includes("RT_SEGMENT_CAP_DISABLED.png")||
                 !initial.imgAssets.intelDisabled.includes("RT_CHECKBOX_DISABLED.png")||
                 !initial.imgAssets.mixDisabled.includes("RT_BUTTON_CAP_DISABLED.png"))
-                throw Error("Approved official disabled PNG state missing");
+                throw Error("Approved official disabled PNG state missing: "+JSON.stringify(initial.imgAssets));
               await (await page.$(".app")).screenshot({path:screenshot});
               // Duck uses an EXISTING state ID and undo, never a fake DSP claim.
               await page.click(".sr-amb-ref-duck input");
