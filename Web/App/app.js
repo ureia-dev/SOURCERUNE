@@ -1,5 +1,6 @@
 import {createSceneNode, parametersFromState, hpfFromState, eq3FromState, audioSupportNote} from "./audio/engine.js";
 import {eqGraph,miniEqSvg as renderThreeBandEq,updateEqPlot,sizeEqMarkers} from "./eq_graph.js";
+import {updateEqAnalyzer} from "./eq_analyzer_v1.js";
 import {attachEqInteractions,dismissEqFloat} from "./eq_interactions.js";
 import {openEqFocus,eqFocusIsOpen,markMiniEqInert,syncEqFocus,repositionEqFocus} from "./eq_focus.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
@@ -335,9 +336,9 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 `<div class="macro macro-intelligibility ${state.advanced==="INTELLIGIBILITY"?"selected":""}" data-open="INTELLIGIBILITY"><h3>INTELLIGIBILITY</h3>${macroKnob("intelligibility","AMOUNT","%","centered")}${modeButtons("intelligibilityMode",["NATURAL","DIALOGUE","AGGRESSIVE"],{NATURAL:"Natural",DIALOGUE:"More Clear",AGGRESSIVE:"Muffled"})}</div>`+
 `<div class="macro macro-ambience ${state.advanced==="AMBIENCE"?"selected":""}" data-open="AMBIENCE"><h3>AMBIENCE</h3>${macroSelect("ambienceType")}<div class="ambience-preview"><img src="${assetUrl(selected("SPACE_ENVIRONMENT"))}" alt=""></div>${macroKnob("ambience","AMOUNT","%","centered")}<div class="macro-wave" aria-hidden="true"></div></div>`+
 `<div class="macro macro-mix ${state.advanced==="MIX"?"selected":""}" data-open="MIX"><h3>MIX</h3>${macroKnob("mix","WET","%","large centered")}<span class="macro-mix-mode">WET</span></div>`+
-`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" data-eq-zoom-in class="macro-eq-zoom-in" aria-label="Zoom in EQ editor" title="Zoom In · expand EQ">⤢</button><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><label class="eq-hpf-control"><span>HPF</span><input type="range" data-eq-hpf min="20" max="1000" step="1" value="${state.params.hpf}" title="HPF 20 Hz = OFF; 21–1000 Hz is active"/><output data-eq-hpf-value>${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</output></label><span class="eq-pending">LPF ${(state.params.lpf/1000).toFixed(1)}k · B1–3 · TONE: PENDING</span></div></div>`;
+`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" data-eq-zoom-in class="macro-eq-zoom-in" aria-label="Zoom in EQ editor" title="Zoom In · expand EQ">⤢</button><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><div class="eq-cut-indicators" aria-label="HPF and LPF are draggable in graph"><span>HPF <strong data-eq-readout="hpf">${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</strong></span><span class="eq-cut-caption">DRAG EQ POINTS</span><span>LPF <strong data-eq-readout="lpf">${state.params.lpf>=20000?"OFF":(state.params.lpf/1000).toFixed(1)+" kHz"}</strong></span></div></div></div>`;
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(x.target.closest(".macro-knob,input,button,select,[role=slider]"))return;openAdvanced(e.dataset.open)});
-bindMacroKnobs();bindEqHpf();if(eqFocusIsOpen())markMiniEqInert();else bindMiniEq();
+bindMacroKnobs();if(eqFocusIsOpen())markMiniEqInert();else bindMiniEq();
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
 $$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}));
   $$("[data-eq-zoom-in]").forEach(b=>b.onclick=e=>{
@@ -347,11 +348,6 @@ $$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.da
       getControl:findControl,snapshot:()=>core(),
       onChange:(key,value)=>{
         state.params[key]=value;refreshMiniEq();
-        if(key==="hpf"){
-          const input=$("[data-eq-hpf]"),out=$("[data-eq-hpf-value]");
-          if(input)input.value=String(value);
-          if(out)out.textContent=value<=20?"OFF":value+" Hz";
-        }
         const input=$('[data-param="'+key+'"]');
         if(input){
           input.value=String(value);
@@ -375,8 +371,8 @@ function refreshMiniEq(){
   const plot=eqGraph(state,audioCtx?.sampleRate||48000);
   for(const svg of svgs)updateEqPlot(svg,plot);
   const h=$('[data-eq-readout="hpf"]'),l=$('[data-eq-readout="lpf"]');
-  if(h)h.textContent=String(state.params.hpf);
-  if(l)l.textContent=(state.params.lpf/1000).toFixed(1);
+  if(h)h.textContent=state.params.hpf<=20?"OFF":state.params.hpf+" Hz";
+  if(l)l.textContent=state.params.lpf>=20000?"OFF":(state.params.lpf/1000).toFixed(1)+" kHz";
   syncEqFocus();
 }
 function bindMiniEq(){
@@ -389,13 +385,8 @@ function bindMiniEq(){
     snapshot:()=>core(),
     changed:(key,value)=>{
       refreshMiniEq();
-      // Keep the existing HPF slider and Advanced numeric view in sync
-      // without remounting the SVG during a gesture.
-      if(key==="hpf"){
-        const input=$("[data-eq-hpf]"),out=$("[data-eq-hpf-value]");
-        if(input)input.value=String(value);
-        if(out)out.textContent=value<=20?"OFF":value+" Hz";
-      }
+      // Mini HPF/LPF nodes are the ONLY compact controls; Advanced remains synced.
+      // Never remount the interactive SVG during a gesture.
       const adv=$('[data-param="'+key+'"]');
       if(adv){
         adv.value=String(value);
@@ -568,6 +559,7 @@ audio.addEventListener("error",()=>mark("音檔無法播放，請使用 WAV／�
 audio.addEventListener("seeked",()=>sceneNode?.port.postMessage({type:"reset"}));
 function stats(a){if(!a)return{peak:-Infinity,rms:-Infinity,pct:0};const d=new Uint8Array(a.fftSize);a.getByteTimeDomainData(d);let p=0,s=0;for(const x of d){const v=(x-128)/128;p=Math.max(p,Math.abs(v));s+=v*v}p=db(p);const r=db(Math.sqrt(s/d.length));return{peak:p,rms:r,pct:Math.max(0,Math.min(100,(p+60)/60*100))}}
 function meters(){const i=stats(inAn),o=stats(outAn);peakIn=Math.max(peakIn,i.peak);peakOut=Math.max(peakOut,o.peak);const im=$("#inMeter"),om=$("#outMeter"),ui2=state?.ui==="UI_02",pct=v=>Math.max(0,Math.min(100,(v+60)/60*100)),iv=meterMode==="RMS"?i.rms:i.peak,ov=meterMode==="RMS"?o.rms:o.peak,ip=meterMode==="RMS"?pct(i.rms):i.pct,op=meterMode==="RMS"?pct(o.rms):o.pct;if(ui2){im.style.width=ip+"%";om.style.width=op+"%";im.style.height="100%";om.style.height="100%"}else{im.style.height=ip+"%";om.style.height=op+"%";im.style.width="";om.style.width=""}$("#peakInValue").textContent=fmt(iv);$("#peakOutValue").textContent=fmt(ov);$("#rmsInValue").textContent=fmt(i.rms);$("#rmsOutValue").textContent=fmt(o.rms)}
+let spectrumBins=null;
 function spectrum(){
   const c=$("#spectrumCanvas"),x=c.getContext("2d"),w=c.width,h=c.height;
   x.clearRect(0,0,w,h);x.fillStyle="#081015";x.fillRect(0,0,w,h);
@@ -587,7 +579,11 @@ function spectrum(){
     x.fillText(f>=1000?(f/1000)+"k":String(f),xx,h-9);
   }
   if(!outAn)return;
-  const d=new Float32Array(outAn.frequencyBinCount);outAn.getFloatFrequencyData(d);
+  // Share one analyser read between the main spectrum and compact/Focus EQ.
+  if(!spectrumBins||spectrumBins.length!==outAn.frequencyBinCount)
+    spectrumBins=new Float32Array(outAn.frequencyBinCount);
+  const d=spectrumBins;outAn.getFloatFrequencyData(d);
+  updateEqAnalyzer(d,audioCtx?.sampleRate||48000,performance.now(),!audio.paused&&!document.hidden);
   const sr=audioCtx?.sampleRate||48000,ny=sr/2;
   x.strokeStyle="#55cfff";x.lineWidth=1.7;x.beginPath();
   for(let px=0;px<=Math.floor(pw);px++){
