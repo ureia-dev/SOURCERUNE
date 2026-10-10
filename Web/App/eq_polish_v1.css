@@ -178,3 +178,7 @@
   .sr-eq-focus .sr-eq-knob-dial:before{inset:3px;}
   .sr-eq-focus .sr-eq-band-type{margin-bottom:1px;}
 }
+
+/* LPF stays visually distinct (muted warm magenta) as in approved preview. */
+.macro-eq-svg [data-eq-ring="lpf"]{stroke:#e58eac;fill:#2e1c2a;}
+.macro-eq-svg [data-eq-center="lpf"]{fill:#ffd1e1;}
