@@ -73,6 +73,7 @@
   - **驗收/進度**：`PARTIAL：UI_01 主卡 ON/OFF 已改為按鈕，可直接切換既有 EQ_TONE bypass、Advanced 及 Undo/Redo；UI_02 原標籤不變。實作 commit `7e28b217`、CSS `4e6e5155`。PR #63 合併 `3e3799d3`／#64 修復 `43bfcb6a`；Fast #108/#109 PASS，**Web Preview #81 Chrome `U01-17-POWER.ok=true`**：Power 切換、Advanced bypass、Undo、Redo、基準恢復皆通過。**HPF/LPF/TONE 主卡選單、曲線/節點、Native 仍 PENDING；本項保持 PARTIAL 未勾**。`
 - [ ] **U01-18｜底部七區材質/字型/刻度/間距**（P1）— 七卡旋鈕、金屬材質、對比、留白、刻度與 REF 不同；逐區 1:1 REF/實際 Web 重疊驗證。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **2026-10-10 旋鈕／動態數值限定驗收**：PR #78 `9393bc32`、#79 `73964644` 合併；Web Preview [#38026732851](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38026732851) report commit `73964644`，UI01/UI02 geometry+knobSmoke+knobValues 均 true，檔案 `Web/App/knob_value_ref_alignment_v1.css`。UI01 Speed/Doppler/Width 各43px、一般68px、MIX82px，標籤在上／數字在下，八顆無文字裁切。UI02 Motion 54px、底部四顆76px，Bad Signal/Intelligibility 數值在右、Mix 下方，Condition 保留 Used 選單；內容仍使用真 live state，沒有照搬 REF 例圖預設數值。UI02 正式核准 1672×941 RGB REF SHA256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff` 已核實；UI01 正式 1508×808 binary 仍未入庫，只依 142 點掃描 APPROX。**這次僅尺寸／值位置／操作驗收，未做每像素材質／字型疊圖與 Native editor；本項保持 [ ]／PARTIAL。**
 
 ## UI_02：22 個待辦
 
@@ -102,6 +103,7 @@
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U02-13｜三顆小旋鈕 Speed/Doppler/Width**（P1/P2）— Web drag/wheel/key binding 已寫，但 54px 指針、材質、字體與 REF 不同；驗真 pointer 值/Undo。
   - **驗收/進度**：`PARTIAL`（2026-10-10）。UI_02 真 Chromium [Web Preview #38025720819](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38025720819) 在正式場景區以滑鼠拖曳／滾輪／鍵盤驗收 Speed 60→84→83→84→Undo 60、Doppler 70→94→93→94→70、Width 40→64→63→64→40；三顆皆綁正式 RT_KNOB_S_BASE.png，沒有誤開 Advanced，Fast PR #76 PASS。此為 Web 功能驗收；54px 指針、REF 材質/字體與 Native UI 尚未全部比對，保持 [ ]。
+  - **2026-10-10 旋鈕／動態數值限定驗收**：PR #78 `9393bc32`、#79 `73964644` 合併；Web Preview [#38026732851](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38026732851) report commit `73964644`，UI01/UI02 geometry+knobSmoke+knobValues 均 true，檔案 `Web/App/knob_value_ref_alignment_v1.css`。UI01 Speed/Doppler/Width 各43px、一般68px、MIX82px，標籤在上／數字在下，八顆無文字裁切。UI02 Motion 54px、底部四顆76px，Bad Signal/Intelligibility 數值在右、Mix 下方，Condition 保留 Used 選單；內容仍使用真 live state，沒有照搬 REF 例圖預設數值。UI02 正式核准 1672×941 RGB REF SHA256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff` 已核實；UI01 正式 1508×808 binary 仍未入庫，只依 142 點掃描 APPROX。**這次僅尺寸／值位置／操作驗收，未做每像素材質／字型疊圖與 Native editor；本項保持 [ ]／PARTIAL。**
 - [ ] **U02-14｜Speed 60% vs 60 km/h**（P1/待核准）— REF 百分比、Web 公里時速；須先確認產品單位，不可改掉物理速度。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U02-15｜SPACE/ENVIRONMENT 下拉與夜景**（P1）— REF City Street 夜景，Web Busy City Street/圖框不同；校 selector、State、獨立素材。
@@ -114,8 +116,10 @@
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U02-19｜CONDITION 金屬旋鈕/USED**（P1）— REF 大金屬 Knob/USED，Web 材質/比例不同；保持既有 76px 幾何並核真操作。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **2026-10-10 旋鈕／動態數值限定驗收**：PR #78 `9393bc32`、#79 `73964644` 合併；Web Preview [#38026732851](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38026732851) report commit `73964644`，UI01/UI02 geometry+knobSmoke+knobValues 均 true，檔案 `Web/App/knob_value_ref_alignment_v1.css`。UI01 Speed/Doppler/Width 各43px、一般68px、MIX82px，標籤在上／數字在下，八顆無文字裁切。UI02 Motion 54px、底部四顆76px，Bad Signal/Intelligibility 數值在右、Mix 下方，Condition 保留 Used 選單；內容仍使用真 live state，沒有照搬 REF 例圖預設數值。UI02 正式核准 1672×941 RGB REF SHA256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff` 已核實；UI01 正式 1508×808 binary 仍未入庫，只依 142 點掃描 APPROX。**這次僅尺寸／值位置／操作驗收，未做每像素材質／字型疊圖與 Native editor；本項保持 [ ]／PARTIAL。**
 - [ ] **U02-20｜INTELLIGIBILITY 數值/底部溢出**（P0）— REF 75% 且主旋鈕在框內，Web 70% 和模式鈕可能溢出；先測可見/遮蔽/互動，數值先核 Scene。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **2026-10-10 旋鈕／動態數值限定驗收**：PR #78 `9393bc32`、#79 `73964644` 合併；Web Preview [#38026732851](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38026732851) report commit `73964644`，UI01/UI02 geometry+knobSmoke+knobValues 均 true，檔案 `Web/App/knob_value_ref_alignment_v1.css`。UI01 Speed/Doppler/Width 各43px、一般68px、MIX82px，標籤在上／數字在下，八顆無文字裁切。UI02 Motion 54px、底部四顆76px，Bad Signal/Intelligibility 數值在右、Mix 下方，Condition 保留 Used 選單；內容仍使用真 live state，沒有照搬 REF 例圖預設數值。UI02 正式核准 1672×941 RGB REF SHA256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff` 已核實；UI01 正式 1508×808 binary 仍未入庫，只依 142 點掃描 APPROX。**這次僅尺寸／值位置／操作驗收，未做每像素材質／字型疊圖與 Native editor；本項保持 [ ]／PARTIAL。**
 - [ ] **U02-21｜MIX Wet 下拉/箭頭**（P0/待核准）— REF 有 Wet 下拉、右箭頭，Web 缺同等可操作控件；先核真 Mix 語意，再做 State+Undo。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U02-22｜EQ/TONE Natural/曲線/On-Power**（P0）— REF 細緻 EQ 曲線與 Natural 下拉、On/Power；Web 簡化；需真 4-band/HPF/LPF/Tone/Bypass。
@@ -133,6 +137,7 @@
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-05｜UI_02 REF 1:1 細節疊圖**（P2）— 25 大框/139 候選仍多 APPROX；需文字、邊框、Knob、材質、Hitbox、亮暗/開關逐區驗證。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **2026-10-10 旋鈕／動態數值限定驗收**：PR #78 `9393bc32`、#79 `73964644` 合併；Web Preview [#38026732851](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38026732851) report commit `73964644`，UI01/UI02 geometry+knobSmoke+knobValues 均 true，檔案 `Web/App/knob_value_ref_alignment_v1.css`。UI01 Speed/Doppler/Width 各43px、一般68px、MIX82px，標籤在上／數字在下，八顆無文字裁切。UI02 Motion 54px、底部四顆76px，Bad Signal/Intelligibility 數值在右、Mix 下方，Condition 保留 Used 選單；內容仍使用真 live state，沒有照搬 REF 例圖預設數值。UI02 正式核准 1672×941 RGB REF SHA256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff` 已核實；UI01 正式 1508×808 binary 仍未入庫，只依 142 點掃描 APPROX。**這次僅尺寸／值位置／操作驗收，未做每像素材質／字型疊圖與 Native editor；本項保持 [ ]／PARTIAL。**
 - [ ] **CROSS-06｜Web Preview 未定位 404**（P2）— #76 render-log 有 404 但 URL 未查出；需查失敗資源與根因並以新 log 驗證解決。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-07｜完整可執行 C++ 聲學 DSP**（P3）— Source/Motion/Space/Transmission/Condition/Cover/Ambience 等真訊號模型、相位/延遲/CPU/Golden 需驗證。
