@@ -1,5 +1,9 @@
 # SOURCERUNE PROJECT CONSTITUTION — 永久製作原則與完整規格
 
+## 2026-10-10 最新核准決策：EQ 固定 ±24 dB 的高精度 Web 圖形（取代 ±12）
+
+右下小 EQ 及內建 Zoom In 放大視窗須採 **同一套真實 HPF／LPF／Band1–3 EQ**。其顯示固定 ±24 dB，不再自動縮放；**實際 Band Gain 範圍仍為 −18～+18 dB**，不得為了圖改演算法。按核准專業 EQ 示意圖，節點要細小等比例圓形（Web 實測 mini 4.4–4.5 px、Focus 6.9 px），保留獨立透明滑鼠命中區以方便拖曳；曲線細緻、彩色柔和漸層、網格低對比。Focus 11 個 Freq/Gain/Q 旋鈕必須對應既有同一份狀態／Undo／AudioWorklet，控制方式沿用 VVChain UI_A 的滑鼠操作語意，但嚴禁搬 VVChain DSP。未實作的 24 dB/oct 滤波斜率、額外 Band Bypass、Phase/濾波 Type 不可呈現成假功能，現有 HPF／LPF 仍固定真 12 dB/oct。主實作 [PR #104](https://github.com/ureia-dev/SOURCERUNE/pull/104) 已合併，Fast #38047626674 PASS，真 Web Preview #38047739428 UI_01/02 eqFocus/eqMouse/geometry PASS。Native 自訂 EQ GUI 仍 PENDING；DSP unchanged，未觸發新 DSP restore。完整可操作數值規格與 10+10+10+2 證據參照 `docs/product/UI_FUNCTION_CONTRACT.md`、`docs/product/reference/EQ_24DB_MOUSE_PRECISION_AUDIT_20261010.md`。
+
 > **永久規範；任何 GPT、Codex、GitHub Copilot、開發者、排程、PR、分支、交接與後續新對話均應遵守。**
 >
 > **唯一專案：`ureia-dev/SOURCERUNE`。** 不要與 VVChain 或其他專案混淆。
