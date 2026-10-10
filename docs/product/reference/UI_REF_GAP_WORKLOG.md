@@ -60,6 +60,15 @@
 - **驗收閘**：先恢復合法完整來源與正式素材取檔、檔案 SHA 檢查；在實際入口 `Web/App/index.html?ui=UI_01` 以 Chromium 渲染並取得 **baseline**；進行最小 Scene UI 實作，透過同一真入口產生 **after 截圖**，驗 hitbox/Zoom/Reset/Mode/時間/距離/車輛/波形、未動 UI_02；必要的 Fast 一次成功後，讓使用者看**真元件組裝畫面**並確認，保持草稿 PR 不合併。任何一項證據缺失都留 `PENDING`。
 - **截至本紀錄**：能力關卡未通過，故沒有修改任何正式 `Web/App` 程式或 PNG，沒有產生新組裝截圖；**U01-06～09 仍 `[ ]`**。本紀錄是可恢復的根因與工作定位 checkpoint，不是已完成 Scene 子項。
 
+### 2026-10-10｜UI_01 Scene View 亮度 2× 候選（等待使用者看圖，不合併）
+
+- **使用者最新指示**：「繼續，一次做剛剛兩倍亮」。此輪按 **UI_01 Scene View 畫面亮度 2 倍** 實作，只有視覺明暗，沒有延伸至整個 Plugin、UI_02、ReferenceSheets 或 DSP。
+- **實際修改**：`Web/App/scene_view_ref_stage1_v1.css` 的 `body.ui-01 .scene-panel{filter:brightness(2)}`，等比例調亮已拼裝 Scene 子樹（背景、格線、動態曲線、文字、時間尺、控制列）；`.github/workflows/ui01-scene-pr113-preview.yml` 在原單次 Chromium 真截圖中增加 computed CSS `brightness(2)` 驗證；沒有調整 geometry／聲音／音訊參數。
+- **實作 checkpoint**：`ad3760bc781204367641410aeb4938defd289f9e`；真實新版組裝圖 [UI_01_PR113.png](../../../Web/App/preview/rendered/UI_01_PR113.png)，真實報告 [UI_01_PR113_report.json](../../../Web/App/preview/rendered/UI_01_PR113_report.json)。報告以實作 commit 為 `source`，PNG SHA256 為 `c875486caebafe0aa9e3f579e49cc2b0e45bbfc350aa378703820306af945fba`，與舊暗版的截圖不同。
+- **驗收證據**：原有 Fast CI [#38060116480](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38060116480) PASS，PR 真 Chromium [#38060116561](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38060116561) PASS。報告 `geometryOk=true`、`sceneBrightness=brightness(2)`、Scene height 262px、main 1499×807、`visualSmoke.zoomIn/zoomReset/labelNoOverlap=true`、時間刻度 5 格、5 張正式 Runtime 素材 HTTP 200、左 4 張正式圖片解碼成功。
+- **邊界**：CSS `brightness(2)` 為顯示像素通道增亮，明部可能截頂；不是實測感知亮度恰好兩倍，也不是改原圖曝光。空音檔狀態的時間尺／seek 音訊 E2E、UI_01 REF 原圖逐像素疊圖與 Native Host 仍待驗。
+- **等待使用者視覺核准**：PR #113 必須保持 draft / unmerged；U01-06～09 仍為原有 `[ ]`，本次未開始 Spectrum（U01-10）。若使用者要求再調亮／降低，沿同一工作線小改並真截圖，不得自行合併。
+
 ### 2026-10-10 Scene View 第一階段：真實組裝候選已完成，等待使用者檢查（不合併）
 
 - **這是 U01-06～09 的 Web 候選，並非 REF 像素級最終 DONE；原有 U01-06/07/08/09 仍維持 \`[ ]\`，等使用者逐項檢查核准後才更新。** 下一項 Spectrum（U01-10）尚未開始。
