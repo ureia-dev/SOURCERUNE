@@ -1,5 +1,5 @@
 {
-  "commit": "22674d4c8f65bda29ea71324f8fdbd397d693275",
+  "commit": "c2a03a1f8f7ec2d8def4d2351d9589b1d3fef6fb",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -730,7 +730,9 @@
             "+0.0 dB",
             "+1.3 dB"
           ],
-          "knobWheel": true
+          "knobWheel": true,
+          "accessibleSliders": true,
+          "keyboardPopup": true
         }
       }
     },
@@ -1258,7 +1260,9 @@
             "+0.0 dB",
             "+1.3 dB"
           ],
-          "knobWheel": true
+          "knobWheel": true,
+          "accessibleSliders": true,
+          "keyboardPopup": true
         }
       }
     }
