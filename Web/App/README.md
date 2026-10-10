@@ -134,3 +134,7 @@ Original VVChain UI_A `nextQFromWheel(q,deltaY,fine)` multiplies Q by `exp(clamp
 ### EQ popup explicit Enter commit
 
 Chrome #38034518770 proved graph Q-wheel, numeric dragging, and the popup render work, but typed numeric input was left as raw `1700` instead of the expected committed and formatted `1.7 kHz` on Enter. The interaction code now explicitly commits and formats on Enter, with blur as a fallback; escaping restores the prior value and does not commit. Web state only; C++ filters, parameter ranges, saved presets and CPU untouched. The true browser render report is the gate, not a Pages green badge.
+
+### Real Chrome EQ double-click capture handling
+
+Web Preview #38034721219 validated node/popup wheels and typed Enter edit, then exposed a real Bell double-click issue: a pointer capture can retarget the second click/dblclick onto the SVG surface, not the circle. `eq_interactions.js` now hit-tests the second click at its viewport coordinates, tolerating a 14px point area but never resetting a distant blank region; both `click(detail>=2)` and `dblclick` invoke the idempotent existing reset (Bell Gain=0, Freq/Q unchanged; HPF=20Hz, LPF=20kHz). This is interaction-only, with no preset/DSP modifications. Real UI_01/UI_02 Chrome logs, not Pages job status, remain the gate.
