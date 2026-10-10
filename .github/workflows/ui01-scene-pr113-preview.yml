@@ -96,6 +96,25 @@ jobs:
                 return {ui:"UI_01",sceneBrightness:getComputedStyle(scene).filter,geometryOk:window.__geometryAudit.ok,geometryFailed:window.__geometryAudit.failures,app:{w:app.getBoundingClientRect().width,h:app.getBoundingClientRect().height},sceneHeight:scene.getBoundingClientRect().height,sceneSvgHeight:svg.getBoundingClientRect().height,waveformHeight:waveform.getBoundingClientRect().height,semanticArt:imgs.map(i=>({src:i.getAttribute("src"),naturalWidth:i.naturalWidth,loaded:i.complete&&i.naturalWidth>0})),assets};
               });
               if(result.sceneBrightness!=="brightness(2)")throw Error("Expected UI_01 Scene exactly 2x brighter; got "+result.sceneBrightness);
+              const material=await page.evaluate(()=>{
+                const wave=document.querySelector(".scene-waveform-strip");
+                const buttons=Array.from(document.querySelectorAll(".macro-motion .macro-mode-row button"));
+                const bounds=n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,bottom:r.bottom}};
+                return {waveImage:getComputedStyle(wave).borderImageSource,
+                  waveBounds:bounds(wave),
+                  buttons:buttons.map(n=>({value:n.dataset.value,active:n.classList.contains("active"),
+                    image:getComputedStyle(n).backgroundImage,rect:bounds(n)})),
+                  macroBottom:document.querySelector(".macro-motion").getBoundingClientRect().bottom,
+                  curve:document.querySelector("#motionPath").getAttribute("d")};
+              });
+              if(!material.waveImage.includes("RT_WAVEFORM_STRIP_BG.png"))
+                throw Error("Waveform approved PNG nine-slice missing");
+              if(material.buttons.length!==3)throw Error("Expected three Motion mode buttons");
+              if(material.buttons.some(x=>x.rect.h<35||x.rect.h>37||x.rect.y<690||x.rect.bottom>material.macroBottom-6))
+                throw Error("REF Motion button dimensions/position failed: "+JSON.stringify(material.buttons));
+              if(material.buttons.some(x=>!x.image.includes(x.active?"RT_SEGMENT_CAP_ACTIVE.png":"RT_SEGMENT_CAP_IDLE.png")))
+                throw Error("Motion mode raster state incorrect: "+JSON.stringify(material.buttons));
+              if(material.buttons.filter(x=>x.active).length!==1)throw Error("Expected exactly one active Motion mode");
               if(pageErrors.length)throw Error("Page errors: "+JSON.stringify(pageErrors));
               if(!result.geometryOk)throw Error("Original geometry failed: "+JSON.stringify(result.geometryFailed));
               if(!result.semanticArt.some(i=>i.loaded&&i.naturalWidth>=100))throw Error("No substantial semantic artwork decoded");
@@ -103,6 +122,7 @@ jobs:
               const dest="Web/App/preview/rendered/UI_01_PR113.png";
               await page.$eval(".app",el=>el.scrollIntoView({block:"nearest"}));
               await (await page.$(".app")).screenshot({path:dest});
+              result.assembledMaterials=material;
               result.visualSmoke={zoomIn:true,zoomReset:true,timeRulerTicks:5,labelNoOverlap:!labelOverlap};
               result.sha=process.env.SOURCE_SHA;
               result.screenshotSha256=crypto.createHash("sha256").update(fs.readFileSync(dest)).digest("hex");
