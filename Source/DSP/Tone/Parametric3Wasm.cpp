@@ -1,4 +1,20 @@
 #include "Parametric3.h"
+// Freestanding wasm32 has no libc. Clang's aggregate copies may lower to
+// memcpy/memset even when the audio DSP itself uses no heap or I/O.
+#ifdef __wasm__
+extern "C" __attribute__((optnone)) void* memcpy(void* destination,const void* source,__SIZE_TYPE__ count){
+    volatile unsigned char* dst=(volatile unsigned char*)destination;
+    const volatile unsigned char* src=(const volatile unsigned char*)source;
+    for(__SIZE_TYPE__ i=0;i<count;++i)dst[i]=src[i];
+    return destination;
+}
+extern "C" __attribute__((optnone)) void* memset(void* destination,int value,__SIZE_TYPE__ count){
+    volatile unsigned char* dst=(volatile unsigned char*)destination;
+    for(__SIZE_TYPE__ i=0;i<count;++i)dst[i]=(unsigned char)value;
+    return destination;
+}
+#endif
+
 namespace {sourcerune::dsp::Parametric3 eq;float buffers[2][128]{};}
 extern "C" {
 int sr_eq3_version(){return 1;}
