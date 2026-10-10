@@ -67,3 +67,23 @@ body.ui-01 .sr-intel-ref-options input{
   appearance:none;flex:none;margin:0;width:14px;height:14px;opacity:.75;
   background:transparent url("../../Assets/UI/Runtime/Common/Controls/RT_CHECKBOX_DISABLED.png") center/contain no-repeat;
 }
+
+/* UI_01 true mix state display + nonfunctional phase label; no DSP invention. */
+body.ui-01 .macro-mix{position:relative;overflow:hidden}
+body.ui-01 .macro-mix .macro-knob{margin:10px auto 0}
+body.ui-01 .sr-mix-live-ratio{
+  position:absolute;bottom:42px;left:8px;right:8px;height:24px;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  font:8px ui-monospace,Consolas,monospace;color:#c0dbe7;
+  background:transparent url("../../Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_ACTIVE.png") center/100% 100% no-repeat;
+}
+body.ui-01 .sr-mix-live-ratio small{
+  color:#86a0ad;font-size:7px;
+}
+body.ui-01 .sr-mix-phase-pending{
+  box-sizing:border-box;position:absolute;left:16px;right:16px;bottom:11px;
+  width:calc(100% - 32px);height:26px;border:0;
+  color:#8297a2;font:13px ui-monospace,Consolas,monospace;
+  cursor:not-allowed;
+  background:transparent url("../../Assets/UI/Runtime/Common/Controls/RT_BUTTON_CAP_DISABLED.png") center/100% 100% no-repeat;
+}

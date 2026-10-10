@@ -52,3 +52,14 @@ export function intelligibilityRefMarkup(state){
     +'<label title="Dynamic DSP and public parameter need approval">'
     +'<input type="checkbox" disabled aria-label="Dynamic not yet implemented"><span>Dynamic</span></label></div>';
 }
+
+export function mixRefMarkup(state){
+  if(state.ui!=="UI_01")return '<span class="macro-mix-mode">WET</span>';
+  // mix is the existing real Original↔Full Scene parameter; no new DSP.
+  const wet=clamp(Math.round(Number(state.params.mix)||0),0,100),dry=100-wet;
+  return '<div class="sr-mix-live-ratio" aria-label="Live dry wet ratio">'
+    +'<span>WET '+wet+'%</span><small>DRY '+dry+'%</small></div>'
+    +'<button type="button" class="sr-mix-phase-pending" disabled'
+    +' title="Ø phase inversion requires explicit approved DSP implementation"'
+    +' aria-label="Phase inversion unavailable">Ø</button>';
+}
