@@ -14,8 +14,10 @@ export function hpfFromState(state) {
 }
 export function eq3FromState(state){
   const p=state.params;
-  return [p.lpf,p.b1Freq,p.b1Gain,p.b1Q,p.b2Freq,p.b2Gain,p.b2Q,
-    p.b3Freq,p.b3Gain,p.b3Q,Number(!!(state.globalBypass||state.bypass?.EQ_TONE))];
+  return [p.lpf??20000,p.b1Freq??120,p.b1Gain??0,p.b1Q??0.7,
+    p.b2Freq??600,p.b2Gain??0,p.b2Q??1,
+    p.b3Freq??2400,p.b3Gain??0,p.b3Q??1,
+    Number(!!(state.globalBypass||state.bypass?.EQ_TONE))];
 }
 export function audioSupportNote(state) {
   const source=supportedSource.has(modelNumber(state.selection.SOURCE));
