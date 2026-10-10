@@ -7,9 +7,9 @@ async function auditKnobs(page,ui){
   const before=await value();
   const box=await page.$eval(selector,e=>{
     const r=e.getBoundingClientRect();
-    return {x:r.left+r.width/2,y:r.top+r.height/2,width:r.width,height:r.height};
+    return {x:r.left+r.width/2,y:r.top+r.height/2,width:r.width,height:r.height,display:getComputedStyle(e).display,faceWidth:e.parentElement.querySelector('.macro-knob-face')?.getBoundingClientRect().width};
   });
-  assert(box.width>10&&box.height>10,ui+" BAD SIGNAL hit area missing");
+  assert(box.width>10&&box.height>10,ui+" BAD SIGNAL hit area missing: "+JSON.stringify(box));
   await page.mouse.move(box.x,box.y);
   await page.mouse.down();
   await page.mouse.move(box.x,box.y-40,{steps:5});
