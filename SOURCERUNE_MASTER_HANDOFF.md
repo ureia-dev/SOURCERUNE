@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 最新 checkpoint：UI_01／UI_02 主旋鈕與 Advanced 視窗修復（2026-10-10）
+
+- **起因與根因**：前次雖把範圍值事件接上，但較晚的 `.macro input {position:relative}` 與 range 的 margin 使透明 hitbox 離開正式 PNG 旋鈕，使用者實際拖動反而按到卡片觸發 Advanced；Advanced 又受 `.app` scale、overflow 裁切，使用 `left/right/top/bottom` 填滿整個 Web shell，必須按 CLOSE。不能把舊 `knobSmoke` 單顆 Bad Signal 成功視為全 UI 完成。
+- **實際修復**：PR [#75](https://github.com/ureia-dev/SOURCERUNE/pull/75) merge `4bf937dd`：最後載入 `Web/App/main_controls_dialog_v1.css` 使透明控制層真正覆蓋正式旋鈕 face，不移動 REF 圖像，卡片 `.macro-knob` 不再觸發開詳細視窗。Advanced panel 移到 document.body，真 backdrop 點外關閉、Esc／CLOSE 保留，依實際模組控制數量用 470／600／750／940px 寬（本輪選定測試小/中/大為 470/750/940）；限制最大視窗高度，內容過多才捲動，UI_02 Ambience 保留橫向滑桿。
+- **驗收與再補足**：PR [#76](https://github.com/ureia-dev/SOURCERUNE/pull/76) merge `dca77fe8` 新增 UI_02 場景區 Speed／Doppler／Width 小旋鈕真操作測試。最新 [Web Preview #38025720819](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38025720819) true Chrome: `Web/App/preview/rendered/geometry-report.json` `commit=dca77fe8...` 且 UI_01/UI_02 `geometry.ok=true`, `knobSmoke.ok=true`；UI_01 8 顆圓形、UI_02 下方 4 顆圓形、UI_02 上方 3 顆小旋鈕，真 mouse drag、wheel、keyboard、Undo 恢復，且未開 Advanced。正式 PNG 解碼 PASS，UI_02 Ambience slider PASS。Dialog outside click / Esc / CLOSE、small 470×223px、medium 750×382px、large 940×464px 均 PASS。`render-log.txt` 結尾 `render audit completed successfully`，不可只以 workflow SUCCESS 判定。
+- **不影響與仍未完成**：未改 74 Factory Preset、已核准版面座標、UI 圖檔、參數 public IDs、共用 DSP、CI 安全次數。Native VST3 還是 host generic editor，正式 UI_01/UI_02 插件編輯器與不少模組真 DSP 仍 PENDING；其餘卡片/開關/REF 細節 E2E 未全部驗。唯一工作日誌 `docs/product/reference/UI_REF_GAP_WORKLOG.md` CROSS-03、U02-13 保持 PARTIAL/[ ]，勿誤勾完整。
+
 ## Web 旋鈕接線與 Chromium 驗收（2026-10-10）
 
 - **範圍**：UI_01/UI_02 既有 speed/doppler/width/badSignal/condition/intelligibility/ambience/mix 八個 Web macro 控制已接上下拖曳、單步滾輪、鍵盤、雙擊預設值、單手勢 Undo/Redo 與 Advanced／Shared State 即時同步；UI_02 Ambience 橫向滑桿保留。原有 UI 外觀尺寸/素材、State schema、74 Factory Preset、DSP 算法及 CI 次數不變。部分參數仍僅保存 State，不代表真 DSP 功能已完成。
