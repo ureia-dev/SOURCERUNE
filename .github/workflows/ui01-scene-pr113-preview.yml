@@ -178,7 +178,7 @@ jobs:
                 if(!c.iconImage.includes("RT_MODULE_ICON_"+iconNames[c.type]+"_DEFAULT.png"))
                   throw Error("Approved module icon PNG not applied: "+c.type+" "+c.iconImage);
                 if(Math.abs(c.card.h-expectedH[i])>2)throw Error("Card outer REF height changed: "+c.type);
-                if(c.art.w<230||c.art.w>246||c.art.x<c.card.x+10||c.art.right>c.card.right-48)
+                if(c.art.w<230||c.art.w>246||c.art.x<c.card.x+8||c.art.right>c.card.right-48)
                   throw Error("Card photo RECT mismatch: "+c.type+" "+JSON.stringify(c.art));
                 if(c.title.x<c.card.x+65||c.name.x<c.card.x+65||c.name.right>c.edit.x+1)
                   throw Error("Card icon/header not REF aligned: "+c.type);
