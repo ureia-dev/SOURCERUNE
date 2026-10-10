@@ -393,18 +393,24 @@
   ],
   "lufs": {
     "box": {
-      "x": 1309.7806396484375,
-      "y": 417.24041748046875,
-      "w": 121,
-      "h": 69,
-      "right": 1424.783203125,
-      "bottom": 482.8203430175781
+      "x": 1300.2763671875,
+      "y": 352.61090087890625,
+      "w": 141,
+      "h": 58,
+      "right": 1434.2874755859375,
+      "bottom": 407.736083984375
     },
     "value": "—"
   },
   "buttons": {
     "peak": true,
     "rms": false
+  },
+  "lufsLayout": {
+    "inside": true,
+    "labelVisible": true,
+    "pendingVisible": true,
+    "duplicateScale": "none"
   },
   "spectrumVisualProof": {
     "same": true,
@@ -413,14 +419,14 @@
     "positivePeak": true,
     "distinctWidth": true
   },
-  "sourceSha": "e1f2652733958827064d7f4710a2f5a77e1c6fc6",
+  "sourceSha": "00568969a612255071bbb2b0d6c83afd69c8ecea",
   "modeSmoke": "PASS",
-  "pngSha256": "e32ded9360ae88d87224bc3f273dca1e3115954c5b3eb3fd2b0d0c9667f94327",
+  "pngSha256": "f76485e00414d9e680a456c1d96c766f30368722fbfbba5c99cd27c4100d3d0e",
   "liveAudioProof": {
     "playing": true,
-    "seconds": 0.269333,
+    "seconds": 0.272,
     "miniPathSize": 5476,
-    "activeCyanPixels": 246
+    "activeCyanPixels": 248
   },
-  "spectrumShotSha256": "0c9d0f3ce9bf9139a1883ce271e19eec9ea6a0fbcfbbdaf690e9d9e235020baa"
+  "spectrumShotSha256": "9581aea637c9b709a5ce6079993741527b3eebcf9a4c9d718ab07524868fb0c5"
 }
