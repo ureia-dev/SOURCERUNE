@@ -109,6 +109,296 @@
     "macroBottom": 802,
     "curve": "M110.00 260.00 L126.46 257.19 L142.92 254.39 L159.38 251.58 L175.83 248.77 L192.29 245.96 L208.75 243.16 L225.21 240.35 L241.67 237.54 L258.13 234.73 L274.58 231.93 L291.04 229.12 L307.50 226.31 L323.96 223.51 L340.42 220.70 L356.88 217.89 L373.33 215.08 L389.79 212.28 L406.25 209.47 L422.71 206.66 L439.17 203.85 L455.63 201.05 L472.08 198.24 L488.54 195.43 L505.00 192.63 L521.46 196.89 L537.92 201.16 L554.38 205.42 L570.83 209.69 L587.29 213.95 L603.75 218.22 L620.21 222.48 L636.67 226.75 L653.13 231.02 L669.58 235.28 L686.04 239.55 L702.50 243.81 L718.96 248.08 L735.42 252.34 L751.88 256.61 L768.33 260.88 L784.79 265.14 L801.25 269.41 L817.71 273.67 L834.17 277.94 L850.63 282.20 L867.08 286.47 L883.54 290.73 L900.00 295.00"
   },
+  "semanticCardProof": [
+    {
+      "type": "SOURCE",
+      "card": {
+        "x": 10,
+        "y": 58,
+        "w": 313,
+        "h": 136,
+        "right": 323,
+        "bottom": 194
+      },
+      "art": {
+        "x": 19,
+        "y": 115,
+        "w": 239,
+        "h": 72,
+        "right": 258,
+        "bottom": 187
+      },
+      "header": {
+        "x": 11,
+        "y": 59,
+        "w": 311,
+        "h": 46,
+        "right": 322,
+        "bottom": 105
+      },
+      "title": {
+        "x": 82,
+        "y": 66,
+        "w": 185,
+        "h": 17,
+        "right": 267,
+        "bottom": 83
+      },
+      "name": {
+        "x": 82,
+        "y": 83,
+        "w": 185,
+        "h": 16,
+        "right": 267,
+        "bottom": 99
+      },
+      "nameText": "Smartphone Speakerphone",
+      "src": "http://127.0.0.1:4173/Assets/UI/UI_01/SOURCE/SRC_003_Smartphone_Speakerphone.png",
+      "natural": [
+        384,
+        144
+      ],
+      "iconImage": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Icons/RT_MODULE_ICON_SOURCE_DEFAULT.png\")",
+      "iconBox": {
+        "w": "45px",
+        "h": "41px"
+      },
+      "fit": "cover",
+      "loaded": true,
+      "edit": {
+        "x": 270,
+        "y": 72,
+        "w": 48,
+        "h": 34,
+        "right": 318,
+        "bottom": 106
+      },
+      "next": {
+        "x": 269,
+        "y": 115,
+        "w": 49,
+        "h": 72,
+        "right": 318,
+        "bottom": 187
+      }
+    },
+    {
+      "type": "TRANSMISSION",
+      "card": {
+        "x": 10,
+        "y": 201,
+        "w": 313,
+        "h": 132,
+        "right": 323,
+        "bottom": 333
+      },
+      "art": {
+        "x": 19,
+        "y": 257,
+        "w": 239,
+        "h": 70,
+        "right": 258,
+        "bottom": 327
+      },
+      "header": {
+        "x": 11,
+        "y": 202,
+        "w": 311,
+        "h": 44,
+        "right": 322,
+        "bottom": 246
+      },
+      "title": {
+        "x": 82,
+        "y": 209,
+        "w": 185,
+        "h": 17,
+        "right": 267,
+        "bottom": 226
+      },
+      "name": {
+        "x": 82,
+        "y": 226,
+        "w": 185,
+        "h": 16,
+        "right": 267,
+        "bottom": 242
+      },
+      "nameText": "GSM Stable",
+      "src": "http://127.0.0.1:4173/Assets/UI/UI_01/TRANSMISSION/TRN_005_GSM_Stable.png",
+      "natural": [
+        512,
+        256
+      ],
+      "iconImage": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Icons/RT_MODULE_ICON_TRANSMISSION_DEFAULT.png\")",
+      "iconBox": {
+        "w": "45px",
+        "h": "41px"
+      },
+      "fit": "cover",
+      "loaded": true,
+      "edit": {
+        "x": 270,
+        "y": 213,
+        "w": 48,
+        "h": 34,
+        "right": 318,
+        "bottom": 247
+      },
+      "next": {
+        "x": 269,
+        "y": 257,
+        "w": 49,
+        "h": 70,
+        "right": 318,
+        "bottom": 327
+      }
+    },
+    {
+      "type": "WALL_COVER",
+      "card": {
+        "x": 10,
+        "y": 340,
+        "w": 313,
+        "h": 132,
+        "right": 323,
+        "bottom": 472
+      },
+      "art": {
+        "x": 19,
+        "y": 397,
+        "w": 239,
+        "h": 69,
+        "right": 258,
+        "bottom": 466
+      },
+      "header": {
+        "x": 11,
+        "y": 341,
+        "w": 311,
+        "h": 44,
+        "right": 322,
+        "bottom": 385
+      },
+      "title": {
+        "x": 82,
+        "y": 348,
+        "w": 185,
+        "h": 17,
+        "right": 267,
+        "bottom": 365
+      },
+      "name": {
+        "x": 82,
+        "y": 365,
+        "w": 185,
+        "h": 16,
+        "right": 267,
+        "bottom": 381
+      },
+      "nameText": "None / Open",
+      "src": "http://127.0.0.1:4173/Assets/UI/UI_01/WALL_COVER/CVR_001_None_Open.png",
+      "natural": [
+        384,
+        144
+      ],
+      "iconImage": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Icons/RT_MODULE_ICON_WALL_DEFAULT.png\")",
+      "iconBox": {
+        "w": "45px",
+        "h": "41px"
+      },
+      "fit": "cover",
+      "loaded": true,
+      "edit": {
+        "x": 270,
+        "y": 353,
+        "w": 48,
+        "h": 34,
+        "right": 318,
+        "bottom": 387
+      },
+      "next": {
+        "x": 269,
+        "y": 397,
+        "w": 49,
+        "h": 70,
+        "right": 318,
+        "bottom": 467
+      }
+    },
+    {
+      "type": "SPACE_ENVIRONMENT",
+      "card": {
+        "x": 10,
+        "y": 478,
+        "w": 313,
+        "h": 97,
+        "right": 323,
+        "bottom": 575
+      },
+      "art": {
+        "x": 19,
+        "y": 533,
+        "w": 239,
+        "h": 35,
+        "right": 258,
+        "bottom": 568
+      },
+      "header": {
+        "x": 11,
+        "y": 479,
+        "w": 311,
+        "h": 40,
+        "right": 322,
+        "bottom": 519
+      },
+      "title": {
+        "x": 82,
+        "y": 486,
+        "w": 185,
+        "h": 17,
+        "right": 267,
+        "bottom": 503
+      },
+      "name": {
+        "x": 82,
+        "y": 503,
+        "w": 185,
+        "h": 16,
+        "right": 267,
+        "bottom": 519
+      },
+      "nameText": "Busy City Street",
+      "src": "http://127.0.0.1:4173/Assets/UI/UI_01/SPACE_ENVIRONMENT/SPC_022_Busy_City_Street.png",
+      "natural": [
+        384,
+        144
+      ],
+      "iconImage": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Icons/RT_MODULE_ICON_SPACE_DEFAULT.png\")",
+      "iconBox": {
+        "w": "45px",
+        "h": "41px"
+      },
+      "fit": "cover",
+      "loaded": true,
+      "edit": {
+        "x": 270,
+        "y": 489,
+        "w": 48,
+        "h": 34,
+        "right": 318,
+        "bottom": 523
+      },
+      "next": {
+        "x": 269,
+        "y": 532,
+        "w": 49,
+        "h": 36,
+        "right": 318,
+        "bottom": 568
+      }
+    }
+  ],
   "spectrumControls": {
     "count": 4,
     "visible": true,
@@ -145,6 +435,10 @@
     "timeRulerTicks": 5,
     "labelNoOverlap": true
   },
-  "sha": "e5eee3aaa9520e0eacec9f8f9069d2f2de6867fc",
-  "screenshotSha256": "73c37e88525e49521315b055ca622bacee76e94ce14b8cb598cb67e511b3f2a9"
+  "sha": "7a2360d824baebb5d6aecb777b60106bd8cf2baa",
+  "screenshotSha256": "acc903fb5b272bb844207e50cae9298e71a9d86e8739178a16df77354d2b5651",
+  "cardCycleSmoke": {
+    "sourceNext": true,
+    "photoChanged": true
+  }
 }
