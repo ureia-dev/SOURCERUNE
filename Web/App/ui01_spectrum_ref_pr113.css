@@ -52,3 +52,12 @@ body.ui-01 .analysis-rta-controls button:active{
   background-image:url("../../Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_ACTIVE.png");
 }
 body.ui-02 .analysis-rta-controls{display:none}
+
+/* Optical correction: inherited .tabs button min-width:116px must NOT stretch
+   the five REF-sized analyser controls. Approved scan has widths ~74/72/38/48/88. */
+body.ui-01 .analysis-rta-controls button{min-width:0!important}
+body.ui-01 .analysis-rta-controls button[data-spectrum-source="PRE"]{width:74px}
+body.ui-01 .analysis-rta-controls button[data-spectrum-source="POST"]{width:72px}
+body.ui-01 .analysis-rta-controls button[data-spectrum-rta]{width:38px}
+body.ui-01 .analysis-rta-controls button[data-spectrum-smoothing]{width:48px}
+body.ui-01 .analysis-rta-controls .spectrum-channel-label{width:88px}
