@@ -32,12 +32,12 @@ int main(int argc,char** argv){try{
     require(component->initialize(host)==kResultOk,"component initialize");
     require(controller->initialize(host)==kResultOk,"controller initialize");
     FUnknownPtr<IAudioProcessor> processor(component);require(bool(processor),"audio processor interface");
-    require(controller->getParameterCount()==13,"parameter count");
+    require(controller->getParameterCount()==int32(sr::ids.size()),"parameter count");
     std::set<ParamID> ids;
-    for(int32 i=0;i<13;++i){ParameterInfo info{};require(controller->getParameterInfo(i,info)==kResultOk,"parameter info");ids.insert(info.id);
+    for(int32 i=0;i<int32(sr::ids.size());++i){ParameterInfo info{};require(controller->getParameterInfo(i,info)==kResultOk,"parameter info");ids.insert(info.id);
         require(info.id==sr::ids[unsigned(i)],"stable parameter mapping");
         require(info.defaultNormalizedValue==sr::defaults[unsigned(i)],"controller/processor defaults");}
-    require(ids.size()==13,"unique parameter IDs");
+    require(ids.size()==sr::ids.size(),"unique parameter IDs");
     SpeakerArrangement arrangement=SpeakerArr::kStereo;
     require(processor->setBusArrangements(&arrangement,1,&arrangement,1)==kResultOk,"stereo arrangement");
     ProcessSetup setup{kRealtime,kSample32,512,48000};
@@ -81,7 +81,7 @@ int main(int argc,char** argv){try{
     reference.prepare(48000);reference.setParameters(restored);reference.reset();reference.process(l,r,refL,refR,512);
     for(int i=0;i<512;++i)require(std::abs(ol[i]-refL[i])<1e-6,"offline restored audio parity");
     processor->setProcessing(false);component->setActive(false);controller->terminate();component->terminate();
-    std::cout<<"PASS: bundle load, 13 stable parameters, stereo audio, shared-core max error="<<maxError
+    std::cout<<"PASS: bundle load, 23 stable parameters, stereo audio, shared-core max error="<<maxError
         <<", block automation, exact bypass, state recall, offline process. SDK mini-host only; DAW pending.\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<"FAIL: "<<e.what()<<'\n';return 1;}}
