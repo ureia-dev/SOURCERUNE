@@ -57,7 +57,8 @@ async function auditKnobs(page,ui){
   const allVisible=await auditAllVisibleRoundKnobs(page,ui);
   const dialogs=await auditCompactAdvanced(page,ui);
   const motion=ui==="UI_02"?await auditUi02MotionSmallKnobs(page):[];
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion};
+  const knobValues=await auditRefKnobValueComposition(page,ui);
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
@@ -186,5 +187,50 @@ async function auditUi02MotionSmallKnobs(page){
     results.push({id,before:geom.start,dragged:after,wheel,keyed,restored,art:'RT_KNOB_S_BASE.png'});
   }
   return results;
+}
+// REF numeric appearance must stay linked to live DOM values, not a picture.
+async function auditRefKnobValueComposition(page,ui){
+  const result=await page.evaluate(ui=>{
+    const data={};
+    const ids=ui==="UI_01"?["speed","doppler","width","badSignal","condition","intelligibility","ambience","mix"]:
+      ["badSignal","condition","intelligibility","mix"];
+    for(const id of ids){
+      const control=document.querySelector('[data-macro="'+id+'"]');
+      const knob=control?.closest('.macro-knob');
+      const face=knob?.querySelector('.macro-knob-face');
+      const value=knob?.querySelector('.macro-knob-value');
+      const label=knob?.querySelector('.macro-knob-label');
+      if(!control||!face||!value)continue;
+      const f=face.getBoundingClientRect(),v=value.getBoundingClientRect(),c=knob.closest('.macro').getBoundingClientRect();
+      const hidden=getComputedStyle(value).visibility==="hidden";
+      data[id]={valueText:value.textContent,controlValue:control.value,hidden,
+        faceDiameter:f.width,labelAbove:label?label.getBoundingClientRect().bottom<=f.top+3:null,
+        valueBelow:v.top>=f.bottom-2,valueRight:v.left>=f.right+6,
+        insideCard:v.right<=c.right+1&&v.bottom<=c.bottom+1,
+        faceLeft:f.left,faceTop:f.top};
+    }
+    return data;
+  },ui);
+  const ids=Object.keys(result),expected=ui==="UI_01"?8:4;
+  assert.equal(ids.length,expected,ui+" numeric/knob controls not all present");
+  for(const [id,x] of Object.entries(result)){
+    assert(x.valueText.startsWith(String(x.controlValue)),ui+" "+id+" displayed value not live");
+    if(ui==="UI_01"){
+      assert(x.labelAbove,ui+" "+id+" REF label must be above its metal face");
+      assert(x.valueBelow,ui+" "+id+" REF numeric value must be below its face");
+    }else if(id==="condition")assert(x.hidden,ui+" condition uses its Used selector, not a duplicate percent readout");
+    else if(id==="mix")assert(x.valueBelow,ui+" MIX value belongs below its face");
+    else assert(x.valueRight,ui+" "+id+" numeric value belongs beside its face");
+    if(!(ui==="UI_02"&&id==="condition"))
+      assert(x.insideCard,ui+" "+id+" live numeric text clipped by its card: "+JSON.stringify(x));
+  }
+  if(ui==="UI_01"){
+    for(const id of ["speed","doppler","width"])assert(Math.abs(result[id].faceDiameter-43)<1,
+      "UI_01 approved scan uses small 41–44px dial for "+id);
+  }else{
+    for(const id of ids)assert(Math.abs(result[id].faceDiameter-76)<1,
+      "UI_02 approved bottom metal dial uses 76px for "+id);
+  }
+  return {ok:true,values:result};
 }
 module.exports={auditKnobs};
