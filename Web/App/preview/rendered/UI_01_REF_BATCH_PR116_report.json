@@ -1,5 +1,5 @@
 {
-  "sourceSha": "7da7138c0e1f5b9c1a9257220a7a8a275e28fa54",
+  "sourceSha": "301282e7810344b1ef1a947a968d960257f7d270",
   "checks": {
     "UI_01": {
       "geometry": true,
@@ -37,5 +37,5 @@
       "knobSmoke": true
     }
   },
-  "imageSha256": "8f79f3edebef7948f76e530a6d51f99fbc199d090f60831324ddbe1beda80f50"
+  "imageSha256": "d54267d662737bae085a984dd286d3a51031043ca7908322d84d7b4db66d6b74"
 }
