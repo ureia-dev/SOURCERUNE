@@ -124,3 +124,20 @@ body.ui-01 .meter-values>div:last-child em{
   margin:0;
 }
 body.ui-02 .meter-db-scale{display:none}
+
+/* V9 reserved a three-row grid and a CSS-generated six-line scale.
+   Explicitly retire that legacy presentation: the approved six DOM ticks
+   and single independent LUFS bed now own the right rail visual. */
+body.ui-01 .meters::after{content:none!important}
+body.ui-01 .meter-values{display:block!important}
+body.ui-01 .meter-values>div:last-child{
+  position:relative;
+  box-sizing:border-box;
+  width:100%;
+  margin:0!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  transform:none!important;
+}
+body.ui-01 .meter-values>div:last-child span,
+body.ui-01 .meter-values>div:last-child em{display:block!important}

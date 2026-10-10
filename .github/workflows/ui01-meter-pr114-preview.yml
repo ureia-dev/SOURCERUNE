@@ -75,6 +75,24 @@ jobs:
               if(result.ticks.map(x=>x.value).join(",")!=="0,-6,-12,-24,-36,-60")
                 throw Error("Six REF dB scale labels missing");
               if(result.lufs.value!=="—")throw Error("False LUFS data shown before audio");
+
+              const lufsLayout=await page.evaluate(()=>{
+                const rail=document.querySelector(".meter-rail").getBoundingClientRect();
+                const parent=document.querySelector(".meter-values").getBoundingClientRect();
+                const contents=document.querySelector(".meter-values>div:last-child").getBoundingClientRect();
+                const span=document.querySelector(".meter-values>div:last-child span");
+                const em=document.querySelector(".meter-values>div:last-child em");
+                return {inside:contents.top>=parent.top&&contents.bottom<=parent.bottom+1&&
+                  parent.bottom<=rail.bottom+1,
+                  labelVisible:getComputedStyle(span).display!=="none",
+                  pendingVisible:getComputedStyle(em).display!=="none",
+                  duplicateScale:getComputedStyle(document.querySelector(".meters"),"::after").content};
+              });
+              if(!lufsLayout.inside||!lufsLayout.labelVisible||!lufsLayout.pendingVisible||
+                 (lufsLayout.duplicateScale!=="none"&&lufsLayout.duplicateScale!=="normal"))
+                throw Error("Meter LUFS bed or duplicate dB scale: "+JSON.stringify(lufsLayout));
+              result.lufsLayout=lufsLayout;
+
               if(!result.buttons.peak||result.buttons.rms)throw Error("Initial PEAK state wrong");
               await page.click("#meterRmsBtn");
               if(!(await page.$eval("#meterRmsBtn",x=>x.classList.contains("active"))))
