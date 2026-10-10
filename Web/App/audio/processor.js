@@ -13,6 +13,17 @@ class SceneWorklet extends AudioWorkletProcessor {
         env:{sinf:Math.sin,cosf:Math.cos}
       });
       this.tone=tone.exports;
+      // Additional exact same shared C++ Parametric3 implementation as Native.
+      const eqModule=new WebAssembly.Instance(
+        new WebAssembly.Module(options.processorOptions.eqBytes),
+        {env:{sinf:Math.sin,cosf:Math.cos,powf:Math.pow}});
+      this.eq3=eqModule.exports;
+      if(this.eq3.sr_eq3_version()!==1)throw new Error('EQ3 ABI 不相容');
+      this.eq3.sr_eq3_prepare(sampleRate);
+      this.eq3.sr_eq3_set(...options.processorOptions.eq3);
+      this.eq3.sr_eq3_reset();
+      this.eqBuf=[0,1].map(c=>new Float32Array(
+        this.eq3.memory.buffer,this.eq3.sr_eq3_buffer(c),128));
       if(this.tone.sr_hpf_version()!==1)throw new Error('HPF ABI 不相容');
       this.tone.sr_hpf_prepare(sampleRate);
       this.tone.sr_hpf_set(...options.processorOptions.hpf);
@@ -29,10 +40,12 @@ class SceneWorklet extends AudioWorkletProcessor {
         if(data.type==='parameters'){
           this.dsp.sr_parameters(...data.values);
           if(data.hpf)this.tone.sr_hpf_set(...data.hpf);
+          if(data.eq3)this.eq3.sr_eq3_set(...data.eq3);
         }
         if(data.type==='reset'){
           this.dsp.sr_reset();
           this.tone.sr_hpf_reset();
+          this.eq3.sr_eq3_reset();
         }
       };
       this.port.postMessage({type:'ready'});
@@ -55,7 +68,12 @@ class SceneWorklet extends AudioWorkletProcessor {
         for(let c=0;c<2;c++)this.toneBuf[c].set(this.output[c].subarray(0,n));
         this.tone.sr_hpf_process(n);
       }
-      const rendered=useHpf?this.toneBuf:this.output;
+      let rendered=useHpf?this.toneBuf:this.output;
+      const useEq=!!this.eq3.sr_eq3_active();
+      if(useEq){
+        for(let c=0;c<2;c++)this.eqBuf[c].set(rendered[c].subarray(0,n));
+        this.eq3.sr_eq3_process(n);rendered=this.eqBuf;
+      }
       for(let c=0;c<output.length;c++)for(let i=0;i<n;i++)output[c][offset+i]=rendered[c][i];
     }
     return true;

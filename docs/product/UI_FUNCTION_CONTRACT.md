@@ -86,7 +86,7 @@ Both UI_01 and UI_02 must expose the following product functions.
 - Advanced final tone section.
 - HPF.
 - LPF.
-- 4-band EQ.
+- **3-band EQ**: exactly Band 1–3 (Freq / Gain / Q); older Band 4 retired and never processed. The HPF and LPF remain independent stages.
 - Final tone shaping.
 - Per-module bypass.
 

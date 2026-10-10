@@ -59,7 +59,8 @@ async function auditKnobs(page,ui){
   const motion=ui==="UI_02"?await auditUi02MotionSmallKnobs(page):[];
   const knobValues=await auditRefKnobValueComposition(page,ui);
   const hpf=await auditHpf(page,ui);
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf};
+  const eq=await auditMiniEq(page,ui);
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
@@ -325,4 +326,36 @@ async function auditHpf(page,ui){
   }
   return {ok:true,ui,init,changed,undo:true,redo:true,curve:points,audio,realWorklet};
 }
+async function auditMiniEq(page,ui){
+  const names=await page.$eval('.macro-eq-svg [data-eq-node]',els=>els.map(e=>e.dataset.eqNode));
+  assert.deepEqual(names,['hpf','b1','b2','b3','lpf'],ui+' must have HPF LPF and exactly 3 EQ bands');
+  const results={};
+  for(const id of names){
+    const node='.macro-eq-svg [data-eq-node="'+id+'"]';
+    const key=id==='hpf'||id==='lpf'?id:'b'+id.slice(1)+'Gain';
+    // Read active values from the Advanced form, without clicking the graph.
+    await page.$eval('.macro-eq h3',e=>e.click());
+    const before=await page.$eval('[data-param="'+key+'"]',e=>Number(e.value));
+    await page.$eval('#advancedCloseBtn',e=>e.click());
+    const box=await page.$eval(node,e=>{const b=e.getBoundingClientRect();return{x:b.x+b.width/2,y:b.y+b.height/2};});
+    const move=id==='hpf'?14:id==='lpf'?-14:0;
+    await page.mouse.move(box.x,box.y);await page.mouse.down();
+    await page.mouse.move(box.x+move,box.y+(id.startsWith('b')?-9:0),{steps:4});
+    await page.mouse.up();
+    await page.$eval('.macro-eq h3',e=>e.click());
+    const after=await page.$eval('[data-param="'+key+'"]',e=>Number(e.value));
+    await page.$eval('#advancedCloseBtn',e=>e.click());
+    assert.notEqual(after,before,ui+' EQ '+id+' does not really change live state');
+    assert.equal(await page.$eval('body',e=>e.classList.contains('advanced-open')),false,
+      ui+' dragging EQ node opened detail window');
+    await page.$eval('#undoBtn',e=>e.click());
+    await page.$eval('.macro-eq h3',e=>e.click());
+    const undone=await page.$eval('[data-param="'+key+'"]',e=>Number(e.value));
+    await page.$eval('#advancedCloseBtn',e=>e.click());
+    assert.equal(undone,before,ui+' '+id+' EQ drag missing atomic undo');
+    results[id]={before,dragged:after,undone};
+  }
+  return {ok:true,nodes:names,values:results};
+}
+
 module.exports={auditKnobs};

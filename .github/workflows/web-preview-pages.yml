@@ -29,6 +29,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Build shared three-band EQ WASM
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash Tools/Build/build_eq3_wasm.sh
+          node -e 'const fs=require("fs");const e=new WebAssembly.Instance(new WebAssembly.Module(fs.readFileSync("Web/App/audio/eq3.wasm")),{env:{sinf:Math.sin,cosf:Math.cos,powf:Math.pow}}).exports;if(e.sr_eq3_version()!==1)throw Error("EQ3 ABI missing");console.log("EQ3 shared C++ WASM verified")'
+
       - name: Render UI reference audit
         continue-on-error: true
         shell: bash
@@ -258,7 +265,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A Web/App/preview/rendered
+          git add -A Web/App/preview/rendered Web/App/audio/eq3.wasm
           if git diff --cached --quiet; then
             echo "render audit unchanged"
             exit 0

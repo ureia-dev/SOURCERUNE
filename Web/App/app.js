@@ -1,4 +1,5 @@
-import {createSceneNode, parametersFromState, hpfFromState, audioSupportNote} from "./audio/engine.js";
+import {createSceneNode, parametersFromState, hpfFromState, eq3FromState, audioSupportNote} from "./audio/engine.js";
+import {eqGraph,miniEqSvg as renderThreeBandEq} from "./eq_graph.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
 const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"],LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT",SCENE_PRESET_HERO:"SCENE PRESET HERO"};
 const DEFSEL={SOURCE:"SRC_003_Smartphone_Speakerphone",TRANSMISSION:"TRN_005_GSM_Stable",WALL_COVER:"CVR_001_None_Open",SPACE_ENVIRONMENT:"SPC_022_Busy_City_Street"};
@@ -41,12 +42,18 @@ function applySceneViewportProfile(){
   if(path)path.setAttribute("d",ui1?"M110 300 C340 225 650 225 900 300":"M110 325 C340 250 650 250 900 325");
 }
 function newState(){const p={};for(const g of Object.values(schema.groups))for(const c of g.controls)p[c.id]=c.default;return{ui:"UI_01",view:"3D",tab:"spectrum",advanced:"MOTION",params:p,selection:{...DEFSEL},bypass:Object.fromEntries(Object.entries(schema.groups).filter(([,g])=>g.bypass).map(([k])=>[k,false])),sync:true,seed:48151623,markers:{start:null,closest:null,end:null},globalBypass:false,preset:null,snapshots:{A:null,B:null,C:null,D:null},generatorOn:false}}
+function migrateLegacyEq(s){
+  const base=newState(),next=Object.assign(base,copy(s));
+  next.params=Object.assign({},base.params,s?.params||{});
+  for(const k of ["b4Freq","b4Gain","b4Q"])delete next.params[k];
+  return next;
+}
 function core(){const s=copy(state);delete s.snapshots;return s}function mark(t){$("#stateStatus").textContent=t}function push(){undo.push(core());if(undo.length>80)undo.shift();redo=[];hist()}function mut(fn){push();fn();mark("MODIFIED");refresh()}function hist(){$("#undoBtn").disabled=!undo.length;$("#redoBtn").disabled=!redo.length;const p=$("#pasteStateBtn");if(p)p.disabled=!stateClipboard}
 function copyState(){stateClipboard=core();mark("STATE COPIED");hist()}
-function pasteState(){if(!stateClipboard)return;push();const keep={ui:state.ui,view:state.view,snapshots:state.snapshots};state=Object.assign(newState(),copy(stateClipboard));state.ui=keep.ui;state.view=keep.view;state.snapshots=keep.snapshots;mark("STATE PASTED");refresh()}
+function pasteState(){if(!stateClipboard)return;push();const keep={ui:state.ui,view:state.view,snapshots:state.snapshots};state=migrateLegacyEq(stateClipboard);state.ui=keep.ui;state.view=keep.view;state.snapshots=keep.snapshots;mark("STATE PASTED");refresh()}
 function toggleSceneFullscreen(){const el=$(".scene-panel");if(!document.fullscreenElement)el?.requestFullscreen?.();else document.exitFullscreen?.()}
 function syncFullscreenState(){const b=$("#sceneFullscreenBtn");if(b)b.classList.toggle("active",document.fullscreenElement===$(".scene-panel"))}
-function restore(s){const snaps=state.snapshots;state=Object.assign(newState(),copy(s));state.snapshots=snaps;refresh()}
+function restore(s){const snaps=state.snapshots;state=migrateLegacyEq(s);state.snapshots=snaps;refresh()}
 function assetUrl(x){return "../../Assets/UI/"+(state.ui==="UI_01"?x.ui01:x.ui02)}
 function selected(t){return byId.get(state.selection[t])}
 async function init(){[schema,{items:catalog},{presets:scenePresets}]=await Promise.all([fetch("./data/ui_controls.json").then(r=>r.json()),fetch("./data/catalog.json").then(r=>r.json()),fetch("./data/scene_presets_v1.json").then(r=>r.json())]);byId=new Map(catalog.map(x=>[x.id,x]));state=newState();const requestedUi=new URLSearchParams(location.search).get("ui");if(requestedUi==="UI_01"||requestedUi==="UI_02")state.ui=requestedUi;try{userPresets=JSON.parse(localStorage.getItem("sourcerune.userPresets.v1")||"{}")}catch{}mountWebTransport();mountAdvancedDialog();renderPreset();renderNav();bind();refresh();hist();animate();if(new URLSearchParams(location.search).has("test"))$("#diagnosticBar").classList.remove("hidden")}
@@ -82,14 +89,7 @@ function hpfEqPath(){
   const y=Math.min(95,50+Math.max(0,Math.log2(hz/20))*12);
   return "M0 "+y.toFixed(1)+" L"+lx(hz).toFixed(1)+" 50 H100";
 }
-function miniEqSvg(){
-  const x=Math.log10(Math.max(20,state.params.hpf)/20)/3*100;
-  return `<svg class="macro-eq-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="HPF live response (other EQ bands pending)">
-    <g class="macro-eq-grid"><path d="M0 25H100M0 50H100M0 75H100M25 0V100M50 0V100M75 0V100"/></g>
-    <path data-eq-hpf-path class="macro-eq-line" d="${hpfEqPath()}"/>
-    <circle data-eq-hpf-marker cx="${x.toFixed(1)}" cy="50" r="2.7"/>
-  </svg>`;
-}
+function miniEqSvg(){return renderThreeBandEq(state,audioCtx?.sampleRate||48000)}
 function syncHpfUi(){
   const input=$("[data-eq-hpf]");
   if(input){
@@ -98,9 +98,10 @@ function syncHpfUi(){
     if(out)out.textContent=state.params.hpf<=20?"OFF":state.params.hpf+" Hz";
   }
   const path=$("[data-eq-hpf-path]");
-  if(path)path.setAttribute("d",hpfEqPath());
+  if(path)path.setAttribute("d",eqGraph(state,audioCtx?.sampleRate||48000).path);
   const marker=$("[data-eq-hpf-marker]");
   if(marker)marker.setAttribute("cx",(Math.log10(Math.max(20,state.params.hpf)/20)/3*100).toFixed(1));
+  refreshMiniEq();
 }
 function bindEqHpf(){
   const el=$("[data-eq-hpf]");
@@ -332,11 +333,80 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 `<div class="macro macro-intelligibility ${state.advanced==="INTELLIGIBILITY"?"selected":""}" data-open="INTELLIGIBILITY"><h3>INTELLIGIBILITY</h3>${macroKnob("intelligibility","AMOUNT","%","centered")}${modeButtons("intelligibilityMode",["NATURAL","DIALOGUE","AGGRESSIVE"],{NATURAL:"Natural",DIALOGUE:"More Clear",AGGRESSIVE:"Muffled"})}</div>`+
 `<div class="macro macro-ambience ${state.advanced==="AMBIENCE"?"selected":""}" data-open="AMBIENCE"><h3>AMBIENCE</h3>${macroSelect("ambienceType")}<div class="ambience-preview"><img src="${assetUrl(selected("SPACE_ENVIRONMENT"))}" alt=""></div>${macroKnob("ambience","AMOUNT","%","centered")}<div class="macro-wave" aria-hidden="true"></div></div>`+
 `<div class="macro macro-mix ${state.advanced==="MIX"?"selected":""}" data-open="MIX"><h3>MIX</h3>${macroKnob("mix","WET","%","large centered")}<span class="macro-mix-mode">WET</span></div>`+
-`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><label class="eq-hpf-control"><span>HPF</span><input type="range" data-eq-hpf min="20" max="1000" step="1" value="${state.params.hpf}" title="HPF 20 Hz = OFF; 21–1000 Hz is active"/><output data-eq-hpf-value>${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</output></label><span class="eq-pending">LPF · 4-BAND · TONE: PENDING</span></div></div>`;
+`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><label class="eq-hpf-control"><span>HPF</span><input type="range" data-eq-hpf min="20" max="1000" step="1" value="${state.params.hpf}" title="HPF 20 Hz = OFF; 21–1000 Hz is active"/><output data-eq-hpf-value>${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</output></label><span class="eq-pending">LPF ${(state.params.lpf/1000).toFixed(1)}k · B1–3 · TONE: PENDING</span></div></div>`;
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(x.target.closest(".macro-knob,input,button,select,[role=slider]"))return;openAdvanced(e.dataset.open)});
-bindMacroKnobs();bindEqHpf();
+bindMacroKnobs();bindEqHpf();bindMiniEq();
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
 $$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}))}
+function refreshMiniEq(){
+  const svg=$(".macro-eq-svg");if(!svg)return;
+  const plot=eqGraph(state,audioCtx?.sampleRate||48000);
+  svg.querySelector(".macro-eq-line")?.setAttribute("d",plot.path);
+  for(const n of plot.nodes){const dot=svg.querySelector('[data-eq-node="'+n.id+'"]');
+    if(dot){dot.setAttribute("cx",n.x);dot.setAttribute("cy",n.y);}}
+  const h=$('[data-eq-readout="hpf"]'),l=$('[data-eq-readout="lpf"]');
+  if(h)h.textContent=String(state.params.hpf);
+  if(l)l.textContent=(state.params.lpf/1000).toFixed(1);
+}
+function bindMiniEq(){
+  const svg=$(".macro-eq-svg");if(!svg)return;
+  let drag=null;
+  const apply=(id,raw,axis)=>{
+    const key=id==="hpf"||id==="lpf"?id:"b"+id.slice(1)+(axis==="gain"?"Gain":"Freq");
+    const def=findControl(key);if(!def)return false;
+    const step=Number(def.step)||1,min=Number(def.min),max=Number(def.max);
+    const value=Math.max(min,Math.min(max,Number((min+Math.round((raw-min)/step)*step).toFixed(6))));
+    if(value===state.params[key])return false;
+    state.params[key]=value;refreshMiniEq();if(key==="hpf")syncHpfUi();updateGains();
+    const adv=$('[data-param="'+key+'"]');
+    if(adv){adv.value=String(value);const v=adv.closest(".adv-control")?.querySelector(".value");
+      if(v)v.textContent=value+(def.unit?" "+def.unit:"");}
+    return true;
+  };
+  // The graph itself must not activate the enclosing Advanced card.
+  svg.addEventListener("click",e=>e.stopPropagation());
+  svg.addEventListener("pointerdown",e=>{
+    const dot=e.target.closest("[data-eq-node]");if(!dot)return;
+    e.stopPropagation();e.preventDefault();
+    drag={id:dot.dataset.eqNode,pointer:e.pointerId,before:core(),changed:false};
+    svg.setPointerCapture(e.pointerId);dot.focus({preventScroll:true});
+  });
+  svg.addEventListener("pointermove",e=>{
+    if(!drag||e.pointerId!==drag.pointer)return;
+    e.preventDefault();const r=svg.getBoundingClientRect();
+    const xx=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+    const yy=Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));
+    const freq=20*Math.pow(1000,xx);
+    const changed=drag.id.startsWith("b")
+      ?(apply(drag.id,freq,"freq")|apply(drag.id,(.5-yy)*18/0.34,"gain"))
+      :apply(drag.id,freq,"freq");
+    drag.changed ||=!!changed;
+  });
+  const finish=e=>{
+    if(!drag||e.pointerId!==drag.pointer)return;
+    e.stopPropagation();const old=drag.before,changed=drag.changed;drag=null;
+    if(svg.hasPointerCapture(e.pointerId))svg.releasePointerCapture(e.pointerId);
+    if(changed){undo.push(old);if(undo.length>80)undo.shift();redo=[];hist();mark("MODIFIED");refresh();}
+  };
+  svg.addEventListener("pointerup",finish);svg.addEventListener("pointercancel",finish);
+  svg.addEventListener("wheel",e=>{
+    const dot=e.target.closest("[data-eq-node]");if(!dot)return;
+    e.preventDefault();e.stopPropagation();
+    const id=dot.dataset.eqNode,key=id.startsWith("b")?"b"+id.slice(1)+"Gain":id,def=findControl(key);
+    const old=core(),newValue=state.params[key]-Math.sign(e.deltaY)*(Number(def.step)||1);
+    if(apply(id,newValue,id.startsWith("b")?"gain":"freq")){
+      undo.push(old);if(undo.length>80)undo.shift();redo=[];hist();mark("MODIFIED");
+    }
+  },{passive:false});
+  svg.addEventListener("dblclick",e=>{
+    const dot=e.target.closest("[data-eq-node]");if(!dot)return;
+    e.preventDefault();e.stopPropagation();const id=dot.dataset.eqNode;
+    const ids=id.startsWith("b")?["Freq","Gain","Q"].map(x=>"b"+id.slice(1)+x):[id];
+    const old=core();let changed=false;
+    for(const k of ids){const def=findControl(k);if(state.params[k]!==def.default){state.params[k]=def.default;changed=true;}}
+    if(changed){undo.push(old);redo=[];hist();refresh();updateGains();}
+  });
+}
 function findControl(id){for(const g of Object.values(schema.groups)){const c=g.controls.find(x=>x.id===id);if(c)return c}}
 function renderFlow(){const implemented=new Set(["SOURCE","TRANSMISSION"]);const n=[["INPUT"],["TRANSMISSION","TRANSMISSION"],["SOURCE","SOURCE"],["CONDITION","CONDITION"],["COVER","WALL_COVER"],["DISTANCE / MOTION","MOTION"],["SPACE","SPACE_ENVIRONMENT"],["AMBIENCE","AMBIENCE"],["INTELLIGIBILITY","INTELLIGIBILITY"],["TONE","EQ_TONE"],["MIX / OUTPUT"]];$("#signalFlow").innerHTML=n.map(([x,k],i)=>`<span class="flow-node ${k&&state.bypass[k]?"bypassed":""} ${k&&state.advanced===k?"selected":""}">${x}${k&&!implemented.has(k)?" (PENDING)":""}</span>${i<n.length-1?'<span class="flow-arrow">→</span>':""}`).join("")}
 function renderNav(){$("#advancedNav").innerHTML=Object.entries(schema.groups).map(([k,g])=>`<button data-adv="${k}">${g.label}</button>`).join("");$$("[data-adv]").forEach(b=>b.onclick=()=>{state.advanced=b.dataset.adv;renderAdvanced();renderMacros()})}
@@ -351,8 +421,8 @@ function renderAdvanced(){const k=state.advanced,g=schema.groups[k];
     drawer.style.setProperty("--advanced-cols",String(total<=2?2:total<=6?3:4));
     drawer.dataset.section=k;
     drawer.dataset.controlCount=String(total);
-  }$(".advanced-drawer")?.classList.toggle("bypassed",!!state.bypass[k]);$$("[data-adv]").forEach(b=>b.classList.toggle("active",b.dataset.adv===k));$("#advancedTitle").textContent=g.label;let extra="";if(g.assetType)extra=`<div class="adv-control wide"><label>MODEL / TYPE</label><div class="value">${selected(g.assetType).name}</div><button data-library="${g.assetType}">SELECT FROM LIBRARY</button></div>`;if(g.special==="motion")extra+=`<div class="adv-control wide"><label>TIMELINE</label><div class="adv-buttons"><button data-set-marker="start">SET START</button><button data-set-marker="closest">SET CLOSEST</button><button data-set-marker="end">SET END</button><button id="advSync">${state.sync?"SYNC ON":"SYNC OFF"}</button></div></div>`;if(g.special==="seed")extra+=`<div class="adv-control wide"><label>DETERMINISTIC SEED</label><div class="adv-buttons"><input id="seedInput" type="number" value="${state.seed}"><button id="applySeed">APPLY</button><button id="newSeed">NEW SEED</button></div></div>`;if(g.special==="generator")extra+=`<div class="adv-control"><label>GENERATOR STATE</label><button id="generatorToggle" class="${state.generatorOn?"active":""}">${state.generatorOn?"ON":"OFF"}</button></div>`;const bp=g.bypass?`<button id="advBypass" class="${state.bypass[k]?"active":""}">${state.bypass[k]?"BYPASSED":"ACTIVE"}</button>`:"";$("#advancedBody").innerHTML=`<div class="adv-top"><div class="adv-summary">${g.assetType?selected(g.assetType).name:g.label}</div><div>${bp}</div></div><div class="adv-grid">${g.controls.map(control).join("")}${extra}</div><div class="state-note">${audioSupportNote(state)}。已支援：SOURCE Character、Bad Signal／Bandwidth Loss、Mix／Gain／Bypass；HPF 已有真 DSP，LPF／4-band／其餘控制仍僅保存狀態。</div>`;bindAdvanced()}
-function bindAdvanced(){$$("[data-library]").forEach(b=>b.onclick=()=>openBrowser(b.dataset.library));$$("[data-param]").forEach(c=>{c.onpointerdown=()=>c.dataset.before=JSON.stringify(core());const apply=e=>{const id=e.target.dataset.param,def=findControl(id);state.params[id]=def.type==="select"?e.target.value:+e.target.value;updateScene();updateGains();updateCurves();const v=e.target.closest(".adv-control")?.querySelector(".value");if(v&&def.type==="range")v.textContent=state.params[id]+" "+(def.unit||"")};c.oninput=apply;c.onchange=e=>{apply(e);if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}});const bp=$("#advBypass");if(bp)bp.onclick=()=>mut(()=>state.bypass[state.advanced]=!state.bypass[state.advanced]);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));const sy=$("#advSync");if(sy)sy.onclick=()=>mut(()=>state.sync=!state.sync);const ap=$("#applySeed");if(ap)ap.onclick=()=>mut(()=>state.seed=Math.max(0,Math.floor(+$("#seedInput").value||0)));const ns=$("#newSeed");if(ns)ns.onclick=()=>mut(()=>state.seed=(Math.imul(state.seed||1,1664525)+1013904223)>>>0);const gt=$("#generatorToggle");if(gt)gt.onclick=()=>mut(()=>state.generatorOn=!state.generatorOn)}
+  }$(".advanced-drawer")?.classList.toggle("bypassed",!!state.bypass[k]);$$("[data-adv]").forEach(b=>b.classList.toggle("active",b.dataset.adv===k));$("#advancedTitle").textContent=g.label;let extra="";if(g.assetType)extra=`<div class="adv-control wide"><label>MODEL / TYPE</label><div class="value">${selected(g.assetType).name}</div><button data-library="${g.assetType}">SELECT FROM LIBRARY</button></div>`;if(g.special==="motion")extra+=`<div class="adv-control wide"><label>TIMELINE</label><div class="adv-buttons"><button data-set-marker="start">SET START</button><button data-set-marker="closest">SET CLOSEST</button><button data-set-marker="end">SET END</button><button id="advSync">${state.sync?"SYNC ON":"SYNC OFF"}</button></div></div>`;if(g.special==="seed")extra+=`<div class="adv-control wide"><label>DETERMINISTIC SEED</label><div class="adv-buttons"><input id="seedInput" type="number" value="${state.seed}"><button id="applySeed">APPLY</button><button id="newSeed">NEW SEED</button></div></div>`;if(g.special==="generator")extra+=`<div class="adv-control"><label>GENERATOR STATE</label><button id="generatorToggle" class="${state.generatorOn?"active":""}">${state.generatorOn?"ON":"OFF"}</button></div>`;const bp=g.bypass?`<button id="advBypass" class="${state.bypass[k]?"active":""}">${state.bypass[k]?"BYPASSED":"ACTIVE"}</button>`:"";$("#advancedBody").innerHTML=`<div class="adv-top"><div class="adv-summary">${g.assetType?selected(g.assetType).name:g.label}</div><div>${bp}</div></div><div class="adv-grid">${g.controls.map(control).join("")}${extra}</div><div class="state-note">${audioSupportNote(state)}。已支援：SOURCE Character、Bad Signal／Bandwidth Loss、Mix／Gain／Bypass；HPF、LPF、三段 EQ 已有真 DSP；Final Tone 與其餘部分仍僅保存狀態。</div>`;bindAdvanced()}
+function bindAdvanced(){$$("[data-library]").forEach(b=>b.onclick=()=>openBrowser(b.dataset.library));$$("[data-param]").forEach(c=>{c.onpointerdown=()=>c.dataset.before=JSON.stringify(core());const apply=e=>{const id=e.target.dataset.param,def=findControl(id);state.params[id]=def.type==="select"?e.target.value:+e.target.value;updateScene();updateGains();updateCurves();refreshMiniEq();const v=e.target.closest(".adv-control")?.querySelector(".value");if(v&&def.type==="range")v.textContent=state.params[id]+" "+(def.unit||"")};c.oninput=apply;c.onchange=e=>{apply(e);if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}});const bp=$("#advBypass");if(bp)bp.onclick=()=>mut(()=>state.bypass[state.advanced]=!state.bypass[state.advanced]);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));const sy=$("#advSync");if(sy)sy.onclick=()=>mut(()=>state.sync=!state.sync);const ap=$("#applySeed");if(ap)ap.onclick=()=>mut(()=>state.seed=Math.max(0,Math.floor(+$("#seedInput").value||0)));const ns=$("#newSeed");if(ns)ns.onclick=()=>mut(()=>state.seed=(Math.imul(state.seed||1,1664525)+1013904223)>>>0);const gt=$("#generatorToggle");if(gt)gt.onclick=()=>mut(()=>state.generatorOn=!state.generatorOn)}
 // UI_02 Motion deck reuses the already-defined shared parameters; no new DSP state.
 // Drag commits one history entry on release. Wheel/keyboard commit single value steps.
 function motionKnobValue(def,raw){
@@ -432,12 +502,12 @@ function bindMotionKnobs(){
 }
 function bind(){bindMotionKnobs();const advancedCloseBtn=$("#advancedCloseBtn");if(advancedCloseBtn)advancedCloseBtn.onclick=closeAdvanced;document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.body.classList.contains("advanced-open")&&$("#assetBrowser")?.classList.contains("hidden")){e.preventDefault();closeAdvanced()}});$$("[data-ui]").forEach(b=>b.onclick=()=>mut(()=>state.ui=b.dataset.ui));$$("[data-view]").forEach(b=>b.onclick=()=>mut(()=>state.view=b.dataset.view));$$("[data-motion-mode]").forEach(b=>b.onclick=()=>mut(()=>state.params.motionMode=b.dataset.motionMode));$$("[data-tab]").forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;$$("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));$$(".tab-content").forEach(x=>x.classList.toggle("active",x.dataset.content===state.tab))});$("#syncToggle").onchange=e=>mut(()=>state.sync=e.target.checked);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));$("#browserClose").onclick=closeBrowser;$("#assetBrowser").onclick=e=>{if(e.target.id==="assetBrowser")closeBrowser()};$("#assetSearch").oninput=renderBrowserList;$("#categorySelect").onchange=renderBrowserList;$("#presetSelect").onchange=loadPreset;$("#presetPrevBtn").onclick=()=>stepPreset(-1);$("#presetNextBtn").onclick=()=>stepPreset(1);$("#savePresetBtn").onclick=savePreset;$("#presetVisualsBtn").onclick=()=>openBrowser("SCENE_PRESET_HERO");$("#importStateBtn").onclick=()=>$("#stateImportFile").click();$("#exportStateBtn").onclick=exportState;$("#stateImportFile").onchange=importState;$("#undoBtn").onclick=doUndo;$("#redoBtn").onclick=doRedo;$("#copyStateBtn").onclick=copyState;$("#pasteStateBtn").onclick=pasteState;$("#sceneFullscreenBtn").onclick=toggleSceneFullscreen;const settings=$("#settingsBtn"),tools=$("#globalToolsPopover");if(settings)settings.onclick=e=>{e.stopPropagation();document.body.classList.toggle("global-tools-open")};if(tools)tools.onclick=e=>e.stopPropagation();document.addEventListener("click",()=>document.body.classList.remove("global-tools-open"));$$("[data-global-ui]").forEach(b=>b.onclick=()=>mut(()=>state.ui=b.dataset.globalUi));$$("[data-global-action]").forEach(b=>b.onclick=()=>{const a=b.dataset.globalAction;if(a==="undo")doUndo();else if(a==="redo")doRedo();else if(a==="save")savePreset();else if(a==="import")$("#stateImportFile").click();else if(a==="export")exportState();else if(a==="bypass")mut(()=>state.globalBypass=!state.globalBypass)});const mdm=$("#motionDeckMode");if(mdm)mdm.onchange=e=>mut(()=>state.params.motionMode=e.target.value);document.addEventListener("fullscreenchange",syncFullscreenState);$("#globalBypass").onclick=()=>mut(()=>state.globalBypass=!state.globalBypass);$("#audioFile").onchange=loadAudio;$("#playBtn").onclick=play;$("#stopBtn").onclick=stop;$("#loopToggle").onchange=e=>audio.loop=e.target.checked;$("#seekSlider").oninput=e=>{if(audio.duration)audio.currentTime=+e.target.value/1000*audio.duration};const peakBtn=$("#meterPeakBtn"),rmsBtn=$("#meterRmsBtn");if(peakBtn)peakBtn.onclick=()=>{meterMode="PEAK";peakBtn.classList.add("active");rmsBtn?.classList.remove("active")};if(rmsBtn)rmsBtn.onclick=()=>{meterMode="RMS";rmsBtn.classList.add("active");peakBtn?.classList.remove("active")};$("#resetPeakBtn").onclick=()=>{peakIn=peakOut=-Infinity;mark("PEAK RESET")};$$("[data-snapshot]").forEach(b=>b.onclick=()=>snapshot(b.dataset.snapshot,b))}
 function doUndo(){if(!undo.length)return;redo.push(core());restore(undo.pop());hist();mark("UNDO")}function doRedo(){if(!redo.length)return;undo.push(core());restore(redo.pop());hist();mark("REDO")}
-function applyFactoryPreset(heroId,pushHistory=true){const cfg=scenePresets[heroId],hero=byId.get(heroId);if(!cfg){if(hero)$("#sceneTitle").textContent=hero.name;return}if(pushHistory)push();const keep={ui:state.ui,view:state.view,snapshots:state.snapshots};const ns=newState();ns.ui=keep.ui;ns.view=keep.view;ns.snapshots=keep.snapshots;Object.assign(ns.selection,cfg.selection||{});Object.assign(ns.params,cfg.params||{});Object.assign(ns.bypass,cfg.bypass||{});ns.preset="factory:"+heroId;state=ns;$("#sceneTitle").textContent=cfg.name||hero?.name||"Scene View";mark("FACTORY PRESET LOADED");refresh();renderPreset()}function stepPreset(delta){const sel=$("#presetSelect"),opts=[...sel.options].filter(o=>o.value);if(!opts.length)return;let i=opts.findIndex(o=>o.value===sel.value);if(i<0)i=delta>0?-1:0;i=(i+delta+opts.length)%opts.length;sel.value=opts[i].value;loadPreset({target:sel})}
-function loadPreset(e){const v=e.target.value;if(!v)return;if(v.startsWith("factory:"))applyFactoryPreset(v.slice(8),true);else{push();const p=userPresets[v.slice(5)];if(p){const snaps=state.snapshots;state=Object.assign(newState(),copy(p.state));state.snapshots=snaps;state.preset=v}mark("PRESET LOADED");refresh()}}
+function applyFactoryPreset(heroId,pushHistory=true){const cfg=scenePresets[heroId],hero=byId.get(heroId);if(!cfg){if(hero)$("#sceneTitle").textContent=hero.name;return}if(pushHistory)push();const keep={ui:state.ui,view:state.view,snapshots:state.snapshots};const ns=newState();ns.ui=keep.ui;ns.view=keep.view;ns.snapshots=keep.snapshots;Object.assign(ns.selection,cfg.selection||{});Object.assign(ns.params,cfg.params||{});for(const k of ["b4Freq","b4Gain","b4Q"])delete ns.params[k];Object.assign(ns.bypass,cfg.bypass||{});ns.preset="factory:"+heroId;state=ns;$("#sceneTitle").textContent=cfg.name||hero?.name||"Scene View";mark("FACTORY PRESET LOADED");refresh();renderPreset()}function stepPreset(delta){const sel=$("#presetSelect"),opts=[...sel.options].filter(o=>o.value);if(!opts.length)return;let i=opts.findIndex(o=>o.value===sel.value);if(i<0)i=delta>0?-1:0;i=(i+delta+opts.length)%opts.length;sel.value=opts[i].value;loadPreset({target:sel})}
+function loadPreset(e){const v=e.target.value;if(!v)return;if(v.startsWith("factory:"))applyFactoryPreset(v.slice(8),true);else{push();const p=userPresets[v.slice(5)];if(p){const snaps=state.snapshots;state=migrateLegacyEq(p.state);state.snapshots=snaps;state.preset=v}mark("PRESET LOADED");refresh()}}
 function savePreset(){const name=prompt("Preset name");if(!name)return;const k=Date.now().toString(36);userPresets[k]={name,state:core()};localStorage.setItem("sourcerune.userPresets.v1",JSON.stringify(userPresets));state.preset="user:"+k;renderPreset();refresh();mark("PRESET SAVED")}
 function exportState(){const b=new Blob([JSON.stringify({product:"SOURCERUNE",schema:1,state:core()},null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="SOURCERUNE_State.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);mark("STATE EXPORTED")}
 function importState(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const p=JSON.parse(r.result);if(p.product!=="SOURCERUNE"||!p.state)throw Error("Invalid state");push();restore(p.state);mark("STATE IMPORTED")}catch(x){alert("State import failed: "+x.message)}e.target.value=""};r.readAsText(f)}
-function snapshot(s,b){if(!state.snapshots[s])state.snapshots[s]=core();else{push();const keep=state.snapshots;state=Object.assign(newState(),copy(keep[s]));state.snapshots=keep;refresh()}$$("[data-snapshot]").forEach(x=>x.classList.toggle("active",x===b));mark("SNAPSHOT "+s)}
+function snapshot(s,b){if(!state.snapshots[s])state.snapshots[s]=core();else{push();const keep=state.snapshots;state=migrateLegacyEq(keep[s]);state.snapshots=keep;refresh()}$$("[data-snapshot]").forEach(x=>x.classList.toggle("active",x===b));mark("SNAPSHOT "+s)}
 function openBrowser(t){browserType=t;$("#browserTitle").textContent=LABEL[t];const cats=[...new Set(catalog.filter(x=>x.type===t).map(x=>x.category))];$("#categorySelect").innerHTML='<option value="">All categories</option>'+cats.map(x=>`<option>${x}</option>`).join("");$("#assetSearch").value="";$("#assetBrowser").classList.remove("hidden");renderBrowserList();const current=t==="SCENE_PRESET_HERO"&&state.preset?.startsWith("factory:")?byId.get(state.preset.slice(8)):selected(t);const first=catalog.find(x=>x.type===t);if(current||first)preview(current||first)}
 function closeBrowser(){$("#assetBrowser").classList.add("hidden")}function renderBrowserList(){const q=$("#assetSearch").value.toLowerCase(),c=$("#categorySelect").value,x=catalog.filter(i=>i.type===browserType&&(!c||i.category===c)&&(!q||i.name.toLowerCase().includes(q)||i.id.toLowerCase().includes(q)));const activeId=browserType==="SCENE_PRESET_HERO"&&state.preset?.startsWith("factory:")?state.preset.slice(8):state.selection[browserType];$("#assetList").innerHTML=x.map(i=>`<button class="asset-item ${activeId===i.id?"active":""}" data-id="${i.id}"><span>${i.category}</span><strong>${i.name}</strong></button>`).join("");$$(".asset-item").forEach(b=>{b.onmouseenter=()=>preview(byId.get(b.dataset.id));b.onclick=()=>{if(browserType==="SCENE_PRESET_HERO"){applyFactoryPreset(b.dataset.id,true);renderBrowserList();preview(byId.get(b.dataset.id));return}mut(()=>state.selection[browserType]=b.dataset.id);renderBrowserList();preview(byId.get(b.dataset.id))}})}function preview(x){const activeId=browserType==="SCENE_PRESET_HERO"&&state.preset?.startsWith("factory:")?state.preset.slice(8):state.selection[browserType];$("#assetPreview").classList.toggle("selected",activeId===x.id);$("#assetPreview").innerHTML=`<div class="preview-art"><img src="${assetUrl(x)}" alt="" onerror="this.remove()"></div><div class="preview-title">${x.name}</div><div class="preview-id">${x.id}</div>`}
 function setMarker(k){mut(()=>state.markers[k]=audio.currentTime||0)}function renderMarkers(){const f=v=>v==null?"—":v.toFixed(2)+"s";$("#markerStatus").textContent="START "+f(state.markers.start)+" · CLOSEST "+f(state.markers.closest)+" · END "+f(state.markers.end)}
@@ -465,7 +535,7 @@ async function setupAudio(){
   try{await audioSetup;}finally{audioSetup=null;}
 }
 function updateGains(){
-  if(sceneNode)sceneNode.port.postMessage({type:"parameters",values:parametersFromState(state),hpf:hpfFromState(state)});
+  if(sceneNode)sceneNode.port.postMessage({type:"parameters",values:parametersFromState(state),hpf:hpfFromState(state),eq3:eq3FromState(state)});
   const label=$("#buildLabel");
   if(label){label.textContent="WEB TEST · "+(audioName?audioName+" · ":"")+audioSupportNote(state);label.title=label.textContent;}
 }

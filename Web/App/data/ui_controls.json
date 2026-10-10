@@ -616,36 +616,6 @@
           "default": 1
         },
         {
-          "id": "b4Freq",
-          "label": "BAND 4 FREQ",
-          "type": "range",
-          "min": 20,
-          "max": 20000,
-          "step": 1,
-          "unit": "Hz",
-          "default": 8000
-        },
-        {
-          "id": "b4Gain",
-          "label": "BAND 4 GAIN",
-          "type": "range",
-          "min": -18,
-          "max": 18,
-          "step": 0.1,
-          "unit": "dB",
-          "default": 0
-        },
-        {
-          "id": "b4Q",
-          "label": "BAND 4 Q",
-          "type": "range",
-          "min": 0.1,
-          "max": 12,
-          "step": 0.1,
-          "unit": "",
-          "default": 0.7
-        },
-        {
           "id": "finalTone",
           "label": "FINAL TONE",
           "type": "range",
