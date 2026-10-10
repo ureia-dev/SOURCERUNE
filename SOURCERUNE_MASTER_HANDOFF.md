@@ -1,5 +1,11 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 2026-10-10 更新：EQ 畫面固定 ±12 dB；Zoom In 放大視窗僅完成設計（尚未新增按鈕）
+
+- **目前這輪修改（Web）**：`Web/App/eq_graph.js` 的 `displayRange=12` 永久固定，移除以前依三段 Gain 自動跳 ±6/±12/±18 的邏輯；只動計算曲線 Y 軸及節點畫面位置，原 HPF+LPF+B1–B3 真正 C++ DSP／Gain 參數範圍、Automation、74 個 Factory Preset、EQ 滑鼠感度都不改。`Tests/Web/knob_smoke.cjs` 既有一次 Chromium UI01／UI02 驗收中增加 0、6、9、14、-18dB 皆顯示固定 `displayRange===12` 的不變條件；實際驗收結果須看當輪 `Web/App/preview/rendered/geometry-report.json`／`render-log.txt`，不能只看 Pages 綠燈。
+- **Zoom In 全面規劃／仍 PENDING 實作**：右下 `EQ / TONE` 主卡新增 Zoom In 圖示（緊鄰 Power、不移 REF 座標），點後於原 Plugin 內部開啟約 900×500px、上限可用畫面 90% 的可定位 EQ Focus 面板，頻譜 X 20Hz–20k、Y 永遠 ±12dB，五節點全部操作放大，沿用數值小框、Bell 節點 wheel Q、數值直接輸入／Shift／雙擊 Gain 歸零／Undo，只有一份 state/C++ DSP，不雙算 EQ／FFT，不改 preset。關閉／Esc／Zoom Out 恢復小 EQ 原樣且參數不丟，彈出期間背後小 EQ 不能收滑鼠，需 keyboard focus/host resize/re-render 清除 handler 與 viewport scaling 真測。
+- **唯一正式細規**：`docs/product/UI_FUNCTION_CONTRACT.md` 的 **EQ Zoom In / Focus editor — APPROVED PLANNING ONLY**。沒有新增大視窗實體、按鈕、第二組 EQ；Native VST3 自訂圖形介面未存在，Web 及 Native Zoom parity 不可誤報。UI 01/02 U01-17/U02-22 仍 [ ]／PARTIAL。本輪完成證據在對應 PR 和 Fast CI／Web Preview 後補；後續對話從這份新決定接續，不得恢復以前的 auto-fit。
+
 ## 最新 checkpoint：VVChain UI_A 操作方式移植到 SOURCERUNE EQ（2026-10-10）
 
 - **需求來源／界線**：使用者核准只參考 Private `nevemn-code/VVChain` 最新 UI_A 的 mouse/popup 操作（參照 private main `e388fa86`、`assets/ui/candidates/UI_A/UI_A位置與大小說明.md`、`docs/index.html`、`Source/PluginEditor.cpp`）。不複製其 DSP、filter type、Dynamic EQ、M/S、SOLO、座標/素材；SOURCERUNE 永遠只 HPF／LPF／B1–3，原 `b4` IDs deprecated/reserved。正式 Web source `Web/App/eq_interactions.js`、`eq_interactions_v1.css`、`app.js`、`eq_graph.js`，UI_01、UI_02 共用同一組 state/AudioWorklet/DSP。
