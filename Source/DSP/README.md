@@ -31,3 +31,7 @@ CHROME_PATH=/path/to/chrome node Tests/Audio/browser_smoke.cjs
 ```
 
 Browser smoke starts/stops a local server, loads a generated WAV, checks actual output and parameter changes, transport, preset loading, both existing layouts and real offline AudioWorklet output. It is not human audition, Safari/Firefox validation, VST3 Host testing or a release safety suite.
+
+## Final tone EQ — three bands (2026-10-10)
+
+Shared C++ chain now includes HPF + LPF + exactly 3 peaking RBJ biquads before the original Mix/Output stage. Active controls: hpf, lpf, b1..b3 Freq/Gain/Q and eqBypass. The legacy b4Freq/b4Gain/b4Q public IDs are deprecated/reserved, not processed. Flat/default bell gain, HPF at 20Hz, LPF at 20kHz, and EQ bypass skip EQ audio processing where possible. Per-sample section coefficients smooth on changes, no oversampling or added algorithmic latency. WebAssembly ABI is now version 2 with 23 total bridge parameters. Verify the compiled WASM against C++ source; version 1 binaries MUST NOT be used with the new transport. Real host/audio measurements and listen tests are distinct gates.
