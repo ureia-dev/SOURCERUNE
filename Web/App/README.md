@@ -75,3 +75,26 @@ smoke so their pointer/wheel/keyboard path is explicitly tracked too.
 This is Web UI wiring; unsupported DSP and the Native VST3 custom editor
 remain pending. No Factory Presets, parameter IDs or approved UI geometry are
 changed.
+
+## EQ / TONE — HPF first (2026-10-10)
+
+The bottom-right **HPF** is a real adjustable stereo 12 dB/oct Butterworth
+high-pass (RBJ/W3C biquad), not a static EQ graphic. UI_01 and UI_02 share
+existing public parameter `hpf` (20–1000 Hz, 1 Hz step), `EQ_TONE` module
+bypass, one gesture per Undo, keyboard and wheel. **20 Hz is exact OFF**;
+this preserves previous saved scenes by default. A single C++ header
+`Source/DSP/Tone/Hpf.h` implements both the Native stereo stage and the
+independent 1538-byte `audio/hpf.wasm` used in Web AudioWorklet after the
+original MVP scene module. OFF skips HPF processing and extra buffer copies;
+no oversampling, no audio-callback allocations or trig, cutoff changes are
+smoothed. The UI response curve shows the HPF only, not a claim that the other
+four EQ bands are processing audio.
+
+Web renderer evidence must be read from the committed
+`preview/rendered/geometry-report.json` (`knobSmoke.hpf`) and
+`render-log.txt`, **not merely Pages success**. Native source supports host
+IDs 42 (HPF) and 1102 (EQ bypass) with v1 11-parameter state recall, but an
+updated VST3 host package/DAW test must be independently verified. The
+remaining LPF, four parametric EQ bands and Final Tone DSP remain PENDING.
+Current post-scene HPF is a deliberately scoped MVP stage; moving tone before
+MIX in the final full scene chain remains a separate parity milestone.
