@@ -58,6 +58,12 @@
       "bytes": 954
     }
   ],
-  "sha": "6723ac8019091ff341c1f06c47f74ac1c4836869",
-  "screenshotSha256": "70073a3b429da8f351edaaadbdb4638ea7651c13a45e14109ccf12d13635cbd4"
+  "visualSmoke": {
+    "zoomIn": true,
+    "zoomReset": true,
+    "timeRulerTicks": 5,
+    "labelNoOverlap": true
+  },
+  "sha": "8df99ffb41f1d5e2d2845f5cedf339816118ea0f",
+  "screenshotSha256": "798bfe88817b2e786cb5b4f81077b1a6169db06fccb5b3ab180a71510df4f3fb"
 }
