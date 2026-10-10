@@ -1,16 +1,16 @@
 curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
 [UI_01] Browser console: Failed to load resource: the server responded with a status of 404 (File not found)
-AssertionError [ERR_ASSERTION]: UI_01 direct numeric frequency should show 1.7 kHz
+AssertionError [ERR_ASSERTION]: UI_01 double-click should reset only Gain
 
-1700 !== 1.7
+1.3 !== 0
 
-    at auditEqMouseGestures (/home/runner/work/SOURCERUNE/SOURCERUNE/Tests/Web/knob_smoke.cjs:396:10)
+    at auditEqMouseGestures (/home/runner/work/SOURCERUNE/SOURCERUNE/Tests/Web/knob_smoke.cjs:404:10)
     at async auditKnobs (/home/runner/work/SOURCERUNE/SOURCERUNE/Tests/Web/knob_smoke.cjs:63:17)
     at async [stdin]:133:29 {
   generatedMessage: false,
   code: 'ERR_ASSERTION',
-  actual: 1700,
-  expected: 1.7,
+  actual: 1.3,
+  expected: 0,
   operator: 'strictEqual',
   diff: 'simple'
 }
