@@ -1,5 +1,16 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+## 2026-10-11｜PR #116 UI_02 REF 續批：三組光學修正（待驗證）
+
+- **起點**：main `0d374288`、工作分支 `style/ui01-condition-eq-knob-ref-20261011` 的 `0cbf6383`；原 PR #116 Fast #38069959072／Chromium #38069958987 PASS，不重做原 UI_01 13 區。這批保留同一個 Draft PR，未合併、未部署。
+- **A 卡片／Live Scene**：`ab70e8cb7ac0c1edd604b92e7ed60f9253764b65`，改善四張照片/標題、焦點、框線及真實 SVG Motion/Distance 低眩光；不替換模型/素材。
+- **B Motion／真 Meter**：`5bf94f26551dff00af2c847e66bc3a6070d578e9`，大旋鈕讀數/指針、三顆小旋鈕文字/指針/焦點、真 IN/OUT 填充上的分段視覺；不變 Meter 寬度及聲音。
+- **C 底部五區**：`ae7a77b3da20a6e7bc7fe02b6ad591dbfccd509c`，將 Intelligibility 三模式按鈕排入原框、數值避讓、正式 Idle/Active/Hover PNG，另調 Condition/Bad Signal/Mix/EQ/Ambience 光學材質；既有 Mode State/Undo 保留。
+- **整批接入**：`a5e3b61544f079cbf74c37dee66b3cdd3927c801` 由最後載入的 `Web/App/ui01_ref_batch_c_v1.css` 以三個標準 CSS `@import` 接入 `ui02_ref_batch_a/b/c_v1.css`。一次集中推送，原工作流會同輪檢查 UI_01／UI_02 geometry 與 knob smoke；**UI_02 本批專屬新截圖與模式避讓/Undo 驗收尚未實測，不能冒稱 PASS**。
+- **目前狀態**：約 20 個有依據的 UI_02 光學修正群，均屬 APPROX／候選，未達每輪 50–100 個目標，拒絕湊數。U02-04/13/20 等整項仍 [ ]／PARTIAL，UI_02 REF 1:1 overlay、Native Host 仍待驗。DSP changed **NO**，WASM／AudioWorklet 音訊算法、Preset、參數語意、ReferenceSheets 均未動。
+
+
+
 ## 2026-10-11｜PR #116 UI_01 視覺整批修正（同批多 commit、單次推送）
 
 - 使用者要求「一次改多一點，改多一點在丟上去 GITHUB」；從此 UI REF 工作以 **先集中審查需求→3 個可追蹤獨立 commit→單次推送→一次 Fast + 真 Chromium→統一回報** 為優先。此為工作方式而非自動增加測試量、修改 DSP 或默認合併授權；錯誤仍遵守二次上限與根因檢查。
