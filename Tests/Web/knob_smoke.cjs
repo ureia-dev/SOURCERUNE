@@ -342,8 +342,8 @@ async function auditMiniEq(page,ui){
       return {gain:g,displayRange:result.displayRange,nodeY:result.nodes.find(n=>n.id==='b2').y};
     });
   });
-  assert(fixedScale.every(x=>x.displayRange===12),ui+' EQ graph must remain fixed +/-12 dB for any active Gain');
-  assert.equal(fixedScale[0].nodeY,50,ui+' fixed +/-12 dB must keep zero dB on centreline');
+  assert(fixedScale.every(x=>x.displayRange===24),ui+' EQ graph must remain fixed +/-24 dB for any active Gain');
+  assert.equal(fixedScale[0].nodeY,50,ui+' fixed +/-24 dB must keep zero dB on centreline');
   const names=await page.$$eval('.macro-eq-svg [data-eq-node]',els=>els.map(e=>e.dataset.eqNode));
   assert.deepEqual(names,['hpf','b1','b2','b3','lpf'],ui+' must have HPF LPF and exactly 3 EQ bands');
   const results={};
@@ -466,7 +466,34 @@ async function auditEqFocus(page,ui){
   assert(layout.dialog.x>=layout.app.x-2&&layout.dialog.y>=layout.app.y-2,ui+' Focus outside plugin origin');
   assert(layout.dialog.x+layout.dialog.w<=layout.app.x+layout.app.w+3,ui+' Focus outside plugin width');
   assert(layout.dialog.y+layout.dialog.h<=layout.app.y+layout.app.h+3,ui+' Focus outside plugin height');
-  assert.equal(await page.$eval(focus+' .sr-eq-focus-title small',e=>e.textContent.includes('±12 dB')),true);
+  assert.equal(await page.$eval(focus+' .sr-eq-focus-title small',e=>e.textContent.includes('±24 dB')),true);
+  // Precision handle optics: real circles regardless of SVG aspect ratio.
+  const precision=await page.evaluate(()=>{
+    const read=selector=>{
+      const e=document.querySelector(selector);if(!e)return null;
+      const b=e.getBoundingClientRect();return {w:b.width,h:b.height};
+    };
+    return {
+      mini:read('.macro-eq .sr-eq-node-ring'),
+      miniHit:read('.macro-eq [data-eq-node="b2"]'),
+      focus:read('#eqFocusDialog .sr-eq-node-ring'),
+      focusHit:read('#eqFocusDialog [data-eq-node="b2"]'),
+      line:document.querySelector('#eqFocusDialog .macro-eq-line')?.getAttribute('stroke')
+    };
+  });
+  for(const type of ['mini','focus']){
+    assert(precision[type],ui+' missing visible precision EQ node');
+    assert(Math.abs(precision[type].w-precision[type].h)<1.4,
+      ui+' '+type+' EQ node rendered as a stretched ellipse');
+  }
+  assert(precision.mini.w<6&&precision.mini.w>2.5,ui+' mini EQ point still too large');
+  assert(precision.focus.w<9&&precision.focus.w>4,ui+' Focus EQ point still too large');
+  assert(precision.miniHit.w>=14&&precision.focusHit.w>=18,
+    ui+' precision node lost its usable transparent mouse target');
+  assert(precision.line?.startsWith('url(#sr-eq-line-'),ui+' curve missing subtle multi-band gradient');
+  const controlIds=await page.$$eval('#eqFocusDialog [data-eq-focus-control]',xs=>xs.map(x=>x.dataset.eqFocusControl));
+  assert.deepEqual(controlIds,['hpf','b1Freq','b1Gain','b1Q','b2Freq','b2Gain','b2Q','b3Freq','b3Gain','b3Q','lpf'],
+    ui+' must expose exactly 11 REAL EQ controls, no unimplemented 24dB slope option');
   const before=await read('b2-gain');
   const initialPath=await graphPath();
   const pt=await mid(node('b2'));await page.mouse.move(pt.x,pt.y);
@@ -492,6 +519,31 @@ async function auditEqFocus(page,ui){
   assert.notEqual(wheelQ,initialQ,ui+' Focus bell wheel did not change Q');
   await page.$eval('#undoBtn',e=>e.click());
   assert.equal(await read('b2-q'),initialQ,ui+' Focus Q wheel undo mismatch');
+  // Actual Focus knobs use exactly the same state, mouse gesture semantics
+  // and global history as nodes. One vertical gesture is one Undo entry.
+  const knobXY=await mid('[data-eq-focus-control="b2Gain"]');
+  const knobBefore=await read('b2-gain');
+  await page.mouse.move(knobXY.x,knobXY.y);
+  await page.mouse.down();
+  await page.mouse.move(knobXY.x,knobXY.y-17,{steps:4});
+  await page.mouse.up();
+  const knobDragged=await read('b2-gain');
+  assert.notEqual(knobDragged,knobBefore,ui+' Focus Gain dial not functional');
+  await page.$eval('#undoBtn',el=>el.click());
+  assert.equal(await read('b2-gain'),knobBefore,ui+' Focus dial missing atomic Undo');
+  await page.$eval('#redoBtn',el=>el.click());
+  assert.equal(await read('b2-gain'),knobDragged,ui+' Focus dial missing Redo');
+  await page.$eval('#undoBtn',el=>el.click());
+  // One wheel increment on a real Gain knob equals one 0.1 dB step.
+  const gainWheelXY=await mid('[data-eq-focus-control="b1Gain"]');
+  const gainAt0=await read('b1-gain');
+  await page.mouse.move(gainWheelXY.x,gainWheelXY.y);
+  await page.mouse.wheel({deltaY:-120});
+  const gainAt1=await read('b1-gain');
+  assert.equal(Math.round((parseFloat(gainAt1)-parseFloat(gainAt0))*10),1,
+    ui+' dial wheel should change only one 0.1dB step');
+  await page.$eval('#undoBtn',el=>el.click());
+  assert.equal(await read('b1-gain'),gainAt0,ui+' dial wheel undo failed');
   // Readout buttons must navigate to the REAL SVG node and open its popup.
   await page.$eval('[data-eq-focus-select="b3"]',el=>el.click());
   assert.equal(await page.$eval('.sr-eq-float',e=>!e.hidden),true,
@@ -529,7 +581,8 @@ async function auditEqFocus(page,ui){
     largeSize:[Math.round(layout.dialog.w),Math.round(layout.dialog.h)],
     b2Gain:[before,dragged],qWheel:[initialQ,wheelQ],
     undo:true,redo:true,readoutPopup:true,escape:true,reopen:true,
-    viewportContained:contained,zoomOut:true,closeX:true,fixedRange:12};
+    viewportContained:contained,zoomOut:true,closeX:true,fixedRange:24,
+    nodeDimensions:precision,liveControls:controlIds,knobGesture:[knobBefore,knobDragged],knobWheel:true};
 }
 async function readOrNull(page,selector){
   return page.$eval(selector,e=>!e.hidden).catch(()=>false);
