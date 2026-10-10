@@ -1,5 +1,14 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+## UI_01 Condition / EQ / 金屬旋鈕｜REF 外觀候選（2026-10-11，PR #116）
+
+- **目前目標**：延續前輪已合併的 PR #114／#115，只精修 UI_01 的 U01-13 Condition、U01-17 EQ/Tone、U01-18 旋鈕材質外觀。唯一分支 `style/ui01-condition-eq-knob-ref-20261011`、[Draft PR #116](https://github.com/ureia-dev/SOURCERUNE/pull/116)，**不合併／不部署**。起點 main `0d374288ea181f65a2c839b90432e068697d43df`。
+- **三個獨立可恢復實作 checkpoint**：① Condition `e363a52e2fd10510e45c675f8f1c831dad058f02`：正式 OFF/ON checkbox、USED select 尺寸、兩行文字和對齊；不變 `rattle/wowFlutter`／Undo。② EQ/Tone `eef04d2cb7118b07d6817bee136065c485da9ea9`：正式 `RT_BUTTON_CAP_IDLE/HOVER`、`RT_SEGMENT_CAP_IDLE/ACTIVE`，細緻化 5 點 EQ 圖框；保留 Zoom、ON/OFF、原 Eq/HPF 真值。③ 旋鈕 `dad0c7ec31c0a86fe04530816a7782cee1661a50`：低眩光金屬面、細指針與稍低彩度環線、UI_01 七卡一致文字；**不改已鎖定 face 大小、透明命中範圍與參數**。三份 CSS 均只附加 UI_01 scope，由 `Web/App/index.html` 引用；UI_02 不改樣式。
+- **真實驗證**：[Fast CI #38069264033](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38069264033) **SUCCESS**（包含既有 DSP Guard、JS、素材完整性）；[真 Chromium #38069264112](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38069264112) **SUCCESS**，來源 `1ec323aaf25f6c7f43ccd059759df4d1769e4502`。瀏覽器報告 UI_01 與 UI_02 `geometry=true`／`knobSmoke=true`，Condition 真 toggle+Undo 與 EQ Bypass 真 toggle+Undo 均通過，五個 EQ 節點與 Material computed CSS 實證；證據 [UI_01_REF_FINISH_PR116.png](../../../Web/App/preview/rendered/UI_01_REF_FINISH_PR116.png) 和 [JSON](../../../Web/App/preview/rendered/UI_01_REF_FINISH_PR116_report.json)，PNG SHA256 `fa7a498aa6c83001153564c3ca75a3137c225a5caab6e5d40141b2fcb981f05f`。
+- **測試診斷**：一次性 Chromium 腳本初稿有兩處括號語法問題；修正後又發現正確 `HOVER` PNG 被過嚴格 IDLE 斷言拒收；再使用 repo 現有 DOM Undo 點擊驗證模式，沒有更改產品碼讓測試過關。三次皆留下 traceable commit；最後真 Chrome 成功。臨時圖片生成 workflow 僅供此輪預覽，正式合併前需從 PR 移除，保留 PNG／JSON。
+- **驗收邊界**：最新 UI_01 正式 REF 1508×808 原始完整 PNG 仍未入庫，所以這只是以 142 個掃描元件規格做可檢查的 **APPROX 候選**，不是 1:1 pixel perfect；Native VST3 自訂 UI／Host 未驗證，Condition／其他未核准 DSP 不因顯示控制項而變成完成。**U01-13／17／18 繼續 `[ ]`／PARTIAL**，不擅自勾整項，等待使用者看圖；`Assets/UI/ReferenceSheets` 解析度仍延後。DSP／WASM／Native 音訊路徑／參數 IDs／Factory Preset 均**零改動**，無需新 DSP 還原點。
+- **下一步**：使用者視覺檢查三項外觀；之後繼續原工作日誌中尚未驗收的剩餘 UI_01 細節／UI_02 對應項，遇涉及 DSP 聲音語意的功能只提案，不擅動。只有收到「部署」指示才核最新 CI 並合併／發布。
+
 ## 部署完成 Checkpoint｜PR #114＋#115（2026-10-11）
 
 - **使用者正式授權**：明確表示「部署」表示自動合併及打包，無須每次確認；本次指定立刻部署，並核對 GitHub UI 黃色 `Action required`。
