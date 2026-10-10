@@ -1,5 +1,13 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## Mac／Windows Release pipeline checkpoint — 2026-10-10 第三批
+
+- **起點**：PR #67 已 merge `3d1652ee`；Fast run `38015724287` PASS、Pages run `38015761171` SUCCESS；本批由 audit main `eced7b3` 建立 `feat/native-release-packages`。
+- **已授權**：使用者明確同意 Mac／Windows 手動 Release build。既有 Fast 自動 PR、Deep/Release 手動層級不變；只新增 Release 的 macos-15 universal／windows-2022 x64 兩個 build job，每個沿用一次 bounded SDK mini-host，不增加完整 validator／stress 次數。
+- **已實作**：`.github/workflows/ci.yml` 建置共用 C++ VST3、Mac 雙架構檢查／ad-hoc signing、成功後 `Tools/Build/package_native.py` 產生 ZIP／安裝说明／source SHA／SDK license／SHA-256，Actions artifact 保存 30 天。Windows generic editor、Mac 未 notarize，均為 MVP preview。
+- **待驗**：Mac／Windows runner 尚未執行，沒有可下載成品或 DAW PASS；不可拿 Linux smoke 或 Fast CI 冒充跨平台成功。既有聲音 DSP 不變，不重跑已成功音訊案例。
+- **下一步**：本分支 PR/Fast 保存後，以 `SOURCERUNE CI` 的 Run workflow 選本分支及 `release`。現有 GitHub connector 沒有 workflow_dispatch 操作；若使用瀏覽器代按，瀏覽器 fallback 規則要求先取得同意。跨平台成功後才合併本批並交付 artifact URL；失敗只修根因，不反覆跑整組成功測試。
+
 ## Native VST3 MVP checkpoint — 2026-10-10 第二批
 
 - **Web 已上線**：PR #66 已 merge `d82f4420`，Fast run `37970139055` PASS；Pages run `37970747320` SUCCESS，render audit `074b085e` 記錄成功。網址 https://ureia-dev.github.io/SOURCERUNE/Web/App/ 。本輪另查 HTTP 200、線上 app.js 與 main 相同、線上 WASM SHA-256 `3d0ce6b0aa610e008a1308d030b453905b07e3320f1185bcd42452bc2e1ad714` 與已測 binary 相同。未重跑既有成功 Web 聲音驗證。

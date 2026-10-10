@@ -139,7 +139,7 @@
   - **驗收/進度**：`PARTIAL`（2026-10-10）：`Source/DSP/SceneProcessor.*` 真共用 C++ MVP；Native/WASM 48 kHz、20,480 samples parity 最大誤差 0。SOURCE／TRANSMISSION 頻響子集已接，完整聲學／CPU／Golden 仍 PENDING。起始實作 GitHub `f352d3d8`；本批 PR/Fast/deploy 以 MASTER_HANDOFF 及 live GitHub 為準。
 
 - [ ] **CROSS-08｜真正 Native VST3 可載入 Plugin**（P3）— Linux Native MVP 已有真 build/bundle；正式 editor、macOS/Windows DAW 與 release 待驗。
-  - **驗收/進度**：`PARTIAL`（2026-10-10 第二批）：`Source/Plugin/VST3/Plugin.cpp` 直接連共用 C++，Linux x86_64 bundle 真載入 SDK mini-host、11 basic params、DSP、Bypass、state PASS。Native 先用 Host generic editor；不是 UI_01/02 嵌入完成，也不是商用 DAW/跨 OS 驗收。branch `feat/native-vst3-mvp`，PR/Fast 依 MASTER_HANDOFF 與 live GitHub。
+  - **驗收/進度**：`PARTIAL`（2026-10-10 第二批）：`Source/Plugin/VST3/Plugin.cpp` 直接連共用 C++，Linux x86_64 bundle 真載入 SDK mini-host、11 basic params、DSP、Bypass、state PASS。Native 先用 Host generic editor；不是 UI_01/02 嵌入完成，也不是商用 DAW/跨 OS 驗收。PR #67 已 merge `3d1652ee`、Fast `38015724287` PASS。第三批經使用者核准新增 Mac universal／Windows x64 手動 Release build/package，branch `feat/native-release-packages`；跨 OS run/artifact 與真 DAW 尚待驗，不勾整項。
 - [ ] **CROSS-09｜WebAssembly/AudioWorklet DSP**（P3）— 共用 C++ MVP 已接入；完整聲學、音檔處理與跨平台 parity 持續驗證。
   - **驗收/進度**：`PARTIAL`（2026-10-10）：共用 C++ WASM / AudioWorklet 已在真 Chromium 153 跑通；兩 UI geometry、WAV load/play/pause/resume/stop、參數即時改音、Bypass、OfflineAudioContext 8 kHz 衰減與 stereo PASS。新增 Web 試聽列解開原本隱藏的 transport。完整模組／跨瀏覽器／Native VST3 parity 仍待驗，不勾整項完成。
 

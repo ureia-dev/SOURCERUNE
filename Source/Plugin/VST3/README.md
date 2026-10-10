@@ -27,4 +27,12 @@ build/native/bin/Release/sourcerune_host_smoke "$PWD/build/native/VST3/Release/S
 
 One SDK mini-host case verifies actual bundle/factory loading, 11 unique IDs and defaults, stereo audio against the shared core, block parameter changes, exact bypass, state save/restore and offline audio parity. It does not automatically run in Fast. SDK automatic full validator is off to avoid adding an unapproved safety/stress suite; existing project test gates and counts are unchanged.
 
-Next: approved macOS/Windows Release build runners, DAW load/recall verification, sample-accurate automation, full state/preset parity and native UI integration. Pro Tools requires a later AAX target, not this VST3.
+## Downloadable previews (manual Release)
+
+The user approved the Mac/Windows Release matrix on 2026-10-10. In GitHub Actions → **SOURCERUNE CI** → **Run workflow**, choose the intended branch and `validation_level: release`. Fast and Deep must pass first. Release then builds macOS universal (arm64 + x86_64, deployment target 11.0) and Windows x64, runs the existing bounded SDK host once on each runner, and uploads a ZIP plus SHA-256 checksum for 30 days. PRs still run Fast only.
+
+Mac uses the standard `macos-15` runner; Windows uses `windows-2022` and VS 2022. Runner labels: https://docs.github.com/en/actions/reference/runners/github-hosted-runners . The Mac ZIP preserves bundle permissions with `ditto`; both packages include `INSTALL.txt`, the exact source commit and the SDK license. Upload is gated on build, host and packaging success. Mac checks both binary architectures but runs the host only in the runner's native architecture.
+
+These are MVP previews: Mac is ad-hoc signed, not Developer ID signed or notarized. Windows is unsigned and may need the Microsoft Visual C++ x64 runtime. No signing secrets are required. No automated DAW installation, full validator, extra stress rounds or GitHub Release publication is added. Cross-platform builds remain **pending until a successful manual run is recorded**.
+
+Next: run this approved manual Release, then DAW load/recall verification, sample-accurate automation, full state/preset parity and native UI integration. Pro Tools requires a later AAX target, not this VST3.
