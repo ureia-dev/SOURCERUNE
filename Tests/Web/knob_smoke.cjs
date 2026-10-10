@@ -544,6 +544,25 @@ async function auditEqFocus(page,ui){
     ui+' dial wheel should change only one 0.1dB step');
   await page.$eval('#undoBtn',el=>el.click());
   assert.equal(await read('b1-gain'),gainAt0,ui+' dial wheel undo failed');
+  const accessible=await page.evaluate(()=>{
+    const ids=[...document.querySelectorAll('#eqFocusDialog [data-eq-focus-control]')];
+    return ids.every(x=>x.getAttribute('role')==='slider'
+      &&Number.isFinite(Number(x.getAttribute('aria-valuemin')))
+      &&Number.isFinite(Number(x.getAttribute('aria-valuemax')))
+      &&Number.isFinite(Number(x.getAttribute('aria-valuenow')))
+      &&Boolean(x.getAttribute('aria-valuetext')));
+  });
+  assert(accessible,ui+' Focus dials must expose real keyboard slider ranges/values');
+  const keyQ=await read('b1-q');
+  await page.$eval('[data-eq-focus-control="b1Q"]',el=>el.focus());
+  await page.keyboard.press('ArrowUp');
+  assert.notEqual(await read('b1-q'),keyQ,ui+' keyboard Q increment must edit live EQ');
+  await page.$eval('#undoBtn',e=>e.click());
+  assert.equal(await read('b1-q'),keyQ,ui+' keyboard Q change missing Undo');
+  await page.$eval('[data-eq-focus-control="b3Freq"]',el=>el.focus());
+  await page.keyboard.press('Enter');
+  assert.equal(await page.$eval('.sr-eq-float',e=>!e.hidden),true,
+    ui+' keyboard activation must open the existing numeric editor');
   // Readout buttons must navigate to the REAL SVG node and open its popup.
   await page.$eval('[data-eq-focus-select="b3"]',el=>el.click());
   assert.equal(await page.$eval('.sr-eq-float',e=>!e.hidden),true,
@@ -582,7 +601,8 @@ async function auditEqFocus(page,ui){
     b2Gain:[before,dragged],qWheel:[initialQ,wheelQ],
     undo:true,redo:true,readoutPopup:true,escape:true,reopen:true,
     viewportContained:contained,zoomOut:true,closeX:true,fixedRange:24,
-    nodeDimensions:precision,liveControls:controlIds,knobGesture:[knobBefore,knobDragged],knobWheel:true};
+    nodeDimensions:precision,liveControls:controlIds,knobGesture:[knobBefore,knobDragged],knobWheel:true,
+    accessibleSliders:accessible,keyboardPopup:true};
 }
 async function readOrNull(page,selector){
   return page.$eval(selector,e=>!e.hidden).catch(()=>false);
