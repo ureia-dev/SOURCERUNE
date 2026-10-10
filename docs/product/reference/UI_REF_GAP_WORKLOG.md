@@ -4,6 +4,109 @@
 
 > 2026-10-09 建立；承接使用者選取的完整缺項稽核。**每完成一個工作 ID，要直接在這份 GitHub 文件中將 `[ ]` 更新為 `[x]`，填入 PR／Commit／CI／正式 REF 與真 Web/Native 驗收證據。** 不另建立重複競爭工作清單。純文件的登錄不等於任何修復完成。
 
+## 2026-10-10｜UI_01／UI_02 與正式 REF 對照盤點（本輪只登錄、不修復）
+
+> **Checkpoint 性質：盤點／待辦優先級整理；沒有新完成的 UI ID。** 本節只對應以下原有工作 ID，**不新增第二份 TODO 或獨立產品規格**。底下既有 `[ ]` 保留原狀；日後實際修正與驗收才可把對應 ID 改為 `[x]`。
+
+### 來源與能證明的範圍
+
+- 查核時 repo `ureia-dev/SOURCERUNE`，`main=e457eba0153d0d6e624cc93cc9c3ddb39f83bd6c`；當時 open PR 僅 `#68`（Native 打包，與本盤點分離）。
+- 現有實際畫面：[`UI_01.png`](../../../Web/App/preview/rendered/UI_01.png)、[`UI_02.png`](../../../Web/App/preview/rendered/UI_02.png)；Chrome 量測：[`geometry-report.json`](../../../Web/App/preview/rendered/geometry-report.json) 與 [`render-log.txt`](../../../Web/App/preview/rendered/render-log.txt)。
+- 最後成功的 Web Preview：[run 38055341443](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38055341443)，**報告內標記的來源 commit 是 `2aaee45953bd3b39aeecc0ad7beb5ead93e56b63`，與本次 main HEAD 不同**；因此只能宣稱該次報告驗證項目通過，**不可把它冒稱為 e457eba 全畫面的新一輪逐像素驗收**。當時 CI 38055528325 success。
+- 該份 Chrome 報告：UI_01 幾何 51/51、UI_02 幾何 41/41，兩版 `knobSmoke`、`eqMouse`、`eqInline`、`eqFocus` 皆 `ok=true`；這是已測幾何與操作通過，**不等於 REF 逐像素一致、獨立圖片畫質合格、Native VST3 Host 完成、全 DSP 已驗收**。
+- 正式 REF：UI_02 原始 `Assets/UI/UI_02/UI_02_REF/UI_02_REF.png`（1672×941）及 2.5× PNG 已入 Git；**UI_01 最新正式無說明圖 1508×808 與 2.5× PNG 仍未入 Git**，只有 142 個元件掃描/座標文件；所以 UI_01 細節是以現有掃描規格比對，**不是同一批原始像素的完整 overlay 結果**。早期 1536×1024 含註解海報/1499×807 UI shell 的不同座標系不能直接視為 1:1。
+
+### UI_01｜差異歸屬（維持原有 ID）
+
+| 原 ID | REF 對比後的剩餘工作／限制 | 本輪判定 |
+|---|---|---|
+| U01-01～05 | Logo/上方工具/預設展示模型與四張素材卡：版位已有，品牌、照片、裁切、亮度、框線、圖示與 REF 未逐項對齊；REF 展示車載聲音／行動通話等，Web 初始模型不同 **不代表應強制改產品預設**。 | `PENDING / 部分待決策` |
+| U01-06～09 | 中央 Scene：補核對 REF 的明亮距離／時間曲線、車/人物或節點、Start/Closest/End、Zoom/Reset、波形與 seek marker；線、點、值必須維持 Live，不能用 REF 圖裁切冒充。 | `PENDING` |
+| U01-10 | Spectrum 分析列與模式：REF 的 Pre/Post、RTA、1/3、L+R 等可見操作，當前主介面未完整具備等價控制；需要真 analyzer/state 與互動驗收，不只補字。 | `PENDING / P0` |
+| U01-11 | Meter/Peak/RMS/LUFS：彩色分段、完整刻度、文字及材質仍未精細對齊；Peak/RMS 保持真 Live，LUFS 不可填假讀數（另見 CROSS-10）。 | `PARTIAL / P1` |
+| U01-13～16 | 底部七區控件：Condition 的 USED/勾選雖有已驗子項，但整區未完成；Intelligibility Presence/Dynamic、Ambience S/M/Duck/波形、Mix Ø 等仍要核產品語意與真控制綁定。 | `PARTIAL / 待核准項不得自行發明 DSP` |
+| U01-17 | EQ 五節點顏色、迷你框不顯黑塊、Zoom In/drag/wheel/Undo 已有 Web Chromium 子項 PASS；**整體仍未完成 REF 細像素對位、Final Tone/Native Host 驗收**。 | `PARTIAL` |
+| U01-18 | 七區的金屬旋鈕、指針、刻度環、面板反光、字體大小/基線、控制留白與 REF 還有視覺差距；固定外框尺寸不應任意重排。 | `PENDING / 視覺重點` |
+
+### UI_02｜差異歸屬（維持原有 ID）
+
+| 原 ID | REF 對比後的剩餘工作／限制 | 本輪判定 |
+|---|---|---|
+| U02-01～04 | 頂部 Shuffle、Folder/A-B 排列與橫向 IN/OUT Meter：主幾何已建立，部分圖示、位置、完整色段/標尺仍不符；Shuffle 用途不能由圖案擅自決定。 | `PENDING / 部分待決策` |
+| U02-05～07、15～17 | SOURCE/Transmission/Wall/Space/Ambience 照片或選取模型與 REF 展示場景不同；尤其 Ambience 使用與環境重複圖片，須獨立素材及正確 state；70%/35% 是比較場景差，不能直接更改預設。 | `PENDING` |
+| U02-08～09、CROSS-02 | **最顯眼的視覺缺口：中央 Scene REF 為細緻夜景、前景汽車/人物與深度關係，現行 Web 顯示模糊白日街景與簡化物件**。須使用獨立高品質背景/前景資產，而非銳化模糊小圖或把整張 REF 當背景。 | `PENDING / 優先修復美術品質` |
+| U02-10～14 | 大 Distance 300px、三個小旋鈕 54px 的配置已立基礎，但刻度、指針、∞、文字、Motion 車輛動線仍待比對；Speed % vs km/h 屬待核准單位，不擅改物理速度。 | `PARTIAL / 部分待決策` |
+| U02-18～21 | 底部波形/Mobile selector、Condition 材質、Intelligibility 模式鈕可能溢出底框、Mix Wet/箭頭等尚須確實完整顯示並驗證操作；尤其先修 Intelligibility 溢出。 | `PENDING / P0、P1 各依原 ID` |
+| U02-22 | EQ Web 五節點互動已有真 Chrome PASS；REF Natural/完整外觀與 Native 編輯器/Host 未完成，不因 EQ 子項 PASS 而勾整項。 | `PARTIAL` |
+
+### 2026-10-10 使用者最新執行覆蓋規則：逐步給實際組裝圖、逐步核准、不合併
+
+> **這節規則取代上文「先修 UI_02 高解析場景美術」的排序，但不刪除該既存待辦 ID。** 使用者明確要求 `Assets/UI/ReferenceSheets/` **圖片解析度修復暫緩**；目前階段不得觸碰這個資料夾的圖檔，也不以高解析重製當作先決步驟。ART-SHARED-001、CROSS-02 等圖片品質任務仍保留原樣並保持待辦，不宣稱已完成。
+
+- **執行序列鎖定**：① **UI_01 Scene View**（U01-06～09：真汽車獨立 Runtime 圖層、距離／Motion 曲線、時間軸刻度、ZOOM/RESET、Live waveform；逐項核已有元件和真操作）→ ② Spectrum（U01-10）→ ③ 左四張素材卡之狀態／圖片對照（U01-03～05；REF 範例值不直接改 Factory 或啟動預設）→ ④ 右側 Meter（U01-11；不得假造 LUFS）→ ⑤ 底部七模組缺漏真控件（U01-13～17；涉及待核准語意先停止該項）→ ⑥ 旋鈕／材質／字體／間距（U01-18；避免擅改大區幾何）。UI_02 對應同質項目留在既有 U02-01～22，後續按使用者核准再接續。
+- **硬性使用者驗收關卡**：只做當前一項；**用真正 SOURCERUNE Web/App 與正式 `Assets/UI/Runtime` 元件拼回實際畫面**，不得以示意圖、AI 生成類似畫面、REF 全頁截圖冒充可運作 UI；提供工作分支的實際畫面及可檢查連結，記錄來源 SHA。用戶檢查／明確同意後才做下一項；**全部保持未合併**，不得以 Fast CI 綠燈代替用戶觀感核准。
+- **改碼前能力關卡仍有效**：先實測完整必要 Web 來源／素材在執行環境落地、真 Chrome 啟動與基準截圖；如環境缺網路、GitHub 連接器拿不到真正完整大圖或無法執行任務所需入口，記 `BLOCKED-VERIFICATION`，僅允許文件／診斷，不在無法驗證時盲改正式程式。成功後依現有流程少量修改、最小 Fast、實際 Chrome screenshot 比 REF，留 branch/commit/PR/CI/預覽證據。
+- **DSP 凍結**：上述都是顯示與 UI 互動工作；已存在的音訊路徑、DSP、WASM、Factory Preset、公開參數 ID、Safety/CI 次數**全部保持不動**；若某個聲音行為必須實際改動，另行取得授權並先遠端建立全新還原點。
+
+**本輪實際觀察／驗收限制**：主介面真正入口 `Web/App/index.html`、程式 `Web/App/app.js`、UI_01 Runtime 元件、真 Chromium 主線最近已於 Pages run 38055341443 在 main 來源 2aaee459 成功，並有 `Web/App/preview/rendered/UI_01.png` 實際畫面；但該證據不是本分支新版本真實截圖。此回合容器 `curl https://github.com` 回報 `Could not resolve host`，GitHub 文字連接器可讀而完整本機 repo／正式大型 PNG／完整瀏覽器重建管道尚未確立。因此截至本 checkpoint，**Scene View 尚未改碼、尚無新組裝截圖；U01-06～09 仍 `[ ]`；首項為 `BLOCKED-VERIFICATION`**。既有 CSS `Web/App/layout_convergence_v1.css` 明確將 UI_01 `.motion-readouts` 隱藏，也隱藏 `.scene-commandbar button`／`.marker-status`；既有 `app.js` 的 `updateScene()`、`setMarker()` 與 `waveform()` 已具部分 Live 能力，日後僅在能力關卡實際過關後復用，勿從零再做。
+ 
+### Scene View 第一階段：2026-10-10 實際能力診斷及最小交付點（未修復、未完成）
+
+- **固定 repo/branch/PR**：`ureia-dev/SOURCERUNE`，`main=e457eba0153d0d6e624cc93cc9c3ddb39f83bd6c`，本工作 `docs/ui01-ui02-ref-comparison-log-20261010`，草稿 PR [#113](https://github.com/ureia-dev/SOURCERUNE/pull/113)，最新基準 `ee110f236bbe2c9dcba9ee0901b07007a1dde8e8`，既有 PR Fast [#38057041831](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38057041831) success；PR 保持 draft / unmerged。重新接手必須再次核對最新 main、PR、CI。
+- **已實測執行環境**：`git=/usr/bin/git`、`chromium=/usr/bin/chromium`、`node` 可用，但 `/mnt/data` 沒有 SOURCERUNE 工作樹。環境 `NETWORK=caas_packages_only`、HTTPS/HTTP Proxy 空、DNS `nameserver 168.63.129.16`。 `curl -I -L https://github.com/ureia-dev/SOURCERUNE/archive/refs/heads/main.zip` → `curl: (6) Could not resolve host: github.com`；對 `1.1.1.1` 直連也 ConnectionError。故不是盲猜 ZIP 太大，也不是 GitHub CI 故障，而是當前 container 對外網路權限限制，標示 `EXTERNAL-BLOCKED / CAPABILITY`；**沒有反覆重跑 GitHub Actions、沒有更改 runner/測試次數**。
+- **GitHub 讀取可用，但不能冒充已落地**：GitHub connector 可讀 `Web/App/index.html`、`app.js`、CSS、REF 142 筆掃描文件，也可讀先前 `Web/App/preview/rendered/UI_01.png` 真實舊截圖；但這不等於正式大型 PNG、所有 JS/CSS/assets 已完整到容器，也不等於這個分支有新 Chrome 畫面。GitHub REST 的 binary 路徑不能直接變成本機完整 repo；沒有合法可驗證的自動載入渠道時嚴禁用 AI 補圖/假資料替代。
+- **第一項確切 UI 工作**：只做 U01-06～09 的 UI_01 上方 Scene（REF 新圖檔 `SCENE_PANEL` approx x337/y57/w969/h268；真 Web 既有 plugin-local center x333/y58/w967、Scene 高 262，header 34、SVG 186、Waveform strip 38）。這兩個來源座標不一致；不得硬算 1:1。此階段只復用 `RT_MOTION_CAR_GLYPH.png`、`RT_SCENE_*_MARKER_*.png`、`RT_DISTANCE_CALLOUT.png`、`RT_SCENE_GRID.png`、`RT_WAVEFORM_STRIP_BG.png`，搭配現有真動態 SVG/Canvas；**不動 ReferenceSheets、DSP、Preset、參數與 Native 聲音**。
+- **需優先核查的實作掛點**：`Web/App/index.html` 的 `#sceneSvg`、`#motionPath`、`#motionCarGlyph`、`#sourceNode`、`#listenerNode`、`#distanceLine`、`#distanceCallout`、`#sceneWaveformCanvas`、`#sceneFullscreenBtn`、`.scene-commandbar`、`.motion-readouts`；`Web/App/app.js` 的 `applySceneViewportProfile()`、`updateScene()`、`setMarker()`、`waveform()`、`time()`、`bind()`；`Web/App/layout_convergence_v1.css` 的 UI_01 隱藏命令/讀數規則及 `Web/App/ref_geometry_lock_v11.css` 的 final 尺寸。真 Zoom/Reset、時間/距離軸、車輛跟隨、波形需和 state/transport 即時連動，不能畫不可操作的假控制；開關/縮放不能破壞 geometry audit 或 UI_02。
+- **驗收閘**：先恢復合法完整來源與正式素材取檔、檔案 SHA 檢查；在實際入口 `Web/App/index.html?ui=UI_01` 以 Chromium 渲染並取得 **baseline**；進行最小 Scene UI 實作，透過同一真入口產生 **after 截圖**，驗 hitbox/Zoom/Reset/Mode/時間/距離/車輛/波形、未動 UI_02；必要的 Fast 一次成功後，讓使用者看**真元件組裝畫面**並確認，保持草稿 PR 不合併。任何一項證據缺失都留 `PENDING`。
+- **截至本紀錄**：能力關卡未通過，故沒有修改任何正式 `Web/App` 程式或 PNG，沒有產生新組裝截圖；**U01-06～09 仍 `[ ]`**。本紀錄是可恢復的根因與工作定位 checkpoint，不是已完成 Scene 子項。
+
+### 2026-10-10｜UI_01 左側四張語意素材卡（U01-04／05）真實組裝候選，等待使用者審核
+
+- **使用者最新階段要求**：在 Scene View／Spectrum 成果後接續第三步「左側四張卡」，沿用唯一草稿 [PR #113](https://github.com/ureia-dev/SOURCERUNE/pull/113) 之 `docs/ui01-ui02-ref-comparison-log-20261010`，**不能合併、不能切新 PR、不能動 DSP／WASM／Factory Preset／ReferenceSheets 的解析度，也不擅自改成 REF 範例的 Car Speaker/Mobile Call/Wooden Door 模型**。
+- **正式素材確認**：四張語意照片目前由 `Web/App/app.js` 的 `renderModules()`／`selected(t)`／`assetUrl(art)` 綁定原本獨立的 `Assets/UI/UI_01/<TYPE>/*.png`；外框是 `Assets/UI/Runtime/Common/Shell/RT_CARD_FRAME.png`；四顆圖示是正式 `RT_MODULE_ICON_SOURCE/TRANSMISSION/WALL/SPACE_DEFAULT.png`／hover ACTIVE；箭頭是正式 `RT_IMAGE_ARROW_R_IDLE/HOVER.png`。這輪沒有新增任何 PNG，也沒有借用整張 REF 截圖作介面。
+- **實作**：`Web/App/ui01_asset_cards_pr113.css` 與 `Web/App/index.html` 加入 UI_01-only 視覺層：四卡圖示框統一 45×41 px，標題與目前模型名稱實際 browser x=82px 對齊；細調文字亮度、長標題截斷、照片實際裁切時的亮度與對比，不更改真模型 ID。**已存在幾何鎖不得破壞**，經首次 Fast PASS／Chrome geometry 對四卡藝術框 FAIL 後立即診斷並恢復四張照片原確認矩形，不修改既有幾何測試：SOURCE x19/y115/w239/h72、TRANSMISSION x19/y257/w239/h70、WALL x19/y397/w239/h69、SPACE x19/y533/w239/h35；卡片外框四張 313 寬、高 136/132/132/97。EDIT／箭頭原座標亦未改。
+- **可中斷 commit**：首版 `1730a7c80bc87db6610adbb5ff79d8b97c026e6f` 只修卡圖與內部；幾何根因確認後修復 `38caf35b751e8cb8dc37a411b47cfd8c243db5ad`；驗收讀數符合原幾何之小型 browser 測試修正 `7a2360d824baebb5d6aecb777b60106bd8cf2baa`。第二步沒有擴大至其他 UI。
+- **真實驗證證據**：[PR 分支實際 1499×807 組裝圖](../../../Web/App/preview/rendered/UI_01_PR113.png)、[結構化 Chromium 報告](../../../Web/App/preview/rendered/UI_01_PR113_report.json)。Chrome 預覽 [run 38062286363](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38062286363) PASS，原有 Fast [run 38062286335](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38062286335) PASS。預覽 source `7a2360d824baebb5d6aecb777b60106bd8cf2baa`，PNG SHA256 `acc903fb5b272bb844207e50cae9298e71a9d86e8739178a16df77354d2b5651`；report `geometryOk=true`、四張圖片載入且尺寸有效、全部正式圖示背景 PNG 正確、Card header text x82、45×41 圖示、原鎖定照片矩形；實際按 SOURCE 下一個箭頭後 Semantic img `src` 改變且解碼成功，`cardCycleSmoke.sourceNext=true`。**先取初始狀態截圖，後做互動驗證，不把 next 之後選項充作新預設**。
+- **驗收限制**：UI_01 REF 最新原始完整 PNG 未入庫，因此卡片仍僅依掃描 142 點 APPROX 比對；PHOTO 風格是否需換成 REF 原所示 CAR/MOBILE 等模型、原圖是否設計核准、4 種 EDIT 對話視覺與 Native VST3 Host 仍待確認。**U01-04／05 保持原本 `[ ]`，直到使用者明確確認；U01-03 模型預設更不得自行決定。** 下一步按原清單為右側 Meter（U01-11），留待此次四卡實圖使用者審核後再前進。
+
+### 2026-10-10｜使用者紅圈兩區與 Spectrum 下一步：正式 Runtime 組裝候選（未合併）
+
+- **最新要求**：使用者用紅圈指出 ① Scene View 最底部時間／波形條 ② UI_01 底部 MOTION 的 APPROACH／PASS BY／LEAVE 三鍵，判斷 PNG 未正確使用或未製作，要求先修這兩處並繼續下一項。只改 `ureia-dev/SOURCERUNE` 的 PR #113、UI_01；不要停止在這兩項，不修改 `Assets/UI/ReferenceSheets/**`，**DSP changed? NO**。此節取代前面「等待 Scene 核准才做 Spectrum」的停工順序；**PR 仍然 draft，不合併**。
+- **A：波形條 PNG**：已有正式 `Assets/UI/Runtime/UI_01/Scene/RT_WAVEFORM_STRIP_BG.png`；舊 UI 把小 raster 直接放大到 ~950px，造成圓角和刻度失真。新增 `Web/App/ui01_asset_frame_fix_pr113.css`，對正式 PNG 做 border-image 九宮格，分開保護邊角，再以低對比顯示格線；原來的真 Canvas／播放時間刻度／seek 游標維持原功能。靜音或沒有 LOAD AUDIO 時**不偽造錄音波形**。
+- **B：Motion 三鍵 PNG**：專案原本已有 `Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_IDLE/HOVER/ACTIVE.png`，原按鈕用通用視覺樣式且位置過高。改接三種正式 PNG 狀態，移至 REF 低處（Chromium 真測 y=749、h=36，寬約 76.7／80.6／77.7），仍透過既有 `data-macro-select="motionMode"` 回寫既有狀態，不更改聲音參數含義。A+B 最小修正 commit：`1752f8e37a5f94ebca4488b39777ef605219af1a`；既有 Fast [#38061169413](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38061169413) PASS，真 Chromium [#38061169521](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38061169521) PASS，幾何 PASS。
+- **C：UI_01 Spectrum（U01-10）下一步**：在 `Web/App/index.html` 的原 Analysis tabs 加上 PRE／POST／RTA／1/3／L+R，`Web/App/ui01_spectrum_ref_pr113.css` 使用既有正式 SEGMENT CAP PNG，五段總寬約 340px，靠右且未超過 Analysis 967px。  `Web/App/app.js` 新增 Web 可視化限定的控制：PRE/POST 讀現有 `inAn`/ `outAn`，RTA 真的控制可視曲線，1/3 使用 FFT 實際 bin power 的正負 1/6 octave 平均（關閉為 RAW），白色比較曲線是另一個真 analyser 的值；**Mini/Focus EQ 持續固定從原 post analyser 更新，完全不改變音訊訊號路徑**。L+R 是目前合併聲道的靜態、非可按指示標籤，**不假裝已具獨立左右聲道 FFT**。C 功能 commit `9df1d34cc3b7bcb377521f204147bd9c8de3eaf3`，前端 NodeList 綁定修正 commit `c19e8a189be3dd83671e403502608ed14c71ba99`，REF 尺寸修正 commit `a075066d7f49578f6056011df64c71898c355fe9`。
+- **最終真證據**：[PR 內更新的 UI_01_PR113.png](../../../Web/App/preview/rendered/UI_01_PR113.png) 與 [UI_01_PR113_report.json](../../../Web/App/preview/rendered/UI_01_PR113_report.json)；截圖來源 `a075066d7f49578f6056011df64c71898c355fe9`，PNG SHA256 `73c37e88525e49521315b055ca622bacee76e94ce14b8cb598cb67e511b3f2a9`；Fast [#38061627853](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38061627853) **PASS**，PR Chromium [#38061627900](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38061627900) **PASS**。報告 `geometryOk=true`、Spectrum 4 個可操作按鍵以真 Chromium 點選切換回預設 POST／RTA ON／1/3 ON、L+R 靜態 label，Scene Zoom/Reset、時間尺及距離避讓仍 PASS。
+- **不得誤判**：已驗的是實際組裝、選擇控制、Chrome 及 Node/C++ Fast；尚未載真測試音檔確認 PRE/POST 比較圖、1/3 波形精度、seek／WASM 實際播放 E2E，也未比對 UI_01 正式原 PNG 的 1:1 overlay（正式原圖仍未入 Git），**Native Host UI parity 未做**。原待辦 U01-06～10 保持 `[ ]` 直到使用者外觀核准及要求的端到端驗證；**不合併 PR #113**。下一個優先工作仍是使用者清單中的左四卡及後續 Meter，但先由使用者查看本輪圖片再決定具體場景／預設是否需要改動。
+
+### 2026-10-10｜UI_01 Scene View 亮度 2× 候選（等待使用者看圖，不合併）
+
+- **使用者最新指示**：「繼續，一次做剛剛兩倍亮」。此輪按 **UI_01 Scene View 畫面亮度 2 倍** 實作，只有視覺明暗，沒有延伸至整個 Plugin、UI_02、ReferenceSheets 或 DSP。
+- **實際修改**：`Web/App/scene_view_ref_stage1_v1.css` 的 `body.ui-01 .scene-panel{filter:brightness(2)}`，等比例調亮已拼裝 Scene 子樹（背景、格線、動態曲線、文字、時間尺、控制列）；`.github/workflows/ui01-scene-pr113-preview.yml` 在原單次 Chromium 真截圖中增加 computed CSS `brightness(2)` 驗證；沒有調整 geometry／聲音／音訊參數。
+- **實作 checkpoint**：`ad3760bc781204367641410aeb4938defd289f9e`；真實新版組裝圖 [UI_01_PR113.png](../../../Web/App/preview/rendered/UI_01_PR113.png)，真實報告 [UI_01_PR113_report.json](../../../Web/App/preview/rendered/UI_01_PR113_report.json)。報告以實作 commit 為 `source`，PNG SHA256 為 `c875486caebafe0aa9e3f579e49cc2b0e45bbfc350aa378703820306af945fba`，與舊暗版的截圖不同。
+- **驗收證據**：原有 Fast CI [#38060116480](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38060116480) PASS，PR 真 Chromium [#38060116561](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38060116561) PASS。報告 `geometryOk=true`、`sceneBrightness=brightness(2)`、Scene height 262px、main 1499×807、`visualSmoke.zoomIn/zoomReset/labelNoOverlap=true`、時間刻度 5 格、5 張正式 Runtime 素材 HTTP 200、左 4 張正式圖片解碼成功。
+- **邊界**：CSS `brightness(2)` 為顯示像素通道增亮，明部可能截頂；不是實測感知亮度恰好兩倍，也不是改原圖曝光。空音檔狀態的時間尺／seek 音訊 E2E、UI_01 REF 原圖逐像素疊圖與 Native Host 仍待驗。
+- **等待使用者視覺核准**：PR #113 必須保持 draft / unmerged；U01-06～09 仍為原有 `[ ]`，本次未開始 Spectrum（U01-10）。若使用者要求再調亮／降低，沿同一工作線小改並真截圖，不得自行合併。
+
+### 2026-10-10 Scene View 第一階段：真實組裝候選已完成，等待使用者檢查（不合併）
+
+- **這是 U01-06～09 的 Web 候選，並非 REF 像素級最終 DONE；原有 U01-06/07/08/09 仍維持 \`[ ]\`，等使用者逐項檢查核准後才更新。** 下一項 Spectrum（U01-10）尚未開始。
+- **真實預覽阻塞已解除**：本回合使用 PR #113 專屬獨立 screenshot workflow \`.github/workflows/ui01-scene-pr113-preview.yml\`；GitHub Actions 真正 checkout 同一個 PR 分支，從完整 \`Web/App/index.html?ui=UI_01\` 載入 Runtime PNG 及四張正式 UI01 素材，再以 Chromium 截取 \`.app\`，將照片及報告提交回 PR 分支。工作容器本身仍無 GitHub DNS，**不能宣稱本機可完整取檔**。預覽只供 PR #113，沒有 main 部署與合併，也沒有新增安全／壓力測試次數。
+- **正式程式改動範圍**：\`Web/App/index.html\` 新增分層 Distance/Scene 指示、ZOOM/RESET 及 waveform 上的時間尺、游標；\`Web/App/app.js\` 僅接 sceneViewBox、Zoom state、Live Scene 更新與 time UI 更新；\`Web/App/scene_view_ref_stage1.js\` 為 UI01-only 動態 Motion/Distance 曲線、SOURCE 標籤、讀數框避讓、真時間／波形 seek；\`Web/App/scene_view_ref_stage1_v1.css\` 為新視覺規則。其他元件繼續從原 Runtime/semantic paths 載入，未製作或更換圖片，\`Assets/UI/ReferenceSheets\` **沒有修改**。
+- **候選最終 SOURCE SHA**：\`1b3bc7140d7c07175283976a2985b5bb3caf7ab1\`（所有程序修正後）；**真 Chrome** [UI_01_PR113.png](../../../Web/App/preview/rendered/UI_01_PR113.png) 及 [UI_01_PR113_report.json](../../../Web/App/preview/rendered/UI_01_PR113_report.json) 已在本工作分支產出；report screenshot SHA256 \`1ea7af325b2746aaaf83d722ca5a8f99cac97cc587a9609693686467644372e1\`。首次基準實拍來自 \`31d50b854792133803f5074ee5b99c69b5981027\`，不可拿基準假稱 after。
+- **真驗證**：[UI PR Screenshot Action #38059168605](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38059168605) **PASS**；[原有 Fast #38059168612](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38059168612) **PASS**；視覺 report \`geometryOk=true\`、\`visualSmoke.zoomIn=true\`、\`zoomReset=true\`、\`timeRulerTicks=5\`、\`labelNoOverlap=true\`；正式 Runtime Scene 五種圖均 HTTP 200，有效 semantic art 四張全成功解碼；1499×807 主外框、Scene 262px、SVG 186px 未變。檢查指出最初 SOURCE 名稱會蓋到 callout，已縮短、位移並用真 bbox 消除；另外修復 Zoom 刷新時舊曲線覆蓋真 live 曲線的錯誤，增加前後曲線 \`d\` 一致性的瀏覽器斷言。
+- **尚未證明**：因 Web Screenshot 只載入空白播放器，截圖上時間尺顯示 Motion \`0%/25%/50%/75%/100%\`，載入實際音檔時切換分秒與拖曳 seek 的完整端到端還沒用音訊檔實測；REF 原圖 UI01 PNG 缺檔，不能宣稱整個 Scene 完成精確像素疊圖；Native VST3 自訂 UI、DAW/Host 操作、Web 與 Native 統一畫面仍 PENDING。尤其聲音 DSP、WASM、公開 parameter IDs、Factory Preset 完全未修改。
+- **使用者驗收門檻**：只請使用者看真組裝圖對比正式 REF，確認目前 Scene View 的車、節點、距離線、Zoom/Reset、時間尺、波形外觀與比例；若要修，**沿 PR #113** 最小修改並再出同一路徑的新真截圖；直到明確核准**不合併、不修改 Spectrum**。完成後才繼續 U01-10。
+
+### 下一步順序與驗收門檻
+
+1. **先修 UI_02 場景美術**（U02-08/09、CROSS-02、ART-SHARED-001）：先核獨立高解析正式素材與場景狀態，建立一張 REF/實際 Web 同場景的局部疊圖；不擅自用 AI 重畫替換核准 REF。
+2. **再補 UI_01 Scene/Spectrum 真控制**（U01-06～10）：縮放、時間、波形與分析器先核操作/State，再做像素外觀，不碰 DSP 演算法。
+3. **兩套 UI 旋鈕與文字/金屬細節**（U01-18、U02-10/13/19、CROSS-04/05）：對照原有位置、尺寸、指針、刻度、字體基線、不同狀態，保留已 PASS 的主幾何；UI_01 必須先解 CROSS-01 正式 PNG 缺檔才能做真正同來源 pixel overlay。
+4. **補底部真正缺少的操作並修溢出**（U01-13～16、U02-18～21、CROSS-03）：逐項 click、drag、wheel、keyboard、Undo/Redo、顯示/遮蔽；涉及 Shuffle/S-M/Ø/∞/速度單位一律先等產品語意核准。
+5. **最後才做 1:1 REF 局部疊圖與跨平台驗收**（CROSS-04/05/08/15）：逐區驗位置/材質/字體/開關狀態/Hitbox，保存 Web Preview Chrome report、實際畫面、PR/commit/CI；Native Host 無實測不得宣稱完成。
+
+**本節更新政策**：只登錄最新差異與最小修復順序，無任何 runtime UI/CSS/圖片/參數/Factory Preset/DSP 的修改；未新增或提高測試壓力/次數；不得重算下列既有 `[x]`／`[ ]`，亦不拿舊報告取代修正後的真驗收。
+
 ## 基準與不可誤判的事項
 
 - 建立時 `main=2bf84e5ca05306324f995095f0aa26f1d2647e47`，無 open PR；Fast CI #100/#101 成功。**每次新對話仍須重新查 live HEAD/PR/CI**。
