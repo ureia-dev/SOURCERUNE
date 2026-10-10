@@ -71,3 +71,7 @@ body.ui-01 .scene-time-cursor:before{
   clip-path:polygon(0 0,100% 0,50% 100%);
 }
 body.ui-02 .scene-time-ruler,body.ui-02 .scene-time-cursor{display:none}
+
+/* User-approved brightness adjustment: 2x the previous Scene View rendering.
+   Display-only post-compositing, never changes geometry, DSP or UI_02. */
+body.ui-01 .scene-panel{filter:brightness(2)}

@@ -93,8 +93,9 @@ jobs:
                   const response=await fetch(path);const bytes=await response.arrayBuffer();
                   return {path,status:response.status,bytes:bytes.byteLength};
                 }));
-                return {ui:"UI_01",geometryOk:window.__geometryAudit.ok,geometryFailed:window.__geometryAudit.failures,app:{w:app.getBoundingClientRect().width,h:app.getBoundingClientRect().height},sceneHeight:scene.getBoundingClientRect().height,sceneSvgHeight:svg.getBoundingClientRect().height,waveformHeight:waveform.getBoundingClientRect().height,semanticArt:imgs.map(i=>({src:i.getAttribute("src"),naturalWidth:i.naturalWidth,loaded:i.complete&&i.naturalWidth>0})),assets};
+                return {ui:"UI_01",sceneBrightness:getComputedStyle(scene).filter,geometryOk:window.__geometryAudit.ok,geometryFailed:window.__geometryAudit.failures,app:{w:app.getBoundingClientRect().width,h:app.getBoundingClientRect().height},sceneHeight:scene.getBoundingClientRect().height,sceneSvgHeight:svg.getBoundingClientRect().height,waveformHeight:waveform.getBoundingClientRect().height,semanticArt:imgs.map(i=>({src:i.getAttribute("src"),naturalWidth:i.naturalWidth,loaded:i.complete&&i.naturalWidth>0})),assets};
               });
+              if(result.sceneBrightness!=="brightness(2)")throw Error("Expected UI_01 Scene exactly 2x brighter; got "+result.sceneBrightness);
               if(pageErrors.length)throw Error("Page errors: "+JSON.stringify(pageErrors));
               if(!result.geometryOk)throw Error("Original geometry failed: "+JSON.stringify(result.geometryFailed));
               if(!result.semanticArt.some(i=>i.loaded&&i.naturalWidth>=100))throw Error("No substantial semantic artwork decoded");
