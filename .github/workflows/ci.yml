@@ -34,6 +34,13 @@ jobs:
       - name: JavaScript syntax
         run: node --check Web/App/app.js
 
+      - name: Shared DSP compile and bounded native smoke
+        run: |
+          set -euo pipefail
+          node --check Web/App/eq_graph.js
+          g++ -std=c++20 -O2 -ffp-contract=off -Wall -Wextra -Werror Source/DSP/SceneProcessor.cpp Tests/Audio/native_smoke.cpp -o /tmp/sourcerune-native-eq
+          /tmp/sourcerune-native-eq
+
       - name: JSON and preset mirror smoke
         shell: bash
         run: |
