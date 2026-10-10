@@ -300,16 +300,34 @@ export function attachEqInteractions(ctx){
     }
     committed(before);open(id);syncRows();
   },{passive:false});
-  svg.addEventListener("dblclick",e=>{
-    const dot=e.target.closest('[data-eq-node]');if(!dot)return;
+  // Pointer capture can retarget click/dblclick from circle to the SVG
+  // itself. Always use actual screen-space coordinates for a 2-click gesture;
+  // never reset a section by double-clicking unrelated blank graph space.
+  const doubleClickNode=e=>{
+    const direct=e.target.closest?.('[data-eq-node]');
+    if(direct)return direct.dataset.eqNode;
+    let nearest=null,distance=14;
+    for(const id of NODES){
+      const a=anchorFor(id);if(!a)continue;
+      const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);
+      if(d<distance){distance=d;nearest=id;}
+    }
+    return nearest;
+  };
+  const resetDouble=e=>{
+    const id=doubleClickNode(e);if(!id)return;
     e.preventDefault();e.stopPropagation();
-    const id=dot.dataset.eqNode,before=ctx.snapshot();
-    // VVChain double click resets only the bell's Gain, preserving Freq/Q.
+    const before=ctx.snapshot();
+    // Exactly VVChain's Bell semantics: Gain zero, Freq and Q unchanged.
     const d=def(keyFor(id,"freq"));
     if(id.startsWith("b"))apply(id,"gain",0);
     else apply(id,"freq",Number(d.default));
     committed(before);open(id);syncRows();
-  });
+  };
+  // Puppeteer/host can send click(detail=2) with dblclick on the SVG
+  // itself following pointer-capture release. Both paths are idempotent.
+  svg.addEventListener("click",e=>{if(e.detail>=2)resetDouble(e);});
+  svg.addEventListener("dblclick",resetDouble);
   svg.addEventListener("keydown",e=>{
     const dot=e.target.closest('[data-eq-node]');if(!dot)return;
     const id=dot.dataset.eqNode,kind=id.startsWith("b")?"gain":"freq";
