@@ -293,6 +293,36 @@ async function auditHpf(page,ui){
   });
   assert(audio.attenuation<-20,ui+" real HPF failed frequency attenuation "+JSON.stringify(audio));
   assert(audio.bypassIdle&&audio.bypassExact,ui+" OFF must be sample-exact");
-  return {ok:true,ui,init,changed,undo:true,redo:true,curve:points,audio};
+  let realWorklet=null;
+  if(ui==="UI_01"){
+    // Real end-to-end OfflineAudioContext -> existing SOURCE WASM -> new
+    // shared C++ HPF WASM, without speakers or a separate CI tier.
+    realWorklet=await page.evaluate(async()=>{
+      const {createSceneNode}=await import('./audio/engine.js');
+      async function run(hpf){
+        const context=new OfflineAudioContext(2,24000,48000);
+        const state={
+          params:{sourceCharacter:50,badSignal:0,bandwidthLoss:0,inputGain:0,mix:100,outputGain:0,hpf},
+          selection:{SOURCE:'SRC_003_Smartphone_Speakerphone',TRANSMISSION:'TRN_001_Direct_Clean'},
+          bypass:{SOURCE:true,TRANSMISSION:true,EQ_TONE:false},globalBypass:false
+        };
+        const node=await createSceneNode(context,state);
+        const input=context.createBuffer(2,24000,48000);
+        for(let c=0;c<2;c++)for(let i=0;i<24000;i++)
+          input.getChannelData(c)[i]=.25*Math.sin(2*Math.PI*40*i/48000);
+        const source=context.createBufferSource();
+        source.buffer=input;source.connect(node);node.connect(context.destination);
+        source.start();const rendered=await context.startRendering();
+        let energy=0;for(let i=12000;i<24000;i++){
+          const y=rendered.getChannelData(0)[i];energy+=y*y;
+        }
+        return Math.sqrt(energy/12000);
+      }
+      return {off:await run(20),on:await run(240)};
+    });
+    assert(realWorklet.off>.16&&realWorklet.on<realWorklet.off*.12,
+      "HPF not working in actual Web AudioWorklet: "+JSON.stringify(realWorklet));
+  }
+  return {ok:true,ui,init,changed,undo:true,redo:true,curve:points,audio,realWorklet};
 }
 module.exports={auditKnobs};
