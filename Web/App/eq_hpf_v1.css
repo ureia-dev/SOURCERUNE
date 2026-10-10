@@ -39,3 +39,5 @@ body.ui-01 .macro-eq-head .macro-eq-power.active,
 body.ui-02 .macro-eq-head .macro-eq-power.active {
   color:#e3f8ff;border-color:#50add0;background:#102b37;
 }
+
+/* Main EQ panel remains REF-sized; test fixes do not alter this geometry. */
