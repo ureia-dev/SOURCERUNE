@@ -18,7 +18,7 @@ Audio is now processed by `Source/DSP/SceneProcessor.cpp`. Open the hosted Web A
 
 Supported provisional models: SOURCE 001/002/003/011/040 (earpiece, bottom speaker, speakerphone, walkie, megaphone); TRANSMISSION 001/002/003/005/011 (direct, narrowband, PSTN, GSM bandwidth only, walkie). Other models skip that module and show a pending notice. All 74 presets remain selectable; only supported SOURCE/TRANSMISSION and Mix/Gain currently affect sound. Codec/noise/dropout/Condition/Cover/Motion/Space/Ambience/Intelligibility/EQ and LUFS remain pending. This is not a measured-device or full-scene simulation yet.
 
-Native VST3 wrapper/Host is pending; the native C++ processor already uses the same source. Build and validation commands: `Source/DSP/README.md`.
+Native VST3 uses the same C++ source and has a Linux SDK mini-host checkpoint; macOS/Windows DAW verification remains pending. Build and validation commands: `Source/DSP/README.md` and `Source/Plugin/VST3/README.md`.
 
 ## UI state / browser manual acceptance (Web TEST)
 
