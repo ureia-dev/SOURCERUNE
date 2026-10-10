@@ -578,12 +578,12 @@ let spectrumPreBins=null;
 const spectrumView={source:"POST",rta:true,smooth:true};
 function bindSpectrumView(){
   const sync=()=>{
-    $("[data-spectrum-source]").forEach(b=>{const active=b.dataset.spectrumSource===spectrumView.source;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});
+    document.querySelectorAll("[data-spectrum-source]").forEach(b=>{const active=b.dataset.spectrumSource===spectrumView.source;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});
     const rta=$("[data-spectrum-rta]"),smoothing=$("[data-spectrum-smoothing]");
     if(rta){rta.classList.toggle("active",spectrumView.rta);rta.setAttribute("aria-pressed",String(spectrumView.rta))}
     if(smoothing){smoothing.classList.toggle("active",spectrumView.smooth);smoothing.setAttribute("aria-pressed",String(spectrumView.smooth));smoothing.textContent=spectrumView.smooth?"1/3":"RAW"}
   };
-  $("[data-spectrum-source]").forEach(b=>b.addEventListener("click",()=>{spectrumView.source=b.dataset.spectrumSource;sync()}));
+  document.querySelectorAll("[data-spectrum-source]").forEach(b=>b.addEventListener("click",()=>{spectrumView.source=b.dataset.spectrumSource;sync()}));
   $("[data-spectrum-rta]")?.addEventListener("click",()=>{spectrumView.rta=!spectrumView.rta;sync()});
   $("[data-spectrum-smoothing]")?.addEventListener("click",()=>{spectrumView.smooth=!spectrumView.smooth;sync()});
   sync();
