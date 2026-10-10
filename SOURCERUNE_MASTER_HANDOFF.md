@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## Web 旋鈕接線與 Chromium 驗收（2026-10-10）
+
+- **範圍**：UI_01/UI_02 既有 speed/doppler/width/badSignal/condition/intelligibility/ambience/mix 八個 Web macro 控制已接上下拖曳、單步滾輪、鍵盤、雙擊預設值、單手勢 Undo/Redo 與 Advanced／Shared State 即時同步；UI_02 Ambience 橫向滑桿保留。原有 UI 外觀尺寸/素材、State schema、74 Factory Preset、DSP 算法及 CI 次數不變。部分參數仍僅保存 State，不代表真 DSP 功能已完成。
+- **GitHub checkpoints**：PR #69 (9c97e836)、#70 (57e8df37 修 selector 初始化)、#71 (da8b216a 修透明旋鈕操作範圍)、#72 (ba9a8f81 修測試游標)、#73 (d7cd7118 更新 Web 說明及依原本 Pages 規則部署)。以上均已 merge，Fast PASS。
+- **真 Web 證據**：Web Preview [run #38024619544](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38024619544)，report來源 d7cd7118，UI01/02 均 geometry.ok=true / knobSmoke.ok=true，Bad Signal 20→42 drag、42→41 wheel、41→42 keyboard、Advanced 42、Undo/Redo 復原 20；UI02 Ambience 35→82→35。render-log 結尾成功，Pages 已部署至 https://ureia-dev.github.io/SOURCERUNE/Web/App/ 。特別注意舊 Pages run #38024098734/#38024256300/#38024421902 雖然工作流程綠燈，但 render-audit 曾失敗；驗收必須核最新 report/log，不能只看 workflow 顏色。
+- **未完成**：Native VST3 現仍只有 11 個 host generic editor 參數，沒有兩套 custom Native UI；Condition/Intelligibility/Ambience 等 DSP 仍 PENDING，本輪只驗主宏旋鈕與 UI_02 Ambience，不是所有 UI E2E。唯一工作日誌 docs/product/reference/UI_REF_GAP_WORKLOG.md 的 CROSS-03 維持 PARTIAL/[ ]；下一輪讀 live main/PR/CI，不要重做已驗證項。
+
 ## Native VST3 MVP checkpoint — 2026-10-10 第二批
 
 - **Web 已上線**：PR #66 已 merge `d82f4420`，Fast run `37970139055` PASS；Pages run `37970747320` SUCCESS，render audit `074b085e` 記錄成功。網址 https://ureia-dev.github.io/SOURCERUNE/Web/App/ 。本輪另查 HTTP 200、線上 app.js 與 main 相同、線上 WASM SHA-256 `3d0ce6b0aa610e008a1308d030b453905b07e3320f1185bcd42452bc2e1ad714` 與已測 binary 相同。未重跑既有成功 Web 聲音驗證。
