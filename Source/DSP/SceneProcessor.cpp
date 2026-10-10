@@ -37,6 +37,15 @@ SceneProcessor::Coefficients SceneProcessor::design(float f,float sr,bool hp) {
     const float b=(hp ? 1+c : 1-c)*0.5f/den;
     return {b,(hp?-2:2)*b,b,-2*c/den,(1-a)/den};
 }
+SceneProcessor::Coefficients SceneProcessor::designBell(float f,float gainDb,float q,float sr) {
+    // RBJ Audio EQ Cookbook peaking EQ; A=10^(dBgain/40).
+    const float w=6.28318530718f*clamp(f,20,sr*0.45f)/sr;
+    const float a=powf(10,clamp(gainDb,-18,18)/40);
+    const float alpha=sinf(w)/(2*clamp(q,0.1f,12.0f));
+    const float c=cosf(w),den=1+alpha/a;
+    return {(1+alpha*a)/den,-2*c/den,(1-alpha*a)/den,
+        -2*c/den,(1-alpha/a)/den};
+}
 void SceneProcessor::Filter::step(float r) {
     current.b0=approach(current.b0,target.b0,r);current.b1=approach(current.b1,target.b1,r);
     current.b2=approach(current.b2,target.b2,r);current.a1=approach(current.a1,target.a1,r);
@@ -67,11 +76,24 @@ void SceneProcessor::setParameters(const Parameters& p) {
     targetTransmission=!p.transmissionBypass&&supportsTransmission(p.transmissionModel)&&p.transmissionModel!=1?1:0;
     targetWet=clamp(p.mix,0,100)*0.01f;targetActive=p.globalBypass?0:1;
     targetIn=powf(10,clamp(p.inputGain,-24,24)/20);targetOut=powf(10,clamp(p.outputGain,-24,24)/20);
+    // Cutoffs at their documented transparent extrema and zero-gain bells are
+    // identity: bypass the section to avoid wasting audio-thread cycles.
+    const Coefficients identity{1,0,0,0,0};
+    eqEnabled[0]=p.hpf>20.5f;
+    eqEnabled[1]=p.lpf<19995.0f;
+    filters[4].target=eqEnabled[0]?design(p.hpf,sampleRate,true):identity;
+    filters[5].target=eqEnabled[1]?design(p.lpf,sampleRate,false):identity;
+    for(unsigned band=0;band<3;++band){
+        eqEnabled[band+2]=p.eqGain[band]>0.0001f||p.eqGain[band]<-0.0001f;
+        filters[6+band].target=eqEnabled[band+2]?
+            designBell(p.eqFreq[band],p.eqGain[band],p.eqQ[band],sampleRate):identity;
+    }
+    targetEqWet=p.eqBypass?0:1;
 }
 void SceneProcessor::reset() {
     for(auto& f:filters){f.current=f.target;for(unsigned c=0;c<2;++c)f.z1[c]=f.z2[c]=0;}
     sourceWet=targetSource;transmissionWet=targetTransmission;wet=targetWet;
-    active=targetActive;inGain=targetIn;outGain=targetOut;
+    active=targetActive;inGain=targetIn;outGain=targetOut;eqWet=targetEqWet;
 }
 void SceneProcessor::process(const float* l,const float* r,float* ol,float* or_,unsigned frames) {
     for(unsigned i=0;i<frames;++i){
@@ -79,7 +101,11 @@ void SceneProcessor::process(const float* l,const float* r,float* ol,float* or_,
         transmissionWet=approach(transmissionWet,targetTransmission,smoothing);
         wet=approach(wet,targetWet,smoothing);active=approach(active,targetActive,smoothing);
         inGain=approach(inGain,targetIn,smoothing);outGain=approach(outGain,targetOut,smoothing);
-        for(auto& f:filters)f.step(smoothing);
+        eqWet=approach(eqWet,targetEqWet,smoothing);
+        // Updating coefficients costs only for the enabled EQ sections.
+        for(unsigned j=0;j<4;++j)filters[j].step(smoothing);
+        if(eqWet>0.00001f)for(unsigned j=0;j<5;++j)
+            if(eqEnabled[j])filters[4+j].step(smoothing);
         const float input[2]={clean(l?l[i]:0),clean(r?r[i]:(l?l[i]:0))};
         float output[2];
         for(unsigned c=0;c<2;++c){
@@ -87,7 +113,13 @@ void SceneProcessor::process(const float* l,const float* r,float* ol,float* or_,
             const float tr=filters[1].tick(filters[0].tick(dry,c),c);
             const float transmitted=dry+(tr-dry)*transmissionWet;
             const float src=filters[3].tick(filters[2].tick(transmitted,c),c);
-            const float scene=transmitted+(src-transmitted)*sourceWet;
+            float scene=transmitted+(src-transmitted)*sourceWet;
+            if(eqWet>0.00001f){
+                float shaped=scene;
+                for(unsigned j=0;j<5;++j)if(eqEnabled[j])
+                    shaped=filters[4+j].tick(shaped,c);
+                scene+=(shaped-scene)*eqWet;
+            }
             const float processed=protect(clean((dry+(scene-dry)*wet)*outGain));
             output[c]=input[c]+(processed-input[c])*active;
         }
