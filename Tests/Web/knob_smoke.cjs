@@ -378,7 +378,7 @@ async function auditEqMouseGestures(page,ui){
   const firstQ=await read('q'),firstGain=await read('gain');
   await page.mouse.wheel({deltaY:-120});
   const wheelQ=await read('q');
-  assert(wheelQ>firstQ,ui+' EQ point wheel should increase Q');
+  assert(wheelQ<firstQ,ui+' VVChain wheel-up should decrease Q (wider bell)');
   assert.equal(await read('gain'),firstGain,ui+' EQ point wheel must NOT change gain');
   const input=await xy('[data-eq-float-value="gain"]');
   await page.mouse.move(input.x,input.y);
