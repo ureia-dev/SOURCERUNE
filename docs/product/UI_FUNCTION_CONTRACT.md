@@ -87,6 +87,9 @@ Both UI_01 and UI_02 must expose the following product functions.
 - HPF.
 - LPF.
 - **3-band EQ**: exactly Band 1–3 (Freq / Gain / Q); older Band 4 retired and never processed. The HPF and LPF remain independent stages.
+- EQ interaction (UI_01 and UI_02 WEB): hover each of the five graph points to show a compact editable numeric box; cut points expose only Frequency, Bell points expose Frequency/Gain/Q. Pointer XY changes Bell frequency/gain, horizontal Frequency for HPF/LPF; Shift enables fine drag. Point wheel changes Bell Q (VVChain-style signed direction) or cut frequency. Numeric rows allow click-to-type, Enter commit/Escape cancel, vertical drag/Shift fine, one-step wheel with delta accumulation (Freq 1Hz, Gain .1dB, Q .01); bell double-click resets **Gain only**. Popup follows node and safely auto-hides after leaving node-to-popup tunnel. Entire drag creates one Undo history entry. Auto-fit graph display +/-6/12/18dB never changes the stored gain, DSP, automation, preset or latency.
+- Native VST3 generic host parameters are exposed but Native custom graphical editor/mouse parity is **PENDING**; never equate Web editor evidence with Native. VVChain-specific Dynamic EQ/M-S/SOLO/curve menu is **not** a requested SOURCE EQ parameter or signal-processing feature.
+
 - Final tone shaping.
 - Per-module bypass.
 
