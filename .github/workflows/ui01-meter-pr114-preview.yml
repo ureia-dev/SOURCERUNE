@@ -1,0 +1,113 @@
+name: UI_01 Meter PR114 Real Preview
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "Web/App/index.html"
+      - "Web/App/ui01_meter_ref_pr114.css"
+      - ".github/workflows/ui01-meter-pr114-preview.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sr-ui01-meter-pr114
+  cancel-in-progress: true
+
+jobs:
+  meter_preview:
+    if: github.event.pull_request.number == 114 && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout exact PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Real browser Meter assembly and control smoke
+        shell: bash
+        env:
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/meter-http.log 2>&1 &
+          http_pid=$!
+          trap 'kill "$http_pid" 2>/dev/null || true' EXIT
+          for n in {1..25}; do
+            if curl -fsS http://127.0.0.1:4173/Web/App/ >/dev/null; then break; fi
+            sleep 1
+          done
+          chrome="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$chrome"
+          npm install --silent --no-save --prefix /tmp/sr-meter-puppeteer puppeteer-core@24
+          NODE_PATH=/tmp/sr-meter-puppeteer/node_modules CHROME_PATH="$chrome" node <<'NODE'
+          const fs=require("fs"),crypto=require("crypto"),puppeteer=require("puppeteer-core");
+          (async()=>{
+            const browser=await puppeteer.launch({executablePath:process.env.CHROME_PATH,headless:true,args:["--no-sandbox","--disable-dev-shm-usage"]});
+            try{
+              const page=await browser.newPage();
+              const pageErrors=[];
+              page.on("pageerror",e=>pageErrors.push(e.message));
+              await page.setViewport({width:1499,height:845,deviceScaleFactor:1});
+              await page.goto("http://127.0.0.1:4173/Web/App/?ui=UI_01",{waitUntil:"networkidle0",timeout:30000});
+              await page.waitForFunction(()=>!!window.__geometryAudit,{timeout:10000});
+              let result=await page.evaluate(()=>{
+                const box=e=>{const x=e.getBoundingClientRect();return {x:x.x,y:x.y,w:x.width,h:x.height,right:x.right,bottom:x.bottom}};
+                const rail=document.querySelector(".meter-rail");
+                const meterSlots=Array.from(document.querySelectorAll(".meter-slot"));
+                const meterFill=Array.from(document.querySelectorAll(".meter-fill"));
+                const ticks=Array.from(document.querySelectorAll(".meter-db-scale span"));
+                const lufs=document.querySelector(".meter-values>div:last-child");
+                return {geometry:window.__geometryAudit,rail:box(rail),
+                  slots:meterSlots.map((n,i)=>({box:box(n),frame:getComputedStyle(n).backgroundImage,
+                    fillMask:getComputedStyle(meterFill[i]).maskImage||getComputedStyle(meterFill[i]).webkitMaskImage})),
+                  ticks:ticks.map(n=>({value:n.textContent,box:box(n)})),lufs:{box:box(lufs),value:document.querySelector("#lufsValue")?.textContent},
+                  buttons:{peak:document.querySelector("#meterPeakBtn")?.classList.contains("active"),
+                    rms:document.querySelector("#meterRmsBtn")?.classList.contains("active")}};
+              });
+              if(pageErrors.length)throw Error("JS runtime error "+JSON.stringify(pageErrors));
+              if(!result.geometry.ok)throw Error("Reference geometry regression "+JSON.stringify(result.geometry.failures));
+              if(result.slots.length!==2||result.slots.some(x=>Math.abs(x.box.w-20)>1||Math.abs(x.box.h-178)>1))
+                throw Error("Meter slots moved from REF geometry");
+              if(result.slots.some(x=>!x.frame.includes("RT_METER_FRAME.png")||!x.fillMask.includes("RT_METER_SEGMENT.png")))
+                throw Error("Meter missing approved PNG layers");
+              if(result.ticks.map(x=>x.value).join(",")!=="0,-6,-12,-24,-36,-60")
+                throw Error("Six REF dB scale labels missing");
+              if(result.lufs.value!=="—")throw Error("False LUFS data shown before audio");
+              if(!result.buttons.peak||result.buttons.rms)throw Error("Initial PEAK state wrong");
+              await page.click("#meterRmsBtn");
+              if(!(await page.$eval("#meterRmsBtn",x=>x.classList.contains("active"))))
+                throw Error("RMS toggle failed");
+              await page.click("#meterPeakBtn");
+              if(!(await page.$eval("#meterPeakBtn",x=>x.classList.contains("active"))))
+                throw Error("PEAK toggle failed");
+              const shot="Web/App/preview/rendered/UI_01_METER_PR114.png";
+              await (await page.$(".app")).screenshot({path:shot});
+              result.sourceSha=process.env.SOURCE_SHA;
+              result.modeSmoke="PASS";
+              result.pngSha256=crypto.createHash("sha256").update(fs.readFileSync(shot)).digest("hex");
+              fs.writeFileSync("Web/App/preview/rendered/UI_01_METER_PR114_report.json",JSON.stringify(result,null,2)+"\n");
+              console.log("REAL UI_01 METER PASS "+JSON.stringify({sha:result.sourceSha,geometry:result.geometry.ok,shot:result.pngSha256}));
+            }finally{await browser.close();}
+          })().catch(e=>{console.error(e.stack||e);process.exitCode=1;});
+          NODE
+      - name: Save review-only screenshot to PR branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Web/App/preview/rendered/UI_01_METER_PR114.png Web/App/preview/rendered/UI_01_METER_PR114_report.json
+          if ! git diff --cached --quiet; then
+            git commit -m "docs(preview): capture real UI_01 Meter PR114 artwork"
+            git push origin "HEAD:refs/heads/${{ github.event.pull_request.head.ref }}"
+          fi
+      - name: Upload one real preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourcerune-ui01-meter-pr114
+          path: |
+            Web/App/preview/rendered/UI_01_METER_PR114.png
+            Web/App/preview/rendered/UI_01_METER_PR114_report.json
+          retention-days: 7
