@@ -5,7 +5,9 @@ export function parametersFromState(state) {
   const p=state.params, b=state.bypass;
   return [p.sourceCharacter,p.badSignal,p.bandwidthLoss,p.inputGain,p.mix,p.outputGain,
     modelNumber(state.selection.SOURCE),modelNumber(state.selection.TRANSMISSION),
-    Number(!!b.SOURCE),Number(!!b.TRANSMISSION),Number(!!state.globalBypass)];
+    Number(!!b.SOURCE),Number(!!b.TRANSMISSION),Number(!!state.globalBypass),
+    p.hpf,p.lpf,p.b1Freq,p.b1Gain,p.b1Q,p.b2Freq,p.b2Gain,p.b2Q,
+    p.b3Freq,p.b3Gain,p.b3Q,Number(!!b.EQ_TONE)];
 }
 export function audioSupportNote(state) {
   const source=supportedSource.has(modelNumber(state.selection.SOURCE));
