@@ -61,7 +61,8 @@ async function auditKnobs(page,ui){
   const hpf=await auditHpf(page,ui);
   const eq=await auditMiniEq(page,ui);
   const eqMouse=await auditEqMouseGestures(page,ui);
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq,eqMouse};
+  const eqFocus=await auditEqFocus(page,ui);
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq,eqMouse,eqFocus};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
@@ -433,6 +434,105 @@ async function auditEqMouseGestures(page,ui){
   return {ok:true,hover:true,nodeWheelQ:[firstQ,wheelQ],numericDrag:[gBefore,gDragged],
     typedFrequency,gainWheel:[gDragged,gWheel],bellDoubleClickGain:0,
     noAdvanced:true,hpfLpfFreqOnly:true,autoDismiss:true};
+}
+
+
+async function auditEqFocus(page,ui){
+  const zoom='.macro-eq [data-eq-zoom-in]',focus='#eqFocusDialog',node=id=>focus+' [data-eq-node="'+id+'"]';
+  const mid=selector=>page.$eval(selector,e=>{
+    const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};
+  });
+  const read=id=>page.$eval('[data-eq-focus-value="'+id+'"]',e=>e.textContent);
+  const graphPath=()=>page.$eval(focus+' .macro-eq-line',e=>e.getAttribute('d'));
+  assert(await page.$(zoom),ui+' Zoom In action missing on compact EQ');
+  assert.equal(await page.$(focus),null,ui+' Focus should not be open by default');
+  await page.$eval(zoom,e=>e.click());
+  assert(await page.$(focus),ui+' Zoom In did not create in-plugin EQ Focus');
+  const layout=await page.evaluate(()=>{
+    const app=document.querySelector('.app').getBoundingClientRect();
+    const dialog=document.querySelector('#eqFocusDialog').getBoundingClientRect();
+    const svg=document.querySelector('#eqFocusDialog .macro-eq-svg');
+    const mini=document.querySelector('.macro-eq .macro-eq-svg');
+    return {app:{x:app.x,y:app.y,w:app.width,h:app.height},
+      dialog:{x:dialog.x,y:dialog.y,w:dialog.width,h:dialog.height},
+      focusNodes:[...svg.querySelectorAll('[data-eq-node]')].map(n=>n.dataset.eqNode),
+      ghost:Boolean(mini?.inert&&mini.dataset.eqFocusGhost==='1'&&mini.style.pointerEvents==='none'),
+      dialogs:document.querySelectorAll('#eqFocusDialog').length};
+  });
+  assert.deepEqual(layout.focusNodes,['hpf','b1','b2','b3','lpf'],ui+' big EQ must own five live nodes');
+  assert(layout.ghost,ui+' mini preview must be inert while Focus is active');
+  assert.equal(layout.dialogs,1,ui+' must never create more than one Focus');
+  assert(layout.dialog.w>350&&layout.dialog.h>230,ui+' Focus is not enlarged');
+  assert(layout.dialog.x>=layout.app.x-2&&layout.dialog.y>=layout.app.y-2,ui+' Focus outside plugin origin');
+  assert(layout.dialog.x+layout.dialog.w<=layout.app.x+layout.app.w+3,ui+' Focus outside plugin width');
+  assert(layout.dialog.y+layout.dialog.h<=layout.app.y+layout.app.h+3,ui+' Focus outside plugin height');
+  assert.equal(await page.$eval(focus+' .sr-eq-focus-title small',e=>e.textContent.includes('±12 dB')),true);
+  const before=await read('b2-gain');
+  const initialPath=await graphPath();
+  const pt=await mid(node('b2'));await page.mouse.move(pt.x,pt.y);
+  await page.mouse.down();await page.mouse.move(pt.x+25,pt.y-12,{steps:5});await page.mouse.up();
+  const dragged=await read('b2-gain');
+  assert.notEqual(dragged,before,ui+' dragged Focus node did not change real Gain');
+  const newPath=await graphPath();
+  assert.notEqual(newPath,initialPath,ui+' Focus did not recompute the same EQ response');
+  const miniPath=await page.$eval('.macro-eq .macro-eq-line',e=>e.getAttribute('d'));
+  assert.equal(miniPath,newPath,ui+' miniature and Focus response diverged');
+  assert.equal(await page.$eval('.macro-eq .macro-eq-svg',e=>e.inert),true);
+  // Existing global history still works even if its toolbar is behind Focus.
+  await page.$eval('#undoBtn',e=>e.click());
+  assert.equal(await read('b2-gain'),before,ui+' Focus drag did not undo atomically');
+  await page.$eval('#redoBtn',e=>e.click());
+  assert.equal(await read('b2-gain'),dragged,ui+' Focus drag redo mismatch');
+  await page.$eval('#undoBtn',e=>e.click());
+  assert.equal(await read('b2-gain'),before,ui+' Focus baseline not restored');
+  // Bell wheel is Q, not gain, as in the existing approved compact editor.
+  const wheelXY=await mid(node('b2'));await page.mouse.move(wheelXY.x,wheelXY.y);
+  const initialQ=await read('b2-q');await page.mouse.wheel({deltaY:-120});
+  const wheelQ=await read('b2-q');
+  assert.notEqual(wheelQ,initialQ,ui+' Focus bell wheel did not change Q');
+  await page.$eval('#undoBtn',e=>e.click());
+  assert.equal(await read('b2-q'),initialQ,ui+' Focus Q wheel undo mismatch');
+  // Readout buttons must navigate to the REAL SVG node and open its popup.
+  await page.$eval('[data-eq-focus-select="b3"]',el=>el.click());
+  assert.equal(await page.$eval('.sr-eq-float',e=>!e.hidden),true,
+    ui+' readout button must focus node and open editable floating values');
+  const selected=await page.$$eval('.sr-eq-float [data-eq-float-value]',els=>els.map(e=>e.dataset.eqFloatValue));
+  assert.deepEqual(selected,['freq','gain','q'],ui+' focused Bell must show existing F/G/Q editor');
+  // Keyboard Escape cancels the Focus surface without changing EQ state.
+  await page.keyboard.press('Escape');
+  assert.equal(await page.$(focus),null,ui+' Escape must close Focus');
+  assert.equal(await page.$eval(zoom,e=>e===document.activeElement),true,
+    ui+' closing Focus must restore keyboard focus');
+  assert.equal(await page.$eval('.macro-eq .macro-eq-svg',e=>Boolean(!e.inert&&!e.dataset.eqFocusGhost)),true,
+    ui+' closing Focus must restore original interactive mini graph');
+  assert.equal(await readOrNull(page,'.sr-eq-float'),false,ui+' numeric hover box not dismissed');
+  await page.$eval(zoom,e=>e.click());
+  assert(await page.$(focus),ui+' second open did not work');
+  // A scaled/resized app must keep the floating editor within the plugin.
+  const viewport=page.viewport();
+  await page.setViewport({width:1200,height:730,deviceScaleFactor:1});
+  await page.evaluate(()=>new Promise(requestAnimationFrame));
+  const contained=await page.evaluate(()=>{
+    const a=document.querySelector('.app').getBoundingClientRect();
+    const d=document.querySelector('#eqFocusDialog').getBoundingClientRect();
+    return d.left>=a.left-2&&d.top>=a.top-2&&d.right<=a.right+3&&d.bottom<=a.bottom+3;
+  });
+  assert(contained,ui+' Focus escaped plugin bounds after host/viewport resize');
+  await page.setViewport(viewport);
+  await page.evaluate(()=>new Promise(requestAnimationFrame));
+  await page.$eval('[data-eq-focus-zoom-out]',e=>e.click());
+  assert.equal(await page.$(focus),null,ui+' Zoom Out did not close the floating editor');
+  await page.$eval(zoom,e=>e.click());
+  await page.$eval('[data-eq-focus-close]',e=>e.click());
+  assert.equal(await page.$(focus),null,ui+' X button did not close the floating editor');
+  return {ok:true,sharedLiveSVG:true,inertSmall:true,nodes:layout.focusNodes,
+    largeSize:[Math.round(layout.dialog.w),Math.round(layout.dialog.h)],
+    b2Gain:[before,dragged],qWheel:[initialQ,wheelQ],
+    undo:true,redo:true,readoutPopup:true,escape:true,reopen:true,
+    viewportContained:contained,zoomOut:true,closeX:true,fixedRange:12};
+}
+async function readOrNull(page,selector){
+  return page.$eval(selector,e=>!e.hidden).catch(()=>false);
 }
 
 module.exports={auditKnobs};
