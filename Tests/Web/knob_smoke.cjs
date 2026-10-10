@@ -256,11 +256,11 @@ async function auditHpf(page,ui){
   assert.equal(await page.$eval('[data-param="hpf"]',e=>Number(e.value)),21,
     ui+" Advanced HPF does not reflect main-control state");
   await page.click('#advancedCloseBtn');
-  await page.click('#undoBtn');
+  await page.$eval('#undoBtn',e=>e.click());
   assert.equal(await page.$eval(selector,e=>Number(e.value)),20,ui+" HPF Undo failed");
-  await page.click('#redoBtn');
+  await page.$eval('#redoBtn',e=>e.click());
   assert.equal(await page.$eval(selector,e=>Number(e.value)),21,ui+" HPF Redo failed");
-  await page.click('#undoBtn');
+  await page.$eval('#undoBtn',e=>e.click());
   // Test actual real shared C++ WASM filter, not merely state/visual updates.
   const audio=await page.evaluate(async()=>{
     const response=await fetch('./audio/hpf.wasm');
