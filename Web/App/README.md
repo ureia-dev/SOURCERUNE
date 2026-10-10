@@ -106,3 +106,7 @@ This extends the previously approved real HPF (Tone/Hpf.h) without replacing it:
 ### WASM render gate (2026-10-10)
 
 The shared low-CPU three-band EQ WASM must be **compiled and instantiated** before the Web Preview reports success; `Source/DSP/Tone/Parametric3Wasm.cpp` now supplies the tiny freestanding memory functions used by clang. Prior Web Preview `38032145505` failed at `env.memcpy` and is **not** a successful deployment. This Web/App README update triggers the existing Pages build, which builds `eq3.wasm`, executes real Chromium UI_01/UI_02 EQ tests, publishes the binary, and saves the true audit log. Its result must be inspected, not inferred from the green job status. No extra safety/stress iterations or tests.
+
+### EQ five-node Chromium gate
+
+In the original one-shot Pages UI audit, `auditMiniEq` must enumerate *all* five nodes with Puppeteer's `$$eval`, not the single-element `$eval`. The initial 2026-10-10 audit failed on that test-harness typo; only the post-fix true Chromium `geometry-report.json`/`render-log.txt` can establish five-point drag and Undo pass. The HTML page/binary/low-CPU DSP are unchanged by this fix.
