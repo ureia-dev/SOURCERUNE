@@ -74,8 +74,10 @@ let svgNumber=0;
 export function miniEqSvg(state,sampleRate=48000){
   const plot=eqGraph(state,sampleRate),suffix=++svgNumber;
   const grad="sr-eq-line-"+suffix,fill="sr-eq-fill-"+suffix;
-  const colors=[["0%","#49c9df"],["32%","#6bdbb4"],["56%","#e1cb76"],
-    ["78%","#ee7884"],["100%","#e88aac"]];
+  // Approved colorful five-handle palette; mirrors VVChain's distinct
+  // red/yellow/blue/green band visual language, not its DSP.
+  const colors=[["0%","#22c55e"],["20%","#ef4444"],["47%","#facc15"],
+    ["77%","#3b82f6"],["100%","#f472b6"]];
   return '<svg class="macro-eq-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="group" aria-label="EQ response graph">'
     +'<defs><linearGradient id="'+grad+'" x1="0%" y1="0%" x2="100%" y2="0%">'
     +colors.map(c=>'<stop offset="'+c[0]+'" stop-color="'+c[1]+'"/>').join('')
@@ -87,6 +89,8 @@ export function miniEqSvg(state,sampleRate=48000){
     +'<path class="macro-eq-grid-minor" d="M13.265 0V100M23.299 0V100M33.333 0V100M46.598 0V100M56.632 0V100M66.667 0V100M79.931 0V100M89.966 0V100"/>'
     +'<path class="macro-eq-grid-major" d="M0 16H100M0 33H100M0 67H100M0 84H100"/>'
     +'<path class="macro-eq-zero" d="M0 50H100"/></g>'
+    +'<path class="macro-eq-analyzer-fill" d="" aria-hidden="true"/>'
+    +'<path class="macro-eq-analyzer-line" d="" aria-hidden="true"/>'
     +'<path class="macro-eq-fill" d="'+plot.fillPath+'" fill="url(#'+fill+')"/>'
     +'<path class="macro-eq-halo" d="'+plot.path+'" stroke="url(#'+grad+')"/>'
     +'<path class="macro-eq-line" data-eq-hpf-path d="'+plot.path+'" stroke="url(#'+grad+')"/>'
