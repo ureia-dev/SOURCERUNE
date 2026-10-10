@@ -56,7 +56,8 @@ async function auditKnobs(page,ui){
   }
   const allVisible=await auditAllVisibleRoundKnobs(page,ui);
   const dialogs=await auditCompactAdvanced(page,ui);
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs};
+  const motion=ui==="UI_02"?await auditUi02MotionSmallKnobs(page):[];
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
@@ -151,4 +152,39 @@ async function auditCompactAdvanced(page,ui){
   return {small,medium,large,outsideDismiss:true,escapeDismiss:true};
 }
 
+// UI_02's three small scene-view metal dials are outside the bottom macro strip.
+// They must work from the real pointer target, without opening Advanced.
+async function auditUi02MotionSmallKnobs(page){
+  const results=[];
+  for(const id of ['speed','doppler','width']){
+    const selector='[data-motion-adjust="'+id+'"]';
+    const geom=await page.$eval(selector,el=>{
+      const r=el.getBoundingClientRect();
+      return {x:r.x+r.width/2,y:r.y+r.height/2,width:r.width,height:r.height,
+        start:Number(el.getAttribute('aria-valuenow')),art:getComputedStyle(el).backgroundImage};
+    });
+    assert(geom.width>40&&geom.height>40, id+' small motion knob absent');
+    assert(geom.art.includes('RT_KNOB_S_BASE.png'),id+' approved small knob image not bound');
+    await page.mouse.move(geom.x,geom.y);
+    await page.mouse.down();
+    await page.mouse.move(geom.x,geom.y-24,{steps:4});
+    await page.mouse.up();
+    const after=await page.$eval(selector,el=>Number(el.getAttribute('aria-valuenow')));
+    assert(after>geom.start,id+' real scene knob drag failed');
+    assert.equal(await page.$eval('body',e=>e.classList.contains('advanced-open')),false,
+      id+' scene knob drag opened Advanced unexpectedly');
+    await page.mouse.move(geom.x,geom.y);
+    await page.mouse.wheel({deltaY:120});
+    const wheel=await page.$eval(selector,el=>Number(el.getAttribute('aria-valuenow')));
+    assert.equal(wheel,after-1,id+' scene knob wheel step wrong');
+    await page.keyboard.press('ArrowUp');
+    const keyed=await page.$eval(selector,el=>Number(el.getAttribute('aria-valuenow')));
+    assert.equal(keyed,after,id+' scene knob keyboard step wrong');
+    for(let i=0;i<3;i++)await page.$eval('#undoBtn',el=>el.click());
+    const restored=await page.$eval(selector,el=>Number(el.getAttribute('aria-valuenow')));
+    assert.equal(restored,geom.start,id+' scene knob undo did not recover baseline');
+    results.push({id,before:geom.start,dragged:after,wheel,keyed,restored,art:'RT_KNOB_S_BASE.png'});
+  }
+  return results;
+}
 module.exports={auditKnobs};
