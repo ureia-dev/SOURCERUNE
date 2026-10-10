@@ -66,6 +66,8 @@ export function attachEqInteractions(ctx){
   const svg=ctx.svg;
   if(!svg)return;
   const box=ensureBox();cancelHide();
+  // Mini EQ = direct five-point editor only. Numeric popup belongs ONLY to Focus.
+  const allowPopup=()=>Boolean(svg.closest(".sr-eq-focus"));
   if(active&&active.ctx!==ctx){active=null;box.hidden=true;}
   const state=()=>ctx.getState();
   const def=k=>ctx.findControl(k);
@@ -116,6 +118,10 @@ export function attachEqInteractions(ctx){
   };
   const open=(id,{rebuild=false}={})=>{
     if(!NODES.includes(id))return;
+    if(!allowPopup()){
+      if(active?.ctx===ctx)dismissEqFloat();
+      return;
+    }
     cancelHide();
     if(active?.ctx===ctx&&active.id===id&&!box.hidden&&!rebuild){syncRows();place(id);return;}
     // A new hovered node should not steal an editor while text entry is active.
