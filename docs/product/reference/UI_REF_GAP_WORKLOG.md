@@ -4,6 +4,51 @@
 
 > 2026-10-09 建立；承接使用者選取的完整缺項稽核。**每完成一個工作 ID，要直接在這份 GitHub 文件中將 `[ ]` 更新為 `[x]`，填入 PR／Commit／CI／正式 REF 與真 Web/Native 驗收證據。** 不另建立重複競爭工作清單。純文件的登錄不等於任何修復完成。
 
+## 2026-10-10｜UI_01／UI_02 與正式 REF 對照盤點（本輪只登錄、不修復）
+
+> **Checkpoint 性質：盤點／待辦優先級整理；沒有新完成的 UI ID。** 本節只對應以下原有工作 ID，**不新增第二份 TODO 或獨立產品規格**。底下既有 `[ ]` 保留原狀；日後實際修正與驗收才可把對應 ID 改為 `[x]`。
+
+### 來源與能證明的範圍
+
+- 查核時 repo `ureia-dev/SOURCERUNE`，`main=e457eba0153d0d6e624cc93cc9c3ddb39f83bd6c`；當時 open PR 僅 `#68`（Native 打包，與本盤點分離）。
+- 現有實際畫面：[`UI_01.png`](../../../Web/App/preview/rendered/UI_01.png)、[`UI_02.png`](../../../Web/App/preview/rendered/UI_02.png)；Chrome 量測：[`geometry-report.json`](../../../Web/App/preview/rendered/geometry-report.json) 與 [`render-log.txt`](../../../Web/App/preview/rendered/render-log.txt)。
+- 最後成功的 Web Preview：[run 38055341443](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38055341443)，**報告內標記的來源 commit 是 `2aaee45953bd3b39aeecc0ad7beb5ead93e56b63`，與本次 main HEAD 不同**；因此只能宣稱該次報告驗證項目通過，**不可把它冒稱為 e457eba 全畫面的新一輪逐像素驗收**。當時 CI 38055528325 success。
+- 該份 Chrome 報告：UI_01 幾何 51/51、UI_02 幾何 41/41，兩版 `knobSmoke`、`eqMouse`、`eqInline`、`eqFocus` 皆 `ok=true`；這是已測幾何與操作通過，**不等於 REF 逐像素一致、獨立圖片畫質合格、Native VST3 Host 完成、全 DSP 已驗收**。
+- 正式 REF：UI_02 原始 `Assets/UI/UI_02/UI_02_REF/UI_02_REF.png`（1672×941）及 2.5× PNG 已入 Git；**UI_01 最新正式無說明圖 1508×808 與 2.5× PNG 仍未入 Git**，只有 142 個元件掃描/座標文件；所以 UI_01 細節是以現有掃描規格比對，**不是同一批原始像素的完整 overlay 結果**。早期 1536×1024 含註解海報/1499×807 UI shell 的不同座標系不能直接視為 1:1。
+
+### UI_01｜差異歸屬（維持原有 ID）
+
+| 原 ID | REF 對比後的剩餘工作／限制 | 本輪判定 |
+|---|---|---|
+| U01-01～05 | Logo/上方工具/預設展示模型與四張素材卡：版位已有，品牌、照片、裁切、亮度、框線、圖示與 REF 未逐項對齊；REF 展示車載聲音／行動通話等，Web 初始模型不同 **不代表應強制改產品預設**。 | `PENDING / 部分待決策` |
+| U01-06～09 | 中央 Scene：補核對 REF 的明亮距離／時間曲線、車/人物或節點、Start/Closest/End、Zoom/Reset、波形與 seek marker；線、點、值必須維持 Live，不能用 REF 圖裁切冒充。 | `PENDING` |
+| U01-10 | Spectrum 分析列與模式：REF 的 Pre/Post、RTA、1/3、L+R 等可見操作，當前主介面未完整具備等價控制；需要真 analyzer/state 與互動驗收，不只補字。 | `PENDING / P0` |
+| U01-11 | Meter/Peak/RMS/LUFS：彩色分段、完整刻度、文字及材質仍未精細對齊；Peak/RMS 保持真 Live，LUFS 不可填假讀數（另見 CROSS-10）。 | `PARTIAL / P1` |
+| U01-13～16 | 底部七區控件：Condition 的 USED/勾選雖有已驗子項，但整區未完成；Intelligibility Presence/Dynamic、Ambience S/M/Duck/波形、Mix Ø 等仍要核產品語意與真控制綁定。 | `PARTIAL / 待核准項不得自行發明 DSP` |
+| U01-17 | EQ 五節點顏色、迷你框不顯黑塊、Zoom In/drag/wheel/Undo 已有 Web Chromium 子項 PASS；**整體仍未完成 REF 細像素對位、Final Tone/Native Host 驗收**。 | `PARTIAL` |
+| U01-18 | 七區的金屬旋鈕、指針、刻度環、面板反光、字體大小/基線、控制留白與 REF 還有視覺差距；固定外框尺寸不應任意重排。 | `PENDING / 視覺重點` |
+
+### UI_02｜差異歸屬（維持原有 ID）
+
+| 原 ID | REF 對比後的剩餘工作／限制 | 本輪判定 |
+|---|---|---|
+| U02-01～04 | 頂部 Shuffle、Folder/A-B 排列與橫向 IN/OUT Meter：主幾何已建立，部分圖示、位置、完整色段/標尺仍不符；Shuffle 用途不能由圖案擅自決定。 | `PENDING / 部分待決策` |
+| U02-05～07、15～17 | SOURCE/Transmission/Wall/Space/Ambience 照片或選取模型與 REF 展示場景不同；尤其 Ambience 使用與環境重複圖片，須獨立素材及正確 state；70%/35% 是比較場景差，不能直接更改預設。 | `PENDING` |
+| U02-08～09、CROSS-02 | **最顯眼的視覺缺口：中央 Scene REF 為細緻夜景、前景汽車/人物與深度關係，現行 Web 顯示模糊白日街景與簡化物件**。須使用獨立高品質背景/前景資產，而非銳化模糊小圖或把整張 REF 當背景。 | `PENDING / 優先修復美術品質` |
+| U02-10～14 | 大 Distance 300px、三個小旋鈕 54px 的配置已立基礎，但刻度、指針、∞、文字、Motion 車輛動線仍待比對；Speed % vs km/h 屬待核准單位，不擅改物理速度。 | `PARTIAL / 部分待決策` |
+| U02-18～21 | 底部波形/Mobile selector、Condition 材質、Intelligibility 模式鈕可能溢出底框、Mix Wet/箭頭等尚須確實完整顯示並驗證操作；尤其先修 Intelligibility 溢出。 | `PENDING / P0、P1 各依原 ID` |
+| U02-22 | EQ Web 五節點互動已有真 Chrome PASS；REF Natural/完整外觀與 Native 編輯器/Host 未完成，不因 EQ 子項 PASS 而勾整項。 | `PARTIAL` |
+
+### 下一步順序與驗收門檻
+
+1. **先修 UI_02 場景美術**（U02-08/09、CROSS-02、ART-SHARED-001）：先核獨立高解析正式素材與場景狀態，建立一張 REF/實際 Web 同場景的局部疊圖；不擅自用 AI 重畫替換核准 REF。
+2. **再補 UI_01 Scene/Spectrum 真控制**（U01-06～10）：縮放、時間、波形與分析器先核操作/State，再做像素外觀，不碰 DSP 演算法。
+3. **兩套 UI 旋鈕與文字/金屬細節**（U01-18、U02-10/13/19、CROSS-04/05）：對照原有位置、尺寸、指針、刻度、字體基線、不同狀態，保留已 PASS 的主幾何；UI_01 必須先解 CROSS-01 正式 PNG 缺檔才能做真正同來源 pixel overlay。
+4. **補底部真正缺少的操作並修溢出**（U01-13～16、U02-18～21、CROSS-03）：逐項 click、drag、wheel、keyboard、Undo/Redo、顯示/遮蔽；涉及 Shuffle/S-M/Ø/∞/速度單位一律先等產品語意核准。
+5. **最後才做 1:1 REF 局部疊圖與跨平台驗收**（CROSS-04/05/08/15）：逐區驗位置/材質/字體/開關狀態/Hitbox，保存 Web Preview Chrome report、實際畫面、PR/commit/CI；Native Host 無實測不得宣稱完成。
+
+**本節更新政策**：只登錄最新差異與最小修復順序，無任何 runtime UI/CSS/圖片/參數/Factory Preset/DSP 的修改；未新增或提高測試壓力/次數；不得重算下列既有 `[x]`／`[ ]`，亦不拿舊報告取代修正後的真驗收。
+
 ## 基準與不可誤判的事項
 
 - 建立時 `main=2bf84e5ca05306324f995095f0aa26f1d2647e47`，無 open PR；Fast CI #100/#101 成功。**每次新對話仍須重新查 live HEAD/PR/CI**。
