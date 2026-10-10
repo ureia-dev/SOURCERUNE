@@ -65,7 +65,12 @@ export function syncEqFocus(){
       if(button){
         const pct=100*(value-Number(def.min))/(Number(def.max)-Number(def.min));
         button.style.setProperty("--dial-angle",(Math.max(0,Math.min(100,pct))*2.7).toFixed(2)+"deg");
+        button.setAttribute("role","slider");
+        button.setAttribute("aria-valuemin",String(def.min));
+        button.setAttribute("aria-valuemax",String(def.max));
         button.setAttribute("aria-valuenow",String(value));
+        button.setAttribute("aria-valuetext",key.endsWith("Gain")?gain(value):
+          key.endsWith("Q")?Number(value).toFixed(2):freq(value));
       }
     }
   }
@@ -216,6 +221,13 @@ export function openEqFocus({getState,onPower,onDismiss,getControl,onChange,snap
     button.addEventListener("dblclick",e=>{
       e.preventDefault();e.stopPropagation();const before=snapshot();
       if(write(Number(def.default)))commit(before);
+    });
+    // Keyboard button activation opens the same VVChain-style numeric popup;
+    // Arrow/Home/End continue adjusting the real parameter in place.
+    button.addEventListener("click",e=>{
+      if(e.detail!==0)return;
+      const id=key==="hpf"||key==="lpf"?key:key.slice(0,2);
+      c.svg.querySelector('[data-eq-node="'+id+'"]')?.focus({preventScroll:true});
     });
     button.addEventListener("keydown",e=>{
       const direction=["ArrowUp","ArrowRight"].includes(e.key)?1:
