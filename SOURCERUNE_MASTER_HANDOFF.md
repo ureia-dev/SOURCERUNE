@@ -1,5 +1,13 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 最新 checkpoint：右下 EQ 真 HPF / 最省資源優先（2026-10-10）
+
+- **本輪僅授權 HPF 第一階段**，未擅改 74 Factory Preset 或其他 EQ/TONE 聲音。正式已有 public parameter `hpf` ID42（20–1000Hz；20Hz=exact OFF），`EQ_TONE` module bypass。採用同一份 `Source/DSP/Tone/Hpf.h` 立體聲 Butterworth 二階 HPF（12dB/oct, RBJ/W3C），不 oversample／不 allocation/lock/I/O／不 per-sample sin/cos；OFF 後整段完全跳過 HPF 運算。Native 測試 cutoff240Hz，40Hz 相對4kHz −31.13dB、OFF 原樣輸出。
+- **Web 真 DSP 已驗**：`Source/DSP/Tone/HpfWasm.cpp` + `Tools/Build/build_hpf_wasm.sh` 生成 1,538-byte `Web/App/audio/hpf.wasm`，Git blob `994816dd4b8857eb765bb33d6d537e6ba67252fc`；`Web/App/audio/engine.js` + `processor.js` 接真正 AudioWorklet 後段，port 更新 HPF；OFF 不進模組也不複製緩衝。UI_01/UI_02 的右下 EQ 新增可滑、可滾輪／鍵盤改、雙擊 OFF、Undo/Redo、Advanced 同值、12dB HPF 曲線與 EQ Power。數值保持現有 hpf 參數範圍與 State；LPF／4-band／Final Tone 只顯示 PENDING，不冒稱有 DSP。
+- **真瀏覽器證據**：PR [#81](https://github.com/ureia-dev/SOURCERUNE/pull/81) merge `3f627bd8`，[#82](https://github.com/ureia-dev/SOURCERUNE/pull/82) merge `1a0d1b6d`；Fast CI PASS。[Web Preview #38031171637](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38031171637) `geometry-report.json` 來源 `1a0d1b6d`，UI_01/UI_02 `geometry.ok=true`、`knobSmoke.ok=true`、`knobSmoke.hpf.ok=true`，HPF 20→21/Undo/Redo/曲線/Advanced；真 `OfflineAudioContext` 聲鏈 40Hz RMS OFF 0.17677669 / ON(240Hz) 0.00490798，直接同 C++ HPF WASM 測得40Hz相對4kHz -31.1189dB、OFF bit exact；render-log 成功（另有既存一筆 404，另案）。
+- **Native 本輪做到了來源但未達 Host 驗收**：`Source/Plugin/VST3/Plugin.cpp` 接相同 C++ HPF；`Source/State/NativeParameterIds.h` 原 11 ID 不動，新增 #42 HPF / #1102 EQ Bypass，共13；state V2寫13個值且相容舊 V1 11個值。更新 `Tests/Audio/vst3_host_smoke.cpp` 的13 ID期待；未經新版實際SDK Host/DAW 編譯、載入與儲存回讀驗證，不把舊版11 IDs mini-host PASS當此次完成。
+- **重要音訊順序差異**：這版 sidecar/Native HPF 位於舊 Scene MVP 的混合／Output 後，先求兩端同算法且可試聽。產品最終契約 `TONE → MIX/OUTPUT` 尚待完整主 DSP 整合。LPF、4-band（Freq/Gain/Q）、真正 EQ 主曲線拖節點、Final Tone、Host sample-offset automation、CPU profiler benchmark及使用者試聽都 PENDING。唯一工作日誌 U01-17/U02-22 保持 PARTIAL/[ ]。下一對話先查 live main/PR/Pages 並從 checkpoint 續做。
+
 ## 旋鈕／Live 數值依 UI_01、UI_02 REF 排版（2026-10-10）
 
 - 已合併 PR #78 `9393bc32`、#79 `73964644`，UI Web `Web/App/knob_value_ref_alignment_v1.css` 最後覆蓋既有圖面與輸入 hitbox：UI_01 小旋鈕 43px、一般 68px、Mix 82px，數字在下／標籤在上；UI_02 Motion 54px、底部四顆 76px，Bad Signal／Intelligibility 數字右、Mix 數字下、Condition 保留 Used selector。真參數／真單位仍沿用 ui_controls.json（Speed 為 km/h），**不照搬 REF 示意 60%／75% 等到 State/Preset**。沒有改原音效、Factory74、公共 ID 或 Native。
