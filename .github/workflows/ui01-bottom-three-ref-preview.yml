@@ -73,9 +73,9 @@ jobs:
                   modes:document.querySelectorAll(".macro-intelligibility .macro-mode-row button").length,
                   selectedModes:document.querySelectorAll(".macro-intelligibility .macro-mode-row button.active").length,
                   ratio:m.textContent.trim(),waveCanvas:[wave.width,wave.height],waveVisible:css.display!=="none",
-                  imgAssets:{ambDisabled:getComputedStyle(refs[0]).backgroundImage,
-                    intelDisabled:getComputedStyle(refs[2]).backgroundImage,
-                    mixDisabled:getComputedStyle(refs[4]).backgroundImage}};
+                  imgAssets:{ambDisabled:getComputedStyle(document.querySelector(".sr-amb-ref-modes button")).backgroundImage,
+                    intelDisabled:getComputedStyle(document.querySelector(".sr-intel-ref-options input")).backgroundImage,
+                    mixDisabled:getComputedStyle(document.querySelector(".sr-mix-phase-pending")).backgroundImage}};
               });
               if(errors.length||!initial.geometry)throw Error("Browser JS or locked geometry "+JSON.stringify({errors,initial}));
               if(initial.nodes.some(x=>!x.ok)||!initial.allDisabled||initial.disabled!==5||!initial.duck||
