@@ -53,7 +53,7 @@ jobs:
               await page.goto("http://127.0.0.1:4173/Web/App/?ui=UI_01",{waitUntil:"networkidle0",timeout:30000});
               await page.waitForFunction(()=>!!window.__geometryAudit,{timeout:10000});
               let result=await page.evaluate(()=>{
-                const box=e=>{const x=e.getBoundingClientRect();return {x:x.x,y:x.y,w:x.width,h:x.height,right:x.right,bottom:x.bottom}};
+                const box=e=>{const x=e.getBoundingClientRect(),s=getComputedStyle(e);return {x:x.x,y:x.y,w:parseFloat(s.width),h:parseFloat(s.height),right:x.right,bottom:x.bottom}};
                 const rail=document.querySelector(".meter-rail");
                 const meterSlots=Array.from(document.querySelectorAll(".meter-slot"));
                 const meterFill=Array.from(document.querySelectorAll(".meter-fill"));
@@ -82,6 +82,26 @@ jobs:
               await page.click("#meterPeakBtn");
               if(!(await page.$eval("#meterPeakBtn",x=>x.classList.contains("active"))))
                 throw Error("PEAK toggle failed");
+              const spectrumProof=await page.evaluate(async()=>{
+                const {createSpectrumDisplayTrace}=await import("/Web/App/eq_analyzer_v1.js");
+                const bins=new Float32Array(2048).fill(-105);
+                for(let i=0;i<bins.length;i++){
+                  const f=i*48000/(2*bins.length);
+                  bins[i]=-95+75*Math.exp(-Math.pow((f-1000)/150,2));
+                }
+                const eq=createSpectrumDisplayTrace(),main=createSpectrumDisplayTrace();
+                const a=eq.update(bins,48000,100,true);
+                const b=main.update(bins,48000,100,true,{octaveWidth:1/24,frequencySmoothing:true});
+                const same=a?.length===129&&a.every((v,i)=>Math.abs(v-b[i])<1e-6);
+                const wide=createSpectrumDisplayTrace();
+                const wideResult=wide.update(bins,48000,100,true,{octaveWidth:1/3,frequencySmoothing:true});
+                return {same,points:a?.length,wideFinite:Array.from(wideResult).every(Number.isFinite),
+                  positivePeak:Math.max(...a)>-90,distinctWidth:Math.max(...wideResult)<Math.max(...a)};
+              });
+              if(!spectrumProof.same||spectrumProof.points!==129||!spectrumProof.wideFinite||
+                 !spectrumProof.positivePeak||!spectrumProof.distinctWidth)
+                throw Error("Shared EQ/Spectrum visual algorithm mismatch "+JSON.stringify(spectrumProof));
+              result.spectrumVisualProof=spectrumProof;
               const shot="Web/App/preview/rendered/UI_01_METER_PR114.png";
               await (await page.$(".app")).screenshot({path:shot});
               result.sourceSha=process.env.SOURCE_SHA;
