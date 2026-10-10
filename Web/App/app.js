@@ -643,21 +643,22 @@ function spectrum(){
       tangents[i]=a*b<=0?0:2*a*b/(a+b);
     }
     x.save();x.globalAlpha=alpha;x.lineJoin="round";
-    x.beginPath();x.moveTo(left,ys[0]);
+    const linePath=new Path2D();linePath.moveTo(left,ys[0]);
     for(let i=0;i<count-1;i++){
       const x0=left+i*dx,dy=dx/3;
-      x.bezierCurveTo(x0+dy,Math.max(top,Math.min(top+ph,ys[i]+tangents[i]*dy)),
+      linePath.bezierCurveTo(x0+dy,Math.max(top,Math.min(top+ph,ys[i]+tangents[i]*dy)),
         x0+dx-dy,Math.max(top,Math.min(top+ph,ys[i+1]-tangents[i+1]*dy)),
         x0+dx,ys[i+1]);
     }
     if(fill){
-      x.save();x.lineTo(left+pw,top+ph);x.lineTo(left,top+ph);x.closePath();
+      const fillPath=new Path2D(linePath);
+      fillPath.lineTo(left+pw,top+ph);fillPath.lineTo(left,top+ph);fillPath.closePath();
       const grad=x.createLinearGradient(0,top,0,top+ph);
       grad.addColorStop(0,"rgba(93,199,225,.16)");
       grad.addColorStop(1,"rgba(93,199,225,.005)");
-      x.fillStyle=grad;x.fill();x.restore();
+      x.fillStyle=grad;x.fill(fillPath);
     }
-    x.strokeStyle=color;x.lineWidth=lineWidth;x.stroke();x.restore();
+    x.strokeStyle=color;x.lineWidth=lineWidth;x.stroke(linePath);x.restore();
   };
   // Actual secondary analyser; no reference/template shape is synthesized.
   drawTrace(other,"#c5dce5",.38,1,false);

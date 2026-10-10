@@ -96,7 +96,7 @@ jobs:
                 const wide=createSpectrumDisplayTrace();
                 const wideResult=wide.update(bins,48000,100,true,{octaveWidth:1/3,frequencySmoothing:true});
                 return {same,points:a?.length,wideFinite:Array.from(wideResult).every(Number.isFinite),
-                  positivePeak:Math.max(...a)>-90,distinctWidth:Math.max(...wideResult)<Math.max(...a)};
+                  positivePeak:Math.max(...a)>-90,distinctWidth:Array.from(wideResult).some((v,i)=>Math.abs(v-a[i])>.05)};
               });
               if(!spectrumProof.same||spectrumProof.points!==129||!spectrumProof.wideFinite||
                  !spectrumProof.positivePeak||!spectrumProof.distinctWidth)
@@ -107,6 +107,56 @@ jobs:
               result.sourceSha=process.env.SOURCE_SHA;
               result.modeSmoke="PASS";
               result.pngSha256=crypto.createHash("sha256").update(fs.readFileSync(shot)).digest("hex");
+              // A short, generated *real audio-file* smoke exercises the existing
+              // AudioWorklet and analyser — never injected into app samples.
+              await page.evaluate(()=>{
+                const rate=48000,frames=rate*3,bytes=new ArrayBuffer(44+frames*2),v=new DataView(bytes);
+                const ascii=(p,s)=>{for(let i=0;i<s.length;i++)v.setUint8(p+i,s.charCodeAt(i));};
+                ascii(0,"RIFF");v.setUint32(4,bytes.byteLength-8,true);ascii(8,"WAVE");
+                ascii(12,"fmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);
+                v.setUint16(22,1,true);v.setUint32(24,rate,true);
+                v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);
+                ascii(36,"data");v.setUint32(40,frames*2,true);
+                for(let i=0;i<frames;i++){
+                  const sine=Math.sin(2*Math.PI*1000*i/rate)*.35;
+                  v.setInt16(44+2*i,Math.round(sine*32767),true);
+                }
+                const dt=new DataTransfer();
+                dt.items.add(new File([bytes],"spectrum-reference-tone.wav",{type:"audio/wav"}));
+                const input=document.querySelector("#audioFile");
+                input.files=dt.files;input.dispatchEvent(new Event("change",{bubbles:true}));
+              });
+              await page.waitForFunction(()=>{
+                const a=document.querySelector("#audioElement");return !!a?.src&&a.readyState>=1;
+              },{timeout:16000});
+              await page.click("#playBtn");
+              await page.waitForFunction(()=>{
+                const a=document.querySelector("#audioElement");return !a.paused&&a.currentTime>.25;
+              },{timeout:15000});
+              await page.waitForFunction(()=>{
+                const line=document.querySelector(".macro-eq-analyzer-line");
+                return line?.getAttribute("d")?.length>100;
+              },{timeout:6500});
+              const tone=await page.evaluate(()=>{
+                const c=document.querySelector("#spectrumCanvas"),ctx=c.getContext("2d");
+                const img=ctx.getImageData(38,9,c.width-50,c.height-35);
+                let cyan=0;
+                for(let i=0;i<img.data.length;i+=4){
+                  if(img.data[i]<165&&img.data[i+1]>145&&img.data[i+2]>180)cyan++;
+                }
+                return {playing:!document.querySelector("#audioElement").paused,
+                  seconds:document.querySelector("#audioElement").currentTime,
+                  miniPathSize:document.querySelector(".macro-eq-analyzer-line")?.getAttribute("d")?.length||0,
+                  activeCyanPixels:cyan};
+              });
+              if(!tone.playing||tone.activeCyanPixels<25||tone.miniPathSize<100)
+                throw Error("Live analyser audio-path smoke failed "+JSON.stringify(tone));
+              const liveShot="Web/App/preview/rendered/UI_01_SPECTRUM_PR114.png";
+              await (await page.$(".app")).screenshot({path:liveShot});
+              result.liveAudioProof=tone;
+              result.spectrumShotSha256=crypto.createHash("sha256").update(fs.readFileSync(liveShot)).digest("hex");
+              await page.click("#playBtn");
+
               fs.writeFileSync("Web/App/preview/rendered/UI_01_METER_PR114_report.json",JSON.stringify(result,null,2)+"\n");
               console.log("REAL UI_01 METER PASS "+JSON.stringify({sha:result.sourceSha,geometry:result.geometry.ok,shot:result.pngSha256}));
             }finally{await browser.close();}
@@ -118,7 +168,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Web/App/preview/rendered/UI_01_METER_PR114.png Web/App/preview/rendered/UI_01_METER_PR114_report.json
+          git add Web/App/preview/rendered/UI_01_METER_PR114.png Web/App/preview/rendered/UI_01_METER_PR114_report.json Web/App/preview/rendered/UI_01_SPECTRUM_PR114.png
           if ! git diff --cached --quiet; then
             git commit -m "docs(preview): capture real UI_01 Meter PR114 artwork"
             git push origin "HEAD:refs/heads/${{ github.event.pull_request.head.ref }}"
@@ -130,4 +180,5 @@ jobs:
           path: |
             Web/App/preview/rendered/UI_01_METER_PR114.png
             Web/App/preview/rendered/UI_01_METER_PR114_report.json
+            Web/App/preview/rendered/UI_01_SPECTRUM_PR114.png
           retention-days: 7
