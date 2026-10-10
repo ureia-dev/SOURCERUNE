@@ -102,14 +102,14 @@ jobs:
                   await page.click('[data-condition-checkbox="rattle"]');
                   if((await page.$eval('[data-condition-checkbox="rattle"]',el=>el.checked))===before)
                     throw Error("Real Condition checkbox did not toggle");
-                  await page.click("#undoBtn");
+                  await page.$eval("#undoBtn",el=>el.click());
                   if((await page.$eval('[data-condition-checkbox="rattle"]',el=>el.checked))!==before)
                     throw Error("Real Condition Undo did not restore");
                   const oldPower=await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed"));
                   await page.click("[data-eq-power]");
                   if((await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed")))===oldPower)
                     throw Error("EQ bypass did not toggle");
-                  await page.click("#undoBtn");
+                  await page.$eval("#undoBtn",el=>el.click());
                   if((await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed")))!==oldPower)
                     throw Error("EQ bypass Undo did not restore");
                   result.checks[ui].stateUndo=true;
