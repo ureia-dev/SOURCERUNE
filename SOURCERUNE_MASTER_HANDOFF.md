@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## 最新 checkpoint：EQ 專業精緻視覺／固定 ±24 dB／11 個可操作控制（2026-10-10）
+
+- **已修改並實際 Web 驗收**：[PR #104](https://github.com/ureia-dev/SOURCERUNE/pull/104) 合併 `22674d4c8f65bda29ea71324f8fdbd397d693275`。以核准 EQ 示意為外觀方向，小視窗與放大視窗都修正 SVG 原本非等比過大節點：mini 4.4–4.5px，Focus 6.9px，透明 hit target 約 18/22px。真 RBJ EQ 曲線細化為 1.15/1.35px 漸層、細網格、低對比零線／透明區，不用假頻譜／昂貴動畫。顯示固定 **±24dB**（取代舊 ±12，僅呈現），Bell DSP Gain 仍是 ±18 dB。放大 Focus 的 11 個真可拖曳／滾輪／鍵盤 Freq/Gain/Q 旋鈕接回原 `state.params`、AudioWorklet、Undo/Redo；濾波斜率 12 dB/oct 標 **FIXED**，不假裝有 24 dB/oct 演算法。
+- **10+10+10+2 真實證據**：`docs/product/reference/EQ_24DB_MOUSE_PRECISION_AUDIT_20261010.md` 紀錄 10 個小／大 UI 比例、10 個對數 Freq 座標、10 個垂直 dB 數值（非多跑 30 次 CI）及 2 階段修正。Fast [#38047626674](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38047626674) PASS，DSP guard／現有 DSP 簡測皆通過。[真 Web Preview #38047739428](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38047739428) 出版成功，`geometry-report.json` `commit=22674d4c`，UI_01／UI_02 `geometry.ok`、`knobSmoke.eq.ok`、`eqMouse.ok`、`eqFocus.ok` 全 true；實測兩視窗圓點寬高約相等、11個參數真控、B2 Gain knob 0→1.3dB、Q wheel 1.0→0.9、Undo/Redo、Focus 原有開合、固定±24。真 `render-log.txt` 結尾為 `render audit completed successfully`（有原有非阻塞一次 localhost connection failure 和一筆 404）。
+- **第二次最終修正**：Focus 11 個 knob 補 `role=slider`、min/max/now/text，以及 keyboard Enter 開啟數值小框；僅 UI/無 DSP 行為改動。此修正 **Fast／真 Chrome 的新 SHA 實測暫待當輪 CI 結果**，未驗前不得冒稱第二次已通過。
+- **絕不誤報**：DSP changed? **NO**；`Source/DSP`、WASM、AudioWorklet 計算、Native VST3 處理、參數 ID、74 Factory Preset 一律不改，也未使用或覆寫 DSP restore；所以無 DSP 修改需新還原點。Native 自訂 UI／Windows、macOS VST3 Host 圖形操作與 Final Tone 仍 PENDING。唯一產品細規 `docs/product/UI_FUNCTION_CONTRACT.md`。現有 U01-17／U02-22 全 ID 仍 [ ]／PARTIAL，僅這次 Web EQ 視覺與互動子項 DONE。
+
 ## 最新 checkpoint：右下 EQ Zoom In 放大浮動編輯視窗 Web DONE（2026-10-10）
 
 - **本次已正式做／部署**：使用者核准先完整規劃再自行實作、部署；[PR #102](https://github.com/ureia-dev/SOURCERUNE/pull/102) 合併 `dacad91676e92c6bc555b36ab2437ef65624ee61`（基底 `d96d6d6f`），新增 `Web/App/eq_focus.js`／`eq_focus_v1.css`、`app.js` 綁定標題右側 Zoom In `⤢`、`eq_interactions.js` 加清除焦點／浮動框；原 `eq_graph.js` 固定 ±12 dB 不變。Zoom In 在**現有效果器視窗內**開啟約 900×500 logical、依現有 UI_01／UI_02 縮放與畫面 90% 上限自適應的可拖曳浮動板，Zoom Out/X/Esc 關閉、回復按鈕焦點。五節點 HPF/B1/B2/B3/LPF／Q Wheel／Gain Drag／數值浮框與 Undo 直接共用已有 listener-bound **同一 SVG**（打開時移動活 SVG，mini 留 inert 即時視覺縮圖；關閉移回，嚴禁第二個 DSP、AudioContext、FFT）。主卡 REF 大小、原功能不改，維持一套 AudioWorklet/C++ EQ。
