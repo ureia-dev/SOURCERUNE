@@ -128,7 +128,7 @@
 - [ ] **CROSS-02｜SCN037 Scene Hero 512×256 問題**（P1/素材）— 部署圖含烘焙文字且尺寸比 Scene 顯示小，與核准夜景 REF 不符；需真正高解析獨立美術/前景。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-03｜主介面全部操作 E2E**（P2）— 兩套 UI 真 click、drag、wheel、keyboard、開關、Undo/Redo、數值/Focus/Bypass；不可只憑 Geometry PASS 打勾。
-  - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
+  - **驗收/進度**：PARTIAL（2026-10-10），尚不可勾完成。Web UI_01/UI_02 既有八組旋鈕／macro ID 已接上下拖曳、滾輪、鍵盤、雙擊復位、Undo/Redo、Advanced 共用數值；UI_02 Ambience 保留橫向滑桿。PR #69/#70/#71/#72/#73 均合併，Fast PASS，Web Preview [run 38024619544](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38024619544) 真 Chromium PASS：report commit d7cd7118、UI_01/02 knobSmoke.ok=true、geometry.ok=true，Bad Signal 20→42 drag、42→41 wheel、41→42 keyboard、Advanced 42、Undo/Redo 恢復 20；UI_02 Ambience 35→82→35，render-log 成功。完整主 UI click/bypass、全旋鈕逐個實測、Native custom editor/Host 和其他模組 DSP 仍 PENDING，故維持 [ ]。
 - [ ] **CROSS-04｜UI_01 1508×808 ↔ 1499×807 註冊**（P2）— 兩套座標原點不同；需錨點對齊、局部 overlay、誤差及細字 baseline/刻度實測。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **CROSS-05｜UI_02 REF 1:1 細節疊圖**（P2）— 25 大框/139 候選仍多 APPROX；需文字、邊框、Knob、材質、Hitbox、亮暗/開關逐區驗證。
