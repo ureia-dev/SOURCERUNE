@@ -7,10 +7,24 @@ const label={hpf:"HPF",b1:"BAND 1",b2:"BAND 2",b3:"BAND 3",lpf:"LPF"};
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
 const freq=f=>f>=1000?(f/1000).toFixed(f%1000?2:1)+" kHz":f+" Hz";
 const gain=v=>(v>=0?"+":"")+Number(v).toFixed(1)+" dB";
-const valueHTML=id=>{
-  if(id==="hpf"||id==="lpf")return '<span data-eq-focus-value="'+id+'-freq"></span>';
-  return '<span data-eq-focus-value="'+id+'-freq"></span><span data-eq-focus-value="'+id+'-gain"></span><span data-eq-focus-value="'+id+'-q"></span>';
+const knobKey=(id,kind)=>id==="hpf"||id==="lpf"?id:id+(kind==="freq"?"Freq":kind==="gain"?"Gain":"Q");
+const knobKinds=id=>id==="hpf"||id==="lpf"?["freq"]:["freq","gain","q"];
+const knobHTML=(id,kind)=>{
+  const key=knobKey(id,kind),valueId=id+"-"+kind;
+  const caption=kind==="freq"?"FREQ":kind==="gain"?"GAIN":"Q";
+  return '<button type="button" class="sr-eq-focus-knob" data-eq-focus-control="'+key+'"'
+    +' aria-label="'+label[id]+' '+caption+'" title="Drag vertically, Shift for fine, wheel for one step">'
+    +'<span class="sr-eq-knob-dial" aria-hidden="true"><i></i></span>'
+    +'<span class="sr-eq-knob-caption">'+caption+'</span>'
+    +'<span class="sr-eq-knob-value" data-eq-focus-value="'+valueId+'"></span></button>';
 };
+const bandHTML=id=>
+  '<div class="sr-eq-focus-band" data-eq-focus-band="'+id+'">'
+  +'<button type="button" class="sr-eq-band-head" data-eq-focus-select="'+id
+  +'" aria-label="Select '+label[id]+' node"><i></i><strong>'+label[id]+'</strong></button>'
+  +'<span class="sr-eq-band-type">'+(id==="hpf"||id==="lpf"?"12 dB/OCT · FIXED":"PEAK · FIXED")+'</span>'
+  +'<div class="sr-eq-band-knobs">'+knobKinds(id).map(k=>knobHTML(id,k)).join("")+'</div></div>';
+
 function bounds(){
   const r=document.querySelector(".app")?.getBoundingClientRect();
   if(!r)return {left:0,top:0,width:innerWidth,height:innerHeight};
@@ -43,7 +57,16 @@ export function syncEqFocus(){
     if(e)e.textContent=(id==="hpf"&&f<=20?"OFF":freq(f));
     if(id.startsWith("b")){
       root.querySelector('[data-eq-focus-value="'+id+'-gain"]').textContent=gain(p[id+"Gain"]);
-      root.querySelector('[data-eq-focus-value="'+id+'-q"]').textContent="Q "+Number(p[id+"Q"]).toFixed(2);
+      root.querySelector('[data-eq-focus-value="'+id+'-q"]').textContent=Number(p[id+"Q"]).toFixed(2);
+    }
+    for(const kind of knobKinds(id)){
+      const key=knobKey(id,kind),def=current.getControl(key),value=Number(p[key]);
+      const button=root.querySelector('[data-eq-focus-control="'+key+'"]');
+      if(button){
+        const pct=100*(value-Number(def.min))/(Number(def.max)-Number(def.min));
+        button.style.setProperty("--dial-angle",(Math.max(0,Math.min(100,pct))*2.7).toFixed(2)+"deg");
+        button.setAttribute("aria-valuenow",String(value));
+      }
     }
   }
   const power=root.querySelector("[data-eq-focus-power]");
@@ -78,7 +101,7 @@ export function closeEqFocus(){
   const restore=document.querySelector("[data-eq-zoom-in]");
   if(restore)restore.focus({preventScroll:true});
 }
-export function openEqFocus({getState,onPower,onDismiss}){
+export function openEqFocus({getState,onPower,onDismiss,getControl,onChange,snapshot,commit}){
   if(current)return;
   const small=document.querySelector(".macro-eq .macro-eq-svg");
   if(!small)return;
@@ -115,14 +138,14 @@ export function openEqFocus({getState,onPower,onDismiss}){
     +'<span style="top:67%">−12</span><span style="top:84%">−24</span></div>'
     +'<div class="sr-eq-focus-plot"><div class="sr-eq-focus-graph-host" data-eq-focus-graph></div>'
     +'<div class="sr-eq-focus-x"><span>20</span><span>100</span><span>1k</span><span>10k</span><span>20k Hz</span></div></div></div>'
-    +'<div class="sr-eq-focus-readouts">'+ids.map(id=>'<button type="button" data-eq-focus-select="'+id+'" aria-label="Edit '+label[id]+'"><strong>'+label[id]+'</strong>'+valueHTML(id)+'</button>').join("")+'</div>'
+    +'<div class="sr-eq-focus-readouts">'+ids.map(bandHTML).join("")+'</div>'
     +'<footer class="sr-eq-focus-foot"><span>DRAG: FREQUENCY / GAIN · WHEEL ON BAND: Q · SHIFT: FINE</span>'
     +'<span>HPF · 3 BANDS · LPF</span></footer>'
     +'</section>';
   document.body.append(overlay);
   const dialog=overlay.querySelector(".sr-eq-focus");
   dialog.querySelector("[data-eq-focus-graph]").append(small);
-  current={svg:small,overlay,dialog,getState,onPower,onDismiss,position:null,docListener:null,resizeListener:null};
+  current={svg:small,overlay,dialog,getState,onPower,onDismiss,getControl,onChange,snapshot,commit,position:null,docListener:null,resizeListener:null};
   const c=current;
   reposition(false);syncEqFocus();
   requestAnimationFrame(()=>{if(current===c)sizeEqMarkers(c.svg);});
@@ -133,6 +156,75 @@ export function openEqFocus({getState,onPower,onDismiss}){
       const dot=c.svg.querySelector('[data-eq-node="'+button.dataset.eqFocusSelect+'"]');
       dot?.focus({preventScroll:true});
     };
+  });
+  // Real live parameter dials, not decorative/unsupported filter choices.
+  // The same state and undo transactions drive the SVG/Advanced/Worklet.
+  dialog.querySelectorAll("[data-eq-focus-control]").forEach(button=>{
+    const key=button.dataset.eqFocusControl,def=getControl(key);
+    const lo=Number(def.min),hi=Number(def.max),step=Number(def.step)||1;
+    const read=()=>Number(getState().params[key]);
+    const clampStep=v=>Number(Math.max(lo,Math.min(hi,
+      lo+Math.round((Math.max(lo,Math.min(hi,v))-lo)/step)*step)).toFixed(6));
+    const write=v=>{const next=clampStep(v);if(next===read())return false;onChange(key,next);return true;};
+    let gesture=null,accum=0;
+    const applyWheel=(dy,shift)=>{
+      if(!Number.isFinite(dy)||dy===0)return;
+      accum+=dy;
+      if(Math.abs(accum)<12/1.3)return;
+      const dir=accum<0?1:-1;accum=0;
+      const before=snapshot();
+      if(write(read()+dir*step))commit(before);
+    };
+    button.addEventListener("pointerdown",e=>{
+      if(e.button!==0)return;
+      e.stopPropagation();e.preventDefault();
+      gesture={id:e.pointerId,start:e.clientY,last:e.clientY,value:read(),
+        before:snapshot(),moved:false};
+      button.setPointerCapture(e.pointerId);
+      button.focus({preventScroll:true});
+    });
+    button.addEventListener("pointermove",e=>{
+      if(!gesture||e.pointerId!==gesture.id)return;
+      const d=gesture.start-e.clientY;
+      if(Math.abs(d)>2)gesture.moved=true;
+      if(!gesture.moved)return;
+      e.preventDefault();
+      const factor=e.shiftKey?.2:1;
+      const val=key.endsWith("Freq")||key==="hpf"||key==="lpf"?
+        gesture.value*Math.exp(d*.0125*factor):
+        key.endsWith("Q")?gesture.value*Math.exp(d*.015*factor):
+        gesture.value+d*.075*factor;
+      write(val);
+    });
+    const finish=e=>{
+      if(!gesture||e.pointerId!==gesture.id)return;
+      e.stopPropagation();
+      const g=gesture;gesture=null;
+      if(button.hasPointerCapture(e.pointerId))button.releasePointerCapture(e.pointerId);
+      if(g.moved){commit(g.before);}
+      else{
+        const id=key==="hpf"||key==="lpf"?key:key.slice(0,2);
+        c.svg.querySelector('[data-eq-node="'+id+'"]')?.focus({preventScroll:true});
+      }
+    };
+    button.addEventListener("pointerup",finish);
+    button.addEventListener("pointercancel",finish);
+    button.addEventListener("wheel",e=>{
+      if(e.ctrlKey)return;e.preventDefault();e.stopPropagation();
+      applyWheel(e.deltaMode===1?e.deltaY*16:e.deltaMode===2?e.deltaY*120:e.deltaY,e.shiftKey);
+    },{passive:false});
+    button.addEventListener("dblclick",e=>{
+      e.preventDefault();e.stopPropagation();const before=snapshot();
+      if(write(Number(def.default)))commit(before);
+    });
+    button.addEventListener("keydown",e=>{
+      const direction=["ArrowUp","ArrowRight"].includes(e.key)?1:
+        ["ArrowDown","ArrowLeft"].includes(e.key)?-1:0;
+      if(!direction&&e.key!=="Home"&&e.key!=="End")return;
+      e.preventDefault();e.stopPropagation();const before=snapshot();
+      const value=e.key==="Home"?lo:e.key==="End"?hi:read()+direction*step;
+      if(write(value))commit(before);
+    });
   });
   for(const type of ["close","zoom-out"])dialog.querySelector("[data-eq-focus-"+type+"]").onclick=e=>{
     e.stopPropagation();closeEqFocus();
