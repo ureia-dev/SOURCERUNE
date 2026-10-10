@@ -175,7 +175,7 @@ function commitMacroKnob(id,raw){
   if(setMacroKnob(id,raw))finishMacroKnobChange(before,id);
 }
 function bindMacroKnobs(){
-  $("[data-macro]").forEach(input=>{
+  $$("[data-macro]").forEach(input=>{
     const id=input.dataset.macro,def=findControl(id);
     if(!def)return;
     let pointer=null,startY=0,startValue=0,before=null;
