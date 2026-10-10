@@ -29,6 +29,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Build shared EQ-capable WASM
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash Tools/Build/build_wasm.sh
+          node -e 'const fs=require("fs");const e=new WebAssembly.Instance(new WebAssembly.Module(fs.readFileSync("Web/App/audio/sourcerune.wasm")),{env:{sinf:Math.sin,cosf:Math.cos,powf:Math.pow}}).exports;if(e.sr_version()!==2)throw Error("WASM ABI2 missing");console.log("Shared DSP EQ WASM ABI 2 verified")'
+
       - name: Render UI reference audit
         continue-on-error: true
         shell: bash
@@ -258,7 +265,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A Web/App/preview/rendered
+          git add -A Web/App/preview/rendered Web/App/audio/sourcerune.wasm
           if git diff --cached --quiet; then
             echo "render audit unchanged"
             exit 0
