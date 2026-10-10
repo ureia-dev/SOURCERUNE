@@ -87,3 +87,13 @@ body.ui-01 .sr-mix-phase-pending{
   cursor:not-allowed;
   background:transparent url("../../Assets/UI/Runtime/Common/Controls/RT_BUTTON_CAP_DISABLED.png") center/100% 100% no-repeat;
 }
+
+/* Optical review after true 1499x807 render: avoid value/checkbox proximity,
+   and stack Mix WET / DRY across two clear lines in its narrow card. */
+body.ui-01 .sr-intel-ref-options{bottom:7px;gap:5px}
+body.ui-01 .sr-mix-live-ratio{
+  bottom:41px;height:30px;box-sizing:border-box;
+  flex-direction:column;gap:0;padding:3px 0 2px;line-height:11px;
+}
+body.ui-01 .sr-mix-live-ratio span,
+body.ui-01 .sr-mix-live-ratio small{display:block;line-height:11px}
