@@ -1,5 +1,5 @@
 {
-  "commit": "d7cd7118b91e1108b0164ac18e183d2fc9b617a4",
+  "commit": "4bf937ddc6b9abfa47743b96456db7d4d062bd04",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -218,7 +218,7 @@
             "w": 67.99999197644438,
             "h": 68.00002575926749,
             "x": 296.9998988807134,
-            "y": 625.9997661644874
+            "y": 626.9060241772324
           },
           "condition": {
             "w": 67.99995819362127,
@@ -377,7 +377,84 @@
         "undid": 41,
         "redid": 42,
         "restored": 20,
-        "ambience": null
+        "ambience": null,
+        "allVisible": [
+          {
+            "id": "speed",
+            "before": 60,
+            "dragged": 100,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "doppler",
+            "before": 70,
+            "dragged": 83,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "width",
+            "before": 40,
+            "dragged": 53,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "badSignal",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "condition",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "intelligibility",
+            "before": 70,
+            "dragged": 83,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "ambience",
+            "before": 35,
+            "dragged": 48,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "mix",
+            "before": 100,
+            "dragged": 87,
+            "hit": true,
+            "alignment": 0
+          }
+        ],
+        "dialogs": {
+          "small": {
+            "width": 470,
+            "height": 223.375,
+            "parent": "BODY",
+            "cols": "2"
+          },
+          "medium": {
+            "width": 750,
+            "height": 382.1875
+          },
+          "large": {
+            "width": 940,
+            "height": 464.1875,
+            "viewportHeight": 807
+          },
+          "outsideDismiss": true,
+          "escapeDismiss": true
+        }
       }
     },
     "UI_02": {
@@ -602,6 +679,55 @@
           "first": 35,
           "changed": 82,
           "reverted": 35
+        },
+        "allVisible": [
+          {
+            "id": "badSignal",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "condition",
+            "before": 20,
+            "dragged": 33,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "intelligibility",
+            "before": 70,
+            "dragged": 83,
+            "hit": true,
+            "alignment": 0
+          },
+          {
+            "id": "mix",
+            "before": 100,
+            "dragged": 87,
+            "hit": true,
+            "alignment": 0
+          }
+        ],
+        "dialogs": {
+          "small": {
+            "width": 470,
+            "height": 223.375,
+            "parent": "BODY",
+            "cols": "2"
+          },
+          "medium": {
+            "width": 750,
+            "height": 382.1875
+          },
+          "large": {
+            "width": 940,
+            "height": 464.1875,
+            "viewportHeight": 941
+          },
+          "outsideDismiss": true,
+          "escapeDismiss": true
         }
       }
     }
