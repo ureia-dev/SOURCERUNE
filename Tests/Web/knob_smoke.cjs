@@ -16,6 +16,8 @@ async function auditKnobs(page,ui){
   await page.mouse.up();
   const dragged=await value();
   assert(dragged>before,ui+" vertical drag did not change the control");
+  // The previous drag ends above the face; hover again before testing wheel.
+  await page.mouse.move(box.x,box.y);
   await page.mouse.wheel({deltaY:120});
   const scrolled=await value();
   assert.equal(scrolled,dragged-1,ui+" wheel must move one schema step");
