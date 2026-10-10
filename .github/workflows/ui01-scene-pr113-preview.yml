@@ -151,11 +151,55 @@ jobs:
               const dest="Web/App/preview/rendered/UI_01_PR113.png";
               await page.$eval(".app",el=>el.scrollIntoView({block:"nearest"}));
               await (await page.$(".app")).screenshot({path:dest});
+              // UI_01 left-rail card REF: four live independent images and Runtime icon bindings.
+              const cardsProof=await page.evaluate(()=>{
+                const box=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom}};
+                return Array.from(document.querySelectorAll("body.ui-01 .module-rail .module-card")).map(card=>{
+                  const art=card.querySelector(".module-art");
+                  const img=card.querySelector(".module-art img");
+                  const header=card.querySelector(".module-meta");
+                  const title=header.querySelector("span");
+                  const name=header.querySelector("strong");
+                  const icon=getComputedStyle(title,"::before");
+                  const imageCss=getComputedStyle(img);
+                  return {type:card.dataset.type,card:box(card),art:box(art),header:box(header),title:box(title),
+                    name:box(name),nameText:name.textContent,src:img.currentSrc,natural:[img.naturalWidth,img.naturalHeight],
+                    iconImage:icon.backgroundImage,iconBox:{w:icon.width,h:icon.height},
+                    fit:imageCss.objectFit,loaded:img.complete&&img.naturalWidth>0,
+                    edit:box(card.querySelector("[data-edit]")),next:box(card.querySelector(".module-cycle-next"))};
+                });
+              });
+              if(cardsProof.length!==4)throw Error("Four UI01 cards not assembled");
+              const iconNames={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL",SPACE_ENVIRONMENT:"SPACE"};
+              const expectedH=[136,132,132,97];
+              for(let i=0;i<cardsProof.length;i++){
+                const c=cardsProof[i];
+                if(!c.loaded||c.natural[0]<150)throw Error("Card semantic photo missing: "+c.type);
+                if(!c.iconImage.includes("RT_MODULE_ICON_"+iconNames[c.type]+"_DEFAULT.png"))
+                  throw Error("Approved module icon PNG not applied: "+c.type+" "+c.iconImage);
+                if(Math.abs(c.card.h-expectedH[i])>2)throw Error("Card outer REF height changed: "+c.type);
+                if(c.art.w<230||c.art.w>246||c.art.x<c.card.x+10||c.art.right>c.card.right-48)
+                  throw Error("Card photo RECT mismatch: "+c.type+" "+JSON.stringify(c.art));
+                if(c.title.x<c.card.x+65||c.name.x<c.card.x+65||c.name.right>c.edit.x+1)
+                  throw Error("Card icon/header not REF aligned: "+c.type);
+                if(c.fit!=="cover"||c.next.bottom>c.card.bottom+2)throw Error("Card crop/navigation not intact: "+c.type);
+              }
               result.assembledMaterials=material;
+              result.semanticCardProof=cardsProof;
               result.spectrumControls=spectrumProof;
               result.visualSmoke={zoomIn:true,zoomReset:true,timeRulerTicks:5,labelNoOverlap:!labelOverlap};
               result.sha=process.env.SOURCE_SHA;
               result.screenshotSha256=crypto.createHash("sha256").update(fs.readFileSync(dest)).digest("hex");
+              // Interaction proof after the review screenshot: cycling a source must
+              // update the real semantic source image, without altering default screenshot.
+              const originalSrc=await page.$eval('.module-card[data-type="SOURCE"] .module-art img',img=>img.getAttribute("src"));
+              await page.click('.module-card[data-type="SOURCE"] .module-cycle-next');
+              await page.waitForFunction(before=>{
+                const img=document.querySelector('.module-card[data-type="SOURCE"] .module-art img');
+                return !!img && img.getAttribute("src")!==before && img.complete && img.naturalWidth>0;
+              },{timeout:7000},originalSrc);
+              result.cardCycleSmoke={sourceNext:true,photoChanged:true};
+
               fs.writeFileSync("Web/App/preview/rendered/UI_01_PR113_report.json",JSON.stringify(result,null,2)+"\n");
               console.log("REAL CHROME SCENE PREVIEW PASS "+JSON.stringify(result));
             }finally{await browser.close();}
