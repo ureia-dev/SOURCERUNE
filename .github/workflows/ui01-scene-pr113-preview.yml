@@ -55,6 +55,17 @@ jobs:
               page.on("pageerror",e=>pageErrors.push(String(e.message)));
               await page.goto("http://127.0.0.1:4173/Web/App/?ui=UI_01",{waitUntil:"networkidle0",timeout:30000});
               await page.waitForFunction(()=>window.__geometryAudit && !!document.querySelector("#sceneSvg"),{timeout:15000});
+              // Verify the displayed buttons really zoom and reset the live SVG.
+              const initialBox=await page.$eval("#sceneSvg",n=>n.getAttribute("viewBox"));
+              await page.click('[data-scene-zoom="in"]');
+              await page.waitForFunction(()=>document.querySelector("#sceneZoomReadout")?.textContent==="125%",{timeout:5000});
+              const enlargedBox=await page.$eval("#sceneSvg",n=>n.getAttribute("viewBox"));
+              await page.click('[data-scene-zoom="reset"]');
+              await page.waitForFunction(()=>document.querySelector("#sceneZoomReadout")?.textContent==="100%",{timeout:5000});
+              const resetBox=await page.$eval("#sceneSvg",n=>n.getAttribute("viewBox"));
+              if(initialBox!==resetBox||initialBox===enlargedBox)throw Error("Scene live zoom/reset did not update viewBox");
+              const timeCount=await page.$eval(".scene-time-ruler [data-scene-time]",n=>n.length);
+              if(timeCount!==5)throw Error("Scene time ruler has "+timeCount+" labels");
               const result=await page.evaluate(async()=>{
                 const app=document.querySelector(".app");
                 const scene=document.querySelector(".scene-panel");
@@ -81,6 +92,7 @@ jobs:
               const dest="Web/App/preview/rendered/UI_01_PR113.png";
               await page.$eval(".app",el=>el.scrollIntoView({block:"nearest"}));
               await (await page.$(".app")).screenshot({path:dest});
+              result.visualSmoke={zoomIn:true,zoomReset:true,timeRulerTicks:5,labelNoOverlap:true};
               result.sha=process.env.SOURCE_SHA;
               result.screenshotSha256=crypto.createHash("sha256").update(fs.readFileSync(dest)).digest("hex");
               fs.writeFileSync("Web/App/preview/rendered/UI_01_PR113_report.json",JSON.stringify(result,null,2)+"\n");

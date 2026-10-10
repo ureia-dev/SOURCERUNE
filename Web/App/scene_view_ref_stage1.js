@@ -48,10 +48,10 @@ export function syncSceneGuide(state){
   const car=$("#motionCarGlyph");
   if(car){car.setAttribute("x",(point.x-28).toFixed(2));car.setAttribute("y",(point.y-60).toFixed(2));}
   const label=$("#sourceLabel");
-  if(label){label.setAttribute("x",point.x.toFixed(2));label.setAttribute("y",Math.min(326,point.y+33).toFixed(2));}
+  if(label){label.textContent="SOURCE";label.setAttribute("x",clamp(point.x-111,145,820).toFixed(2));label.setAttribute("y",clamp(point.y+23,185,290).toFixed(2));}
   const line=$("#distanceLine");
   if(line){line.setAttribute("x1",point.x.toFixed(2));line.setAttribute("y1",point.y.toFixed(2));line.setAttribute("y2",String(listenerY));}
-  const cx=(point.x+500)/2,cy=(point.y+listenerY)/2-9;
+  const cx=(point.x+500)/2+(Math.abs(point.x-500)<140?105:0),cy=(point.y+listenerY)/2-9;
   const bed=$("#distanceCallout");
   if(bed){bed.setAttribute("x",(cx-40).toFixed(2));bed.setAttribute("y",(cy-31).toFixed(2));}
   const value=$("#distanceText");
