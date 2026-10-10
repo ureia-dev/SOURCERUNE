@@ -1,5 +1,6 @@
 {
   "ui": "UI_01",
+  "sceneBrightness": "brightness(2)",
   "geometryOk": true,
   "geometryFailed": [],
   "app": {
@@ -64,6 +65,6 @@
     "timeRulerTicks": 5,
     "labelNoOverlap": true
   },
-  "sha": "5f33c9bec9e5d44f8c9d2b0e257a17b922346a7a",
-  "screenshotSha256": "a074453ca40da126ab63f2c96b7268a4b017322de83303a633b24bf725a6dabe"
+  "sha": "ad3760bc781204367641410aeb4938defd289f9e",
+  "screenshotSha256": "c875486caebafe0aa9e3f579e49cc2b0e45bbfc350aa378703820306af945fba"
 }
