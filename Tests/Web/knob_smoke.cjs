@@ -327,7 +327,7 @@ async function auditHpf(page,ui){
   return {ok:true,ui,init,changed,undo:true,redo:true,curve:points,audio,realWorklet};
 }
 async function auditMiniEq(page,ui){
-  const names=await page.$eval('.macro-eq-svg [data-eq-node]',els=>els.map(e=>e.dataset.eqNode));
+  const names=await page.$$eval('.macro-eq-svg [data-eq-node]',els=>els.map(e=>e.dataset.eqNode));
   assert.deepEqual(names,['hpf','b1','b2','b3','lpf'],ui+' must have HPF LPF and exactly 3 EQ bands');
   const results={};
   for(const id of names){
