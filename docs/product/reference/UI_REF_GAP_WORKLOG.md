@@ -60,6 +60,15 @@
 - **驗收閘**：先恢復合法完整來源與正式素材取檔、檔案 SHA 檢查；在實際入口 `Web/App/index.html?ui=UI_01` 以 Chromium 渲染並取得 **baseline**；進行最小 Scene UI 實作，透過同一真入口產生 **after 截圖**，驗 hitbox/Zoom/Reset/Mode/時間/距離/車輛/波形、未動 UI_02；必要的 Fast 一次成功後，讓使用者看**真元件組裝畫面**並確認，保持草稿 PR 不合併。任何一項證據缺失都留 `PENDING`。
 - **截至本紀錄**：能力關卡未通過，故沒有修改任何正式 `Web/App` 程式或 PNG，沒有產生新組裝截圖；**U01-06～09 仍 `[ ]`**。本紀錄是可恢復的根因與工作定位 checkpoint，不是已完成 Scene 子項。
 
+### 2026-10-10｜UI_01 左側四張語意素材卡（U01-04／05）真實組裝候選，等待使用者審核
+
+- **使用者最新階段要求**：在 Scene View／Spectrum 成果後接續第三步「左側四張卡」，沿用唯一草稿 [PR #113](https://github.com/ureia-dev/SOURCERUNE/pull/113) 之 `docs/ui01-ui02-ref-comparison-log-20261010`，**不能合併、不能切新 PR、不能動 DSP／WASM／Factory Preset／ReferenceSheets 的解析度，也不擅自改成 REF 範例的 Car Speaker/Mobile Call/Wooden Door 模型**。
+- **正式素材確認**：四張語意照片目前由 `Web/App/app.js` 的 `renderModules()`／`selected(t)`／`assetUrl(art)` 綁定原本獨立的 `Assets/UI/UI_01/<TYPE>/*.png`；外框是 `Assets/UI/Runtime/Common/Shell/RT_CARD_FRAME.png`；四顆圖示是正式 `RT_MODULE_ICON_SOURCE/TRANSMISSION/WALL/SPACE_DEFAULT.png`／hover ACTIVE；箭頭是正式 `RT_IMAGE_ARROW_R_IDLE/HOVER.png`。這輪沒有新增任何 PNG，也沒有借用整張 REF 截圖作介面。
+- **實作**：`Web/App/ui01_asset_cards_pr113.css` 與 `Web/App/index.html` 加入 UI_01-only 視覺層：四卡圖示框統一 45×41 px，標題與目前模型名稱實際 browser x=82px 對齊；細調文字亮度、長標題截斷、照片實際裁切時的亮度與對比，不更改真模型 ID。**已存在幾何鎖不得破壞**，經首次 Fast PASS／Chrome geometry 對四卡藝術框 FAIL 後立即診斷並恢復四張照片原確認矩形，不修改既有幾何測試：SOURCE x19/y115/w239/h72、TRANSMISSION x19/y257/w239/h70、WALL x19/y397/w239/h69、SPACE x19/y533/w239/h35；卡片外框四張 313 寬、高 136/132/132/97。EDIT／箭頭原座標亦未改。
+- **可中斷 commit**：首版 `1730a7c80bc87db6610adbb5ff79d8b97c026e6f` 只修卡圖與內部；幾何根因確認後修復 `38caf35b751e8cb8dc37a411b47cfd8c243db5ad`；驗收讀數符合原幾何之小型 browser 測試修正 `7a2360d824baebb5d6aecb777b60106bd8cf2baa`。第二步沒有擴大至其他 UI。
+- **真實驗證證據**：[PR 分支實際 1499×807 組裝圖](../../../Web/App/preview/rendered/UI_01_PR113.png)、[結構化 Chromium 報告](../../../Web/App/preview/rendered/UI_01_PR113_report.json)。Chrome 預覽 [run 38062286363](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38062286363) PASS，原有 Fast [run 38062286335](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38062286335) PASS。預覽 source `7a2360d824baebb5d6aecb777b60106bd8cf2baa`，PNG SHA256 `acc903fb5b272bb844207e50cae9298e71a9d86e8739178a16df77354d2b5651`；report `geometryOk=true`、四張圖片載入且尺寸有效、全部正式圖示背景 PNG 正確、Card header text x82、45×41 圖示、原鎖定照片矩形；實際按 SOURCE 下一個箭頭後 Semantic img `src` 改變且解碼成功，`cardCycleSmoke.sourceNext=true`。**先取初始狀態截圖，後做互動驗證，不把 next 之後選項充作新預設**。
+- **驗收限制**：UI_01 REF 最新原始完整 PNG 未入庫，因此卡片仍僅依掃描 142 點 APPROX 比對；PHOTO 風格是否需換成 REF 原所示 CAR/MOBILE 等模型、原圖是否設計核准、4 種 EDIT 對話視覺與 Native VST3 Host 仍待確認。**U01-04／05 保持原本 `[ ]`，直到使用者明確確認；U01-03 模型預設更不得自行決定。** 下一步按原清單為右側 Meter（U01-11），留待此次四卡實圖使用者審核後再前進。
+
 ### 2026-10-10｜使用者紅圈兩區與 Spectrum 下一步：正式 Runtime 組裝候選（未合併）
 
 - **最新要求**：使用者用紅圈指出 ① Scene View 最底部時間／波形條 ② UI_01 底部 MOTION 的 APPROACH／PASS BY／LEAVE 三鍵，判斷 PNG 未正確使用或未製作，要求先修這兩處並繼續下一項。只改 `ureia-dev/SOURCERUNE` 的 PR #113、UI_01；不要停止在這兩項，不修改 `Assets/UI/ReferenceSheets/**`，**DSP changed? NO**。此節取代前面「等待 Scene 核准才做 Spectrum」的停工順序；**PR 仍然 draft，不合併**。
