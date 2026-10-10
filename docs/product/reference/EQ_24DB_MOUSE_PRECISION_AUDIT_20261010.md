@@ -25,3 +25,9 @@
 (2) Chrome UI_01+UI_02 真實拖曳、Q wheel、直接數值輸入、11 真 dials、單次 Undo／Redo、固定24dB、縮放關閉正常，`render-log.txt` 必須結束 `render audit completed successfully`、`geometry-report.json` 同一 SHA 全通過。Fast 正常一次；不擅增安全重複測試。
 
 兩個 Browser Gate 結果在此文件完成後補入，測試腳本本身不等於已通過。
+
+## 第一階段真實驗收 PASS／第二修正待測
+
+PR #104 合併 commit `22674d4c`，Fast #38047626674 PASS；真 [Web Preview #38047739428](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38047739428) 已把 `geometry-report.json` 寫入 GitHub，來源 SHA `22674d4c`，兩版 UI_01、UI_02 `geometry.ok`、`eqMouse.ok`、`eqFocus.ok` 全 PASS。具體 mini ring 4.469×4.404／4.471×4.375 CSS px、Focus 6.900×6.900px；hit mini 約 17.88×17.6、focus 22×22；兩版 11 個 Focus parameter key 數與順序精確，B2 旋鈕上拖 Gain +0→+1.3dB、wheel 0.1dB、Q wheel 1.00→0.90、原 Undo/Redo、5節點 Drag/Focus reopen/responsive 均通過。固定 ±24 在實際測試 Gain 0／6／9／14／−18 dB 均保持 24。
+
+兩次修正紀錄：1. 在主 PR #104 內 ZoomIn/ZoomOut 立即重算 SVG 橢圓真 CSS 像素半徑，並將 LPF 點與 HPF 改成辨識度合理的靜柔色，已測通；2. UI Focus 真 dial Slider 的 ARIA min/max/value/keyboard Enter 開啟 popup 改動在後續獨立修復分支，**新一次 Fast/Chrome 尚待新 PR 證據，不能假稱已測**。本檔數學 30 組並非額外安全/壓測回合。
