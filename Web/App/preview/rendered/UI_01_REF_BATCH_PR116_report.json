@@ -1,0 +1,41 @@
+{
+  "sourceSha": "9c9d90169a97ab0faa9ce22e39eca4f051f3d1ba",
+  "checks": {
+    "UI_01": {
+      "geometry": true,
+      "knobSmoke": true,
+      "visual": {
+        "boxSafe": true,
+        "offPng": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_CHECKBOX_ON.png\")",
+        "zoomPng": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_BUTTON_CAP_HOVER.png\")",
+        "activePower": true,
+        "powerPng": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_ACTIVE.png\")",
+        "knobPng": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_KNOB_M_BASE.png\")",
+        "knobNeedle": {
+          "width": "1.5px",
+          "opacity": "1"
+        },
+        "realValue": "20%",
+        "eqNodes": 5,
+        "selected": 1
+      },
+      "batchMaterials": {
+        "signal": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_CHECKBOX_OFF.png\")",
+        "eqInputColor": "rgb(216, 235, 242)",
+        "meterFrame": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Meter/RT_METER_FRAME.png\")",
+        "intelligibilityActive": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_ACTIVE.png\")",
+        "ambDisabled": true,
+        "phaseDisabled": true,
+        "styleA": true,
+        "styleB": true,
+        "styleC": true
+      },
+      "stateUndo": true
+    },
+    "UI_02": {
+      "geometry": true,
+      "knobSmoke": true
+    }
+  },
+  "imageSha256": "8f79f3edebef7948f76e530a6d51f99fbc199d090f60831324ddbe1beda80f50"
+}

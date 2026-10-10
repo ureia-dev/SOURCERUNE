@@ -1,5 +1,54 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+## 2026-10-11｜PR #116 UI_02 模式避讓／可及性／既有 Chromium 測試接入（候選）
+
+- **最新核對**：main `0d374288`，工作 branch `style/ui01-condition-eq-knob-ref-20261011` 起點 `6af698b5`，PR #116 Draft、未合併。前一輪 Fast #38079747681／Chromium #38079747652 均為 SUCCESS，但兩者來源為 `301282e7`，**不是這批新程式碼的驗證證據**。
+- **A 視覺避讓**：`98186c3837852175e56ad4d750370739e9b94602`，僅在 UI_02 已有三模式欄補 `min-width:0`、單行省略、防溢出與固定行高，維持 172px 卡框、110px 模式欄、76px knob、26px 模式鍵、正式 PNG、現有 hitbox 與音訊不變。
+- **B 真模式可及性**：`ddc8447996776655d78bc8b22bb4f1cf99fd7223`，共用 `modeButtons()` 加 `type=button`／依現有 `state.params` 產生 `aria-pressed=true/false`；仍是原來的按鈕、模式 ID、點擊處理、Undo，沒有新增或更改任何 DSP／參數。
+- **C 現有 Chromium 測試**：`13d875f37f56e939716e74cf3f0daf9f72b2f7a6`，`Tests/Web/ui02_ref_audit.cjs` 由既有 `Tests/Web/knob_smoke.cjs` 內 UI_02 分支呼叫；檢查三個模式鍵和讀數是否在鎖定卡框內、彼此不交疊、正式 ACTIVE PNG、CSS 三份直接載入、唯一 active 與 aria-pressed 一致、真 click／Undo 回復。**這是新增驗證條件，尚未實際跑過，不等於通過**；沒有另開 CI tier 或重試失敗 runner。
+- **本輪有效成果**：3 組範圍明確的程式／測試修改，未達 50–100 項；UI_02 專屬真實截圖、這批新的 Fast CI 與 Chromium 執行、模式避讓實測、Native Host parity、原始 REF 1:1 比對均 **PENDING**。既有 UI_01／UI_02 `geometry=true`／`knobSmoke=true` 僅代表前輪來源，不能用來宣稱本輪通過。
+- **工作流限制**：現有 PR #116 的臨時 Chromium 工作流只監看 UI_01 CSS 與 `index.html`，不監看 UI_02 CSS／Tests；前輪修改工作流兩次遭安全阻擋，故本輪不盲目重試同一修改。後續必須在允許的既有 Chromium 執行入口驗證後，才可將 U02-20 與 CROSS-05 從 PARTIAL 改為 DONE。
+- **DSP changed NO**；不動 `Source/DSP/**`、WASM／AudioWorklet 聲音計算、Factory Preset、參數語意、ReferenceSheets 解析度；PR 不合併、不正式部署。
+
+
+## 2026-10-11｜PR #116 UI_02 CSS 接入獨立化（候選）
+
+- 接續 main `0d374288`、工作 PR #116 HEAD `2ff77ef1`；前輪 Fast #38075874755、Chromium #38075874759 已確認 SUCCESS，未重做既有 UI_01 驗收。
+- 本輪將 UI_02 三份 REF scope CSS 直接在 `Web/App/index.html` 載入，從 `ui01_ref_batch_c_v1.css` 移除三個間接 `@import`；原三份 CSS 內容不變，維持兩套 UI 及既有 state/聲音。
+- 原定新增 UI_02 專屬 Chromium 截圖及模式切換／Undo 驗收，但 GitHub 工作流修改兩次被工具安全檢查阻擋；遵守同錯兩次即停，不重試。UI_02 截圖、模式避讓、Undo 仍 PENDING，U02-20/CROSS-05 保持 [ ]／PARTIAL。這批只有 CSS 載入方式改善，不算 50–100 項視覺完成。
+- **DSP changed NO**；未合併、未正式部署；本次 CI 狀態以 push 後 Actions 為準。
+
+## 2026-10-11｜PR #116 UI_02 REF 續批：三組光學修正（待驗證）
+
+- **起點**：main `0d374288`、工作分支 `style/ui01-condition-eq-knob-ref-20261011` 的 `0cbf6383`；原 PR #116 Fast #38069959072／Chromium #38069958987 PASS，不重做原 UI_01 13 區。這批保留同一個 Draft PR，未合併、未部署。
+- **A 卡片／Live Scene**：`ab70e8cb7ac0c1edd604b92e7ed60f9253764b65`，改善四張照片/標題、焦點、框線及真實 SVG Motion/Distance 低眩光；不替換模型/素材。
+- **B Motion／真 Meter**：`5bf94f26551dff00af2c847e66bc3a6070d578e9`，大旋鈕讀數/指針、三顆小旋鈕文字/指針/焦點、真 IN/OUT 填充上的分段視覺；不變 Meter 寬度及聲音。
+- **C 底部五區**：`ae7a77b3da20a6e7bc7fe02b6ad591dbfccd509c`，將 Intelligibility 三模式按鈕排入原框、數值避讓、正式 Idle/Active/Hover PNG，另調 Condition/Bad Signal/Mix/EQ/Ambience 光學材質；既有 Mode State/Undo 保留。
+- **整批接入**：`a5e3b61544f079cbf74c37dee66b3cdd3927c801` 由最後載入的 `Web/App/ui01_ref_batch_c_v1.css` 以三個標準 CSS `@import` 接入 `ui02_ref_batch_a/b/c_v1.css`。一次集中推送，原工作流會同輪檢查 UI_01／UI_02 geometry 與 knob smoke；**UI_02 本批專屬新截圖與模式避讓/Undo 驗收尚未實測，不能冒稱 PASS**。
+- **目前狀態**：約 20 個有依據的 UI_02 光學修正群，均屬 APPROX／候選，未達每輪 50–100 個目標，拒絕湊數。U02-04/13/20 等整項仍 [ ]／PARTIAL，UI_02 REF 1:1 overlay、Native Host 仍待驗。DSP changed **NO**，WASM／AudioWorklet 音訊算法、Preset、參數語意、ReferenceSheets 均未動。
+
+
+
+## 2026-10-11｜PR #116 UI_01 視覺整批修正（同批多 commit、單次推送）
+
+- 使用者要求「一次改多一點，改多一點在丟上去 GITHUB」；從此 UI REF 工作以 **先集中審查需求→3 個可追蹤獨立 commit→單次推送→一次 Fast + 真 Chromium→統一回報** 為優先。此為工作方式而非自動增加測試量、修改 DSP 或默認合併授權；錯誤仍遵守二次上限與根因檢查。
+- 這批以唯一既有分支 `style/ui01-condition-eq-knob-ref-20261011`、草稿 PR #116 為基底，不建立平行 PR，不重做 #114/#115。每組先建立 Git commit 物件，最後將完整線一次 fast-forward 推送，避免每個像素調整都觸發 CI。
+- **A／卡片、Scene、分析器**：`fc78a991ac5e398d76e8c15257108ed3cb8d6cab`，涵蓋四卡 live 文字與照片低對比、EDIT/箭頭狀態、Scene 真 Zoom／時間標尺視覺、Spectrum PRE/POST/RTA 真控制的按鍵文字。保留所選模型、實際曲線、控制座標與真分析儀。
+- **B／Meter、Motion、Bad Signal、Condition、Intelligibility**：`51243b97b40fae8c6de85dba177ec44f54278868`，涵蓋真 Meter 刻度/LUFS pending 框低對比、Motion 3 模式狀態、Bad Signal 四顆原有 Checkbox 改用正式 Runtime ON/OFF/DISABLED PNG、Condition 文字、Intelligibility 三模式狀態和未核准控件灰階。所有真參數／Undo 不變，不假造 LUFS。
+- **C／Ambience、Mix、EQ、七卡旋鈕**：`48a08eda8aab44815858c0240f13dacf04be8262`，涵蓋 Ambience Duck/OUT 波形框、S/M 停用外觀、Mix 真 WET/DRY 顯示與 Ø 停用、Mini EQ 已存在實際 Freq/Gain/Q 文字和鍵盤焦點、七卡上方文字與旋鈕光學狀態。聲音算法、State/ID/Factory Preset 不變。
+- 新增 `Web/App/ui01_ref_batch_a_v1.css`／`b_v1.css`／`c_v1.css`，以 UI_01-only scope 逐組最小覆蓋既有正式 PNG、所有鎖定外框／命中區均不改。**不改** `Source/DSP/**`、AudioWorklet／WASM、Native sound processing、`Assets/UI/ReferenceSheets/**`、Presets。UI_02 不改；Native Host parity 待實測。
+- 正式 REF UI_01 1508×808 原始檔仍未入庫，故外觀標示 **APPROX**；原 U01-13、17、18 及其他不足的 U01 ID 均保留 `[ ]`／PARTIAL，直到真實瀏覽器截圖與使用者確認，不能自動全勾。
+- **驗證狀態（推送前）**：本批 CSS/工作流已建立可追蹤檔案與 commit，但真 Chromium、Fast 與圖片尚未執行；禁止提前寫 PASS。新候選畫面交付路徑 `Web/App/preview/rendered/UI_01_REF_BATCH_PR116.png`，需等真正 Chromium 產生後才列為證據；只正常執行必要一次 Fast 和一次 Chromium。PR 保持 Draft、未合併／未正式部署。
+
+## UI_01 Condition / EQ / 金屬旋鈕｜REF 外觀候選（2026-10-11，PR #116）
+
+- **目前目標**：延續前輪已合併的 PR #114／#115，只精修 UI_01 的 U01-13 Condition、U01-17 EQ/Tone、U01-18 旋鈕材質外觀。唯一分支 `style/ui01-condition-eq-knob-ref-20261011`、[Draft PR #116](https://github.com/ureia-dev/SOURCERUNE/pull/116)，**不合併／不部署**。起點 main `0d374288ea181f65a2c839b90432e068697d43df`。
+- **三個獨立可恢復實作 checkpoint**：① Condition `e363a52e2fd10510e45c675f8f1c831dad058f02`：正式 OFF/ON checkbox、USED select 尺寸、兩行文字和對齊；不變 `rattle/wowFlutter`／Undo。② EQ/Tone `eef04d2cb7118b07d6817bee136065c485da9ea9`：正式 `RT_BUTTON_CAP_IDLE/HOVER`、`RT_SEGMENT_CAP_IDLE/ACTIVE`，細緻化 5 點 EQ 圖框；保留 Zoom、ON/OFF、原 Eq/HPF 真值。③ 旋鈕 `dad0c7ec31c0a86fe04530816a7782cee1661a50`：低眩光金屬面、細指針與稍低彩度環線、UI_01 七卡一致文字；**不改已鎖定 face 大小、透明命中範圍與參數**。三份 CSS 均只附加 UI_01 scope，由 `Web/App/index.html` 引用；UI_02 不改樣式。
+- **真實驗證**：[Fast CI #38069264033](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38069264033) **SUCCESS**（包含既有 DSP Guard、JS、素材完整性）；[真 Chromium #38069264112](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38069264112) **SUCCESS**，來源 `1ec323aaf25f6c7f43ccd059759df4d1769e4502`。瀏覽器報告 UI_01 與 UI_02 `geometry=true`／`knobSmoke=true`，Condition 真 toggle+Undo 與 EQ Bypass 真 toggle+Undo 均通過，五個 EQ 節點與 Material computed CSS 實證；證據 [UI_01_REF_FINISH_PR116.png](../../../Web/App/preview/rendered/UI_01_REF_FINISH_PR116.png) 和 [JSON](../../../Web/App/preview/rendered/UI_01_REF_FINISH_PR116_report.json)，PNG SHA256 `fa7a498aa6c83001153564c3ca75a3137c225a5caab6e5d40141b2fcb981f05f`。
+- **測試診斷**：一次性 Chromium 腳本初稿有兩處括號語法問題；修正後又發現正確 `HOVER` PNG 被過嚴格 IDLE 斷言拒收；再使用 repo 現有 DOM Undo 點擊驗證模式，沒有更改產品碼讓測試過關。三次皆留下 traceable commit；最後真 Chrome 成功。臨時圖片生成 workflow 僅供此輪預覽，正式合併前需從 PR 移除，保留 PNG／JSON。
+- **驗收邊界**：最新 UI_01 正式 REF 1508×808 原始完整 PNG 仍未入庫，所以這只是以 142 個掃描元件規格做可檢查的 **APPROX 候選**，不是 1:1 pixel perfect；Native VST3 自訂 UI／Host 未驗證，Condition／其他未核准 DSP 不因顯示控制項而變成完成。**U01-13／17／18 繼續 `[ ]`／PARTIAL**，不擅自勾整項，等待使用者看圖；`Assets/UI/ReferenceSheets` 解析度仍延後。DSP／WASM／Native 音訊路徑／參數 IDs／Factory Preset 均**零改動**，無需新 DSP 還原點。
+- **下一步**：使用者視覺檢查三項外觀；之後繼續原工作日誌中尚未驗收的剩餘 UI_01 細節／UI_02 對應項，遇涉及 DSP 聲音語意的功能只提案，不擅動。只有收到「部署」指示才核最新 CI 並合併／發布。
+
 ## 部署完成 Checkpoint｜PR #114＋#115（2026-10-11）
 
 - **使用者正式授權**：明確表示「部署」表示自動合併及打包，無須每次確認；本次指定立刻部署，並核對 GitHub UI 黃色 `Action required`。

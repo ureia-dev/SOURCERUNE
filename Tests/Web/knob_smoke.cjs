@@ -1,6 +1,7 @@
 // One-shot real Chromium knob interaction check used by existing Web Preview.
 // No new CI tier, repeated runs or changes to approved UI geometry.
 const assert=require("node:assert/strict");
+const {auditUi02Intelligibility}=require("./ui02_ref_audit.cjs");
 async function auditKnobs(page,ui){
   const selector='[data-macro="badSignal"]';
   const value=()=>page.$eval(selector,e=>Number(e.value));
@@ -63,7 +64,8 @@ async function auditKnobs(page,ui){
   const eqMouse=await auditEqMouseGestures(page,ui);
   const eqInline=await auditEqMiniInline(page,ui);
   const eqFocus=await auditEqFocus(page,ui);
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq,eqMouse,eqInline,eqFocus};
+  const ui02Ref=ui==="UI_02"?await auditUi02Intelligibility(page):null;
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq,eqMouse,eqInline,eqFocus,ui02Ref};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
