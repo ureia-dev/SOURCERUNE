@@ -1,5 +1,5 @@
 {
-  "commit": "08097902e452ca5f780cd1394466c9a3249e4582",
+  "commit": "42463c4e9db566abaff077e2b2ecdafc49cce35f",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -669,6 +669,23 @@
           "noAdvanced": true,
           "undo": true
         },
+        "eqInline": {
+          "ok": true,
+          "contained": true,
+          "selectedB2": true,
+          "wheel": [
+            "+0 dB",
+            "+0.1 dB"
+          ],
+          "verticalDrag": [
+            "+0 dB",
+            "+1.4 dB"
+          ],
+          "typedFreq": "1700 Hz",
+          "atomicUndo": true,
+          "cutsFreqOnly": true,
+          "miniPopupNever": true
+        },
         "eqFocus": {
           "ok": true,
           "sharedLiveSVG": true,
@@ -718,7 +735,7 @@
               "w": 22,
               "h": 22
             },
-            "line": "url(#sr-eq-line-88)"
+            "line": "url(#sr-eq-line-91)"
           },
           "liveControls": [
             "hpf",
@@ -1206,6 +1223,23 @@
           "noAdvanced": true,
           "undo": true
         },
+        "eqInline": {
+          "ok": true,
+          "contained": true,
+          "selectedB2": true,
+          "wheel": [
+            "+0 dB",
+            "+0.1 dB"
+          ],
+          "verticalDrag": [
+            "+0 dB",
+            "+1.4 dB"
+          ],
+          "typedFreq": "1700 Hz",
+          "atomicUndo": true,
+          "cutsFreqOnly": true,
+          "miniPopupNever": true
+        },
         "eqFocus": {
           "ok": true,
           "sharedLiveSVG": true,
@@ -1244,7 +1278,7 @@
               "h": 4.375
             },
             "miniHit": {
-              "w": 17.8826904296875,
+              "w": 17.8828125,
               "h": 17.5
             },
             "focus": {
@@ -1255,7 +1289,7 @@
               "w": 22,
               "h": 22
             },
-            "line": "url(#sr-eq-line-68)"
+            "line": "url(#sr-eq-line-71)"
           },
           "liveControls": [
             "hpf",
