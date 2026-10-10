@@ -1,5 +1,5 @@
 {
-  "commit": "3d1652ee8704ac0b63a9745c873b4d969ae7f9e5",
+  "commit": "d7cd7118b91e1108b0164ac18e183d2fc9b617a4",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -365,6 +365,19 @@
           "redoToggled": true,
           "backToBaseline": true
         }
+      },
+      "knobSmoke": {
+        "ok": true,
+        "ui": "UI_01",
+        "before": 20,
+        "dragged": 42,
+        "scrolled": 41,
+        "keyed": 42,
+        "advanced": 42,
+        "undid": 41,
+        "redid": 42,
+        "restored": 20,
+        "ambience": null
       }
     },
     "UI_02": {
@@ -572,6 +585,23 @@
           "h": 76.00003640004896,
           "x": 1115.0005357783944,
           "y": 796.000370734456
+        }
+      },
+      "knobSmoke": {
+        "ok": true,
+        "ui": "UI_02",
+        "before": 20,
+        "dragged": 42,
+        "scrolled": 41,
+        "keyed": 42,
+        "advanced": 42,
+        "undid": 41,
+        "redid": 42,
+        "restored": 20,
+        "ambience": {
+          "first": 35,
+          "changed": 82,
+          "reverted": 35
         }
       }
     }

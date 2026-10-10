@@ -1,16 +1,3 @@
 curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
 [UI_01] Browser console: Failed to load resource: the server responded with a status of 404 (File not found)
-AssertionError [ERR_ASSERTION]: UI_01 wheel must move one schema step
-
-42 !== 41
-
-    at auditKnobs (/home/runner/work/SOURCERUNE/SOURCERUNE/Tests/Web/knob_smoke.cjs:21:10)
-    at async [stdin]:133:29 {
-  generatedMessage: false,
-  code: 'ERR_ASSERTION',
-  actual: 42,
-  expected: 41,
-  operator: 'strictEqual',
-  diff: 'simple'
-}
-render audit failed with status 1
+render audit completed successfully
