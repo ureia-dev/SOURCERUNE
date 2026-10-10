@@ -240,29 +240,31 @@ async function auditRefKnobValueComposition(page,ui){
 
 // Same existing one-shot Web Preview Chrome smoke, no extra CI tier.
 async function auditHpf(page,ui){
-  const selector='[data-eq-hpf]';
-  const box=await page.$eval(selector,e=>{
-    const r=e.getBoundingClientRect();
-    return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width,h:r.height};
-  });
-  assert(box.w>45&&box.h>0,ui+" bottom EQ HPF control is not visible");
-  const init=await page.$eval(selector,e=>Number(e.value));
-  assert.equal(init,20,ui+" untouched HPF default must be neutral/OFF");
+  // A real mini-graph HPF point is the ONLY compact cutoff control.
+  const selector='.macro-eq-svg [data-eq-node="hpf"]';
+  assert.equal(await page.$('[data-eq-hpf]'),null,ui+' redundant HPF slider must be removed');
+  assert(await page.$(selector),ui+' HPF integrated frequency-graph node missing');
+  assert(await page.$('.macro-eq-svg [data-eq-node="lpf"]'),ui+' LPF node missing');
+  const init=await page.$eval('[data-eq-readout="hpf"]',e=>e.textContent.trim());
+  assert.equal(init,'OFF',ui+' untouched HPF must be neutral/OFF');
   await page.$eval(selector,e=>e.focus());
   await page.keyboard.press('ArrowRight');
-  const changed=await page.$eval(selector,e=>Number(e.value));
-  assert.equal(changed,21,ui+" real keyboard did not change HPF cutoff");
-  assert.equal(await page.$eval('[data-eq-hpf-value]',e=>e.textContent.trim()),'21 Hz');
+  const changed=await page.$eval('[data-eq-readout="hpf"]',e=>e.textContent.trim());
+  assert.equal(changed,'21 Hz',ui+' mini graph HPF keyboard ArrowRight must change one 1Hz step');
+  assert.equal(await page.$eval('.sr-eq-float',e=>e.hidden),true,
+    ui+' small graph must NEVER display the black EQ values popup');
   const points=await page.$eval('[data-eq-hpf-path]',e=>e.getAttribute('d'));
-  assert(points!=='M0 50H100',ui+" HPF curve did not update");
+  assert(points!=='M0 50H100',ui+' actual HPF transfer curve did not update');
   await page.click('.macro-eq h3');
   assert.equal(await page.$eval('[data-param="hpf"]',e=>Number(e.value)),21,
-    ui+" Advanced HPF does not reflect main-control state");
+    ui+' Advanced HPF must sync from integrated graph point');
   await page.click('#advancedCloseBtn');
   await page.$eval('#undoBtn',e=>e.click());
-  assert.equal(await page.$eval(selector,e=>Number(e.value)),20,ui+" HPF Undo failed");
+  assert.equal(await page.$eval('[data-eq-readout="hpf"]',e=>e.textContent.trim()),'OFF',
+    ui+' direct HPF-point Undo failed');
   await page.$eval('#redoBtn',e=>e.click());
-  assert.equal(await page.$eval(selector,e=>Number(e.value)),21,ui+" HPF Redo failed");
+  assert.equal(await page.$eval('[data-eq-readout="hpf"]',e=>e.textContent.trim()),'21 Hz',
+    ui+' direct HPF-point Redo failed');
   await page.$eval('#undoBtn',e=>e.click());
   // Test actual real shared C++ WASM filter, not merely state/visual updates.
   const audio=await page.evaluate(async()=>{
@@ -326,7 +328,8 @@ async function auditHpf(page,ui){
     assert(realWorklet.off>.16&&realWorklet.on<realWorklet.off*.12,
       "HPF not working in actual Web AudioWorklet: "+JSON.stringify(realWorklet));
   }
-  return {ok:true,ui,init,changed,undo:true,redo:true,curve:points,audio,realWorklet};
+  return {ok:true,ui,init,changed,integratedGraph:true,noStandaloneSlider:true,
+    noBlackPopup:true,undo:true,redo:true,curve:points,audio,realWorklet};
 }
 async function auditMiniEq(page,ui){
   // Validate graph-only display zoom for a flat, medium and even out-of-range
@@ -377,65 +380,67 @@ async function auditMiniEq(page,ui){
 
 
 async function auditEqMouseGestures(page,ui){
+  // Compact editor has no black floating values UI; full Focus retains it.
   const node=id=>'.macro-eq-svg [data-eq-node="'+id+'"]';
-  const xy=selector=>page.$eval(selector,el=>{
-    const r=el.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};
+  const xy=selector=>page.$eval(selector,e=>{
+    const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};
   });
   const position=async id=>{
     const pt=await xy(node(id));await page.mouse.move(pt.x,pt.y);return pt;
   };
-  const boxVisible=()=>page.$eval('.sr-eq-float',e=>!e.hidden&&getComputedStyle(e).display!=='none');
-  const read=kind=>page.$eval('[data-eq-float-value="'+kind+'"]',e=>parseFloat(e.value));
-  const hidden=()=>page.$eval('body',e=>e.classList.contains('advanced-open'));
+  const popupVisible=()=>page.$eval('.sr-eq-float',e=>!e.hidden);
+  const param=async key=>{
+    await page.$eval('.macro-eq h3',e=>e.click());
+    const value=await page.$eval('[data-param="'+key+'"]',e=>Number(e.value));
+    await page.$eval('#advancedCloseBtn',e=>e.click());
+    return value;
+  };
   await position('b2');
-  assert(await boxVisible(),ui+' hovering EQ point must reveal floating readout');
-  const fields=await page.$$eval('[data-eq-float-value]',xs=>xs.map(x=>x.dataset.eqFloatValue));
-  assert.deepEqual(fields,['freq','gain','q'],ui+' bell popup fields missing');
-  const firstQ=await read('q'),firstGain=await read('gain');
-  await page.mouse.wheel({deltaY:-120});
-  const wheelQ=await read('q');
-  assert(wheelQ<firstQ,ui+' VVChain wheel-up should decrease Q (wider bell)');
-  assert.equal(await read('gain'),firstGain,ui+' EQ point wheel must NOT change gain');
-  const input=await xy('[data-eq-float-value="gain"]');
-  await page.mouse.move(input.x,input.y);
-  assert(await boxVisible(),ui+' popup must survive move from EQ point');
-  const gBefore=await read('gain');
-  await page.mouse.move(input.x,input.y);await page.mouse.down();
-  await page.mouse.move(input.x,input.y-18,{steps:4});await page.mouse.up();
-  assert((await read('gain'))>gBefore,ui+' vertical numeric drag must adjust Gain');
-  const gDragged=await read('gain');
-  // Clicking one value selects text; typing commits on Enter without Advanced.
-  await page.$eval('[data-eq-float-value="freq"]',el=>{el.focus();el.select();});
-  await page.keyboard.type('1700');
-  await page.keyboard.press('Enter');
-  const typedFrequency=await read('freq');
-  assert.equal(typedFrequency,1.7,ui+' direct numeric frequency should show 1.7 kHz');
-  await page.mouse.move(input.x,input.y);
-  await page.mouse.wheel({deltaY:-120});
-  const gWheel=await read('gain');
-  assert(Math.abs(gWheel-gDragged-.1)<.015,ui+' popup wheel must change one 0.1dB step, not accelerate');
-  const qAfter=await read('q');
-  const bell=await position('b2');
-  await page.mouse.click(bell.x,bell.y,{clickCount:2,delay:80});
-  assert.equal(await read('gain'),0,ui+' double-click should reset only Gain');
-  assert.equal(await read('freq'),typedFrequency,ui+' double-click must preserve Freq');
-  assert.equal(await read('q'),qAfter,ui+' double-click must preserve Q');
-  assert(!await hidden(),ui+' small EQ editor must not open full Advanced dialog');
-  await position('hpf');
-  assert.deepEqual(await page.$$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' HPF must show only frequency');
-  await position('lpf');
-  assert.deepEqual(await page.$$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' LPF must show only frequency');
-  await page.mouse.move(2,2);
-  await new Promise(done=>setTimeout(done,350));
-  assert(!await boxVisible(),ui+' floating EQ popup did not dismiss after leaving interaction area');
-  // Revert wheel, drag, text entry, and double-click changes so the next
-  // UI layout runs from the same baseline and other audits are deterministic.
-  for(let i=0;i<5;i++)await page.$eval('#undoBtn',el=>el.click());
-  return {ok:true,hover:true,nodeWheelQ:[firstQ,wheelQ],numericDrag:[gBefore,gDragged],
-    typedFrequency,gainWheel:[gDragged,gWheel],bellDoubleClickGain:0,
-    noAdvanced:true,hpfLpfFreqOnly:true,autoDismiss:true};
+  assert.equal(await popupVisible(),false,ui+' mini graph hover spawned unwanted black box');
+  const initialQ=await param('b2Q');
+  await position('b2');await page.mouse.wheel({deltaY:-120});
+  const adjustedQ=await param('b2Q');
+  assert(adjustedQ<initialQ,ui+' wheel-up must lower band Q like VVChain');
+  assert.equal(await popupVisible(),false,ui+' mini wheel spawned unwanted information box');
+  const initialGain=await param('b2Gain');
+  const pt=await position('b2');await page.mouse.down();
+  await page.mouse.move(pt.x,pt.y-18,{steps:4});await page.mouse.up();
+  const gained=await param('b2Gain');
+  assert(gained>initialGain,ui+' mini direct drag failed to update Bell Gain');
+  assert.equal(await popupVisible(),false,ui+' mini node drag spawned unwanted black information box');
+  const double=await position('b2');
+  await page.mouse.click(double.x,double.y,{clickCount:2,delay:60});
+  assert.equal(await param('b2Gain'),0,ui+' double click must reset Bell Gain only');
+  assert.equal(await param('b2Q'),adjustedQ,ui+' double click must preserve Q');
+  await position('hpf');assert.equal(await popupVisible(),false,ui+' HPF point spawned popup');
+  await position('lpf');assert.equal(await popupVisible(),false,ui+' LPF point spawned popup');
+  for(let i=0;i<3;i++)await page.$eval('#undoBtn',el=>el.click());
+  assert.equal(await param('b2Q'),initialQ,ui+' node wheel Undo baseline changed');
+  assert.equal(await param('b2Gain'),initialGain,ui+' node Gain Undo baseline changed');
+  const colorAndAnalyzer=await page.evaluate(async()=>{
+    const styles=['hpf','b1','b2','b3','lpf'].map(id=>
+      getComputedStyle(document.querySelector('.macro-eq [data-eq-ring="'+id+'"]')).stroke);
+    const {updateEqAnalyzer}=await import('./eq_analyzer_v1.js');
+    const bins=new Float32Array(1024).fill(-85);
+    for(let i=2;i<260;i++)bins[i]=-27-i/80;
+    updateEqAnalyzer(bins,48000,10000,true);
+    const svg=document.querySelector('.macro-eq-svg');
+    const line=svg.querySelector('.macro-eq-analyzer-line')?.getAttribute('d')||'';
+    const area=svg.querySelector('.macro-eq-analyzer-fill')?.getAttribute('d')||'';
+    updateEqAnalyzer(bins,48000,10100,false);
+    return {styles,linePoints:(line.match(/L/g)||[]).length,areaClose:area.endsWith(' Z'),
+      cleared:svg.querySelector('.macro-eq-analyzer-line').getAttribute('d')===''};
+  });
+  assert.equal(new Set(colorAndAnalyzer.styles).size,5,ui+' five EQ handles must have distinct vivid colors');
+  assert(colorAndAnalyzer.linePoints>=128&&colorAndAnalyzer.areaClose&&colorAndAnalyzer.cleared,
+    ui+' VVChain-referenced logarithmic smoother/analyzer visual data must render and clear');
+  assert.equal(await page.$eval('body',e=>e.classList.contains('advanced-open')),false,
+    ui+' compact direct EQ gesture opened Advanced');
+  return {ok:true,onlyMiniNodes:true,noBlackPopup:true,
+    nodeWheelQ:[initialQ,adjustedQ],gainDrag:[initialGain,gained],
+    bellDoubleClickGain:0,cutPoints:true,vividNodes:colorAndAnalyzer.styles,
+    analyzerReference:true,noAdvanced:true,undo:true};
 }
-
 
 async function auditEqFocus(page,ui){
   const zoom='.macro-eq [data-eq-zoom-in]',focus='#eqFocusDialog',node=id=>focus+' [data-eq-node="'+id+'"]';
