@@ -8,14 +8,33 @@ const trace=new Float32Array(POINTS).fill(-90);
 let power=new Float64Array(0),prefix=new Float64Array(0),lastFrame=-Infinity,visible=false;
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
 const yFor=db=>(98-clamp((db+90)/90,0,1)*77);
+// Exactly the reference VVChain UI_A shape-preserving cubic trace,
+// from chen2622113/VVChain docs/index.html drawEQ() (main 5767e459).
+// Typed arrays persist between frames; no additional FFT, nodes, or DSP.
+const curveY=new Float32Array(POINTS);
+const curveSlopes=new Float32Array(POINTS-1);
+const curveTangents=new Float32Array(POINTS);
 function paint(graphs){
-  let line="",fill="";
-  for(let i=0;i<POINTS;i++){
-    const x=i*100/(POINTS-1),y=yFor(trace[i]);
-    const part=(i?"L":"M")+x.toFixed(3)+" "+y.toFixed(3);
-    line+=part;
+  const dx=100/(POINTS-1);
+  for(let i=0;i<POINTS;i++)curveY[i]=yFor(trace[i]);
+  for(let i=0;i<POINTS-1;i++)
+    curveSlopes[i]=(curveY[i+1]-curveY[i])/dx;
+  curveTangents[0]=curveSlopes[0];
+  curveTangents[POINTS-1]=curveSlopes[POINTS-2];
+  for(let i=1;i<POINTS-1;i++){
+    const a=curveSlopes[i-1],b=curveSlopes[i];
+    curveTangents[i]=a*b<=0?0:2*a*b/(a+b);
   }
-  fill=line+" L100 100 L0 100 Z";
+  let line="M0 "+curveY[0].toFixed(3);
+  for(let i=0;i<POINTS-1;i++){
+    const x0=i*dx,x1=(i+1)*dx,dy=dx/3;
+    const cp1=clamp(curveY[i]+curveTangents[i]*dy,0,100);
+    const cp2=clamp(curveY[i+1]-curveTangents[i+1]*dy,0,100);
+    line+=" C"+(x0+dy).toFixed(3)+" "+cp1.toFixed(3)+" "
+      +(x1-dy).toFixed(3)+" "+cp2.toFixed(3)+" "
+      +x1.toFixed(3)+" "+curveY[i+1].toFixed(3);
+  }
+  const fill=line+" L100 100 L0 100 Z";
   for(const svg of graphs){
     svg.querySelector(".macro-eq-analyzer-line")?.setAttribute("d",line);
     svg.querySelector(".macro-eq-analyzer-fill")?.setAttribute("d",fill);

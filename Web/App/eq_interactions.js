@@ -257,7 +257,7 @@ export function attachEqInteractions(ctx){
   });
   svg.addEventListener("focusin",e=>{
     const dot=e.target.closest?.('[data-eq-node]');
-    if(dot&&!popupDrag)open(dot.dataset.eqNode);
+    if(dot&&!popupDrag){ctx.select?.(dot.dataset.eqNode);open(dot.dataset.eqNode);}
   });
   svg.addEventListener("pointerover",e=>{
     const dot=e.target.closest('[data-eq-node]');
@@ -272,6 +272,7 @@ export function attachEqInteractions(ctx){
     if(!dot||e.button!==0)return;
     e.preventDefault();e.stopPropagation();
     const id=dot.dataset.eqNode;
+    ctx.select?.(id);
     drag={id,pointer:e.pointerId,startX:e.clientX,startY:e.clientY,
       freq:get(id,"freq"),gain:id.startsWith("b")?get(id,"gain"):0,
       before:ctx.snapshot(),changed:false};
@@ -306,6 +307,7 @@ export function attachEqInteractions(ctx){
     if(e.ctrlKey)return;
     e.preventDefault();e.stopPropagation();
     const id=dot.dataset.eqNode;
+    ctx.select?.(id);
     if(nodeWheelTarget!==id){nodeWheelTarget=id;nodeWheelAccum=0;}
     const dy=e.deltaMode===1?e.deltaY*16:e.deltaMode===2?e.deltaY*120:e.deltaY;
     nodeWheelAccum+=dy;
