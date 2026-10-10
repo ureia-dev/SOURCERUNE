@@ -6,7 +6,7 @@ const l=new Float32Array(e.memory.buffer,e.sr_input(0),128),r=new Float32Array(e
 const out=new Float32Array(e.memory.buffer,e.sr_output(0),128);
 const data=fs.readFileSync(process.argv[2]);
 assert.equal(data.length,160*128*4);
-const params=[100,60,0,0,100,0,3,5,0,0,0];
+const params=[100,60,0,0,100,0,3,5,0,0,0,20,20000,120,0,.7,600,0,1,2400,0,1,0];
 e.sr_prepare(48000);e.sr_parameters(...params);e.sr_reset();
 let seed=7,maxError=0,delta=0;
 for(let b=0;b<160;b++){
