@@ -589,6 +589,16 @@ async function auditEqFocus(page,ui){
   await page.mouse.down();await page.mouse.move(pt.x+25,pt.y-12,{steps:5});await page.mouse.up();
   const dragged=await read('b2-gain');
   assert.notEqual(dragged,before,ui+' dragged Focus node did not change real Gain');
+  const focusHitStyle=await page.$eval('#eqFocusDialog [data-eq-node="b2"]',el=>{
+    const st=getComputedStyle(el);
+    return {outline:st.outlineStyle,shadow:st.boxShadow,filter:st.filter,
+      background:st.backgroundColor};
+  });
+  assert.equal(focusHitStyle.outline,'none',ui+' Focus selected node outline is an opaque block');
+  assert.equal(focusHitStyle.shadow,'none',ui+' Focus selected node has a shadow rectangle');
+  assert.equal(focusHitStyle.filter,'none',ui+' Focus selected node uses a blocking filter');
+  assert(['rgba(0, 0, 0, 0)','transparent'].includes(focusHitStyle.background),
+    ui+' Focus selected node has opaque background');
   const newPath=await graphPath();
   assert.notEqual(newPath,initialPath,ui+' Focus did not recompute the same EQ response');
   const miniPath=await page.$eval('.macro-eq .macro-eq-line',e=>e.getAttribute('d'));
