@@ -31,6 +31,14 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: DSP protected-path change guard
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.sha }}"
+          python3 Tools/Build/dsp_change_guard.py --base "${{ github.event.pull_request.base.sha }}" --head "$GITHUB_SHA"
+
       - name: JavaScript syntax
         run: node --check Web/App/app.js
 
