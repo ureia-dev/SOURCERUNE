@@ -60,6 +60,16 @@
 - **驗收閘**：先恢復合法完整來源與正式素材取檔、檔案 SHA 檢查；在實際入口 `Web/App/index.html?ui=UI_01` 以 Chromium 渲染並取得 **baseline**；進行最小 Scene UI 實作，透過同一真入口產生 **after 截圖**，驗 hitbox/Zoom/Reset/Mode/時間/距離/車輛/波形、未動 UI_02；必要的 Fast 一次成功後，讓使用者看**真元件組裝畫面**並確認，保持草稿 PR 不合併。任何一項證據缺失都留 `PENDING`。
 - **截至本紀錄**：能力關卡未通過，故沒有修改任何正式 `Web/App` 程式或 PNG，沒有產生新組裝截圖；**U01-06～09 仍 `[ ]`**。本紀錄是可恢復的根因與工作定位 checkpoint，不是已完成 Scene 子項。
 
+### 2026-10-10 Scene View 第一階段：真實組裝候選已完成，等待使用者檢查（不合併）
+
+- **這是 U01-06～09 的 Web 候選，並非 REF 像素級最終 DONE；原有 U01-06/07/08/09 仍維持 \`[ ]\`，等使用者逐項檢查核准後才更新。** 下一項 Spectrum（U01-10）尚未開始。
+- **真實預覽阻塞已解除**：本回合使用 PR #113 專屬獨立 screenshot workflow \`.github/workflows/ui01-scene-pr113-preview.yml\`；GitHub Actions 真正 checkout 同一個 PR 分支，從完整 \`Web/App/index.html?ui=UI_01\` 載入 Runtime PNG 及四張正式 UI01 素材，再以 Chromium 截取 \`.app\`，將照片及報告提交回 PR 分支。工作容器本身仍無 GitHub DNS，**不能宣稱本機可完整取檔**。預覽只供 PR #113，沒有 main 部署與合併，也沒有新增安全／壓力測試次數。
+- **正式程式改動範圍**：\`Web/App/index.html\` 新增分層 Distance/Scene 指示、ZOOM/RESET 及 waveform 上的時間尺、游標；\`Web/App/app.js\` 僅接 sceneViewBox、Zoom state、Live Scene 更新與 time UI 更新；\`Web/App/scene_view_ref_stage1.js\` 為 UI01-only 動態 Motion/Distance 曲線、SOURCE 標籤、讀數框避讓、真時間／波形 seek；\`Web/App/scene_view_ref_stage1_v1.css\` 為新視覺規則。其他元件繼續從原 Runtime/semantic paths 載入，未製作或更換圖片，\`Assets/UI/ReferenceSheets\` **沒有修改**。
+- **候選最終 SOURCE SHA**：\`1b3bc7140d7c07175283976a2985b5bb3caf7ab1\`（所有程序修正後）；**真 Chrome** [UI_01_PR113.png](../../../Web/App/preview/rendered/UI_01_PR113.png) 及 [UI_01_PR113_report.json](../../../Web/App/preview/rendered/UI_01_PR113_report.json) 已在本工作分支產出；report screenshot SHA256 \`1ea7af325b2746aaaf83d722ca5a8f99cac97cc587a9609693686467644372e1\`。首次基準實拍來自 \`31d50b854792133803f5074ee5b99c69b5981027\`，不可拿基準假稱 after。
+- **真驗證**：[UI PR Screenshot Action #38059168605](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38059168605) **PASS**；[原有 Fast #38059168612](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38059168612) **PASS**；視覺 report \`geometryOk=true\`、\`visualSmoke.zoomIn=true\`、\`zoomReset=true\`、\`timeRulerTicks=5\`、\`labelNoOverlap=true\`；正式 Runtime Scene 五種圖均 HTTP 200，有效 semantic art 四張全成功解碼；1499×807 主外框、Scene 262px、SVG 186px 未變。檢查指出最初 SOURCE 名稱會蓋到 callout，已縮短、位移並用真 bbox 消除；另外修復 Zoom 刷新時舊曲線覆蓋真 live 曲線的錯誤，增加前後曲線 \`d\` 一致性的瀏覽器斷言。
+- **尚未證明**：因 Web Screenshot 只載入空白播放器，截圖上時間尺顯示 Motion \`0%/25%/50%/75%/100%\`，載入實際音檔時切換分秒與拖曳 seek 的完整端到端還沒用音訊檔實測；REF 原圖 UI01 PNG 缺檔，不能宣稱整個 Scene 完成精確像素疊圖；Native VST3 自訂 UI、DAW/Host 操作、Web 與 Native 統一畫面仍 PENDING。尤其聲音 DSP、WASM、公開 parameter IDs、Factory Preset 完全未修改。
+- **使用者驗收門檻**：只請使用者看真組裝圖對比正式 REF，確認目前 Scene View 的車、節點、距離線、Zoom/Reset、時間尺、波形外觀與比例；若要修，**沿 PR #113** 最小修改並再出同一路徑的新真截圖；直到明確核准**不合併、不修改 Spectrum**。完成後才繼續 U01-10。
+
 ### 下一步順序與驗收門檻
 
 1. **先修 UI_02 場景美術**（U02-08/09、CROSS-02、ART-SHARED-001）：先核獨立高解析正式素材與場景狀態，建立一張 REF/實際 Web 同場景的局部疊圖；不擅自用 AI 重畫替換核准 REF。
