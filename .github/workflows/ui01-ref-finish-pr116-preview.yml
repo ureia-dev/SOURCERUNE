@@ -90,7 +90,7 @@ jobs:
                     };
                   });
                   if(!s.boxSafe||!s.offPng.includes("RT_CHECKBOX_OFF.png")&&!s.offPng.includes("RT_CHECKBOX_ON.png")||
-                     !s.zoomPng.includes("RT_BUTTON_CAP_IDLE.png")||
+                     !(s.zoomPng.includes("RT_BUTTON_CAP_IDLE.png")||s.zoomPng.includes("RT_BUTTON_CAP_HOVER.png"))||
                      !s.powerPng.includes(s.activePower?"RT_SEGMENT_CAP_ACTIVE.png":"RT_SEGMENT_CAP_IDLE.png")||
                      !s.knobPng.includes("RT_KNOB_M_BASE.png")||s.knobNeedle.width!=="1.5px"||
                      s.eqNodes!==5||s.selected!==1)throw Error("Approved REF visual materials or active real controls missing: "+JSON.stringify(s));
