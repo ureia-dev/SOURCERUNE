@@ -75,3 +75,7 @@ smoke so their pointer/wheel/keyboard path is explicitly tracked too.
 This is Web UI wiring; unsupported DSP and the Native VST3 custom editor
 remain pending. No Factory Presets, parameter IDs or approved UI geometry are
 changed.
+
+## Active EQ revision (2026-10-10)
+
+Right-side EQ mini graph has exactly 5 draggable nodes: HPF, LPF and Band 1–3 (three peaking filters). Left/right adjusts frequency; up/down adjusts gain for a bell; mousewheel adjusts one schema step, Shift fine drag follows future refinement, double-click resets; one drag is one Undo entry. Every control edits Web shared state and the common C++/WASM sound engine, while the Native VST3 generic editor uses the same shared engine with 23 host params. Legacy Band 4 keys from imported state are ignored, never used as a hidden DSP stage. Final Tone remains a saved parameter only and is still pending sound behavior. The waveform/spectrum display is not the EQ graph.
