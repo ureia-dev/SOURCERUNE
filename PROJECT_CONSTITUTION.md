@@ -12,6 +12,10 @@
 
 > **原始決議來源警示（2026-10-08）**：使用者已指定 SOURCERUNE 最初完整產品討論正本為 `https://chatgpt.com/c/6abfd770-e594-83e8-adc4-992fa6ed47b3`。這是私人聊天連結，當前尚未讀到全文；此前的完整交接檔是後續聊天整理而非原始正本。詳見 `docs/history/SOURCERUNE_DECISION_TRACEABILITY_AUDIT_20261008.md` §0A。**永久原則已保存可確認部分，但不能稱所有最初討論已 100% 覆蓋**。若日後取得正本全文，需逐訊息核對並把確認的新最終決議修訂於本憲章及相關規格。
 
+## DSP 最高優先凍結補充決議（2026-10-10）
+
+正式核准的新規範：現有 DSP 聲音演算法在沒有**使用者對本次精確變更的明確核准**前一律不准動；獲准後改前、獨立再審、改後須三次核對，**每次實際修改前必須另建立且從 GitHub 遠端驗證一筆 DSP 還原點**。任何自主 DSP 研發責任、舊版規劃、UI/CI 建置授權均不能取代此條。細節、範圍、例外、驗收及不宣稱虛假保護等，單一權威見 [DSP_FREEZE_AND_RESTORE_POLICY.md](docs/architecture/DSP_FREEZE_AND_RESTORE_POLICY.md)。
+
 ## 開始任何工作的固定程序
 
 1. 讀 `AGENTS.md` → `PROJECT_RULES.md` → **本文件全部適用章節** → `SOURCERUNE_MASTER_HANDOFF.md`（僅當前進度）→ 受影響子系統 authoritative MD/JSON/manifest/程式碼。
