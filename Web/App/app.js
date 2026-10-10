@@ -56,7 +56,7 @@ function closeAdvanced(){
 function renderModules(){$("#moduleRail").innerHTML=TYPES.map(t=>{const x=selected(t),bp=state.bypass[t],hero=state.preset?.startsWith("factory:")?byId.get(state.preset.slice(8)):null,art=state.ui==="UI_02"&&t==="SOURCE"&&hero&&!String(hero.status||"").includes("art-required")?hero:x;return`<article class="module-card ${bp?"bypassed":""}" data-type="${t}"><div class="module-art"><img src="${assetUrl(art)}" alt="" onerror="this.closest('.module-card').classList.add('missing');this.remove()"></div><button class="module-cycle module-cycle-prev" data-cycle="${t}" data-dir="-1" aria-label="Previous ${LABEL[t]}"></button><button class="module-cycle module-cycle-next" data-cycle="${t}" data-dir="1" aria-label="Next ${LABEL[t]}"></button><div class="module-actions"><button data-byp="${t}" class="${bp?"active":""}">BYP</button><button data-edit="${t}">EDIT</button></div><div class="module-meta"><span>${LABEL[t]}</span><strong>${x.name}</strong></div></article>`}).join("");$$(".module-card").forEach(e=>e.onclick=x=>{if(!x.target.closest("button"))openBrowser(e.dataset.type)});$$("[data-cycle]").forEach(b=>b.onclick=e=>{e.stopPropagation();cycleAsset(b.dataset.cycle,+b.dataset.dir)});$$("[data-byp]").forEach(b=>b.onclick=()=>mut(()=>state.bypass[b.dataset.byp]=!state.bypass[b.dataset.byp]));$$("[data-edit]").forEach(b=>b.onclick=()=>openAdvanced(b.dataset.edit));$("#sourceLabel").textContent=selected("SOURCE").name.toUpperCase()}
 const MAC=[["MOTION","motion","%","MOTION"],["BAD SIGNAL","badSignal","%","TRANSMISSION"],["CONDITION","condition","%","CONDITION"],["INTELLIGIBILITY","intelligibility","%","INTELLIGIBILITY"],["AMBIENCE","ambience","%","AMBIENCE"],["MIX","mix","%","MIX"],["ADVANCED EQ / TONE","finalTone","","EQ_TONE"]];
 function macroPct(id){const c=findControl(id),v=+state.params[id];return Math.max(0,Math.min(100,(v-c.min)/(c.max-c.min)*100))}
-function macroKnob(id,label,unit="",klass=""){const c=findControl(id),v=state.params[id],pct=macroPct(id),angle=-135+pct*2.7;return`<div class="macro-knob ${klass}" data-value="${v}${unit}" style="--pct:${pct};--angle:${angle}deg"><div class="macro-knob-face"><strong class="macro-knob-value">${v}${unit}</strong></div><span class="macro-knob-label">${label}</span><input class="macro-knob-range" data-macro="${id}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${v}" aria-label="${label}"></div>`}
+function macroKnob(id,label,unit="",klass=""){const c=findControl(id),v=state.params[id],pct=macroPct(id),angle=-135+pct*2.7;return`<div class="macro-knob ${klass}" data-value="${v}${unit}" style="--pct:${pct};--angle:${angle}deg"><div class="macro-knob-face"><strong class="macro-knob-value">${v}${unit}</strong></div><span class="macro-knob-label">${label}</span><input class="macro-knob-range" data-macro="${id}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${v}" aria-label="${label}" aria-valuetext="${v}${c.unit||""}" title="Drag vertically, scroll, arrow keys, Shift for fine drag, double click to reset"></div>`}
 function macroSelect(id,klass=""){const c=findControl(id);return`<select class="macro-select ${klass}" data-macro-selectbox="${id}">${c.options.map(o=>`<option value="${o}" ${state.params[id]===o?"selected":""}>${pretty(o)}</option>`).join("")}</select>`}
 function modeButtons(id,vals,labels={}){return`<div class="macro-mode-row">${vals.map(v=>`<button data-macro-select="${id}" data-value="${v}" class="${state.params[id]===v?"active":""}">${labels[v]||pretty(v)}</button>`).join("")}</div>`}
 function miniEqSvg(){const fs=[20,state.params.b1Freq,state.params.b2Freq,state.params.b3Freq,state.params.b4Freq,20000],gs=[0,state.params.b1Gain,state.params.b2Gain,state.params.b3Gain,state.params.b4Gain,0];const lx=f=>Math.log10(Math.max(20,f)/20)/3*100,y=g=>50-Math.max(-18,Math.min(18,g))/18*34;const pts=fs.map((f,i)=>[lx(f),y(gs[i])]);const path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");return`<svg class="macro-eq-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><g class="macro-eq-grid"><path d="M0 25H100M0 50H100M0 75H100M25 0V100M50 0V100M75 0V100"/></g><path class="macro-eq-line" d="${path}"/>${pts.slice(1,5).map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.7"/>`).join("")}</svg>`}
@@ -123,6 +123,131 @@ function bindUi01ConditionCheckboxes(){
     $("[data-condition-checkbox='"+id+"']")?.focus({preventScroll:true});
   });
 }
+
+/* A single numeric state is shared by the macro face, Advanced drawer, scene
+   readouts and the AudioWorklet. The existing schema defines all limits/steps. */
+function syncMacroKnob(id){
+  const def=findControl(id),value=state.params[id];
+  const input=$('[data-macro="'+id+'"]');
+  if(input){
+    input.value=String(value);
+    input.setAttribute("aria-valuenow",String(value));
+    input.setAttribute("aria-valuetext",String(value)+(def.unit||""));
+    const knob=input.closest(".macro-knob");
+    if(knob){
+      const pct=macroPct(id),display=String(value)+(def.unit||"");
+      knob.style.setProperty("--pct",pct);
+      knob.style.setProperty("--angle",(-135+pct*2.7)+"deg");
+      knob.dataset.value=display;
+      const label=knob.querySelector(".macro-knob-value");
+      if(label)label.textContent=display;
+    }
+  }
+  const advanced=$('[data-param="'+id+'"]');
+  if(advanced){
+    advanced.value=String(value);
+    const readout=advanced.closest(".adv-control")?.querySelector(".value");
+    if(readout)readout.textContent=String(value)+(def.unit?" "+def.unit:"");
+  }
+  updateScene();
+  updateGains();
+  updateCurves();
+}
+function setMacroKnob(id,raw){
+  const def=findControl(id),number=Number(raw);
+  if(!def||!Number.isFinite(number))return false;
+  const next=motionKnobValue(def,number);
+  if(next===state.params[id])return false;
+  state.params[id]=next;
+  syncMacroKnob(id);
+  return true;
+}
+function finishMacroKnobChange(before,id){
+  if(!before||before.params[id]===state.params[id])return;
+  undo.push(before);
+  if(undo.length>80)undo.shift();
+  redo=[];
+  hist();
+  mark("MODIFIED");
+}
+function commitMacroKnob(id,raw){
+  const before=core();
+  if(setMacroKnob(id,raw))finishMacroKnobChange(before,id);
+}
+function bindMacroKnobs(){
+  $("[data-macro]").forEach(input=>{
+    const id=input.dataset.macro,def=findControl(id);
+    if(!def)return;
+    let pointer=null,startY=0,startValue=0,before=null;
+    const face=input.closest(".macro-knob");
+    input.addEventListener("pointerdown",e=>{
+      if(e.button!==0)return;
+      before=core();
+      // UI_02's exposed Ambience track must remain a horizontal range.
+      if(state.ui==="UI_02"&&id==="ambience")return;
+      e.preventDefault();
+      e.stopPropagation();
+      pointer=e.pointerId;
+      startY=e.clientY;
+      startValue=Number(state.params[id]);
+      input.focus({preventScroll:true});
+      face?.classList.add("adjusting");
+      input.setPointerCapture(e.pointerId);
+    });
+    input.addEventListener("pointermove",e=>{
+      if(pointer!==e.pointerId)return;
+      e.preventDefault();
+      const factor=(Number(def.max)-Number(def.min))/180*(e.shiftKey?.2:1);
+      setMacroKnob(id,startValue+(startY-e.clientY)*factor);
+    });
+    const finish=e=>{
+      if(pointer!==e.pointerId)return;
+      pointer=null;
+      face?.classList.remove("adjusting");
+      if(input.hasPointerCapture(e.pointerId))input.releasePointerCapture(e.pointerId);
+      finishMacroKnobChange(before,id);
+      before=null;
+    };
+    input.addEventListener("pointerup",finish);
+    input.addEventListener("pointercancel",finish);
+    // Keep native slider input/change for the exposed UI_02 Ambience
+    // track and for programmatic / assistive input, without double commits.
+    input.addEventListener("input",()=>{
+      if(pointer===null)setMacroKnob(id,input.value);
+    });
+    input.addEventListener("change",()=>{
+      if(pointer!==null||!before)return;
+      finishMacroKnobChange(before,id);
+      before=null;
+    });
+    input.addEventListener("wheel",e=>{
+      if(e.ctrlKey||e.deltaY===0)return;
+      e.preventDefault();
+      e.stopPropagation();
+      const step=Number(def.step)||1;
+      commitMacroKnob(id,Number(state.params[id])+(e.deltaY<0?step:-step));
+    },{passive:false});
+    input.addEventListener("keydown",e=>{
+      const step=Number(def.step)||1,value=Number(state.params[id]);
+      let next=null;
+      if(e.key==="ArrowUp"||e.key==="ArrowRight")next=value+step;
+      else if(e.key==="ArrowDown"||e.key==="ArrowLeft")next=value-step;
+      else if(e.key==="PageUp")next=value+step*10;
+      else if(e.key==="PageDown")next=value-step*10;
+      else if(e.key==="Home")next=Number(def.min);
+      else if(e.key==="End")next=Number(def.max);
+      if(next===null)return;
+      e.preventDefault();
+      e.stopPropagation();
+      commitMacroKnob(id,next);
+    });
+    input.addEventListener("dblclick",e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      commitMacroKnob(id,Number(def.default));
+    });
+  });
+}
 function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML=
 `<div class="macro macro-motion ${state.advanced==="MOTION"?"selected":""}" data-open="MOTION"><h3>MOTION</h3><div class="motion-knob-row"><div class="macro-knob macro-knob-readonly" style="--pct:${Math.max(0,Math.min(100,d/100*100))}"><div class="macro-knob-face"><strong class="macro-knob-value">${d}m</strong></div><span class="macro-knob-label">DISTANCE</span></div>${macroKnob("speed","SPEED","", "compact")}${macroKnob("doppler","DOPPLER","%","compact")}${macroKnob("width","WIDTH","%","compact")}</div>${modeButtons("motionMode",["APPROACH","PASS_BY","LEAVE"])}</div>`+
 `<div class="macro macro-badsignal ${state.advanced==="TRANSMISSION"?"selected":""}" data-open="TRANSMISSION"><h3>BAD SIGNAL</h3><div class="macro-two-col">${macroKnob("badSignal","AMOUNT","%")}<div class="macro-side"><span class="macro-device-name">${selected("TRANSMISSION").name}</span>${ui01SignalDetail()}</div></div></div>`+
@@ -132,7 +257,7 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 `<div class="macro macro-mix ${state.advanced==="MIX"?"selected":""}" data-open="MIX"><h3>MIX</h3>${macroKnob("mix","WET","%","large centered")}<span class="macro-mix-mode">WET</span></div>`+
 `<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3>${state.ui==="UI_01"?`<button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button>`:`<span>${state.bypass.EQ_TONE?"OFF":"ON"}</span>`}</div>${miniEqSvg()}<div class="macro-eq-foot"><span>HPF ${state.params.hpf} Hz</span><span>LPF ${(state.params.lpf/1000).toFixed(1)} kHz</span><span>TONE ${state.params.finalTone}</span></div></div>`;
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(!x.target.closest("input,button,select")){openAdvanced(e.dataset.open)}});
-$$("[data-macro]").forEach(r=>{r.onpointerdown=()=>r.dataset.before=JSON.stringify(core());r.oninput=e=>{const id=e.target.dataset.macro;state.params[id]=+e.target.value;const k=e.target.closest(".macro-knob");if(k){const pct=macroPct(id);k.style.setProperty("--pct",pct);k.style.setProperty("--angle",(-135+pct*2.7)+"deg");const unit=findControl(id).unit||"";k.dataset.value=state.params[id]+unit;const v=k.querySelector(".macro-knob-value");if(v)v.textContent=state.params[id]+unit}updateScene();updateGains();updateCurves()};r.onchange=e=>{if(e.target.dataset.before){undo.push(JSON.parse(e.target.dataset.before));redo=[];hist()}mark("MODIFIED");renderMacros()}});
+bindMacroKnobs();
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
 $$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}))}
 function findControl(id){for(const g of Object.values(schema.groups)){const c=g.controls.find(x=>x.id===id);if(c)return c}}
