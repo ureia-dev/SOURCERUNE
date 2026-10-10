@@ -40,3 +40,16 @@ body.ui-02 .macro-strip .macro[data-open="AMBIENCE"] .macro-knob:after{
 }
 body.ui-02 .macro-strip button:focus-visible,
 body.ui-02 .macro-strip select:focus-visible{outline:1px solid rgba(131,193,211,.8);outline-offset:1px}
+
+/* UI_02: keep all three real modes inside their locked 172px card.
+   Never clip a long translated label into a neighbouring mode or the knob readout. */
+body.ui-02 .macro-strip .macro-intelligibility .macro-mode-row{
+ min-width:0;z-index:1;
+}
+body.ui-02 .macro-strip .macro-intelligibility .macro-mode-row button{
+ min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ line-height:26px;letter-spacing:.005em;
+}
+body.ui-02 .macro-strip .macro-intelligibility .macro-mode-row button[aria-pressed="true"]{
+ color:#e7f4f7;
+}
