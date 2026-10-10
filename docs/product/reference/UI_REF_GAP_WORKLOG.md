@@ -1,5 +1,17 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+## 部署完成 Checkpoint｜PR #114＋#115（2026-10-11）
+
+- **使用者正式授權**：明確表示「部署」表示自動合併及打包，無須每次確認；本次指定立刻部署，並核對 GitHub UI 黃色 `Action required`。
+- **外部告警根因**：PR #114、#115 中 `github-actions[bot]` 提交截圖／JSON 時，`pull_request` 事件會留下 `action_required`，該類 run 的 **jobs=[]**，並非 UI JS 或 test step 執行失敗。上一次成功人工 head 的 Chromium run 為 #38067016670（#115，SUCCESS），#114 為 #38065542025 等；兩者快照提交後沒有修改已測程式。合併前已從 PR #114/#115 **刪除臨時預覽 workflow**，保留最終 PNG、JSON 證據，避免上線後繼續污染 Actions 清單。
+- **合併和 Fast CI**：[PR #114](https://github.com/ureia-dev/SOURCERUNE/pull/114) 在最新正式 Fast [#38067377365](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38067377365) **SUCCESS（含 DSP protected path guard）** 後，已由 merge commit `7f8712b4ebe1e52a962652077229caa5d3686260` 進入 main。[PR #115](https://github.com/ureia-dev/SOURCERUNE/pull/115) 在 Fast [#38067512752](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38067512752) **SUCCESS** 後，已由 merge commit `b5676adf1aa2d1b29f7679f66c203f180829b431` 進入 main。兩 PR 都不是 Draft、都已合併，且 UI_01/02 主程式的來源在 main。
+- **真 Web 發布**：[GitHub Pages](https://ureia-dev.github.io/SOURCERUNE/Web/App/?ui=UI_01) 正式 [run #38067588972](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38067588972) **SUCCESS**：Shared three-band EQ WASM build、Render audit、Pages package upload、Pages deployment steps 均 SUCCESS；發布所用主程式是 `b5676adf1aa2d1b29f7679f66c203f180829b431`。工作流另提交渲染稽核 `e35a761a060d3c5a5295d2026de0cc0e524ba8c6`（只變更 `Web/App/preview/rendered/**`）；最終 repo 上的 `Web/App/preview/rendered/geometry-report.json` 指回發布版本，`UI_01.ok=true`、`UI_02.ok=true`、雙 UI `knobSmoke.ok=true`、failures=[]。網頁外部實際 HTTP 存取未能由聊天端直接驗證，不以 Actions success 冒稱真人在瀏覽器已看見。
+- **打包邊界**：正式 run 的 `github-pages` artifact 已產出（artifact #11675309884），**Web 靜態包存在**；這個 artifact **不是 Windows/macOS VST3 安裝包**。main 目前只含 `ci.yml` / `web-preview-pages.yml`，沒有 Windows/macOS Native 套件工作流、沒有 `Tools/Build/package_native.py`。相關打包仍在未合併、有舊 Native 狀態（11 ID，與目前 13 ID 不一致）的 [PR #68](https://github.com/ureia-dev/SOURCERUNE/pull/68)；依專案 Release 手動觸發與 Host acceptance 規則，**本輪未出新的 VST3 ZIP／未進行真正的 DAW Host 驗收**。不得自行加入未核准的自動 Release 壓測或聲稱完成雙平台打包。
+- **DSP**：#114/#115 及這次合併均無 `Source/DSP/**`、WASM/AudioWorklet 音訊演算法、公開參數語意或 Factory Preset 改動；無 DSP 還原點需要建立。S/M／Presence／Dynamic／Ø 等視覺控件仍刻意 disabled，不能誤判為真正音效處理功能已完成。
+- **恢復點**：Web 正式來源 commit `b5676adf`，Render audit checkpoint `e35a761a`；下輪修改前先重讀最新 `main`、PR、CI；下一項仍依唯一工作單從剩餘 Condition / EQ/Tone / 旋鈕材質起進行，切勿重做本輪成功三模組。
+
+
+
 > **最新 P0 Checkpoint（2026-10-09）**：U01-12 `[x]`（UI_01 Web 四個 Checkbox／共用 State／Advanced／Undo/Redo 已 Chrome 真驗收），**目前 11 項 `[x]`、55 項 `[ ]`（含 ART-SHARED-001）**；CROSS-01（兩張 UI_01 正式 PNG binary 入 GitHub）仍 BLOCKED，其他 P0 仍待辦。文末「初次登錄統計」是歷史數值，不可當現況。
 
 > 2026-10-09 建立；承接使用者選取的完整缺項稽核。**每完成一個工作 ID，要直接在這份 GitHub 文件中將 `[ ]` 更新為 `[x]`，填入 PR／Commit／CI／正式 REF 與真 Web/Native 驗收證據。** 不另建立重複競爭工作清單。純文件的登錄不等於任何修復完成。
