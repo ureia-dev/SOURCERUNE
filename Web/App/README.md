@@ -106,3 +106,7 @@ This extends the previously approved real HPF (Tone/Hpf.h) without replacing it:
 ### WASM render gate (2026-10-10)
 
 The shared low-CPU three-band EQ WASM must be **compiled and instantiated** before the Web Preview reports success; `Source/DSP/Tone/Parametric3Wasm.cpp` now supplies the tiny freestanding memory functions used by clang. Prior Web Preview `38032145505` failed at `env.memcpy` and is **not** a successful deployment. This Web/App README update triggers the existing Pages build, which builds `eq3.wasm`, executes real Chromium UI_01/UI_02 EQ tests, publishes the binary, and saves the true audit log. Its result must be inspected, not inferred from the green job status. No extra safety/stress iterations or tests.
+
+### Web Preview EQ3 verification checkpoint (2026-10-10)
+
+The existing UI_01/UI_02 Chromium audit collects all five `[data-eq-node]` elements via `$$eval` before pointer/Advanced/Undo checks. Earlier green Pages workflow was not valid acceptance because the individual audit had thrown `els.map is not a function` and logged `render audit failed`. This marker re-triggers the existing one-shot Pages deployment and replaces no DSP logic.
