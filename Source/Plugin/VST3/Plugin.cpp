@@ -16,26 +16,36 @@ namespace sourcerune::plugin {
 // Permanent component/controller identities, independent of model/preset/UI.
 const FUID processorId(0x5749BC01,0xEB244D2D,0x9D4475AC,0xAE23D901);
 const FUID controllerId(0x5749BC02,0xEB244D2D,0x9D4475AC,0xAE23D901);
-using Values=std::array<double,11>;
+using Values=std::array<double,23>;
 static_assert(std::atomic<double>::is_always_lock_free);
 
 bool readState(IBStream* stream,Values& values){
     if(!stream)return false;
-    IBStreamer reader(stream,kLittleEndian);int32 magic=0,version=0;Values candidate;
-    if(!reader.readInt32(magic)||magic!=0x53524E31||!reader.readInt32(version)||version!=1)return false;
-    for(double& x:candidate)if(!reader.readDouble(x)||!std::isfinite(x)||x<0||x>1)return false;
+    IBStreamer reader(stream,kLittleEndian);int32 magic=0,version=0;Values candidate=sr::defaults;
+    if(!reader.readInt32(magic)||magic!=0x53524E31||!reader.readInt32(version)||(version!=1&&version!=2))return false;
+    // V1 recall had exactly 11 floats. Fill new EQ controls with flat defaults.
+    for(unsigned i=0;i<(version==1?11U:23U);++i)
+        if(!reader.readDouble(candidate[i])||!std::isfinite(candidate[i])||candidate[i]<0||candidate[i]>1)return false;
     values=candidate;return true;
 }
 bool writeState(IBStream* stream,const Values& values){
     if(!stream)return false;IBStreamer writer(stream,kLittleEndian);
-    if(!writer.writeInt32(0x53524E31)||!writer.writeInt32(1))return false;
+    if(!writer.writeInt32(0x53524E31)||!writer.writeInt32(2))return false;
     for(double x:values)if(!writer.writeDouble(x))return false;
     return true;
 }
 dsp::Parameters toDSP(const Values& v){
-    return {float(v[0]*100),float(v[1]*100),float(v[2]*100),float(v[3]*48-24),
+    dsp::Parameters p={float(v[0]*100),float(v[1]*100),float(v[2]*100),float(v[3]*48-24),
         float(v[4]*100),float(v[5]*48-24),sr::sourceModels[std::min(4,int(v[6]*5))],
         sr::transmissionModels[std::min(4,int(v[7]*5))],v[8]>=.5,v[9]>=.5,v[10]>=.5};
+    const auto scale=[](double x,double lo,double hi){return float(lo+x*(hi-lo));};
+    p.hpf=scale(v[11],20,1000);p.lpf=scale(v[12],1000,20000);
+    for(unsigned i=0;i<3;++i){
+        p.eqFreq[i]=scale(v[13+i*3],20,20000);
+        p.eqGain[i]=scale(v[14+i*3],-18,18);
+        p.eqQ[i]=scale(v[15+i*3],0.1,12);
+    }
+    p.eqBypass=v[22]>=.5;return p;
 }
 
 class Processor final : public AudioEffect {
@@ -123,6 +133,24 @@ public:
         parameters.addParameter(STR16("Source Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate,1100);
         parameters.addParameter(STR16("Transmission Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate,1101);
         parameters.addParameter(STR16("Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate|ParameterInfo::kIsBypass,2000);
+        // Native host generic editor controls the SAME shared C++ EQ as Web.
+        auto eqAdd=[&](const TChar* name,const TChar* unit,unsigned index,double lo,double hi,double plain){
+            auto* param=new RangeParameter(name,sr::ids[index],unit,lo,hi,plain);
+            param->getInfo().defaultNormalizedValue=sr::defaults[index];
+            parameters.addParameter(param);
+        };
+        eqAdd(STR16("EQ HPF"),STR16("Hz"),11,20,1000,20);
+        eqAdd(STR16("EQ LPF"),STR16("Hz"),12,1000,20000,20000);
+        for(unsigned band=0;band<3;++band){
+            const TChar* freq[]{STR16("EQ Band 1 Freq"),STR16("EQ Band 2 Freq"),STR16("EQ Band 3 Freq")};
+            const TChar* db[]{STR16("EQ Band 1 Gain"),STR16("EQ Band 2 Gain"),STR16("EQ Band 3 Gain")};
+            const TChar* q[]{STR16("EQ Band 1 Q"),STR16("EQ Band 2 Q"),STR16("EQ Band 3 Q")};
+            const double frequency[]{120,600,2400},quality[]{0.7,1,1};
+            eqAdd(freq[band],STR16("Hz"),13+band*3,20,20000,frequency[band]);
+            eqAdd(db[band],STR16("dB"),14+band*3,-18,18,0);
+            eqAdd(q[band],STR16(""),15+band*3,0.1,12,quality[band]);
+        }
+        parameters.addParameter(STR16("EQ Bypass"),nullptr,1,0,ParameterInfo::kCanAutomate,1102);
         for(unsigned i=0;i<sr::ids.size();++i)setParamNormalized(sr::ids[i],sr::defaults[i]);
         return kResultOk;
     }
