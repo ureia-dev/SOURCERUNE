@@ -1,0 +1,129 @@
+{
+  "sourceSha": "711c081fdb3001b5a0c8ad36c797be24eeb81871",
+  "initial": {
+    "geometry": true,
+    "geometryFailed": [],
+    "cards": [
+      {
+        "left": 883.986328125,
+        "top": 556.9541625976562,
+        "right": 1031.3035888671875,
+        "bottom": 762.2478637695312,
+        "width": 147.3172607421875,
+        "height": 205.293701171875
+      },
+      {
+        "left": 685.345703125,
+        "top": 556.9541625976562,
+        "right": 876.3828735351562,
+        "bottom": 762.2478637695312,
+        "width": 191.03717041015625,
+        "height": 205.293701171875
+      },
+      {
+        "left": 1038.906982421875,
+        "top": 556.9541625976562,
+        "right": 1148.2069091796875,
+        "bottom": 762.2478637695312,
+        "width": 109.2999267578125,
+        "height": 205.293701171875
+      }
+    ],
+    "nodes": [
+      {
+        "ok": true,
+        "bounds": {
+          "left": 966.674072265625,
+          "top": 638.6914672851562,
+          "right": 1020.8488159179688,
+          "bottom": 665.3035888671875,
+          "width": 54.17474365234375,
+          "height": 26.61212158203125
+        }
+      },
+      {
+        "ok": true,
+        "bounds": {
+          "left": 975.3319702148438,
+          "top": 675.7583618164062,
+          "right": 1023.7001342773438,
+          "bottom": 688.114013671875,
+          "width": 48.3681640625,
+          "height": 12.35565185546875
+        }
+      },
+      {
+        "ok": true,
+        "bounds": {
+          "left": 893.49072265625,
+          "top": 713.7757568359375,
+          "right": 1021.7992553710938,
+          "bottom": 749.8922119140625,
+          "width": 128.30853271484375,
+          "height": 36.116455078125
+        }
+      },
+      {
+        "ok": true,
+        "bounds": {
+          "left": 699.6022338867188,
+          "top": 715.6765747070312,
+          "right": 865.9281005859375,
+          "bottom": 754.6444091796875,
+          "width": 166.32586669921875,
+          "height": 38.96783447265625
+        }
+      },
+      {
+        "ok": true,
+        "bounds": {
+          "left": 1047.4609375,
+          "top": 693.816650390625,
+          "right": 1139.653076171875,
+          "bottom": 722.3296508789062,
+          "width": 92.192138671875,
+          "height": 28.51300048828125
+        }
+      },
+      {
+        "ok": true,
+        "bounds": {
+          "left": 1055.064453125,
+          "top": 726.13134765625,
+          "right": 1132.049560546875,
+          "bottom": 750.8426513671875,
+          "width": 76.985107421875,
+          "height": 24.7113037109375
+        }
+      }
+    ],
+    "disabled": 5,
+    "allDisabled": true,
+    "duck": true,
+    "duckAmount": "45%",
+    "modes": 3,
+    "selectedModes": 1,
+    "ratio": "WET 100%DRY 0%",
+    "waveCanvas": [
+      132,
+      28
+    ],
+    "waveVisible": true,
+    "imgAssets": {
+      "ambDisabled": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_DISABLED.png\")",
+      "intelDisabled": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_CHECKBOX_DISABLED.png\")",
+      "mixDisabled": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_BUTTON_CAP_DISABLED.png\")"
+    }
+  },
+  "modeSmoke": "PASS",
+  "duckUndo": "PASS",
+  "mixKeyboard": "PASS",
+  "realOutputWave": {
+    "lit": 961,
+    "seconds": 0.258988,
+    "playing": true
+  },
+  "previewSha256": "d281c6963dfe369c24e88987963610aa8280852f1f9aa8c1bff63b3882477c94",
+  "liveSha256": "0a948577be6e6d0d11499fe4e1a50ea176181c7010e3ac336db7f7820c983a5f",
+  "errors": []
+}
