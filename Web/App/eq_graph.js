@@ -25,14 +25,23 @@ export function eqGraph(state,sampleRate=48000){
     }
     return Math.max(-36,Math.min(18,v));
   };
-  const y=f=>Math.max(4,Math.min(96,50-response(f)/18*34));
+  // VVChain-style auto-fit: display-only +/-6, +/-12, +/-18 dB.
+  // No audio parameter, preset, gain value or response formula is modified.
+  const maxGain=Math.max(...[1,2,3].map(b=>Math.abs(Number(p["b"+b+"Gain"])||0)));
+  const displayRange=maxGain<=6?6:maxGain<=12?12:18;
+  const y=f=>Math.max(4,Math.min(96,50-response(f)/displayRange*34));
   const path=Array.from({length:101},(_,i)=>{
     const f=20*Math.pow(1000,i/100);
     return(i?"L":"M")+i+" "+y(f).toFixed(2);
   }).join(" ");
   const nodes=[["hpf",p.hpf],["b1",p.b1Freq],["b2",p.b2Freq],["b3",p.b3Freq],["lpf",p.lpf]]
-    .map(([id,f])=>({id,x:Math.max(3,Math.min(97,freqX(f))),y:y(f)}));
-  return {path,nodes};
+    .map(([id,f])=>{
+      // Band handles always represent their OWN Gain, not the summed EQ curve.
+      const gain=id.startsWith("b")?p["b"+id.slice(1)+"Gain"]:null;
+      return {id,x:Math.max(3,Math.min(97,freqX(f))),
+        y:gain===null?y(f):Math.max(4,Math.min(96,50-gain/displayRange*34))};
+    });
+  return {path,nodes,displayRange};
 }
 export function miniEqSvg(state,sampleRate=48000){
   const {path,nodes}=eqGraph(state,sampleRate);

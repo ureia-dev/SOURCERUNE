@@ -1,5 +1,6 @@
 import {createSceneNode, parametersFromState, hpfFromState, eq3FromState, audioSupportNote} from "./audio/engine.js";
 import {eqGraph,miniEqSvg as renderThreeBandEq} from "./eq_graph.js";
+import {attachEqInteractions} from "./eq_interactions.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
 const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"],LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT",SCENE_PRESET_HERO:"SCENE PRESET HERO"};
 const DEFSEL={SOURCE:"SRC_003_Smartphone_Speakerphone",TRANSMISSION:"TRN_005_GSM_Stable",WALL_COVER:"CVR_001_None_Open",SPACE_ENVIRONMENT:"SPC_022_Busy_City_Street"};
@@ -350,61 +351,33 @@ function refreshMiniEq(){
 }
 function bindMiniEq(){
   const svg=$(".macro-eq-svg");if(!svg)return;
-  let drag=null;
-  const apply=(id,raw,axis)=>{
-    const key=id==="hpf"||id==="lpf"?id:"b"+id.slice(1)+(axis==="gain"?"Gain":"Freq");
-    const def=findControl(key);if(!def)return false;
-    const step=Number(def.step)||1,min=Number(def.min),max=Number(def.max);
-    const value=Math.max(min,Math.min(max,Number((min+Math.round((raw-min)/step)*step).toFixed(6))));
-    if(value===state.params[key])return false;
-    state.params[key]=value;refreshMiniEq();if(key==="hpf")syncHpfUi();updateGains();
-    const adv=$('[data-param="'+key+'"]');
-    if(adv){adv.value=String(value);const v=adv.closest(".adv-control")?.querySelector(".value");
-      if(v)v.textContent=value+(def.unit?" "+def.unit:"");}
-    return true;
-  };
-  // The graph itself must not activate the enclosing Advanced card.
-  svg.addEventListener("click",e=>e.stopPropagation());
-  svg.addEventListener("pointerdown",e=>{
-    const dot=e.target.closest("[data-eq-node]");if(!dot)return;
-    e.stopPropagation();e.preventDefault();
-    drag={id:dot.dataset.eqNode,pointer:e.pointerId,before:core(),changed:false};
-    svg.setPointerCapture(e.pointerId);dot.focus({preventScroll:true});
-  });
-  svg.addEventListener("pointermove",e=>{
-    if(!drag||e.pointerId!==drag.pointer)return;
-    e.preventDefault();const r=svg.getBoundingClientRect();
-    const xx=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
-    const yy=Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));
-    const freq=20*Math.pow(1000,xx);
-    const changed=drag.id.startsWith("b")
-      ?(apply(drag.id,freq,"freq")|apply(drag.id,(.5-yy)*18/0.34,"gain"))
-      :apply(drag.id,freq,"freq");
-    drag.changed ||=!!changed;
-  });
-  const finish=e=>{
-    if(!drag||e.pointerId!==drag.pointer)return;
-    e.stopPropagation();const old=drag.before,changed=drag.changed;drag=null;
-    if(svg.hasPointerCapture(e.pointerId))svg.releasePointerCapture(e.pointerId);
-    if(changed){undo.push(old);if(undo.length>80)undo.shift();redo=[];hist();mark("MODIFIED");refresh();}
-  };
-  svg.addEventListener("pointerup",finish);svg.addEventListener("pointercancel",finish);
-  svg.addEventListener("wheel",e=>{
-    const dot=e.target.closest("[data-eq-node]");if(!dot)return;
-    e.preventDefault();e.stopPropagation();
-    const id=dot.dataset.eqNode,key=id.startsWith("b")?"b"+id.slice(1)+"Gain":id,def=findControl(key);
-    const old=core(),newValue=state.params[key]-Math.sign(e.deltaY)*(Number(def.step)||1);
-    if(apply(id,newValue,id.startsWith("b")?"gain":"freq")){
-      undo.push(old);if(undo.length>80)undo.shift();redo=[];hist();mark("MODIFIED");
+  attachEqInteractions({
+    svg,
+    getState:()=>state,
+    findControl,
+    snapshot:()=>core(),
+    changed:(key,value)=>{
+      refreshMiniEq();
+      // Keep the existing HPF slider and Advanced numeric view in sync
+      // without remounting the SVG during a gesture.
+      if(key==="hpf"){
+        const input=$("[data-eq-hpf]"),out=$("[data-eq-hpf-value]");
+        if(input)input.value=String(value);
+        if(out)out.textContent=value<=20?"OFF":value+" Hz";
+      }
+      const adv=$('[data-param="'+key+'"]');
+      if(adv){
+        adv.value=String(value);
+        const v=adv.closest(".adv-control")?.querySelector(".value"),def=findControl(key);
+        if(v)v.textContent=value+(def.unit?" "+def.unit:"");
+      }
+      updateGains();
+    },
+    commit:before=>{
+      if(!before||JSON.stringify(before.params)===JSON.stringify(state.params))return;
+      undo.push(before);if(undo.length>80)undo.shift();
+      redo=[];hist();mark("MODIFIED");
     }
-  },{passive:false});
-  svg.addEventListener("dblclick",e=>{
-    const dot=e.target.closest("[data-eq-node]");if(!dot)return;
-    e.preventDefault();e.stopPropagation();const id=dot.dataset.eqNode;
-    const ids=id.startsWith("b")?["Freq","Gain","Q"].map(x=>"b"+id.slice(1)+x):[id];
-    const old=core();let changed=false;
-    for(const k of ids){const def=findControl(k);if(state.params[k]!==def.default){state.params[k]=def.default;changed=true;}}
-    if(changed){undo.push(old);redo=[];hist();refresh();updateGains();}
   });
 }
 function findControl(id){for(const g of Object.values(schema.groups)){const c=g.controls.find(x=>x.id===id);if(c)return c}}
