@@ -31,3 +31,7 @@ CHROME_PATH=/path/to/chrome node Tests/Audio/browser_smoke.cjs
 ```
 
 Browser smoke starts/stops a local server, loads a generated WAV, checks actual output and parameter changes, transport, preset loading, both existing layouts and real offline AudioWorklet output. It is not human audition, Safari/Firefox validation, VST3 Host testing or a release safety suite.
+
+## Final EQ — exactly three active bands (2026-10-10)
+
+This extends the previously approved real HPF (Tone/Hpf.h) without replacing it: a new shared C++ Tone/Parametric3.h provides 12 dB/oct LPF and **only Band 1, Band 2, Band 3** RBJ peaking EQ; no fourth-band processing. Public b4Freq/b4Gain/b4Q IDs 53–55 are **retired and reserved**, not exposed or renumbered. The 74 existing Factory presets require no rewriting. Neutral bands skip processing, LPF at 20 kHz is an inactive stage, EQ bypass has a bounded low-CPU idle path. Web uses the same C++ standalone EQ WASM loaded by AudioWorklet after the existing HPF; VST3 adds compatible host parameters (23 total) and reads older 11/13-value states. The two Web layouts share HPF + LPF + three draggable EQ graph nodes and Advanced values; Final Tone itself remains state-only. An actual compiled WASM, one-shot browser audit and separate Native/VST3 host evidence are required before claiming each platform is verified.
