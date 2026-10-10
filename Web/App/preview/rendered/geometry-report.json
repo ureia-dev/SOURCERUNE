@@ -1,5 +1,5 @@
 {
-  "commit": "c9ebcd2f16faef8ae1a68f6cde5ba627beb23a3a",
+  "commit": "dacad91676e92c6bc555b36ab2437ef65624ee61",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -661,6 +661,39 @@
           "noAdvanced": true,
           "hpfLpfFreqOnly": true,
           "autoDismiss": true
+        },
+        "eqFocus": {
+          "ok": true,
+          "sharedLiveSVG": true,
+          "inertSmall": true,
+          "nodes": [
+            "hpf",
+            "b1",
+            "b2",
+            "b3",
+            "lpf"
+          ],
+          "largeSize": [
+            813,
+            452
+          ],
+          "b2Gain": [
+            "+0.0 dB",
+            "+1.6 dB"
+          ],
+          "qWheel": [
+            "Q 1.00",
+            "Q 0.90"
+          ],
+          "undo": true,
+          "redo": true,
+          "readoutPopup": true,
+          "escape": true,
+          "reopen": true,
+          "viewportContained": true,
+          "zoomOut": true,
+          "closeX": true,
+          "fixedRange": 12
         }
       }
     },
@@ -1119,6 +1152,39 @@
           "noAdvanced": true,
           "hpfLpfFreqOnly": true,
           "autoDismiss": true
+        },
+        "eqFocus": {
+          "ok": true,
+          "sharedLiveSVG": true,
+          "inertSmall": true,
+          "nodes": [
+            "hpf",
+            "b1",
+            "b2",
+            "b3",
+            "lpf"
+          ],
+          "largeSize": [
+            825,
+            459
+          ],
+          "b2Gain": [
+            "+0.0 dB",
+            "+1.6 dB"
+          ],
+          "qWheel": [
+            "Q 1.00",
+            "Q 0.90"
+          ],
+          "undo": true,
+          "redo": true,
+          "readoutPopup": true,
+          "escape": true,
+          "reopen": true,
+          "viewportContained": true,
+          "zoomOut": true,
+          "closeX": true,
+          "fixedRange": 12
         }
       }
     }
