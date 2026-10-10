@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## EQ 最新正式 checkpoint — 三段 EQ＋HPF／LPF（2026-10-10）
+
+- **最新核准 3 Band 取代舊的 4 Band**：真正 UI/DSP 只有 HPF、LPF、Band 1/2/3。舊 b4Freq、b4Gain、b4Q public IDs 53–55 僅保留 reserved/deprecated，不當成第四段濾波、不出現在 active controls；舊 Web 匯入 State 移除 b4 欄位；74 Factory Presets 無 b4 使用，不改內容。
+- **共用真 DSP**：已存在的 Source/DSP/Tone/Hpf.h 真 HPF 保留；新 Source/DSP/Tone/Parametric3.h 有二階 Butterworth LPF + 三組 RBJ Bell，inactive/flat 跳過運算、native 1×、無新增演算法延遲；C++ 單次 bounded audio smoke 通過左右聲道、非平坦可聽音頻變化、旁通原樣輸出。Web 使用同一份 C++ 編出的獨立 eq3.wasm，在 AudioWorklet 舊真 HPF 後處理。Native VST3 generic editor 保持前 13 ID 不變，新增十個 EQ 控制共 23，V1 11 / V2 13 讀取兼容，現行 V3；但 Windows/macOS VST3 Host、真正 Plugin UI 以及真實 CPU benchmark 未驗。
+- **Repo PR 與真 Chrome 證據**：#86 e3328e46（三段 EQ/LPF C++ + Web/Native 控制）、#87 eec98aaf（WASM freestanding memcpy/memset）、#88 345de82a（重新部署）、#89 4f755569（修正 Puppeteer 單節點讀取），均已合併；舊衝突 #83、#85 已關閉。真正 Web Preview https://github.com/ureia-dev/SOURCERUNE/actions/runs/38032900735 的 Web/App/preview/rendered/geometry-report.json 來源 commit 4f755569e6eccefdbeaa51737a382e2bda873fc0：UI01/UI02 geometry.ok、knobSmoke.ok、eq.ok 均 true；兩版 HPF/B1/B2/B3/LPF 均真 pointer drag、Advanced 數值同步、Undo 恢復成功；真 HPF OfflineAudioContext smoke 仍 PASS。render-log 顯示 render audit completed successfully（有舊非阻塞 404）。Pages 已部署 https://ureia-dev.github.io/SOURCERUNE/Web/App/ 。
+- **仍 PENDING / PARTIAL**：Final Tone 對聲音作用、REF 細節 1:1、真正 EQ3 Web AudioWorklet 獨立量化頻率響應/CPU 實測、Native VST3 Host（含 Win11/macOS）、Native UI/editor、TONE→MIX 最終 processing order；不能只憑 UI 或 Pages green 虛稱全 DSP/Native 完成。正式缺項 U01-17/U02-22 仍維持 [ ]。
+
 ## 最新 checkpoint：右下 EQ 真 HPF / 最省資源優先（2026-10-10）
 
 - **本輪僅授權 HPF 第一階段**，未擅改 74 Factory Preset 或其他 EQ/TONE 聲音。正式已有 public parameter `hpf` ID42（20–1000Hz；20Hz=exact OFF），`EQ_TONE` module bypass。採用同一份 `Source/DSP/Tone/Hpf.h` 立體聲 Butterworth 二階 HPF（12dB/oct, RBJ/W3C），不 oversample／不 allocation/lock/I/O／不 per-sample sin/cos；OFF 後整段完全跳過 HPF 運算。Native 測試 cutoff240Hz，40Hz 相對4kHz −31.13dB、OFF 原樣輸出。
