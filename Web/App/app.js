@@ -509,7 +509,7 @@ function bindMotionKnobs(){
     });
   });
 }
-function bind(){bindMotionKnobs();bindSceneView({getState:()=>state,setZoom:zoom=>mut(()=>state.sceneZoom=zoom),audio});const advancedCloseBtn=$("#advancedCloseBtn");if(advancedCloseBtn)advancedCloseBtn.onclick=closeAdvanced;document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.body.classList.contains("advanced-open")&&$("#assetBrowser")?.classList.contains("hidden")){e.preventDefault();closeAdvanced()}});$$("[data-ui]").forEach(b=>b.onclick=()=>mut(()=>state.ui=b.dataset.ui));$$("[data-view]").forEach(b=>b.onclick=()=>mut(()=>state.view=b.dataset.view));$$("[data-motion-mode]").forEach(b=>b.onclick=()=>mut(()=>state.params.motionMode=b.dataset.motionMode));$$("[data-tab]").forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;$$("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));$$(".tab-content").forEach(x=>x.classList.toggle("active",x.dataset.content===state.tab))});$("#syncToggle").onchange=e=>mut(()=>state.sync=e.target.checked);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));$("#browserClose").onclick=closeBrowser;$("#assetBrowser").onclick=e=>{if(e.target.id==="assetBrowser")closeBrowser()};$("#assetSearch").oninput=renderBrowserList;$("#categorySelect").onchange=renderBrowserList;$("#presetSelect").onchange=loadPreset;$("#presetPrevBtn").onclick=()=>stepPreset(-1);$("#presetNextBtn").onclick=()=>stepPreset(1);$("#savePresetBtn").onclick=savePreset;$("#presetVisualsBtn").onclick=()=>openBrowser("SCENE_PRESET_HERO");$("#importStateBtn").onclick=()=>$("#stateImportFile").click();$("#exportStateBtn").onclick=exportState;$("#stateImportFile").onchange=importState;$("#undoBtn").onclick=doUndo;$("#redoBtn").onclick=doRedo;$("#copyStateBtn").onclick=copyState;$("#pasteStateBtn").onclick=pasteState;$("#sceneFullscreenBtn").onclick=toggleSceneFullscreen;const settings=$("#settingsBtn"),tools=$("#globalToolsPopover");if(settings)settings.onclick=e=>{e.stopPropagation();document.body.classList.toggle("global-tools-open")};if(tools)tools.onclick=e=>e.stopPropagation();document.addEventListener("click",()=>document.body.classList.remove("global-tools-open"));$$("[data-global-ui]").forEach(b=>b.onclick=()=>mut(()=>state.ui=b.dataset.globalUi));$$("[data-global-action]").forEach(b=>b.onclick=()=>{const a=b.dataset.globalAction;if(a==="undo")doUndo();else if(a==="redo")doRedo();else if(a==="save")savePreset();else if(a==="import")$("#stateImportFile").click();else if(a==="export")exportState();else if(a==="bypass")mut(()=>state.globalBypass=!state.globalBypass)});const mdm=$("#motionDeckMode");if(mdm)mdm.onchange=e=>mut(()=>state.params.motionMode=e.target.value);document.addEventListener("fullscreenchange",syncFullscreenState);$("#globalBypass").onclick=()=>mut(()=>state.globalBypass=!state.globalBypass);$("#audioFile").onchange=loadAudio;$("#playBtn").onclick=play;$("#stopBtn").onclick=stop;$("#loopToggle").onchange=e=>audio.loop=e.target.checked;$("#seekSlider").oninput=e=>{if(audio.duration)audio.currentTime=+e.target.value/1000*audio.duration};const peakBtn=$("#meterPeakBtn"),rmsBtn=$("#meterRmsBtn");if(peakBtn)peakBtn.onclick=()=>{meterMode="PEAK";peakBtn.classList.add("active");rmsBtn?.classList.remove("active")};if(rmsBtn)rmsBtn.onclick=()=>{meterMode="RMS";rmsBtn.classList.add("active");peakBtn?.classList.remove("active")};$("#resetPeakBtn").onclick=()=>{peakIn=peakOut=-Infinity;mark("PEAK RESET")};$$("[data-snapshot]").forEach(b=>b.onclick=()=>snapshot(b.dataset.snapshot,b))}
+function bind(){bindMotionKnobs();bindSpectrumView();bindSceneView({getState:()=>state,setZoom:zoom=>mut(()=>state.sceneZoom=zoom),audio});const advancedCloseBtn=$("#advancedCloseBtn");if(advancedCloseBtn)advancedCloseBtn.onclick=closeAdvanced;document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.body.classList.contains("advanced-open")&&$("#assetBrowser")?.classList.contains("hidden")){e.preventDefault();closeAdvanced()}});$$("[data-ui]").forEach(b=>b.onclick=()=>mut(()=>state.ui=b.dataset.ui));$$("[data-view]").forEach(b=>b.onclick=()=>mut(()=>state.view=b.dataset.view));$$("[data-motion-mode]").forEach(b=>b.onclick=()=>mut(()=>state.params.motionMode=b.dataset.motionMode));$$("[data-tab]").forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;$$("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));$$(".tab-content").forEach(x=>x.classList.toggle("active",x.dataset.content===state.tab))});$("#syncToggle").onchange=e=>mut(()=>state.sync=e.target.checked);$$("[data-set-marker]").forEach(b=>b.onclick=()=>setMarker(b.dataset.setMarker));$("#browserClose").onclick=closeBrowser;$("#assetBrowser").onclick=e=>{if(e.target.id==="assetBrowser")closeBrowser()};$("#assetSearch").oninput=renderBrowserList;$("#categorySelect").onchange=renderBrowserList;$("#presetSelect").onchange=loadPreset;$("#presetPrevBtn").onclick=()=>stepPreset(-1);$("#presetNextBtn").onclick=()=>stepPreset(1);$("#savePresetBtn").onclick=savePreset;$("#presetVisualsBtn").onclick=()=>openBrowser("SCENE_PRESET_HERO");$("#importStateBtn").onclick=()=>$("#stateImportFile").click();$("#exportStateBtn").onclick=exportState;$("#stateImportFile").onchange=importState;$("#undoBtn").onclick=doUndo;$("#redoBtn").onclick=doRedo;$("#copyStateBtn").onclick=copyState;$("#pasteStateBtn").onclick=pasteState;$("#sceneFullscreenBtn").onclick=toggleSceneFullscreen;const settings=$("#settingsBtn"),tools=$("#globalToolsPopover");if(settings)settings.onclick=e=>{e.stopPropagation();document.body.classList.toggle("global-tools-open")};if(tools)tools.onclick=e=>e.stopPropagation();document.addEventListener("click",()=>document.body.classList.remove("global-tools-open"));$$("[data-global-ui]").forEach(b=>b.onclick=()=>mut(()=>state.ui=b.dataset.globalUi));$$("[data-global-action]").forEach(b=>b.onclick=()=>{const a=b.dataset.globalAction;if(a==="undo")doUndo();else if(a==="redo")doRedo();else if(a==="save")savePreset();else if(a==="import")$("#stateImportFile").click();else if(a==="export")exportState();else if(a==="bypass")mut(()=>state.globalBypass=!state.globalBypass)});const mdm=$("#motionDeckMode");if(mdm)mdm.onchange=e=>mut(()=>state.params.motionMode=e.target.value);document.addEventListener("fullscreenchange",syncFullscreenState);$("#globalBypass").onclick=()=>mut(()=>state.globalBypass=!state.globalBypass);$("#audioFile").onchange=loadAudio;$("#playBtn").onclick=play;$("#stopBtn").onclick=stop;$("#loopToggle").onchange=e=>audio.loop=e.target.checked;$("#seekSlider").oninput=e=>{if(audio.duration)audio.currentTime=+e.target.value/1000*audio.duration};const peakBtn=$("#meterPeakBtn"),rmsBtn=$("#meterRmsBtn");if(peakBtn)peakBtn.onclick=()=>{meterMode="PEAK";peakBtn.classList.add("active");rmsBtn?.classList.remove("active")};if(rmsBtn)rmsBtn.onclick=()=>{meterMode="RMS";rmsBtn.classList.add("active");peakBtn?.classList.remove("active")};$("#resetPeakBtn").onclick=()=>{peakIn=peakOut=-Infinity;mark("PEAK RESET")};$$("[data-snapshot]").forEach(b=>b.onclick=()=>snapshot(b.dataset.snapshot,b))}
 function doUndo(){if(!undo.length)return;redo.push(core());restore(undo.pop());hist();mark("UNDO")}function doRedo(){if(!redo.length)return;undo.push(core());restore(redo.pop());hist();mark("REDO")}
 function applyFactoryPreset(heroId,pushHistory=true){const cfg=scenePresets[heroId],hero=byId.get(heroId);if(!cfg){if(hero)$("#sceneTitle").textContent=hero.name;return}if(pushHistory)push();const keep={ui:state.ui,view:state.view,snapshots:state.snapshots};const ns=newState();ns.ui=keep.ui;ns.view=keep.view;ns.snapshots=keep.snapshots;Object.assign(ns.selection,cfg.selection||{});Object.assign(ns.params,cfg.params||{});for(const k of ["b4Freq","b4Gain","b4Q"])delete ns.params[k];Object.assign(ns.bypass,cfg.bypass||{});ns.preset="factory:"+heroId;state=ns;$("#sceneTitle").textContent=cfg.name||hero?.name||"Scene View";mark("FACTORY PRESET LOADED");refresh();renderPreset()}function stepPreset(delta){const sel=$("#presetSelect"),opts=[...sel.options].filter(o=>o.value);if(!opts.length)return;let i=opts.findIndex(o=>o.value===sel.value);if(i<0)i=delta>0?-1:0;i=(i+delta+opts.length)%opts.length;sel.value=opts[i].value;loadPreset({target:sel})}
 function loadPreset(e){const v=e.target.value;if(!v)return;if(v.startsWith("factory:"))applyFactoryPreset(v.slice(8),true);else{push();const p=userPresets[v.slice(5)];if(p){const snaps=state.snapshots;state=migrateLegacyEq(p.state);state.snapshots=snaps;state.preset=v}mark("PRESET LOADED");refresh()}}
@@ -574,6 +574,20 @@ audio.addEventListener("seeked",()=>sceneNode?.port.postMessage({type:"reset"}))
 function stats(a){if(!a)return{peak:-Infinity,rms:-Infinity,pct:0};const d=new Uint8Array(a.fftSize);a.getByteTimeDomainData(d);let p=0,s=0;for(const x of d){const v=(x-128)/128;p=Math.max(p,Math.abs(v));s+=v*v}p=db(p);const r=db(Math.sqrt(s/d.length));return{peak:p,rms:r,pct:Math.max(0,Math.min(100,(p+60)/60*100))}}
 function meters(){const i=stats(inAn),o=stats(outAn);peakIn=Math.max(peakIn,i.peak);peakOut=Math.max(peakOut,o.peak);const im=$("#inMeter"),om=$("#outMeter"),ui2=state?.ui==="UI_02",pct=v=>Math.max(0,Math.min(100,(v+60)/60*100)),iv=meterMode==="RMS"?i.rms:i.peak,ov=meterMode==="RMS"?o.rms:o.peak,ip=meterMode==="RMS"?pct(i.rms):i.pct,op=meterMode==="RMS"?pct(o.rms):o.pct;if(ui2){im.style.width=ip+"%";om.style.width=op+"%";im.style.height="100%";om.style.height="100%"}else{im.style.height=ip+"%";om.style.height=op+"%";im.style.width="";om.style.width=""}$("#peakInValue").textContent=fmt(iv);$("#peakOutValue").textContent=fmt(ov);$("#rmsInValue").textContent=fmt(i.rms);$("#rmsOutValue").textContent=fmt(o.rms)}
 let spectrumBins=null;
+let spectrumPreBins=null;
+const spectrumView={source:"POST",rta:true,smooth:true};
+function bindSpectrumView(){
+  const sync=()=>{
+    $("[data-spectrum-source]").forEach(b=>{const active=b.dataset.spectrumSource===spectrumView.source;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});
+    const rta=$("[data-spectrum-rta]"),smoothing=$("[data-spectrum-smoothing]");
+    if(rta){rta.classList.toggle("active",spectrumView.rta);rta.setAttribute("aria-pressed",String(spectrumView.rta))}
+    if(smoothing){smoothing.classList.toggle("active",spectrumView.smooth);smoothing.setAttribute("aria-pressed",String(spectrumView.smooth));smoothing.textContent=spectrumView.smooth?"1/3":"RAW"}
+  };
+  $("[data-spectrum-source]").forEach(b=>b.addEventListener("click",()=>{spectrumView.source=b.dataset.spectrumSource;sync()}));
+  $("[data-spectrum-rta]")?.addEventListener("click",()=>{spectrumView.rta=!spectrumView.rta;sync()});
+  $("[data-spectrum-smoothing]")?.addEventListener("click",()=>{spectrumView.smooth=!spectrumView.smooth;sync()});
+  sync();
+}
 function spectrum(){
   const c=$("#spectrumCanvas"),x=c.getContext("2d"),w=c.width,h=c.height;
   x.clearRect(0,0,w,h);x.fillStyle="#081015";x.fillRect(0,0,w,h);
@@ -593,19 +607,56 @@ function spectrum(){
     x.fillText(f>=1000?(f/1000)+"k":String(f),xx,h-9);
   }
   if(!outAn)return;
-  // Share one analyser read between the main spectrum and compact/Focus EQ.
+  // The EQ mini/focus analyser always receives POST data, regardless of
+  // which *visualisation* the user chooses here. No audio routing changes.
   if(!spectrumBins||spectrumBins.length!==outAn.frequencyBinCount)
     spectrumBins=new Float32Array(outAn.frequencyBinCount);
-  const d=spectrumBins;outAn.getFloatFrequencyData(d);
-  updateEqAnalyzer(d,audioCtx?.sampleRate||48000,performance.now(),!audio.paused&&!document.hidden);
-  const sr=audioCtx?.sampleRate||48000,ny=sr/2;
-  x.strokeStyle="#55cfff";x.lineWidth=1.7;x.beginPath();
-  for(let px=0;px<=Math.floor(pw);px++){
-    const f=20*Math.pow(20000/20,px/pw),bin=Math.max(0,Math.min(d.length-1,Math.round(f/ny*(d.length-1))));
-    const dbv=Math.max(-60,Math.min(0,d[bin])),yy=top+(-dbv/60)*ph,xx=left+px;
-    px?x.lineTo(xx,yy):x.moveTo(xx,yy);
+  outAn.getFloatFrequencyData(spectrumBins);
+  updateEqAnalyzer(spectrumBins,audioCtx?.sampleRate||48000,performance.now(),!audio.paused&&!document.hidden);
+  if(!spectrumView.rta)return;
+  if(inAn){
+    if(!spectrumPreBins||spectrumPreBins.length!==inAn.frequencyBinCount)
+      spectrumPreBins=new Float32Array(inAn.frequencyBinCount);
+    inAn.getFloatFrequencyData(spectrumPreBins);
   }
-  x.stroke();
+  const primary=spectrumView.source==="PRE"?spectrumPreBins:spectrumBins;
+  const other=spectrumView.source==="PRE"?spectrumBins:spectrumPreBins;
+  const sr=audioCtx?.sampleRate||48000,ny=sr/2;
+  const makePowerPrefix=d=>{
+    if(!spectrumView.smooth)return null;
+    const pref=new Float64Array(d.length+1);
+    for(let i=0;i<d.length;i++){
+      const v=Number.isFinite(d[i])?Math.max(-160,Math.min(20,d[i])):-160;
+      pref[i+1]=pref[i]+Math.pow(10,v/10);
+    }
+    return pref;
+  };
+  const primarySum=primary?makePowerPrefix(primary):null;
+  const otherSum=other?makePowerPrefix(other):null;
+  const getDb=(bins,prefix,f)=>{
+    const len=bins.length,binHz=ny/len;
+    const nearest=Math.min(len-1,Math.max(0,Math.round(f/binHz)));
+    if(!prefix)return Number.isFinite(bins[nearest])?bins[nearest]:-160;
+    // True 1/3-octave *power average*: +/- 1/6 octave around f.
+    const lo=Math.max(0,Math.min(len-1,Math.floor(f*Math.pow(2,-1/6)/binHz)));
+    const hi=Math.max(lo,Math.min(len-1,Math.ceil(f*Math.pow(2,1/6)/binHz)));
+    const power=Math.max(1e-16,(prefix[hi+1]-prefix[lo])/(hi-lo+1));
+    return 10*Math.log10(power);
+  };
+  const drawTrace=(bins,prefix,color,opacity,width)=>{
+    if(!bins)return;
+    x.strokeStyle=color;x.globalAlpha=opacity;x.lineWidth=width;x.beginPath();
+    for(let px=0;px<=Math.floor(pw);px++){
+      const f=20*Math.pow(20000/20,px/pw);
+      const dbv=Math.max(-60,Math.min(0,getDb(bins,prefix,f)));
+      const yy=top+(-dbv/60)*ph,xx=left+px;
+      px?x.lineTo(xx,yy):x.moveTo(xx,yy);
+    }
+    x.stroke();x.globalAlpha=1;
+  };
+  // White comparator is the actual opposite pre/post analyser, not a template.
+  drawTrace(other,otherSum,"#d1e4eb",.40,1.05);
+  drawTrace(primary,primarySum,"#65ceef",1,1.7);
 }
 function waveform(){const c=$("#sceneWaveformCanvas");if(!c)return;const x=c.getContext("2d"),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle="#315564";x.lineWidth=1;x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();if(!inAn)return;const d=new Uint8Array(inAn.fftSize);inAn.getByteTimeDomainData(d);x.strokeStyle="#5cc9ee";x.lineWidth=1.5;x.beginPath();for(let a=0;a<w;a++){const n=Math.floor(a/w*(d.length-1)),yy=d[n]/255*h;a?x.lineTo(a,yy):x.moveTo(a,yy)}x.stroke()}
 function time(){const t=audio.currentTime||0,m=Math.floor(t/60),s=Math.floor(t%60),ms=Math.floor(t%1*1000);$("#transportTime").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${String(ms).padStart(3,"0")}`;if(audio.duration)$("#seekSlider").value=Math.round(t/audio.duration*1000);syncSceneTime(state,audio)}
