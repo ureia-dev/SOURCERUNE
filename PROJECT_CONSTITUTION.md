@@ -1,5 +1,9 @@
 # SOURCERUNE PROJECT CONSTITUTION — 永久製作原則與完整規格
 
+## 2026-10-10 最新 EQ UI 限定：小視窗不得浮黑框／HPF & LPF 放進頻譜
+
+**2026-10-10 目前最新用戶 EQ 五項更正（在 UI 產品契約中取代歷史小框／滑桿規則）**：節點旁/焦點不准出現黑色方塊；小 EQ 點選/拖曳/滾輪完全不顯示數值浮動資訊框，只有 Zoom In Focus 大 EQ 使用 Freq/Gain/Q 浮框；HPF 原獨立 slider 移除，HPF 與 LPF 直接作為小頻譜五個實際可拖曳點的兩端，另有 Band1–3 三點；配色採 VVChain 式分明 HPF 綠/B1 紅/B2 黃/B3 藍/LPF 粉的鮮明但不刺眼色彩；頻譜**只參考 private chen2622113/VVChain 的 UI 呈現**，對數頻率、功率平均、7-tap 空間平滑、快升慢降，並使用 SOURCERUNE 既有 post-DSP AnalyserNode 一次 FFT 讀數（不創第二 FFT／音訊節點、不變聲音）；真 EQ 曲線及 ±24dB 顯示不變。僅 Web UI_01/02；Native VST3 自訂視窗與 Host 驗收 PENDING。**DSP changed NO**。當輪工作分支 fix/eq-spectrum-node-ux-vvchain-reference-20261010，已修改 Web/App/eq_interactions.js、eq_analyzer_v1.js、eq_graph.js、app.js、eq_polish_v1.css、Tests/Web/knob_smoke.cjs；**Fast/Chromium/deploy 尚待 PR 驗收，不能冒稱通過。**
+
 ## 2026-10-10 最新核准決策：EQ 固定 ±24 dB 的高精度 Web 圖形（取代 ±12）
 
 右下小 EQ 及內建 Zoom In 放大視窗須採 **同一套真實 HPF／LPF／Band1–3 EQ**。其顯示固定 ±24 dB，不再自動縮放；**實際 Band Gain 範圍仍為 −18～+18 dB**，不得為了圖改演算法。按核准專業 EQ 示意圖，節點要細小等比例圓形（Web 實測 mini 4.4–4.5 px、Focus 6.9 px），保留獨立透明滑鼠命中區以方便拖曳；曲線細緻、彩色柔和漸層、網格低對比。Focus 11 個 Freq/Gain/Q 旋鈕必須對應既有同一份狀態／Undo／AudioWorklet，控制方式沿用 VVChain UI_A 的滑鼠操作語意，但嚴禁搬 VVChain DSP。未實作的 24 dB/oct 滤波斜率、額外 Band Bypass、Phase/濾波 Type 不可呈現成假功能，現有 HPF／LPF 仍固定真 12 dB/oct。主實作 [PR #104](https://github.com/ureia-dev/SOURCERUNE/pull/104) 已合併，Fast #38047626674 PASS，真 Web Preview #38047739428 UI_01/02 eqFocus/eqMouse/geometry PASS。Native 自訂 EQ GUI 仍 PENDING；DSP unchanged，未觸發新 DSP restore。完整可操作數值規格與 10+10+10+2 證據參照 `docs/product/UI_FUNCTION_CONTRACT.md`、`docs/product/reference/EQ_24DB_MOUSE_PRECISION_AUDIT_20261010.md`。
