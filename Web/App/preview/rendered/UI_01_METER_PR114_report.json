@@ -419,14 +419,14 @@
     "positivePeak": true,
     "distinctWidth": true
   },
-  "sourceSha": "00568969a612255071bbb2b0d6c83afd69c8ecea",
+  "sourceSha": "d8105ff2e3df78342abefff3ab3e90de74606116",
   "modeSmoke": "PASS",
-  "pngSha256": "f76485e00414d9e680a456c1d96c766f30368722fbfbba5c99cd27c4100d3d0e",
+  "pngSha256": "a21c3ecc2891c3aba2d35dd9fd91cd86abf3436704a7a195e4a934379f6216c1",
   "liveAudioProof": {
     "playing": true,
     "seconds": 0.272,
     "miniPathSize": 5476,
-    "activeCyanPixels": 248
+    "activeCyanPixels": 249
   },
-  "spectrumShotSha256": "9581aea637c9b709a5ce6079993741527b3eebcf9a4c9d718ab07524868fb0c5"
+  "spectrumShotSha256": "fc04eaa76ba5ca15142d36cdee871e26389d896faa825e2a792e740fd7e50bf0"
 }
