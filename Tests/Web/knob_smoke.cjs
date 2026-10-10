@@ -60,7 +60,8 @@ async function auditKnobs(page,ui){
   const knobValues=await auditRefKnobValueComposition(page,ui);
   const hpf=await auditHpf(page,ui);
   const eq=await auditMiniEq(page,ui);
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq};
+  const eqMouse=await auditEqMouseGestures(page,ui);
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq,eqMouse};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
@@ -356,6 +357,67 @@ async function auditMiniEq(page,ui){
     results[id]={before,dragged:after,undone};
   }
   return {ok:true,nodes:names,values:results};
+}
+
+
+async function auditEqMouseGestures(page,ui){
+  const node=id=>'.macro-eq-svg [data-eq-node="'+id+'"]';
+  const xy=selector=>page.$eval(selector,el=>{
+    const r=el.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};
+  });
+  const position=async id=>{
+    const pt=await xy(node(id));await page.mouse.move(pt.x,pt.y);return pt;
+  };
+  const boxVisible=()=>page.$eval('.sr-eq-float',e=>!e.hidden&&getComputedStyle(e).display!=='none');
+  const read=kind=>page.$eval('[data-eq-float-value="'+kind+'"]',e=>parseFloat(e.value));
+  const hidden=()=>page.$eval('body',e=>e.classList.contains('advanced-open'));
+  await position('b2');
+  assert(await boxVisible(),ui+' hovering EQ point must reveal floating readout');
+  const fields=await page.$eval('[data-eq-float-value]',xs=>xs.map(x=>x.dataset.eqFloatValue));
+  assert.deepEqual(fields,['freq','gain','q'],ui+' bell popup fields missing');
+  const firstQ=await read('q'),firstGain=await read('gain');
+  await page.mouse.wheel({deltaY:-120});
+  const wheelQ=await read('q');
+  assert(wheelQ>firstQ,ui+' EQ point wheel should increase Q');
+  assert.equal(await read('gain'),firstGain,ui+' EQ point wheel must NOT change gain');
+  const input=await xy('[data-eq-float-value="gain"]');
+  await page.mouse.move(input.x,input.y);
+  assert(await boxVisible(),ui+' popup must survive move from EQ point');
+  const gBefore=await read('gain');
+  await page.mouse.move(input.x,input.y);await page.mouse.down();
+  await page.mouse.move(input.x,input.y-18,{steps:4});await page.mouse.up();
+  assert((await read('gain'))>gBefore,ui+' vertical numeric drag must adjust Gain');
+  const gDragged=await read('gain');
+  // Clicking one value selects text; typing commits on Enter without Advanced.
+  await page.$eval('[data-eq-float-value="freq"]',el=>{el.focus();el.select();});
+  await page.keyboard.type('1700');
+  await page.keyboard.press('Enter');
+  const typedFrequency=await read('freq');
+  assert.equal(typedFrequency,1.7,ui+' direct numeric frequency should show 1.7 kHz');
+  await page.mouse.move(input.x,input.y);
+  await page.mouse.wheel({deltaY:-120});
+  const gWheel=await read('gain');
+  assert(Math.abs(gWheel-gDragged-.1)<.015,ui+' popup wheel must change one 0.1dB step, not accelerate');
+  const qAfter=await read('q');
+  const bell=await position('b2');
+  await page.mouse.click(bell.x,bell.y,{clickCount:2,delay:80});
+  assert.equal(await read('gain'),0,ui+' double-click should reset only Gain');
+  assert.equal(await read('freq'),typedFrequency,ui+' double-click must preserve Freq');
+  assert.equal(await read('q'),qAfter,ui+' double-click must preserve Q');
+  assert(!await hidden(),ui+' small EQ editor must not open full Advanced dialog');
+  await position('hpf');
+  assert.deepEqual(await page.$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' HPF must show only frequency');
+  await position('lpf');
+  assert.deepEqual(await page.$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' LPF must show only frequency');
+  await page.mouse.move(2,2);
+  await new Promise(done=>setTimeout(done,350));
+  assert(!await boxVisible(),ui+' floating EQ popup did not dismiss after leaving interaction area');
+  // Revert wheel, drag, text entry, and double-click changes so the next
+  // UI layout runs from the same baseline and other audits are deterministic.
+  for(let i=0;i<5;i++)await page.$eval('#undoBtn',el=>el.click());
+  return {ok:true,hover:true,nodeWheelQ:[firstQ,wheelQ],numericDrag:[gBefore,gDragged],
+    typedFrequency,gainWheel:[gDragged,gWheel],bellDoubleClickGain:0,
+    noAdvanced:true,hpfLpfFreqOnly:true,autoDismiss:true};
 }
 
 module.exports={auditKnobs};
