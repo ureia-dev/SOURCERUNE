@@ -1,5 +1,5 @@
 {
-  "commit": "3df08f49dd89db4bcb1dcb4cf3c30b40cdaac1c0",
+  "commit": "739646449a8c570c6870cbfb13ff92b9b951e5d3",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -193,50 +193,50 @@
               "w": 54.99998158701009,
               "h": 54.99999003271587,
               "x": 25.499992768313753,
-              "y": 625.9997661644874
+              "y": 650.9997984878926
             },
             {
-              "w": 54.99999003271587,
-              "h": 54.99999003271587,
-              "x": 86.49997265375062,
-              "y": 625.9997661644874
+              "w": 42.999993435862336,
+              "h": 42.999993435862336,
+              "x": 108.49995515370772,
+              "y": 650.9997984878926
             },
             {
-              "w": 54.99999003271587,
-              "h": 54.99999003271587,
-              "x": 147.4999440934817,
-              "y": 625.9997661644874
+              "w": 42.999993435862336,
+              "h": 42.999993435862336,
+              "x": 169.49994348485035,
+              "y": 650.9997984878926
             },
             {
-              "w": 54.99995624989276,
-              "h": 54.99999003271587,
-              "x": 208.4999493160359,
-              "y": 625.9997661644874
+              "w": 42.999993435862336,
+              "h": 42.999993435862336,
+              "x": 230.499931815993,
+              "y": 650.9997984878926
             }
           ],
           "badSignal": {
             "w": 67.99999197644438,
-            "h": 68.00002575926749,
+            "h": 67.99995819362127,
             "x": 296.9998988807134,
-            "y": 626.9060241772324
+            "y": 657.4060352342153
           },
           "condition": {
             "w": 67.99995819362127,
-            "h": 68.00002575926749,
+            "h": 67.99995819362127,
             "x": 482.99984613194306,
-            "y": 625.9997661644874
+            "y": 650.9997984878926
           },
           "intelligibility": {
             "w": 68.00002575926749,
             "h": 68.00002575926749,
-            "x": 748.4997286087986,
-            "y": 625.9997661644874
+            "x": 697.9997457456086,
+            "y": 661.9997559550479
           },
           "ambience": {
             "w": 67.99995819362127,
             "h": 67.99995819362127,
             "x": 934.4997096428515,
-            "y": 655.9997914394443
+            "y": 671.9998094237977
           },
           "mix": {
             "w": 82.0001006155172,
@@ -455,7 +455,108 @@
           "outsideDismiss": true,
           "escapeDismiss": true
         },
-        "motion": []
+        "motion": [],
+        "knobValues": {
+          "ok": true,
+          "values": {
+            "speed": {
+              "valueText": "60",
+              "controlValue": "60",
+              "hidden": false,
+              "faceDiameter": 43,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 170.45538330078125,
+              "faceTop": 588.0780639648438
+            },
+            "doppler": {
+              "valueText": "70%",
+              "controlValue": "70",
+              "hidden": false,
+              "faceDiameter": 43,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 225.55947875976562,
+              "faceTop": 588.0780639648438
+            },
+            "width": {
+              "valueText": "40%",
+              "controlValue": "40",
+              "hidden": false,
+              "faceDiameter": 43,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 280.66357421875,
+              "faceTop": 588.0780639648438
+            },
+            "badSignal": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 340.7360534667969,
+              "faceTop": 593.8651123046875
+            },
+            "condition": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 508.75836181640625,
+              "faceTop": 588.0780639648438
+            },
+            "intelligibility": {
+              "valueText": "70%",
+              "controlValue": "70",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 702.9776611328125,
+              "faceTop": 598.0148315429688
+            },
+            "ambience": {
+              "valueText": "35%",
+              "controlValue": "35",
+              "hidden": false,
+              "faceDiameter": 68,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 916.6189575195312,
+              "faceTop": 607.04833984375
+            },
+            "mix": {
+              "valueText": "100%",
+              "controlValue": "100",
+              "hidden": false,
+              "faceDiameter": 82,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 1039.473876953125,
+              "faceTop": 565.494384765625
+            }
+          }
+        }
       }
     },
     "UI_02": {
@@ -615,27 +716,27 @@
         "bottomKnob": {
           "w": 76.00003640004896,
           "h": 76.00003640004896,
-          "x": 28.000010783503857,
+          "x": 57.00002730003672,
           "y": 796.000370734456
         },
         "motionAdjust": {
           "speed": {
             "w": 86.00002717864643,
             "h": 76.00003640004896,
-            "x": 822.547241947931,
-            "y": 645.0003036673871
+            "x": 775.5472387023381,
+            "y": 663.0003403102168
           },
           "doppler": {
-            "w": 85.99996062695384,
+            "w": 86.00002717864643,
             "h": 76.00003640004896,
-            "x": 987.797357434817,
-            "y": 645.0003036673871
+            "x": 946.7973220357054,
+            "y": 663.0003403102168
           },
           "width": {
-            "w": 86.00009373033903,
+            "w": 85.99996062695384,
             "h": 76.00003640004896,
-            "x": 1153.031766722249,
-            "y": 645.0003036673871
+            "x": 1135.031796631112,
+            "y": 663.0003403102168
           }
         },
         "motionKnobAssetBindings": {
@@ -661,7 +762,7 @@
         "mixKnob": {
           "w": 76.00003640004896,
           "h": 76.00003640004896,
-          "x": 1115.0005357783944,
+          "x": 1036.0004821792584,
           "y": 796.000370734456
         }
       },
@@ -758,7 +859,60 @@
             "restored": 40,
             "art": "RT_KNOB_S_BASE.png"
           }
-        ]
+        ],
+        "knobValues": {
+          "ok": true,
+          "values": {
+            "badSignal": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": false,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": false,
+              "valueRight": true,
+              "insideCard": true,
+              "faceLeft": 121.57174682617188,
+              "faceTop": 730.0191040039062
+            },
+            "condition": {
+              "valueText": "20%",
+              "controlValue": "20",
+              "hidden": true,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": false,
+              "valueRight": true,
+              "insideCard": true,
+              "faceLeft": 426.96917724609375,
+              "faceTop": 730.0191040039062
+            },
+            "intelligibility": {
+              "valueText": "70%",
+              "controlValue": "70",
+              "hidden": false,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": false,
+              "valueRight": true,
+              "insideCard": true,
+              "faceLeft": 725.9468383789062,
+              "faceTop": 730.0191040039062
+            },
+            "mix": {
+              "valueText": "100%",
+              "controlValue": "100",
+              "hidden": false,
+              "faceDiameter": 76,
+              "labelAbove": true,
+              "valueBelow": true,
+              "valueRight": false,
+              "insideCard": true,
+              "faceLeft": 1019.421875,
+              "faceTop": 730.0191040039062
+            }
+          }
+        }
       }
     }
   }
