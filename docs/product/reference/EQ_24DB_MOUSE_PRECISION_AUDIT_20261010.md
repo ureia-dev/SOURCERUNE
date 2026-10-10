@@ -31,3 +31,8 @@
 PR #104 合併 commit `22674d4c`，Fast #38047626674 PASS；真 [Web Preview #38047739428](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38047739428) 已把 `geometry-report.json` 寫入 GitHub，來源 SHA `22674d4c`，兩版 UI_01、UI_02 `geometry.ok`、`eqMouse.ok`、`eqFocus.ok` 全 PASS。具體 mini ring 4.469×4.404／4.471×4.375 CSS px、Focus 6.900×6.900px；hit mini 約 17.88×17.6、focus 22×22；兩版 11 個 Focus parameter key 數與順序精確，B2 旋鈕上拖 Gain +0→+1.3dB、wheel 0.1dB、Q wheel 1.00→0.90、原 Undo/Redo、5節點 Drag/Focus reopen/responsive 均通過。固定 ±24 在實際測試 Gain 0／6／9／14／−18 dB 均保持 24。
 
 兩次修正紀錄：1. 在主 PR #104 內 ZoomIn/ZoomOut 立即重算 SVG 橢圓真 CSS 像素半徑，並將 LPF 點與 HPF 改成辨識度合理的靜柔色，已測通；2. UI Focus 真 dial Slider 的 ARIA min/max/value/keyboard Enter 開啟 popup 改動在後續獨立修復分支，**新一次 Fast/Chrome 尚待新 PR 證據，不能假稱已測**。本檔數學 30 組並非額外安全/壓測回合。
+
+## 第二次最終修正／部署實證（2026-10-10）
+
+**最終兩次修正真 Chrome 已完成 PASS**：PR [#105](https://github.com/ureia-dev/SOURCERUNE/pull/105) 合併 `c2a03a1f8f7ec2d8def4d2351d9589b1d3fef6fb`，Fast #38048132628 PASS；[Web Preview #38048168497](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38048168497) `geometry-report.json` source `c2a03a1f`，UI_01、UI_02 `geometry.ok`、`knobSmoke.eq.ok`、`eqMouse.ok`、`eqFocus.ok` 均 true，特別 `eqFocus.accessibleSliders=true`、`keyboardPopup=true`。兩版 11 個控制均有 ARIA slider min/max/value/text、鍵盤 Q 調整 Undo 正常、Enter 進入數值編輯；render log 結尾 `render audit completed successfully`，網站部署成功。既存非阻塞 localhost 初次 curl failed 和一筆 404 仍另案。**DSP changed NO；Native EQ 圖形 Host 尚 PENDING**。
+以上符合需求的「10 次尺寸試算＋10 次對數頻率精算＋10 次 dB 顯示改善＋2 次最終修正」。各次是有獨立檢查條件的運算／核查，而不是擅自重跑 32 次 CI 或安全壓測。
