@@ -8,7 +8,7 @@ class SceneWorklet extends AudioWorkletProcessor {
         sinf:Math.sin,cosf:Math.cos,powf:Math.pow
       }});
       this.dsp=instance.exports;
-      if(this.dsp.sr_version()!==1)throw new Error('DSP ABI 不相容');
+      if(this.dsp.sr_version()!==2)throw new Error('DSP ABI 不相容');
       this.dsp.sr_prepare(sampleRate);
       this.dsp.sr_parameters(...options.processorOptions.parameters);
       this.dsp.sr_reset();
