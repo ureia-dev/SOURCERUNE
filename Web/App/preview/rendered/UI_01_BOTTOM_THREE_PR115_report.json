@@ -1,5 +1,5 @@
 {
-  "sourceSha": "961ead1054a0b952a9f95688af470f1ad993bdc3",
+  "sourceSha": "711c081fdb3001b5a0c8ad36c797be24eeb81871",
   "initial": {
     "geometry": true,
     "geometryFailed": [],
@@ -119,11 +119,11 @@
   "duckUndo": "PASS",
   "mixKeyboard": "PASS",
   "realOutputWave": {
-    "lit": 960,
-    "seconds": 0.250667,
+    "lit": 961,
+    "seconds": 0.258988,
     "playing": true
   },
   "previewSha256": "d281c6963dfe369c24e88987963610aa8280852f1f9aa8c1bff63b3882477c94",
-  "liveSha256": "30d5c4341ec7f95045b2e973d425d4c1f046d810b3731812fc97e941585a042f",
+  "liveSha256": "0a948577be6e6d0d11499fe4e1a50ea176181c7010e3ac336db7f7820c983a5f",
   "errors": []
 }
