@@ -39,6 +39,17 @@
 | U02-18～21 | 底部波形/Mobile selector、Condition 材質、Intelligibility 模式鈕可能溢出底框、Mix Wet/箭頭等尚須確實完整顯示並驗證操作；尤其先修 Intelligibility 溢出。 | `PENDING / P0、P1 各依原 ID` |
 | U02-22 | EQ Web 五節點互動已有真 Chrome PASS；REF Natural/完整外觀與 Native 編輯器/Host 未完成，不因 EQ 子項 PASS 而勾整項。 | `PARTIAL` |
 
+### 2026-10-10 使用者最新執行覆蓋規則：逐步給實際組裝圖、逐步核准、不合併
+
+> **這節規則取代上文「先修 UI_02 高解析場景美術」的排序，但不刪除該既存待辦 ID。** 使用者明確要求 `Assets/UI/ReferenceSheets/` **圖片解析度修復暫緩**；目前階段不得觸碰這個資料夾的圖檔，也不以高解析重製當作先決步驟。ART-SHARED-001、CROSS-02 等圖片品質任務仍保留原樣並保持待辦，不宣稱已完成。
+
+- **執行序列鎖定**：① **UI_01 Scene View**（U01-06～09：真汽車獨立 Runtime 圖層、距離／Motion 曲線、時間軸刻度、ZOOM/RESET、Live waveform；逐項核已有元件和真操作）→ ② Spectrum（U01-10）→ ③ 左四張素材卡之狀態／圖片對照（U01-03～05；REF 範例值不直接改 Factory 或啟動預設）→ ④ 右側 Meter（U01-11；不得假造 LUFS）→ ⑤ 底部七模組缺漏真控件（U01-13～17；涉及待核准語意先停止該項）→ ⑥ 旋鈕／材質／字體／間距（U01-18；避免擅改大區幾何）。UI_02 對應同質項目留在既有 U02-01～22，後續按使用者核准再接續。
+- **硬性使用者驗收關卡**：只做當前一項；**用真正 SOURCERUNE Web/App 與正式 `Assets/UI/Runtime` 元件拼回實際畫面**，不得以示意圖、AI 生成類似畫面、REF 全頁截圖冒充可運作 UI；提供工作分支的實際畫面及可檢查連結，記錄來源 SHA。用戶檢查／明確同意後才做下一項；**全部保持未合併**，不得以 Fast CI 綠燈代替用戶觀感核准。
+- **改碼前能力關卡仍有效**：先實測完整必要 Web 來源／素材在執行環境落地、真 Chrome 啟動與基準截圖；如環境缺網路、GitHub 連接器拿不到真正完整大圖或無法執行任務所需入口，記 `BLOCKED-VERIFICATION`，僅允許文件／診斷，不在無法驗證時盲改正式程式。成功後依現有流程少量修改、最小 Fast、實際 Chrome screenshot 比 REF，留 branch/commit/PR/CI/預覽證據。
+- **DSP 凍結**：上述都是顯示與 UI 互動工作；已存在的音訊路徑、DSP、WASM、Factory Preset、公開參數 ID、Safety/CI 次數**全部保持不動**；若某個聲音行為必須實際改動，另行取得授權並先遠端建立全新還原點。
+
+**本輪實際觀察／驗收限制**：主介面真正入口 `Web/App/index.html`、程式 `Web/App/app.js`、UI_01 Runtime 元件、真 Chromium 主線最近已於 Pages run 38055341443 在 main 來源 2aaee459 成功，並有 `Web/App/preview/rendered/UI_01.png` 實際畫面；但該證據不是本分支新版本真實截圖。此回合容器 `curl https://github.com` 回報 `Could not resolve host`，GitHub 文字連接器可讀而完整本機 repo／正式大型 PNG／完整瀏覽器重建管道尚未確立。因此截至本 checkpoint，**Scene View 尚未改碼、尚無新組裝截圖；U01-06～09 仍 `[ ]`；首項為 `BLOCKED-VERIFICATION`**。既有 CSS `Web/App/layout_convergence_v1.css` 明確將 UI_01 `.motion-readouts` 隱藏，也隱藏 `.scene-commandbar button`／`.marker-status`；既有 `app.js` 的 `updateScene()`、`setMarker()` 與 `waveform()` 已具部分 Live 能力，日後僅在能力關卡實際過關後復用，勿從零再做。
+ 
 ### 下一步順序與驗收門檻
 
 1. **先修 UI_02 場景美術**（U02-08/09、CROSS-02、ART-SHARED-001）：先核獨立高解析正式素材與場景狀態，建立一張 REF/實際 Web 同場景的局部疊圖；不擅自用 AI 重畫替換核准 REF。
