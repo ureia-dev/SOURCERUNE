@@ -39,8 +39,8 @@ export function miniEqSvg(state,sampleRate=48000){
   return `<svg class="macro-eq-svg" viewBox="0 0 100 100" preserveAspectRatio="none"
     role="group" aria-label="Drag HPF LPF or EQ band 1 to 3">
     <g class="macro-eq-grid"><path d="M0 25H100M0 50H100M0 75H100M25 0V100M50 0V100M75 0V100"/></g>
-    <path class="macro-eq-line" d="${path}"/>
-    ${nodes.map(n=>`<circle data-eq-node="${n.id}" role="slider" tabindex="0"
+    <path class="macro-eq-line" data-eq-hpf-path d="${path}"/>
+    ${nodes.map(n=>`<circle data-eq-node="${n.id}" ${n.id==="hpf"?"data-eq-hpf-marker":""} role="slider" tabindex="0"
       aria-label="${n.id==="hpf"?"HPF":n.id==="lpf"?"LPF":n.id.toUpperCase()}"
       cx="${n.x.toFixed(2)}" cy="${n.y.toFixed(2)}" r="3.5"/>`).join("")}
   </svg>`;
