@@ -1,5 +1,5 @@
 {
-  "commit": "4bf937ddc6b9abfa47743b96456db7d4d062bd04",
+  "commit": "dca77fe8c4e6c39c62179bd27e804d6b88e09c0b",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -454,7 +454,8 @@
           },
           "outsideDismiss": true,
           "escapeDismiss": true
-        }
+        },
+        "motion": []
       }
     },
     "UI_02": {
@@ -728,7 +729,36 @@
           },
           "outsideDismiss": true,
           "escapeDismiss": true
-        }
+        },
+        "motion": [
+          {
+            "id": "speed",
+            "before": 60,
+            "dragged": 84,
+            "wheel": 83,
+            "keyed": 84,
+            "restored": 60,
+            "art": "RT_KNOB_S_BASE.png"
+          },
+          {
+            "id": "doppler",
+            "before": 70,
+            "dragged": 94,
+            "wheel": 93,
+            "keyed": 94,
+            "restored": 70,
+            "art": "RT_KNOB_S_BASE.png"
+          },
+          {
+            "id": "width",
+            "before": 40,
+            "dragged": 64,
+            "wheel": 63,
+            "keyed": 64,
+            "restored": 40,
+            "art": "RT_KNOB_S_BASE.png"
+          }
+        ]
       }
     }
   }
