@@ -66,6 +66,13 @@ jobs:
               if(initialBox!==resetBox||initialBox===enlargedBox)throw Error("Scene live zoom/reset did not update viewBox");
               const timeCount=await page.$eval(".scene-time-ruler [data-scene-time]",n=>n.length);
               if(timeCount!==5)throw Error("Scene time ruler has "+timeCount+" labels");
+              const labelOverlap=await page.evaluate(()=>{
+                const a=document.querySelector("#sourceLabel")?.getBoundingClientRect();
+                const b=document.querySelector("#distanceCallout")?.getBoundingClientRect();
+                if(!a||!b)return true;
+                return a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+              });
+              if(labelOverlap)throw Error("SOURCE label still overlaps distance callout");
               const result=await page.evaluate(async()=>{
                 const app=document.querySelector(".app");
                 const scene=document.querySelector(".scene-panel");
@@ -92,7 +99,7 @@ jobs:
               const dest="Web/App/preview/rendered/UI_01_PR113.png";
               await page.$eval(".app",el=>el.scrollIntoView({block:"nearest"}));
               await (await page.$(".app")).screenshot({path:dest});
-              result.visualSmoke={zoomIn:true,zoomReset:true,timeRulerTicks:5,labelNoOverlap:true};
+              result.visualSmoke={zoomIn:true,zoomReset:true,timeRulerTicks:5,labelNoOverlap:!labelOverlap};
               result.sha=process.env.SOURCE_SHA;
               result.screenshotSha256=crypto.createHash("sha256").update(fs.readFileSync(dest)).digest("hex");
               fs.writeFileSync("Web/App/preview/rendered/UI_01_PR113_report.json",JSON.stringify(result,null,2)+"\n");
