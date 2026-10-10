@@ -343,7 +343,29 @@ $$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.da
   $$("[data-eq-zoom-in]").forEach(b=>b.onclick=e=>{
     e.preventDefault();e.stopPropagation();dismissEqFloat();
     openEqFocus({getState:()=>state,onDismiss:dismissEqFloat,
-      onPower:()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE})});
+      onPower:()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}),
+      getControl:findControl,snapshot:()=>core(),
+      onChange:(key,value)=>{
+        state.params[key]=value;refreshMiniEq();
+        if(key==="hpf"){
+          const input=$("[data-eq-hpf]"),out=$("[data-eq-hpf-value]");
+          if(input)input.value=String(value);
+          if(out)out.textContent=value<=20?"OFF":value+" Hz";
+        }
+        const input=$('[data-param="'+key+'"]');
+        if(input){
+          input.value=String(value);
+          const label=input.closest(".adv-control")?.querySelector(".value"),def=findControl(key);
+          if(label)label.textContent=value+(def.unit?" "+def.unit:"");
+        }
+        updateGains();
+      },
+      commit:before=>{
+        if(!before||JSON.stringify(before.params)===JSON.stringify(state.params))return;
+        undo.push(before);if(undo.length>80)undo.shift();
+        redo=[];hist();mark("MODIFIED");
+      }
+    });
   });
 }
 function refreshMiniEq(){
