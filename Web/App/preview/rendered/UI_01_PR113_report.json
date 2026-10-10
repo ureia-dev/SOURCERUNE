@@ -435,7 +435,7 @@
     "timeRulerTicks": 5,
     "labelNoOverlap": true
   },
-  "sha": "7a2360d824baebb5d6aecb777b60106bd8cf2baa",
+  "sha": "1ac14790d1083096ce57da3435ce8184aeb274b9",
   "screenshotSha256": "acc903fb5b272bb844207e50cae9298e71a9d86e8739178a16df77354d2b5651",
   "cardCycleSmoke": {
     "sourceNext": true,
