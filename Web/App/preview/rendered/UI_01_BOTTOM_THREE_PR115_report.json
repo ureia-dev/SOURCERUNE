@@ -1,5 +1,5 @@
 {
-  "sourceSha": "e6def090752322e3e5a2508d124eea7a70cb9cc8",
+  "sourceSha": "961ead1054a0b952a9f95688af470f1ad993bdc3",
   "initial": {
     "geometry": true,
     "geometryFailed": [],
@@ -67,22 +67,22 @@
         "ok": true,
         "bounds": {
           "left": 699.6022338867188,
-          "top": 709.9739990234375,
+          "top": 715.6765747070312,
           "right": 865.9281005859375,
-          "bottom": 749.8922119140625,
+          "bottom": 754.6444091796875,
           "width": 166.32586669921875,
-          "height": 39.918212890625
+          "height": 38.96783447265625
         }
       },
       {
         "ok": true,
         "bounds": {
           "left": 1047.4609375,
-          "top": 698.5687866210938,
+          "top": 693.816650390625,
           "right": 1139.653076171875,
-          "bottom": 721.3792114257812,
+          "bottom": 722.3296508789062,
           "width": 92.192138671875,
-          "height": 22.8104248046875
+          "height": 28.51300048828125
         }
       },
       {
@@ -119,11 +119,11 @@
   "duckUndo": "PASS",
   "mixKeyboard": "PASS",
   "realOutputWave": {
-    "lit": 959,
-    "seconds": 0.258667,
+    "lit": 960,
+    "seconds": 0.250667,
     "playing": true
   },
-  "previewSha256": "f245cc54dce6513c568501b45f2d70bd106b92be818168bf955badfad6d4acc4",
-  "liveSha256": "f2bf242d35ec2ea8b78f1b5c203c9e347ed88a257142ad9932547582ff3326be",
+  "previewSha256": "d281c6963dfe369c24e88987963610aa8280852f1f9aa8c1bff63b3882477c94",
+  "liveSha256": "30d5c4341ec7f95045b2e973d425d4c1f046d810b3731812fc97e941585a042f",
   "errors": []
 }
