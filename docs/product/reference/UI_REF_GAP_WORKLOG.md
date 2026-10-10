@@ -69,7 +69,8 @@
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 - [ ] **U01-16｜MIX Wet/Ø**（P0/待核准）— REF 有 Wet 與 Ø 可點控制，Web 只有文字；先核准 Ø 功能再實作，勿擅加相位反轉。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
-- [ ] **U01-17｜EQ/TONE 彩色曲線/三下拉/On/Power**（P0）— REF 有 HPF/LPF/Tone 選擇、節點、On/Power；須按現有 4-band 做真可調/Undo/Bypass，不憑圖增加 Band。
+- [ ] **U01-17｜EQ/TONE 彩色曲線/三下拉/On/Power**
+  - **2026-10-10 最新覆蓋規格：Band 1–3，不再是舊 4-band**。PR #86–#89 與真 Web Preview #38032900735 已驗 UI_01／UI_02 五節點 HPF、LPF、Band1、Band2、Band3 的實際拖曳、Advanced 同步與 Undo；共享 C++ LPF+3 Bell/舊 HPF 存在且 Fast 原生編譯及基本音訊 smoke PASS，eq3.wasm 編譯載入 PASS。公開 b4 IDs 保留 reserved 但不執行；74 Factory Presets 不變。Final Tone、Native 23 Host ID 在 Win/macOS 載入、最終 signal flow、CPU profiling 與像素級 REF 對位仍未驗，保持 [ ]／PARTIAL。（P0）— REF 有 HPF/LPF/Tone 選擇、節點、On/Power；須按現有 4-band 做真可調/Undo/Bypass，不憑圖增加 Band。
   - **驗收/進度**：`PARTIAL：UI_01 主卡 ON/OFF 已改為按鈕，可直接切換既有 EQ_TONE bypass、Advanced 及 Undo/Redo；UI_02 原標籤不變。實作 commit `7e28b217`、CSS `4e6e5155`。PR #63 合併 `3e3799d3`／#64 修復 `43bfcb6a`；Fast #108/#109 PASS，**Web Preview #81 Chrome `U01-17-POWER.ok=true`**：Power 切換、Advanced bypass、Undo、Redo、基準恢復皆通過。**HPF/LPF/TONE 主卡選單、曲線/節點、Native 仍 PENDING；本項保持 PARTIAL 未勾**。`
   - **HPF 獨立子項 DONE（2026-10-10）／整體仍 PARTIAL**：PR #81（`3f627bd8`）加入 UI_01 右下 EQ 主卡真 HPF 20–1000 Hz 橫向 slider、即時曲線、鍵盤／滾輪／Undo／Redo／Advanced 同步、EQ Power，並以同一份 C++ stereo Butterworth 12 dB/oct 程式接 Web 音訊真處理；PR #82（`1a0d1b6d`）修正 Chrome 隱藏 Undo 工具列測試方式。**真 Chrome [Web Preview #38031171637](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38031171637)**：UI01 geometry/knobSmoke/hpf 都 PASS、HPF 20→21、Undo/Redo、頻率曲線已驗；48 kHz actual OfflineAudioContext 40 Hz RMS OFF=0.17677669／240Hz ON=0.00490798，證實真正 WASM audio filtering；音訊路徑目前在 scene MVP 後端（最終 TONE→MIX 排序仍待完成）。LPF、4-band 的 Freq/Gain/Q、Tone、完整 REF 下拉／節點及 Native VST3 Host 新版驗收仍 PENDING，U01-17 不可勾 [x]。
 - [ ] **U01-18｜底部七區材質/字型/刻度/間距**（P1）— 七卡旋鈕、金屬材質、對比、留白、刻度與 REF 不同；逐區 1:1 REF/實際 Web 重疊驗證。
@@ -123,7 +124,8 @@
   - **2026-10-10 旋鈕／動態數值限定驗收**：PR #78 `9393bc32`、#79 `73964644` 合併；Web Preview [#38026732851](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38026732851) report commit `73964644`，UI01/UI02 geometry+knobSmoke+knobValues 均 true，檔案 `Web/App/knob_value_ref_alignment_v1.css`。UI01 Speed/Doppler/Width 各43px、一般68px、MIX82px，標籤在上／數字在下，八顆無文字裁切。UI02 Motion 54px、底部四顆76px，Bad Signal/Intelligibility 數值在右、Mix 下方，Condition 保留 Used 選單；內容仍使用真 live state，沒有照搬 REF 例圖預設數值。UI02 正式核准 1672×941 RGB REF SHA256 `dc41cbce44527f212e5955994be9312711c36bc2f45a77f7c364aa60743f6aff` 已核實；UI01 正式 1508×808 binary 仍未入庫，只依 142 點掃描 APPROX。**這次僅尺寸／值位置／操作驗收，未做每像素材質／字型疊圖與 Native editor；本項保持 [ ]／PARTIAL。**
 - [ ] **U02-21｜MIX Wet 下拉/箭頭**（P0/待核准）— REF 有 Wet 下拉、右箭頭，Web 缺同等可操作控件；先核真 Mix 語意，再做 State+Undo。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
-- [ ] **U02-22｜EQ/TONE Natural/曲線/On-Power**（P0）— REF 細緻 EQ 曲線與 Natural 下拉、On/Power；Web 簡化；需真 4-band/HPF/LPF/Tone/Bypass。
+- [ ] **U02-22｜EQ/TONE Natural/曲線/On-Power**
+  - **2026-10-10 最新覆蓋規格：Band 1–3，不再是舊 4-band**。PR #86–#89 與真 Web Preview #38032900735 已驗 UI_01／UI_02 五節點 HPF、LPF、Band1、Band2、Band3 的實際拖曳、Advanced 同步與 Undo；共享 C++ LPF+3 Bell/舊 HPF 存在且 Fast 原生編譯及基本音訊 smoke PASS，eq3.wasm 編譯載入 PASS。公開 b4 IDs 保留 reserved 但不執行；74 Factory Presets 不變。Final Tone、Native 23 Host ID 在 Win/macOS 載入、最終 signal flow、CPU profiling 與像素級 REF 對位仍未驗，保持 [ ]／PARTIAL。（P0）— REF 細緻 EQ 曲線與 Natural 下拉、On/Power；Web 簡化；需真 4-band/HPF/LPF/Tone/Bypass。
   - **驗收/進度**：`PENDING`；真正補到 Web/Native/素材/聲音後，附來源、PR/Commit/Fast CI、相關截圖/操作/Host 證據並在原 ID 勾選。
 
 ## 共用圖片品質／操作／DSP／VST3：15 個待辦
