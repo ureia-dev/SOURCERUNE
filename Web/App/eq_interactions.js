@@ -272,6 +272,7 @@ export function attachEqInteractions(ctx){
     if(!dot||e.button!==0)return;
     e.preventDefault();e.stopPropagation();
     const id=dot.dataset.eqNode;
+    ctx.select?.(id);
     drag={id,pointer:e.pointerId,startX:e.clientX,startY:e.clientY,
       freq:get(id,"freq"),gain:id.startsWith("b")?get(id,"gain"):0,
       before:ctx.snapshot(),changed:false};
