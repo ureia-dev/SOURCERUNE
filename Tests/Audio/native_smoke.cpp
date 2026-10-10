@@ -22,5 +22,16 @@ int main(int argc,char**) {
     assert(delta>100&&energy>1);
     p.globalBypass=true;dsp.setParameters(p);dsp.reset();dsp.process(left,right,out,outR,128);
     for(int i=0;i<128;++i){assert(out[i]==left[i]);assert(outR[i]==right[i]);}
+    // Verify EQ is audible, three independent bands and full EQ bypass.
+    p.globalBypass=false;p.sourceBypass=true;p.transmissionBypass=true;
+    p.sourceCharacter=0;p.badSignal=0;p.eqBypass=false;
+    p.hpf=300;p.lpf=5500;
+    p.eqGain[0]=6;p.eqGain[1]=-6;p.eqGain[2]=3;
+    dsp.setParameters(p);dsp.reset();dsp.process(left,right,out,outR,128);
+    double eqDifference=0;
+    for(int i=0;i<128;++i){assert(std::isfinite(out[i]));eqDifference+=std::abs(out[i]-left[i]);}
+    assert(eqDifference>0.01);
+    p.eqBypass=true;dsp.setParameters(p);dsp.reset();dsp.process(left,right,out,outR,128);
+    for(int i=0;i<128;++i){assert(std::abs(out[i]-left[i])<0.0001f);}
     if(argc==1)std::puts("Native DSP smoke PASS: audible delta, finite output, exact bypass, stereo");
 }
