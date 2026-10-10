@@ -56,6 +56,7 @@ jobs:
           NODE_PATH=/tmp/sourcerune-ui-audit/node_modules CHROME_PATH="$CHROME_PATH" node <<'NODE'
           const fs = require("fs");
           const puppeteer = require("puppeteer-core");
+          const { auditKnobs } = require("./Tests/Web/knob_smoke.cjs");
 
           (async () => {
             const browser = await puppeteer.launch({
@@ -184,6 +185,8 @@ jobs:
                 results[ui].interactionSmoke["U01-17-POWER"] = eqPower;
                 if (!eqPower.ok) throw new Error("[UI_01] EQ power smoke failed: "+JSON.stringify(eqPower));
               }
+              // One-shot real-browser knob check, using the already launched page.
+              results[ui].knobSmoke = await auditKnobs(page,ui);
               await page.screenshot({
                 path: `Web/App/preview/rendered/${ui}.png`,
                 fullPage: false
