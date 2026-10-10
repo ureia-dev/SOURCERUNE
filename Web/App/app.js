@@ -1,5 +1,5 @@
 import {createSceneNode, parametersFromState, hpfFromState, eq3FromState, audioSupportNote} from "./audio/engine.js";
-import {eqGraph,miniEqSvg as renderThreeBandEq} from "./eq_graph.js";
+import {eqGraph,miniEqSvg as renderThreeBandEq,updateEqPlot,sizeEqMarkers} from "./eq_graph.js";
 import {attachEqInteractions,dismissEqFloat} from "./eq_interactions.js";
 import {openEqFocus,eqFocusIsOpen,markMiniEqInert,syncEqFocus,repositionEqFocus} from "./eq_focus.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
@@ -351,13 +351,7 @@ function refreshMiniEq(){
   // its inert compact preview with ONE calculated response, not two DSPs.
   const svgs=$$(".macro-eq-svg");if(!svgs.length)return;
   const plot=eqGraph(state,audioCtx?.sampleRate||48000);
-  for(const svg of svgs){
-    svg.querySelector(".macro-eq-line")?.setAttribute("d",plot.path);
-    for(const n of plot.nodes){
-      const dot=svg.querySelector('[data-eq-node="'+n.id+'"]');
-      if(dot){dot.setAttribute("cx",n.x);dot.setAttribute("cy",n.y);}
-    }
-  }
+  for(const svg of svgs)updateEqPlot(svg,plot);
   const h=$('[data-eq-readout="hpf"]'),l=$('[data-eq-readout="lpf"]');
   if(h)h.textContent=String(state.params.hpf);
   if(l)l.textContent=(state.params.lpf/1000).toFixed(1);
@@ -365,6 +359,7 @@ function refreshMiniEq(){
 }
 function bindMiniEq(){
   const svg=$(".macro-eq-svg");if(!svg)return;
+  sizeEqMarkers(svg);
   attachEqInteractions({
     svg,
     getState:()=>state,
