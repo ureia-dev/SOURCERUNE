@@ -50,6 +50,16 @@
 
 **本輪實際觀察／驗收限制**：主介面真正入口 `Web/App/index.html`、程式 `Web/App/app.js`、UI_01 Runtime 元件、真 Chromium 主線最近已於 Pages run 38055341443 在 main 來源 2aaee459 成功，並有 `Web/App/preview/rendered/UI_01.png` 實際畫面；但該證據不是本分支新版本真實截圖。此回合容器 `curl https://github.com` 回報 `Could not resolve host`，GitHub 文字連接器可讀而完整本機 repo／正式大型 PNG／完整瀏覽器重建管道尚未確立。因此截至本 checkpoint，**Scene View 尚未改碼、尚無新組裝截圖；U01-06～09 仍 `[ ]`；首項為 `BLOCKED-VERIFICATION`**。既有 CSS `Web/App/layout_convergence_v1.css` 明確將 UI_01 `.motion-readouts` 隱藏，也隱藏 `.scene-commandbar button`／`.marker-status`；既有 `app.js` 的 `updateScene()`、`setMarker()` 與 `waveform()` 已具部分 Live 能力，日後僅在能力關卡實際過關後復用，勿從零再做。
  
+### Scene View 第一階段：2026-10-10 實際能力診斷及最小交付點（未修復、未完成）
+
+- **固定 repo/branch/PR**：`ureia-dev/SOURCERUNE`，`main=e457eba0153d0d6e624cc93cc9c3ddb39f83bd6c`，本工作 `docs/ui01-ui02-ref-comparison-log-20261010`，草稿 PR [#113](https://github.com/ureia-dev/SOURCERUNE/pull/113)，最新基準 `ee110f236bbe2c9dcba9ee0901b07007a1dde8e8`，既有 PR Fast [#38057041831](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38057041831) success；PR 保持 draft / unmerged。重新接手必須再次核對最新 main、PR、CI。
+- **已實測執行環境**：`git=/usr/bin/git`、`chromium=/usr/bin/chromium`、`node` 可用，但 `/mnt/data` 沒有 SOURCERUNE 工作樹。環境 `NETWORK=caas_packages_only`、HTTPS/HTTP Proxy 空、DNS `nameserver 168.63.129.16`。 `curl -I -L https://github.com/ureia-dev/SOURCERUNE/archive/refs/heads/main.zip` → `curl: (6) Could not resolve host: github.com`；對 `1.1.1.1` 直連也 ConnectionError。故不是盲猜 ZIP 太大，也不是 GitHub CI 故障，而是當前 container 對外網路權限限制，標示 `EXTERNAL-BLOCKED / CAPABILITY`；**沒有反覆重跑 GitHub Actions、沒有更改 runner/測試次數**。
+- **GitHub 讀取可用，但不能冒充已落地**：GitHub connector 可讀 `Web/App/index.html`、`app.js`、CSS、REF 142 筆掃描文件，也可讀先前 `Web/App/preview/rendered/UI_01.png` 真實舊截圖；但這不等於正式大型 PNG、所有 JS/CSS/assets 已完整到容器，也不等於這個分支有新 Chrome 畫面。GitHub REST 的 binary 路徑不能直接變成本機完整 repo；沒有合法可驗證的自動載入渠道時嚴禁用 AI 補圖/假資料替代。
+- **第一項確切 UI 工作**：只做 U01-06～09 的 UI_01 上方 Scene（REF 新圖檔 `SCENE_PANEL` approx x337/y57/w969/h268；真 Web 既有 plugin-local center x333/y58/w967、Scene 高 262，header 34、SVG 186、Waveform strip 38）。這兩個來源座標不一致；不得硬算 1:1。此階段只復用 `RT_MOTION_CAR_GLYPH.png`、`RT_SCENE_*_MARKER_*.png`、`RT_DISTANCE_CALLOUT.png`、`RT_SCENE_GRID.png`、`RT_WAVEFORM_STRIP_BG.png`，搭配現有真動態 SVG/Canvas；**不動 ReferenceSheets、DSP、Preset、參數與 Native 聲音**。
+- **需優先核查的實作掛點**：`Web/App/index.html` 的 `#sceneSvg`、`#motionPath`、`#motionCarGlyph`、`#sourceNode`、`#listenerNode`、`#distanceLine`、`#distanceCallout`、`#sceneWaveformCanvas`、`#sceneFullscreenBtn`、`.scene-commandbar`、`.motion-readouts`；`Web/App/app.js` 的 `applySceneViewportProfile()`、`updateScene()`、`setMarker()`、`waveform()`、`time()`、`bind()`；`Web/App/layout_convergence_v1.css` 的 UI_01 隱藏命令/讀數規則及 `Web/App/ref_geometry_lock_v11.css` 的 final 尺寸。真 Zoom/Reset、時間/距離軸、車輛跟隨、波形需和 state/transport 即時連動，不能畫不可操作的假控制；開關/縮放不能破壞 geometry audit 或 UI_02。
+- **驗收閘**：先恢復合法完整來源與正式素材取檔、檔案 SHA 檢查；在實際入口 `Web/App/index.html?ui=UI_01` 以 Chromium 渲染並取得 **baseline**；進行最小 Scene UI 實作，透過同一真入口產生 **after 截圖**，驗 hitbox/Zoom/Reset/Mode/時間/距離/車輛/波形、未動 UI_02；必要的 Fast 一次成功後，讓使用者看**真元件組裝畫面**並確認，保持草稿 PR 不合併。任何一項證據缺失都留 `PENDING`。
+- **截至本紀錄**：能力關卡未通過，故沒有修改任何正式 `Web/App` 程式或 PNG，沒有產生新組裝截圖；**U01-06～09 仍 `[ ]`**。本紀錄是可恢復的根因與工作定位 checkpoint，不是已完成 Scene 子項。
+
 ### 下一步順序與驗收門檻
 
 1. **先修 UI_02 場景美術**（U02-08/09、CROSS-02、ART-SHARED-001）：先核獨立高解析正式素材與場景狀態，建立一張 REF/實際 Web 同場景的局部疊圖；不擅自用 AI 重畫替換核准 REF。
