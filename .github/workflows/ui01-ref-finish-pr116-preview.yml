@@ -107,10 +107,10 @@ jobs:
                     throw Error("Real Condition Undo did not restore");
                   const oldPower=await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed"));
                   await page.click("[data-eq-power]");
-                  if((await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed"))===oldPower)
+                  if((await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed")))===oldPower)
                     throw Error("EQ bypass did not toggle");
                   await page.click("#undoBtn");
-                  if((await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed"))!==oldPower)
+                  if((await page.$eval("[data-eq-power]",el=>el.getAttribute("aria-pressed")))!==oldPower)
                     throw Error("EQ bypass Undo did not restore");
                   result.checks[ui].stateUndo=true;
                 }
