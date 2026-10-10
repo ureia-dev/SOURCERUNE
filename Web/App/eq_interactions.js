@@ -181,12 +181,24 @@ export function attachEqInteractions(ctx){
     const before=ctx.snapshot();
     if(apply(active.id,kind,get(active.id,kind)+dir*step)){committed(before);syncRows();place(active.id);}
   };
+  // Commit explicitly on Enter; blur alone is not a reliable completion
+  // signal after a synthetic select()/keyboard gesture in all Chromium hosts.
+  const commitTyped=input=>{
+    if(!active||!input)return;
+    const kind=input.dataset.eqFloatValue,raw=parseNumber(input.value,kind);
+    const before=ctx.snapshot();
+    if(apply(active.id,kind,raw))committed(before);
+    input.value=formatted(kind,get(active.id,kind));
+  };
   box.onkeydown=e=>{
     const input=e.target.closest('[data-eq-float-value]');
     if(!input)return;
-    if(e.key==="Enter"){e.preventDefault();input.blur();}
-    else if(e.key==="Escape"){
-      e.preventDefault();input.dataset.cancelEdit="1";
+    if(e.key==="Enter"){
+      e.preventDefault();e.stopPropagation();
+      commitTyped(input);input.blur();
+    }else if(e.key==="Escape"){
+      e.preventDefault();e.stopPropagation();
+      input.dataset.cancelEdit="1";
       input.value=formatted(input.dataset.eqFloatValue,get(active.id,input.dataset.eqFloatValue));
       input.blur();
     }
@@ -198,9 +210,7 @@ export function attachEqInteractions(ctx){
     const input=e.target.closest('[data-eq-float-value]');
     if(!input||!active)return;
     if(input.dataset.cancelEdit==="1"){delete input.dataset.cancelEdit;return;}
-    const kind=input.dataset.eqFloatValue,raw=parseNumber(input.value,kind),before=ctx.snapshot();
-    if(apply(active.id,kind,raw))committed(before);
-    input.value=formatted(kind,get(active.id,kind));
+    commitTyped(input);
   };
   box.onpointerenter=()=>cancelHide();
   box.onpointerleave=e=>{last.lastX=e.clientX;last.lastY=e.clientY;delayHide(last);};
