@@ -62,6 +62,18 @@ async function auditKnobs(page,ui){
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
 // Operate the exact face centre and check that no detail window opens.
 async function auditAllVisibleRoundKnobs(page,ui){
+  // A painted CSS circle does not prove the actual approved knob bitmap loaded.
+  const art=await page.evaluate(async()=>{
+    const face=document.querySelector('.macro-badsignal .macro-knob-face');
+    const background=face&&getComputedStyle(face).backgroundImage;
+    const url=background&&background.match(/url\(["']?([^"')]+)/)?.[1];
+    if(!url)return {loaded:false,reason:'no knob image URL',background};
+    const img=new Image();
+    img.src=url;
+    try{await img.decode();return {loaded:img.naturalWidth>0,width:img.naturalWidth,height:img.naturalHeight,url};}
+    catch(e){return {loaded:false,url,error:String(e)};}
+  });
+  assert(art.loaded,ui+" approved knob bitmap unavailable: "+JSON.stringify(art));
   const ids=await page.evaluate(()=>{
     return [...document.querySelectorAll('.macro-knob > input.macro-knob-range')]
       .filter(input=>{
