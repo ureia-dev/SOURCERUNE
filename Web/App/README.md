@@ -152,3 +152,7 @@ Evidence: PR [#102](https://github.com/ureia-dev/SOURCERUNE/pull/102) merge `dac
 ### Professional EQ graph and working Focus controls (2026-10-10)
 
 Fixed visual ±24 dB now applies to both mini and Focus; all true C++ filter/Gain ranges remain identical to before. Multi-color thin real response and low-contrast grid; compact visible control-point rings ~4.5px, enlarged ~6.9px with independent invisible 18/22px pointer hit regions. Real Focus control bar exposes 11 Freq/Gain/Q knobs hooked to same state, undo and AudioWorklet. Real cut filters 12 dB/oct FIXED — the approved concept's extra 24dB/oct/Phase options remain unimplemented rather than being misleading fake controls. 10+10+10 numerical design audit plus two correction gates at `docs/product/reference/EQ_24DB_MOUSE_PRECISION_AUDIT_20261010.md`. PR #104 Fast #38047626674, Web Chrome Preview #38047739428, UI_01/UI_02 eqMouse/eqFocus/geometry true PASS. Final keyboard/ARIA follow-up must be validated separately. DSP changed? NO. Native EQ editor parity PENDING.
+
+### 2026-10-10 五色 EQ 選點視覺最終防回歸驗收
+
+已合併 [PR #110](https://github.com/ureia-dev/SOURCERUNE/pull/110)（僅在原有一次 Web Chromium 測試內補驗 UI_01／UI_02 小 EQ 及 Focus 選取後不得出現不透明黑色方塊，並核實 HPF 綠、B1 紅、B2 黃、B3 藍、LPF 粉五個準確顏色）。此檔更新用來啟動 **原本既有的一次** Pages/Chromium 預覽程序，檢查 `Web/App/preview/rendered/render-log.txt` 與同版 `geometry-report.json`，而非只信 workflow 綠燈。沒有音效算法、音訊路徑、Preset、EQ 參數 ID 或 CI 測試次數修改。原先 PR #107/#108/#109 的使用者需求及真功能保持不變。
