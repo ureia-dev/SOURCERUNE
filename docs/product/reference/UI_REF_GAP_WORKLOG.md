@@ -1,5 +1,12 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+## 2026-10-11｜PR #116 UI_02 CSS 接入獨立化（候選）
+
+- 接續 main `0d374288`、工作 PR #116 HEAD `2ff77ef1`；前輪 Fast #38075874755、Chromium #38075874759 已確認 SUCCESS，未重做既有 UI_01 驗收。
+- 本輪將 UI_02 三份 REF scope CSS 直接在 `Web/App/index.html` 載入，從 `ui01_ref_batch_c_v1.css` 移除三個間接 `@import`；原三份 CSS 內容不變，維持兩套 UI 及既有 state/聲音。
+- 原定新增 UI_02 專屬 Chromium 截圖及模式切換／Undo 驗收，但 GitHub 工作流修改兩次被工具安全檢查阻擋；遵守同錯兩次即停，不重試。UI_02 截圖、模式避讓、Undo 仍 PENDING，U02-20/CROSS-05 保持 [ ]／PARTIAL。這批只有 CSS 載入方式改善，不算 50–100 項視覺完成。
+- **DSP changed NO**；未合併、未正式部署；本次 CI 狀態以 push 後 Actions 為準。
+
 ## 2026-10-11｜PR #116 UI_02 REF 續批：三組光學修正（待驗證）
 
 - **起點**：main `0d374288`、工作分支 `style/ui01-condition-eq-knob-ref-20261011` 的 `0cbf6383`；原 PR #116 Fast #38069959072／Chromium #38069958987 PASS，不重做原 UI_01 13 區。這批保留同一個 Draft PR，未合併、未部署。
