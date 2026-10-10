@@ -54,3 +54,24 @@ Preview render audit using `Tests/Web/knob_smoke.cjs`. The action may be green
 while the optional render-audit step itself failed; always inspect
 `Web/App/preview/rendered/render-log.txt` and the fresh
 `geometry-report.json` for `UI_01.knobSmoke` and `UI_02.knobSmoke`.
+
+## Main UI metal knobs and adaptive Advanced panel (2026-10-10)
+
+The approved metal knob assets are **visible live elements**, with transparent
+input hit targets pinned exactly over their painted faces. Turning a knob on
+either main UI does **not** open Advanced: the card header / EDIT does.
+The detail dialog is independent of the scaled UI shell, supports click outside,
+Escape and CLOSE to dismiss, and grows from compact 470px controls to wider
+750px / 940px sections according to actual content (viewport capped).
+
+Web Preview #38025580778 is the real Chromium proof for all 8 UI_01 round
+macro knobs and 4 visible UI_02 bottom round knobs. It also verifies the
+approved knob PNG actually decodes, shared values and Undo/Redo, and the
+Adaptive dialog at 470/750/940px on both layouts. The UI_02 Ambience bar
+retains its horizontal slider behaviour. The three scene-area small motion
+dials (Speed/Doppler/Width) are included in the subsequent one-shot browser
+smoke so their pointer/wheel/keyboard path is explicitly tracked too.
+
+This is Web UI wiring; unsupported DSP and the Native VST3 custom editor
+remain pending. No Factory Presets, parameter IDs or approved UI geometry are
+changed.
