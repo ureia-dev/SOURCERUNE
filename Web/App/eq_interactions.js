@@ -51,6 +51,17 @@ function delayHide(ctx){
     if(!nearBox(ctx.lastX,ctx.lastY,active.anchor))hide();
   },260);
 }
+// Dismiss a node editor when swapping the mini/focused presentation.
+export function dismissEqFloat(){
+  cancelHide();
+  if(popupDrag){
+    const drag=popupDrag;popupDrag=null;
+    if(drag.input?.hasPointerCapture?.(drag.pointer))drag.input.releasePointerCapture(drag.pointer);
+    active?.ctx?.commit?.(drag.before);
+  }
+  if(floatBox?.contains(document.activeElement))document.activeElement.blur();
+  active=null;if(floatBox)floatBox.hidden=true;
+}
 export function attachEqInteractions(ctx){
   const svg=ctx.svg;
   if(!svg)return;
@@ -237,6 +248,10 @@ export function attachEqInteractions(ctx){
   svg.addEventListener("click",e=>e.stopPropagation());
   svg.addEventListener("contextmenu",e=>{
     if(e.target.closest('[data-eq-node]'))e.preventDefault();
+  });
+  svg.addEventListener("focusin",e=>{
+    const dot=e.target.closest?.('[data-eq-node]');
+    if(dot&&!popupDrag)open(dot.dataset.eqNode);
   });
   svg.addEventListener("pointerover",e=>{
     const dot=e.target.closest('[data-eq-node]');
