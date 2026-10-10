@@ -204,7 +204,7 @@ async function auditRefKnobValueComposition(page,ui){
       const f=face.getBoundingClientRect(),v=value.getBoundingClientRect(),c=knob.closest('.macro').getBoundingClientRect();
       const hidden=getComputedStyle(value).visibility==="hidden";
       data[id]={valueText:value.textContent,controlValue:control.value,hidden,
-        faceDiameter:f.width,labelAbove:label?label.getBoundingClientRect().bottom<=f.top+3:null,
+        faceDiameter:parseFloat(getComputedStyle(face).width),labelAbove:label?label.getBoundingClientRect().bottom<=f.top+3:null,
         valueBelow:v.top>=f.bottom-2,valueRight:v.left>=f.right+6,
         insideCard:v.right<=c.right+1&&v.bottom<=c.bottom+1,
         faceLeft:f.left,faceTop:f.top};
