@@ -9,6 +9,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: sr-scene-pr113-preview
@@ -17,6 +19,9 @@ concurrency:
 jobs:
   scene_preview:
     if: github.event.pull_request.number == 113 && github.event.pull_request.head.repo.full_name == github.repository
+    environment:
+      name: github-pages
+      url: ${{ steps.pages_deploy.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 7
     steps:
@@ -225,3 +230,43 @@ jobs:
             Web/App/preview/rendered/UI_01_PR113.png
             Web/App/preview/rendered/UI_01_PR113_report.json
           retention-days: 7
+      - name: Build production Web WASM for preview site
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash Tools/Build/build_eq3_wasm.sh
+          node -e 'const fs=require("fs");const e=new WebAssembly.Instance(new WebAssembly.Module(fs.readFileSync("Web/App/audio/eq3.wasm")),{env:{sinf:Math.sin,cosf:Math.cos,powf:Math.pow}}).exports;if(e.sr_eq3_version()!==1)throw Error("EQ3 ABI missing")'
+      - name: Prepare PR113 branch-only static Web deployment
+        shell: bash
+        env:
+          REVIEW_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/Web _site/Assets
+          cp -a Web/App _site/Web/App
+          cp -a Assets/UI _site/Assets/UI
+          python3 - <<'PY'
+          from pathlib import Path
+          import os,re,json
+          p=Path("_site/Web/App/index.html")
+          source=p.read_text(encoding="utf-8")
+          rev=os.environ["REVIEW_SOURCE_SHA"][:12]
+          source=re.sub(r'href="(\./[^"]+\.css)"',lambda m:f'href="{m.group(1)}?v={rev}"',source)
+          source=re.sub(r'src="(\./[^"]+\.js)"',lambda m:f'src="{m.group(1)}?v={rev}"',source)
+          p.write_text(source,encoding="utf-8")
+          Path("_site/index.html").write_text('<!doctype html><meta charset="utf-8"><title>SOURCERUNE Preview PR113</title><script>location.replace("./Web/App/"+location.search+location.hash)</script>',encoding="utf-8")
+          Path("_site/PR113_DEPLOY_PROOF.json").write_text(json.dumps({"repo":"ureia-dev/SOURCERUNE","branch":"docs/ui01-ui02-ref-comparison-log-20261010","pr":113,"source_sha":os.environ["REVIEW_SOURCE_SHA"],"kind":"Web preview only","native_ui_parity":"PENDING"},indent=2)+"\n",encoding="utf-8")
+          assert Path("_site/Web/App/audio/eq3.wasm").stat().st_size>1000
+          assert Path("_site/Web/App/preview/rendered/UI_01_PR113.png").stat().st_size>10000
+          print("Review-only Pages artifact verified",os.environ["REVIEW_SOURCE_SHA"])
+          PY
+      - name: Configure existing GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload PR113 static Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy PR113 Web Preview (no merge)
+        uses: actions/deploy-pages@v4
+        id: pages_deploy
