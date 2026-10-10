@@ -9,7 +9,7 @@
   },
   "sceneHeight": 262,
   "sceneSvgHeight": 186,
-  "waveformHeight": 37,
+  "waveformHeight": 9,
   "semanticArt": [
     {
       "src": "../../Assets/UI/UI_01/SOURCE/SRC_003_Smartphone_Speakerphone.png",
@@ -59,12 +59,62 @@
       "bytes": 954
     }
   ],
+  "assembledMaterials": {
+    "waveImage": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/UI_01/Scene/RT_WAVEFORM_STRIP_BG.png\")",
+    "waveBounds": {
+      "x": 342,
+      "y": 278,
+      "w": 949,
+      "h": 38,
+      "bottom": 316
+    },
+    "buttons": [
+      {
+        "value": "APPROACH",
+        "active": false,
+        "image": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_IDLE.png\")",
+        "rect": {
+          "x": 23,
+          "y": 749,
+          "w": 76.6875,
+          "h": 36,
+          "bottom": 785
+        }
+      },
+      {
+        "value": "PASS_BY",
+        "active": true,
+        "image": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_ACTIVE.png\")",
+        "rect": {
+          "x": 103.6875,
+          "y": 749,
+          "w": 80.625,
+          "h": 36,
+          "bottom": 785
+        }
+      },
+      {
+        "value": "LEAVE",
+        "active": false,
+        "image": "url(\"http://127.0.0.1:4173/Assets/UI/Runtime/Common/Controls/RT_SEGMENT_CAP_IDLE.png\")",
+        "rect": {
+          "x": 188.3125,
+          "y": 749,
+          "w": 77.6875,
+          "h": 36,
+          "bottom": 785
+        }
+      }
+    ],
+    "macroBottom": 802,
+    "curve": "M110.00 260.00 L126.46 257.19 L142.92 254.39 L159.38 251.58 L175.83 248.77 L192.29 245.96 L208.75 243.16 L225.21 240.35 L241.67 237.54 L258.13 234.73 L274.58 231.93 L291.04 229.12 L307.50 226.31 L323.96 223.51 L340.42 220.70 L356.88 217.89 L373.33 215.08 L389.79 212.28 L406.25 209.47 L422.71 206.66 L439.17 203.85 L455.63 201.05 L472.08 198.24 L488.54 195.43 L505.00 192.63 L521.46 196.89 L537.92 201.16 L554.38 205.42 L570.83 209.69 L587.29 213.95 L603.75 218.22 L620.21 222.48 L636.67 226.75 L653.13 231.02 L669.58 235.28 L686.04 239.55 L702.50 243.81 L718.96 248.08 L735.42 252.34 L751.88 256.61 L768.33 260.88 L784.79 265.14 L801.25 269.41 L817.71 273.67 L834.17 277.94 L850.63 282.20 L867.08 286.47 L883.54 290.73 L900.00 295.00"
+  },
   "visualSmoke": {
     "zoomIn": true,
     "zoomReset": true,
     "timeRulerTicks": 5,
     "labelNoOverlap": true
   },
-  "sha": "70348cc562e4f012145186972d788878f299bf8e",
-  "screenshotSha256": "c875486caebafe0aa9e3f579e49cc2b0e45bbfc350aa378703820306af945fba"
+  "sha": "1752f8e37a5f94ebca4488b39777ef605219af1a",
+  "screenshotSha256": "94157cdb3e1d1484b9e23b6099064779e9968f5286cef4bfef3083cde955afe1"
 }
