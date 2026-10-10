@@ -5,7 +5,7 @@ import {attachEqInteractions,dismissEqFloat} from "./eq_interactions.js";
 import {eqMiniInlineMarkup,bindEqMiniInline,syncEqMiniInline,selectEqMiniInline} from "./eq_mini_inline.js";
 import {openEqFocus,eqFocusIsOpen,markMiniEqInert,syncEqFocus,repositionEqFocus} from "./eq_focus.js";
 import {sceneViewBox,syncSceneZoom,syncSceneGuide,syncSceneTime,bindSceneView} from "./scene_view_ref_stage1.js";
-import {ambienceRefMarkup,bindAmbienceRef,paintAmbienceOutput,intelligibilityRefMarkup,mixRefMarkup} from "./ui01_bottom_ref.js";
+import {ambienceRefMarkup,bindAmbienceRef,paintAmbienceOutput,intelligibilityRefMarkup,mixRefMarkup,syncMixRef} from "./ui01_bottom_ref.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
 const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"],LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT",SCENE_PRESET_HERO:"SCENE PRESET HERO"};
 const DEFSEL={SOURCE:"SRC_003_Smartphone_Speakerphone",TRANSMISSION:"TRN_005_GSM_Stable",WALL_COVER:"CVR_001_None_Open",SPACE_ENVIRONMENT:"SPC_022_Busy_City_Street"};
@@ -244,6 +244,7 @@ function setMacroKnob(id,raw){
   if(next===state.params[id])return false;
   state.params[id]=next;
   syncMacroKnob(id);
+  if(id==="mix")syncMixRef(state);
   return true;
 }
 function finishMacroKnobChange(before,id){

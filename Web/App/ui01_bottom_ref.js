@@ -63,3 +63,12 @@ export function mixRefMarkup(state){
     +' title="Ø phase inversion requires explicit approved DSP implementation"'
     +' aria-label="Phase inversion unavailable">Ø</button>';
 }
+
+export function syncMixRef(state){
+  const el=document.querySelector("body.ui-01 .sr-mix-live-ratio");
+  if(!el)return;
+  const wet=clamp(Math.round(Number(state.params.mix)||0),0,100);
+  const label=el.querySelector("span"),dry=el.querySelector("small");
+  if(label)label.textContent="WET "+wet+"%";
+  if(dry)dry.textContent="DRY "+(100-wet)+"%";
+}
