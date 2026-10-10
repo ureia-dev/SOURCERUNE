@@ -429,7 +429,7 @@ async function auditEqMouseGestures(page,ui){
     const line=svg.querySelector('.macro-eq-analyzer-line')?.getAttribute('d')||'';
     const area=svg.querySelector('.macro-eq-analyzer-fill')?.getAttribute('d')||'';
     updateEqAnalyzer(bins,48000,10100,false);
-    return {styles,linePoints:(line.match(/L/g)||[]).length,areaClose:area.endsWith(' Z'),
+    return {styles,linePoints:(line.match(/[CL]/g)||[]).length,areaClose:area.endsWith(' Z'),
       cleared:svg.querySelector('.macro-eq-analyzer-line').getAttribute('d')===''};
   });
   assert.equal(new Set(colorAndAnalyzer.styles).size,5,ui+' five EQ handles must have distinct vivid colors');
