@@ -4,6 +4,18 @@
 
 > 2026-10-09 建立；承接使用者選取的完整缺項稽核。**每完成一個工作 ID，要直接在這份 GitHub 文件中將 `[ ]` 更新為 `[x]`，填入 PR／Commit／CI／正式 REF 與真 Web/Native 驗收證據。** 不另建立重複競爭工作清單。純文件的登錄不等於任何修復完成。
 
+## 2026-10-10｜UI_01 主 Spectrum 共用算法及右側 Meter 待驗收（PR #114）
+
+> **這節為現行最新狀態，取代下方歷史紀錄中「PR #113 尚未合併」及「Spectrum 尚用舊繪圖語法」的敘述。** 先前 UI_01 Scene／Spectrum 控制／四卡已經使用者授權，PR #113 **合併** `e10fa05c47723dbb287f59418ee55e33046d454b`，並由 [正式 Web Pages run #38064099009](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38064099009) 完成部署。原工作內容沒有重做。
+
+- **使用者此輪插單**：紅圈主分析區 `SPECTRUM` 要套用**小型 EQ 同一套頻譜算法**，換掉原本 Canvas 直接 FFT 取點、逐像素畫線的視覺語法；再繼續下一項 UI（既有第四步 U01-11 右側 Meter）。不碰 `Source/DSP/**`、WASM／AudioWorklet 計算、公開參數 ID、Factory Preset，亦不動 `Assets/UI/ReferenceSheets/**` 解析度。
+- **單一進行中工作線**：[PR #114](https://github.com/ureia-dev/SOURCERUNE/pull/114) ／ `feat/ui01-meter-ref-pr114`；最後候選程式 checkpoint `00568969a612255071bbb2b0d6c83afd69c8ecea`，真 Chromium 圖／報告更新 commit `0d48d1b06193d255081b8fca0f4381b2c373b9fc`，**draft，未合併，未重新部署**。PR #113 不重開；舊打包 PR #68 與本 UI 無關，未合併。沒有新 DSP 還原點，因本輪未改任何受保護 DSP。
+- **主 SPECTRUM 真正共用**：`Web/App/eq_analyzer_v1.js` 導出同一 `createSpectrumDisplayTrace()` 顯示用演算法；迷你 EQ 與主分析器皆走原 129 點、20 Hz–20 kHz 對數頻率取樣、FFT bin **power average**、7 點頻率平滑、`attack=.70 / release=.21`、42ms 視覺節流、+4.5 dB/octave-of-frequency（公式 `4.5 * log2(f/1000)`）只供顯示補償。大畫面改用相同的保持曲線形狀之三次 Bézier 繪圖；保留真 PRE／POST 兩路現有 analyser、RTA 開關、1/3 octave 功率平滑／RAW、靜態 L+R。該演算法只繪畫：**音訊處理聲音完全不變**。Main Canvas 的填色採獨立 Path2D，避免把封閉填色底框也描邊。
+- **真實播放證據**：在 GitHub Actions 由真正 Web/App 將臨時 48 kHz、3 秒、1 kHz PCM WAV 經現有播放器 + DSP AudioWorklet 播放，真正的 Canvas 採樣色彩與 mini EQ overlay 同時成功。測得 `playing=true`、播放時間約 `0.272s`、mini SVG 線段長度 `5476`、主頻譜有效青色像素 `248`；相同模型 129 個樣本逐點數值相等（`same=true`），三分之一八度的取樣結果與窄頻取樣不同而有限；**並非在正式畫面畫假峰值**。實際畫面 [SPECTRUM 真 1kHz 輸入圖](../../../Web/App/preview/rendered/UI_01_SPECTRUM_PR114.png)。
+- **同輪 Meter 續作**：`Web/App/ui01_meter_ref_pr114.css` 復用批准 `RT_METER_FRAME.png`／`RT_METER_SEGMENT.png` 與 `RT_SEGMENT_CAP_IDLE/HOVER/ACTIVE.png`；既有 IN／OUT 20×178px 真 Peak/RMS 指示保留，加入中間 `0,-6,-12,-24,-36,-60` dB 文字與分段 LED。V9 舊 `.meters::after` 六行刻度造成雙疊、`.meter-values` 舊 Grid 推走 LUFS 文字的真實問題已清除，現 `LUFS` 區真正位於 Meter 鎖定框內，**讀數只保持 `—`／pending，未有 LUFS DSP 不得仿造數值**。其餘精確 REF 文字字型與 Native Host 視覺仍未確認；U01-11 仍原始 `[ ]` 待人工視覺核准。
+- **正式驗證證據**：[Meter 真空檔畫面](../../../Web/App/preview/rendered/UI_01_METER_PR114.png)／[JSON 報告](../../../Web/App/preview/rendered/UI_01_METER_PR114_report.json)；[Chromium run #38065399265](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38065399265) **SUCCESS**、[Fast CI #38065399202](https://github.com/ureia-dev/SOURCERUNE/actions/runs/38065399202) **SUCCESS**；`geometry.ok=true`、`lufsLayout.inside=true`／`labelVisible=true`／`pendingVisible=true`／`duplicateScale=none`、正式 Meter PNG 已讀取、Peak↔RMS click PASS。先前 run #38064554279 因瀏覽器 transform 尺寸驗證錯誤失敗，#38064953484 的不正確「1/3 峰值必定較低」測試假設也已診斷修正，未盲目重跑；後續 run 已成功。
+- **剩餘邊界**：正式 UI_01 REF 原 PNG 仍未入庫，沒有 1:1 同來源 overlay；VST3 Native 自訂 UI 與真 Host 尚未驗證，本輪沒有包版 VST；如使用者日後說「部署」，依最新指示可直接合併、正式 Web 部署與**既有核准流程允許的**打包，無需重問，但**不可跳過 CI／DSP 鎖定或假稱 Native 已出包**。UI 工作後續依序為 U01-13～17 底部七模組、U01-18 旋鈕與材質；待真畫面檢查後沿現有計畫小步繼續。
+
 ## 2026-10-10｜UI_01／UI_02 與正式 REF 對照盤點（本輪只登錄、不修復）
 
 > **Checkpoint 性質：盤點／待辦優先級整理；沒有新完成的 UI ID。** 本節只對應以下原有工作 ID，**不新增第二份 TODO 或獨立產品規格**。底下既有 `[ ]` 保留原狀；日後實際修正與驗收才可把對應 ID 改為 `[x]`。
