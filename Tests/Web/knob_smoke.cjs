@@ -408,6 +408,23 @@ async function auditEqMouseGestures(page,ui){
   await page.mouse.move(pt.x,pt.y-18,{steps:4});await page.mouse.up();
   const gained=await param('b2Gain');
   assert(gained>initialGain,ui+' mini direct drag failed to update Bell Gain');
+  // Visual focus proof: transparent SVG hit targets must never produce an
+  // opaque black selection rectangle. Verify after an actual pointer drag.
+  const selectedVisual=await page.$eval('.macro-eq [data-eq-node="b2"]',el=>{
+    const css=getComputedStyle(el);
+    const ring=getComputedStyle(document.querySelector('.macro-eq [data-eq-ring="b2"]'));
+    const fill=css.fill.match(/[\d.]+/g)?.map(Number)||[];
+    return {outline:css.outlineStyle,background:css.backgroundColor,
+      boxShadow:css.boxShadow,filter:css.filter,fill,
+      selectedRing:ring.stroke};
+  });
+  assert.equal(selectedVisual.outline,'none',ui+' selected mini EQ node has black outline');
+  assert.equal(selectedVisual.boxShadow,'none',ui+' selected mini EQ node has rectangular shadow');
+  assert.equal(selectedVisual.filter,'none',ui+' selected mini EQ node has rectangular filter');
+  assert(selectedVisual.background==='rgba(0, 0, 0, 0)'||selectedVisual.background==='transparent',
+    ui+' selected mini EQ node has opaque background');
+  assert((selectedVisual.fill[3]??1)<.02,
+    ui+' selected mini EQ hit area is opaque instead of transparent');
   assert.equal(await popupVisible(),false,ui+' mini node drag spawned unwanted black information box');
   const double=await position('b2');
   await page.mouse.click(double.x,double.y,{clickCount:2,delay:60});
@@ -433,11 +450,15 @@ async function auditEqMouseGestures(page,ui){
       cleared:svg.querySelector('.macro-eq-analyzer-line').getAttribute('d')===''};
   });
   assert.equal(new Set(colorAndAnalyzer.styles).size,5,ui+' five EQ handles must have distinct vivid colors');
+  assert.deepEqual(colorAndAnalyzer.styles,[
+    'rgb(34, 197, 94)','rgb(239, 68, 68)','rgb(250, 204, 21)',
+    'rgb(59, 130, 246)','rgb(244, 114, 182)'
+  ],ui+' approved HPF/3 bands/LPF vivid five-color palette shifted');
   assert(colorAndAnalyzer.linePoints>=128&&colorAndAnalyzer.areaClose&&colorAndAnalyzer.cleared,
     ui+' VVChain-referenced logarithmic smoother/analyzer visual data must render and clear');
   assert.equal(await page.$eval('body',e=>e.classList.contains('advanced-open')),false,
     ui+' compact direct EQ gesture opened Advanced');
-  return {ok:true,onlyMiniNodes:true,noBlackPopup:true,
+  return {ok:true,onlyMiniNodes:true,noBlackPopup:true,noOpaqueNodeFocus:true,
     nodeWheelQ:[initialQ,adjustedQ],gainDrag:[initialGain,gained],
     bellDoubleClickGain:0,cutPoints:true,vividNodes:colorAndAnalyzer.styles,
     analyzerReference:true,noAdvanced:true,undo:true};
@@ -568,6 +589,16 @@ async function auditEqFocus(page,ui){
   await page.mouse.down();await page.mouse.move(pt.x+25,pt.y-12,{steps:5});await page.mouse.up();
   const dragged=await read('b2-gain');
   assert.notEqual(dragged,before,ui+' dragged Focus node did not change real Gain');
+  const focusHitStyle=await page.$eval('#eqFocusDialog [data-eq-node="b2"]',el=>{
+    const st=getComputedStyle(el);
+    return {outline:st.outlineStyle,shadow:st.boxShadow,filter:st.filter,
+      background:st.backgroundColor};
+  });
+  assert.equal(focusHitStyle.outline,'none',ui+' Focus selected node outline is an opaque block');
+  assert.equal(focusHitStyle.shadow,'none',ui+' Focus selected node has a shadow rectangle');
+  assert.equal(focusHitStyle.filter,'none',ui+' Focus selected node uses a blocking filter');
+  assert(['rgba(0, 0, 0, 0)','transparent'].includes(focusHitStyle.background),
+    ui+' Focus selected node has opaque background');
   const newPath=await graphPath();
   assert.notEqual(newPath,initialPath,ui+' Focus did not recompute the same EQ response');
   const miniPath=await page.$eval('.macro-eq .macro-eq-line',e=>e.getAttribute('d'));
