@@ -122,3 +122,7 @@ Web Chrome `Tests/Web/knob_smoke.cjs` contains actual hover, wheel, drag, text a
 ### EQ interaction audit correction
 
 Web Preview #38034071507 compiled EQ WASM and deployed Web, but real Chromium did **not** pass: new small-popup smoke incorrectly used Puppeteer `$eval` to call `.map` on one input. Fixed **all three** numeric-field enumerations to `$$eval`; the existing one-shot UI_01/UI_02 browser gate must be rerun and the written render report checked before reporting success. No UI or DSP behavior changed in this correction.
+
+### Literal Puppeteer selector correction (2026-10-10)
+
+Root cause of two prior renders: generator-side JavaScript string-replacement interpreted replacement "$$" as a single literal "$"; thus previous supposed test correction never changed GitHub content (original test blob SHA remained the same). In the working branch, after committing the exact source, fetch and verify all three readbacks contain `page.$$eval(...)`, and only then rerun the original one-shot Pages/browser audit. No UI/DSP/CI safety iteration changes.

@@ -373,7 +373,7 @@ async function auditEqMouseGestures(page,ui){
   const hidden=()=>page.$eval('body',e=>e.classList.contains('advanced-open'));
   await position('b2');
   assert(await boxVisible(),ui+' hovering EQ point must reveal floating readout');
-  const fields=await page.$eval('[data-eq-float-value]',xs=>xs.map(x=>x.dataset.eqFloatValue));
+  const fields=await page.$$eval('[data-eq-float-value]',xs=>xs.map(x=>x.dataset.eqFloatValue));
   assert.deepEqual(fields,['freq','gain','q'],ui+' bell popup fields missing');
   const firstQ=await read('q'),firstGain=await read('gain');
   await page.mouse.wheel({deltaY:-120});
@@ -406,9 +406,9 @@ async function auditEqMouseGestures(page,ui){
   assert.equal(await read('q'),qAfter,ui+' double-click must preserve Q');
   assert(!await hidden(),ui+' small EQ editor must not open full Advanced dialog');
   await position('hpf');
-  assert.deepEqual(await page.$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' HPF must show only frequency');
+  assert.deepEqual(await page.$$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' HPF must show only frequency');
   await position('lpf');
-  assert.deepEqual(await page.$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' LPF must show only frequency');
+  assert.deepEqual(await page.$$eval('[data-eq-float-value]',xs=>xs.map(e=>e.dataset.eqFloatValue)),['freq'],ui+' LPF must show only frequency');
   await page.mouse.move(2,2);
   await new Promise(done=>setTimeout(done,350));
   assert(!await boxVisible(),ui+' floating EQ popup did not dismiss after leaving interaction area');
