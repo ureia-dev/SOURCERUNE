@@ -20,7 +20,7 @@ Alternatively set `ZIG=/path/to/zig`; first checkpoint used Zig 0.17.0. The chec
 
 - Fast: existing repository syntax/data/assets/structure CI unchanged. Native smoke is a single bounded developer check, no stress loops or automatic safety expansion.
 - Deep: manual default-size native/WASM fixture and real browser integration. No workflow trigger/round count changed.
-- Release: VST3/package/Host not yet implemented; no release claim.
+- Release: native VST3 now has a Linux development build and manual SDK mini-host smoke (`Source/Plugin/VST3/README.md`); macOS/Windows DAW and release acceptance remain pending.
 
 ```sh
 g++ -std=c++20 -O2 -ffp-contract=off -Wall -Wextra -Werror Source/DSP/SceneProcessor.cpp Tests/Audio/native_smoke.cpp -o /tmp/sourcerune-smoke

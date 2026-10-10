@@ -1,5 +1,15 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## Native VST3 MVP checkpoint — 2026-10-10 第二批
+
+- **Web 已上線**：PR #66 已 merge `d82f4420`，Fast run `37970139055` PASS；Pages run `37970747320` SUCCESS，render audit `074b085e` 記錄成功。網址 https://ureia-dev.github.io/SOURCERUNE/Web/App/ 。本輪另查 HTTP 200、線上 app.js 與 main 相同、線上 WASM SHA-256 `3d0ce6b0aa610e008a1308d030b453905b07e3320f1185bcd42452bc2e1ad714` 與已測 binary 相同。未重跑既有成功 Web 聲音驗證。
+- **新分支**：`feat/native-vst3-mvp`，由 `074b085e` 起步。根 CMake 及 `Source/Plugin/VST3/Plugin.cpp` 建立可載入 Native target，直接 link 原有 `SceneProcessor.cpp`，不改 Web DSP、Preset、圖資或 UI geometry。
+- **已實作**：11 個基本控制、既有 public IDs 對應的永久 host 數字 ID、mono/stereo float32、global/module bypass、versioned state save/recall、block-rate parameter queue。Native 先採 host generic editor，不宣稱 UI_01/02 已 native 嵌入。
+- **已驗收範圍**：Linux x86_64／g++ 13.3／CMake／固定官方 SDK 3.8.1 `3cdf9ca5`。真 `.vst3` bundle 編譯、SDK mini-host 載入、11 unique/default params、48 kHz stereo 音訊與共用 core 最大誤差 0、parameter change、exact bypass、state recall／offline audio parity PASS。最初遺漏 SDK enable macro 導致 ModuleEntry 缺失、setProcessing 繼承 kNotImplemented；均已最小修復，不以失敗 build 作完成證據。
+- **執行入口**：`Source/Plugin/VST3/README.md`；`Tests/Audio/vst3_host_smoke.cpp` 為一次性 bounded Deep/manual 整合，build 屬 Release/manual。本輪未改 CI trigger／matrix／safety/stress 次數，未自動跑完整 validator 或安裝至 DAW。
+- **仍 PENDING**：macOS／Windows 原生建置、真正 DAW Host、完整 validator／release、sample-offset automation、Web JSON／74 Factory 完整 recall、native UI、使用者實際試聽。不能把 SDK mini-host 當 DAW 測試，不能把 Linux bundle 當 Mac/Windows 成品。
+- **下一步**：在使用者核准前不擅增 Release matrix/runner；取得 macOS／Windows Release 建置 runner 的核准後，製作對應可下載插件並做真 DAW 驗證。先保存本分支、PR、必要 Fast CI；接近 token 上限時照使用者要求停在 GitHub checkpoint。
+
 ## Web DSP MVP checkpoint — 2026-10-10
 
 - 起點 main `ef3c7324`；分支 `feat/shared-dsp-web-mvp`。本次明確授權以 Web 真聲音 → Native VST3 優先，取代舊 UI-only 工作順序；保留 UI、64 public IDs、74 Preset 及既有安全測試次數。
