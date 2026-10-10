@@ -130,3 +130,7 @@ Root cause of two prior renders: generator-side JavaScript string-replacement in
 ### Exact VVChain Q wheel direction verification
 
 Original VVChain UI_A `nextQFromWheel(q,deltaY,fine)` multiplies Q by `exp(clamp(deltaY/100,-1,1)*speed)`: upward `deltaY<0` **decreases Q** (wider bell), downward increases Q (narrower). The new SOURCERUNE node implementation already matches, but the first real gesture test incorrectly required Q to increase on upward scroll. Browser gate now asserts the correct direction; no product logic, DSP, or preset changes. Prior Chrome #38034389932 failed on this incorrect assertion and must not be treated as passing the gesture test.
+
+### EQ popup explicit Enter commit
+
+Chrome #38034518770 proved graph Q-wheel, numeric dragging, and the popup render work, but typed numeric input was left as raw `1700` instead of the expected committed and formatted `1.7 kHz` on Enter. The interaction code now explicitly commits and formats on Enter, with blur as a fallback; escaping restores the prior value and does not commit. Web state only; C++ filters, parameter ranges, saved presets and CPU untouched. The true browser render report is the gate, not a Pages green badge.
