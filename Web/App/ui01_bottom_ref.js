@@ -41,3 +41,14 @@ export function paintAmbienceOutput(analyser,playing,now){
   }
   g.stroke();
 }
+
+export function intelligibilityRefMarkup(state){
+  if(state.ui!=="UI_01")return "";
+  // Presence/Dynamic are explicit REF affordances, NOT registered processing.
+  // Disabled state prevents false parameter or audio processing promises.
+  return '<div class="sr-intel-ref-options" aria-label="Presence and Dynamic DSP not connected">'
+    +'<label title="Presence DSP and public parameter need approval">'
+    +'<input type="checkbox" disabled aria-label="Presence not yet implemented"><span>Presence</span></label>'
+    +'<label title="Dynamic DSP and public parameter need approval">'
+    +'<input type="checkbox" disabled aria-label="Dynamic not yet implemented"><span>Dynamic</span></label></div>';
+}
