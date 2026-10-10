@@ -1,5 +1,5 @@
 {
-  "commit": "42463c4e9db566abaff077e2b2ecdafc49cce35f",
+  "commit": "2aaee45953bd3b39aeecc0ad7beb5ead93e56b63",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -648,6 +648,7 @@
           "ok": true,
           "onlyMiniNodes": true,
           "noBlackPopup": true,
+          "noOpaqueNodeFocus": true,
           "nodeWheelQ": [
             1,
             0.9
@@ -1202,6 +1203,7 @@
           "ok": true,
           "onlyMiniNodes": true,
           "noBlackPopup": true,
+          "noOpaqueNodeFocus": true,
           "nodeWheelQ": [
             1,
             0.9
