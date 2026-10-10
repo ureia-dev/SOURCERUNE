@@ -61,8 +61,9 @@ async function auditKnobs(page,ui){
   const hpf=await auditHpf(page,ui);
   const eq=await auditMiniEq(page,ui);
   const eqMouse=await auditEqMouseGestures(page,ui);
+  const eqInline=await auditEqMiniInline(page,ui);
   const eqFocus=await auditEqFocus(page,ui);
-  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq,eqMouse,eqFocus};
+  return {ok:true,ui,before,dragged,scrolled,keyed,advanced,undid,redid,restored,ambience,allVisible,dialogs,motion,knobValues,hpf,eq,eqMouse,eqInline,eqFocus};
 }
 
 // Verify every rendered main-screen round knob, not only BAD SIGNAL.
@@ -440,6 +441,68 @@ async function auditEqMouseGestures(page,ui){
     nodeWheelQ:[initialQ,adjustedQ],gainDrag:[initialGain,gained],
     bellDoubleClickGain:0,cutPoints:true,vividNodes:colorAndAnalyzer.styles,
     analyzerReference:true,noAdvanced:true,undo:true};
+}
+
+async function auditEqMiniInline(page,ui){
+  const root='.macro-eq [data-eq-mini-inline]';
+  const pick=id=>'.macro-eq .macro-eq-svg [data-eq-node="'+id+'"]';
+  const field=kind=>root+' [data-eq-mini-value="'+kind+'"]';
+  const middle=selector=>page.$eval(selector,e=>{
+    const b=e.getBoundingClientRect();
+    return{x:b.x+b.width/2,y:b.y+b.height/2,w:b.width,h:b.height};
+  });
+  const val=kind=>page.$eval(field(kind),e=>e.value);
+  const visible=await page.$eval(root,e=>{
+    const b=e.getBoundingClientRect(),parent=e.closest('.macro-eq').getBoundingClientRect();
+    return{w:b.width,h:b.height,within:b.left>=parent.left-2&&b.right<=parent.right+2
+      &&b.bottom<=parent.bottom+3};
+  });
+  assert(visible.within&&visible.w>155&&visible.h>=24,ui+' mini editable row must fit in EQ card');
+  const b2=await middle(pick('b2'));
+  await page.mouse.click(b2.x,b2.y);
+  assert.equal(await page.$eval(root,e=>e.dataset.eqMiniSelected),'b2',
+    ui+' mini EQ node click did not select band values');
+  assert.equal(await page.$eval('.sr-eq-float',e=>e.hidden),true,
+    ui+' mini EQ values accidentally opened the floating info popup');
+  const originalGain=await val('gain');
+  const gainSpot=await middle(field('gain'));
+  await page.mouse.move(gainSpot.x,gainSpot.y);
+  await page.mouse.wheel({deltaY:-120});
+  const wheelGain=await val('gain');
+  assert(Math.abs(parseFloat(wheelGain)-parseFloat(originalGain)-.1)<.011,
+    ui+' mini inline Gain wheel must be exactly one 0.1dB step');
+  await page.$eval('#undoBtn',el=>el.click());
+  assert.equal(await val('gain'),originalGain,ui+' mini inline wheel missing undo');
+  // One vertical drag, one Undo; true shared Bell Gain parameter.
+  const dragSpot=await middle(field('gain'));
+  await page.mouse.move(dragSpot.x,dragSpot.y);
+  await page.mouse.down();await page.mouse.move(dragSpot.x,dragSpot.y-18,{steps:4});await page.mouse.up();
+  const movedGain=await val('gain');
+  assert(parseFloat(movedGain)>parseFloat(originalGain),ui+' mini numeric drag failed');
+  await page.$eval('#undoBtn',el=>el.click());
+  assert.equal(await val('gain'),originalGain,ui+' mini numeric drag missing atomic Undo');
+  // Focus/Enter can type numbers directly, without showing a floating popup.
+  const originalFreq=await val('freq');
+  await page.$eval(field('freq'),el=>{el.focus();el.select()});
+  await page.keyboard.type('1700');
+  await page.keyboard.press('Enter');
+  assert.equal(await val('freq'),'1.7 kHz',ui+' mini direct frequency typed edit not committed');
+  await page.$eval('#undoBtn',el=>el.click());
+  assert.equal(await val('freq'),originalFreq,ui+' mini typed frequency undo failed');
+  const h=await middle(pick('hpf'));await page.mouse.click(h.x,h.y);
+  assert.equal(await page.$eval(root,e=>e.dataset.eqMiniSelected),'hpf',ui+' HPF selection unavailable');
+  assert.equal(await page.$eval(field('gain'),e=>e.disabled),true,
+    ui+' HPF cut has no real Gain; must not show fake active control');
+  assert.equal(await page.$eval(field('q'),e=>e.disabled),true,
+    ui+' HPF cut has no real Q; must not show fake active control');
+  const l=await middle(pick('lpf'));await page.mouse.click(l.x,l.y);
+  assert.equal(await page.$eval(root,e=>e.dataset.eqMiniSelected),'lpf',ui+' LPF selection unavailable');
+  assert.equal(await page.$eval(field('freq'),e=>e.disabled),false,ui+' LPF frequency must stay editable');
+  assert.equal(await page.$eval('.sr-eq-float',e=>e.hidden),true,
+    ui+' compact selected EQ values must never open black popup');
+  return {ok:true,contained:true,selectedB2:true,wheel:[originalGain,wheelGain],
+    verticalDrag:[originalGain,movedGain],typedFreq:'1700 Hz',atomicUndo:true,
+    cutsFreqOnly:true,miniPopupNever:true};
 }
 
 async function auditEqFocus(page,ui){
