@@ -32,3 +32,25 @@ These are reproducible **manual checks**, not a claim of completed human visual 
 6. Compare processed sound with GLOBAL BYPASS; original public parameter IDs and plugin shell geometry remain unchanged. Web transport lives outside the plugin shell.
 
 Fast CI checks source syntax/structure; browser interaction and subjective visual approval are **separate** from CI and require actual Web TEST observation.
+
+## Round macro knob controls (UI_01 and UI_02)
+
+All **visible round macro knobs** share the existing published state IDs and
+schema limits: drag **up/down** to adjust, hold **Shift** during drag for fine
+movement, hover and scroll for one schema step, use arrow keys / Page Up or Down
+/ Home / End, or double-click for the schema default. Each drag is one Undo
+entry. The displayed values, Advanced drawer, state recall, and currently
+supported AudioWorklet parameters use the same state.
+
+The UI_02 **Ambience** exposed horizontal slider intentionally remains a
+horizontal slider. The current-distance display is read-only and derived from
+the existing motion parameters. This interaction wiring does **not** imply
+that Condition, Ambience, Intelligibility or other unfinished DSP has been
+implemented. The VST3 native host currently uses its generic parameter editor;
+custom native round knob artwork and full Web/Native parity are still pending.
+
+One-shot real-browser regression evidence is collected in the existing Web
+Preview render audit using `Tests/Web/knob_smoke.cjs`. The action may be green
+while the optional render-audit step itself failed; always inspect
+`Web/App/preview/rendered/render-log.txt` and the fresh
+`geometry-report.json` for `UI_01.knobSmoke` and `UI_02.knobSmoke`.
