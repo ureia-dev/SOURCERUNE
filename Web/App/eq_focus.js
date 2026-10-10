@@ -31,6 +31,7 @@ function reposition(preserve=true){
   current.dialog.style.left=current.position.x+"px";current.dialog.style.top=current.position.y+"px";
 }
 export function eqFocusIsOpen(){return Boolean(current);}
+export function repositionEqFocus(){reposition();}
 export function syncEqFocus(){
   if(!current)return;
   const s=current.getState(),p=s.params,root=current.dialog;
