@@ -119,14 +119,14 @@
     "channel": "L+R",
     "channelTag": "SPAN",
     "bounds": {
-      "x": 748,
+      "x": 955,
       "y": 328,
-      "width": 547,
+      "width": 340,
       "height": 36,
       "top": 328,
       "right": 1295,
       "bottom": 364,
-      "left": 748
+      "left": 955
     },
     "tabBounds": {
       "x": 333,
@@ -145,6 +145,6 @@
     "timeRulerTicks": 5,
     "labelNoOverlap": true
   },
-  "sha": "c19e8a189be3dd83671e403502608ed14c71ba99",
-  "screenshotSha256": "96a5cd366e333ff08e7da49dfd4989e1937bc9301bf0af09bb480c931da36caf"
+  "sha": "a075066d7f49578f6056011df64c71898c355fe9",
+  "screenshotSha256": "73c37e88525e49521315b055ca622bacee76e94ce14b8cb598cb67e511b3f2a9"
 }
