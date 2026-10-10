@@ -1,5 +1,16 @@
 # SOURCERUNE — UI_01／UI_02 REF 缺項修復工作日誌（唯一有效）
 
+## 2026-10-11｜PR #116 UI_02 模式避讓／可及性／既有 Chromium 測試接入（候選）
+
+- **最新核對**：main `0d374288`，工作 branch `style/ui01-condition-eq-knob-ref-20261011` 起點 `6af698b5`，PR #116 Draft、未合併。前一輪 Fast #38079747681／Chromium #38079747652 均為 SUCCESS，但兩者來源為 `301282e7`，**不是這批新程式碼的驗證證據**。
+- **A 視覺避讓**：`98186c3837852175e56ad4d750370739e9b94602`，僅在 UI_02 已有三模式欄補 `min-width:0`、單行省略、防溢出與固定行高，維持 172px 卡框、110px 模式欄、76px knob、26px 模式鍵、正式 PNG、現有 hitbox 與音訊不變。
+- **B 真模式可及性**：`ddc8447996776655d78bc8b22bb4f1cf99fd7223`，共用 `modeButtons()` 加 `type=button`／依現有 `state.params` 產生 `aria-pressed=true/false`；仍是原來的按鈕、模式 ID、點擊處理、Undo，沒有新增或更改任何 DSP／參數。
+- **C 現有 Chromium 測試**：`13d875f37f56e939716e74cf3f0daf9f72b2f7a6`，`Tests/Web/ui02_ref_audit.cjs` 由既有 `Tests/Web/knob_smoke.cjs` 內 UI_02 分支呼叫；檢查三個模式鍵和讀數是否在鎖定卡框內、彼此不交疊、正式 ACTIVE PNG、CSS 三份直接載入、唯一 active 與 aria-pressed 一致、真 click／Undo 回復。**這是新增驗證條件，尚未實際跑過，不等於通過**；沒有另開 CI tier 或重試失敗 runner。
+- **本輪有效成果**：3 組範圍明確的程式／測試修改，未達 50–100 項；UI_02 專屬真實截圖、這批新的 Fast CI 與 Chromium 執行、模式避讓實測、Native Host parity、原始 REF 1:1 比對均 **PENDING**。既有 UI_01／UI_02 `geometry=true`／`knobSmoke=true` 僅代表前輪來源，不能用來宣稱本輪通過。
+- **工作流限制**：現有 PR #116 的臨時 Chromium 工作流只監看 UI_01 CSS 與 `index.html`，不監看 UI_02 CSS／Tests；前輪修改工作流兩次遭安全阻擋，故本輪不盲目重試同一修改。後續必須在允許的既有 Chromium 執行入口驗證後，才可將 U02-20 與 CROSS-05 從 PARTIAL 改為 DONE。
+- **DSP changed NO**；不動 `Source/DSP/**`、WASM／AudioWorklet 聲音計算、Factory Preset、參數語意、ReferenceSheets 解析度；PR 不合併、不正式部署。
+
+
 ## 2026-10-11｜PR #116 UI_02 CSS 接入獨立化（候選）
 
 - 接續 main `0d374288`、工作 PR #116 HEAD `2ff77ef1`；前輪 Fast #38075874755、Chromium #38075874759 已確認 SUCCESS，未重做既有 UI_01 驗收。
