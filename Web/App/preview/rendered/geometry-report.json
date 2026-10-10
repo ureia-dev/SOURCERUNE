@@ -1,5 +1,5 @@
 {
-  "commit": "739646449a8c570c6870cbfb13ff92b9b951e5d3",
+  "commit": "1a0d1b6d7c2a6a6ae612d0436688ac48dfe2e170",
   "results": {
     "UI_01": {
       "ui": "UI_01",
@@ -445,7 +445,7 @@
           },
           "medium": {
             "width": 750,
-            "height": 382.1875
+            "height": 393.375
           },
           "large": {
             "width": 940,
@@ -555,6 +555,26 @@
               "faceLeft": 1039.473876953125,
               "faceTop": 565.494384765625
             }
+          }
+        },
+        "hpf": {
+          "ok": true,
+          "ui": "UI_01",
+          "init": 20,
+          "changed": 21,
+          "undo": true,
+          "redo": true,
+          "curve": "M0 50.8 L0.7 50 H100",
+          "audio": {
+            "low": 0.004914465814464016,
+            "high": 0.17677454446938118,
+            "attenuation": -31.11886816733262,
+            "bypassIdle": true,
+            "bypassExact": true
+          },
+          "realWorklet": {
+            "off": 0.17677669493967038,
+            "on": 0.004907983511890018
           }
         }
       }
@@ -821,7 +841,7 @@
           },
           "medium": {
             "width": 750,
-            "height": 382.1875
+            "height": 393.375
           },
           "large": {
             "width": 940,
@@ -912,6 +932,23 @@
               "faceTop": 730.0191040039062
             }
           }
+        },
+        "hpf": {
+          "ok": true,
+          "ui": "UI_02",
+          "init": 20,
+          "changed": 21,
+          "undo": true,
+          "redo": true,
+          "curve": "M0 50.8 L0.7 50 H100",
+          "audio": {
+            "low": 0.004914465814464016,
+            "high": 0.17677454446938118,
+            "attenuation": -31.11886816733262,
+            "bypassIdle": true,
+            "bypassExact": true
+          },
+          "realWorklet": null
         }
       }
     }
