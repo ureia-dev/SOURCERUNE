@@ -64,7 +64,7 @@ jobs:
               await page.waitForFunction(()=>document.querySelector("#sceneZoomReadout")?.textContent==="100%",{timeout:5000});
               const resetBox=await page.$eval("#sceneSvg",n=>n.getAttribute("viewBox"));
               if(initialBox!==resetBox||initialBox===enlargedBox)throw Error("Scene live zoom/reset did not update viewBox");
-              const timeCount=await page.$eval(".scene-time-ruler [data-scene-time]",n=>n.length);
+              const timeCount=await page.evaluate(()=>document.querySelectorAll(".scene-time-ruler [data-scene-time]").length);
               if(timeCount!==5)throw Error("Scene time ruler has "+timeCount+" labels");
               const labelOverlap=await page.evaluate(()=>{
                 const a=document.querySelector("#sourceLabel")?.getBoundingClientRect();
