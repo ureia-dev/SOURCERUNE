@@ -1,5 +1,12 @@
 # SOURCERUNE — 工作交接與最新核查點
 
+## Native 建置接續 checkpoint — 2026-10-11
+
+- PR #68 / `feat/native-release-packages` 仍 OPEN；原 head `2149fbcb` 的 Fast run `38016769590` PASS，但未執行 Release、沒有 Mac/Windows artifact。
+- 本次同步 main `0d374288ea181f65a2c839b90432e068697d43df`，保留已合併 EQ/HPF/LPF、23 Native parameters、DSP hard-lock guard 及 UI 成果，解決交接/Native README 衝突。舊 11-parameter 驗證不能當作新版 23-parameter bundle 已驗。
+- DSP changed? **NO**：本批相對上述 main 僅為 CI build/package/文件；未改演算法、映射、WASM、音訊路徑或 DSP guard，無新增 DSP restore ref 需求。既有 DSP 凍結政策完整保留。
+- 下一步：手動啟動本分支 `SOURCERUNE CI` / `validation_level=release`，完成 Mac universal / Windows x64 build 及現有一次 bounded host smoke，再交付 ZIP/checksum；真 DAW 仍 PENDING。GitHub connector 無 dispatch 功能；依瀏覽器 fallback 規則，待使用者同意透過瀏覽器代按 Run workflow。未產出成品前保留 PR 不合併。
+
 ## 最新 checkpoint：五色 EQ／小窗直接編輯／VVChain 頻譜 Web 已驗收；聲音新增功能維持凍結（2026-10-10）
 
 - **本輪 UI 已接入且真 Chrome 驗收 PASS**：使用者最新圖片紅框的底部空白處改為在原卡片內常駐可調欄位。點五個節點（HPF／B1–3／LPF）選擇對應數值，Bell 的 FREQ／GAIN／Q 均可直接輸入、單格滾輪、上下拖曳（Shift 微調），單一拖曳寫入原 `state.params`／Undo／Redo；HPF／LPF 現有 DSP 僅有 FREQ，所以另外兩欄只顯示禁用「—」，不可假裝有聲音功能；小視窗原本就禁用浮動數值 popup，放大 Focus 繼續保留。來源 `Web/App/eq_mini_inline.js`／`eq_mini_inline_v1.css`／`app.js`／`eq_interactions.js`，以及 `Tests/Web/knob_smoke.cjs`。兩個 UI_01／UI_02 使用相同資料與功能，原 5 個彩色點、固定 ±24dB、不透明黑框消除／獨立 LPF/HPF 點仍維持已完成的主分支版本。

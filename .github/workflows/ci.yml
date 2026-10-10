@@ -268,7 +268,7 @@ jobs:
             echo "SOURCERUNE release-readiness manifest"
             echo "commit=${GITHUB_SHA}"
             echo
-            echo "NOTE: native VST3/WASM build targets are not yet present; this is repository readiness only."
+            echo "Shared C++ Web/WASM and VST3 MVP targets exist. Native packages are separate Release artifacts; DAW acceptance is pending."
             sha256sum               Assets/FactoryPresets/scene_presets_v1.json               Web/App/data/scene_presets_v1.json               Web/App/data/catalog.json               Web/App/data/ui_controls.json               Source/State/ParameterIds.h
           } > release-readiness.txt
 
@@ -278,3 +278,73 @@ jobs:
           name: sourcerune-release-readiness
           path: release-readiness.txt
           if-no-files-found: error
+
+  release-native:
+    name: Release VST3 (${{ matrix.package }})
+    needs: deep
+    if: github.event_name == 'workflow_dispatch' && inputs.validation_level == 'release'
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            package: macOS-universal
+          - os: windows-2022
+            package: Windows-x64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Configure macOS universal bundle
+        if: runner.os == 'macOS'
+        run: >-
+          cmake -S . -B build/native -G Xcode
+          -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
+          -DSOURCERUNE_BUILD_HOST_SMOKE=ON
+
+      - name: Configure Windows x64 bundle
+        if: runner.os == 'Windows'
+        run: >-
+          cmake -S . -B build/native -G "Visual Studio 17 2022" -A x64
+          -DSOURCERUNE_BUILD_HOST_SMOKE=ON
+
+      - name: Build shared-core plugin and bounded host
+        run: cmake --build build/native --config Release --target SOURCERUNE sourcerune_host_smoke --parallel 3
+
+      - name: Verify macOS architectures, ad-hoc sign and run bounded host once
+        if: runner.os == 'macOS'
+        run: |
+          set -euo pipefail
+          bundle="$PWD/build/native/VST3/Release/SOURCERUNE.vst3"
+          lipo -verify_arch arm64 x86_64 "$bundle/Contents/MacOS/SOURCERUNE"
+          codesign --force --sign - "$bundle"
+          codesign --verify --strict "$bundle"
+          build/native/bin/Release/sourcerune_host_smoke "$bundle"
+
+      - name: Run Windows bounded host once
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $bundle = (Resolve-Path 'build/native/VST3/Release/SOURCERUNE.vst3').Path
+          & build/native/bin/Release/sourcerune_host_smoke.exe $bundle
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Package plugin, installation notes and checksums
+        run: python Tools/Build/package_native.py --platform ${{ matrix.package }} --commit ${{ github.sha }}
+
+      - name: Upload preview package
+        uses: actions/upload-artifact@v6
+        with:
+          name: SOURCERUNE-${{ matrix.package }}-${{ github.sha }}
+          path: |
+            build/packages/*.zip
+            build/packages/*.sha256
+          if-no-files-found: error
+          retention-days: 30
