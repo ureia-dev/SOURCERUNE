@@ -126,3 +126,7 @@ Web Preview #38034071507 compiled EQ WASM and deployed Web, but real Chromium di
 ### Literal Puppeteer selector correction (2026-10-10)
 
 Root cause of two prior renders: generator-side JavaScript string-replacement interpreted replacement "$$" as a single literal "$"; thus previous supposed test correction never changed GitHub content (original test blob SHA remained the same). In the working branch, after committing the exact source, fetch and verify all three readbacks contain `page.$$eval(...)`, and only then rerun the original one-shot Pages/browser audit. No UI/DSP/CI safety iteration changes.
+
+### Exact VVChain Q wheel direction verification
+
+Original VVChain UI_A `nextQFromWheel(q,deltaY,fine)` multiplies Q by `exp(clamp(deltaY/100,-1,1)*speed)`: upward `deltaY<0` **decreases Q** (wider bell), downward increases Q (narrower). The new SOURCERUNE node implementation already matches, but the first real gesture test incorrectly required Q to increase on upward scroll. Browser gate now asserts the correct direction; no product logic, DSP, or preset changes. Prior Chrome #38034389932 failed on this incorrect assertion and must not be treated as passing the gesture test.
