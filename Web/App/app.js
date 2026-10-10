@@ -2,6 +2,7 @@ import {createSceneNode, parametersFromState, hpfFromState, eq3FromState, audioS
 import {eqGraph,miniEqSvg as renderThreeBandEq,updateEqPlot,sizeEqMarkers} from "./eq_graph.js";
 import {updateEqAnalyzer} from "./eq_analyzer_v1.js";
 import {attachEqInteractions,dismissEqFloat} from "./eq_interactions.js";
+import {eqMiniInlineMarkup,bindEqMiniInline,syncEqMiniInline,selectEqMiniInline} from "./eq_mini_inline.js";
 import {openEqFocus,eqFocusIsOpen,markMiniEqInert,syncEqFocus,repositionEqFocus} from "./eq_focus.js";
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];
 const TYPES=["SOURCE","TRANSMISSION","WALL_COVER","SPACE_ENVIRONMENT"],LABEL={SOURCE:"SOURCE",TRANSMISSION:"TRANSMISSION",WALL_COVER:"WALL / COVER",SPACE_ENVIRONMENT:"SPACE / ENVIRONMENT",SCENE_PRESET_HERO:"SCENE PRESET HERO"};
@@ -336,9 +337,9 @@ function renderMacros(){const d=distance().toFixed(1);$("#macroStrip").innerHTML
 `<div class="macro macro-intelligibility ${state.advanced==="INTELLIGIBILITY"?"selected":""}" data-open="INTELLIGIBILITY"><h3>INTELLIGIBILITY</h3>${macroKnob("intelligibility","AMOUNT","%","centered")}${modeButtons("intelligibilityMode",["NATURAL","DIALOGUE","AGGRESSIVE"],{NATURAL:"Natural",DIALOGUE:"More Clear",AGGRESSIVE:"Muffled"})}</div>`+
 `<div class="macro macro-ambience ${state.advanced==="AMBIENCE"?"selected":""}" data-open="AMBIENCE"><h3>AMBIENCE</h3>${macroSelect("ambienceType")}<div class="ambience-preview"><img src="${assetUrl(selected("SPACE_ENVIRONMENT"))}" alt=""></div>${macroKnob("ambience","AMOUNT","%","centered")}<div class="macro-wave" aria-hidden="true"></div></div>`+
 `<div class="macro macro-mix ${state.advanced==="MIX"?"selected":""}" data-open="MIX"><h3>MIX</h3>${macroKnob("mix","WET","%","large centered")}<span class="macro-mix-mode">WET</span></div>`+
-`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" data-eq-zoom-in class="macro-eq-zoom-in" aria-label="Zoom in EQ editor" title="Zoom In · expand EQ">⤢</button><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><div class="eq-cut-indicators" aria-label="HPF and LPF are draggable in graph"><span>HPF <strong data-eq-readout="hpf">${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</strong></span><span class="eq-cut-caption">DRAG EQ POINTS</span><span>LPF <strong data-eq-readout="lpf">${state.params.lpf>=20000?"OFF":(state.params.lpf/1000).toFixed(1)+" kHz"}</strong></span></div></div></div>`;
+`<div class="macro macro-eq ${state.advanced==="EQ_TONE"?"selected":""}" data-open="EQ_TONE"><div class="macro-eq-head"><h3>EQ / TONE (ADVANCED)</h3><button type="button" data-eq-zoom-in class="macro-eq-zoom-in" aria-label="Zoom in EQ editor" title="Zoom In · expand EQ">⤢</button><button type="button" class="macro-eq-power ${state.bypass.EQ_TONE?"":"active"}" data-eq-power aria-label="EQ / TONE power" aria-pressed="${!state.bypass.EQ_TONE}">${state.bypass.EQ_TONE?"OFF":"ON"}</button></div>${miniEqSvg()}<div class="macro-eq-foot"><div class="eq-cut-indicators" aria-label="HPF and LPF are draggable in graph"><span>HPF <strong data-eq-readout="hpf">${state.params.hpf<=20?"OFF":state.params.hpf+" Hz"}</strong></span><span class="eq-cut-caption">DRAG EQ POINTS</span><span>LPF <strong data-eq-readout="lpf">${state.params.lpf>=20000?"OFF":(state.params.lpf/1000).toFixed(1)+" kHz"}</strong></span></div>${eqMiniInlineMarkup()}</div></div>`;
 $$("[data-open]").forEach(e=>e.onclick=x=>{if(x.target.closest(".macro-knob,input,button,select,[role=slider]"))return;openAdvanced(e.dataset.open)});
-bindMacroKnobs();if(eqFocusIsOpen())markMiniEqInert();else bindMiniEq();
+bindMacroKnobs();if(eqFocusIsOpen())markMiniEqInert();else bindMiniEq();bindMiniEqInline();
 $$("[data-macro-select]").forEach(b=>b.onclick=()=>mut(()=>state.params[b.dataset.macroSelect]=b.dataset.value));
 $$("[data-macro-selectbox]").forEach(s=>s.onchange=()=>mut(()=>state.params[s.dataset.macroSelectbox]=s.value));bindUi01SignalCheckboxes();bindUi01ConditionCheckboxes();$$("[data-eq-power]").forEach(b=>b.onclick=()=>mut(()=>{state.bypass.EQ_TONE=!state.bypass.EQ_TONE}));
   $$("[data-eq-zoom-in]").forEach(b=>b.onclick=e=>{
@@ -374,6 +375,17 @@ function refreshMiniEq(){
   if(h)h.textContent=state.params.hpf<=20?"OFF":state.params.hpf+" Hz";
   if(l)l.textContent=state.params.lpf>=20000?"OFF":(state.params.lpf/1000).toFixed(1)+" kHz";
   syncEqFocus();
+  syncEqMiniInline();
+}
+function bindMiniEqInline(){
+  bindEqMiniInline({
+    state:()=>state,findControl,snapshot:()=>core(),
+    changed:(k,v)=>{refreshMiniEq();const adv=$(`[data-param="${k}"]`);
+      if(adv){adv.value=String(v);const val=adv.closest(".adv-control")?.querySelector(".value");if(val){const def=findControl(k);val.textContent=v+" "+(def.unit||"");}}
+      updateGains();},
+    commit:before=>{if(JSON.stringify(before.params)===JSON.stringify(state.params))return;
+      undo.push(before);if(undo.length>80)undo.shift();redo=[];hist();mark("MODIFIED");}
+  });
 }
 function bindMiniEq(){
   const svg=$(".macro-eq-svg");if(!svg)return;
@@ -382,6 +394,7 @@ function bindMiniEq(){
     svg,
     getState:()=>state,
     findControl,
+    select:selectEqMiniInline,
     snapshot:()=>core(),
     changed:(key,value)=>{
       refreshMiniEq();
